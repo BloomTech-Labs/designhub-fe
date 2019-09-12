@@ -8,9 +8,12 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  GET_USERS_START,
-  GET_USERS_SUCCESS,
-  GET_USERS_FAILURE,
+  GET_ALL_USERS_START,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAILURE,
+  GET_SINGLE_USER_START,
+  GET_SINGLE_USER_SUCCESS,
+  GET_SINGLE_USER_FAILURE,
   GET_ALL_PROJECTS_START,
   GET_ALL_PROJECTS_SUCCESS,
   GET_ALL_PROJECTS_FAILURE,
@@ -23,12 +26,13 @@ import {
 } from '../actions';
 
 const initialState = {
-  error: {},
+  error: null,
   message: null,
-  currentUser: {},
-  users: [],
-  projects: [],
-  teams: [],
+  currentUser: null,
+  singleUser: null,
+  users: null,
+  projects: null,
+  teams: null,
   isLoading: false,
   isLoggedIn: false
 };
@@ -97,21 +101,40 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
         error: action.error
       };
-    case GET_USERS_START:
+    case GET_ALL_USERS_START:
       return {
         ...state,
         error: {},
         isLoading: true,
         users: []
       };
-    case GET_USERS_SUCCESS:
+    case GET_ALL_USERS_SUCCESS:
       return {
         ...state,
         error: {},
         isLoading: false,
         users: action.payload
       };
-    case GET_USERS_FAILURE:
+    case GET_ALL_USERS_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
+    case GET_SINGLE_USER_START:
+      return {
+        ...state,
+        error: {},
+        isLoading: true
+      };
+    case GET_SINGLE_USER_SUCCESS:
+      return {
+        ...state,
+        error: {},
+        isLoading: false,
+        singleUser: action.payload
+      };
+    case GET_SINGLE_USER_FAILURE:
       return {
         ...state,
         error: action.error,

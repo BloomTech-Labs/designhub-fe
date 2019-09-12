@@ -24,19 +24,19 @@ export const signup = () => dispatch => {
   dispatch({ type: SIGNUP_START });
 };
 
-export const GET_USERS_START = 'GET_USERS_START';
-export const GET_USERS_SUCCESS = 'GET_USERS_SUCCESS';
-export const GET_USERS_FAILURE = 'GET_USERS_FAILURE';
+export const GET_ALL_USERS_START = 'GET_USERS_START';
+export const GET_ALL_USERS_SUCCESS = 'GET_USERS_SUCCESS';
+export const GET_ALL_USERS_FAILURE = 'GET_USERS_FAILURE';
 
 export const getUsers = () => dispatch => {
-  dispatch({ type: GET_USERS_START });
+  dispatch({ type: GET_ALL_USERS_START });
   return axiosWithAuth()
     .get('/api/v1/users')
     .then(res => {
-      dispatch({ type: GET_USERS_SUCCESS, payload: res.data });
+      dispatch({ type: GET_ALL_USERS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_USERS_FAILURE, error: err });
+      dispatch({ type: GET_ALL_USERS_FAILURE, error: err });
     });
 };
 
