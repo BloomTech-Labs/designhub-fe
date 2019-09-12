@@ -11,9 +11,12 @@ import {
   GET_USERS_START,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE,
-  GET_PROJECTS_START,
-  GET_PROJECTS_SUCCESS,
-  GET_PROJECTS_FAILURE,
+  GET_ALL_PROJECTS_START,
+  GET_ALL_PROJECTS_SUCCESS,
+  GET_ALL_PROJECTS_FAILURE,
+  ADD_PROJECT_START,
+  ADD_PROJECT_SUCCESS,
+  ADD_PROJECT_FAILURE,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_FAILURE
@@ -114,24 +117,43 @@ export const reducer = (state = initialState, action) => {
         error: action.error,
         isLoading: false
       };
-    case GET_PROJECTS_START:
+    case GET_ALL_PROJECTS_START:
       return {
         ...state,
         error: {},
         isLoading: true
       };
-    case GET_PROJECTS_SUCCESS:
+    case GET_ALL_PROJECTS_SUCCESS:
       return {
         ...state,
         error: {},
         isLoading: false,
         projects: action.payload
       };
-    case GET_PROJECTS_FAILURE:
+    case GET_ALL_PROJECTS_FAILURE:
       return {
         ...state,
         error: action.error,
         isLoading: false
+      };
+    case ADD_PROJECT_START:
+      return {
+        ...state,
+        error: {},
+        isLoading: true
+      };
+    case ADD_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: {},
+        projects: [...state.projects, ...action.payload]
+      };
+    case ADD_PROJECT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
       };
     case UPDATE_USER_START:
       return {
