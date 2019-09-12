@@ -72,6 +72,22 @@ export const addProject = project => dispatch => {
     });
 };
 
+export const GET_SINGLE_USER_START = 'GET_SINGLE_USER_START';
+export const GET_SINGLE_USER_SUCCESS = 'GET_SINGLE_USER_SUCCESS';
+export const GET_SINGLE_USER_FAILURE = 'GET_SINGLE_USER_FAILURE';
+
+export const getSingleUser = id => dispatch => {
+  dispatch({ type: GET_SINGLE_USER_START });
+  return axiosWithAuth()
+    .get(`/api/v1/users/${id}`)
+    .then(res => {
+      dispatch({ type: GET_SINGLE_USER_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_SINGLE_USER_FAILURE, error: err });
+    });
+};
+
 export const UPDATE_USER_START = 'UPDATE_USER_START';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
