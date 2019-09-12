@@ -8,6 +8,6 @@ export const axiosWithAuth = () => {
       'Content-Type': 'application/json',
       Authorization: token
     },
-    baseURL: 'https://designhubx-staging.herokuapp.com'
+    baseURL: `${process.env.REACT_APP_BASE_URL}`
   });
 };
