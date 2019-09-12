@@ -1,0 +1,29 @@
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  left: 30px;
+  top: 25%;
+
+  background: #15161a;
+  border-radius: 10px;
+
+  width: 71px;
+
+  a {
+    margin-top: 56px;
+    &:last-child {
+      margin-bottom: 56px;
+    }
+  }
+
+  svg {
+    fill: none;
+    stroke: #6d6d72;
+    &:hover {
+      stroke: white;
+    }
+  }
+}
