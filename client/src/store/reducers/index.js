@@ -35,6 +35,7 @@ const initialState = {
   singleUser: null,
   users: null,
   projects: null,
+  singleProject: null,
   teams: null,
   isLoading: false,
   isLoggedIn: false
@@ -45,13 +46,13 @@ export const reducer = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case LOGIN_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         currentUser: action.payload.user,
         isLoggedIn: true,
         isLoading: false,
@@ -67,16 +68,16 @@ export const reducer = (state = initialState, action) => {
     case LOGOUT_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: false,
         isLoggedIn: false,
-        currentUser: {}
+        currentUser: null
       };
     case LOGOUT_FAILURE:
       return {
@@ -87,13 +88,13 @@ export const reducer = (state = initialState, action) => {
     case SIGNUP_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: false,
         message: action.payload.message,
         user: action.payload.user
@@ -107,14 +108,13 @@ export const reducer = (state = initialState, action) => {
     case GET_ALL_USERS_START:
       return {
         ...state,
-        error: {},
-        isLoading: true,
-        users: []
+        error: null,
+        isLoading: true
       };
     case GET_ALL_USERS_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: false,
         users: action.payload
       };
@@ -127,13 +127,13 @@ export const reducer = (state = initialState, action) => {
     case GET_SINGLE_USER_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case GET_SINGLE_USER_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: false,
         singleUser: action.payload
       };
@@ -146,13 +146,13 @@ export const reducer = (state = initialState, action) => {
     case GET_ALL_PROJECTS_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case GET_ALL_PROJECTS_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: false,
         projects: action.payload
       };
@@ -162,17 +162,36 @@ export const reducer = (state = initialState, action) => {
         error: action.error,
         isLoading: false
       };
+    case GET_SINGLE_PROJECT_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_SINGLE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        singleProject: action.payload
+      };
+    case GET_SINGLE_PROJECT_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
     case ADD_PROJECT_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case ADD_PROJECT_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        error: {},
+        error: null,
         projects: [...state.projects, ...action.payload]
       };
     case ADD_PROJECT_FAILURE:
@@ -184,13 +203,13 @@ export const reducer = (state = initialState, action) => {
     case UPDATE_USER_START:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: true
       };
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        error: {},
+        error: null,
         isLoading: false,
         users: [...state.users, action.payload]
       };
