@@ -36,7 +36,7 @@ export const logout = () => dispatch => {
       dispatch({type: GET_USERS_SUCCESS, payload: res.data})
     })
     .catch(err => {
-      dispatch({type: GET_USERS_SUCCESS, error: err})
+      dispatch({type: GET_USERS_FAILURE, error: err})
     })
  }
 
@@ -44,7 +44,17 @@ export const logout = () => dispatch => {
  export const GET_ALL_PROJECTS_SUCCESS = 'GET_ALL_PROJECTS_SUCCESS',
  export const GET_ALL_PROJECTS_FAILURE = 'GET_ALL_PROJECTS_FAILURE',
 
-
+export const getAllProjects = () => dispatch => {
+  dispatch({type: GET_ALL_PROJECTS_START});
+  return axiosWithAuth()
+    .get("/api/v1/projects")
+    .then(res => {
+      dispatch({type: GET_ALL_PROJECTS_SUCCESS, payload: res.data})
+    })
+    .catch(err => {
+      dispatch({type: GET_ALL_PROJECTS_FAILURE, error: err})
+    })
+}
 
  export const ADD_PROJECT_START = 'ADD_PROJECT_START',
  export const ADD_PROJECT_SUCCESS = 'ADD_PROJECT_SUCCESS',
