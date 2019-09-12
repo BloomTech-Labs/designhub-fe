@@ -5,6 +5,9 @@ import {
   LOGOUT_START,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  SIGNUP_START,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
   GET_USERS_START,
   GET_USERS_SUCCESS,
   GET_USERS_FAILURE
@@ -12,6 +15,7 @@ import {
 
 const initialState = {
   error: {},
+  message: null,
   currentUser: {},
   users: [],
   projects: [],
@@ -32,9 +36,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: {},
-        currentUser: action.payload,
+        currentUser: action.payload.user,
         isLoggedIn: true,
-        isLoading: false
+        isLoading: false,
+        currentUser: action.payload,
+        message: action.payload.message
       };
     case LOGIN_FAILURE:
       return {
@@ -62,6 +68,25 @@ export const reducer = (state = initialState, action) => {
         ...state,
         error: action.error,
         isLoading: false
+      };
+    case SIGNUP_START:
+      return {
+        ...state,
+        error: {},
+        isLoading: true
+      };
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        error: {},
+        isLoading: false,
+        message: action.payload
+      };
+    case SIGNUP_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
       };
     case GET_USERS_START:
       return {
