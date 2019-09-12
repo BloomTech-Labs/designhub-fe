@@ -13,7 +13,10 @@ import {
   GET_USERS_FAILURE,
   GET_PROJECTS_START,
   GET_PROJECTS_SUCCESS,
-  GET_PROJECTS_FAILURE
+  GET_PROJECTS_FAILURE,
+  UPDATE_USER_START,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -125,6 +128,25 @@ export const reducer = (state = initialState, action) => {
         projects: action.payload
       };
     case GET_PROJECTS_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
+    case UPDATE_USER_START:
+      return {
+        ...state,
+        error: {},
+        isLoading: true
+      };
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        error: {},
+        isLoading: false,
+        users: [...state.users, action.payload]
+      };
+    case UPDATE_USER_FAILURE:
       return {
         ...state,
         error: action.error,
