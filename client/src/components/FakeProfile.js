@@ -9,7 +9,7 @@ const FakeProfile = () => {
   if (loading || !user) {
     return <div>Loading...</div>;
   }
-
+  console.log('hello!');
   return (
     <>
       <img src={user.picture} alt="Profile" />

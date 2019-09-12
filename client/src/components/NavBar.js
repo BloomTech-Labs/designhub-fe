@@ -16,7 +16,7 @@ const NavBar = () => {
       {isAuthenticated && <button onClick={() => logout()}>Log out</button>}
       <span>
         <Link to="/">Home</Link>&nbsp;
-        <Link to="/profile">Profile</Link>
+        <Link to="/fake-profile">Profile</Link>
       </span>
     </div>
   );
