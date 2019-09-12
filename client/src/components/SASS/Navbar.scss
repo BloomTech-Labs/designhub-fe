@@ -1,0 +1,20 @@
+nav {
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  left: 30px;
+  top: 25%;
+
+  background: #15161a;
+  border-radius: 10px;
+
+  width: 71px;
+
+  img {
+    margin-top: 56px;
+  }
+  :last-child {
+    margin-bottom: 56px;
+  }
+}
