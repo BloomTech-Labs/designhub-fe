@@ -8,6 +8,6 @@ export const axiosWithAuth = () => {
       'Content-Type': 'application/json',
       Authorization: token
     },
-    baseURL: 'https://localhost:5000'
+    baseURL: `${process.env.REACT_APP_BASE_URL}`
   });
 };

@@ -8,12 +8,12 @@ import logger from 'redux-logger';
 import { Auth0Provider } from './auth-wrapper.js';
 import config from './auth_config.js';
 
-import { reducer } from './store/reducers';
+import rootReducer from './store/reducers';
 
 import './index.css';
 import App from './App';
 
-const store = createStore(reducer, applyMiddleware(thunk, logger));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 const onRedirectCallback = appState => {
   window.history.replaceState(
