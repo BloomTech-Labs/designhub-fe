@@ -10,7 +10,10 @@ import {
   SIGNUP_FAILURE,
   GET_USERS_START,
   GET_USERS_SUCCESS,
-  GET_USERS_FAILURE
+  GET_USERS_FAILURE,
+  GET_PROJECTS_START,
+  GET_PROJECTS_SUCCESS,
+  GET_PROJECTS_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -39,7 +42,6 @@ export const reducer = (state = initialState, action) => {
         currentUser: action.payload.user,
         isLoggedIn: true,
         isLoading: false,
-        currentUser: action.payload,
         message: action.payload.message
       };
     case LOGIN_FAILURE:
@@ -80,7 +82,8 @@ export const reducer = (state = initialState, action) => {
         ...state,
         error: {},
         isLoading: false,
-        message: action.payload
+        message: action.payload.message,
+        user: action.payload.user
       };
     case SIGNUP_FAILURE:
       return {
@@ -103,6 +106,25 @@ export const reducer = (state = initialState, action) => {
         users: action.payload
       };
     case GET_USERS_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
+    case GET_PROJECTS_START:
+      return {
+        ...state,
+        error: {},
+        isLoading: true
+      };
+    case GET_PROJECTS_SUCCESS:
+      return {
+        ...state,
+        error: {},
+        isLoading: false,
+        projects: action.payload
+      };
+    case GET_PROJECTS_FAILURE:
       return {
         ...state,
         error: action.error,
