@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { Auth0Provider } from './auth-wrapper.js';
+import config from './auth_config.js';
 
 import { reducer } from './store/reducers';
 
@@ -13,10 +15,27 @@ import App from './App';
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));
 
+const onRedirectCallback = appState => {
+  window.history.replaceState(
+    {},
+    document.title,
+    appState && appState.targetUrl
+      ? appState.targetUrl
+      : window.location.pathname
+  );
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <Auth0Provider
+        domain={config.domain}
+        client_id={config.clientId}
+        redirect_uri={window.location.origin}
+        onRedirectCallback={onRedirectCallback}
+      >
+        <App />
+      </Auth0Provider>
     </Router>
   </Provider>,
   document.getElementById('root')
