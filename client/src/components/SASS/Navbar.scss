@@ -1,6 +1,7 @@
 nav {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   position: absolute;
   left: 30px;
@@ -11,9 +12,14 @@ nav {
 
   width: 71px;
 
-  img {
+  svg {
+    stroke: #6d6d72;
     margin-top: 56px;
+    &:hover {
+      stroke: white;
+    }
   }
+
   :last-child {
     margin-bottom: 56px;
   }
