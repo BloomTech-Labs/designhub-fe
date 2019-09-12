@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import UserProfile_LI from './components/UserProfile_LI';
 import Navbar from './components/Navbar';
 

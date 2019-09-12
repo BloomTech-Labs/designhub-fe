@@ -12,15 +12,18 @@ nav {
 
   width: 71px;
 
-  svg {
-    stroke: #6d6d72;
+  a {
     margin-top: 56px;
-    &:hover {
-      stroke: white;
+    &:last-child {
+      margin-bottom: 56px;
     }
   }
 
-  :last-child {
-    margin-bottom: 56px;
+  svg {
+    fill: none;
+    stroke: #6d6d72;
+    &:hover {
+      stroke: white;
+    }
   }
 }
