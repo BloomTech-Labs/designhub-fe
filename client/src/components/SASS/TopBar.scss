@@ -10,15 +10,16 @@
 
   .logo-container {
     margin-top: 5px;
-    width: 2%;
+    width: auto;
   }
 
   .search-bar-container {
     align-self: flex-start;
-    width: 78%;
+    width: 78vw;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+    margin-left: 55px;
   }
 
   .top-bar-user-info {
@@ -28,7 +29,6 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    width: 12%;
     justify-content: space-between;
   }
 
