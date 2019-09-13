@@ -23,8 +23,8 @@ const DarkModeSwitch = () => {
           y2="29.215"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#5557FE" />
-          <stop offset="1" stop-color="#9555FE" />
+          <stop stopColor="#5557FE" />
+          <stop offset="1" stopColor="#9555FE" />
         </linearGradient>
       </defs>
     </svg>
