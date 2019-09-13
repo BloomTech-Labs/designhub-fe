@@ -28,7 +28,10 @@ const TopBar = () => {
         <SampleLogo />
       </div>
       <div className="search-bar-container">
-        <MagnifyingGlass />
+        <div className="magnifying-glass-container">
+          <MagnifyingGlass />
+        </div>
+
         <SearchBar />
       </div>
       <div className="top-bar-user-info">
@@ -38,7 +41,9 @@ const TopBar = () => {
           src={userInfo.avatar}
           alt="user avatar"
         />
-        <DarkModeSwitch />
+        <div className="dark-mode-switch">
+          <DarkModeSwitch />
+        </div>
       </div>
     </div>
   );

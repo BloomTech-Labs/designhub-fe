@@ -16,16 +16,19 @@
   .search-bar-container {
     align-self: flex-start;
     width: 78%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
   }
 
   .top-bar-user-info {
     color: white;
     font-size: 0.9rem;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.11rem;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    width: 11%;
+    width: 12%;
     justify-content: space-between;
   }
 
@@ -34,6 +37,24 @@
     height: 40px;
     border-radius: 20px;
     border: 2px solid #5557fe;
+    margin: 0 15px;
+  }
+
+  .dark-mode-switch {
+    width: 42px;
+    height: 42px;
+  }
+
+  .search-bar-input {
+    width: 369px;
+    height: 31px;
+    color: white;
+    background: #2a2b31;
+    border-radius: 2px;
+    border: none;
+    margin-left: 15px;
+    padding-left: 10px;
+    letter-spacing: 0.11rem;
   }
 
   h3 {
