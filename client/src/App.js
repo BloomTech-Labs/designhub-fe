@@ -1,6 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { useAuth0 } from './auth-wrapper.js';
+import Navbar from './components/Navbar.js';
+import TopBar from './components/TopBar.js';
 import FakeProfile from './components/FakeProfile.js';
 import Heatmap from './components/Heatmap.js';
 import Navbar from './components/Navbar.js';
@@ -17,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <TopBar />
       <Navbar />
       <Switch>
         <Route exact path="/" />
