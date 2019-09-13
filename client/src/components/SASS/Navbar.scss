@@ -1,29 +1,55 @@
 nav {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-
-  position: absolute;
-  left: 30px;
-  top: 25%;
-
   background: #15161a;
   border-radius: 10px;
+  display: grid;
+  grid-template-columns: 60px 120px;
+  grid-template-rows: 58px 58px 58px 58px 58px;
 
-  width: 71px;
+  position: absolute;
+  left: 20px;
+  top: 25%;
+  width: 60px;
 
   a {
-    margin-top: 56px;
-    &:last-child {
-      margin-bottom: 56px;
+    grid-column: 1;
+    &:hover + p {
+      opacity: 100;
+      transition: 0.5s;
     }
+  }
+
+  p {
+    background: #15161a;
+    border-radius: 0 10px 10px 0;
+    color: white;
+    grid-column: 2;
+    opacity: 0;
+    padding: 10px 10px 10px 10px;
   }
 
   svg {
     fill: none;
+    padding: 20px;
     stroke: #6d6d72;
     &:hover {
       stroke: white;
     }
+  }
+
+  .A {
+    grid-row: 1;
+  }
+  .B {
+    grid-row: 2;
+  }
+  .C {
+    grid-row: 3;
+  }
+  .D {
+    grid-row: 4;
+  }
+  .E {
+    grid-row: 5;
   }
 }
