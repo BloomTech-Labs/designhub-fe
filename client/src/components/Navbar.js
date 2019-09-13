@@ -5,9 +5,9 @@ import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
 import MyProjectsIcon from './Icons/MyProjectsIcon';
 import InboxIcon from './Icons/InboxIcon';
 import SettingsIcon from './Icons/SettingsIcon';
-import './SASS/NavBar.scss';
+import './SASS/Navbar.scss';
 
-const NavBar = () => {
+const Navbar = () => {
   return (
     <nav>
       <NavLink to="/profile">
@@ -38,4 +38,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
