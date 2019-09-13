@@ -1,35 +1,54 @@
-# Description
+# Contributor Covenant Code of Conduct
 
-Fixes # (issue)
+## Our Pledge
 
-## Type of change
+In the interest of fostering an open and welcoming environment, we as
+contributors and maintainers pledge to making participation in our project and
+our community a harassment-free experience for everyone, regardless of age, body
+size, disability, ethnicity, sex characteristics, gender identity and expression,
+level of experience, education, socio-economic status, nationality, personal
+appearance, race, religion, or sexual identity and orientation.
 
-Please delete options that are not relevant.
+## Our Standards
 
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] This change requires a documentation update
+Examples of behavior that contributes to creating a positive environment
+include:
 
-## Change Status
+-   Using welcoming and inclusive language
+-   Being respectful of differing viewpoints and experiences
+-   Gracefully accepting constructive criticism
+-   Focusing on what is best for the community
+-   Showing empathy towards other community members
 
-- [ ] Complete, tested, ready to review and merge
-- [ ] Complete, but not tested (may need new tests)
-- [ ] Incomplete/work-in-progress, PR is for discussion/feedback
+Examples of unacceptable behavior by participants include:
 
-# How Has This Been Tested?
+-   The use of sexualized language or imagery and unwelcome sexual attention or
+    advances
+-   Trolling, insulting/derogatory comments, and personal or political attacks
+-   Public or private harassment
+-   Publishing others' private information, such as a physical or electronic
+    address, without explicit permission
+-   Other conduct which could reasonably be considered inappropriate in a
+    professional setting
 
-- [ ] Test A
-- [ ] Test B
+## Our Responsibilities
 
-# Checklist
+Project maintainers are responsible for clarifying the standards of acceptable
+behavior and are expected to take appropriate and fair corrective action in
+response to any instances of unacceptable behavior.
 
-- [ ] My code follows the style guidelines of this project
-- [ ] I have performed a self-review of my own code
-- [ ] My code has been reviewed by at least one peer
-- [ ] I have commented my code, particularly in hard-to-understand areas
-- [ ] I have made corresponding changes to the documentation
-- [ ] My changes generate no new warnings
-- [ ] I have added tests that prove my fix is effective or that my feature works
-- [ ] New and existing unit tests pass locally with my changes
-- [ ] There are no merge conflicts
+Project maintainers have the right and responsibility to remove, edit, or
+reject comments, commits, code, wiki edits, issues, and other contributions
+that are not aligned to this Code of Conduct, or to ban temporarily or
+permanently any contributor for other behaviors that they deem inappropriate,
+threatening, offensive, or harmful.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
+available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
+
+[homepage]: https://www.contributor-covenant.org
+
+For answers to common questions about this code of conduct, see
+https://www.contributor-covenant.org/faq
