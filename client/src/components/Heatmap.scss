@@ -1,8 +1,10 @@
 .Heatmap {
-  max-width: 700px;
-  display: flex;
   align-items: center;
+  background: #15161a;
+  border-radius: 10px;
+  display: flex;
   justify-content: center;
+  max-width: 700px;
 }
 
 $heatmap-5: #3f1ccc;

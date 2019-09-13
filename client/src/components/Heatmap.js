@@ -34,39 +34,96 @@ const heatmap1 = '#ADAEFF';
 
 const myOptions = {
   chart: {
-    id: 'yearly-activity'
+    id: 'yearly-activity',
+    toolbar: {
+      show: false
+    }
+  },
+  title: {
+    text: 'Activity',
+    align: 'left',
+    margin: 0,
+    offsetX: 15,
+    offsetY: 15,
+    floating: false,
+    style: {
+      fontSize: '16px',
+      color: 'white'
+    }
+  },
+  grid: {
+    show: true,
+    borderColor: '#15161a',
+    padding: {
+      top: 0,
+      right: 20,
+      bottom: 10,
+      left: 10
+    }
+  },
+  xaxis: {
+    labels: {
+      show: false
+    }
+  },
+  yaxis: {
+    labels: {
+      show: true,
+      align: 'right'
+    }
+  },
+  legend: {
+    position: 'bottom',
+    horizontalAlign: 'right',
+    markers: {
+      width: 20,
+      height: 20,
+      radius: 2
+    }
   },
   dataLabels: {
     enabled: false
   },
+  stroke: {
+    show: true,
+    colors: ['#15161a'],
+    width: 1
+  },
   plotOptions: {
     heatmap: {
+      radius: 2,
       shadeIntensity: 0.5,
       colorScale: {
         ranges: [
           {
             from: -30,
             to: 5,
-            name: 'low',
+            name: ' ',
             color: heatmap1
           },
           {
             from: 6,
             to: 20,
-            name: 'medium',
+            name: ' ',
             color: heatmap2
           },
           {
             from: 21,
             to: 45,
-            name: 'high',
+            name: ' ',
             color: heatmap3
           },
           {
             from: 46,
             to: 55,
-            name: 'extreme',
+            name: ' ',
             color: heatmap4
+          },
+          {
+            from: 56,
+            to: 85,
+            name: ' ',
+            color: heatmap5
           }
         ]
       }
@@ -136,10 +193,7 @@ const myOptions = {
         max: 55
       })
     }
-  ],
-  title: {
-    text: 'DesignHub Yearly Activity Heatmap'
-  }
+  ]
 };
 
 function generateData(count, yrange) {
