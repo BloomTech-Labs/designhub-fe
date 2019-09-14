@@ -1,8 +1,57 @@
 .Login-container {
+  align-items: center;
   background: url('./ASSETS/loginpage-bg.jpg');
+  color: white;
+  display: flex;
   height: 100vh;
   width: 100vw;
+
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.left-side {
+  margin-left: 40px;
+  max-width: 50%;
+  h1 {
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 112px;
+    letter-spacing: 0.11em;
+  }
+  p {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.11em;
+  }
+
+  .paragraphs {
+    align-items: center;
+    display: grid;
+    grid-gap: 20px 0;
+    grid-template-columns: 40px 420px;
+
+    h2 {
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.11em;
+    }
+
+    p {
+      grid-column: 2;
+      font-weight: 900;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+
+    span {
+      grid-column: 1;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+  }
 }
