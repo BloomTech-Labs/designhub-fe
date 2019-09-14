@@ -40,13 +40,13 @@ const Login = () => {
         </div>
       </section>
       <section className="right-side">
-        <div className="right-side-container">
+        <div className="form-container">
           <header>
             <NavLink to="">SIGN UP</NavLink>
             <NavLink to="/login">LOG IN</NavLink>
           </header>
           <form onSubmit={handleSubmit}>
-            <label for="username">USERNAME</label>
+            <label htmlFor="username">USERNAME</label>
             <input
               id="username"
               type="text"
@@ -54,7 +54,7 @@ const Login = () => {
               onChange={e => setUsername(e.target.value)}
             />
 
-            <label for="password">PASSWORD</label>
+            <label htmlFor="password">PASSWORD</label>
             <input
               id="password"
               type="text"

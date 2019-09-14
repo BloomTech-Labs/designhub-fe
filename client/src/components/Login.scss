@@ -58,13 +58,11 @@
 
 .right-side {
   align-items: center;
-  // border: 1px solid white;
   display: flex;
   flex-direction: column;
   width: 50%;
 
-  .right-side-container {
-    // border: 3px solid red;
+  .form-container {
     align-items: left;
     display: flex;
     flex-direction: column;
