@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Heatmap from './Heatmap.js';
+
 import './SASS/UserProfile.scss';
 
 import avatar from '../components/ASSETS/avatar.jpg';
@@ -73,6 +75,8 @@ class UserProfile_LI extends Component {
             <button className="user-content-btn">Edit Profile</button>
           </div>
         </div>
+
+        <Heatmap />
       </div>
     );
   }

@@ -1,4 +1,5 @@
 @import './components/SASS/reset.scss';
+@import './components/SASS/Navbar.scss';
 
 body {
   background: #212229;
@@ -24,4 +25,12 @@ h6,
 p,
 button {
   font-family: 'Roboto', sans-serif;
+}
+
+main {
+  align-items: center;
+  // border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
 }
