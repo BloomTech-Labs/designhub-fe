@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Sentry from '@sentry/browser';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -12,6 +13,8 @@ import rootReducer from './store/reducers';
 
 import './index.css';
 import App from './App';
+
+Sentry.init({dsn: `${process.env.REACT_APP_SENTRY_DSN}`});
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
