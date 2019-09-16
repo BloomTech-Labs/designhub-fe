@@ -40,10 +40,34 @@
   }
   .project-header-right {
     width: 40%;
+    height: 100px;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: flex-end;
+    justify-content: space-between;
     text-align: right;
+    .project-header-team {
+      img {
+        padding: 0 5px;
+        width: 42px;
+        height: 42px;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
+    .project-header-links {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      .project-header-button {
+        margin-left: 10px;
+        height: 42px;
+        background: #15161a;
+        border-radius: 10px;
+        min-width: 42px;
+        text-align: center;
+        line-height: 42px;
+      }
+    }
   }
   .project-body {
     display: flex;
@@ -66,7 +90,7 @@
       display: flex;
       flex-flow: column nowrap;
       width: 15%;
-      height: 75vh;
+      height: 80vh;
       overflow-y: scroll;
       justify-content: center;
       align-items: center;
@@ -99,6 +123,9 @@
         font-weight: normal;
         font-size: 1rem;
         margin-bottom: 31px;
+      }
+      .comments-body {
+        height: 100%;
       }
       .comments-form {
         .form-wrapper {

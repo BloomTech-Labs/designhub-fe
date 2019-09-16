@@ -1,5 +1,9 @@
 import React from 'react';
 
+import avatar1 from '../ASSETS/avatar.jpg';
+import avatar2 from '../ASSETS/avatar_2.jpg';
+import avatar3 from '../ASSETS/avatar_3.jpg';
+
 import '../SASS/Project.scss';
 
 const Project = () => {
@@ -66,10 +70,16 @@ const Project = () => {
         </div>
         <div className="project-header-right">
           <div className="project-header-team">
-            Team members avatars go here
+            <img src={avatar1} alt="user avatar" />
+            <img src={avatar2} alt="user avatar" />
+            <img src={avatar3} alt="user avatar" />
           </div>
           <div className="project-header-links">
-            download, star and other links here
+            <div className="project-header-button">Figma</div>
+            <div className="project-header-button">InVision</div>
+            <div className="project-header-button">Download</div>
+            <div className="project-header-button">Star</div>
+            <div className="project-header-button">Edit</div>
           </div>
         </div>
       </div>
