@@ -1,6 +1,8 @@
+@import './palette';
+
 .Heatmap {
   align-items: center;
-  background: #15161a;
+  background: $black;
   border-radius: 10px;
   display: flex;
   width: 98%;
@@ -11,9 +13,3 @@
     width: 100%;
   }
 }
-
-$heatmap-5: #3f1ccc;
-$heatmap-4: #5557fe;
-$heatmap-3: #7072ff;
-$heatmap-2: #8d8fff;
-$heatmap-1: #adaeff;
