@@ -1,0 +1,17 @@
+.project-container {
+  width: 96%;
+  .project-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    margin: 5vh auto;
+  }
+
+  .project-header-right {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+  }
+}
