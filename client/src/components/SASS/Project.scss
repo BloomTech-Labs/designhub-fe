@@ -7,9 +7,35 @@
     justify-content: space-between;
     align-items: center;
 
-    margin: 5vh auto;
+    margin: 4vh auto;
   }
-
+  .project-details {
+    h2 {
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      letter-spacing: 0.11em;
+      margin-bottom: 14px;
+    }
+    h3 {
+      font-style: italic;
+      font-weight: normal;
+      font-size: 1rem;
+      line-height: 19px;
+      letter-spacing: 0.11em;
+      margin-bottom: 21px;
+    }
+    span {
+      color: #6d6d72;
+      font-weight: normal;
+      font-size: 0.8rem;
+      letter-spacing: 0.11em;
+      margin-right: 20px;
+    }
+    .project-header-username {
+      color: #5557fe;
+    }
+  }
   .project-header-right {
     display: flex;
     flex-flow: column nowrap;
@@ -21,25 +47,43 @@
     justify-content: space-between;
     align-items: flex-start;
     .project-main-image {
-      width: 50%;
+      width: 60%;
       height: 75vh;
       background-color: #15161a;
       border: 5px solid #15161a;
       box-sizing: border-box;
       border-radius: 10px;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
     }
     .project-thumbnails {
       display: flex;
       flex-flow: column nowrap;
-      width: 12%;
+      width: 15%;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
+
       img {
         width: 211px;
+        margin-bottom: 16px;
+        border: 5px solid #15161a;
+        box-sizing: border-box;
+        border-radius: 10px;
+        &:hover {
+          border: 5px solid #5557fe;
+          cursor: pointer;
+        }
       }
     }
     .project-comments {
-      width: 28%;
+      width: 25%;
+      background-color: #15161a;
+      border: 5px solid #15161a;
+      box-sizing: border-box;
+      border-radius: 10px;
+      height: 75vh;
     }
   }
 }

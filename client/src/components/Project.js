@@ -55,7 +55,10 @@ const Project = () => {
             DesignHub Product design files + Case study + assets + prototypes.
           </h3>
           <p>
-            <span>Created by eriklambert</span>
+            <span>
+              Created by{' '}
+              <span className="project-header-username">eriklambert</span>
+            </span>
             <span>Created on June 11, 2020</span>
           </p>
         </div>
@@ -69,7 +72,9 @@ const Project = () => {
         </div>
       </div>
       <div className="project-body">
-        <div className="project-main-image">Main image</div>
+        <div className="project-main-image">
+          <img src={projects[0].thumbnail} alt="main project image" />
+        </div>
         <div className="project-thumbnails">
           {projects.map(project => (
             <img src={project.thumbnail} alt="project-thumbnail" />
