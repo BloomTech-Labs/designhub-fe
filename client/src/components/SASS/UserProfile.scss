@@ -1,88 +1,243 @@
-.profile-container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-}
+.user-profile-container {
+  color: white;
+  width: 96%;
 
-.user-content {
-  background: #15161a;
-  border-radius: 10px;
-  width: 80%;
-  margin: 4vh auto;
-  display: flex;
-  justify-content: space-between;
-  padding: 0px 40px;
-
-  h1,
-  p {
-    color: white;
-    font-size: 1rem;
-  }
-
-  .user-info {
+  .user-header {
     display: flex;
     align-items: center;
-    text-align: left;
-    width: 55%;
+    width: 100%;
+    height: 20vh;
+    margin: 5vh auto;
+    background: #15161a;
+    border-radius: 10px;
 
     .avatar {
-      width: max-content;
-      height: max-content;
+      border-radius: 100%;
+      object-fit: cover;
+      height: 14vh;
+      width: 14vh;
+      padding: 4vh;
     }
 
-    .user-info-text {
-      margin-left: 40px;
-      font-weight: normal;
+    .user-info {
+      height: 80%;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
 
       .userFLname {
+        font-size: 1.2rem;
+        font-weight: 400;
         margin: 0;
-        margin-top: 20px;
       }
+
       .username {
-        color: #6d6d72;
         margin: 0;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #6d6d72;
       }
 
-      .user-location-website {
+      .bio {
+        margin: 0;
+        max-width: 60%;
+      }
+
+      .user-info-location-website {
         display: flex;
-        width: 50%;
+        width: max-content;
 
-        .user-location-website-flex {
+        .website {
+          margin-left: 2vh;
+        }
+      }
+    }
+
+    .user-data-container {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+
+      h6 {
+        color: #6d6d72;
+      }
+
+      .user-data {
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+
+        .count-flex {
           display: flex;
-          width: max-content;
-          padding-right: 20px;
+          flex-direction: column;
+          align-items: center;
 
-          img {
-            padding-right: 10px;
+          p {
+            margin: 1vh 0;
           }
+        }
+      }
+      .teams-container {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .teams {
+          margin-top: 1vh;
+
+          .team-avatar {
+            margin-top: 1vh;
+            margin-right: -2vh;
+            border-radius: 100%;
+            object-fit: cover;
+            width: 5vh;
+            height: 5vh;
+            border: 5px solid #15161a;
+          }
+        }
+
+        .edit-profile-btn {
+          margin-top: 3vh;
+          border: none;
+          border-radius: 5px;
+          padding: 1.5vh 8vh;
+          background: #212229;
+          color: white;
+          outline: none;
+          cursor: pointer;
+          transition: 0.1s ease-in-out;
+        }
+
+        .edit-profile-btn:hover {
+          background: #2f303a;
         }
       }
     }
   }
 
-  .user-data {
-    display: flex;
-    width: 40%;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: max-content;
+  .profile-tabs-container {
+    color: white;
+    width: 100%;
+    margin: 0 auto;
 
-    .user-data-flex {
+    .nav-links {
       display: flex;
       justify-content: space-between;
-      width: 100%;
-      text-align: center;
+      width: 26%;
+
+      .links {
+        color: #6d6d72;
+        text-decoration: none;
+        list-style-type: none;
+        margin: 0;
+        cursor: pointer;
+        transition: 0.1s ease-in-out;
+        font-weight: 400;
+      }
+
+      .active-link {
+        color: white;
+      }
+
+      .links:hover {
+        color: white;
+      }
+    }
+  }
+
+  .tabs-container {
+    width: 100%;
+    margin: 4vh 0;
+
+    .tab-content {
+      background: #15161a;
+      padding: 2vh;
+      border-radius: 10px;
+
+      h2 {
+        font-weight: 400;
+        margin: 0;
+        margin-bottom: 2vh;
+      }
     }
 
-    .user-content-btn {
-      width: 20vh;
-      padding: 10px;
-      background: linear-gradient(99.98deg, #5557fe -2.36%, #9555fe 103.67%);
-      border-radius: 5px;
-      border: none;
-      color: white;
-      margin-top: 20px;
+    .projects-array {
+      display: grid;
+      grid-template-columns: 0fr 0fr 0fr 0fr;
+      grid-gap: 2vh;
+      justify-content: space-between;
+      width: 100%;
+
+      .project-thumbnail {
+        width: 20.5vw;
+        height: 12vw;
+        object-fit: cover;
+        border: 8px solid #212229;
+        border-radius: 5px;
+        transition: 0.1s ease-in-out;
+        cursor: pointer;
+      }
+
+      .project-thumbnail:hover {
+        border: 8px solid #5557fe;
+      }
     }
+
+    .follow-container {
+      background: #15161a;
+      padding: 2vh;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 4vh;
+      width: 100%;
+      justify-content: space-between;
+
+      .follow-avatar {
+        border-radius: 100%;
+        object-fit: cover;
+        width: 10vh;
+        height: 10vh;
+      }
+
+      .follow-info-flex {
+        display: flex;
+      }
+
+      .follow-content-flex {
+        display: flex;
+        margin-left: 2vh;
+
+        .follow-FLname {
+          font-weight: 400;
+          font-size: 1.2rem;
+        }
+
+        .follow-username {
+          margin-left: 1vh;
+          font-weight: 400;
+          font-size: 1.2rem;
+          color: #6d6d72;
+        }
+      }
+      .follower-bio {
+        margin: 0;
+        margin-top: 2vh;
+        margin-left: 2vh;
+        max-width: 80%;
+      }
+    }
+  }
+
+  .follow-btn {
+    border: none;
+    border-radius: 5px;
+    padding: 1.5vh 8vh;
+    background: linear-gradient(99.98deg, #5557fe -2.36%, #9555fe 103.67%);
+    color: white;
+    outline: none;
+    cursor: pointer;
   }
 }

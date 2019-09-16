@@ -61,7 +61,7 @@ const Login = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
             />
-            <button>Sign in</button>
+            <button className="sign-in-btn">Sign in</button>
           </form>
           <em>OR</em>
           <button className="auth0-facebook">Sign in with Facebook</button>

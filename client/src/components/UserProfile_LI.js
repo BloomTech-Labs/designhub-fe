@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Heatmap from './Heatmap.js';
 
 import './SASS/UserProfile.scss';
 
 import avatar from '../components/ASSETS/avatar.jpg';
-import link from '../components/ASSETS/link.svg';
-import map from '../components/ASSETS/map-pin.svg';
+// import link from '../components/ASSETS/link.svg';
+// import map from '../components/ASSETS/map-pin.svg';
+import UserProfileTabs from './UserProfile_Tabs';
 
 class UserProfile_LI extends Component {
   constructor(props) {
@@ -16,66 +18,113 @@ class UserProfile_LI extends Component {
 
   render() {
     const userInfo = {
-      avatar: avatar,
-      userName: 'eriklambert',
+      id: 1,
+      username: 'eriklambert',
+      email: 'eriklambert@gmail.com',
+      phoneNumber: '888-555-0152',
       firstName: 'Erik',
       lastName: 'Lambert',
+      location: 'Austin, TX',
       bio:
         'I love designing and always looking for ways to improve and innovate. 🤓 #Usersmatter! #LambdaBound #UXEngineer',
-      location: 'Austin, TX',
       website: 'https://eriklambert.io',
-      projects: 12,
-      followers: 36,
-      following: 1,
-      starred: 143
+      avatar: avatar,
+      created_at: 'June 11, 1997'
+    };
+
+    const projects = {
+      user_id: 1,
+      projects: [
+        {
+          project_id: 1,
+          projectName: 'Landing Page Concept',
+          starred: false
+        },
+        {
+          project_id: 2,
+          projectName: 'Daily UI 2 Onboard',
+          starred: true
+        }
+      ]
+    };
+
+    const teams = {
+      user_id: 1,
+      teams: [
+        {
+          id: 1,
+          username: 'Lambda School',
+          avatar:
+            'https://pbs.twimg.com/profile_images/1146473233895440384/p97lN1Jk_400x400.png'
+        },
+        {
+          id: 2,
+          username: 'Google',
+          avatar: 'https://blog.hubspot.com/hubfs/image8-2.jpg'
+        },
+        {
+          id: 3,
+          username: 'Snapchat',
+          avatar:
+            'https://www.gannett-cdn.com/presto/2019/08/16/USAT/bd6538e4-5535-41ce-857b-518451c3a958-Snapchat_Logo_H.png?crop=2499,1406,x1,y56&width=3200&height=1680&fit=bounds'
+        }
+      ]
     };
 
     return (
-      <div className="profile-container">
-        <div className="user-content">
+      <div className="user-profile-container">
+        <div className="user-header">
+          <img src={userInfo.avatar} className="avatar" alt="avatar" />
           <div className="user-info">
-            <img src={userInfo.avatar} className="avatar" alt="user avatar" />
-            <div className="user-info-text">
-              <h1 className="userFLname">
-                {userInfo.firstName} {userInfo.lastName}
-              </h1>
-              <p className="username">{userInfo.userName}</p>
-              <p className="user-bio">{userInfo.bio}</p>
-              <div className="user-location-website">
-                <div className="user-location-website-flex">
-                  <img src={map} alt="location" />
-                  <p>{userInfo.location}</p>
-                </div>
-                <div className="user-location-website-flex">
-                  <img src={link} alt="website" />
-                  <p>{userInfo.website}</p>
-                </div>
-              </div>
+            <h1 className="userFLname">
+              {userInfo.firstName} {userInfo.lastName}
+            </h1>
+            <h2 className="username">{userInfo.username}</h2>
+            <p className="bio">{userInfo.bio}</p>
+            <div className="user-info-location-website">
+              <p>{userInfo.location}</p>
+              <p className="website">{userInfo.website}</p>
             </div>
           </div>
-          <div className="user-data">
-            <div className="user-data-flex">
-              <div>
-                <p>Projects</p>
-                <p>{userInfo.projects}</p>
+          <div className="user-data-container">
+            <div className="user-data">
+              <div className="count-flex">
+                <h6>Projects</h6>
+                <p>{projects.projects.length}</p>
               </div>
-              <div>
-                <p>Followers</p>
-                <p>{userInfo.followers}</p>
+              <div className="count-flex">
+                <h6>Followers</h6>
+                <p>37</p>
               </div>
-              <div>
-                <p>Following</p>
-                <p>{userInfo.following}</p>
+              <div className="count-flex">
+                <h6>Following</h6>
+                <p>1</p>
               </div>
-              <div>
-                <p>Starred</p>
-                <p>{userInfo.starred}</p>
+              <div className="count-flex">
+                <h6>Starred</h6>
+                <p>143</p>
               </div>
             </div>
-            <button className="user-content-btn">Edit Profile</button>
+            <div className="teams-container">
+              <div className="teams">
+                <h6>Teams</h6>
+                {teams.teams.map(team => (
+                  <img
+                    src={team.avatar}
+                    className="team-avatar"
+                    alt="team avatars"
+                  />
+                ))}
+              </div>
+              <div>
+                <Link to="/">
+                  <button className="edit-profile-btn">Edit Profile</button>
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-
+        <UserProfileTabs />
         <Heatmap />
       </div>
     );

@@ -3,8 +3,13 @@
   background: #15161a;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
-  max-width: 700px;
+  width: 98%;
+  padding: 1%;
+  margin-bottom: 6vh;
+
+  .chart {
+    width: 100%;
+  }
 }
 
 $heatmap-5: #3f1ccc;
