@@ -10,6 +10,7 @@
     margin: 4vh auto;
   }
   .project-details {
+    width: 60%;
     h2 {
       font-weight: 500;
       font-size: 1.5rem;
@@ -32,14 +33,17 @@
       letter-spacing: 0.11em;
       margin-right: 20px;
     }
-    .project-header-username {
+    .project-header-username a {
       color: #5557fe;
+      text-decoration: none;
     }
   }
   .project-header-right {
+    width: 40%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
+    text-align: right;
   }
   .project-body {
     display: flex;
@@ -84,6 +88,26 @@
       box-sizing: border-box;
       border-radius: 10px;
       height: 75vh;
+      padding: 14px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      .comments-header {
+        letter-spacing: 0.11em;
+        font-weight: normal;
+        font-size: 1rem;
+        margin-bottom: 31px;
+      }
+      .comments-form input {
+        border: none;
+        background: #2a2b31;
+        border-radius: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        height: 53px;
+        padding-left: 16px;
+        color: white;
+      }
     }
   }
 }

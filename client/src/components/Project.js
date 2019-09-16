@@ -57,7 +57,9 @@ const Project = () => {
           <p>
             <span>
               Created by{' '}
-              <span className="project-header-username">eriklambert</span>
+              <span className="project-header-username">
+                <a href="#">eriklambert</a>
+              </span>
             </span>
             <span>Created on June 11, 2020</span>
           </p>
@@ -80,7 +82,15 @@ const Project = () => {
             <img src={project.thumbnail} alt="project-thumbnail" />
           ))}
         </div>
-        <div className="project-comments">Comments</div>
+        <div className="project-comments">
+          <div className="comments-header">Comments</div>
+          <div className="comments-body">Comments body</div>
+          <div className="comments-form">
+            <form>
+              <input type="text" placeholder="Leave a comment..." />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
