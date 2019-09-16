@@ -1,11 +1,12 @@
 .project-container {
   width: 96%;
+  color: white;
   .project-header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    color: white;
+
     margin: 5vh auto;
   }
 
@@ -13,5 +14,32 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
+  }
+  .project-body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    .project-main-image {
+      width: 50%;
+      height: 75vh;
+      background-color: #15161a;
+      border: 5px solid #15161a;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+    .project-thumbnails {
+      display: flex;
+      flex-flow: column nowrap;
+      width: 12%;
+      justify-content: center;
+      align-items: flex-start;
+      img {
+        width: 211px;
+      }
+    }
+    .project-comments {
+      width: 28%;
+    }
   }
 }
