@@ -1,3 +1,5 @@
+@import './palette';
+
 .top-bar-container {
   border-bottom: 1px solid #2a2b31;
   position: fixed;
@@ -27,7 +29,7 @@
   }
 
   .top-bar-user-info {
-    color: white;
+    color: $white;
     font-size: 0.9rem;
     letter-spacing: 0.11rem;
     display: flex;
@@ -40,7 +42,7 @@
     width: 40px;
     height: 40px;
     border-radius: 20px;
-    border: 2px solid #5557fe;
+    border: 2px solid $blue;
     margin: 0 15px;
   }
 
@@ -52,8 +54,8 @@
   .search-bar-input {
     width: 369px;
     height: 31px;
-    color: white;
-    background: #2a2b31;
+    color: $white;
+    background: $black;
     border-radius: 2px;
     border: none;
     margin-left: 15px;
@@ -62,6 +64,6 @@
   }
 
   h3 {
-    color: white;
+    color: $white;
   }
 }

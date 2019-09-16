@@ -3,8 +3,8 @@ import SampleLogo from './Icons/SampleLogo.js';
 import MagnifyingGlass from './Icons/MagnifyingGlass.js';
 import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
-import avatar from './ASSETS/avatar.jpg';
-import './SASS/TopBar.scss';
+import avatar from '../ASSETS/avatar.jpg';
+import '../SASS/TopBar.scss';
 
 const TopBar = () => {
   const userInfo = {

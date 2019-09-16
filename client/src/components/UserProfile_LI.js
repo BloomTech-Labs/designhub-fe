@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import './SASS/UserProfile.scss';
+import '../SASS/UserProfile.scss';
 
-import avatar from '../components/ASSETS/avatar.jpg';
-// import link from '../components/ASSETS/link.svg';
-// import map from '../components/ASSETS/map-pin.svg';
+import avatar from '../ASSETS/avatar.jpg';
+// import link from '../ASSETS/link.svg';
+// import map from '../ASSETS/map-pin.svg';
 import UserProfileTabs from './UserProfile_Tabs';
 
 class UserProfile_LI extends Component {

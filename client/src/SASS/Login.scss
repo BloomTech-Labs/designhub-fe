@@ -1,7 +1,9 @@
+@import './palette';
+
 .Login-container {
   align-items: center;
-  background: url('./ASSETS/loginpage-bg.jpg');
-  color: white;
+  background: url('../ASSETS/loginpage-bg.jpg');
+  color: $white;
   display: flex;
   height: 100vh;
   width: 100vw;
@@ -76,7 +78,7 @@
     }
   }
   header a {
-    color: white;
+    color: $white;
     font-size: 18px;
     line-height: 21px;
     letter-spacing: 0.11em;
@@ -107,8 +109,8 @@
     input {
       background: none;
       border: none;
-      border-bottom: 1px solid white;
-      color: white;
+      border-bottom: 1px solid $white;
+      color: $white;
       outline: none;
       max-width: 200px;
       font-weight: 900;
@@ -127,9 +129,9 @@
 
 .sign-in-btn {
   background: none;
-  border: 1px solid white;
+  border: 1px solid $white;
   border-radius: 5px;
-  color: white;
+  color: $white;
   font-size: 14px;
   line-height: 21px;
   text-align: center;

@@ -5,7 +5,7 @@ import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
 import MyProjectsIcon from './Icons/MyProjectsIcon';
 import InboxIcon from './Icons/InboxIcon';
 import SettingsIcon from './Icons/SettingsIcon';
-import './SASS/Navbar.scss';
+import '../SASS/Navbar.scss';
 
 const Navbar = () => {
   return (
