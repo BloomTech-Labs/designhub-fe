@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
+import { useAuth0 } from '../auth-wrapper';
 import '../SASS/Login.scss';
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
+  const { loginWithRedirect } = useAuth0();
   return (
     <div className="Login-container">
       <section className="left-side">
@@ -30,7 +26,7 @@ const Login = () => {
             files all in one place!
           </h2>
 
-          <span role="img" aria-label="megaphone">
+          <span role="img" aria-label="megaphone" className="megaphone">
             📢
           </span>
           <h2>
@@ -42,30 +38,14 @@ const Login = () => {
       <section className="right-side">
         <div className="form-container">
           <header>
-            <NavLink to="">SIGN UP</NavLink>
-            <NavLink to="/login">LOG IN</NavLink>
+            <p>START TODAY</p>
           </header>
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="username">USERNAME</label>
-            <input
-              id="username"
-              type="text"
-              value={username}
-              onChange={e => setUsername(e.target.value)}
-            />
-
-            <label htmlFor="password">PASSWORD</label>
-            <input
-              id="password"
-              type="text"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-            <button className="sign-in-btn">Sign in</button>
-          </form>
-          <em>OR</em>
-          <button className="auth0-facebook">Sign in with Facebook</button>
-          <button className="auth0-twitter">Sign in with Twitter</button>
+          <button
+            className="auth0-redirect-btn"
+            onClick={() => loginWithRedirect({})}
+          >
+            Let's Go!
+          </button>
         </div>
       </section>
     </div>
