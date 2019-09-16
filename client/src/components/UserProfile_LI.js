@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import Heatmap from './Heatmap.js';
-
 import './SASS/UserProfile.scss';
 
 import avatar from '../components/ASSETS/avatar.jpg';
@@ -83,7 +81,9 @@ class UserProfile_LI extends Component {
             <p className="bio">{userInfo.bio}</p>
             <div className="user-info-location-website">
               <p>{userInfo.location}</p>
-              <p className="website">{userInfo.website}</p>
+              <a href={userInfo.website} target="_blank" className="website">
+                {userInfo.website}
+              </a>
             </div>
           </div>
           <div className="user-data-container">
@@ -125,7 +125,6 @@ class UserProfile_LI extends Component {
           </div>
         </div>
         <UserProfileTabs />
-        <Heatmap />
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import Heatmap from './Heatmap.js';
+
 import avatar2 from './ASSETS/avatar_2.jpg';
 import avatar3 from './ASSETS/avatar_3.jpg';
 
@@ -112,6 +114,7 @@ class UserProfile_Tabs extends Component {
                   ))}
                 </div>
               </div>
+              <Heatmap />
             </TabPanel>
             <TabPanel className="tabs-container">
               <div className="tab-content">
@@ -184,7 +187,15 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="tab-content">
                 <h2>Starred</h2>
-                <img src={projects.thumbnail} alt="test" />
+                <div className="projects-array">
+                  {projects.slice(0, 8).map(project => (
+                    <img
+                      src={project.thumbnail}
+                      className="project-thumbnail"
+                      alt="test"
+                    />
+                  ))}
+                </div>
               </div>
             </TabPanel>
           </Tabs>

@@ -24,25 +24,27 @@ const TopBar = () => {
 
   return (
     <div className="top-bar-container">
-      <div className="logo-container">
-        <SampleLogo />
-      </div>
-      <div className="search-bar-container">
-        <div className="magnifying-glass-container">
-          <MagnifyingGlass />
+      <div class="nav-content">
+        <div className="logo-container">
+          <SampleLogo />
         </div>
+        <div className="search-bar-container">
+          <div className="magnifying-glass-container">
+            <MagnifyingGlass />
+          </div>
 
-        <SearchBar />
-      </div>
-      <div className="top-bar-user-info">
-        <p>{userInfo.userName}</p>
-        <img
-          className="profile-pic-thumb"
-          src={userInfo.avatar}
-          alt="user avatar"
-        />
-        <div className="dark-mode-switch">
-          <DarkModeSwitch />
+          <SearchBar />
+        </div>
+        <div className="top-bar-user-info">
+          <p>{userInfo.userName}</p>
+          <img
+            className="profile-pic-thumb"
+            src={userInfo.avatar}
+            alt="user avatar"
+          />
+          <div className="dark-mode-switch">
+            <DarkModeSwitch />
+          </div>
         </div>
       </div>
     </div>

@@ -1,19 +1,38 @@
-.Heatmap {
-  align-items: center;
+.heatmap {
+  margin: 4vh 0;
   background: #15161a;
+  padding: 1.5%;
   border-radius: 10px;
-  display: flex;
-  width: 98%;
-  padding: 1%;
-  margin-bottom: 6vh;
 
-  .chart {
-    width: 100%;
+  .header {
+    margin: 0 0 2vh 0;
+  }
+
+  .react-calendar-heatmap {
+    text {
+      font-size: 8px;
+    }
+    .color-scale-0 {
+      fill: #212229;
+    }
+    .color-scale-1 {
+      fill: #adaeff;
+    }
+    .color-scale-2 {
+      fill: #8d8fff;
+    }
+    .color-scale-3 {
+      fill: #7072ff;
+    }
+    .color-scale-4 {
+      fill: #5557fe;
+    }
+    .color-scale-5 {
+      fill: #3f1ccc;
+    }
+
+    .color-empty {
+      fill: #212229;
+    }
   }
 }
-
-$heatmap-5: #3f1ccc;
-$heatmap-4: #5557fe;
-$heatmap-3: #7072ff;
-$heatmap-2: #8d8fff;
-$heatmap-1: #adaeff;

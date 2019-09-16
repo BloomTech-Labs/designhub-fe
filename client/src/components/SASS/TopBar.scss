@@ -1,12 +1,17 @@
 .top-bar-container {
-  height: 69px;
-  line-height: 69px;
   border-bottom: 1px solid #2a2b31;
-  padding: 0 37px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-content: center;
+  position: fixed;
+  width: 100%;
+  background: #212229;
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8%;
+    width: 96%;
+    margin: 0 auto;
+  }
 
   .logo-container {
     margin-top: 5px;
@@ -14,8 +19,7 @@
   }
 
   .search-bar-container {
-    align-self: flex-start;
-    width: 78vw;
+    width: 100%;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;

@@ -1,6 +1,7 @@
 .user-profile-container {
   color: white;
   width: 96%;
+  margin-top: 7vh;
 
   .user-header {
     display: flex;
@@ -41,7 +42,8 @@
 
       .bio {
         margin: 0;
-        max-width: 60%;
+        max-width: 80%;
+        line-height: 20px;
       }
 
       .user-info-location-website {
@@ -50,6 +52,13 @@
 
         .website {
           margin-left: 2vh;
+          text-decoration: none;
+          color: white;
+          transition: 0.1s ease-in-out;
+        }
+
+        .website:hover {
+          color: #6d6d72;
         }
       }
     }
@@ -120,12 +129,11 @@
   .profile-tabs-container {
     color: white;
     width: 100%;
-    margin: 0 auto;
 
     .nav-links {
       display: flex;
       justify-content: space-between;
-      width: 26%;
+      width: 34%;
 
       .links {
         color: #6d6d72;
@@ -171,7 +179,7 @@
       width: 100%;
 
       .project-thumbnail {
-        width: 20.5vw;
+        width: 19.6vw;
         height: 12vw;
         object-fit: cover;
         border: 8px solid #212229;
@@ -192,7 +200,7 @@
       display: flex;
       align-items: center;
       margin-bottom: 4vh;
-      width: 100%;
+      width: 97.5%;
       justify-content: space-between;
 
       .follow-avatar {
@@ -204,6 +212,7 @@
 
       .follow-info-flex {
         display: flex;
+        align-items: center;
       }
 
       .follow-content-flex {
@@ -212,13 +221,15 @@
 
         .follow-FLname {
           font-weight: 400;
-          font-size: 1.2rem;
+          font-size: 1rem;
+          margin: 0;
         }
 
         .follow-username {
+          margin: 0;
           margin-left: 1vh;
           font-weight: 400;
-          font-size: 1.2rem;
+          font-size: 1rem;
           color: #6d6d72;
         }
       }
@@ -226,7 +237,9 @@
         margin: 0;
         margin-top: 2vh;
         margin-left: 2vh;
-        max-width: 80%;
+        max-width: 90%;
+        font-size: 0.9rem;
+        line-height: 20px;
       }
     }
   }
