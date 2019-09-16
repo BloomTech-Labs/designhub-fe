@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import './Login.scss';
+import '../SASS/Login.scss';
 
 const Login = () => {
   const [username, setUsername] = useState('');

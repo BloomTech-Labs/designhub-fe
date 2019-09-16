@@ -1,5 +1,5 @@
-@import './components/SASS/reset.scss';
-@import './components/SASS/Navbar.scss';
+@import './SASS/reset.scss';
+@import './SASS/Navbar.scss';
 
 body {
   background: #212229;
@@ -7,11 +7,6 @@ body {
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 h1,

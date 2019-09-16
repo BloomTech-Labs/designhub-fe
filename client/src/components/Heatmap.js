@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
-import './Heatmap.scss';
+import '../SASS/Heatmap.scss';
 
 export default class Heatmap extends Component {
   constructor(props) {
