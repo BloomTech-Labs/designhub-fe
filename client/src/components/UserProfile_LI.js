@@ -81,7 +81,12 @@ class UserProfile_LI extends Component {
             <p className="bio">{userInfo.bio}</p>
             <div className="user-info-location-website">
               <p>{userInfo.location}</p>
-              <a href={userInfo.website} target="_blank" className="website">
+              <a
+                href={userInfo.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="website"
+              >
                 {userInfo.website}
               </a>
             </div>
