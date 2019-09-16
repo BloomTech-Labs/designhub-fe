@@ -1,17 +1,13 @@
-@import './components/SASS/reset.scss';
-@import './components/SASS/Navbar.scss';
+@import './SASS/reset.scss';
+@import './SASS/Navbar.scss';
+@import './SASS/UserProfile.scss';
 
 body {
-  background: #212229;
+  background: $almost-black;
   margin: 0;
   font-family: 'Roboto', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 h1,
