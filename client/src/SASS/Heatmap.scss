@@ -1,6 +1,8 @@
+@import './palette';
+
 .heatmap {
   margin: 4vh 0;
-  background: #15161a;
+  background: $black;
   padding: 1.5%;
   border-radius: 10px;
 
@@ -13,22 +15,22 @@
       font-size: 8px;
     }
     .color-scale-0 {
-      fill: #212229;
+      fill: $almost-black;
     }
     .color-scale-1 {
-      fill: #adaeff;
+      fill: $heatmap-1;
     }
     .color-scale-2 {
-      fill: #8d8fff;
+      fill: $heatmap-2;
     }
     .color-scale-3 {
-      fill: #7072ff;
+      fill: $heatmap-3;
     }
     .color-scale-4 {
-      fill: #5557fe;
+      fill: $heatmap-4;
     }
     .color-scale-5 {
-      fill: #3f1ccc;
+      fill: $heatmap-5;
     }
 
     .color-empty {

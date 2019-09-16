@@ -56,12 +56,12 @@
         .website {
           margin-left: 2vh;
           text-decoration: none;
-          color: white;
+          color: $white;
           transition: 0.1s ease-in-out;
         }
 
         .website:hover {
-          color: #6d6d72;
+          color: $dark-grey;
         }
       }
     }
@@ -221,7 +221,7 @@
           margin-left: 1vh;
           font-weight: 400;
           font-size: 1rem;
-          color: #6d6d72;
+          color: $dark-grey;
         }
       }
       .follower-bio {
