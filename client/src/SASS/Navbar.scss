@@ -1,6 +1,8 @@
+@import './palette';
+
 nav {
   align-items: center;
-  background: #15161a;
+  background: $black;
   border-radius: 10px;
   display: grid;
   grid-template-columns: 60px 120px;
@@ -20,9 +22,9 @@ nav {
   }
 
   p {
-    background: #15161a;
+    background: $black;
     border-radius: 0 10px 10px 0;
-    color: white;
+    color: $white;
     grid-column: 2;
     opacity: 0;
     padding: 10px 10px 10px 10px;
@@ -31,9 +33,9 @@ nav {
   svg {
     fill: none;
     padding: 20px;
-    stroke: #6d6d72;
+    stroke: $dark-grey;
     &:hover {
-      stroke: white;
+      stroke: $white;
     }
   }
 

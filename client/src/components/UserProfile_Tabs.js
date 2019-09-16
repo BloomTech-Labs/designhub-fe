@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import avatar2 from './ASSETS/avatar_2.jpg';
-import avatar3 from './ASSETS/avatar_3.jpg';
+import avatar2 from '../ASSETS/avatar_2.jpg';
+import avatar3 from '../ASSETS/avatar_3.jpg';
 
 class UserProfile_Tabs extends Component {
   constructor(props) {

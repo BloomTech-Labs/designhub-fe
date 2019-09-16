@@ -1,0 +1,25 @@
+@import './palette';
+
+@mixin btn {
+  border: none;
+  border-radius: 5px;
+  padding: 1.5vh 8vh;
+  color: $white;
+  outline: none;
+  cursor: pointer;
+}
+
+@mixin follow-btn {
+  @include btn;
+  background: $btn-gradient;
+}
+
+@mixin edit-profile-btn {
+  @include btn;
+  margin-top: 3vh;
+  background: $almost-black;
+  transition: 0.1s ease-in-out;
+  &:hover {
+    background: #2f303a;
+  }
+}
