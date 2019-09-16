@@ -1,11 +1,13 @@
 import React from 'react';
-import './App.scss';
-import UserProfile_LI from './components/UserProfile_LI';
 import { Route, Switch } from 'react-router-dom';
 import { useAuth0 } from './auth-wrapper.js';
-import NavBar from './components/Navbar.js';
+import Login from './components/Login.js';
+import Navbar from './components/Navbar.js';
+import TopBar from './components/TopBar.js';
 import FakeProfile from './components/FakeProfile.js';
 import PrivateRoute from './components/PrivateRoute.js';
+import UserProfile_LI from './components/UserProfile_LI';
+import './App.scss';
 
 function App() {
   const { loading } = useAuth0();
@@ -16,12 +18,15 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
-      <Switch>
-        <Route exact path="/" />
-        <Route exact path="/profile" component={UserProfile_LI} />
-        <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
-      </Switch>
+      <TopBar />
+      <Navbar />
+      <Route exact path="/login" component={Login} />
+      <main className="workspace">
+        <Switch>
+          <Route exact path="/profile" component={UserProfile_LI} />
+          <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
+        </Switch>
+      </main>
     </div>
   );
 }

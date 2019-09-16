@@ -7,7 +7,7 @@ import InboxIcon from './Icons/InboxIcon';
 import SettingsIcon from './Icons/SettingsIcon';
 import './SASS/Navbar.scss';
 
-const NavBar = () => {
+const Navbar = () => {
   return (
     <nav>
       <NavLink to="/profile">
@@ -38,4 +38,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

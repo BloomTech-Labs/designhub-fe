@@ -1,0 +1,63 @@
+.top-bar-container {
+  height: 69px;
+  line-height: 69px;
+  border-bottom: 1px solid #2a2b31;
+  padding: 0 37px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-content: center;
+
+  .logo-container {
+    margin-top: 5px;
+    width: auto;
+  }
+
+  .search-bar-container {
+    align-self: flex-start;
+    width: 78vw;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-left: 55px;
+  }
+
+  .top-bar-user-info {
+    color: white;
+    font-size: 0.9rem;
+    letter-spacing: 0.11rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .profile-pic-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid #5557fe;
+    margin: 0 15px;
+  }
+
+  .dark-mode-switch {
+    width: 42px;
+    height: 42px;
+  }
+
+  .search-bar-input {
+    width: 369px;
+    height: 31px;
+    color: white;
+    background: #2a2b31;
+    border-radius: 2px;
+    border: none;
+    margin-left: 15px;
+    padding-left: 10px;
+    letter-spacing: 0.11rem;
+  }
+
+  h3 {
+    color: white;
+  }
+}

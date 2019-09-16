@@ -1,0 +1,163 @@
+.Login-container {
+  align-items: center;
+  background: url('./ASSETS/loginpage-bg.jpg');
+  color: white;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.left-side {
+  margin-left: 40px;
+  max-width: 50%;
+  h1 {
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 112px;
+    letter-spacing: 0.11em;
+  }
+  p {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.11em;
+  }
+
+  .paragraphs {
+    align-items: center;
+    display: grid;
+    grid-gap: 20px 0;
+    grid-template-columns: 40px 420px;
+
+    h2 {
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.11em;
+    }
+
+    p {
+      grid-column: 2;
+      font-weight: 900;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+
+    span {
+      grid-column: 1;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+  }
+}
+
+.right-side {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+
+  .form-container {
+    align-items: left;
+    display: flex;
+    flex-direction: column;
+    em {
+      font-weight: 900;
+      font-size: 12px;
+      line-height: 21px;
+      margin-top: 5px;
+      text-align: center;
+      letter-spacing: 0.11em;
+    }
+  }
+  header a {
+    color: white;
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.11em;
+    opacity: 0.2;
+    text-decoration: none;
+    &.active {
+      opacity: 1;
+      font-weight: 900;
+      margin-left: 40px;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      margin-top: 20px;
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.11em;
+    }
+
+    input {
+      background: none;
+      border: none;
+      border-bottom: 1px solid white;
+      color: white;
+      outline: none;
+      max-width: 200px;
+      font-weight: 900;
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.11em;
+      padding: 4px;
+
+      &:focus,
+      &:hover {
+        background: hsla(360, 100%, 100%, 0.2);
+      }
+    }
+  }
+}
+
+button {
+  background: none;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+  letter-spacing: 0.11em;
+  max-width: 210px;
+  margin-top: 30px;
+  outline: none;
+  padding: 5px;
+  &:hover {
+    cursor: pointer;
+    background: hsla(360, 100%, 100%, 0.2);
+  }
+}
+
+button.auth0-facebook {
+  border: 1px solid #4992ff;
+  background: #4992ff;
+  margin: 5px 0;
+  &:hover {
+    background: hsla(216, 100%, 64%, 0.55);
+  }
+}
+
+button.auth0-twitter {
+  border: 1px solid #2cccff;
+  background: #2cccff;
+  margin: 10px 0;
+  &:hover {
+    background: hsla(195, 100%, 59%, 0.55);
+  }
+}
