@@ -66,6 +66,8 @@
       display: flex;
       flex-flow: column nowrap;
       width: 15%;
+      height: 75vh;
+      overflow-y: scroll;
       justify-content: center;
       align-items: center;
 
@@ -98,15 +100,27 @@
         font-size: 1rem;
         margin-bottom: 31px;
       }
-      .comments-form input {
-        border: none;
-        background: #2a2b31;
-        border-radius: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        height: 53px;
-        padding-left: 16px;
-        color: white;
+      .comments-form {
+        .form-wrapper {
+          position: relative;
+        }
+        input {
+          position: relative;
+          position: top left;
+          border: none;
+          background: #2a2b31;
+          border-radius: 10px;
+          width: 100%;
+          box-sizing: border-box;
+          height: 53px;
+          padding-left: 16px;
+          color: white;
+        }
+        button {
+          position: absolute;
+          position: top right;
+          z-index: 9;
+        }
       }
     }
   }

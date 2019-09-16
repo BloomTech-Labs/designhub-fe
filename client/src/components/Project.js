@@ -87,7 +87,10 @@ const Project = () => {
           <div className="comments-body">Comments body</div>
           <div className="comments-form">
             <form>
-              <input type="text" placeholder="Leave a comment..." />
+              <div className="form-wrapper">
+                <input type="text" placeholder="Leave a comment..." />
+                <button>Submit</button>
+              </div>
             </form>
           </div>
         </div>
