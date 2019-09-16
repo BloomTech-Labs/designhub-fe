@@ -18,8 +18,8 @@ export default class Heatmap extends Component {
           options={myOptions}
           series={myOptions.series}
           type="heatmap"
-          width={700}
-          height={320}
+          height={550}
+          className="chart"
         />
       </div>
     );
@@ -87,11 +87,11 @@ const myOptions = {
   stroke: {
     show: true,
     colors: ['#15161a'],
-    width: 1
+    width: 10
   },
   plotOptions: {
     heatmap: {
-      radius: 2,
+      radius: 8,
       shadeIntensity: 0.5,
       colorScale: {
         ranges: [
@@ -132,63 +132,84 @@ const myOptions = {
   series: [
     {
       name: 'Jan',
-      data: generateData(20, {
+      data: generateData(31, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Feb',
-      data: generateData(20, {
+      data: generateData(28, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Mar',
-      data: generateData(20, {
+      data: generateData(31, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Apr',
-      data: generateData(20, {
+      data: generateData(30, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'May',
-      data: generateData(20, {
+      data: generateData(31, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Jun',
-      data: generateData(20, {
+      data: generateData(30, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Jul',
-      data: generateData(20, {
+      data: generateData(31, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Aug',
-      data: generateData(20, {
+      data: generateData(31, {
         min: -30,
         max: 55
       })
     },
     {
       name: 'Sep',
-      data: generateData(20, {
+      data: generateData(30, {
+        min: -30,
+        max: 55
+      })
+    },
+    {
+      name: 'Oct',
+      data: generateData(31, {
+        min: -30,
+        max: 55
+      })
+    },
+    {
+      name: 'Nov',
+      data: generateData(30, {
+        min: -30,
+        max: 55
+      })
+    },
+    {
+      name: 'Dec',
+      data: generateData(31, {
         min: -30,
         max: 55
       })

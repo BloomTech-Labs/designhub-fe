@@ -1,11 +1,11 @@
 .user-profile-container {
   color: white;
-  margin-left: 6vh;
+  width: 96%;
 
   .user-header {
     display: flex;
     align-items: center;
-    width: 90%;
+    width: 100%;
     height: 20vh;
     margin: 5vh auto;
     background: #15161a;
@@ -107,6 +107,11 @@
           color: white;
           outline: none;
           cursor: pointer;
+          transition: 0.1s ease-in-out;
+        }
+
+        .edit-profile-btn:hover {
+          background: #2f303a;
         }
       }
     }
@@ -114,7 +119,7 @@
 
   .profile-tabs-container {
     color: white;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 
     .nav-links {
@@ -166,7 +171,7 @@
       width: 100%;
 
       .project-thumbnail {
-        width: 19.5vw;
+        width: 20.5vw;
         height: 12vw;
         object-fit: cover;
         border: 8px solid #212229;

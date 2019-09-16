@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import Heatmap from './Heatmap.js';
 
 import './SASS/UserProfile.scss';
 
 import avatar from '../components/ASSETS/avatar.jpg';
-import link from '../components/ASSETS/link.svg';
-import map from '../components/ASSETS/map-pin.svg';
-import UserProfile_Tabs from './UserProfile_Tabs';
+// import link from '../components/ASSETS/link.svg';
+// import map from '../components/ASSETS/map-pin.svg';
+import UserProfileTabs from './UserProfile_Tabs';
 
 class UserProfile_LI extends Component {
   constructor(props) {
@@ -123,7 +124,7 @@ class UserProfile_LI extends Component {
             </div>
           </div>
         </div>
-        <UserProfile_Tabs />
+        <UserProfileTabs />
         <Heatmap />
       </div>
     );
