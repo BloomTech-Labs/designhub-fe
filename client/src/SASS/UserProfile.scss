@@ -168,6 +168,13 @@
       grid-gap: 2vh;
       justify-content: space-between;
       width: 100%;
+      position: relative;
+
+      .project-info {
+        position: absolute;
+        border: 1px solid red;
+        width: 100%;
+      }
 
       .project-thumbnail {
         width: 19.6vw;
