@@ -8,7 +8,9 @@ const Login = () => {
     <div className="Login-container">
       <section className="left-side">
         <p>WELCOME TO</p>
-        <h1>DESIGNHUB</h1>
+        <h1>
+          DESIGN<em>HUB</em>
+        </h1>
 
         <div className="paragraphs">
           <span role="img" aria-label="handshake">
@@ -36,10 +38,8 @@ const Login = () => {
         </div>
       </section>
       <section className="right-side">
-        <div className="form-container">
-          <header>
-            <p>START TODAY</p>
-          </header>
+        <div className="cta">
+          <header>START TODAY</header>
           <button
             className="auth0-redirect-btn"
             onClick={() => loginWithRedirect({})}

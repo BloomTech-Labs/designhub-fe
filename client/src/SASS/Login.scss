@@ -22,6 +22,18 @@
     font-size: 96px;
     line-height: 112px;
     letter-spacing: 0.11em;
+
+    em {
+      color: hsla(360, 100%, 100%, 0);
+      -webkit-text-fill-color: hsla(
+        360,
+        100%,
+        100%,
+        0
+      ); /* Will override color (regardless of order) */
+      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: $white;
+    }
   }
   p {
     font-weight: 900;
@@ -70,12 +82,13 @@
   flex-direction: column;
   width: 50%;
 
-  .form-container {
-    align-items: left;
+  .cta {
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
   }
-  header p {
+  header {
+    background: none;
     color: $white;
     font-size: 24px;
     font-weight: 900;

@@ -11,13 +11,14 @@
 
 @mixin auth0-redirect-btn {
   @include btn;
-  background: none;
-  border: 1px solid $white;
+  background: $white;
+  color: black;
   font-size: 14px;
   letter-spacing: 0.11em;
   margin-top: 15px;
   &:hover {
-    background: hsla(360, 100%, 100%, 0.2);
+    background: $btn-gradient;
+    color: white;
   }
 }
 
