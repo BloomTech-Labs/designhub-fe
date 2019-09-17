@@ -23,7 +23,8 @@ const ReduxTestComponent = ({
   getSingleProject,
   singleProject,
   updateProject,
-  deleteProject
+  deleteProject,
+  addProject
 }) => {
   useEffect(() => {
     getSingleUser(3);
@@ -33,7 +34,15 @@ const ReduxTestComponent = ({
     deleteProject(21);
     getSingleProject(4);
     getAllProjects();
-  }, []);
+  }, [getAllProjects]);
+
+  const addNewProject = () => {
+    addProject({
+      userId: 6,
+      private: false,
+      projectName: "Mike's amazing designz"
+    }).then(res => getAllProjects());
+  };
 
   return (
     <div style={{ marginTop: '200px', color: 'white' }}>
@@ -94,6 +103,12 @@ const ReduxTestComponent = ({
         ) : (
           <h4>Loading projects...</h4>
         )}
+      </div>
+      <br />
+      <br />
+      <div>
+        <h1 style={{ fontSize: '2rem' }}>Testing add a project router:</h1>
+        <button onClick={addNewProject}>Add a Project</button>
       </div>
     </div>
   );
