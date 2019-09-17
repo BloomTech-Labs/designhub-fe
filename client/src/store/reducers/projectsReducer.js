@@ -13,7 +13,7 @@ import {
 const initialState = {
   error: null,
   message: null,
-  projects: null,
+  allProjects: null,
   singleProject: null,
   isLoading: false
 };
@@ -31,7 +31,7 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        projects: action.payload
+        allProjects: action.payload.data
       };
     case GET_ALL_PROJECTS_FAILURE:
       return {
@@ -69,7 +69,7 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        projects: [...state.projects, ...action.payload]
+        allProjects: [...state.projects, ...action.payload]
       };
     case ADD_PROJECT_FAILURE:
       return {
