@@ -58,6 +58,17 @@
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
+      .edit {
+        color: #5557fe;
+        letter-spacing: 0.11em;
+        padding: 0 25px;
+        font-weight: 500;
+      }
+      svg,
+      img {
+        vertical-align: middle;
+      }
+
       .project-header-button {
         margin-left: 10px;
         height: 42px;
@@ -90,9 +101,9 @@
       display: flex;
       flex-flow: column nowrap;
       width: 15%;
-      height: 80vh;
+      height: 75vh;
       overflow-y: scroll;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
 
       img {
@@ -132,23 +143,37 @@
           position: relative;
         }
         input {
-          position: relative;
-          position: top left;
           border: none;
           background: #2a2b31;
           border-radius: 10px;
           width: 100%;
           box-sizing: border-box;
           height: 53px;
-          padding-left: 16px;
+          padding: 16px;
           color: white;
         }
         button {
           position: absolute;
-          position: top right;
+          right: 6px;
+          top: 6px;
           z-index: 9;
+          height: 40px;
+          vertical-align: middle;
+          width: 40px;
+          border-radius: 100%;
+          border: none;
+          background-color: #5557fe;
+          svg {
+            text-align: center;
+            vertical-align: middle;
+          }
         }
       }
     }
   }
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
 }

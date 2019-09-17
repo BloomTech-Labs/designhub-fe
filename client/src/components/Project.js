@@ -3,8 +3,13 @@ import React from 'react';
 import avatar1 from '../ASSETS/avatar.jpg';
 import avatar2 from '../ASSETS/avatar_2.jpg';
 import avatar3 from '../ASSETS/avatar_3.jpg';
+import figmaIcon from '../ASSETS/figma-icon.png';
+import invisionIcon from '../ASSETS/invision-icon.png';
+import DownloadIcon from './Icons/DownloadIcon';
+import StarIcon from './Icons/StarIcon';
 
 import '../SASS/Project.scss';
+import SendIcon from './Icons/SendIcon';
 
 const Project = () => {
   const projects = [
@@ -75,11 +80,19 @@ const Project = () => {
             <img src={avatar3} alt="user avatar" />
           </div>
           <div className="project-header-links">
-            <div className="project-header-button">Figma</div>
-            <div className="project-header-button">InVision</div>
-            <div className="project-header-button">Download</div>
-            <div className="project-header-button">Star</div>
-            <div className="project-header-button">Edit</div>
+            <div className="project-header-button">
+              <img src={figmaIcon} />
+            </div>
+            <div className="project-header-button">
+              <img src={invisionIcon} />
+            </div>
+            <div className="download project-header-button">
+              <DownloadIcon />
+            </div>
+            <div className="star project-header-button">
+              <StarIcon />
+            </div>
+            <div className="edit project-header-button">Edit</div>
           </div>
         </div>
       </div>
@@ -99,7 +112,9 @@ const Project = () => {
             <form>
               <div className="form-wrapper">
                 <input type="text" placeholder="Leave a comment..." />
-                <button>Submit</button>
+                <button>
+                  <SendIcon />
+                </button>
               </div>
             </form>
           </div>
