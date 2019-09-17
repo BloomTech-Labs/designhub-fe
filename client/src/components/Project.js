@@ -67,7 +67,7 @@ const Project = () => {
             <span>
               Created by{' '}
               <span className="project-header-username">
-                <a href="#">eriklambert</a>
+                <a href="/">eriklambert</a>
               </span>
             </span>
             <span>Created on June 11, 2020</span>
@@ -81,10 +81,10 @@ const Project = () => {
           </div>
           <div className="project-header-links">
             <div className="project-header-button">
-              <img src={figmaIcon} />
+              <img src={figmaIcon} alt="" />
             </div>
             <div className="project-header-button">
-              <img src={invisionIcon} />
+              <img src={invisionIcon} alt="" />
             </div>
             <div className="download project-header-button">
               <DownloadIcon />
@@ -98,7 +98,7 @@ const Project = () => {
       </div>
       <div className="project-body">
         <div className="project-main-image">
-          <img src={projects[0].thumbnail} alt="main project image" />
+          <img src={projects[0].thumbnail} alt="main project" />
         </div>
         <div className="project-thumbnails">
           {projects.map(project => (
