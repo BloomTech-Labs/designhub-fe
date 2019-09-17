@@ -24,7 +24,7 @@ const initialState = {
   message: null,
   currentUser: null,
   singleUser: null,
-  allUsers: null,
+  allUsers: [],
   isLoading: false,
   isLoggedIn: false
 };

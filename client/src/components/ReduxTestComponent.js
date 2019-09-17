@@ -5,7 +5,10 @@ import {
   getAllProjects,
   getSingleUser,
   updateUser,
-  getSingleProject
+  getSingleProject,
+  addProject,
+  updateProject,
+  deleteProject
 } from '../store/actions';
 
 const ReduxTestComponent = ({
@@ -18,14 +21,18 @@ const ReduxTestComponent = ({
   singleUser,
   updateUser,
   getSingleProject,
-  singleProject
+  singleProject,
+  updateProject,
+  deleteProject
 }) => {
   useEffect(() => {
-    getAllProjects();
     getSingleUser(3);
-    updateUser(6, { email: 'mike.vansleen@gmail.com' });
+    updateUser(6, { email: 'mike.vansleen2@gmail.com' });
     getUsers();
+    updateProject(22, { projectName: "Mike's Project Yo!" });
+    deleteProject(21);
     getSingleProject(4);
+    getAllProjects();
   }, []);
 
   return (
@@ -104,5 +111,14 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getUsers, getAllProjects, getSingleUser, updateUser, getSingleProject }
+  {
+    getUsers,
+    getAllProjects,
+    getSingleUser,
+    updateUser,
+    getSingleProject,
+    addProject,
+    updateProject,
+    deleteProject
+  }
 )(ReduxTestComponent);

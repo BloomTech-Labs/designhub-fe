@@ -7,13 +7,19 @@ import {
   GET_SINGLE_PROJECT_FAILURE,
   ADD_PROJECT_START,
   ADD_PROJECT_SUCCESS,
-  ADD_PROJECT_FAILURE
+  ADD_PROJECT_FAILURE,
+  UPDATE_PROJECT_START,
+  UPDATE_PROJECT_SUCCESS,
+  UPDATE_PROJECT_FAILURE,
+  DELETE_PROJECT_START,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAILURE
 } from '../actions';
 
 const initialState = {
   error: null,
   message: null,
-  allProjects: null,
+  allProjects: [],
   singleProject: null,
   isLoading: false
 };
@@ -69,9 +75,46 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        allProjects: [...state.projects, ...action.payload]
+        allProjects: [...state.allProjects, action.payload]
       };
     case ADD_PROJECT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      };
+    case UPDATE_PROJECT_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case UPDATE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        allProjects: [...state.allProjects, action.payload]
+      };
+    case UPDATE_PROJECT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      };
+    case DELETE_PROJECT_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case DELETE_PROJECT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    case DELETE_PROJECT_FAILURE:
       return {
         ...state,
         isLoading: false,
