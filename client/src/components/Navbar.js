@@ -10,12 +10,12 @@ import '../SASS/Navbar.scss';
 const Navbar = () => {
   return (
     <nav>
-      <NavLink to="/profile">
+      <NavLink to="/">
         <ProfileIcon />
       </NavLink>
       <p className="A">Profile</p>
 
-      <NavLink to="">
+      <NavLink to="/create">
         <CreateNewProjectIcon />
       </NavLink>
       <p className="B">New Project</p>
@@ -25,12 +25,12 @@ const Navbar = () => {
       </NavLink>
       <p className="C">Projects</p>
 
-      <NavLink to="">
+      <NavLink to="/inbox">
         <InboxIcon />
       </NavLink>
       <p className="D">Notifications</p>
 
-      <NavLink to="">
+      <NavLink to="/fake-profile">
         <SettingsIcon />
       </NavLink>
       <p className="E">Settings</p>
