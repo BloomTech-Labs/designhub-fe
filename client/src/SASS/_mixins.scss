@@ -9,6 +9,19 @@
   cursor: pointer;
 }
 
+@mixin auth0-redirect-btn {
+  @include btn;
+  background: $white;
+  color: black;
+  font-size: 14px;
+  letter-spacing: 0.11em;
+  margin-top: 15px;
+  &:hover {
+    background: $btn-gradient;
+    color: white;
+  }
+}
+
 @mixin follow-btn {
   @include btn;
   background: $btn-gradient;
