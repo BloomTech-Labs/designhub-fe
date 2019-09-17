@@ -7,6 +7,7 @@ import TopBar from './components/TopBar.js';
 import FakeProfile from './components/FakeProfile.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import UserProfile_LI from './components/UserProfile_LI';
+import Project from './components/Project.js';
 import './App.scss';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <main className="workspace">
         <Switch>
           <Route exact path="/profile" component={UserProfile_LI} />
+          <Route exact path="/project" component={Project} />
           <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
         </Switch>
       </main>
