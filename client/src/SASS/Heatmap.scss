@@ -1,15 +1,40 @@
 @import './palette';
 
-.Heatmap {
-  align-items: center;
+.heatmap {
+  margin: 4vh 0;
   background: $black;
+  padding: 1.5%;
   border-radius: 10px;
-  display: flex;
-  width: 98%;
-  padding: 1%;
-  margin-bottom: 6vh;
 
-  .chart {
-    width: 100%;
+  .header {
+    margin: 0 0 2vh 0;
+  }
+
+  .react-calendar-heatmap {
+    text {
+      font-size: 8px;
+    }
+    .color-scale-0 {
+      fill: $almost-black;
+    }
+    .color-scale-1 {
+      fill: $heatmap-1;
+    }
+    .color-scale-2 {
+      fill: $heatmap-2;
+    }
+    .color-scale-3 {
+      fill: $heatmap-3;
+    }
+    .color-scale-4 {
+      fill: $heatmap-4;
+    }
+    .color-scale-5 {
+      fill: $heatmap-5;
+    }
+
+    .color-empty {
+      fill: #212229;
+    }
   }
 }

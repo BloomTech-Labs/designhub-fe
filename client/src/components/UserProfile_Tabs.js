@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import Heatmap from '../components/Heatmap.js';
+
 import avatar2 from '../ASSETS/avatar_2.jpg';
 import avatar3 from '../ASSETS/avatar_3.jpg';
 
@@ -14,41 +16,49 @@ class UserProfile_Tabs extends Component {
     const projects = [
       {
         project_id: 1,
+        name: 'Project One',
         thumbnail:
           'https://cdn.dribbble.com/users/182336/screenshots/7150621/media/b0a6aa5b2a19029479da7d91972b2774.png'
       },
       {
         project_id: 2,
+        name: 'Project Two',
         thumbnail:
           'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
       },
       {
         project_id: 3,
+        name: 'Project Three',
         thumbnail:
           'https://cdn.dribbble.com/users/3281732/screenshots/7150760/media/a11dae58a8eee44d242417ae6a6bed3c.jpg'
       },
       {
         project_id: 4,
+        name: 'Project Four',
         thumbnail:
           'https://cdn.dribbble.com/users/674925/screenshots/7147175/media/ca03b14f14639eddf76bd01174c9f2c5.png'
       },
       {
         project_id: 5,
+        name: 'Project Five',
         thumbnail:
           'https://cdn.dribbble.com/users/1430543/screenshots/7151173/media/c6109e2cedff65261c8a5f33ce618bba.jpg'
       },
       {
         project_id: 6,
+        name: 'Project Six',
         thumbnail:
           'https://cdn.dribbble.com/users/1312159/screenshots/7148680/image.png'
       },
       {
         project_id: 7,
+        name: 'Project Seven',
         thumbnail:
           'https://cdn.dribbble.com/users/2151039/screenshots/7148065/media/2cf88366ac2a35660345ca8226a97085.png'
       },
       {
         project_id: 8,
+        name: 'Project Eight',
         thumbnail:
           'https://cdn.dribbble.com/users/1160700/screenshots/7150660/media/610f9cc1a848c9ec6ba0121a4c569a9f.png'
       }
@@ -104,14 +114,19 @@ class UserProfile_Tabs extends Component {
                 <h2>Recent Projects</h2>
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
-                    <img
-                      src={project.thumbnail}
-                      className="project-thumbnail"
-                      alt="test"
-                    />
+                    <>
+                      <div className="project-content">
+                        <img
+                          src={project.thumbnail}
+                          className="project-thumbnail"
+                          alt="test"
+                        />
+                      </div>
+                    </>
                   ))}
                 </div>
               </div>
+              <Heatmap />
             </TabPanel>
             <TabPanel className="tabs-container">
               <div className="tab-content">
@@ -184,7 +199,15 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="tab-content">
                 <h2>Starred</h2>
-                <img src={projects.thumbnail} alt="test" />
+                <div className="projects-array">
+                  {projects.slice(0, 8).map(project => (
+                    <img
+                      src={project.thumbnail}
+                      className="project-thumbnail"
+                      alt="test"
+                    />
+                  ))}
+                </div>
               </div>
             </TabPanel>
           </Tabs>

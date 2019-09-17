@@ -1,14 +1,20 @@
 @import './palette';
 
 .top-bar-container {
-  height: 69px;
-  line-height: 69px;
-  border-bottom: 1px solid $black;
-  padding: 0 37px;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-content: center;
+  border-bottom: 1px solid #2a2b31;
+  position: fixed;
+  z-index: 999999;
+  width: 100%;
+  background: $almost-black;
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8%;
+    width: 96%;
+    margin: 0 auto;
+  }
 
   .logo-container {
     margin-top: 5px;
@@ -16,8 +22,7 @@
   }
 
   .search-bar-container {
-    align-self: flex-start;
-    width: 78vw;
+    width: 100%;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -51,12 +56,13 @@
     width: 369px;
     height: 31px;
     color: $white;
-    background: $black;
+    background: $field-bg;
     border-radius: 2px;
     border: none;
     margin-left: 15px;
     padding-left: 10px;
     letter-spacing: 0.11rem;
+    outline: none;
   }
 
   h3 {
