@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { withRouter, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from './auth-wrapper.js';
 import Login from './components/Login.js';
 import Navbar from './components/Navbar.js';
@@ -10,26 +10,26 @@ import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
 import './App.scss';
 
-function App() {
-  const { isAuthenticated, loading, user } = useAuth0();
+function App(props) {
+  const { isAuthenticated, loading } = useAuth0();
 
   if (loading) return <div>Loading...</div>;
   if (!isAuthenticated) return <Login />;
-  else
+  else {
     return (
       <div className="App">
-        <Redirect to="/profile" />;
         <TopBar />
         <Navbar />
         <main className="workspace">
           <Switch>
-            <Route exact path="/profile" component={UserProfile_LI} />
+            <Route exact path="/" component={UserProfile_LI} />
             <Route exact path="/project" component={Project} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
         </main>
       </div>
     );
+  }
 }
 
-export default App;
+export default withRouter(App);

@@ -56,8 +56,7 @@ const Login = () => {
 
 export default Login;
 
-{
-  /* <div className="form-container">
+/* <div className="form-container">
 <header>
 	<NavLink to="">SIGN UP</NavLink>
 	<NavLink to="/login">LOG IN</NavLink>
@@ -84,4 +83,3 @@ export default Login;
 <button className="auth0-facebook">Sign in with Facebook</button>
 <button className="auth0-twitter">Sign in with Twitter</button>
 </div> */
-}
