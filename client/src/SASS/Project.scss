@@ -1,0 +1,179 @@
+.project-container {
+  width: 96%;
+  color: white;
+  .project-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 4vh auto;
+  }
+  .project-details {
+    width: 60%;
+    h2 {
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      letter-spacing: 0.11em;
+      margin-bottom: 14px;
+    }
+    h3 {
+      font-style: italic;
+      font-weight: normal;
+      font-size: 1rem;
+      line-height: 19px;
+      letter-spacing: 0.11em;
+      margin-bottom: 21px;
+    }
+    span {
+      color: #6d6d72;
+      font-weight: normal;
+      font-size: 0.8rem;
+      letter-spacing: 0.11em;
+      margin-right: 20px;
+    }
+    .project-header-username a {
+      color: #5557fe;
+      text-decoration: none;
+    }
+  }
+  .project-header-right {
+    width: 40%;
+    height: 100px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    text-align: right;
+    .project-header-team {
+      img {
+        padding: 0 5px;
+        width: 42px;
+        height: 42px;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
+    .project-header-links {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-end;
+      .edit {
+        color: #5557fe;
+        letter-spacing: 0.11em;
+        padding: 0 25px;
+        font-weight: 500;
+      }
+      svg,
+      img {
+        vertical-align: middle;
+      }
+
+      .project-header-button {
+        margin-left: 10px;
+        height: 42px;
+        background: #15161a;
+        border-radius: 10px;
+        min-width: 42px;
+        text-align: center;
+        line-height: 42px;
+      }
+    }
+  }
+  .project-body {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    .project-main-image {
+      width: 60%;
+      height: 75vh;
+      background-color: #15161a;
+      border: 5px solid #15161a;
+      box-sizing: border-box;
+      border-radius: 10px;
+      overflow: hidden;
+      img {
+        width: 100%;
+      }
+    }
+    .project-thumbnails {
+      display: flex;
+      flex-flow: column nowrap;
+      width: 15%;
+      height: 75vh;
+      overflow-y: scroll;
+      justify-content: flex-start;
+      align-items: center;
+
+      img {
+        width: 211px;
+        margin-bottom: 16px;
+        border: 5px solid #15161a;
+        box-sizing: border-box;
+        border-radius: 10px;
+        &:hover {
+          border: 5px solid #5557fe;
+          cursor: pointer;
+        }
+      }
+    }
+    .project-comments {
+      width: 25%;
+      background-color: #15161a;
+      border: 5px solid #15161a;
+      box-sizing: border-box;
+      border-radius: 10px;
+      height: 75vh;
+      padding: 14px;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      .comments-header {
+        letter-spacing: 0.11em;
+        font-weight: normal;
+        font-size: 1rem;
+        margin-bottom: 31px;
+      }
+      .comments-body {
+        height: 100%;
+      }
+      .comments-form {
+        .form-wrapper {
+          position: relative;
+        }
+        input {
+          border: none;
+          background: #2a2b31;
+          border-radius: 10px;
+          width: 100%;
+          box-sizing: border-box;
+          height: 53px;
+          padding: 16px;
+          color: white;
+        }
+        button {
+          position: absolute;
+          right: 6px;
+          top: 6px;
+          z-index: 9;
+          height: 40px;
+          vertical-align: middle;
+          width: 40px;
+          border-radius: 100%;
+          border: none;
+          background-color: #5557fe;
+          svg {
+            text-align: center;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}

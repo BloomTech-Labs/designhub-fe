@@ -33,6 +33,7 @@ ReactDOM.render(
     <Router>
       <Auth0Provider
         domain={config.domain}
+        audience={config.audience} 
         client_id={config.clientId}
         redirect_uri={window.location.origin}
         onRedirectCallback={onRedirectCallback}
