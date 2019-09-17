@@ -33,7 +33,7 @@ export const getUsers = () => dispatch => {
   return axiosWithAuth()
     .get('/api/v1/users')
     .then(res => {
-      dispatch({ type: GET_ALL_USERS_SUCCESS, payload: res.data });
+      dispatch({ type: GET_ALL_USERS_SUCCESS, payload: res.data.data });
     })
     .catch(err => {
       dispatch({ type: GET_ALL_USERS_FAILURE, error: err });
