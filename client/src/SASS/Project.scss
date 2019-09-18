@@ -1,15 +1,14 @@
 .projects-container {
   width: 96%;
-  margin-top: 7vh;
+  margin-top: 10vh;
   color: white;
-
   .project-header {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
 
-    margin: 4vh auto;
+    margin: 22px auto;
   }
   .project-details {
     width: 60%;
