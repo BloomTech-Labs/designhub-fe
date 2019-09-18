@@ -11,7 +11,7 @@ const Navbar = () => {
   const username = 'eriklambert';
   return (
     <nav>
-      <NavLink to={`/${username}`}>
+      <NavLink to={`/profile/${username}`}>
         <ProfileIcon />
       </NavLink>
       <p className="A">Profile</p>
