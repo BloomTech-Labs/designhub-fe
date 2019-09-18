@@ -4,7 +4,7 @@ import '../SASS/OnboardingForm.scss';
 import axios from 'axios';
 import { useAuth0 } from '../auth-wrapper.js';
 
-const OnboardingForm = () => {
+const OnboardingForm = props => {
   const { user } = useAuth0();
 
   const [formUser, setFormUser] = useState({
@@ -19,31 +19,6 @@ const OnboardingForm = () => {
     website: ''
   });
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log('ON SUBMIT formUser', formUser);
-  };
-
-  useEffect(() => {
-    const getUserData = async () => {
-      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
-      const { id } = user;
-      const res = await axios.get(`api/v1/users/${id}`);
-
-      // this object shape will change soon
-      console.log('res.data.data', res.data.data);
-      const [userData] = res.data.data;
-      let newFormUser = {};
-      for (let prop in userData) {
-        if (userData[prop] && formUser[prop] === '')
-          newFormUser[prop] = userData[prop];
-      }
-      setFormUser({ ...formUser, ...newFormUser });
-    };
-    getUserData();
-    // eslint-disable-next-line
-  }, []);
-
   const {
     // avatar,
     bio,
@@ -55,6 +30,44 @@ const OnboardingForm = () => {
     username,
     website
   } = formUser;
+
+  useEffect(() => {
+    const getUserData = async () => {
+      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
+      const { id } = user;
+      try {
+        const res = await axios.get(`api/v1/users/${id}`);
+        // this object shape will change soon
+        console.log('USE EFFECT res.data.data', res.data.data);
+        const [userData] = res.data.data;
+        let newFormUser = {};
+        for (let prop in userData) {
+          if (userData[prop] && formUser[prop] === '')
+            newFormUser[prop] = userData[prop];
+        }
+        setFormUser({ ...formUser, ...newFormUser });
+      } catch (err) {
+        console.log('USE EFFECT', err);
+      }
+    };
+    getUserData();
+    // eslint-disable-next-line
+  }, []);
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    console.log('ON SUBMIT formUser', formUser);
+    axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
+    const { id } = user;
+    try {
+      const res = await axios.put(`api/v1/users/${id}`, formUser);
+      // this object shape will change soon
+      console.log('HANDLESUBMIT res.data.data', res.data.data);
+      return props.history.push('/');
+    } catch (err) {
+      console.log('HANDLE SUBMIT', err);
+    }
+  };
 
   return (
     <div className="OnboardingForm">
