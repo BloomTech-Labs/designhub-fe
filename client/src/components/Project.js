@@ -180,7 +180,7 @@ class Project extends Component {
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/${this.state.username}`}>eriklambert</Link>
+                  <Link to={`/profile/${this.state.username}`}>eriklambert</Link>
                 </span>
               </span>
               <span>Created on June 11, 2020</span>
