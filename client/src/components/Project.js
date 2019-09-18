@@ -81,17 +81,10 @@ const Project = () => {
           </div>
           <div className="project-header-links">
             <div className="project-header-button">
-<<<<<<< HEAD
-              <img src={figmaIcon} alt="" />
-            </div>
-            <div className="project-header-button">
-              <img src={invisionIcon} alt="" />
-=======
               <img src={figmaIcon} alt="figma-icon" />
             </div>
             <div className="project-header-button">
               <img src={invisionIcon} alt="invision-icon" />
->>>>>>> master
             </div>
             <div className="download project-header-button">
               <DownloadIcon />
