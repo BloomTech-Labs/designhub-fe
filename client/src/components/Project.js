@@ -200,7 +200,9 @@ class Project extends Component {
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/${this.state.username}`}>eriklambert</Link>
+                  <Link to={`/profile/${this.state.username}`}>
+                    eriklambert
+                  </Link>
                 </span>
               </span>
               <span>Created on June 11, 2020</span>
@@ -221,6 +223,7 @@ class Project extends Component {
                       ? 'link-disabled'
                       : 'link-enabled'
                   }
+                  alt="figma"
                 />
               </div>
               <div className="project-header-button">
@@ -231,6 +234,7 @@ class Project extends Component {
                       ? 'link-disabled'
                       : 'link-enabled'
                   }
+                  alt="invision"
                 />
               </div>
               <div className="download project-header-button">
@@ -247,7 +251,7 @@ class Project extends Component {
           <div className="project-main-image">
             <img
               src={projectsArray.mainImg}
-              alt="main project image"
+              alt="main project"
               onClick={this.expand}
             />
           </div>
@@ -256,7 +260,7 @@ class Project extends Component {
               this.state.modal === true ? 'modal-expand' : 'modal-close'
             }
           >
-            <img src={projectsArray.mainImg} alt="main project image" />
+            <img src={projectsArray.mainImg} alt="main project" />
             <span className="background-overlay" onClick={this.close} />
           </div>
           <div className="project-thumbnails">
