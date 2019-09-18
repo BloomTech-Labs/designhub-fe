@@ -1,0 +1,35 @@
+@import './mixins';
+@import './palette';
+
+.project-form-wrapper {
+  margin-top: 78px;
+  color: $white;
+  width: 96%;
+  h2 {
+    margin: 60px auto;
+  }
+  .project-form-container {
+    .inner-form-container {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+    }
+
+    width: 100%;
+    .project-form-left-column {
+      width: 45%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+    }
+    .project-form-right-column {
+      width: 40%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+    }
+    .form-buttons-container {
+      display: block;
+    }
+  }
+}

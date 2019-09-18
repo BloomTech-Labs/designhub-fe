@@ -10,7 +10,7 @@ import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
 import './App.scss';
 import ReduxTestComponent from './components/ReduxTestComponent.js';
-import AddProject from './components/AddProject.js';
+import ProjectForm from './components/ProjectForm.js';
 
 function App(props) {
   const { isAuthenticated, loading } = useAuth0();
@@ -27,7 +27,7 @@ function App(props) {
             <Route exact path="/" component={UserProfile_LI} />
             <Route exact path="/project" component={Project} />
             <Route exact path="/redux" component={ReduxTestComponent} />
-            <Route exact path="/add-project" component={AddProject} />
+            <Route exact path="/add-project" component={ProjectForm} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
         </main>
