@@ -115,6 +115,7 @@ class UserProfile_LI extends Component {
                 <h6>Teams</h6>
                 {teams.teams.map(team => (
                   <img
+                    key={team.avatar}
                     src={team.avatar}
                     className="team-avatar"
                     alt="team avatars"

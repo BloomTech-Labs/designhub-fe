@@ -24,7 +24,7 @@ const TopBar = () => {
 
   return (
     <div className="top-bar-container">
-      <div class="nav-content">
+      <div className="nav-content">
         <div className="logo-container">
           <SampleLogo />
         </div>
