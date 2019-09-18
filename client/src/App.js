@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute.js';
 import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
 import './App.scss';
+import ReduxTestComponent from './components/ReduxTestComponent.js';
 
 function App(props) {
   const { isAuthenticated, loading } = useAuth0();
@@ -24,6 +25,7 @@ function App(props) {
           <Switch>
             <Route exact path="/" component={UserProfile_LI} />
             <Route exact path="/project" component={Project} />
+            <Route exact path="/redux" component={ReduxTestComponent} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
         </main>
