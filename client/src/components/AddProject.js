@@ -1,7 +1,20 @@
 import React from 'react';
 
+import '../SASS/Project.scss';
+
 const AddProject = () => {
-  return <div>Add a project form goes here</div>;
+  return (
+    <div style={{ marginTop: '78px' }}>
+      <form>
+        <input type="text" placeholder="some stuff" />
+        <input type="text" placeholder="some stuff" />
+        <input type="text" placeholder="some stuff" />
+        <input type="text" placeholder="some stuff" />
+        <input type="text" placeholder="some stuff" />
+        <button>Add Project</button>
+      </form>
+    </div>
+  );
 };
 
 export default AddProject;
