@@ -1,7 +1,7 @@
-.project-container {
+.projects-container {
   width: 96%;
+  margin-top: 10vh;
   color: white;
-  margin-top: 78px;
   .project-header {
     display: flex;
     flex-flow: row nowrap;
@@ -70,6 +70,14 @@
         vertical-align: middle;
       }
 
+      .link-disabled {
+        filter: grayscale(100);
+      }
+
+      .link-enabled {
+        filter: grayscale(0);
+      }
+
       .project-header-button {
         margin-left: 10px;
         height: 42px;
@@ -87,8 +95,8 @@
     justify-content: space-between;
     align-items: flex-start;
     .project-main-image {
-      width: 60%;
-      height: 75vh;
+      width: 56%;
+      height: 68vh;
       background-color: #15161a;
       border: 5px solid #15161a;
       box-sizing: border-box;
@@ -101,8 +109,8 @@
     .project-thumbnails {
       display: flex;
       flex-flow: column nowrap;
-      width: 15%;
-      height: 75vh;
+      width: 20%;
+      height: 68vh;
       overflow-y: scroll;
       justify-content: flex-start;
       align-items: center;
@@ -125,7 +133,7 @@
       border: 5px solid #15161a;
       box-sizing: border-box;
       border-radius: 10px;
-      height: 75vh;
+      height: 68vh;
       padding: 14px;
       display: flex;
       flex-flow: column nowrap;
@@ -134,12 +142,45 @@
         letter-spacing: 0.11em;
         font-weight: normal;
         font-size: 1rem;
-        margin-bottom: 31px;
+        margin-bottom: 20px;
       }
       .comments-body {
         height: 100%;
+        overflow-y: scroll;
+        font-size: 0.9rem;
+        line-height: 20px;
+
+        .comment-li-user {
+          background: none;
+          display: flex;
+          padding: 20px 0 20px 0;
+
+          .avatar {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 100%;
+            padding: 0 10px 0 0;
+          }
+        }
+
+        .comment {
+          background: #5557fe;
+          border-radius: 10px;
+          text-align: right;
+          padding: 10px;
+
+          .you {
+            font-weight: 500;
+          }
+
+          .avatar {
+            display: none;
+          }
+        }
       }
       .comments-form {
+        padding-top: 20px;
         .form-wrapper {
           position: relative;
         }
