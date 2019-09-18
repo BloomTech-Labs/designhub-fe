@@ -115,6 +115,7 @@ class UserProfile_LI extends Component {
                 <h6>Teams</h6>
                 {teams.teams.map(team => (
                   <img
+                    key={team.avatar}
                     src={team.avatar}
                     className="team-avatar"
                     alt="team avatars"
@@ -122,7 +123,7 @@ class UserProfile_LI extends Component {
                 ))}
               </div>
               <div>
-                <Link to="/">
+                <Link to="/settings">
                   <button className="edit-profile-btn">Edit Profile</button>
                 </Link>
               </div>

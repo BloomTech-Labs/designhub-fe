@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import Heatmap from '../components/Heatmap.js';
@@ -114,15 +115,15 @@ class UserProfile_Tabs extends Component {
                 <h2>Recent Projects</h2>
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
-                    <>
-                      <div className="project-content">
+                    <div className="project-content" key={project.project_id}>
+                      <Link to={`/project/${project.project_id}`}>
                         <img
                           src={project.thumbnail}
                           className="project-thumbnail"
                           alt="test"
                         />
-                      </div>
-                    </>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -134,6 +135,7 @@ class UserProfile_Tabs extends Component {
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
                     <img
+                      key={project.thumbnail}
                       src={project.thumbnail}
                       className="project-thumbnail"
                       alt="test"
@@ -145,7 +147,7 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="follower-following-container">
                 {followers.map(follower => (
-                  <div className="follow-container">
+                  <div className="follow-container" key={follower.avatar}>
                     <div className="follow-info-flex">
                       <img
                         src={follower.avatar}
@@ -172,7 +174,7 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="follower-following-container">
                 {followers.map(follower => (
-                  <div className="follow-container">
+                  <div className="follow-container" key={follower.avatar}>
                     <div className="follow-info-flex">
                       <img
                         src={follower.avatar}
@@ -202,6 +204,7 @@ class UserProfile_Tabs extends Component {
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
                     <img
+                      key={project.thumbnail}
                       src={project.thumbnail}
                       className="project-thumbnail"
                       alt="test"

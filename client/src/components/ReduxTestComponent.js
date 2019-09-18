@@ -34,6 +34,7 @@ const ReduxTestComponent = ({
     deleteProject(21);
     getSingleProject(4);
     getAllProjects();
+    // eslint-disable-next-line
   }, [getAllProjects]);
 
   const addNewProject = () => {
