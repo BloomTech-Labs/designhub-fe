@@ -5,6 +5,7 @@ import Login from './components/Login.js';
 import Navbar from './components/Navbar.js';
 import TopBar from './components/TopBar.js';
 import FakeProfile from './components/FakeProfile.js';
+import OnboardingForm from './components/OnboardingForm.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
@@ -24,6 +25,7 @@ function App(props) {
           <Switch>
             <Route exact path="/" component={UserProfile_LI} />
             <Route exact path="/project" component={Project} />
+            <PrivateRoute exact path="/onboard" component={OnboardingForm} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
         </main>
