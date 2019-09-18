@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  getUsers,
+  getAllUsers,
   getAllProjects,
   getSingleUser,
   updateUser,
@@ -12,7 +12,7 @@ import {
 } from '../store/actions';
 
 const ReduxTestComponent = ({
-  getUsers,
+  getAllUsers,
   isLoading,
   users,
   getAllProjects,
@@ -29,7 +29,7 @@ const ReduxTestComponent = ({
   useEffect(() => {
     getSingleUser(3);
     updateUser(6, { email: 'mike.vansleen2@gmail.com' });
-    getUsers();
+    getAllUsers();
     updateProject(22, { projectName: "Mike's Project Yo!" });
     deleteProject(21);
     getSingleProject(4);
@@ -127,7 +127,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getUsers,
+    getAllUsers,
     getAllProjects,
     getSingleUser,
     updateUser,

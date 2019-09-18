@@ -47,7 +47,7 @@ export const signup = () => dispatch => {
   dispatch({ type: SIGNUP_START });
 };
 
-export const getUsers = () => dispatch => {
+export const getAllUsers = () => dispatch => {
   dispatch({ type: GET_ALL_USERS_START });
   return axiosWithAuth()
     .get('/api/v1/users')
