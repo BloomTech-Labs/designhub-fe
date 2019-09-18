@@ -11,11 +11,13 @@
 
 @mixin auth0-redirect-btn {
   @include btn;
-  background: $white;
-  color: black;
+  background: none;
+  border: 2px solid $white;
+  color: $white;
   font-size: 14px;
   letter-spacing: 0.11em;
-  margin-top: 15px;
+  margin-top: 10px;
+  width: 350px;
   &:hover {
     background: $btn-gradient;
     color: white;
@@ -35,4 +37,9 @@
   &:hover {
     background: #2f303a;
   }
+}
+
+@mixin submit-btn {
+  @include auth0-redirect-btn;
+  margin-top: 20px;
 }

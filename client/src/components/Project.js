@@ -180,7 +180,9 @@ class Project extends Component {
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/${this.state.username}`}>eriklambert</Link>
+                  <Link to={`/profile/${this.state.username}`}>
+                    eriklambert
+                  </Link>
                 </span>
               </span>
               <span>Created on June 11, 2020</span>
@@ -195,6 +197,7 @@ class Project extends Component {
             <div className="project-header-links">
               <div className="project-header-button">
                 <img
+                  alt="figma-icon"
                   src={figmaIcon}
                   className={
                     projectsArray.figma === null
@@ -205,6 +208,7 @@ class Project extends Component {
               </div>
               <div className="project-header-button">
                 <img
+                  alt="invision-icon"
                   src={invisionIcon}
                   className={
                     projectsArray.invision === null
@@ -225,7 +229,7 @@ class Project extends Component {
         </div>
         <div className="project-body">
           <div className="project-main-image">
-            <img src={projectsArray.mainImg} alt="main project image" />
+            <img src={projectsArray.mainImg} alt="main project" />
           </div>
           <div className="project-thumbnails">
             {thumbnails.map(images => (
