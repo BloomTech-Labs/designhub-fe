@@ -23,8 +23,8 @@ function App(props) {
         <Navbar />
         <main className="workspace">
           <Switch>
-            <Route exact path="/" component={UserProfile_LI} />
-            <Route exact path="/project" component={Project} />
+            <Route exact path="/:username" component={UserProfile_LI} />
+            <Route exact path="/project/:id" component={Project} />
             <Route exact path="/redux" component={ReduxTestComponent} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>

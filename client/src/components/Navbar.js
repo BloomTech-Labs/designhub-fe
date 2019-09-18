@@ -8,9 +8,10 @@ import SettingsIcon from './Icons/SettingsIcon';
 import '../SASS/Navbar.scss';
 
 const Navbar = () => {
+  const username = 'eriklambert';
   return (
     <nav>
-      <NavLink to="/">
+      <NavLink to={`/${username}`}>
         <ProfileIcon />
       </NavLink>
       <p className="A">Profile</p>
