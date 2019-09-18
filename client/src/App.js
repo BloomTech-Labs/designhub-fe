@@ -27,7 +27,7 @@ function App(props) {
             <Route exact path="/" component={UserProfile_LI} />
             <Route exact path="/project" component={Project} />
             <Route exact path="/redux" component={ReduxTestComponent} />
-            <Route exact path="/add-project" component={ProjectForm} />
+            <Route exact path="/create" component={ProjectForm} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
         </main>
