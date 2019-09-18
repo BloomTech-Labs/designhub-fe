@@ -122,7 +122,7 @@ class UserProfile_LI extends Component {
                 ))}
               </div>
               <div>
-                <Link to="/">
+                <Link to="/settings">
                   <button className="edit-profile-btn">Edit Profile</button>
                 </Link>
               </div>

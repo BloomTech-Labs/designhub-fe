@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import Heatmap from '../components/Heatmap.js';
@@ -115,12 +116,14 @@ class UserProfile_Tabs extends Component {
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
                     <>
-                      <div className="project-content">
-                        <img
-                          src={project.thumbnail}
-                          className="project-thumbnail"
-                          alt="test"
-                        />
+                      <div className="project-content" key={project.project_id}>
+                        <Link to={`/project/${project.project_id}`}>
+                          <img
+                            src={project.thumbnail}
+                            className="project-thumbnail"
+                            alt="test"
+                          />
+                        </Link>
                       </div>
                     </>
                   ))}
