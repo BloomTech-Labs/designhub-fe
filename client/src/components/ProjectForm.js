@@ -57,10 +57,12 @@ const ProjectForm = ({ addProject }) => {
           </div>
 
           <div className="project-form-right-column">
-            <h3>Attach files</h3>
-            <button type="submit">Attach files</button>
+            <label>Attach files</label>
+            <button className="attach-files" type="button">
+              Attach files
+            </button>
 
-            <h3>Included files</h3>
+            <label>Included files</label>
             <p>File names will populate here</p>
             <label htmlFor="figmaLink">Figma link</label>
             <input
@@ -77,7 +79,9 @@ const ProjectForm = ({ addProject }) => {
           </div>
         </div>
         <div className="form-buttons-container">
-          <button type="submit">Publish</button>
+          <button className="submit-button" type="submit">
+            Publish
+          </button>
           <button type="button">Cancel</button>
         </div>
       </form>
