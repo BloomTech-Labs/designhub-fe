@@ -7,7 +7,7 @@ const Login = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <div className="Login-container">
-      <Redirect to="/login" />;
+      <Redirect to="/login" />
       <section className="left-side">
         <p>WELCOME TO</p>
         <h1>
@@ -41,12 +41,12 @@ const Login = () => {
       </section>
       <section className="right-side">
         <div className="cta">
-          <header>START TODAY</header>
+          <header>GET STARTED TODAY</header>
           <button
             className="auth0-redirect-btn"
             onClick={() => loginWithRedirect({})}
           >
-            Let's Go!
+            Create account
           </button>
         </div>
       </section>
@@ -55,31 +55,3 @@ const Login = () => {
 };
 
 export default Login;
-
-/* <div className="form-container">
-<header>
-	<NavLink to="">SIGN UP</NavLink>
-	<NavLink to="/login">LOG IN</NavLink>
-</header>
-<form onSubmit={handleSubmit}>
-	<label htmlFor="username">USERNAME</label>
-	<input
-		id="username"
-		type="text"
-		value={username}
-		onChange={e => setUsername(e.target.value)}
-	/>
-
-	<label htmlFor="password">PASSWORD</label>
-	<input
-		id="password"
-		type="text"
-		value={password}
-		onChange={e => setPassword(e.target.value)}
-	/>
-	<button className="sign-in-btn">Sign in</button>
-</form>
-<em>OR</em>
-<button className="auth0-facebook">Sign in with Facebook</button>
-<button className="auth0-twitter">Sign in with Twitter</button>
-</div> */
