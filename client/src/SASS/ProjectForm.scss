@@ -1,0 +1,90 @@
+@import './mixins';
+@import './palette';
+
+.project-form-wrapper {
+  margin-top: 78px;
+  color: $white;
+  width: 90%;
+  h2 {
+    margin: 60px auto;
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.11em;
+  }
+  label {
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1rem;
+    letter-spacing: 0.11em;
+    margin-bottom: 16px;
+  }
+  input {
+    font-weight: normal;
+    font-size: 0.8rem;
+    margin-bottom: 40px;
+    background-color: $field-bg;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    letter-spacing: 0.11em;
+    color: $white;
+  }
+  button {
+    @include btn;
+    background: $dark-grey;
+    width: 188px;
+    text-align: center;
+    letter-spacing: 0.11em;
+    padding: 1.5vh 0px;
+  }
+  p {
+    letter-spacing: 0.11em;
+    color: $dark-grey;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+  #projectDescription {
+    height: 92px;
+    line-height: 92px;
+    input {
+      height: 92px;
+      line-height: 92px;
+    }
+  }
+  .attach-files {
+    padding: 1.5vh 0px;
+    margin-bottom: 24px;
+  }
+  .submit-button {
+    @include btn;
+    background: $btn-gradient;
+    margin-right: 16px;
+  }
+  .project-form-container {
+    .inner-form-container {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+    }
+
+    width: 100%;
+    .project-form-left-column {
+      width: 47%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+    }
+    .project-form-right-column {
+      width: 45%;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+    }
+    .form-buttons-container {
+      display: block;
+    }
+  }
+}

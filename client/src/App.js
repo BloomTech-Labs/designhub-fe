@@ -13,6 +13,7 @@ import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
 import ReduxTestComponent from './components/ReduxTestComponent.js';
 import './App.scss';
+import ProjectForm from './components/ProjectForm.js';
 
 function App() {
   const reduxStore = useSelector(state => state);
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/profile/:username" component={UserProfile_LI} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/redux" component={ReduxTestComponent} />
+            <Route exact path="/create" component={ProjectForm} />
             <PrivateRoute exact path="/onboard" component={OnboardingForm} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
