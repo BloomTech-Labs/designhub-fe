@@ -38,3 +38,8 @@
     background: #2f303a;
   }
 }
+
+@mixin submit-btn {
+  @include auth0-redirect-btn;
+  margin-top: 20px;
+}
