@@ -134,6 +134,8 @@
         cursor: pointer;
         transition: 0.1s ease-in-out;
         font-weight: 400;
+        position: relative;
+        z-index: 100;
       }
 
       .active-link {
@@ -168,7 +170,6 @@
       grid-gap: 2vh;
       justify-content: space-between;
       width: 100%;
-      position: relative;
 
       .project-info {
         position: absolute;
