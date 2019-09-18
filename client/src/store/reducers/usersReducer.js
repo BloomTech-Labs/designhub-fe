@@ -24,7 +24,7 @@ const initialState = {
   message: null,
   currentUser: null,
   singleUser: null,
-  users: null,
+  allUsers: [],
   isLoading: false,
   isLoggedIn: false
 };
@@ -104,7 +104,7 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        users: action.payload
+        allUsers: action.payload
       };
     case GET_ALL_USERS_FAILURE:
       return {
@@ -123,7 +123,7 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        singleUser: action.payload
+        singleUser: action.payload.data[0]
       };
     case GET_SINGLE_USER_FAILURE:
       return {
@@ -142,7 +142,7 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        users: [...state.users, action.payload]
+        allUsers: [...state.allUsers, action.payload]
       };
     case UPDATE_USER_FAILURE:
       return {
