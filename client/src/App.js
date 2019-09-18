@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter, Route, Switch } from 'react-router-dom';
 import { useAuth0 } from './auth-wrapper.js';
+import { useSelector } from 'react-redux';
+
 import Login from './components/Login.js';
 import Navbar from './components/Navbar.js';
 import TopBar from './components/TopBar.js';
@@ -9,10 +11,12 @@ import OnboardingForm from './components/OnboardingForm.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
-import './App.scss';
 import ReduxTestComponent from './components/ReduxTestComponent.js';
+import './App.scss';
 
-function App(props) {
+function App() {
+  const reduxStore = useSelector(state => state);
+  console.log({ reduxStore });
   const { isAuthenticated, loading } = useAuth0();
 
   if (loading) return <div>Loading...</div>;
