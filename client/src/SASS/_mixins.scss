@@ -1,12 +1,37 @@
 @import './palette';
 
+@mixin designhub-letters {
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 112px;
+  letter-spacing: 0.11em;
+
+  em {
+    color: hsla(360, 100%, 100%, 0);
+    -webkit-text-fill-color: hsla(
+      360,
+      100%,
+      100%,
+      0
+    ); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: $white;
+  }
+}
+
 @mixin btn {
   border: none;
   border-radius: 5px;
-  padding: 1.5vh 8vh;
+  padding: 10px 0;
   color: $white;
-  outline: none;
   cursor: pointer;
+  outline: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.11em;
+  line-height: 14px;
+  text-align: center;
 }
 
 @mixin auth0-redirect-btn {
@@ -42,4 +67,103 @@
 @mixin submit-btn {
   @include auth0-redirect-btn;
   margin-top: 20px;
+}
+
+@mixin onboard-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  width: 80%;
+
+  header {
+    h1 {
+      font-size: 36px;
+      line-height: 42px;
+      letter-spacing: 0.11em;
+      margin-top: 30px;
+    }
+
+    h2 {
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+      margin-top: 30px;
+    }
+  }
+
+  .stepComponents {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 800px;
+    // padding: 20px;
+    width: 100%;
+
+    label {
+      color: $dark-grey;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.11em;
+      margin-top: 30px;
+    }
+
+    input {
+      background-color: $field-bg;
+      border: none;
+      border-radius: 2px;
+      color: $white;
+      font-weight: normal;
+      font-size: 0.8rem;
+      letter-spacing: 0.11em;
+      margin-top: 4px;
+      padding: 10px;
+      &:hover {
+        background: hsla(360, 100%, 100%, 0.2);
+      }
+    }
+
+    textarea {
+      background-color: $field-bg;
+      border: none;
+      border-radius: 2px;
+      color: $white;
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 21px;
+      letter-spacing: 0.11em;
+      margin-top: 4px;
+      padding: 4px;
+      resize: none;
+
+      &:focus,
+      &:hover {
+        background: hsla(360, 100%, 100%, 0.2);
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    button {
+      @include btn;
+      width: 188px;
+
+      &.next-btn {
+        background: $btn-gradient;
+      }
+      &.prev-btn {
+        background: $dark-grey;
+      }
+      &:hover {
+        background: hsla(360, 100%, 100%, 0.2);
+      }
+    }
+  }
 }

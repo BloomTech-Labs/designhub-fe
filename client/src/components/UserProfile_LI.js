@@ -1,17 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useEffect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import '../SASS/UserProfile.scss';
 
-import avatar from '../ASSETS/avatar.jpg';
-// import link from '../ASSETS/link.svg';
-// import map from '../ASSETS/map-pin.svg';
 import UserProfileTabs from './UserProfile_Tabs';
 
 const UserProfile_LI = () => {
   const loggedInUser = useSelector(state => state.users.currentUser);
-  console.log(loggedInUser);
+  console.log('UserProfile_LI loggedInUser', loggedInUser);
 
   const teams = {
     user_id: 1,
