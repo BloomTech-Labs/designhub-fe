@@ -38,7 +38,7 @@ function App() {
           component={Loggedin}
         />
       )}
-      <PrivateRoute exact path="/" component={OnboardingForm} />
+      <PrivateRoute exact path="/onboard" component={OnboardingForm} />
     </div>
   );
 }
