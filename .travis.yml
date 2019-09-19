@@ -7,7 +7,7 @@ node_js:
 
 script:
   - cd client
-  - yarn test
+  - npm test
 
 notification:
   - email: false
