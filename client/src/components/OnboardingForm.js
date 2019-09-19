@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import axios from 'axios';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { ONBOARD_SUCCESS } from '../store/actions/usersActions';
+import { updateUser } from '../store/actions/usersActions';
 
 import '../SASS/OnboardingForm.scss';
+
+const uuidv1 = require('uuid/v1');
 
 const OnboardingForm = props => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector(state => state.users);
-
+  const [step, setStep] = useState(1);
   const [formUser, setFormUser] = useState({
     avatar: '',
     bio: '',
@@ -20,7 +20,7 @@ const OnboardingForm = props => {
     id: '',
     lastName: '',
     location: '',
-    phoneNumber: '',
+    phoneNumber: uuidv1(),
     username: '',
     website: ''
   });
@@ -35,33 +35,21 @@ const OnboardingForm = props => {
     // eslint-disable-next-line
   }, [currentUser]);
 
-  const {
-    // avatar,
-    bio,
-    email,
-    firstName,
-    id,
-    lastName,
-    location,
-    phoneNumber,
-    username,
-    website
-  } = formUser;
+  const { id } = formUser;
+
+  const handleChange = e => {
+    setFormUser({ ...formUser, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log({ formUser });
-    try {
-      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
-      const res = await axios.put(`api/v1/users/${id}`, formUser);
-      console.log('HANDLESUBMIT res.data', res.data);
-      // this object shape will change soon
-      const [thisUser] = res.data;
-      dispatch({ type: ONBOARD_SUCCESS, payload: thisUser });
-      return props.history.push('/');
-    } catch (err) {
-      console.log('HANDLE SUBMIT', err);
-    }
+    console.log({ id, formUser });
+    dispatch(updateUser(id, formUser));
+  };
+
+  const logSubmit = e => {
+    e.preventDefault();
+    console.log(formUser);
   };
 
   return (
@@ -73,72 +61,12 @@ const OnboardingForm = props => {
           <h1>Welcome to DesignHub</h1>
           <h2>Let's get started by creating your profile</h2>
         </header>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          value={firstName}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          value={lastName}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="username">Username</label>
-        <input
-          required
-          id="username"
-          name="username"
-          type="text"
-          value={username}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="bio">Description</label>
-        <textarea
-          cols="30"
-          rows="4"
-          name="bio"
-          id="bio"
-          value={bio}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="location">Location</label>
-        <input
-          id="location"
-          name="location"
-          type="text"
-          value={location}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-
-        <label htmlFor="website">Website</label>
-        <input
-          id="website"
-          name="website"
-          type="text"
-          value={website}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
+        <Step1 formUser={formUser} onChange={handleChange} />
         <div className="buttons">
           <button className="prev-btn">Previous</button>
-          <button className="next-btn">Next</button>
+          <button className="next-btn" onClick={logSubmit}>
+            Next
+          </button>
         </div>
       </form>
     </div>
@@ -146,3 +74,81 @@ const OnboardingForm = props => {
 };
 
 export default OnboardingForm;
+
+const Step1 = ({ formUser, onChange }) => {
+  const {
+    bio,
+    email,
+    firstName,
+    id,
+    lastName,
+    location,
+    phoneNumber,
+    username,
+    website
+  } = formUser;
+  return (
+    <>
+      <label htmlFor="firstName">First Name</label>
+      <input
+        id="firstName"
+        name="firstName"
+        type="text"
+        value={firstName}
+        onChange={onChange}
+      />
+      <label htmlFor="lastName">Last Name</label>
+      <input
+        id="lastName"
+        name="lastName"
+        type="text"
+        value={lastName}
+        onChange={onChange}
+      />
+      <label htmlFor="username">Username</label>
+      <input
+        required
+        id="username"
+        name="username"
+        type="text"
+        value={username}
+        onChange={onChange}
+      />
+      <label htmlFor="email">Email</label>
+      <input
+        required
+        id="email"
+        name="email"
+        type="text"
+        value={email}
+        onChange={onChange}
+      />
+      <label htmlFor="bio">Description</label>
+      <textarea
+        cols="30"
+        rows="4"
+        name="bio"
+        id="bio"
+        value={bio}
+        onChange={onChange}
+      />
+      <label htmlFor="location">Location</label>
+      <input
+        id="location"
+        name="location"
+        type="text"
+        value={location}
+        onChange={onChange}
+      />
+
+      <label htmlFor="website">Website</label>
+      <input
+        id="website"
+        name="website"
+        type="text"
+        value={website}
+        onChange={onChange}
+      />
+    </>
+  );
+};

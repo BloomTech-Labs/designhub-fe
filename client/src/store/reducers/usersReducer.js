@@ -93,15 +93,14 @@ export const usersReducer = (state = initialState, action) => {
     case UPDATE_USER_START:
       return {
         ...state,
-        error: null,
         isLoading: true
       };
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        error: null,
+        currentUser: { ...state.currentUser, payload },
         isLoading: false,
-        allUsers: [...state.allUsers, action.payload]
+        onboarding: false
       };
     case UPDATE_USER_FAILURE:
       return {
