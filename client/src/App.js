@@ -1,41 +1,38 @@
-import React from 'react';
-import { withRouter, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import { useAuth0 } from './auth-wrapper.js';
-import Login from './components/Login.js';
-import Navbar from './components/Navbar.js';
-import TopBar from './components/TopBar.js';
-import FakeProfile from './components/FakeProfile.js';
-import OnboardingForm from './components/OnboardingForm.js';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
-import UserProfile_LI from './components/UserProfile_LI.js';
-import Project from './components/Project.js';
 import './App.scss';
-import ReduxTestComponent from './components/ReduxTestComponent.js';
-import ProjectForm from './components/ProjectForm.js';
+import OnboardingForm from './components/OnboardingForm.js';
+import { initUser } from './store/actions/usersActions.js';
 
-function App(props) {
-  const { isAuthenticated, loading } = useAuth0();
+function App() {
+  const { user } = useAuth0();
+  const dispatch = useDispatch();
 
-  if (loading) return <div>Loading...</div>;
-  if (!isAuthenticated) return <Login />;
-  else {
-    return (
-      <div className="App">
-        <TopBar />
-        <Navbar />
-        <main className="workspace">
-          <Switch>
-            <Route exact path="/profile/:username" component={UserProfile_LI} />
-            <Route exact path="/project/:id" component={Project} />
-            <Route exact path="/redux" component={ReduxTestComponent} />
-            <Route exact path="/create" component={ProjectForm} />
-            <PrivateRoute exact path="/onboard" component={OnboardingForm} />
-            <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
-          </Switch>
-        </main>
-      </div>
-    );
-  }
+  //this is mapping state from the redux store to the binding 'onboarding'
+  const { onboarding } = useSelector(state => state.users);
+
+  // useEffect is working as a lifecycle method, it will run when 'user' or 'dispatch' are updated
+  useEffect(() => {
+    if (typeof user !== 'object') return;
+    else {
+      console.log('useEffect() user', user);
+      dispatch(initUser(user));
+    }
+  }, [user, dispatch]);
+
+  return (
+    <div className="App">
+      {onboarding && <Redirect to="/onboard" />}
+      <PrivateRoute path="/" component={Loggedin} />
+      <PrivateRoute exact path="/onboard" component={OnboardingForm} />
+    </div>
+  );
 }
 
-export default withRouter(App);
+export default App;

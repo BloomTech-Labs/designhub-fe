@@ -1,13 +1,4 @@
 import {
-  LOGIN_START,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_START,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  SIGNUP_START,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
   GET_ALL_USERS_START,
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_FAILURE,
@@ -19,6 +10,13 @@ import {
   UPDATE_USER_FAILURE
 } from '../actions';
 
+import {
+  INIT_USER,
+  ONBOARD_START,
+  ONBOARD_SUCCESS,
+  SET_LOADING
+} from '../actions/usersActions';
+
 const initialState = {
   error: null,
   message: null,
@@ -26,72 +24,33 @@ const initialState = {
   singleUser: null,
   allUsers: [],
   isLoading: false,
-  isLoggedIn: false
+  onboarding: false
 };
 
 export const usersReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case LOGIN_START:
+  const { payload, type } = action;
+  switch (type) {
+    case INIT_USER:
       return {
         ...state,
-        error: null,
-        isLoading: true
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        error: null,
-        currentUser: action.payload.user,
-        isLoggedIn: true,
-        isLoading: false,
-        message: action.payload.message
-      };
-    case LOGIN_FAILURE:
-      return {
-        ...state,
-        error: action.error,
-        isLoggedIn: false,
+        currentUser: payload,
         isLoading: false
       };
-    case LOGOUT_START:
+    case SET_LOADING:
       return {
         ...state,
-        error: null,
         isLoading: true
       };
-    case LOGOUT_SUCCESS:
+    case ONBOARD_START:
       return {
         ...state,
-        error: null,
-        isLoading: false,
-        isLoggedIn: false,
-        currentUser: null
+        onboarding: true
       };
-    case LOGOUT_FAILURE:
+    case ONBOARD_SUCCESS:
       return {
         ...state,
-        error: action.error,
-        isLoading: false
-      };
-    case SIGNUP_START:
-      return {
-        ...state,
-        error: null,
-        isLoading: true
-      };
-    case SIGNUP_SUCCESS:
-      return {
-        ...state,
-        error: null,
-        isLoading: false,
-        message: action.payload.message,
-        user: action.payload.user
-      };
-    case SIGNUP_FAILURE:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.error
+        currentUser: payload,
+        onboarding: false
       };
     case GET_ALL_USERS_START:
       return {

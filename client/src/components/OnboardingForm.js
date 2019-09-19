@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import '../SASS/OnboardingForm.scss';
+import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
-import { useAuth0 } from '../auth-wrapper.js';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { ONBOARD_SUCCESS } from '../store/actions/usersActions';
+
+import '../SASS/OnboardingForm.scss';
 
 const OnboardingForm = props => {
-  const { user } = useAuth0();
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state.users);
 
   const [formUser, setFormUser] = useState({
     avatar: '',
     bio: '',
     email: '',
     firstName: '',
+    id: '',
     lastName: '',
     location: '',
     phoneNumber: '',
@@ -19,11 +25,22 @@ const OnboardingForm = props => {
     website: ''
   });
 
+  useEffect(() => {
+    let newFormUser = {};
+    for (let prop in currentUser) {
+      if (currentUser[prop] && formUser[prop] === '')
+        newFormUser[prop] = currentUser[prop];
+    }
+    setFormUser({ ...formUser, ...newFormUser });
+    // eslint-disable-next-line
+  }, [currentUser]);
+
   const {
     // avatar,
     bio,
     email,
     firstName,
+    id,
     lastName,
     location,
     phoneNumber,
@@ -31,38 +48,16 @@ const OnboardingForm = props => {
     website
   } = formUser;
 
-  useEffect(() => {
-    const getUserData = async () => {
-      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
-      const { id } = user;
-      try {
-        const res = await axios.get(`api/v1/users/${id}`);
-        // this object shape will change soon
-        console.log('USE EFFECT res.data.data', res.data.data);
-        const [userData] = res.data.data;
-        let newFormUser = {};
-        for (let prop in userData) {
-          if (userData[prop] && formUser[prop] === '')
-            newFormUser[prop] = userData[prop];
-        }
-        setFormUser({ ...formUser, ...newFormUser });
-      } catch (err) {
-        console.log('USE EFFECT', err);
-      }
-    };
-    getUserData();
-    // eslint-disable-next-line
-  }, []);
-
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log('ON SUBMIT formUser', formUser);
-    axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
-    const { id } = user;
+    console.log({ formUser });
     try {
+      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
       const res = await axios.put(`api/v1/users/${id}`, formUser);
+      console.log('HANDLESUBMIT res.data', res.data);
       // this object shape will change soon
-      console.log('HANDLESUBMIT res.data.data', res.data.data);
+      const [thisUser] = res.data;
+      dispatch({ type: ONBOARD_SUCCESS, payload: thisUser });
       return props.history.push('/');
     } catch (err) {
       console.log('HANDLE SUBMIT', err);
@@ -71,10 +66,12 @@ const OnboardingForm = props => {
 
   return (
     <div className="OnboardingForm">
+      <Redirect to="/onboard" />
       <header>Complete Your User Profile</header>
       <form onSubmit={handleSubmit}>
         <label htmlFor="username">USERNAME</label>
         <input
+          required
           id="username"
           name="username"
           type="text"
@@ -127,6 +124,7 @@ const OnboardingForm = props => {
           PHONE <small>ex: 555-555-5555</small>
         </label>
         <input
+          required
           id="phoneNumber"
           name="phoneNumber"
           type="tel"

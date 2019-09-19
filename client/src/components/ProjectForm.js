@@ -13,7 +13,7 @@ const ProjectForm = ({ addProject }) => {
     projectName: ''
   });
 
-  const { userId, projectName } = project;
+  const { projectName } = project;
 
   const handleChanges = e => {
     setProject({

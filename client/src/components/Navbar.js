@@ -1,13 +1,17 @@
 import React from 'react';
+import { useAuth0 } from '../auth-wrapper.js';
 import { NavLink } from 'react-router-dom';
+
 import ProfileIcon from './Icons/ProfileIcon';
 import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
 import MyProjectsIcon from './Icons/MyProjectsIcon';
 import InboxIcon from './Icons/InboxIcon';
 import SettingsIcon from './Icons/SettingsIcon';
+
 import '../SASS/Navbar.scss';
 
 const Navbar = () => {
+  const { logout } = useAuth0();
   const username = 'eriklambert';
   return (
     <nav>
@@ -21,10 +25,10 @@ const Navbar = () => {
       </NavLink>
       <p className="B">New Project</p>
 
-      <NavLink to="">
+      <NavLink to="/" onClick={() => logout()}>
         <MyProjectsIcon />
       </NavLink>
-      <p className="C">Projects</p>
+      <p className="C">LOGOUT</p>
 
       <NavLink to="/inbox">
         <InboxIcon />
