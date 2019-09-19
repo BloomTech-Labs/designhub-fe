@@ -3,14 +3,13 @@ import { Redirect } from 'react-router-dom';
 
 import { useAuth0 } from './auth-wrapper.js';
 import { useDispatch, useSelector } from 'react-redux';
+import { initUser } from './store/actions/usersActions.js';
 
 import Login from './components/Login.js';
 import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
-import './App.scss';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
-import { initUser } from './store/actions/usersActions.js';
-import Project from './components/Project.js';
+import './App.scss';
 
 function App() {
   const { isAuthenticated, loading, user } = useAuth0();
@@ -23,7 +22,7 @@ function App() {
   useEffect(() => {
     if (typeof user !== 'object') return;
     else {
-      console.log('useEffect() user', user);
+      console.log('App.js useEffect() user', user);
       dispatch(initUser(user));
     }
   }, [user, dispatch]);
