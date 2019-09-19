@@ -9,9 +9,10 @@ export const initUser = user => async dispatch => {
   try {
     const { id } = user;
     const res = await axios.get(`api/v1/users/${id}`);
-    const [thisUser] = res.data.data;
+    const [thisUser] = res.data;
+    console.log('usersActions initUser() res.data', thisUser);
+
     dispatch({ type: INIT_USER, payload: thisUser });
-    console.log('usersActions initUser() res.data.data', thisUser);
     if (thisUser.username === null) {
       dispatch({ type: ONBOARD_START });
     }

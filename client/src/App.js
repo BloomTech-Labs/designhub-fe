@@ -13,10 +13,17 @@ import { initUser } from './store/actions/usersActions.js';
 function App() {
   const { user } = useAuth0();
   const dispatch = useDispatch();
+
+  //this is mapping state from the redux store to the binding 'onboarding'
   const { onboarding } = useSelector(state => state.users);
+
+  // useEffect is working as a lifecycle method, it will run when 'user' or 'dispatch' are updated
   useEffect(() => {
     if (typeof user !== 'object') return;
-    else dispatch(initUser(user));
+    else {
+      console.log('useEffect() user', user);
+      dispatch(initUser(user));
+    }
   }, [user, dispatch]);
 
   return (
