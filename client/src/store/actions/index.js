@@ -1,14 +1,5 @@
 import { axiosWithAuth } from '../../utilities/axiosWithAuth';
 
-export const LOGIN_START = 'LOGIN_START';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGOUT_START = 'LOGIN_START';
-export const LOGOUT_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGOUT_FAILURE = 'LOGIN_FAILURE';
-export const SIGNUP_START = 'SIGNUP_START';
-export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
-export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const GET_ALL_USERS_START = 'GET_USERS_START';
 export const GET_ALL_USERS_SUCCESS = 'GET_USERS_SUCCESS';
 export const GET_ALL_USERS_FAILURE = 'GET_USERS_FAILURE';
@@ -35,17 +26,6 @@ export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';
 export const DELETE_PROJECT_FAILURE = 'DELETE_PROJECT_FAILURE';
 
 // Users actions
-export const login = credentials => dispatch => {
-  dispatch({ type: LOGIN_START });
-};
-
-export const logout = () => dispatch => {
-  dispatch({ type: LOGOUT_START });
-};
-
-export const signup = () => dispatch => {
-  dispatch({ type: SIGNUP_START });
-};
 
 export const getAllUsers = () => dispatch => {
   dispatch({ type: GET_ALL_USERS_START });

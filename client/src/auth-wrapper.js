@@ -1,6 +1,6 @@
 // src/react-auth0-wrapper.js
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
@@ -30,19 +30,17 @@ export const Auth0Provider = ({
       }
 
       const isAuthenticated = await auth0FromHook.isAuthenticated();
-
       setIsAuthenticated(isAuthenticated);
 
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
         const token = await auth0FromHook.getTokenSilently();
-        setUser(user);
+
         // axios defaults
         axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
-
         axios.interceptors.request.use(
           options => {
-            options.headers.authorization = `Bearer ${token}`
+            options.headers.authorization = `Bearer ${token}`;
             return options;
           },
           err => {
@@ -52,13 +50,12 @@ export const Auth0Provider = ({
         );
 
         // post new user and return id and store that id to user state
-        // from useAuth0
-        const res = await axios.post('api/v1/users/', user)
-        const [userFromResponse] = res.data.user
+        const res = await axios.post('api/v1/users/', user);
+        const [userFromResponse] = res.data.user;
         setUser({
           ...user,
           id: userFromResponse.id
-        })
+        });
       }
 
       setLoading(false);
