@@ -32,6 +32,7 @@ function App() {
   return (
     <div className="App">
       {onboarding && <Redirect to="/onboard" />}
+      {loggedInUser && <Redirect to=`/profile/${loggedInUser.username}` />}
       {loggedInUser && (
         <PrivateRoute
           path={`/profile/${loggedInUser.username}`}
