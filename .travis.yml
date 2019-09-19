@@ -1,0 +1,19 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - node
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - cd client
+  - npm install
+  - npm test
+  - npm run build
+
+notification:
+  - email: false
