@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { useAuth0 } from './auth-wrapper.js';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Login from './components/Login.js';
 import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import './App.scss';
@@ -12,7 +13,7 @@ import { initUser } from './store/actions/usersActions.js';
 import Project from './components/Project.js';
 
 function App() {
-  const { user } = useAuth0();
+  const { isAuthenticated, loading, user } = useAuth0();
   const dispatch = useDispatch();
 
   //this is mapping state from the redux store to the binding 'onboarding'
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+      {!loading && !isAuthenticated && <Login />}
       {onboarding && <Redirect to="/onboard" />}
       {loggedInUser && <Redirect to={`/profile/${loggedInUser.username}`} />}
       {loggedInUser && (
