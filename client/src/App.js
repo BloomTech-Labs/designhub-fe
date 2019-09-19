@@ -15,11 +15,8 @@ function App() {
   const dispatch = useDispatch();
   const { isLoading, onboarding } = useSelector(state => state.users);
   useEffect(() => {
-    const getUserData = () => {
-      if (typeof user !== 'object') return;
-      else dispatch(initUser(user));
-    };
-    getUserData();
+    if (typeof user !== 'object') return;
+    else dispatch(initUser(user));
   }, [user, dispatch]);
 
   return (
