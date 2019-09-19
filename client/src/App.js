@@ -4,14 +4,16 @@ import { Redirect } from 'react-router-dom';
 import { useAuth0 } from './auth-wrapper.js';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Login from './components/Login.js';
 import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import './App.scss';
 import OnboardingForm from './components/OnboardingForm.js';
 import { initUser } from './store/actions/usersActions.js';
+import Project from './components/Project.js';
 
 function App() {
-  const { user } = useAuth0();
+  const { isAuthenticated, loading, user } = useAuth0();
   const dispatch = useDispatch();
 
   //this is mapping state from the redux store to the binding 'onboarding'
@@ -26,10 +28,19 @@ function App() {
     }
   }, [user, dispatch]);
 
+  const loggedInUser = useSelector(state => state.users.currentUser);
+
   return (
     <div className="App">
+      {!loading && !isAuthenticated && <Login />}
       {onboarding && <Redirect to="/onboard" />}
-      <PrivateRoute path="/" component={Loggedin} />
+      {loggedInUser && <Redirect to={`/profile/${loggedInUser.username}`} />}
+      {loggedInUser && (
+        <PrivateRoute
+          path={`/profile/${loggedInUser.username}`}
+          component={Loggedin}
+        />
+      )}
       <PrivateRoute exact path="/onboard" component={OnboardingForm} />
     </div>
   );
