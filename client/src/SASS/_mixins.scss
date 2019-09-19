@@ -1,5 +1,24 @@
 @import './palette';
 
+@mixin designhub-letters {
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 112px;
+  letter-spacing: 0.11em;
+
+  em {
+    color: hsla(360, 100%, 100%, 0);
+    -webkit-text-fill-color: hsla(
+      360,
+      100%,
+      100%,
+      0
+    ); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: $white;
+  }
+}
+
 @mixin btn {
   border: none;
   border-radius: 5px;

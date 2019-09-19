@@ -28,26 +28,25 @@ function App() {
   }, [user, dispatch]);
 
   const loggedInUser = useSelector(state => state.users.currentUser);
-
-  return (
-    <div className="App">
-      {loading && <div className="isLoading">Loading...</div>}
-      {onboarding && <OnboardingForm />}
-      {!loading && !isAuthenticated && <Login />}
-      {/* {loggedIn && <PrivateRoute path="/" component={Loggedin} />} */}
-
-      {loggedInUser && <Redirect to={`/profile/${loggedInUser.username}`} />}
-      {loggedInUser && (
-        <PrivateRoute
-          path={`/profile/${loggedInUser.username}`}
-          component={Loggedin}
-        />
-      )}
-
-      {/* {onboarding && <Redirect to="/onboard" />}
-      <PrivateRoute exact path="/onboard" component={OnboardingForm} /> */}
-    </div>
-  );
+  if (onboarding) return <OnboardingForm />;
+  else
+    return (
+      <div className="App">
+        {loading && <Loading />}
+        {!loading && !isAuthenticated && <Login />}
+        {loggedIn && <PrivateRoute path="/" component={Loggedin} />}
+        {loggedInUser && <Redirect to={`/profile/${loggedInUser.username}`} />}
+        <PrivateRoute path="/onboard" component={OnboardingForm} />
+      </div>
+    );
 }
 
 export default App;
+
+const Loading = () => {
+  return (
+    <div className="isLoading">
+      DESIGN<em>HUB</em>
+    </div>
+  );
+};

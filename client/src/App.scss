@@ -31,12 +31,12 @@ main {
 }
 
 div.isLoading {
+  @include designhub-letters;
   align-items: center;
   background: $btn-gradient;
   border-radius: 10px;
   color: $white;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   height: 50%;
   width: 50%;
@@ -50,4 +50,7 @@ div.isLoading {
   line-height: 40px;
   text-align: center;
   letter-spacing: 0.11em;
+  em {
+    -webkit-text-stroke-width: 1px;
+  }
 }
