@@ -3,10 +3,16 @@
 @mixin btn {
   border: none;
   border-radius: 5px;
-  padding: 1.5vh 8vh;
+  padding: 10px 0;
   color: $white;
-  outline: none;
   cursor: pointer;
+  outline: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.11em;
+  line-height: 14px;
+  text-align: center;
 }
 
 @mixin auth0-redirect-btn {

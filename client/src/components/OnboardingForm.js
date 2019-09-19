@@ -67,9 +67,33 @@ const OnboardingForm = props => {
   return (
     <div className="OnboardingForm">
       <Redirect to="/onboard" />
-      <header>Complete Your User Profile</header>
+
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">USERNAME</label>
+        <header>
+          <h1>Welcome to DesignHub</h1>
+          <h2>Let's get started by creating your profile</h2>
+        </header>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          id="firstName"
+          name="firstName"
+          type="text"
+          value={firstName}
+          onChange={e =>
+            setFormUser({ ...formUser, [e.target.name]: e.target.value })
+          }
+        />
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          id="lastName"
+          name="lastName"
+          type="text"
+          value={lastName}
+          onChange={e =>
+            setFormUser({ ...formUser, [e.target.name]: e.target.value })
+          }
+        />
+        <label htmlFor="username">Username</label>
         <input
           required
           id="username"
@@ -80,72 +104,7 @@ const OnboardingForm = props => {
             setFormUser({ ...formUser, [e.target.name]: e.target.value })
           }
         />
-        <label htmlFor="firstName">FIRST NAME</label>
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          value={firstName}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="lastName">LAST NAME</label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          value={lastName}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="email">EMAIL</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          value={email}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="location">LOCATION</label>
-        <input
-          id="location"
-          name="location"
-          type="text"
-          value={location}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="phoneNumber">
-          PHONE <small>ex: 555-555-5555</small>
-        </label>
-        <input
-          required
-          id="phoneNumber"
-          name="phoneNumber"
-          type="tel"
-          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-          value={phoneNumber}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-
-        <label htmlFor="website">WEBSITE</label>
-        <input
-          id="website"
-          name="website"
-          type="text"
-          value={website}
-          onChange={e =>
-            setFormUser({ ...formUser, [e.target.name]: e.target.value })
-          }
-        />
-        <label htmlFor="bio">BIO</label>
+        <label htmlFor="bio">Description</label>
         <textarea
           cols="30"
           rows="4"
@@ -156,8 +115,31 @@ const OnboardingForm = props => {
             setFormUser({ ...formUser, [e.target.name]: e.target.value })
           }
         />
+        <label htmlFor="location">Location</label>
+        <input
+          id="location"
+          name="location"
+          type="text"
+          value={location}
+          onChange={e =>
+            setFormUser({ ...formUser, [e.target.name]: e.target.value })
+          }
+        />
 
-        <button className="submit-btn">Submit</button>
+        <label htmlFor="website">Website</label>
+        <input
+          id="website"
+          name="website"
+          type="text"
+          value={website}
+          onChange={e =>
+            setFormUser({ ...formUser, [e.target.name]: e.target.value })
+          }
+        />
+        <div className="buttons">
+          <button className="prev-btn">Previous</button>
+          <button className="next-btn">Next</button>
+        </div>
       </form>
     </div>
   );
