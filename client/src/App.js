@@ -1,45 +1,48 @@
-import React from 'react';
-import { withRouter, Route, Switch } from 'react-router-dom';
-import { useAuth0 } from './auth-wrapper.js';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import Login from './components/Login.js';
-import Navbar from './components/Navbar.js';
-import TopBar from './components/TopBar.js';
-import FakeProfile from './components/FakeProfile.js';
-import OnboardingForm from './components/OnboardingForm.js';
+import axios from 'axios';
+import { useAuth0 } from './auth-wrapper.js';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
-import UserProfile_LI from './components/UserProfile_LI.js';
-import Project from './components/Project.js';
-import ReduxTestComponent from './components/ReduxTestComponent.js';
 import './App.scss';
-import ProjectForm from './components/ProjectForm.js';
+import OnboardingForm from './components/OnboardingForm.js';
+import { ONBOARD_START, INIT_USER } from './store/actions/usersActions.js';
 
 function App() {
-  const reduxStore = useSelector(state => state);
-  console.log({ reduxStore });
-  const { isAuthenticated, loading } = useAuth0();
+  const { user } = useAuth0();
+  const dispatch = useDispatch();
+  const { onboarding } = useSelector(state => state.users);
+  useEffect(() => {
+    const getUserData = async () => {
+      if (typeof user !== 'object') return;
+      try {
+        const { id } = user;
+        axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
+        const res = await axios.get(`api/v1/users/${id}`);
+        // this object shape will change soon
+        const [thisUser] = res.data.data;
+        dispatch({ type: INIT_USER, payload: thisUser });
+        console.log('App.js USE EFFECT res.data.data', thisUser);
+        if (thisUser.username === '') {
+          dispatch({ type: ONBOARD_START });
+        }
+      } catch (err) {
+        console.log('App.js ERROR', err);
+      }
+    };
+    getUserData();
+  }, [user, dispatch]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!isAuthenticated) return <Login />;
-  else {
-    return (
-      <div className="App">
-        <TopBar />
-        <Navbar />
-        <main className="workspace">
-          <Switch>
-            <Route exact path="/profile/:username" component={UserProfile_LI} />
-            <Route exact path="/project/:id" component={Project} />
-            <Route exact path="/redux" component={ReduxTestComponent} />
-            <Route exact path="/create" component={ProjectForm} />
-            <PrivateRoute exact path="/onboard" component={OnboardingForm} />
-            <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
-          </Switch>
-        </main>
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      {onboarding && <Redirect to="/onboard" />}
+      <PrivateRoute path="/" component={Loggedin} />
+      <PrivateRoute exact path="/onboard" component={OnboardingForm} />
+    </div>
+  );
 }
 
-export default withRouter(App);
+export default App;

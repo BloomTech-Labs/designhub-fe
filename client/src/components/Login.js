@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { useAuth0 } from '../auth-wrapper';
 import '../SASS/Login.scss';
 
@@ -7,7 +6,6 @@ const Login = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <div className="Login-container">
-      <Redirect to="/login" />
       <section className="left-side">
         <p>WELCOME TO</p>
         <h1>
