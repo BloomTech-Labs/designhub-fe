@@ -28,3 +28,27 @@ main {
   flex-direction: column;
   margin-left: 80px;
 }
+
+div.isLoading {
+  align-items: center;
+  background: url('./ASSETS/loginpage-bg.jpg');
+  border-radius: 10px;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // padding-top: 40px;
+  height: 50%;
+  width: 50%;
+
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  z-index: 999;
+
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  letter-spacing: 0.11em;
+}

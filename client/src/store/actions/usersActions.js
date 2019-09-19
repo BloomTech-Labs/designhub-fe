@@ -1,4 +1,5 @@
 import axios from 'axios';
+axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
 
 export const SET_LOADING = 'SET_LOADING';
 
@@ -7,9 +8,7 @@ export const initUser = user => async dispatch => {
   dispatch({ type: SET_LOADING });
   try {
     const { id } = user;
-    axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
     const res = await axios.get(`api/v1/users/${id}`);
-    // this object shape will change soon
     const [thisUser] = res.data.data;
     dispatch({ type: INIT_USER, payload: thisUser });
     console.log('usersActions initUser() res.data.data', thisUser);

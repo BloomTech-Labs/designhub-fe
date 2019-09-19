@@ -13,9 +13,9 @@ import { initUser } from './store/actions/usersActions.js';
 function App() {
   const { user } = useAuth0();
   const dispatch = useDispatch();
-  const { onboarding } = useSelector(state => state.users);
+  const { isLoading, onboarding } = useSelector(state => state.users);
   useEffect(() => {
-    const getUserData = async () => {
+    const getUserData = () => {
       if (typeof user !== 'object') return;
       else dispatch(initUser(user));
     };
@@ -25,6 +25,7 @@ function App() {
   return (
     <div className="App">
       {onboarding && <Redirect to="/onboard" />}
+      {isLoading && <div className="isLoading">Loading...</div>}
       <PrivateRoute path="/" component={Loggedin} />
       <PrivateRoute exact path="/onboard" component={OnboardingForm} />
     </div>
