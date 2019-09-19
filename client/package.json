@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --verbose",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -43,6 +43,9 @@
     ]
   },
   "devDependencies": {
-    "prettier": "^1.18.2"
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.1.4",
+    "prettier": "^1.18.2",
+    "react-test-renderer": "^16.9.0"
   }
 }
