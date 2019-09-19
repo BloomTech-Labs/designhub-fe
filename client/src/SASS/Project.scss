@@ -207,7 +207,10 @@
             height: 30px;
             object-fit: cover;
             border-radius: 100%;
-            padding: 0 10px 0 0;
+          }
+
+          .message {
+            padding-left: 10px;
           }
         }
 
@@ -240,6 +243,8 @@
           height: 53px;
           padding: 16px;
           color: white;
+          font-size: 0.8rem;
+          font-weight: 400;
         }
         button {
           position: absolute;

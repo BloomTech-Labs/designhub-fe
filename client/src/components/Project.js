@@ -217,6 +217,7 @@ class Project extends Component {
             <div className="project-header-links">
               <div className="project-header-button">
                 <img
+                  alt="figma-icon"
                   src={figmaIcon}
                   className={
                     projectsArray.figma === null
@@ -228,6 +229,7 @@ class Project extends Component {
               </div>
               <div className="project-header-button">
                 <img
+                  alt="invision-icon"
                   src={invisionIcon}
                   className={
                     projectsArray.invision === null
@@ -283,7 +285,7 @@ class Project extends Component {
                   {this.state.user_id === comment.user_id ? (
                     <p className="you">You</p>
                   ) : null}
-                  <p>{comment.comment}</p>
+                  <p className="message">{comment.comment}</p>
                 </div>
               ))}
             </div>

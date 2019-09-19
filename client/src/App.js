@@ -5,11 +5,13 @@ import Login from './components/Login.js';
 import Navbar from './components/Navbar.js';
 import TopBar from './components/TopBar.js';
 import FakeProfile from './components/FakeProfile.js';
+import OnboardingForm from './components/OnboardingForm.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import UserProfile_LI from './components/UserProfile_LI.js';
 import Project from './components/Project.js';
 import './App.scss';
 import ReduxTestComponent from './components/ReduxTestComponent.js';
+import ProjectForm from './components/ProjectForm.js';
 
 function App(props) {
   const { isAuthenticated, loading } = useAuth0();
@@ -26,6 +28,8 @@ function App(props) {
             <Route exact path="/profile/:username" component={UserProfile_LI} />
             <Route exact path="/project/:id" component={Project} />
             <Route exact path="/redux" component={ReduxTestComponent} />
+            <Route exact path="/create" component={ProjectForm} />
+            <PrivateRoute exact path="/onboard" component={OnboardingForm} />
             <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
           </Switch>
         </main>
