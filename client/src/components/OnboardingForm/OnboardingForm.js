@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../store/actions/usersActions';
+import { updateUser } from '../../store/actions/usersActions';
 
-import '../SASS/OnboardingForm.scss';
+import '../../SASS/OnboardingForm.scss';
 
 const uuidv1 = require('uuid/v1');
 

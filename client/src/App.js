@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import './App.scss';
-import OnboardingForm from './components/OnboardingForm.js';
+import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 import { initUser } from './store/actions/usersActions.js';
 
 function App() {
