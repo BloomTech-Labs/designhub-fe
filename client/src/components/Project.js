@@ -217,7 +217,6 @@ class Project extends Component {
             <div className="project-header-links">
               <div className="project-header-button">
                 <img
-                  alt="figma-icon"
                   src={figmaIcon}
                   className={
                     projectsArray.figma === null
@@ -229,7 +228,6 @@ class Project extends Component {
               </div>
               <div className="project-header-button">
                 <img
-                  alt="invision-icon"
                   src={invisionIcon}
                   className={
                     projectsArray.invision === null
