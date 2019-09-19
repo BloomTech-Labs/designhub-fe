@@ -1,0 +1,12 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - node
+
+script:
+  - yarn test
+
+notification:
+  - email: false
