@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { updateUser } from '../../store/actions/usersActions';
+import { SET_LOGGEDIN, updateUser } from '../../store/actions/usersActions';
+
+import Step1 from './Step1.js';
+import Step2 from './Step2.js';
 
 import '../../SASS/OnboardingForm.scss';
 
 const uuidv1 = require('uuid/v1');
 
-const OnboardingForm = props => {
+const OnboardingForm = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector(state => state.users);
-  const [step, setStep] = useState(1);
+  const [formStep, setFormStep] = useState(1);
   const [formUser, setFormUser] = useState({
     avatar: '',
     bio: '',
@@ -35,37 +37,63 @@ const OnboardingForm = props => {
     // eslint-disable-next-line
   }, [currentUser]);
 
-  const { id } = formUser;
-
   const handleChange = e => {
     setFormUser({ ...formUser, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async e => {
+  const handleClick = e => {
     e.preventDefault();
-    console.log({ id, formUser });
-    dispatch(updateUser(id, formUser));
+    const move = e.target.name === 'next' ? 'next' : 'prev';
+    if (move === 'next' && formStep < stepComponents.length) {
+      setFormStep(n => ++n);
+    } else if (move === 'prev' && formStep > 1) {
+      setFormStep(n => --n);
+    }
   };
 
-  const logSubmit = e => {
+  const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
-    console.log(formUser);
+    console.log({ id, changes });
+    dispatch(updateUser(id, changes));
+    dispatch({ type: SET_LOGGEDIN });
   };
+
+  const stepComponents = [Step1, Step2];
 
   return (
     <div className="OnboardingForm">
-      <Redirect to="/onboard" />
-
       <form onSubmit={handleSubmit}>
         <header>
           <h1>Welcome to DesignHub</h1>
           <h2>Let's get started by creating your profile</h2>
         </header>
-        <Step1 formUser={formUser} onChange={handleChange} />
+        <section className="stepComponents">
+          {stepComponents.map((Step, i) => {
+            if (i + 1 === formStep) {
+              return (
+                <Step
+                  key={formUser.id}
+                  formUser={formUser}
+                  onChange={handleChange}
+                />
+              );
+            } else return null;
+          })}
+        </section>
+
         <div className="buttons">
-          <button className="prev-btn">Previous</button>
-          <button className="next-btn" onClick={logSubmit}>
+          <button name="prev" className="prev-btn" onClick={handleClick}>
+            Previous
+          </button>
+          <button name="next" className="next-btn" onClick={handleClick}>
             Next
+          </button>
+          <button
+            name="next"
+            className="next-btn"
+            onClick={e => handleSubmit(e, formUser.id, formUser)}
+          >
+            Submit
           </button>
         </div>
       </form>
@@ -74,81 +102,3 @@ const OnboardingForm = props => {
 };
 
 export default OnboardingForm;
-
-const Step1 = ({ formUser, onChange }) => {
-  const {
-    bio,
-    email,
-    firstName,
-    id,
-    lastName,
-    location,
-    phoneNumber,
-    username,
-    website
-  } = formUser;
-  return (
-    <>
-      <label htmlFor="firstName">First Name</label>
-      <input
-        id="firstName"
-        name="firstName"
-        type="text"
-        value={firstName}
-        onChange={onChange}
-      />
-      <label htmlFor="lastName">Last Name</label>
-      <input
-        id="lastName"
-        name="lastName"
-        type="text"
-        value={lastName}
-        onChange={onChange}
-      />
-      <label htmlFor="username">Username</label>
-      <input
-        required
-        id="username"
-        name="username"
-        type="text"
-        value={username}
-        onChange={onChange}
-      />
-      <label htmlFor="email">Email</label>
-      <input
-        required
-        id="email"
-        name="email"
-        type="text"
-        value={email}
-        onChange={onChange}
-      />
-      <label htmlFor="bio">Description</label>
-      <textarea
-        cols="30"
-        rows="4"
-        name="bio"
-        id="bio"
-        value={bio}
-        onChange={onChange}
-      />
-      <label htmlFor="location">Location</label>
-      <input
-        id="location"
-        name="location"
-        type="text"
-        value={location}
-        onChange={onChange}
-      />
-
-      <label htmlFor="website">Website</label>
-      <input
-        id="website"
-        name="website"
-        type="text"
-        value={website}
-        onChange={onChange}
-      />
-    </>
-  );
-};

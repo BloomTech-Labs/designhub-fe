@@ -7,11 +7,9 @@
   color: $white;
   display: flex;
   flex-direction: column;
-  width: 100%;
 
-  position: absolute;
-  top: 0;
-  left: 0;
+  height: 100%;
+  width: 100%;
 
   form {
     @include onboard-form;

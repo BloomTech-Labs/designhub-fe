@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
 
 import { useAuth0 } from './auth-wrapper.js';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Login from './components/Login.js';
 import Loggedin from './components/Loggedin.js';
 import PrivateRoute from './components/PrivateRoute.js';
 import './App.scss';
@@ -11,11 +11,11 @@ import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 import { initUser } from './store/actions/usersActions.js';
 
 function App() {
-  const { user } = useAuth0();
+  const { isAuthenticated, loading, user } = useAuth0();
   const dispatch = useDispatch();
 
   //this is mapping state from the redux store to the binding 'onboarding'
-  const { onboarding } = useSelector(state => state.users);
+  const { loggedIn, onboarding } = useSelector(state => state.users);
 
   // useEffect is working as a lifecycle method, it will run when 'user' or 'dispatch' are updated
   useEffect(() => {
@@ -28,9 +28,10 @@ function App() {
 
   return (
     <div className="App">
-      {onboarding && <Redirect to="/onboard" />}
-      <PrivateRoute path="/" component={Loggedin} />
-      <PrivateRoute exact path="/onboard" component={OnboardingForm} />
+      {loading && <div className="isLoading">Loading...</div>}
+      {!loading && !isAuthenticated && <Login />}
+      {onboarding && <OnboardingForm />}
+      {loggedIn && <PrivateRoute path="/" component={Loggedin} />}
     </div>
   );
 }

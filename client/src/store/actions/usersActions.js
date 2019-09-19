@@ -8,6 +8,7 @@ export const UPDATE_USER_START = 'UPDATE_USER_START';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
 export const SET_LOADING = 'SET_LOADING';
+export const SET_LOGGEDIN = 'SET_LOGGEDIN';
 
 export const initUser = user => async dispatch => {
   dispatch({ type: SET_LOADING });
@@ -18,8 +19,11 @@ export const initUser = user => async dispatch => {
     console.log('usersActions initUser() res.data', thisUser);
 
     dispatch({ type: INIT_USER, payload: thisUser });
-    if (thisUser.username === null) {
+    const { username } = thisUser;
+    if (username === null || username === '') {
       dispatch({ type: ONBOARD_START });
+    } else {
+      dispatch({ type: SET_LOGGEDIN });
     }
   } catch (err) {
     console.log('usersActions initUser() ERROR', err);

@@ -1,4 +1,6 @@
 @import './SASS/reset.scss';
+@import './SASS/palette';
+@import './SASS/mixins';
 @import './SASS/Navbar.scss';
 @import './SASS/UserProfile.scss';
 
@@ -23,7 +25,6 @@ button {
 
 main {
   align-items: center;
-  // border: 1px solid white;
   display: flex;
   flex-direction: column;
   margin-left: 80px;
@@ -31,20 +32,18 @@ main {
 
 div.isLoading {
   align-items: center;
-  background: url('./ASSETS/loginpage-bg.jpg');
+  background: $btn-gradient;
   border-radius: 10px;
   color: $white;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // padding-top: 40px;
   height: 50%;
   width: 50%;
 
   position: absolute;
   top: 25%;
   left: 25%;
-  z-index: 999;
 
   font-weight: 900;
   font-size: 36px;
