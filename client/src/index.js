@@ -5,7 +5,7 @@ import App from './App';
 import './index.css';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import rootReducer from './store/reducers';
@@ -16,7 +16,11 @@ import * as Sentry from '@sentry/browser';
 
 Sentry.init({ dsn: `${process.env.REACT_APP_SENTRY_DSN}` });
 
-const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk, logger))
+);
 
 const onRedirectCallback = appState => {
   window.history.replaceState(
@@ -33,7 +37,7 @@ ReactDOM.render(
     <Router>
       <Auth0Provider
         domain={config.domain}
-        audience={config.audience} 
+        audience={config.audience}
         client_id={config.clientId}
         redirect_uri={window.location.origin}
         onRedirectCallback={onRedirectCallback}
