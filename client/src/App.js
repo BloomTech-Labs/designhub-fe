@@ -26,7 +26,7 @@ function App() {
         const [thisUser] = res.data.data;
         dispatch({ type: INIT_USER, payload: thisUser });
         console.log('App.js USE EFFECT res.data.data', thisUser);
-        if (thisUser.username === '') {
+        if (thisUser.username === null) {
           dispatch({ type: ONBOARD_START });
         }
       } catch (err) {
