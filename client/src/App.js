@@ -9,6 +9,7 @@ import PrivateRoute from './components/PrivateRoute.js';
 import './App.scss';
 import OnboardingForm from './components/OnboardingForm.js';
 import { initUser } from './store/actions/usersActions.js';
+import Project from './components/Project.js';
 
 function App() {
   const { user } = useAuth0();
@@ -26,11 +27,18 @@ function App() {
     }
   }, [user, dispatch]);
 
+  const loggedInUser = useSelector(state => state.users.currentUser);
+
   return (
     <div className="App">
       {onboarding && <Redirect to="/onboard" />}
-      <PrivateRoute path="/" component={Loggedin} />
-      <PrivateRoute exact path="/onboard" component={OnboardingForm} />
+      {loggedInUser && (
+        <PrivateRoute
+          path={`/profile/${loggedInUser.username}`}
+          component={Loggedin}
+        />
+      )}
+      <PrivateRoute exact path="/" component={OnboardingForm} />
     </div>
   );
 }
