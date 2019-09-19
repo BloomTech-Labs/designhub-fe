@@ -50,12 +50,13 @@ const OnboardingForm = props => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log({ formUser });
     try {
       axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
       const res = await axios.put(`api/v1/users/${id}`, formUser);
+      console.log('HANDLESUBMIT res.data', res.data);
       // this object shape will change soon
-      const [thisUser] = res.data.data;
-      console.log('HANDLESUBMIT res.data.data', res.data.data);
+      const [thisUser] = res.data;
       dispatch({ type: ONBOARD_SUCCESS, payload: thisUser });
       return props.history.push('/');
     } catch (err) {
@@ -123,6 +124,7 @@ const OnboardingForm = props => {
           PHONE <small>ex: 555-555-5555</small>
         </label>
         <input
+          required
           id="phoneNumber"
           name="phoneNumber"
           type="tel"
