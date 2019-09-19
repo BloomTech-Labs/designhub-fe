@@ -13,7 +13,8 @@ import {
 import {
   INIT_USER,
   ONBOARD_START,
-  ONBOARD_SUCCESS
+  ONBOARD_SUCCESS,
+  SET_LOADING
 } from '../actions/usersActions';
 
 const initialState = {
@@ -32,7 +33,13 @@ export const usersReducer = (state = initialState, action) => {
     case INIT_USER:
       return {
         ...state,
-        currentUser: payload
+        currentUser: payload,
+        isLoading: false
+      };
+    case SET_LOADING:
+      return {
+        ...state,
+        isLoading: true
       };
     case ONBOARD_START:
       return {
