@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import { useAuth0 } from './auth-wrapper.js';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,7 @@ import PrivateRoute from './components/PrivateRoute.js';
 import './App.scss';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 import { initUser } from './store/actions/usersActions.js';
+import Project from './components/Project.js';
 
 function App() {
   const { isAuthenticated, loading, user } = useAuth0();
@@ -26,12 +28,25 @@ function App() {
     }
   }, [user, dispatch]);
 
+  const loggedInUser = useSelector(state => state.users.currentUser);
+
   return (
     <div className="App">
       {loading && <div className="isLoading">Loading...</div>}
-      {!loading && !isAuthenticated && <Login />}
       {onboarding && <OnboardingForm />}
-      {loggedIn && <PrivateRoute path="/" component={Loggedin} />}
+      {!loading && !isAuthenticated && <Login />}
+      {/* {loggedIn && <PrivateRoute path="/" component={Loggedin} />} */}
+
+      {loggedInUser && <Redirect to={`/profile/${loggedInUser.username}`} />}
+      {loggedInUser && (
+        <PrivateRoute
+          path={`/profile/${loggedInUser.username}`}
+          component={Loggedin}
+        />
+      )}
+
+      {/* {onboarding && <Redirect to="/onboard" />}
+      <PrivateRoute exact path="/onboard" component={OnboardingForm} /> */}
     </div>
   );
 }

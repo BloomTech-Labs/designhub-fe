@@ -19,7 +19,7 @@ function Loggedin(props) {
       <main className="workspace">
         <Switch>
           <Route exact path="/profile/:username" component={UserProfile_LI} />
-          <Route exact path="/project/:id" component={Project} />
+          <PrivateRoute exact path="/project/:id" component={Project} />
           <Route exact path="/redux" component={ReduxTestComponent} />
           <Route exact path="/create" component={ProjectForm} />
           <PrivateRoute exact path="/fake-profile" component={FakeProfile} />
