@@ -18,9 +18,22 @@ class Project extends Component {
     this.state = {
       id: this.props.match.params.id,
       username: 'eriklambert',
-      user_id: 1
+      user_id: 1,
+      modal: false
     };
   }
+
+  expand = () => {
+    this.setState({
+      modal: true
+    });
+  };
+
+  close = () => {
+    this.setState({
+      modal: false
+    });
+  };
 
   render() {
     const projects = [
@@ -167,6 +180,13 @@ class Project extends Component {
           'https://images.unsplash.com/photo-1568782517100-09bf22d88c2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         comment:
           'Yea, I have more pictures saved on my hard drive I think may can work better because I agree, this one is too distracting.'
+      },
+      {
+        user_id: 1,
+        username: 'eriklambert',
+        avatar: avatar1,
+        comment:
+          'Okay, sounds good! Yeah if you can send that over to me when you can that would be super helpful!!'
       }
     ];
 
@@ -197,24 +217,24 @@ class Project extends Component {
             <div className="project-header-links">
               <div className="project-header-button">
                 <img
-                  alt="figma-icon"
                   src={figmaIcon}
                   className={
                     projectsArray.figma === null
                       ? 'link-disabled'
                       : 'link-enabled'
                   }
+                  alt="figma"
                 />
               </div>
               <div className="project-header-button">
                 <img
-                  alt="invision-icon"
                   src={invisionIcon}
                   className={
                     projectsArray.invision === null
                       ? 'link-disabled'
                       : 'link-enabled'
                   }
+                  alt="invision"
                 />
               </div>
               <div className="download project-header-button">
@@ -229,7 +249,19 @@ class Project extends Component {
         </div>
         <div className="project-body">
           <div className="project-main-image">
+            <img
+              src={projectsArray.mainImg}
+              alt="main project"
+              onClick={this.expand}
+            />
+          </div>
+          <div
+            className={
+              this.state.modal === true ? 'modal-expand' : 'modal-close'
+            }
+          >
             <img src={projectsArray.mainImg} alt="main project" />
+            <span className="background-overlay" onClick={this.close} />
           </div>
           <div className="project-thumbnails">
             {thumbnails.map(images => (
@@ -251,7 +283,7 @@ class Project extends Component {
                   {this.state.user_id === comment.user_id ? (
                     <p className="you">You</p>
                   ) : null}
-                  <p>{comment.comment}</p>
+                  <p className="message">{comment.comment}</p>
                 </div>
               ))}
             </div>
