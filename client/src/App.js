@@ -29,13 +29,15 @@ function App() {
 
   const loggedInUser = useSelector(state => state.users.currentUser);
   if (onboarding) return <OnboardingForm />;
+  else if (!loading && !isAuthenticated) return <Login />;
   else
     return (
       <div className="App">
         {loading && <Loading />}
-        {!loading && !isAuthenticated && <Login />}
         {loggedIn && <PrivateRoute path="/" component={Loggedin} />}
-        {loggedInUser && <Redirect to={`/profile/${loggedInUser.username}`} />}
+        {loggedInUser && loggedInUser.username !== null && (
+          <Redirect to={`/profile/${loggedInUser.username}`} />
+        )}
         <PrivateRoute path="/onboard" component={OnboardingForm} />
       </div>
     );

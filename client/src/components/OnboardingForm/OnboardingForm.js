@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_LOGGEDIN, updateUser } from '../../store/actions/usersActions';
@@ -10,7 +11,7 @@ import '../../SASS/OnboardingForm.scss';
 
 const uuidv1 = require('uuid/v1');
 
-const OnboardingForm = () => {
+const OnboardingForm = props => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector(state => state.users);
   const [formStep, setFormStep] = useState(1);
@@ -56,6 +57,7 @@ const OnboardingForm = () => {
     console.log({ id, changes });
     dispatch(updateUser(id, changes));
     dispatch({ type: SET_LOGGEDIN });
+    props.history.push(`/profile/${changes.username}`);
   };
 
   const stepComponents = [Step1, Step2];
@@ -101,4 +103,4 @@ const OnboardingForm = () => {
   );
 };
 
-export default OnboardingForm;
+export default withRouter(OnboardingForm);
