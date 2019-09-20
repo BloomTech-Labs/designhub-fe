@@ -123,7 +123,6 @@
 
     .nav-links {
       display: flex;
-      justify-content: space-between;
       width: 34%;
 
       .links {
@@ -136,6 +135,7 @@
         font-weight: 400;
         position: relative;
         z-index: 100;
+        padding: 0px 20px;
       }
 
       .active-link {
