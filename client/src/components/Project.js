@@ -48,6 +48,7 @@ class Projects extends Component {
     const activeUser = this.props.activeUser;
     const thisProject = this.state.projectInfo;
     const comments = this.state.comments;
+    console.log('Project.js ### COMMENTS', comments);
 
     return (
       <div className="projects-container">
@@ -112,11 +113,16 @@ class Projects extends Component {
             <div className="comments-body">
               {comments.map(comment => (
                 <div
+                  key={comment.id}
                   className={
                     activeUser.id === comment.id ? 'comment' : 'comment-li-user'
                   }
                 >
-                  <img src={comment.avatar} alt="avatar" className="avatar" />
+                  <img
+                    src={comment.userAvatar}
+                    alt="avatar"
+                    className="avatar"
+                  />
                   {activeUser.id === comment.user_id ? (
                     <p className="you">You</p>
                   ) : null}

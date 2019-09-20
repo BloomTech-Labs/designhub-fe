@@ -50,20 +50,25 @@
     .modal--close {
       display: none;
     }
+
     .modal--expand {
-      display: inline;
-      position: absolute;
-      z-index: 999999;
+      align-items: center;
+      animation: fadeIn 0.2s ease-in-out;
+      border: 1px solid white;
+      display: flex;
+      justify-content: center;
+      opacity: 1;
+
+      position: fixed;
       top: 0;
       left: 0;
-      text-align: center;
-      overflow-y: scroll;
-      opacity: 1;
-      animation: fadeIn 0.2s ease-in-out;
+      height: 100%;
+      width: 100%;
+      z-index: 999999;
 
       img {
-        width: 80%;
-        margin: 10vh auto 0;
+        max-width: 75%;
+        padding: 20px;
         position: relative;
         z-index: 999;
       }
@@ -76,8 +81,8 @@
         top: 0;
         content: '';
         width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.673);
+        height: 100%;
+        background: rgba(0, 0, 0, 0.985);
         cursor: pointer;
       }
 

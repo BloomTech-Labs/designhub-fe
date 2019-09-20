@@ -56,8 +56,8 @@ class ImageViewer extends React.Component {
           <section
             className={state.modal === true ? 'modal--expand' : 'modal--close'}
           >
-            <img src={state.activeImg.url} alt="main project" />
             <span className="background-overlay" onClick={close} />
+            <img src={state.activeImg.url} alt="main project" />
           </section>
           <section className="ImageViewer__thumbnails">
             {state.allImgs.map(t => (
