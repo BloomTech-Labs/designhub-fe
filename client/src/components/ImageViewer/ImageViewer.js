@@ -1,4 +1,6 @@
 import React from 'react';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 import '../../SASS/ImageViewer.scss';
 
 const allImgs = [
@@ -32,35 +34,50 @@ const allImgs = [
 ];
 
 class ImageViewer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeImg: { ...allImgs[0] },
-      allImgs: [...allImgs],
-      thisProject: { ...props.thisProject },
-      modal: false
-    };
-  }
+  state = {
+    activeImg: { ...allImgs[0] },
+    allImgs: [...allImgs],
+    isOpen: false,
+    lightBox: [],
+    photoIndex: 0,
+    thisProject: { ...this.props.thisProject }
+  };
+
   render() {
-    const { close, expand, state } = this;
+    const { lightBox, photoIndex, isOpen } = this.state;
     return (
       <div className="ImageViewer">
+        {isOpen && (
+          <Lightbox
+            mainSrc={lightBox[photoIndex]}
+            nextSrc={lightBox[(photoIndex + 1) % lightBox.length]}
+            prevSrc={
+              lightBox[(photoIndex + lightBox.length - 1) % lightBox.length]
+            }
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + lightBox.length - 1) % lightBox.length
+              })
+            }
+            onMoveNextRequest={() =>
+              this.setState(ps => ({
+                ...ps,
+                photoIndex: (photoIndex + 1) % lightBox.length
+              }))
+            }
+          />
+        )}
         <main>
           <section className="ImageViewer__main-image">
             <img
-              src={state.activeImg.url}
+              src={this.state.activeImg.url}
               alt="main project"
-              onClick={expand}
+              onClick={() => this.setState({ isOpen: true })}
             />
           </section>
-          <section
-            className={state.modal === true ? 'modal--expand' : 'modal--close'}
-          >
-            <span className="background-overlay" onClick={close} />
-            <img src={state.activeImg.url} alt="main project" />
-          </section>
           <section className="ImageViewer__thumbnails">
-            {state.allImgs.map(t => (
+            {this.state.allImgs.map(t => (
               <img
                 key={t.url}
                 src={t.url}
@@ -74,15 +91,15 @@ class ImageViewer extends React.Component {
     );
   }
 
-  expand = () => {
-    this.setState({ modal: true });
-  };
-  close = () => {
-    this.setState({ modal: false });
-  };
+  componentDidMount() {
+    const urls = this.state.allImgs.map(i => i.url);
+    this.setState({ lightBox: urls });
+  }
+
   changeImg = imgObj => {
+    const i = this.state.lightBox.findIndex(url => url === imgObj.url);
     if (this.state.activeImg.id !== imgObj.id) {
-      this.setState({ activeImg: imgObj });
+      this.setState({ activeImg: imgObj, photoIndex: i });
     }
   };
 }
