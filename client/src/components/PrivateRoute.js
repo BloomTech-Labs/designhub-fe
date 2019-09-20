@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { useAuth0 } from '../auth-wrapper.js';
-import Login from './Login.js';
+import Login from './LandingPage.js/index.js';
 
 const PrivateRoute = ({ component: Component, path, ...rest }) => {
   const { isAuthenticated } = useAuth0();
