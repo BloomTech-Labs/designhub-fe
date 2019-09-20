@@ -20,54 +20,49 @@ class UserProfile_LI extends Component {
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
+
+  componentDidMount() {
+    this.fetch();
+  }
+
   fetch() {
-    console.log('hello from fetch');
     const userId = this.state.userId;
+
+    function getUserData() {
+      return axiosWithAuth().get(`/api/v1/users/${userId}`);
+    }
     function getFollowingCount() {
       return axiosWithAuth().get(`/api/v1/followers/count/following/${userId}`);
     }
     function getFollowerCount() {
       return axiosWithAuth().get(`/api/v1/followers/count/followers/${userId}`);
     }
-    function getUserData() {
-      return axiosWithAuth().get(`/api/v1/users/${userId}`);
-    }
+
     return axios
-      .all([getFollowingCount(), getFollowerCount(), getUserData()])
+      .all([getUserData(), getFollowingCount(), getFollowerCount()])
       .then(
         axios.spread((a, b, c) => {
-          console.log(a);
-          this.setState(
-            {
-              following: a.data[0].count,
-              followers: b.data[0].count,
-              userData: c.data[0]
-            },
-            () => {
-              console.log('HIIIIIII!');
-            }
-          );
+          this.setState({
+            userData: a.data[0],
+            following: b.data[0].count,
+            followers: c.data[0].count
+          });
         })
       )
       .catch(err => err);
   }
 
-  componentDidMount() {
-    this.fetch();
-    this.props.history.push(
-      `/profile/${this.props.match.params.id}/${this.state.userData.username}`
-    );
-  }
-
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.userId !== prevProps.match.params.id) {
-      console.log('UPDATE OVER HERE');
-      this.fetch();
+    if (prevProps.match.params.id !== prevState.userId) {
+      this.fetch().then(() => {
+        this.setState({ userId: this.props.match.params.id });
+      });
     }
   }
 
   render() {
     const userData = this.state.userData;
+    window.scroll(0, 0);
     return (
       <div className="user-profile-container">
         <div className="user-header">
