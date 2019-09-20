@@ -56,7 +56,7 @@ class Projects extends Component {
   };
 
   render() {
-    const userInfo = this.props.userInfo;
+    const activeUser = this.props.activeUser;
     const singleProjects = this.state.projectInfo;
     const thumbnails = [
       {
@@ -168,11 +168,11 @@ class Projects extends Component {
               {comments.map(comment => (
                 <div
                   className={
-                    userInfo.id === comment.id ? 'comment' : 'comment-li-user'
+                    activeUser.id === comment.id ? 'comment' : 'comment-li-user'
                   }
                 >
                   <img src={comment.avatar} alt="avatar" className="avatar" />
-                  {userInfo.id === comment.user_id ? (
+                  {activeUser.id === comment.user_id ? (
                     <p className="you">You</p>
                   ) : null}
                   <p className="message">{comment.text}</p>
