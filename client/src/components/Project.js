@@ -36,7 +36,7 @@ const Project = props => {
   const id = props.match.params.id;
   useEffect(() => {
     dispatch(getSingleProject(id));
-  }, [id]);
+  }, [id, dispatch]);
 
   const singleProjects = useSelector(state => state.projects.singleProject);
   console.log(singleProjects);
