@@ -35,7 +35,8 @@ export const updateUser = (id, changes) => async dispatch => {
   try {
     const res = await axios.put(`/api/v1/users/${id}`, changes);
     console.log('usersActions updateUser() res.data', res.data);
-    dispatch({ type: UPDATE_USER_SUCCESS, payload: res.data });
+    const updates = res.data[0];
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: updates });
   } catch (err) {
     console.log('usersActions updateUser() ERROR', err);
     dispatch({ type: UPDATE_USER_FAILURE, error: err });
