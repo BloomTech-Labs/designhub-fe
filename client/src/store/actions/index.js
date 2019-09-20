@@ -43,9 +43,9 @@ export const ADD_COMMENT_START = 'ADD_COMMENT_START';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
-export const EDIT_COMMENT_START = 'EDIT_COMMENT_START';
-export const EDIT_COMMENT_SUCCESS = 'EDIT_COMMENT_SUCCESS';
-export const EDIT_COMMENT_FAILURE = 'EDIT_COMMENT_FAILURE';
+export const UPDATE_COMMENT_START = 'UPDATE_COMMENT_START';
+export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS';
+export const UPDATE_COMMENT_FAILURE = 'UPDATE_COMMENT_FAILURE';
 
 export const DELETE_COMMENT_START = 'DELETE_COMMENT_START';
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
@@ -175,14 +175,14 @@ export const addComment = comment => dispatch => {
 };
 
 export const editComment = (commentId, changes) => dispatch => {
-  dispatch({ type: EDIT_COMMENT_START });
+  dispatch({ type: UPDATE_COMMENT_START });
   return axiosWithAuth()
     .put(`/api/v1/comments/${commentId}`, changes)
     .then(res => {
-      dispatch({ type: EDIT_COMMENT_SUCCESS, payload: res.data });
+      dispatch({ type: UPDATE_COMMENT_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: EDIT_COMMENT_FAILURE });
+      dispatch({ type: UPDATE_COMMENT_FAILURE });
     });
 };
 
