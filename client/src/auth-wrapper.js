@@ -52,9 +52,12 @@ export const Auth0Provider = ({
         // post new user and return id and store that id to user state
         const res = await axios.post('api/v1/users/', user);
         const [userFromResponse] = res.data.user;
+        const onboarding = userFromResponse.username === null ? true : false;
+
         setUser({
           ...user,
-          id: userFromResponse.id
+          id: userFromResponse.id,
+          onboarding
         });
       }
 

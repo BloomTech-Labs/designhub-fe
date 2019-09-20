@@ -19,7 +19,7 @@ Sentry.init({ dsn: `${process.env.REACT_APP_SENTRY_DSN}` });
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  composeEnhancers(applyMiddleware(thunk, logger))
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 const onRedirectCallback = appState => {

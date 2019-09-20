@@ -12,12 +12,12 @@ import SettingsIcon from './Icons/SettingsIcon';
 
 import '../SASS/Navbar.scss';
 
-const Navbar = () => {
-  const loggedInUser = useSelector(state => state.users.currentUser);
+const Navbar = ({ userInfo }) => {
   const { logout } = useAuth0();
+
   return (
     <nav>
-      <NavLink to={`/profile/${loggedInUser.username}`}>
+      <NavLink to={`/profile/${userInfo.username}`}>
         <ProfileIcon />
       </NavLink>
       <p className="A">Profile</p>
