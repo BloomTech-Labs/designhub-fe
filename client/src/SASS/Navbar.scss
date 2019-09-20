@@ -26,13 +26,14 @@ nav {
     color: $white;
     grid-column: 2;
     display: none;
-    padding: 10px 10px 10px 10px;
+    padding: 10px;
   }
 
   svg {
     fill: none;
     padding: 20px;
     stroke: $dark-grey;
+
     &:hover {
       stroke: $white;
     }

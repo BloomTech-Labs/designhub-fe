@@ -24,7 +24,7 @@ const TopBar = ({ activeUser }) => {
         </div>
         <div className="top-bar-user-info">
           <p>{activeUser.username}</p>
-          <Link to={`/profile/${activeUser.username}`}>
+          <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
             <img
               className="profile-pic-thumb"
               src={activeUser.avatar}
