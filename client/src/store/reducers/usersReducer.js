@@ -103,10 +103,9 @@ export const usersReducer = (state = initialState, action) => {
         isLoading: true
       };
     case UPDATE_USER_SUCCESS:
-      const changes = { ...state.currentUser, ...payload };
       return {
         ...state,
-        currentUser: changes,
+        currentUser: { ...state.currentUser, ...payload },
         isLoading: false,
         onboarding: false
       };
