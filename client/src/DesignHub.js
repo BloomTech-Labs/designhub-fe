@@ -7,39 +7,44 @@ import Navbar from './components/Navbar';
 import Project from './components/Project';
 import ProjectForm from './components/ProjectForm';
 import PrivateRoute from './components/PrivateRoute';
-import UserProfile_LI from './components/UserProfile_LI';
+import UserProfileLI from './components/UserProfile_LI';
 
 class DesignHub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: []
+      activeUser: [],
+      users: []
     };
   }
 
   componentDidMount() {
     return axiosWithAuth()
       .get(`/api/v1/users/${this.props.user.id}`)
-      .then(res => this.setState({ userInfo: res.data[0] }))
-      .catch(err => console.log(err));
+      .then(res => this.setState({ activeUser: res.data[0] }))
+      .catch(err => err);
   }
 
   render() {
-    const userInfo = this.state.userInfo;
+    const activeUser = this.state.activeUser;
     return (
       <div className="DesignHub">
-        <TopBar />
-        <Navbar userInfo={userInfo} />
+        <TopBar activeUser={activeUser} />
+        <Navbar activeUser={activeUser} />
         <main className="workspace">
           <Switch>
             <Route
               exact
-              path="/profile/:username"
+              path="/profile/:id/:username"
               render={props => (
-                <UserProfile_LI {...props} userInfo={userInfo} />
+                <UserProfileLI {...props} activeUser={activeUser} />
               )}
             />
-            <PrivateRoute exact path="/project/:id" component={Project} />
+            <PrivateRoute
+              exact
+              path="/project/:id"
+              render={props => <Project {...props} activeUser={activeUser} />}
+            />
             <Route exact path="/create" component={ProjectForm} />
           </Switch>
         </main>

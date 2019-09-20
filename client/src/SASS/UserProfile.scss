@@ -16,10 +16,10 @@
     border-radius: 10px;
 
     .avatar {
-      border-radius: 100%;
+      height: 120px;
+      width: 120px;
+      border-radius: 50%;
       object-fit: cover;
-      height: 14vh;
-      width: 14vh;
       padding: 4vh;
     }
 

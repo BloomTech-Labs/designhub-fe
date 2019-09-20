@@ -52,6 +52,7 @@
 @mixin follow-btn {
   @include btn;
   background: $btn-gradient;
+  padding: 10px 40px;
 }
 
 @mixin edit-profile-btn {

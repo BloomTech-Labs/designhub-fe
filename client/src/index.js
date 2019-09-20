@@ -7,7 +7,6 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import logger from 'redux-logger';
 import rootReducer from './store/reducers';
 
 import { Auth0Provider } from './auth-wrapper.js';

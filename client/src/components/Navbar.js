@@ -2,7 +2,6 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAuth0 } from '../auth-wrapper.js';
-import { useSelector } from 'react-redux';
 
 import ProfileIcon from './Icons/ProfileIcon';
 import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
@@ -12,12 +11,12 @@ import SettingsIcon from './Icons/SettingsIcon';
 
 import '../SASS/Navbar.scss';
 
-const Navbar = ({ userInfo }) => {
+const Navbar = ({ activeUser }) => {
   const { logout } = useAuth0();
 
   return (
     <nav>
-      <NavLink to={`/profile/${userInfo.username}`}>
+      <NavLink to={`/profile/${activeUser.id}/${activeUser.username}`}>
         <ProfileIcon />
       </NavLink>
       <p className="A">Profile</p>

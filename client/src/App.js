@@ -7,10 +7,10 @@ import LandingPage from './components/LandingPage.js';
 import './App.scss';
 
 function App() {
-  const { isAuthenticated, loading, user } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
   if (typeof user === 'object') {
-    // console.log('App.js user id', user.id);
-    // console.log('App.js user onboarding', user.onboarding);
+    // ('App.js user id', user.id);
+    // ('App.js user onboarding', user.onboarding);
   }
   if (!isAuthenticated) {
     return <LandingPage />;
