@@ -1,6 +1,8 @@
 import React from 'react';
-import { useAuth0 } from '../auth-wrapper.js';
 import { NavLink } from 'react-router-dom';
+
+import { useAuth0 } from '../auth-wrapper.js';
+import { useSelector } from 'react-redux';
 
 import ProfileIcon from './Icons/ProfileIcon';
 import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
@@ -11,11 +13,11 @@ import SettingsIcon from './Icons/SettingsIcon';
 import '../SASS/Navbar.scss';
 
 const Navbar = () => {
+  const loggedInUser = useSelector(state => state.users.currentUser);
   const { logout } = useAuth0();
-  const username = 'eriklambert';
   return (
     <nav>
-      <NavLink to={`/profile/${username}`}>
+      <NavLink to={`/profile/${loggedInUser.username}`}>
         <ProfileIcon />
       </NavLink>
       <p className="A">Profile</p>
@@ -30,10 +32,10 @@ const Navbar = () => {
       </NavLink>
       <p className="C">LOGOUT</p>
 
-      <NavLink to="/inbox">
+      <NavLink to="/onboard">
         <InboxIcon />
       </NavLink>
-      <p className="D">Notifications</p>
+      <p className="D">Onboarding Form</p>
 
       <NavLink to="/fake-profile">
         <SettingsIcon />

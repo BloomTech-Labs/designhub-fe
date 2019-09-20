@@ -14,7 +14,8 @@ import {
   INIT_USER,
   ONBOARD_START,
   ONBOARD_SUCCESS,
-  SET_LOADING
+  SET_LOADING,
+  SET_LOGGEDIN
 } from '../actions/usersActions';
 
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
   singleUser: null,
   allUsers: [],
   isLoading: false,
+  loggedIn: false,
   onboarding: false
 };
 
@@ -40,6 +42,11 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true
+      };
+    case SET_LOGGEDIN:
+      return {
+        ...state,
+        loggedIn: true
       };
     case ONBOARD_START:
       return {
@@ -93,15 +100,14 @@ export const usersReducer = (state = initialState, action) => {
     case UPDATE_USER_START:
       return {
         ...state,
-        error: null,
         isLoading: true
       };
     case UPDATE_USER_SUCCESS:
       return {
         ...state,
-        error: null,
+        currentUser: { ...state.currentUser, payload },
         isLoading: false,
-        allUsers: [...state.allUsers, action.payload]
+        onboarding: false
       };
     case UPDATE_USER_FAILURE:
       return {

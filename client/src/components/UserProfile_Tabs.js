@@ -16,7 +16,7 @@ const UserProfile_Tabs = () => {
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getAllProjects());
-  }, []);
+  }, [dispatch]);
 
   const allUsers = useSelector(state => state.users.allUsers);
   console.log(allUsers);
