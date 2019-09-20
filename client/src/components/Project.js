@@ -46,38 +46,7 @@ class Projects extends Component {
 
   render() {
     const activeUser = this.props.activeUser;
-<<<<<<< HEAD
     const thisProject = this.state.projectInfo;
-=======
-    const singleProjects = this.state.projectInfo;
-    const thumbnails = [
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      }
-    ];
-
->>>>>>> overhaul
     const comments = this.state.comments;
     console.log('Project.js ### COMMENTS', comments);
 
@@ -149,15 +118,11 @@ class Projects extends Component {
                     activeUser.id === comment.id ? 'comment' : 'comment-li-user'
                   }
                 >
-<<<<<<< HEAD
                   <img
                     src={comment.userAvatar}
                     alt="avatar"
                     className="avatar"
                   />
-=======
-                  <img src={comment.avatar} alt="avatar" className="avatar" />
->>>>>>> overhaul
                   {activeUser.id === comment.user_id ? (
                     <p className="you">You</p>
                   ) : null}
