@@ -15,6 +15,7 @@ import SendIcon from './Icons/SendIcon';
 import ImageViewer from './ImageViewer/ImageViewer.js';
 
 import '../SASS/Project.scss';
+import Comments from './Comments';
 
 class Projects extends Component {
   constructor(props) {
@@ -60,10 +61,12 @@ class Projects extends Component {
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/`}>eriklambert</Link>
+                  <Link to={`/profile/${thisProject.userId}/`}>
+                    eriklambert
+                  </Link>
                 </span>
               </span>
-              <span>Created on June 11, 2020</span>
+              <span>Created At: {thisProject.created_at}</span>
             </p>
           </div>
           <div className="project-header-right">

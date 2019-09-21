@@ -3,7 +3,7 @@
 
 .user-profile-container {
   color: $white;
-  width: 96%;
+  width: 172vh;
   margin-top: 7vh;
 
   .user-header {
@@ -16,8 +16,8 @@
     border-radius: 10px;
 
     .avatar {
-      height: 120px;
-      width: 120px;
+      height: 100px;
+      width: 100px;
       border-radius: 50%;
       object-fit: cover;
       padding: 4vh;
@@ -47,6 +47,7 @@
         margin: 0;
         max-width: 80%;
         line-height: 20px;
+        font-size: 0.85rem;
       }
 
       .user-info-location-website {
@@ -135,7 +136,7 @@
         font-weight: 400;
         position: relative;
         z-index: 100;
-        padding: 0px 20px;
+        padding: 0px 20px 0px 0px;
       }
 
       .active-link {
@@ -167,28 +168,61 @@
     .projects-array {
       display: grid;
       grid-template-columns: 0fr 0fr 0fr 0fr;
-      grid-gap: 2vh;
-      justify-content: space-between;
+      grid-gap: 4vh;
+      grid-row-gap: 1.5vh;
       width: 100%;
 
+      .project-content {
+        width: 38.4vh;
+        position: relative;
+        transition: all 0.2s ease-in-out;
+
+        .project-info {
+          position: absolute;
+          bottom: 10px;
+          width: 103%;
+          color: $white;
+          text-decoration: none;
+          background: $blue;
+          overflow: hidden;
+          height: 50px;
+          display: none;
+          pointer-events: none;
+
+          h1 {
+            padding: 20px;
+          }
+        }
+
+        .project-thumbnail {
+          object-fit: cover;
+          width: 100%;
+          height: 200px;
+          border: 8px solid $almost-black;
+          border-radius: 5px;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+        }
+
+        .project-thumbnail:hover {
+          border: 8px solid $blue;
+        }
+      }
+    }
+
+    .project-content:hover {
       .project-info {
-        position: absolute;
-        border: 1px solid red;
-        width: 100%;
+        display: inline;
+        animation: slideUp 0.25s ease-in-out;
       }
+    }
 
-      .project-thumbnail {
-        width: 19.6vw;
-        height: 12vw;
-        object-fit: cover;
-        border: 8px solid $almost-black;
-        border-radius: 5px;
-        transition: 0.1s ease-in-out;
-        cursor: pointer;
+    @keyframes slideUp {
+      from {
+        height: 0px;
       }
-
-      .project-thumbnail:hover {
-        border: 8px solid $blue;
+      to {
+        height: 50px;
       }
     }
 

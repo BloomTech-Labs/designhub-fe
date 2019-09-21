@@ -1,57 +1,72 @@
 @import './palette';
 
 nav {
-  align-items: center;
+  position: fixed;
+  z-index: 9999999999999;
+  margin-top: 16%;
+  margin-left: 1.2%;
+  width: 70px;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
   background: $black;
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: 60px 120px;
-  grid-template-rows: 58px 58px 58px 58px 58px;
-  position: fixed;
-  left: 20px;
-  top: 25%;
-  width: 60px;
+  transition: all 0.2s ease-in-out;
+  overflow: hidden;
 
-  a {
-    grid-column: 1;
-    &:hover + p {
-      display: inline-block;
-      transition: 0.5s;
+  .navlinks {
+    display: flex;
+    align-items: center;
+    width: max-content;
+
+    .links {
+      text-decoration: none;
+    }
+
+    .active-links {
+      p {
+        color: $white;
+      }
+
+      svg {
+        fill: none;
+        padding: 20px 5px 20px 25px;
+        stroke: $white;
+      }
+    }
+
+    p {
+      transition: all 0.2s ease-in-out;
+      background: $black;
+      border-radius: 0 10px 10px 0;
+      color: $dark-grey;
+      padding: 0 20px 0 20px;
+      width: max-content;
+      transition: all 0.2s ease-in-out;
+    }
+
+    p:hover {
+      color: $white;
+    }
+
+    svg {
+      fill: none;
+      padding: 20px 5px 20px 25px;
+      stroke: $dark-grey;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        stroke: $white;
+      }
     }
   }
+}
 
+nav:hover {
+  width: 240px;
+  transition: all 0.2s ease-in-out;
   p {
-    background: $black;
-    border-radius: 0 10px 10px 0;
-    color: $white;
-    grid-column: 2;
-    display: none;
-    padding: 10px;
-  }
-
-  svg {
-    fill: none;
-    padding: 20px;
-    stroke: $dark-grey;
-
-    &:hover {
-      stroke: $white;
-    }
-  }
-
-  .A {
-    grid-row: 1;
-  }
-  .B {
-    grid-row: 2;
-  }
-  .C {
-    grid-row: 3;
-  }
-  .D {
-    grid-row: 4;
-  }
-  .E {
-    grid-row: 5;
+    display: inline;
   }
 }

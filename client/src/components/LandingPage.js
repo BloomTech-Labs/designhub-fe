@@ -1,6 +1,8 @@
 import React from 'react';
 import { useAuth0 } from '../auth-wrapper';
-import '../SASS/Login.scss';
+import '../SASS/LandingPage.scss';
+
+import x from '../components/Icons/SampleLogo.svg';
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
@@ -39,13 +41,20 @@ const Login = () => {
       </section>
       <section className="right-side">
         <div className="cta">
-          <header>GET STARTED TODAY</header>
-          <button
-            className="auth0-redirect-btn"
-            onClick={() => loginWithRedirect({})}
-          >
-            Create account
-          </button>
+          <img src={x} className="logo" alt="logo" />
+          <h1>
+            Super-charge your design workflow now and start collaborating like a
+            beast
+          </h1>
+          <div>
+            <h6 className="join-head">Join DesignHub today.</h6>
+            <button
+              className="auth0-redirect-btn"
+              onClick={() => loginWithRedirect({})}
+            >
+              Create an account or Sign in
+            </button>
+          </div>
         </div>
       </section>
     </div>

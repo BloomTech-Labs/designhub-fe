@@ -15,7 +15,8 @@ class UserProfile_LI extends Component {
       followers: [],
       following: [],
       userId: this.props.match.params.id,
-      userData: []
+      userData: [],
+      projects: []
     };
   }
 
@@ -26,26 +27,35 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
+    const paramsId = this.props.match.params.id;
     const userId = this.state.userId;
-
-    function getUserData() {
-      return axiosWithAuth().get(`/api/v1/users/${userId}`);
+    function getUserData(id) {
+      return axiosWithAuth().get(`/api/v1/users/${id}`);
     }
-    function getFollowingCount() {
-      return axiosWithAuth().get(`/api/v1/followers/count/following/${userId}`);
+    function getFollowingCount(id) {
+      return axiosWithAuth().get(`/api/v1/followers/count/following/${id}`);
     }
-    function getFollowerCount() {
-      return axiosWithAuth().get(`/api/v1/followers/count/followers/${userId}`);
+    function getFollowerCount(id) {
+      return axiosWithAuth().get(`/api/v1/followers/count/followers/${id}`);
+    }
+    function getUserProjects() {
+      return axiosWithAuth().get(`/api/v1/projects/users/${paramsId}`);
     }
 
     return axios
-      .all([getUserData(), getFollowingCount(), getFollowerCount()])
+      .all([
+        getUserData(paramsId),
+        getFollowingCount(paramsId),
+        getFollowerCount(paramsId),
+        getUserProjects()
+      ])
       .then(
-        axios.spread((a, b, c) => {
+        axios.spread((a, b, c, d) => {
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
-            followers: c.data[0].count
+            followers: c.data[0].count,
+            projects: d.data
           });
         })
       )
@@ -53,15 +63,14 @@ class UserProfile_LI extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params.id !== prevState.userId) {
-      this.fetch().then(() => {
-        this.setState({ userId: this.props.match.params.id });
-      });
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.fetch();
     }
   }
 
   render() {
     const userData = this.state.userData;
+    const projects = this.state.projects;
     window.scroll(0, 0);
     return (
       <div className="user-profile-container">
@@ -124,7 +133,7 @@ class UserProfile_LI extends Component {
             </div>
           </div>
         </div>
-        <UserProfileTabs />
+        <UserProfileTabs projects={projects} />
       </div>
     );
   }

@@ -4,22 +4,33 @@
 .Login-container {
   align-items: center;
   background: url('../ASSETS/loginpage-bg.jpg');
+  background-position: -40vh 0;
   color: $white;
   display: flex;
+  justify-content: space-between;
   height: 100vh;
-  width: 100vw;
-
+  width: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  animation: bgAnimation 10s ease-in-out alternate-reverse infinite;
+}
+
+@keyframes bgAnimation {
+  from {
+    background-position: -40vh 0;
+  }
+  to {
+    background-position: 0vh 0;
+  }
 }
 
 .left-side {
-  margin-left: 40px;
+  margin-left: 6vh;
   max-width: 50%;
   h1 {
     font-weight: 900;
-    font-size: 96px;
+    font-size: 90px;
     line-height: 112px;
     letter-spacing: 0.11em;
 
@@ -47,6 +58,7 @@
     display: grid;
     grid-gap: 20px 0;
     grid-template-columns: 40px 420px;
+    margin-top: 2vh;
 
     h2 {
       font-size: 18px;
@@ -77,27 +89,48 @@
 }
 
 .right-side {
-  align-items: center;
+  width: 50%;
+  background: $white;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  width: 50%;
+  justify-content: space-evenly;
+  align-items: center;
 
   .cta {
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
-  }
-  header {
-    background: none;
-    color: $white;
-    font-size: 16px;
-    font-weight: 900;
-    line-height: 21px;
-    letter-spacing: 0.11em;
-    text-decoration: none;
-  }
-}
+    justify-content: space-evenly;
+    align-items: center;
 
-.auth0-redirect-btn {
-  @include auth0-redirect-btn;
+    .logo {
+      padding-bottom: 4vh;
+      text-align: left;
+      width: 80px;
+    }
+
+    h1 {
+      background: none;
+      color: $black;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+      line-height: 30px;
+      text-decoration: none;
+      text-align: left;
+      width: 48%;
+    }
+
+    .join-head {
+      color: $black;
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-top: 6vh;
+    }
+
+    .auth0-redirect-btn {
+      @include auth0-redirect-btn;
+      margin-top: 3.5vh;
+    }
+  }
 }
