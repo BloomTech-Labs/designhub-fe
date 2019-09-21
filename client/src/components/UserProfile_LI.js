@@ -27,26 +27,26 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
+    const paramsId = this.props.match.params.id;
     const userId = this.state.userId;
-
-    function getUserData() {
-      return axiosWithAuth().get(`/api/v1/users/${userId}`);
+    function getUserData(id) {
+      return axiosWithAuth().get(`/api/v1/users/${id}`);
     }
-    function getFollowingCount() {
-      return axiosWithAuth().get(`/api/v1/followers/count/following/${userId}`);
+    function getFollowingCount(id) {
+      return axiosWithAuth().get(`/api/v1/followers/count/following/${id}`);
     }
-    function getFollowerCount() {
-      return axiosWithAuth().get(`/api/v1/followers/count/followers/${userId}`);
+    function getFollowerCount(id) {
+      return axiosWithAuth().get(`/api/v1/followers/count/followers/${id}`);
     }
     function getUserProjects() {
-      return axiosWithAuth().get(`/api/v1/projects/users/${userId}`);
+      return axiosWithAuth().get(`/api/v1/projects/users/${paramsId}`);
     }
 
     return axios
       .all([
-        getUserData(),
-        getFollowingCount(),
-        getFollowerCount(),
+        getUserData(paramsId),
+        getFollowingCount(paramsId),
+        getFollowerCount(paramsId),
         getUserProjects()
       ])
       .then(
@@ -63,10 +63,8 @@ class UserProfile_LI extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params.id !== prevState.userId) {
-      this.fetch().then(() => {
-        this.setState({ userId: this.props.match.params.id });
-      });
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.fetch();
     }
   }
 

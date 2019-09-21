@@ -173,6 +173,7 @@ class UserProfile_Tabs extends Component {
                           />
                         </>
                       </Link>
+                      <button className="follow-btn">Follow</button>
                     </div>
                   ))}
                 </div>
