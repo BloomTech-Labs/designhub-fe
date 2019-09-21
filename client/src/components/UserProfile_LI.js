@@ -14,7 +14,6 @@ class UserProfile_LI extends Component {
     this.state = {
       followers: [],
       following: [],
-      userId: this.props.match.params.id,
       userData: []
     };
   }
@@ -26,10 +25,6 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
-    console.log('feeeetch',this.props.match.params.id)
-    const userId = this.state.userId;
-    console.log('under fetch ', userId)
-
     function getUserData(id) {
       return axiosWithAuth().get(`/api/v1/users/${id}`);
     }
@@ -55,9 +50,6 @@ class UserProfile_LI extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log('Prevstate: ', prevState)
-    // console.log(this.state.userId )
-    //   console.log( prevState.userId)
     if (this.props.match.params.id !== prevProps.match.params.id) {
       console.log('helo')
       this.fetch()
