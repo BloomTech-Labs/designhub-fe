@@ -42,10 +42,12 @@ class UserProfile_LI extends Component {
       .all([getUserData(), getFollowingCount(), getFollowerCount()])
       .then(
         axios.spread((a, b, c) => {
+          console.log(a)
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
-            followers: c.data[0].count
+            followers: c.data[0].count,
+            userId: this.props.match.params.id
           });
         })
       )
@@ -53,10 +55,8 @@ class UserProfile_LI extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params.id !== prevState.userId) {
-      this.fetch().then(() => {
-        this.setState({ userId: this.props.match.params.id });
-      });
+    if (this.props.match.username !== prevProps.match.username) {
+      this.fetch()
     }
   }
 
