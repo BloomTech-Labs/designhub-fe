@@ -19,6 +19,10 @@
   }
 }
 
+@mixin check {
+  border: 1px solid red;
+}
+
 @mixin btn {
   border: none;
   border-radius: 5px;
