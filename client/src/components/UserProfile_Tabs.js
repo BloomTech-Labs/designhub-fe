@@ -41,11 +41,16 @@ class UserProfile_Tabs extends Component {
                   {projects.slice(0, 8).map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
-                        <img
-                          src={project.mainImg}
-                          className="project-thumbnail"
-                          alt="test"
-                        />
+                        <>
+                          <div className="project-info">
+                            <h1>{project.name}</h1>
+                          </div>
+                          <img
+                            src={project.mainImg}
+                            className="project-thumbnail"
+                            alt="test"
+                          />
+                        </>
                       </Link>
                     </div>
                   ))}

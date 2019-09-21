@@ -32,7 +32,12 @@ class DesignHub extends Component {
     const activeUser = this.state.activeUser;
     return (
       <div className="DesignHub">
-        <TopBar activeUser={activeUser} />
+        <TopBar
+          activeUser={activeUser}
+          darkMode={this.state.darkMode}
+          toggleLightMode={this.toggleLightMode}
+          togglDarkMode={this.togglDarkMode}
+        />
         <div className="side-navigation">
           <Navbar activeUser={activeUser} />
         </div>

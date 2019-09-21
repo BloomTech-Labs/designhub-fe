@@ -99,7 +99,7 @@ class Projects extends Component {
                   <Link to={`/profile/`}>eriklambert</Link>
                 </span>
               </span>
-              <span>Created on June 11, 2020</span>
+              <span>Created At: {singleProjects.created_at}</span>
             </p>
           </div>
           <div className="project-header-right">
@@ -110,26 +110,38 @@ class Projects extends Component {
             </div>
             <div className="project-header-links">
               <div className="project-header-button">
-                <img
-                  src={figmaIcon}
-                  className={
-                    singleProjects.figma === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="figma"
-                />
+                <a
+                  href={singleProjects.figma}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={figmaIcon}
+                    className={
+                      singleProjects.figma === null
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="figma"
+                  />
+                </a>
               </div>
               <div className="project-header-button">
-                <img
-                  src={invisionIcon}
-                  className={
-                    singleProjects.invision === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="invision"
-                />
+                <a
+                  href={singleProjects.invision}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={invisionIcon}
+                    className={
+                      singleProjects.invision === null
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="invision"
+                  />
+                </a>
               </div>
               <div className="download project-header-button">
                 <DownloadIcon />
@@ -159,7 +171,11 @@ class Projects extends Component {
           </div>
           <div className="project-thumbnails">
             {thumbnails.map(images => (
-              <img src={images.source} alt="project-thumbnail" />
+              <img
+                src={images.source}
+                alt="project-thumbnail"
+                key={images.id}
+              />
             ))}
           </div>
           <Comments comment={comments} activeUser={activeUser} />

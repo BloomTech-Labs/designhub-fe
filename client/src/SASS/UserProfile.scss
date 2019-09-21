@@ -168,26 +168,61 @@
     .projects-array {
       display: grid;
       grid-template-columns: 0fr 0fr 0fr 0fr;
-      grid-gap: 2vh;
+      grid-gap: 4vh;
+      grid-row-gap: 1.5vh;
       width: 100%;
 
-      .project-info {
-        position: absolute;
-        width: 100%;
-      }
-
-      .project-thumbnail {
-        object-fit: cover;
+      .project-content {
         width: 38.4vh;
-        height: 200px;
-        border: 8px solid $almost-black;
-        border-radius: 5px;
-        transition: 0.1s ease-in-out;
-        cursor: pointer;
-      }
+        position: relative;
+        transition: all 0.2s ease-in-out;
 
-      .project-thumbnail:hover {
-        border: 8px solid $blue;
+        .project-info {
+          position: absolute;
+          bottom: 10px;
+          width: 103%;
+          color: $white;
+          text-decoration: none;
+          background: $blue;
+          overflow: hidden;
+          height: 50px;
+          display: none;
+          pointer-events: none;
+
+          h1 {
+            padding: 20px;
+          }
+        }
+
+        .project-thumbnail {
+          object-fit: cover;
+          width: 100%;
+          height: 200px;
+          border: 8px solid $almost-black;
+          border-radius: 5px;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+        }
+
+        .project-thumbnail:hover {
+          border: 8px solid $blue;
+        }
+      }
+    }
+
+    .project-content:hover {
+      .project-info {
+        display: inline;
+        animation: slideUp 0.25s ease-in-out;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        height: 0px;
+      }
+      to {
+        height: 50px;
       }
     }
 
