@@ -25,6 +25,7 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
+    const paramsId = this.props.match.params.id
     function getUserData(id) {
       return axiosWithAuth().get(`/api/v1/users/${id}`);
     }
@@ -36,7 +37,7 @@ class UserProfile_LI extends Component {
     }
 
     return axios
-      .all([getUserData(this.props.match.params.id), getFollowingCount(this.props.match.params.id), getFollowerCount(this.props.match.params.id)])
+      .all([getUserData(paramsId), getFollowingCount(paramsId), getFollowerCount(paramsId)])
       .then(
         axios.spread((a, b, c) => {
           this.setState({
@@ -51,7 +52,6 @@ class UserProfile_LI extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      console.log('helo')
       this.fetch()
     }
   }
