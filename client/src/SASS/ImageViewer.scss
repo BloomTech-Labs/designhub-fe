@@ -35,28 +35,30 @@
     }
 
     .ImageViewer__thumbnails {
-      align-items: center;
-      // border: 1px solid red;
       display: flex;
       flex-flow: column nowrap;
-      height: 68vh;
-      justify-content: flex-start;
-      margin: 0 10px;
-      overflow-y: scroll;
       width: 50%;
+      height: 68vh;
+      overflow-y: scroll;
+      justify-content: flex-start;
+      align-items: center;
 
       img {
         border: 5px solid #15161a;
-        border-radius: 10px;
         box-sizing: border-box;
+        border-radius: 10px;
         margin-bottom: 16px;
-        max-width: 211px;
+        height: 151px;
+        width: 211px;
+        object-fit: cover;
+
         &:hover {
           border: 5px solid #5557fe;
           cursor: pointer;
         }
       }
     }
+
     .modal--close {
       display: none;
     }
