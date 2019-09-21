@@ -96,7 +96,9 @@ class Projects extends Component {
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/`}>eriklambert</Link>
+                  <Link to={`/profile/${singleProjects.userId}/`}>
+                    eriklambert
+                  </Link>
                 </span>
               </span>
               <span>Created At: {singleProjects.created_at}</span>

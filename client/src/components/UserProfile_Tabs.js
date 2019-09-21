@@ -1,17 +1,28 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import axios from 'axios';
 
 import Heatmap from '../components/Heatmap.js';
 
 class UserProfile_Tabs extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      allUsers: []
+    };
   }
+
+  componentDidMount() {
+    axios
+      .get('https://designhubx-staging.herokuapp.com/api/v1/users')
+      .then(res => this.setState({ allUsers: res.data }))
+      .catch(err => console.log(err));
+  }
+
   render() {
     const projects = this.props.projects;
-    const allUsers = null;
+    const allUsers = this.state.allUsers;
     return (
       <div className="profile-tabs-container">
         <div>
@@ -49,6 +60,7 @@ class UserProfile_Tabs extends Component {
                             src={project.mainImg}
                             className="project-thumbnail"
                             alt="test"
+                            key={project.id}
                           />
                         </>
                       </Link>
@@ -63,12 +75,21 @@ class UserProfile_Tabs extends Component {
                 <h2>Projects</h2>
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
-                    <img
-                      src={project.mainImg}
-                      className="project-thumbnail"
-                      alt="test"
-                      key={project.id}
-                    />
+                    <div className="project-content" key={project.id}>
+                      <Link to={`/project/${project.id}`}>
+                        <>
+                          <div className="project-info">
+                            <h1>{project.name}</h1>
+                          </div>
+                          <img
+                            src={project.mainImg}
+                            className="project-thumbnail"
+                            alt="test"
+                            key={project.id}
+                          />
+                        </>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -138,12 +159,21 @@ class UserProfile_Tabs extends Component {
                 <h2>Starred</h2>
                 <div className="projects-array">
                   {projects.slice(0, 8).map(project => (
-                    <img
-                      key={project.mainImg}
-                      src={project.mainImg}
-                      className="project-thumbnail"
-                      alt="test"
-                    />
+                    <div className="project-content" key={project.id}>
+                      <Link to={`/project/${project.id}`}>
+                        <>
+                          <div className="project-info">
+                            <h1>{project.name}</h1>
+                          </div>
+                          <img
+                            src={project.mainImg}
+                            className="project-thumbnail"
+                            alt="test"
+                            key={project.id}
+                          />
+                        </>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               </div>
