@@ -3,7 +3,7 @@
 
 .user-profile-container {
   color: $white;
-  width: 96%;
+  width: 172vh;
   margin-top: 7vh;
 
   .user-header {
@@ -16,10 +16,10 @@
     border-radius: 10px;
 
     .avatar {
-      border-radius: 100%;
+      height: 100px;
+      width: 100px;
+      border-radius: 50%;
       object-fit: cover;
-      height: 14vh;
-      width: 14vh;
       padding: 4vh;
     }
 
@@ -47,6 +47,7 @@
         margin: 0;
         max-width: 80%;
         line-height: 20px;
+        font-size: 0.85rem;
       }
 
       .user-info-location-website {
@@ -123,7 +124,6 @@
 
     .nav-links {
       display: flex;
-      justify-content: space-between;
       width: 34%;
 
       .links {
@@ -136,6 +136,7 @@
         font-weight: 400;
         position: relative;
         z-index: 100;
+        padding: 0px 20px;
       }
 
       .active-link {
@@ -168,19 +169,17 @@
       display: grid;
       grid-template-columns: 0fr 0fr 0fr 0fr;
       grid-gap: 2vh;
-      justify-content: space-between;
       width: 100%;
 
       .project-info {
         position: absolute;
-        border: 1px solid red;
         width: 100%;
       }
 
       .project-thumbnail {
-        width: 19.6vw;
-        height: 12vw;
         object-fit: cover;
+        width: 38.4vh;
+        height: 100%;
         border: 8px solid $almost-black;
         border-radius: 5px;
         transition: 0.1s ease-in-out;

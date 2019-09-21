@@ -7,9 +7,6 @@ import { getAllUsers, getAllProjects } from '../store/actions';
 
 import Heatmap from '../components/Heatmap.js';
 
-// import avatar2 from '../ASSETS/avatar_2.jpg';
-// import avatar3 from '../ASSETS/avatar_3.jpg';
-
 const UserProfile_Tabs = () => {
   const dispatch = useDispatch();
 
@@ -19,10 +16,8 @@ const UserProfile_Tabs = () => {
   }, [dispatch]);
 
   const allUsers = useSelector(state => state.users.allUsers);
-  console.log(allUsers);
 
   const userProjects = useSelector(state => state.projects.allProjects);
-  console.log(userProjects);
 
   return (
     <div className="profile-tabs-container">
@@ -71,10 +66,10 @@ const UserProfile_Tabs = () => {
               <div className="projects-array">
                 {userProjects.slice(0, 8).map(project => (
                   <img
-                    key={project.mainImg}
                     src={project.mainImg}
                     className="project-thumbnail"
                     alt="test"
+                    key={project.id}
                   />
                 ))}
               </div>
@@ -84,9 +79,9 @@ const UserProfile_Tabs = () => {
             <div className="follower-following-container">
               {allUsers &&
                 allUsers.map(follower => (
-                  <div className="follow-container" key={follower.avatar}>
+                  <div className="follow-container" key={follower.id}>
                     <div className="follow-info-flex">
-                      <Link to={`/profile/${follower.username}`}>
+                      <Link to={`/profile/${follower.id}/${follower.username}`}>
                         <img
                           src={follower.avatar}
                           className="follow-avatar"

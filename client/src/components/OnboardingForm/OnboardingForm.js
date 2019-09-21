@@ -54,7 +54,7 @@ const OnboardingForm = props => {
 
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
-    console.log({ id, changes });
+    ({ id, changes });
     dispatch(updateUser(id, changes));
     dispatch({ type: SET_LOGGEDIN });
     props.history.push(`/profile/${changes.username}`);
