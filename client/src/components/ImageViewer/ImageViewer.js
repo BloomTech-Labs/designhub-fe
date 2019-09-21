@@ -1,5 +1,4 @@
 import React from 'react';
-import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import '../../SASS/ImageViewer.scss';
 
@@ -37,43 +36,27 @@ class ImageViewer extends React.Component {
   state = {
     activeImg: { ...allImgs[0] },
     allImgs: [...allImgs],
-    isOpen: false,
-    lightBox: [],
-    photoIndex: 0,
+    modal: false,
     thisProject: { ...this.props.thisProject }
   };
 
   render() {
-    const { lightBox, photoIndex, isOpen } = this.state;
+    const { activeImg, modal } = this.state;
     return (
       <div className="ImageViewer">
-        {isOpen && (
-          <Lightbox
-            mainSrc={lightBox[photoIndex]}
-            nextSrc={lightBox[(photoIndex + 1) % lightBox.length]}
-            prevSrc={
-              lightBox[(photoIndex + lightBox.length - 1) % lightBox.length]
-            }
-            onCloseRequest={() => this.setState({ isOpen: false })}
-            onMovePrevRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + lightBox.length - 1) % lightBox.length
-              })
-            }
-            onMoveNextRequest={() =>
-              this.setState(ps => ({
-                ...ps,
-                photoIndex: (photoIndex + 1) % lightBox.length
-              }))
-            }
-          />
-        )}
-        <main>
+        <main className="ImageViewer__body">
+          <div className={modal ? 'modal--expand' : 'modal--close'}>
+            <img src={activeImg.url} alt="main project" />
+            <span
+              className="background-overlay"
+              onClick={() => this.setState({ modal: false })}
+            />
+          </div>
           <section className="ImageViewer__main-image">
             <img
               src={this.state.activeImg.url}
               alt="main project"
-              onClick={() => this.setState({ isOpen: true })}
+              onClick={() => this.setState({ modal: true })}
             />
           </section>
           <section className="ImageViewer__thumbnails">
@@ -91,15 +74,9 @@ class ImageViewer extends React.Component {
     );
   }
 
-  componentDidMount() {
-    const urls = this.state.allImgs.map(i => i.url);
-    this.setState({ lightBox: urls });
-  }
-
   changeImg = imgObj => {
-    const i = this.state.lightBox.findIndex(url => url === imgObj.url);
     if (this.state.activeImg.id !== imgObj.id) {
-      this.setState({ activeImg: imgObj, photoIndex: i });
+      this.setState({ activeImg: imgObj });
     }
   };
 }

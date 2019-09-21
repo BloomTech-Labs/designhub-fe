@@ -15,7 +15,7 @@ import SendIcon from './Icons/SendIcon';
 import ImageViewer from './ImageViewer/ImageViewer.js';
 
 import '../SASS/Project.scss';
-import Comments from './Comments';
+// import Comments from './Comments';
 
 class Projects extends Component {
   constructor(props) {
