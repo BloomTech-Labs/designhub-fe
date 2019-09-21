@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addProject } from '../store/actions';
 import { useAuth0 } from '../auth-wrapper.js';
 
 import '../SASS/ProjectForm.scss';
 
-const ProjectForm = ({ addProject }) => {
+const ProjectForm = () => {
   const { user } = useAuth0();
 
   const [project, setProject] = useState({
@@ -58,9 +57,7 @@ const ProjectForm = ({ addProject }) => {
 
           <div className="project-form-right-column">
             <label>Attach files</label>
-            <button className="attach-files" type="button">
-              Attach files
-            </button>
+            <input type="file" />
 
             <label>Included files</label>
             <p>File names will populate here</p>
@@ -95,5 +92,5 @@ const mapSTateToProps = state => {
 
 export default connect(
   mapSTateToProps,
-  { addProject }
+  {}
 )(ProjectForm);
