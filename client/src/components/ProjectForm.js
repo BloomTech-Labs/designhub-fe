@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useAuth0 } from '../auth-wrapper.js';
 
+import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+
 import '../SASS/ProjectForm.scss';
 
 const ProjectForm = () => {
@@ -9,10 +11,14 @@ const ProjectForm = () => {
 
   const [project, setProject] = useState({
     userId: user.id,
-    projectName: ''
+    name: '',
+    description: '',
+    figma: '',
+    invision: '',
+    mainImg: ''
   });
 
-  const { projectName } = project;
+  const { name, description, figma, invision } = project;
 
   const handleChanges = e => {
     setProject({
@@ -21,9 +27,20 @@ const ProjectForm = () => {
     });
   };
 
+  const addProject = project => {
+    return axiosWithAuth()
+      .post('/api/v1/projects', project)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    addProject(project).then(res => setProject({ projectName: '' }));
+    addProject(project).then(res => setProject({ name: '' }));
   };
 
   return (
@@ -32,20 +49,23 @@ const ProjectForm = () => {
       <form className="project-form-container" onSubmit={handleSubmit}>
         <div className="inner-form-container">
           <div className="project-form-left-column">
-            <label htmlFor="projectName">Project title</label>
+            <label htmlFor="name">Project title</label>
             <input
               type="text"
-              value={projectName}
-              name="projectName"
-              id="projectName"
+              value={name}
+              name="name"
+              id="name"
               placeholder="Enter project title here"
               onChange={handleChanges}
             />
-            <label htmlFor="projectDescription">Project description</label>
+            <label htmlFor="description">Project description</label>
             <input
-              id="projectDescription"
+              id="description"
+              name="description"
+              value={description}
               type="text"
               placeholder="Enter project description here"
+              onChange={handleChanges}
             />
             <label htmlFor="teamMembers">Add team members</label>
             <input
@@ -56,22 +76,33 @@ const ProjectForm = () => {
           </div>
 
           <div className="project-form-right-column">
-            <label>Attach files</label>
-            <input type="file" />
+            <label htmlFor="image-upload">Attach files</label>
+            <input
+              type="file"
+              accept="image/*"
+              name="image-upload"
+              id="image-upload"
+            />
 
             <label>Included files</label>
             <p>File names will populate here</p>
             <label htmlFor="figmaLink">Figma link</label>
             <input
               type="text"
+              name="figma"
+              value={figma}
               placeholder="Enter Figma link here"
               id="figmaLink"
+              onChange={handleChanges}
             />
             <label htmlFor="invisionLink">Figma link</label>
             <input
               type="text"
+              name="invision"
+              value={invision}
               placeholder="Enter InVision link here"
               id="invisionLink"
+              onChange={handleChanges}
             />
           </div>
         </div>
