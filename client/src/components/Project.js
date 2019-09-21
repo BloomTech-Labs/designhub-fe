@@ -171,7 +171,11 @@ class Projects extends Component {
                     activeUser.id === comment.id ? 'comment' : 'comment-li-user'
                   }
                 >
-                  <img src={comment.avatar} alt="avatar" className="avatar" />
+                  <img
+                    src={comment.userAvatar}
+                    alt="avatar"
+                    className="avatar"
+                  />
                   {activeUser.id === comment.user_id ? (
                     <p className="you">You</p>
                   ) : null}

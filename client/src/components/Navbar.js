@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useAuth0 } from '../auth-wrapper.js';
-
 import ProfileIcon from './Icons/ProfileIcon';
 import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
 import MyProjectsIcon from './Icons/MyProjectsIcon';
@@ -12,34 +10,63 @@ import SettingsIcon from './Icons/SettingsIcon';
 import '../SASS/Navbar.scss';
 
 const Navbar = ({ activeUser }) => {
-  const { logout } = useAuth0();
-
   return (
     <nav>
-      <NavLink to={`/profile/${activeUser.id}/${activeUser.username}`}>
-        <ProfileIcon />
-      </NavLink>
-      <p className="A">Profile</p>
+      <div className="navlinks">
+        <NavLink
+          to={`/profile/${activeUser.id}/${activeUser.username}`}
+          activeClassName="active-links"
+        >
+          <ProfileIcon />
+        </NavLink>
+        <NavLink
+          to={`/profile/${activeUser.id}/${activeUser.username}`}
+          className="links"
+          activeClassName="active-links"
+        >
+          <p className="A">Profile</p>
+        </NavLink>
+      </div>
 
-      <NavLink to="/create">
-        <CreateNewProjectIcon />
-      </NavLink>
-      <p className="B">New Project</p>
+      <div className="navlinks">
+        <NavLink to="/create" activeClassName="active-links">
+          <CreateNewProjectIcon />
+        </NavLink>
+        <NavLink to="/create" className="links" activeClassName="active-links">
+          <p className="B">New Project</p>
+        </NavLink>
+      </div>
 
-      <NavLink to="/" onClick={() => logout()}>
-        <MyProjectsIcon />
-      </NavLink>
-      <p className="C">LOGOUT</p>
+      <div className="navlinks">
+        <NavLink to="/explore" activeClassName="active-links">
+          <MyProjectsIcon />
+        </NavLink>
+        <NavLink to="/explore" className="links" activeClassName="active-links">
+          <p className="C">Explore</p>
+        </NavLink>
+      </div>
 
-      <NavLink to="/onboard">
-        <InboxIcon />
-      </NavLink>
-      <p className="D">Onboarding Form</p>
+      <div className="navlinks">
+        <NavLink to="/onboard" activeClassName="active-links">
+          <InboxIcon />
+        </NavLink>
+        <NavLink to="/onboard" className="links" activeClassName="active-links">
+          <p className="D">Onboard</p>
+        </NavLink>
+      </div>
 
-      <NavLink to="/fake-profile">
-        <SettingsIcon />
-      </NavLink>
-      <p className="E">Settings</p>
+      <div className="navlinks">
+        <NavLink to="/settings" activeClassName="active-links">
+          <SettingsIcon />
+        </NavLink>
+        <NavLink
+          to="/settings"
+          className="links"
+          activeClassName="active-links"
+        >
+          <p className="E">Settings</p>
+        </NavLink>
+      </div>
     </nav>
   );
 };

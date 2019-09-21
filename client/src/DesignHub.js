@@ -8,6 +8,9 @@ import Project from './components/Project';
 import ProjectForm from './components/ProjectForm';
 import PrivateRoute from './components/PrivateRoute';
 import UserProfileLI from './components/UserProfile_LI';
+import Settings from './components/Settings.js';
+
+import './SASS/DesignHub.scss';
 
 class DesignHub extends Component {
   constructor(props) {
@@ -30,7 +33,9 @@ class DesignHub extends Component {
     return (
       <div className="DesignHub">
         <TopBar activeUser={activeUser} />
-        <Navbar activeUser={activeUser} />
+        <div className="side-navigation">
+          <Navbar activeUser={activeUser} />
+        </div>
         <main className="workspace">
           <Switch>
             <Route
@@ -46,6 +51,11 @@ class DesignHub extends Component {
               render={props => <Project {...props} activeUser={activeUser} />}
             />
             <Route exact path="/create" component={ProjectForm} />
+            <Route
+              exact
+              path="/settings"
+              render={props => <Settings {...props} activeUser={activeUser} />}
+            />
           </Switch>
         </main>
       </div>
