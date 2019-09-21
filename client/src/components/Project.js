@@ -10,9 +10,9 @@ import figmaIcon from '../ASSETS/figma-icon.png';
 import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
-import SendIcon from './Icons/SendIcon';
 
 import '../SASS/Project.scss';
+import Comments from './Comments';
 
 class Projects extends Component {
   constructor(props) {
@@ -162,38 +162,7 @@ class Projects extends Component {
               <img src={images.source} alt="project-thumbnail" />
             ))}
           </div>
-          <div className="project-comments">
-            <div className="comments-header">Comments</div>
-            <div className="comments-body">
-              {comments.map(comment => (
-                <div
-                  className={
-                    activeUser.id === comment.id ? 'comment' : 'comment-li-user'
-                  }
-                >
-                  <img
-                    src={comment.userAvatar}
-                    alt="avatar"
-                    className="avatar"
-                  />
-                  {activeUser.id === comment.user_id ? (
-                    <p className="you">You</p>
-                  ) : null}
-                  <p className="message">{comment.text}</p>
-                </div>
-              ))}
-            </div>
-            <div className="comments-form">
-              <form>
-                <div className="form-wrapper">
-                  <input type="text" placeholder="Leave a comment..." />
-                  <button>
-                    <SendIcon />
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
+          <Comments comment={comments} activeUser={activeUser} />
         </div>
       </div>
     );

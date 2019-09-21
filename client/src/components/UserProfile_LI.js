@@ -15,7 +15,8 @@ class UserProfile_LI extends Component {
       followers: [],
       following: [],
       userId: this.props.match.params.id,
-      userData: []
+      userData: [],
+      projects: []
     };
   }
 
@@ -37,15 +38,24 @@ class UserProfile_LI extends Component {
     function getFollowerCount() {
       return axiosWithAuth().get(`/api/v1/followers/count/followers/${userId}`);
     }
+    function getUserProjects() {
+      return axiosWithAuth().get(`/api/v1/projects/users/${userId}`);
+    }
 
     return axios
-      .all([getUserData(), getFollowingCount(), getFollowerCount()])
+      .all([
+        getUserData(),
+        getFollowingCount(),
+        getFollowerCount(),
+        getUserProjects()
+      ])
       .then(
-        axios.spread((a, b, c) => {
+        axios.spread((a, b, c, d) => {
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
-            followers: c.data[0].count
+            followers: c.data[0].count,
+            projects: d.data
           });
         })
       )
@@ -62,6 +72,7 @@ class UserProfile_LI extends Component {
 
   render() {
     const userData = this.state.userData;
+    const projects = this.state.projects;
     window.scroll(0, 0);
     return (
       <div className="user-profile-container">
@@ -124,7 +135,7 @@ class UserProfile_LI extends Component {
             </div>
           </div>
         </div>
-        <UserProfileTabs />
+        <UserProfileTabs projects={projects} />
       </div>
     );
   }
