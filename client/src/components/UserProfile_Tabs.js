@@ -109,7 +109,7 @@ const UserProfile_Tabs = () => {
             <div className="follower-following-container">
               {allUsers &&
                 allUsers.map(follower => (
-                  <div className="follow-container" key={follower.avatar}>
+                  <div className="follow-container" key={follower.id}>
                     <div className="follow-info-flex">
                       <img
                         src={follower.avatar}
