@@ -3,50 +3,100 @@ import { connect } from 'react-redux';
 import { useAuth0 } from '../auth-wrapper.js';
 
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+import axios from 'axios';
 
 import '../SASS/ProjectForm.scss';
 
 const ProjectForm = () => {
   const { user } = useAuth0();
 
-  const [project, setProject] = useState({
-    userId: user.id,
-    name: '',
-    description: '',
-    figma: '',
-    invision: '',
-    mainImg: ''
+  const [state, setState] = useState({
+    project: {
+      userId: user.id,
+      name: '',
+      description: '',
+      figma: '',
+      invision: '',
+      mainImg: ''
+    },
+    success: false,
+    url: ''
   });
 
-  const { name, description, figma, invision } = project;
+  const { name, description, figma, invision } = state.project;
 
   const handleChanges = e => {
-    setProject({
-      ...project,
-      [e.target.name]: e.target.value
+    setState({
+      project: {
+        ...state.project,
+        [e.target.name]: e.target.value
+      }
     });
   };
 
   const addProject = project => {
-    return axiosWithAuth()
-      .post('/api/v1/projects', project)
+    axios
+      .post('http://localhost:8000/api/v1/projects', project)
       .then(res => {
-        console.log(res);
+        console.log(res.data.data[0].id);
+        let file = uploadInput.files[0];
+        let fileParts = uploadInput.files[0].name.split('.');
+        let fileType = fileParts[1];
+
+        const projectId = res.data.data[0].id;
+        const body = { id: projectId };
+        axios
+          .post(`http://localhost:8000/api/v1/photo/projects/signed`, body)
+          .then(res => {
+            console.log(res);
+            const photoProjectBody = {
+              projectId: projectId,
+              url: res.data.key
+            };
+            axios
+              .post(
+                `http://localhost:8000/api/v1/photo/projects`,
+                photoProjectBody
+              )
+              .then(() => {
+                var options = {
+                  headers: {
+                    'Content-Type': 'image/jpeg'
+                  }
+                };
+                console.log('options!!!!!', options);
+                console.log('file!!!!!!', file);
+                console.log('PUT URL!!!!!', res.data.url);
+                axios
+                  .put(res.data.url, file, options)
+                  .then(res => console.log(res))
+                  .catch(err => console.log(err));
+              });
+          });
       })
       .catch(err => {
         console.log(err);
       });
   };
 
+  const handleUpload = () => {
+    axios.post(`/api/v1/photo/projects/signed`);
+  };
+  let uploadInput;
   const handleSubmit = e => {
     e.preventDefault();
-    addProject(project).then(res => setProject({ name: '' }));
+
+    addProject(state.project);
   };
 
   return (
     <div className="project-form-wrapper">
       <h2>Create a project</h2>
-      <form className="project-form-container" onSubmit={handleSubmit}>
+      <form
+        enctype="multipart/form-data"
+        className="project-form-container"
+        onSubmit={handleSubmit}
+      >
         <div className="inner-form-container">
           <div className="project-form-left-column">
             <label htmlFor="name">Project title</label>
@@ -70,7 +120,7 @@ const ProjectForm = () => {
             <label htmlFor="teamMembers">Add team members</label>
             <input
               type="text"
-              placeholder="Enter team member usernames seperated by a comma"
+              placeholder="Enter team member usernames separated by a comma"
               id="teamMembers"
             />
           </div>
@@ -78,12 +128,14 @@ const ProjectForm = () => {
           <div className="project-form-right-column">
             <label htmlFor="image-upload">Attach files</label>
             <input
+              ref={ref => {
+                uploadInput = ref;
+              }}
               type="file"
               accept="image/*"
               name="image-upload"
               id="image-upload"
-            />
-
+            />{' '}
             <label>Included files</label>
             <p>File names will populate here</p>
             <label htmlFor="figmaLink">Figma link</label>
