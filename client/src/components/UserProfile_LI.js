@@ -26,28 +26,28 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
+    console.log('feeeetch',this.props.match.params.id)
     const userId = this.state.userId;
+    console.log('under fetch ', userId)
 
-    function getUserData() {
-      return axiosWithAuth().get(`/api/v1/users/${userId}`);
+    function getUserData(id) {
+      return axiosWithAuth().get(`/api/v1/users/${id}`);
     }
-    function getFollowingCount() {
-      return axiosWithAuth().get(`/api/v1/followers/count/following/${userId}`);
+    function getFollowingCount(id) {
+      return axiosWithAuth().get(`/api/v1/followers/count/following/${id}`);
     }
-    function getFollowerCount() {
-      return axiosWithAuth().get(`/api/v1/followers/count/followers/${userId}`);
+    function getFollowerCount(id) {
+      return axiosWithAuth().get(`/api/v1/followers/count/followers/${id}`);
     }
 
     return axios
-      .all([getUserData(), getFollowingCount(), getFollowerCount()])
+      .all([getUserData(this.props.match.params.id), getFollowingCount(this.props.match.params.id), getFollowerCount(this.props.match.params.id)])
       .then(
         axios.spread((a, b, c) => {
-          console.log(a)
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
-            followers: c.data[0].count,
-            userId: this.props.match.params.id
+            followers: c.data[0].count
           });
         })
       )
@@ -55,11 +55,15 @@ class UserProfile_LI extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.username !== prevProps.match.username) {
+    // console.log('Prevstate: ', prevState)
+    // console.log(this.state.userId )
+    //   console.log( prevState.userId)
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      console.log('helo')
       this.fetch()
     }
   }
-
+  
   render() {
     const userData = this.state.userData;
     window.scroll(0, 0);
