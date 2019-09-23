@@ -6,6 +6,7 @@ import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import axios from 'axios';
 
 import '../SASS/ProjectForm.scss';
+import ImageUploadForm from './ImageUploadForm.js';
 
 const ProjectForm = () => {
   const { user } = useAuth0();
@@ -53,24 +54,20 @@ const ProjectForm = () => {
               projectId: projectId,
               url: res.data.key
             };
+            const putUrl = res.data.url;
             axios
               .post(
                 `http://localhost:8000/api/v1/photo/projects`,
                 photoProjectBody
               )
-              .then(() => {
-                var options = {
-                  headers: {
-                    'Content-Type': 'image/jpeg'
-                  }
-                };
-                console.log('options!!!!!', options);
+              .then(res => {
                 console.log('file!!!!!!', file);
-                console.log('PUT URL!!!!!', res.data.url);
+                console.log('PUT!!!!!', putUrl);
+                console.log('RES!!!!!', res);
                 axios
-                  .put(res.data.url, file, options)
-                  .then(res => console.log(res))
-                  .catch(err => console.log(err));
+                  .put(putUrl, file)
+                  .then(res => console.log(putUrl))
+                  .catch(err => console.log('we be getting this error!'));
               });
           });
       })
@@ -91,9 +88,9 @@ const ProjectForm = () => {
 
   return (
     <div className="project-form-wrapper">
-      <h2>Create a project</h2>
+      {/* <h2>Create a project</h2>
       <form
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
         className="project-form-container"
         onSubmit={handleSubmit}
       >
@@ -164,7 +161,8 @@ const ProjectForm = () => {
           </button>
           <button type="button">Cancel</button>
         </div>
-      </form>
+      </form> */}
+      <ImageUploadForm />
     </div>
   );
 };
