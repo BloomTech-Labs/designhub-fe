@@ -1,5 +1,5 @@
 .projects-container {
-  width: 172vh;
+  width: 100%;
   margin-top: 10vh;
   color: white;
 
@@ -12,7 +12,8 @@
     margin: 22px auto;
   }
   .project-details {
-    width: 60%;
+    width: 50%;
+
     h2 {
       font-weight: 500;
       font-size: 1.5rem;
@@ -33,7 +34,7 @@
       font-weight: normal;
       font-size: 0.8rem;
       letter-spacing: 0.11em;
-      margin-right: 20px;
+      padding-right: 2%;
     }
     .project-header-username a {
       color: #5557fe;
@@ -60,6 +61,7 @@
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
+
       .edit {
         color: #5557fe;
         letter-spacing: 0.11em;
@@ -92,22 +94,21 @@
   }
   .project-body {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: row;
+    height: 66vh;
+
     .project-main-image {
-      width: 56%;
-      height: 68vh;
+      width: 100%;
+      height: 100%;
       background-color: #15161a;
       border: 5px solid #15161a;
-      box-sizing: border-box;
       border-radius: 10px;
       overflow: hidden;
+      object-fit: cover;
       cursor: pointer;
-      img {
-        width: 100%;
-      }
+      margin: 0 1% 0 0;
     }
+
     .modal-close {
       display: none;
     }
@@ -126,15 +127,15 @@
 
       img {
         width: 80%;
-        margin: 10vh auto 0;
+        margin: 5vh auto 0;
         position: relative;
-        z-index: 999;
+        z-index: 999999;
       }
 
       span {
         display: inline-block;
         position: fixed;
-        z-index: 99;
+        z-index: 99999;
         left: 0;
         top: 0;
         content: '';
@@ -157,18 +158,20 @@
     .project-thumbnails {
       display: flex;
       flex-flow: column nowrap;
-      width: 20%;
-      height: 68vh;
+      width: 38%;
+      height: 100%;
       overflow-y: scroll;
       justify-content: flex-start;
       align-items: center;
+      margin: 0 0;
 
       img {
-        width: 211px;
+        width: 100%;
         margin-bottom: 16px;
         border: 5px solid #15161a;
         box-sizing: border-box;
         border-radius: 10px;
+        object-fit: cover;
         &:hover {
           border: 5px solid #5557fe;
           cursor: pointer;
@@ -176,16 +179,18 @@
       }
     }
     .project-comments {
-      width: 25%;
+      width: 50%;
+      height: 100%;
       background-color: #15161a;
       border: 5px solid #15161a;
       box-sizing: border-box;
       border-radius: 10px;
-      height: 68vh;
       padding: 14px;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
+      margin: 0 0 0 1%;
+
       .comments-header {
         letter-spacing: 0.11em;
         font-weight: normal;
@@ -247,6 +252,7 @@
           font-size: 0.8rem;
           font-weight: 400;
           outline: none;
+          resize: none;
         }
         button {
           position: absolute;

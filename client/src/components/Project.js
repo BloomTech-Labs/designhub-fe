@@ -155,6 +155,7 @@ class Projects extends Component {
             </div>
           </div>
         </div>
+
         <div className="project-body">
           <div className="project-main-image">
             <img
@@ -180,6 +181,7 @@ class Projects extends Component {
               />
             ))}
           </div>
+
           <Comments comment={comments} activeUser={activeUser} />
         </div>
       </div>
