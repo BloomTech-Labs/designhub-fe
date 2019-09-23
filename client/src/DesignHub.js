@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { axiosWithAuth } from './utilities/axiosWithAuth.js';
 
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
@@ -16,16 +15,9 @@ class DesignHub extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeUser: [],
+      activeUser: this.props.user,
       users: []
     };
-  }
-
-  componentDidMount() {
-    return axiosWithAuth()
-      .get(`/api/v1/users/${this.props.user.id}`)
-      .then(res => this.setState({ activeUser: res.data[0] }))
-      .catch(err => err);
   }
 
   render() {
