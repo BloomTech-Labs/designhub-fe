@@ -52,6 +52,7 @@ class ImageViewer extends React.Component {
               onClick={() => this.setState({ modal: false })}
             />
           </div>
+
           <section className="ImageViewer__main-image">
             <img
               src={this.state.activeImg.url}
@@ -73,6 +74,8 @@ class ImageViewer extends React.Component {
       </div>
     );
   }
+
+  componentDidMount() {}
 
   changeImg = imgObj => {
     if (this.state.activeImg.id !== imgObj.id) {
