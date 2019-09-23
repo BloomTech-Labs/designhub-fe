@@ -1,0 +1,114 @@
+.ImageViewer {
+  // border: 1px solid white;
+  color: white;
+  display: flex;
+  height: 68vh;
+  width: 100%;
+
+  main.ImageViewer__body {
+    // border: 1px solid white;
+    align-items: flex-start;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+
+    .ImageViewer__main-image {
+      background-color: #15161a;
+      border: 5px solid #15161a;
+      box-sizing: border-box;
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      text-align: center;
+      height: 68vh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    .ImageViewer__thumbnails {
+      display: flex;
+      flex-flow: column nowrap;
+      width: 50%;
+      height: 68vh;
+      overflow-y: scroll;
+      justify-content: flex-start;
+      align-items: center;
+
+      img {
+        border: 5px solid #15161a;
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        height: 151px;
+        width: 211px;
+        object-fit: cover;
+
+        &:hover {
+          border: 5px solid #5557fe;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .modal--close {
+      display: none;
+    }
+
+    .modal--expand {
+      animation: fadeIn 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      opacity: 1;
+      overflow-y: scroll;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 999999;
+      width: 100%;
+      height: 100%;
+
+      img {
+        position: relative;
+        max-width: 80%;
+        z-index: 999;
+      }
+
+      span {
+        background: rgba(0, 0, 0, 0.975);
+        cursor: pointer;
+        content: '';
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 99;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0px; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}

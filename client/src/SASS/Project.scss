@@ -2,6 +2,8 @@
   width: 100%;
   margin-top: 10vh;
   color: white;
+  margin-top: 10vh;
+  width: 96%;
 
   .project-header {
     display: flex;
@@ -93,7 +95,9 @@
       }
     }
   }
+
   .project-body {
+    // border: 1px solid magenta;
     display: flex;
     flex-direction: row;
     height: 66vh;
@@ -246,24 +250,25 @@
           }
         }
       }
+
       .comments-form {
         padding-top: 20px;
         .form-wrapper {
           position: relative;
         }
-        textarea {
+        input[type='text'] {
           border: none;
           background: #2a2b31;
           border-radius: 10px;
-          width: 100%;
           box-sizing: border-box;
-          height: 53px;
-          padding: 16px;
           color: white;
           font-size: 0.8rem;
           font-weight: 400;
+          height: 53px;
           outline: none;
           resize: none;
+          width: 100%;
+          padding: 10px;
         }
         button {
           position: absolute;

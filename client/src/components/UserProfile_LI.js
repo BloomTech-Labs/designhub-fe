@@ -28,7 +28,7 @@ class UserProfile_LI extends Component {
 
   fetch() {
     const paramsId = this.props.match.params.id;
-    const userId = this.state.userId;
+    // const userId = this.state.userId;
     function getUserData(id) {
       return axiosWithAuth().get(`/api/v1/users/${id}`);
     }

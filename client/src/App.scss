@@ -4,6 +4,10 @@
 @import './SASS/Navbar.scss';
 @import './SASS/UserProfile.scss';
 
+// * {
+// 	box-sizing:border-box;
+// }
+
 body {
   background: $almost-black;
   margin: 0;

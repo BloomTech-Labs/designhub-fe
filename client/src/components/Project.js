@@ -10,15 +10,17 @@ import figmaIcon from '../ASSETS/figma-icon.png';
 import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
+import SendIcon from './Icons/SendIcon';
+
+import ImageViewer from './ImageViewer/ImageViewer.js';
 
 import '../SASS/Project.scss';
-import Comments from './Comments';
+// import Comments from './Comments';
 
 class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
       projectInfo: [],
       projectId: this.props.match.params.id,
       comments: []
@@ -43,65 +45,28 @@ class Projects extends Component {
       .catch(err => console.log(err));
   }
 
-  expand = () => {
-    this.setState({
-      modal: true
-    });
-  };
-
-  close = () => {
-    this.setState({
-      modal: false
-    });
-  };
-
   render() {
     const activeUser = this.props.activeUser;
-    const singleProjects = this.state.projectInfo;
-    const thumbnails = [
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      }
-    ];
-
+    const thisProject = this.state.projectInfo;
     const comments = this.state.comments;
+    console.log('Project.js ### COMMENTS', comments);
+
     return (
       <div className="projects-container">
         <div className="project-header">
           <div className="project-details">
-            <h2>{singleProjects.name}</h2>
-            <h3>{singleProjects.description}</h3>
+            <h2>{thisProject.name}</h2>
+            <h3>{thisProject.description}</h3>
             <p>
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/${singleProjects.userId}/`}>
+                  <Link to={`/profile/${thisProject.userId}/`}>
                     eriklambert
                   </Link>
                 </span>
               </span>
-              <span>Created At: {singleProjects.created_at}</span>
+              <span>Created At: {thisProject.created_at}</span>
             </p>
           </div>
           <div className="project-header-right">
@@ -112,38 +77,26 @@ class Projects extends Component {
             </div>
             <div className="project-header-links">
               <div className="project-header-button">
-                <a
-                  href={singleProjects.figma}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={figmaIcon}
-                    className={
-                      singleProjects.figma === null
-                        ? 'link-disabled'
-                        : 'link-enabled'
-                    }
-                    alt="figma"
-                  />
-                </a>
+                <img
+                  src={figmaIcon}
+                  className={
+                    thisProject.figma === null
+                      ? 'link-disabled'
+                      : 'link-enabled'
+                  }
+                  alt="figma"
+                />
               </div>
               <div className="project-header-button">
-                <a
-                  href={singleProjects.invision}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    src={invisionIcon}
-                    className={
-                      singleProjects.invision === null
-                        ? 'link-disabled'
-                        : 'link-enabled'
-                    }
-                    alt="invision"
-                  />
-                </a>
+                <img
+                  src={invisionIcon}
+                  className={
+                    thisProject.invision === null
+                      ? 'link-disabled'
+                      : 'link-enabled'
+                  }
+                  alt="invision"
+                />
               </div>
               <div className="download project-header-button">
                 <DownloadIcon />
@@ -157,32 +110,41 @@ class Projects extends Component {
         </div>
 
         <div className="project-body">
-          <div className="main-thumb-flex">
-            <img
-              src={singleProjects.mainImg}
-              alt="main project"
-              onClick={this.expand}
-              className="project-main-image"
-            />
-            <div
-              className={
-                this.state.modal === true ? 'modal-expand' : 'modal-close'
-              }
-            >
-              <img src={singleProjects.mainImg} alt="main project" />
-              <span className="background-overlay" onClick={this.close} />
-            </div>
-            <div className="project-thumbnails">
-              {thumbnails.map(images => (
-                <img
-                  src={images.source}
-                  alt="project-thumbnail"
-                  key={images.id}
-                />
+          {/* THIS IS THE IMAGE CAROUSEL */}
+          <ImageViewer thisProject={thisProject} />
+          <div className="project-comments">
+            <div className="comments-header">Comments</div>
+            <div className="comments-body">
+              {comments.map(comment => (
+                <div
+                  key={comment.id}
+                  className={
+                    activeUser.id === comment.id ? 'comment' : 'comment-li-user'
+                  }
+                >
+                  <img
+                    src={comment.userAvatar}
+                    alt="avatar"
+                    className="avatar"
+                  />
+                  {activeUser.id === comment.user_id ? (
+                    <p className="you">You</p>
+                  ) : null}
+                  <p className="message">{comment.text}</p>
+                </div>
               ))}
             </div>
+            <div className="comments-form">
+              <form>
+                <div className="form-wrapper">
+                  <input type="text" placeholder="Leave a comment..." />
+                  <button>
+                    <SendIcon />
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          <Comments comment={comments} activeUser={activeUser} />
         </div>
       </div>
     );
