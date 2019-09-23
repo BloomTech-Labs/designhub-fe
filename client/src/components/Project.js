@@ -157,31 +157,31 @@ class Projects extends Component {
         </div>
 
         <div className="project-body">
-          <div className="project-main-image">
+          <div className="main-thumb-flex">
             <img
               src={singleProjects.mainImg}
               alt="main project"
               onClick={this.expand}
+              className="project-main-image"
             />
+            <div
+              className={
+                this.state.modal === true ? 'modal-expand' : 'modal-close'
+              }
+            >
+              <img src={singleProjects.mainImg} alt="main project" />
+              <span className="background-overlay" onClick={this.close} />
+            </div>
+            <div className="project-thumbnails">
+              {thumbnails.map(images => (
+                <img
+                  src={images.source}
+                  alt="project-thumbnail"
+                  key={images.id}
+                />
+              ))}
+            </div>
           </div>
-          <div
-            className={
-              this.state.modal === true ? 'modal-expand' : 'modal-close'
-            }
-          >
-            <img src={singleProjects.mainImg} alt="main project" />
-            <span className="background-overlay" onClick={this.close} />
-          </div>
-          <div className="project-thumbnails">
-            {thumbnails.map(images => (
-              <img
-                src={images.source}
-                alt="project-thumbnail"
-                key={images.id}
-              />
-            ))}
-          </div>
-
           <Comments comment={comments} activeUser={activeUser} />
         </div>
       </div>
