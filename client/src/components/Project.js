@@ -108,6 +108,7 @@ class Projects extends Component {
             </div>
           </div>
         </div>
+
         <div className="project-body">
           {/* THIS IS THE IMAGE CAROUSEL */}
           <ImageViewer thisProject={thisProject} />
