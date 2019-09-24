@@ -1,12 +1,12 @@
 // ========== DEPENDENCIES ========== //
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import axios from 'axios';
 // ========== IMPORTED COMPONENTS ========== //
-import UserProfileTabs from './UserProfile_Tabs';
+import UserProfileTabs from './UserProfile_Tabs.js';
 // ========== STYLES ========== //
-import '../SASS/UserProfile.scss';
+import '../../SASS/UserProfile.scss';
 
 class UserProfile_LI extends Component {
   constructor(props) {

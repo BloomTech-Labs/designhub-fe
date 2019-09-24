@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from 'axios';
 
-import Heatmap from '../components/Heatmap.js';
+import Heatmap from './Heatmap.js';
 
 class UserProfile_Tabs extends Component {
   constructor(props) {

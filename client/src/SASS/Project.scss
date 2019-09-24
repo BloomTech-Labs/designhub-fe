@@ -1,7 +1,7 @@
 .projects-container {
   color: white;
   margin-top: 10vh;
-  width: 96%;
+  width: 99%;
 
   .project-header {
     display: flex;
@@ -174,9 +174,9 @@
           font-weight: 400;
           height: 53px;
           outline: none;
-          padding: 16px;
           resize: none;
           width: 100%;
+          padding: 10px;
         }
         button {
           position: absolute;
