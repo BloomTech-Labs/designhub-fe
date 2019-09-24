@@ -32,7 +32,7 @@ function App(props) {
         console.log('App.js useEffect() ERROR', err);
       }
     };
-    getUser();
+    if (typeof user === 'object') getUser();
   }, [user, onboarding, props.history]);
 
   if (!isAuthenticated) {
