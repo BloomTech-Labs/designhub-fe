@@ -2,7 +2,7 @@ import React from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 
-import '../SASS/Heatmap.scss';
+import '../../SASS/Heatmap.scss';
 
 const Heatmap = () => {
   return (
