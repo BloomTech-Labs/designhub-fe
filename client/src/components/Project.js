@@ -23,6 +23,7 @@ class Projects extends Component {
     this.state = {
       projectInfo: [],
       projectId: this.props.match.params.id,
+      thumbnails: [],
       comments: []
     };
   }
@@ -34,6 +35,16 @@ class Projects extends Component {
           `/api/v1/projects/${this.state.projectId}`
       )
       .then(res => this.setState({ projectInfo: res.data[0] }))
+      .catch(err => console.log(err));
+
+    axios
+      .get(
+        `https://designhubx-staging.herokuapp.com/api/v1/photo/projects/${this.state.projectId}`
+      )
+      .then(res => {
+        console.log(res.data);
+        this.setState({ thumbnails: res.data });
+      })
       .catch(err => console.log(err));
 
     axios
@@ -111,7 +122,10 @@ class Projects extends Component {
 
         <div className="project-body">
           {/* THIS IS THE IMAGE CAROUSEL */}
-          <ImageViewer thisProject={thisProject} />
+          <ImageViewer
+            thisProject={thisProject}
+            thumbnails={this.state.thumbnails}
+          />
           <div className="project-comments">
             <div className="comments-header">Comments</div>
             <div className="comments-body">
