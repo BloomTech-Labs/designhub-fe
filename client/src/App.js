@@ -26,9 +26,7 @@ function App(props) {
         if (isOnboarding) {
           setOnboarding(isOnboarding);
         } else {
-          const { id, username } = userFromResponse;
           setReady(true);
-          props.history.push(`/profile/${id}/${username}`);
         }
       } catch (err) {
         console.log('App.js useEffect() ERROR', err);
