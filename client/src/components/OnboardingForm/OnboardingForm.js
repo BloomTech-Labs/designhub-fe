@@ -59,7 +59,10 @@ const OnboardingForm = props => {
       changes = { ...changes, avatar: newAvatar };
       console.log('newAvatar!!!!', newAvatar);
       console.log('changes!!!!', changes);
-      await axiosWithAuth().put(`api/v1/users/${id}`, changes);
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
+        changes
+      );
       props.history.push(`/profile/${id}/${changes.username}`);
 
       props.setOnboarding(false);
@@ -79,6 +82,7 @@ const OnboardingForm = props => {
           id: 8000
         }
       );
+      console.log(key, url);
 
       await axios.put(url, file, {
         headers: {
