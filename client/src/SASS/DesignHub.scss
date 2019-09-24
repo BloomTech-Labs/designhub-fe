@@ -11,5 +11,16 @@
 
   .workspace {
     transition: all 0.2s ease-in-out;
+    width: 92%;
+    margin-left: 7%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .DesignHub {
+    .workspace {
+      margin-left: 2%;
+      width: 96%;
+    }
   }
 }

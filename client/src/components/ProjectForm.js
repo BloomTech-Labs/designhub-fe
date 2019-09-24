@@ -58,9 +58,7 @@ const ProjectForm = ({ addProject }) => {
 
           <div className="project-form-right-column">
             <label>Attach files</label>
-            <button className="attach-files" type="button">
-              Attach files
-            </button>
+            <input type="file" name="pic" accept="image/*" />
 
             <label>Included files</label>
             <p>File names will populate here</p>

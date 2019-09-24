@@ -1,3 +1,23 @@
+@import './mixins';
+@import './palette';
+
 .Settings {
   margin-top: 15vh;
+  background: $black;
+  width: 172vh;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    margin-top: 5vh;
+    border-radius: 100%;
+  }
+
+  button {
+    @include edit-profile-btn;
+    margin: 5vh 0;
+  }
 }

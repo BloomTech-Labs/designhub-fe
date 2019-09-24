@@ -19,6 +19,10 @@
   }
 }
 
+@mixin check {
+  border: 1px solid red;
+}
+
 @mixin btn {
   border: none;
   border-radius: 5px;
@@ -37,15 +41,16 @@
 @mixin auth0-redirect-btn {
   @include btn;
   background: none;
-  border: 2px solid $white;
-  color: $white;
+  border: 1px solid $blue;
+  color: $blue;
   font-size: 14px;
   letter-spacing: 0.11em;
   margin-top: 10px;
   width: 350px;
   &:hover {
-    background: $btn-gradient;
-    color: white;
+    color: $blue;
+    border: 1px solid $blue;
+    background: #5558fe0f;
   }
 }
 

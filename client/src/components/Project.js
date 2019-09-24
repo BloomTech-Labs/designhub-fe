@@ -12,13 +12,15 @@ import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
 import SendIcon from './Icons/SendIcon';
 
+import ImageViewer from './ImageViewer/ImageViewer.js';
+
 import '../SASS/Project.scss';
+// import Comments from './Comments';
 
 class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false,
       projectInfo: [],
       projectId: this.props.match.params.id,
       comments: []
@@ -43,63 +45,28 @@ class Projects extends Component {
       .catch(err => console.log(err));
   }
 
-  expand = () => {
-    this.setState({
-      modal: true
-    });
-  };
-
-  close = () => {
-    this.setState({
-      modal: false
-    });
-  };
-
   render() {
     const activeUser = this.props.activeUser;
-    const singleProjects = this.state.projectInfo;
-    const thumbnails = [
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      },
-      {
-        source:
-          'https://cdn.dribbble.com/users/211151/screenshots/7147835/media/427b43495d03b59054564392c589cda4.jpg'
-      }
-    ];
-
+    const thisProject = this.state.projectInfo;
     const comments = this.state.comments;
+    console.log('Project.js ### COMMENTS', comments);
+
     return (
       <div className="projects-container">
         <div className="project-header">
           <div className="project-details">
-            <h2>{singleProjects.name}</h2>
-            <h3>{singleProjects.description}</h3>
+            <h2>{thisProject.name}</h2>
+            <h3>{thisProject.description}</h3>
             <p>
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/`}>eriklambert</Link>
+                  <Link to={`/profile/${thisProject.userId}/`}>
+                    eriklambert
+                  </Link>
                 </span>
               </span>
-              <span>Created on June 11, 2020</span>
+              <span>Created At: {thisProject.created_at}</span>
             </p>
           </div>
           <div className="project-header-right">
@@ -113,7 +80,7 @@ class Projects extends Component {
                 <img
                   src={figmaIcon}
                   className={
-                    singleProjects.figma === null
+                    thisProject.figma === null
                       ? 'link-disabled'
                       : 'link-enabled'
                   }
@@ -124,7 +91,7 @@ class Projects extends Component {
                 <img
                   src={invisionIcon}
                   className={
-                    singleProjects.invision === null
+                    thisProject.invision === null
                       ? 'link-disabled'
                       : 'link-enabled'
                   }
@@ -141,32 +108,16 @@ class Projects extends Component {
             </div>
           </div>
         </div>
+
         <div className="project-body">
-          <div className="project-main-image">
-            <img
-              src={singleProjects.mainImg}
-              alt="main project"
-              onClick={this.expand}
-            />
-          </div>
-          <div
-            className={
-              this.state.modal === true ? 'modal-expand' : 'modal-close'
-            }
-          >
-            <img src={singleProjects.mainImg} alt="main project" />
-            <span className="background-overlay" onClick={this.close} />
-          </div>
-          <div className="project-thumbnails">
-            {thumbnails.map(images => (
-              <img src={images.source} alt="project-thumbnail" />
-            ))}
-          </div>
+          {/* THIS IS THE IMAGE CAROUSEL */}
+          <ImageViewer thisProject={thisProject} />
           <div className="project-comments">
             <div className="comments-header">Comments</div>
             <div className="comments-body">
               {comments.map(comment => (
                 <div
+                  key={comment.id}
                   className={
                     activeUser.id === comment.id ? 'comment' : 'comment-li-user'
                   }

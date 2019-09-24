@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 import Project from './components/Project';
 import ProjectForm from './components/ProjectForm';
 import PrivateRoute from './components/PrivateRoute';
-import UserProfileLI from './components/UserProfile_LI';
+import UserProfileLI from './components/UserProfile/UserProfile_LI';
 import Settings from './components/Settings.js';
 
 import './SASS/DesignHub.scss';
@@ -32,7 +32,12 @@ class DesignHub extends Component {
     const activeUser = this.state.activeUser;
     return (
       <div className="DesignHub">
-        <TopBar activeUser={activeUser} />
+        <TopBar
+          activeUser={activeUser}
+          darkMode={this.state.darkMode}
+          toggleLightMode={this.toggleLightMode}
+          togglDarkMode={this.togglDarkMode}
+        />
         <div className="side-navigation">
           <Navbar activeUser={activeUser} />
         </div>

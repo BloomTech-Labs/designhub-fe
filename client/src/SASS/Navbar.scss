@@ -2,8 +2,8 @@
 
 nav {
   position: fixed;
-  z-index: 9999999999999;
-  margin-top: 14%;
+  z-index: 9999;
+  margin-top: 16%;
   margin-left: 1.2%;
   width: 70px;
   height: max-content;
@@ -68,5 +68,11 @@ nav:hover {
   transition: all 0.2s ease-in-out;
   p {
     display: inline;
+  }
+}
+
+@media (max-width: 1024px) {
+  nav {
+    display: none;
   }
 }

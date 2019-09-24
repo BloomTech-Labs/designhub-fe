@@ -12,14 +12,14 @@ const SendIcon = () => {
       <path
         d="M17.4168 1.5835L8.7085 10.2918"
         stroke="white"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M17.4168 1.5835L11.8752 17.4168L8.7085 10.2918L1.5835 7.12516L17.4168 1.5835Z"
         stroke="white"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

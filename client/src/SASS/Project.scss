@@ -1,7 +1,10 @@
 .projects-container {
-  width: 96%;
+  width: 100%;
   margin-top: 10vh;
   color: white;
+  margin-top: 10vh;
+  width: 96%;
+
   .project-header {
     display: flex;
     flex-flow: row nowrap;
@@ -11,7 +14,8 @@
     margin: 22px auto;
   }
   .project-details {
-    width: 60%;
+    width: 50%;
+
     h2 {
       font-weight: 500;
       font-size: 1.5rem;
@@ -32,7 +36,7 @@
       font-weight: normal;
       font-size: 0.8rem;
       letter-spacing: 0.11em;
-      margin-right: 20px;
+      padding-right: 2%;
     }
     .project-header-username a {
       color: #5557fe;
@@ -46,6 +50,7 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     text-align: right;
+
     .project-header-team {
       img {
         padding: 0 5px;
@@ -59,6 +64,7 @@
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
+
       .edit {
         color: #5557fe;
         letter-spacing: 0.11em;
@@ -89,102 +95,117 @@
       }
     }
   }
+
   .project-body {
+    // border: 1px solid magenta;
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    .project-main-image {
-      width: 56%;
-      height: 68vh;
-      background-color: #15161a;
-      border: 5px solid #15161a;
-      box-sizing: border-box;
-      border-radius: 10px;
-      overflow: hidden;
-      cursor: pointer;
-      img {
-        width: 100%;
-      }
-    }
-    .modal-close {
-      display: none;
-    }
+    flex-direction: row;
+    height: 66vh;
 
-    .modal-expand {
-      display: inline;
-      position: absolute;
-      z-index: 999999;
-      top: 0;
-      left: 0;
-      text-align: center;
-      height: 100vh;
-      overflow-y: scroll;
-      opacity: 1;
-      animation: fadeIn 0.2s ease-in-out;
-
-      img {
-        width: 80%;
-        margin: 10vh auto 0;
-        position: relative;
-        z-index: 999;
-      }
-
-      span {
-        display: inline-block;
-        position: fixed;
-        z-index: 99;
-        left: 0;
-        top: 0;
-        content: '';
-        width: 100%;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.673);
-        cursor: pointer;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-    }
-
-    .project-thumbnails {
+    .main-thumb-flex {
       display: flex;
-      flex-flow: column nowrap;
-      width: 20%;
-      height: 68vh;
-      overflow-y: scroll;
-      justify-content: flex-start;
-      align-items: center;
+      width: 120%;
 
-      img {
-        width: 211px;
-        margin-bottom: 16px;
-        border: 5px solid #15161a;
+      .project-main-image {
+        width: 100%;
+        height: 66vh;
         box-sizing: border-box;
+        background-color: #15161a;
+        border: 5px solid #15161a;
         border-radius: 10px;
-        &:hover {
-          border: 5px solid #5557fe;
+        object-position: center;
+        cursor: pointer;
+        margin: 0 1% 0 0;
+        overflow: hidden;
+        object-fit: cover;
+      }
+
+      .modal-close {
+        display: none;
+      }
+
+      .modal-expand {
+        display: inline;
+        position: absolute;
+        z-index: 999999;
+        top: 0;
+        left: 0;
+        text-align: center;
+        height: 100vh;
+        overflow-y: scroll;
+        opacity: 1;
+        animation: fadeIn 0.2s ease-in-out;
+
+        img {
+          width: 80%;
+          margin: 5vh auto 0;
+          position: relative;
+          z-index: 999999;
+        }
+
+        span {
+          display: inline-block;
+          position: fixed;
+          z-index: 99999;
+          left: 0;
+          top: 0;
+          content: '';
+          width: 100%;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.673);
           cursor: pointer;
         }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      }
+
+      .project-thumbnails {
+        display: flex;
+        flex-flow: column nowrap;
+        width: 38%;
+        height: 100%;
+        overflow-y: scroll;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 0 0;
+        position: relative;
+
+        img {
+          width: 100%;
+          margin-bottom: 16px;
+          border: 5px solid #15161a;
+          box-sizing: border-box;
+          border-radius: 10px;
+          object-fit: cover;
+          transition: all 0.1s ease-in-out;
+          &:hover {
+            border: 5px solid #5557fe;
+            cursor: pointer;
+          }
+        }
       }
     }
+
     .project-comments {
-      width: 25%;
+      width: 40%;
+      height: 100%;
       background-color: #15161a;
       border: 5px solid #15161a;
       box-sizing: border-box;
       border-radius: 10px;
-      height: 68vh;
       padding: 14px;
       display: flex;
       flex-flow: column nowrap;
       justify-content: space-between;
+      margin: 0 0 0 1%;
+
       .comments-header {
         letter-spacing: 0.11em;
         font-weight: normal;
@@ -229,22 +250,25 @@
           }
         }
       }
+
       .comments-form {
         padding-top: 20px;
         .form-wrapper {
           position: relative;
         }
-        input {
+        input[type='text'] {
           border: none;
           background: #2a2b31;
           border-radius: 10px;
-          width: 100%;
           box-sizing: border-box;
-          height: 53px;
-          padding: 16px;
           color: white;
           font-size: 0.8rem;
           font-weight: 400;
+          height: 53px;
+          outline: none;
+          resize: none;
+          width: 100%;
+          padding: 10px;
         }
         button {
           position: absolute;
@@ -270,4 +294,34 @@
 ::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+@media (max-width: 1024px) {
+  .projects-container {
+    .project-details {
+      width: 60%;
+    }
+
+    .project-body {
+      display: flex;
+      flex-direction: column;
+
+      .main-thumb-flex {
+        .project-main-image {
+          width: 60%;
+        }
+
+        .project-thumbnails {
+          width: 22%;
+          height: 66vh;
+        }
+      }
+
+      .project-comments {
+        width: 100%;
+        margin: 3% 0;
+        height: max-content;
+      }
+    }
+  }
 }
