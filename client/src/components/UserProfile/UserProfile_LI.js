@@ -1,12 +1,12 @@
 // ========== DEPENDENCIES ========== //
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import axios from 'axios';
 // ========== IMPORTED COMPONENTS ========== //
-import UserProfileTabs from './UserProfile_Tabs';
+import UserProfileTabs from './UserProfile_Tabs.js';
 // ========== STYLES ========== //
-import '../SASS/UserProfile.scss';
+import '../../SASS/UserProfile.scss';
 
 class UserProfile_LI extends Component {
   constructor(props) {
@@ -14,7 +14,9 @@ class UserProfile_LI extends Component {
     this.state = {
       followers: [],
       following: [],
-      userData: []
+      userId: this.props.match.params.id,
+      userData: [],
+      projects: []
     };
   }
 
@@ -25,7 +27,8 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
-    const paramsId = this.props.match.params.id
+    const paramsId = this.props.match.params.id;
+    // const userId = this.state.userId;
     function getUserData(id) {
       return axiosWithAuth().get(`/api/v1/users/${id}`);
     }
@@ -35,15 +38,24 @@ class UserProfile_LI extends Component {
     function getFollowerCount(id) {
       return axiosWithAuth().get(`/api/v1/followers/count/followers/${id}`);
     }
+    function getUserProjects() {
+      return axiosWithAuth().get(`/api/v1/projects/users/${paramsId}`);
+    }
 
     return axios
-      .all([getUserData(paramsId), getFollowingCount(paramsId), getFollowerCount(paramsId)])
+      .all([
+        getUserData(paramsId),
+        getFollowingCount(paramsId),
+        getFollowerCount(paramsId),
+        getUserProjects()
+      ])
       .then(
-        axios.spread((a, b, c) => {
+        axios.spread((a, b, c, d) => {
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
-            followers: c.data[0].count
+            followers: c.data[0].count,
+            projects: d.data
           });
         })
       )
@@ -52,12 +64,13 @@ class UserProfile_LI extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.fetch()
+      this.fetch();
     }
   }
-  
+
   render() {
     const userData = this.state.userData;
+    const projects = this.state.projects;
     window.scroll(0, 0);
     return (
       <div className="user-profile-container">
@@ -120,7 +133,7 @@ class UserProfile_LI extends Component {
             </div>
           </div>
         </div>
-        <UserProfileTabs />
+        <UserProfileTabs projects={projects} />
       </div>
     );
   }

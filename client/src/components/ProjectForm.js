@@ -123,6 +123,7 @@ const ProjectForm = () => {
           </div>
 
           <div className="project-form-right-column">
+<<<<<<< HEAD
             <label htmlFor="image-upload">Attach files</label>
             <input
               ref={ref => {
@@ -133,6 +134,11 @@ const ProjectForm = () => {
               name="image-upload"
               id="image-upload"
             />{' '}
+=======
+            <label>Attach files</label>
+            <input type="file" name="pic" accept="image/*" />
+
+>>>>>>> f2c163b546756b4ba8c87792896b65fa3b08384e
             <label>Included files</label>
             <p>File names will populate here</p>
             <label htmlFor="figmaLink">Figma link</label>

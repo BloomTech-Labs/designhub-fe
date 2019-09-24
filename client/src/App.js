@@ -1,23 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import { useAuth0 } from './auth-wrapper.js';
+import { axiosWithAuth } from './utilities/axiosWithAuth.js';
 
 import DesignHub from './DesignHub.js';
 import LandingPage from './components/LandingPage.js';
+import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 
 import './App.scss';
 
-function App() {
+function App(props) {
   const { isAuthenticated, user } = useAuth0();
-  if (typeof user === 'object') {
-    // ('App.js user id', user.id);
-    // ('App.js user onboarding', user.onboarding);
-  }
+  const [onboarding, setOnboarding] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axiosWithAuth().post('api/v1/users/', user);
+        const [userFromResponse] = res.data.user;
+        setUserData(userFromResponse);
+        const isOnboarding = userFromResponse.username === null ? true : false;
+        if (isOnboarding) {
+          setOnboarding(isOnboarding);
+        } else {
+          setReady(true);
+        }
+      } catch (err) {
+        console.log('App.js useEffect() ERROR', err);
+      }
+    };
+    getUser();
+  }, [user, onboarding, props.history]);
+
   if (!isAuthenticated) {
     return <LandingPage />;
   } else if (typeof user === 'object') {
     return (
       <div className="App">
-        <DesignHub user={user} />
+        {onboarding && <OnboardingForm setOnboarding={setOnboarding} />}
+        {!onboarding && ready && <DesignHub user={userData} />}
       </div>
     );
   } else {
@@ -29,4 +53,4 @@ function App() {
   }
 }
 
-export default App;
+export default withRouter(App);
