@@ -17,6 +17,7 @@ const OnboardingForm = props => {
   const stepComponents = [Step1, Step2];
   const [formStep, setFormStep] = useState(1);
   const submitButton = formStep === stepComponents.length ? true : false;
+  const showPrev = formStep === 1 ? false : true;
 
   const [formUser, setFormUser] = useState({
     avatar: user.picture || '',
@@ -59,10 +60,6 @@ const OnboardingForm = props => {
   return (
     <div className="OnboardingForm">
       <form onSubmit={handleSubmit}>
-        <header>
-          <h1>Welcome to DesignHub</h1>
-          <h2>Let's get started by creating your profile</h2>
-        </header>
         <section className="stepComponents">
           {stepComponents.map((Step, i) => {
             if (i + 1 === formStep) {
@@ -78,12 +75,13 @@ const OnboardingForm = props => {
         </section>
 
         <div className="buttons">
-          <button name="prev" className="prev-btn" onClick={handleClick}>
-            Previous
-          </button>
+          {showPrev && (
+            <button name="prev" className="prev-btn" onClick={handleClick}>
+              Previous
+            </button>
+          )}
           {submitButton ? (
             <button
-              name="next"
               className="next-btn"
               onClick={e => handleSubmit(e, formUser.id, formUser)}
             >
