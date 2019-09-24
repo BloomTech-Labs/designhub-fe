@@ -12,6 +12,10 @@ const Step1 = ({ formUser, onChange }) => {
   } = formUser;
   return (
     <>
+      <header>
+        <h1>Welcome to DesignHub</h1>
+        <h2>Let's get started by creating your profile</h2>
+      </header>
       <label htmlFor="firstName">First Name</label>
       <input
         id="firstName"
