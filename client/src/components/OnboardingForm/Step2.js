@@ -1,7 +1,7 @@
 import React from 'react';
 import UploadCloud from '../Icons/UploadCloud';
 
-const Step2 = ({ formUser, onChange }) => {
+const Step2 = ({ formUser, onChange, onFileChange }) => {
   const { avatar } = formUser;
   return (
     <>
@@ -10,12 +10,18 @@ const Step2 = ({ formUser, onChange }) => {
         <h2>Upload a picture to complete your profile</h2>
       </header>
       <label htmlFor="avatar">Avatar</label>
-      <input
+      {/* <input
         id="avatar"
         name="avatar"
         type="text"
         value={avatar}
         onChange={onChange}
+      /> */}
+      <input
+        type="file"
+        name="avatarImage"
+        id="avatarImage"
+        onChange={onFileChange}
       />
 
       <div className="uploadImage">
