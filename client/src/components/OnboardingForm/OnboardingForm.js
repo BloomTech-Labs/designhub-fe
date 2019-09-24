@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth0 } from '../../auth-wrapper.js';
-import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';

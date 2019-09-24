@@ -34,7 +34,7 @@ export const Auth0Provider = ({
 
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
-        const token = await auth0FromHook.getTokenSilently();
+        // const token = await auth0FromHook.getTokenSilently();
 
         // axios defaults
         // axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
