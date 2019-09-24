@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import axios from 'axios';
 import { useAuth0 } from '../../auth-wrapper.js';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
@@ -18,6 +18,12 @@ const OnboardingForm = props => {
   const [formStep, setFormStep] = useState(1);
   const submitButton = formStep === stepComponents.length ? true : false;
   const showPrev = formStep === 1 ? false : true;
+
+  //avatar image handlers
+  const [file, setFile] = useState(null);
+  const onFileChange = event => {
+    setFile(event.target.files[0]);
+  };
 
   const [formUser, setFormUser] = useState({
     avatar: user.picture || '',
@@ -49,9 +55,42 @@ const OnboardingForm = props => {
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
     try {
-      await axiosWithAuth().put(`/api/v1/users/${id}`, changes);
+      const newAvatar = await handleImageUpload(file);
+      changes = { ...changes, avatar: newAvatar };
+      console.log('newAvatar!!!!', newAvatar);
+      console.log('changes!!!!', changes);
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
+        changes
+      );
       props.history.push(`/profile/${id}/${changes.username}`);
+
       props.setOnboarding(false);
+    } catch (err) {
+      console.log('OnboardingForm.js handleSubmit() ERROR', err);
+    }
+  };
+
+  const handleImageUpload = async file => {
+    console.log(file);
+    try {
+      const {
+        data: { key, url }
+      } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
+        {
+          id: 8000
+        }
+      );
+      console.log(key, url);
+
+      await axios.put(url, file, {
+        headers: {
+          'Content-Type': 'image/*'
+        }
+      });
+
+      return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
     } catch (err) {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
@@ -68,6 +107,7 @@ const OnboardingForm = props => {
                   key={formUser.id}
                   formUser={formUser}
                   onChange={handleChange}
+                  onFileChange={onFileChange}
                 />
               );
             } else return null;
