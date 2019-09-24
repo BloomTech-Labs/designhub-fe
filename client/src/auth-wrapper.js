@@ -37,17 +37,17 @@ export const Auth0Provider = ({
         const token = await auth0FromHook.getTokenSilently();
 
         // axios defaults
-        axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
-        axios.interceptors.request.use(
-          options => {
-            options.headers.authorization = `Bearer ${token}`;
-            return options;
-          },
-          err => {
-            // do something with the error
-            return Promise.reject(err);
-          }
-        );
+        // axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
+        // axios.interceptors.request.use(
+        //   options => {
+        //     options.headers.authorization = `Bearer ${token}`;
+        //     return options;
+        //   },
+        //   err => {
+        //     // do something with the error
+        //     return Promise.reject(err);
+        //   }
+        // );
 
         // post new user and return id and store that id to user state
         const res = await axios.post('api/v1/users/', user);
