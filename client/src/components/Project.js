@@ -126,11 +126,13 @@ class Projects extends Component {
 
         <div className="project-body">
           {/* THIS IS THE IMAGE CAROUSEL */}
+
           <ImageViewer
             comments={this.state.comments}
             thisProject={thisProject}
             thumbnails={this.state.thumbnails}
           />
+
           <div className="project-comments">
             <div className="comments-header">Comments</div>
             <div className="comments-body">

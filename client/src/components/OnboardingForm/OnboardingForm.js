@@ -58,10 +58,11 @@ const OnboardingForm = props => {
       changes = { ...changes, avatar: newAvatar };
       console.log('newAvatar!!!!', newAvatar);
       console.log('changes!!!!', changes);
-      await axios.put(
+      const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
         changes
       );
+      console.log(res);
       props.history.push(`/profile/${id}/${changes.username}`);
 
       props.setOnboarding(false);
@@ -89,7 +90,7 @@ const OnboardingForm = props => {
         }
       });
 
-      return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
+      return `${process.env.S3_BUCKET_URL}${key}`;
     } catch (err) {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
