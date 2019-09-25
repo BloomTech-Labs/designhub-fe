@@ -78,6 +78,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
       });
       return await Promise.all(requestPromises).then(res => {
         console.log('Promise.all RES!!!!!', res[0]);
+
         return res[0];
       });
     }
@@ -91,8 +92,15 @@ const ProjectForm = ({ isEditing, project, history }) => {
         `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
         project
       );
-
       const something = await handleImageUpload(files, id);
+      const newProject = {
+        ...project,
+        mainImg: something
+      };
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
+        newProject
+      );
       await history.push(`/project/${id}`);
       return something;
     } catch (err) {
