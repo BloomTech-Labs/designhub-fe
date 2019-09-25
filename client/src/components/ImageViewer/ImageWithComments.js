@@ -30,11 +30,11 @@ export class ImageWithComments extends React.Component {
     let activeComments = comments.filter(c => c.img_id === id);
     let activeTemp = tempComments.filter(c => c.img_id === id);
     return (
-      <div className="carousel">
+      <div className="ImageWithComments">
         <img
           src={url}
           alt={url}
-          onMouseMove={this.onMouseMove}
+          // onMouseMove={this.onMouseMove}
           onClick={e => this.handleClick(e, id)}
         />
 

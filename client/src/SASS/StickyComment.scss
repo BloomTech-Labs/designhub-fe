@@ -1,23 +1,121 @@
 @import './palette';
 
-.sticker {
-  border-radius: 10px;
+.StickyComment {
+  display: flex;
+  align-items: center;
   position: absolute;
   height: 94px;
-  width: 283px;
+  //negative margin compensates for centering
+  margin: -48px 0 0 -11px;
   z-index: 99999;
 
-  .del-button {
-    opacity: 0;
-  }
-
-  .sticker-text {
+  .StickyComment__dot {
+    align-self: center;
+    align-items: center;
     background: $blue;
+    border-radius: 50%;
+    display: flex;
+    height: 20px;
+    justify-content: center;
+    width: 20px;
+
+    .StickyComment__dot-center {
+      background: $white;
+      border-radius: 50%;
+      height: 6px;
+      width: 6px;
+    }
   }
 
-  &:hover {
-    .del-button {
-      opacity: 100;
+  hr.StickyComment__midbar {
+    border-color: $blue;
+    background: $blue;
+    width: 64px;
+  }
+
+  .StickyComment__text {
+    align-self: center;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    font-size: 12px;
+    grid-column: 3;
+    line-height: 14px;
+    letter-spacing: 0.11em;
+    padding: 8px;
+    height: 100%;
+  }
+
+  .StickyComment__form {
+    align-self: center;
+    border-radius: 10px;
+    display: flex;
+    // margin-left: -4px;
+
+    textarea {
+      background-color: $blue;
+      border: none;
+      border-radius: 10px;
+      box-sizing: border-box;
+      color: $white;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      padding: 8px;
+      resize: none;
+      height: 94px;
+      width: 283px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  button.StickyComments__submit-btn {
+    align-self: flex-end;
+    background-color: $blue;
+    border: 1px solid $white;
+    border-radius: 100%;
+    cursor: pointer;
+    height: 40px;
+    margin: 0 0 6px -45px;
+    outline: none;
+    width: 40px;
+    z-index: 9;
+    svg {
+      margin: 0 0 -3px -3px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+  .StickyComment__text {
+    box-sizing: border-box;
+    background: $blue;
+    max-width: 283px;
+  }
+
+  .StickyComment__del-button {
+    align-self: flex-end;
+    background-color: $blue;
+    border: 1px solid $white;
+    border-radius: 100%;
+    color: $white;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 900;
+    height: 40px;
+    letter-spacing: 0.11em;
+    line-height: 14px;
+    margin: 0 0 6px -45px;
+    outline: none;
+    transition: background 0.2s ease-out;
+    width: 40px;
+    z-index: 9;
+
+    &:hover {
+      background: $alert;
+      transition: background 0.2s ease-out;
     }
   }
 }

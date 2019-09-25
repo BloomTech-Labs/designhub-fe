@@ -1,4 +1,5 @@
 import React from 'react';
+import SendIcon from '../Icons/SendIcon.js';
 
 export class TempComment extends React.Component {
   state = {
@@ -8,26 +9,38 @@ export class TempComment extends React.Component {
   render() {
     const { comment } = this.state;
     const { c } = this.props;
-    const { id, top, left } = c;
+    const { top, left } = c;
     return (
       <div
-        className="sticker"
+        className="StickyComment"
         style={{
           position: 'absolute',
           top: top,
           left: left
         }}
       >
-        <form onSubmit={e => this.handleSubmit(e, c)}>
-          <input
+        <section className="StickyComment__dot">
+          <div className="StickyComment__dot-center"> </div>
+        </section>
+
+        <hr className="StickyComment__midbar" />
+
+        <form className="StickyComment__form">
+          <textarea
             ref={input => (this.nameInput = input)}
             type="text"
             value={comment}
             onChange={e => this.setState({ comment: e.target.value })}
           />
-          <button type="submit">submit</button>
-          <button onClick={e => this.handleDelete(e, id)}>delete</button>
         </form>
+
+        <button
+          className="StickyComments__submit-btn"
+          onClick={e => this.handleSubmit(e, c)}
+        >
+          <SendIcon />
+        </button>
+        {/* <button onClick={e => this.handleDelete(e, id)}>delete</button> */}
       </div>
     );
   }
