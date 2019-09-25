@@ -8,8 +8,7 @@ import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
 
-const ProjectForm = props => {
-  console.log('ProjectForm PROPS!!!!!!!!!!!!!!!', props);
+const ProjectForm = ({ isEditing, project, history }) => {
   const [files, setFiles] = useState([]);
   const [disableButton, setDisableButton] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,11 +18,11 @@ const ProjectForm = props => {
   const [state, setState] = useState({
     project: {
       userId: user.id,
-      name: '',
-      description: '',
-      figma: '',
-      invision: '',
-      mainImg: ''
+      name: isEditing ? project.name : '',
+      description: isEditing ? project.description : '',
+      figma: isEditing ? project.figma : '',
+      invision: isEditing ? project.invision : '',
+      mainImg: isEditing ? project.mainImg : ''
     },
     success: false,
     url: ''
@@ -45,6 +44,7 @@ const ProjectForm = props => {
     e.preventDefault();
     addProject(state.project);
   };
+
   const handleImageUpload = async (file, projectId) => {
     if (files.length > 0) {
       let requestPromises = files.map(async (file, index) => {
@@ -91,7 +91,7 @@ const ProjectForm = props => {
       );
 
       const something = await handleImageUpload(files, id);
-      await props.history.push(`/project/${id}`);
+      await history.push(`/project/${id}`);
       return something;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
@@ -100,9 +100,7 @@ const ProjectForm = props => {
 
   return (
     <div className="project-form-wrapper">
-      <h2>
-        {props.isEditing && props.project ? 'Edit project' : 'Create a project'}
-      </h2>
+      <h2>{isEditing ? 'Edit project' : 'Create a project'}</h2>
       <form
         encType="multipart/form-data"
         className="project-form-container"
@@ -113,9 +111,7 @@ const ProjectForm = props => {
             <label htmlFor="name">Project title</label>
             <input
               type="text"
-              value={
-                props.isEditing && props.project ? props.project.name : name
-              }
+              value={name}
               name="name"
               id="name"
               placeholder="Enter project title here"
@@ -125,11 +121,7 @@ const ProjectForm = props => {
             <input
               id="description"
               name="description"
-              value={
-                props.isEditing && props.project
-                  ? props.project.description
-                  : description
-              }
+              value={description}
               type="text"
               placeholder="Enter project description here"
               onChange={handleChanges}
@@ -168,9 +160,7 @@ const ProjectForm = props => {
             <input
               type="text"
               name="figma"
-              value={
-                props.isEditing && props.project ? props.project.figma : figma
-              }
+              value={figma}
               placeholder="Enter Figma link here"
               id="figmaLink"
               onChange={handleChanges}
@@ -179,11 +169,7 @@ const ProjectForm = props => {
             <input
               type="text"
               name="invision"
-              value={
-                props.isEditing && props.project
-                  ? props.project.invision
-                  : invision
-              }
+              value={invision}
               placeholder="Enter InVision link here"
               id="invisionLink"
               onChange={handleChanges}
@@ -196,7 +182,7 @@ const ProjectForm = props => {
             type="submit"
             disabled={disableButton}
           >
-            Publish
+            {isEditing ? 'Edit' : 'Publish'}
           </button>
           <button type="button">Cancel</button>
         </div>

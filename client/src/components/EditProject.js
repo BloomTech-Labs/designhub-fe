@@ -29,7 +29,11 @@ class EditProject extends Component {
   }
 
   render() {
-    return <ProjectForm isEditing={true} project={this.state.project} />;
+    if (this.state.project) {
+      return <ProjectForm isEditing={true} project={this.state.project} />;
+    } else {
+      return <h2>Loading...</h2>;
+    }
   }
 }
 
