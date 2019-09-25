@@ -46,7 +46,7 @@ const ProjectForm = props => {
   };
   const handleImageUpload = async (file, projectId) => {
     if (files.length > 0) {
-      files.map(async (file, index) => {
+      let requestPromises = files.map(async (file, index) => {
         try {
           const {
             data: { key, url }
@@ -69,11 +69,9 @@ const ProjectForm = props => {
           );
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
-        } finally {
-          setIsLoading(false);
-          props.history.push(`/project/${projectId}`);
         }
       });
+      return await Promise.all(requestPromises);
     }
   };
 
@@ -87,6 +85,7 @@ const ProjectForm = props => {
       );
       setProjectId(id);
       await handleImageUpload(files, id);
+      await props.history.push(`/project/${id}`);
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
