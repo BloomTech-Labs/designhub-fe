@@ -8,7 +8,7 @@ import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
 
-const ProjectForm = props => {
+const ProjectForm = ({ isEditing, project, history }) => {
   const [files, setFiles] = useState([]);
   const [disableButton, setDisableButton] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -18,11 +18,11 @@ const ProjectForm = props => {
   const [state, setState] = useState({
     project: {
       userId: user.id,
-      name: '',
-      description: '',
-      figma: '',
-      invision: '',
-      mainImg: ''
+      name: isEditing ? project.name : '',
+      description: isEditing ? project.description : '',
+      figma: isEditing ? project.figma : '',
+      invision: isEditing ? project.invision : '',
+      mainImg: isEditing ? project.mainImg : ''
     },
     success: false,
     url: ''
@@ -42,8 +42,11 @@ const ProjectForm = props => {
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
-    addProject(state.project);
+    isEditing
+      ? editProject(state.project, project.id)
+      : addProject(state.project);
   };
+
   const handleImageUpload = async (file, projectId) => {
     if (files.length > 0) {
       let requestPromises = files.map(async (file, index) => {
@@ -90,16 +93,29 @@ const ProjectForm = props => {
       );
 
       const something = await handleImageUpload(files, id);
-      await props.history.push(`/project/${id}`);
+      await history.push(`/project/${id}`);
       return something;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
   };
 
+  const editProject = async (changes, id) => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
+        changes
+      );
+      await handleImageUpload(files, id);
+      await history.push(`/project/${id}`);
+    } catch (err) {
+      console.log('ProjectForm.js editProject ERROR', err);
+    }
+  };
+
   return (
     <div className="project-form-wrapper">
-      <h2>Create a project</h2>
+      <h2>{isEditing ? 'Edit project' : 'Create a project'}</h2>
       <form
         encType="multipart/form-data"
         className="project-form-container"
@@ -151,7 +167,9 @@ const ProjectForm = props => {
           )}
 
           <div className="project-form-right-column">
-            <label htmlFor="image-upload">Attach files</label>
+            <label htmlFor="image-upload">
+              {isEditing ? 'Add more files' : 'Attach files'}
+            </label>
 
             <MultiImageUpload filesArray={{ files, setFiles }} />
 
@@ -164,7 +182,7 @@ const ProjectForm = props => {
               id="figmaLink"
               onChange={handleChanges}
             />
-            <label htmlFor="invisionLink">Figma link</label>
+            <label htmlFor="invisionLink">InVision link</label>
             <input
               type="text"
               name="invision"
@@ -181,7 +199,7 @@ const ProjectForm = props => {
             type="submit"
             disabled={disableButton}
           >
-            Publish
+            {isEditing ? 'Save Changes' : 'Publish'}
           </button>
           <button type="button">Cancel</button>
         </div>
