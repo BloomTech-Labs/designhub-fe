@@ -1,0 +1,23 @@
+@import './palette';
+
+.sticker {
+  border-radius: 10px;
+  position: absolute;
+  height: 94px;
+  width: 283px;
+  z-index: 99999;
+
+  .del-button {
+    opacity: 0;
+  }
+
+  .sticker-text {
+    background: $blue;
+  }
+
+  &:hover {
+    .del-button {
+      opacity: 100;
+    }
+  }
+}

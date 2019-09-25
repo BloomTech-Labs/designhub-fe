@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../SASS/ImageViewer.scss';
+import { ImageWithComments } from './ImageWithComments';
 
 class ImageViewer extends Component {
   constructor(props) {
@@ -39,10 +40,13 @@ class ImageViewer extends Component {
         <div className="ImageViewer">
           <main className="ImageViewer__body">
             <div className={modal ? 'modal--expand' : 'modal--close'}>
-              <img src={activeImg.url} alt="main project" />
               <span
                 className="background-overlay"
                 onClick={() => this.setState({ modal: false })}
+              />
+              <ImageWithComments
+                activeImg={activeImg}
+                comments={this.props.comments}
               />
             </div>
 
