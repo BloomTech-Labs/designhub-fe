@@ -23,6 +23,8 @@ class UserProfile_Tabs extends Component {
   render() {
     const projects = this.props.projects;
     const allUsers = this.state.allUsers;
+    const followers = this.props.followers;
+    const following = this.props.following;
     return (
       <div className="profile-tabs-container">
         <div>
@@ -96,62 +98,64 @@ class UserProfile_Tabs extends Component {
             </TabPanel>
             <TabPanel className="tabs-container">
               <div className="follower-following-container">
-                {allUsers &&
-                  allUsers.map(follower => (
-                    <div className="follow-container" key={follower.id}>
-                      <div className="follow-info-flex">
-                        <Link
-                          to={`/profile/${follower.id}/${follower.username}`}
-                        >
-                          <img
-                            src={follower.avatar}
-                            className="follow-avatar"
-                            alt="avatar"
-                          />
-                        </Link>
-                        <div className="follow-content">
-                          <div className="follow-content-flex">
-                            <h1 className="follow-FLname">
-                              {follower.firstName} {follower.lastName}
-                            </h1>
-                            <h1 className="follow-username">
-                              {follower.username}
-                            </h1>
-                          </div>
-                          <p className="follower-bio">{follower.bio}</p>
-                        </div>
-                      </div>
-                      <button className="follow-btn">Follow</button>
-                    </div>
-                  ))}
-              </div>
-            </TabPanel>
-            <TabPanel className="tabs-container">
-              <div className="follower-following-container">
-                {allUsers &&
-                  allUsers.map(follower => (
-                    <div className="follow-container" key={follower.avatar}>
-                      <div className="follow-info-flex">
+                {followers.map(follower => (
+                  <div className="follow-container" key={follower.id}>
+                    <div className="follow-info-flex">
+                      <Link
+                        to={`/profile/${follower.userId}/${follower.username}`}
+                      >
                         <img
                           src={follower.avatar}
                           className="follow-avatar"
                           alt="avatar"
                         />
-                        <div className="follow-content">
-                          <div className="follow-content-flex">
-                            <h1 className="follow-FLname">
-                              {follower.firstName} {follower.lastName}
-                            </h1>
-                            <h1 className="follow-username">
-                              {follower.username}
-                            </h1>
-                          </div>
-                          <p className="follower-bio">{follower.bio}</p>
+                      </Link>
+                      <div className="follow-content">
+                        <div className="follow-content-flex">
+                          <h1 className="follow-FLname">
+                            {follower.firstName} {follower.lastName}
+                          </h1>
+                          <h1 className="follow-username">
+                            {follower.username}
+                          </h1>
                         </div>
+                        <p className="follower-bio">{follower.bio}</p>
                       </div>
-                      <button className="follow-btn">Follow</button>
                     </div>
-                  ))}
+                    <button className="follow-btn">Follow</button>
+                  </div>
+                ))}
+              </div>
+            </TabPanel>
+            <TabPanel className="tabs-container">
+              <div className="follower-following-container">
+                {following.map(follower => (
+                  <div className="follow-container" key={follower.id}>
+                    <div className="follow-info-flex">
+                      <Link
+                        to={`/profile/${follower.userId}/${follower.username}`}
+                      >
+                        <img
+                          src={follower.avatar}
+                          className="follow-avatar"
+                          alt="avatar"
+                        />
+                      </Link>
+                      <div className="follow-content">
+                        <div className="follow-content-flex">
+                          <h1 className="follow-FLname">
+                            {follower.firstName} {follower.lastName}
+                          </h1>
+                          <h1 className="follow-username">
+                            {follower.username}
+                          </h1>
+                        </div>
+                        <p className="follower-bio">{follower.bio}</p>
+                      </div>
+                    </div>
+                    <button className="follow-btn">Follow</button>
+                  </div>
+                ))}
               </div>
             </TabPanel>
             <TabPanel className="tabs-container">
