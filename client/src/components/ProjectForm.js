@@ -42,7 +42,9 @@ const ProjectForm = ({ isEditing, project, history }) => {
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
-    addProject(state.project);
+    isEditing
+      ? editProject(state.project, project.id)
+      : addProject(state.project);
   };
 
   const handleImageUpload = async (file, projectId) => {
@@ -95,6 +97,18 @@ const ProjectForm = ({ isEditing, project, history }) => {
       return something;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
+    }
+  };
+
+  const editProject = async (changes, id) => {
+    try {
+      await axios.put(
+        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
+        changes
+      );
+      await history.push(`/project/${id}`);
+    } catch (err) {
+      console.log('ProjectForm.js editProject ERROR', err);
     }
   };
 
@@ -182,7 +196,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
             type="submit"
             disabled={disableButton}
           >
-            {isEditing ? 'Edit' : 'Publish'}
+            {isEditing ? 'Save Changes' : 'Publish'}
           </button>
           <button type="button">Cancel</button>
         </div>
