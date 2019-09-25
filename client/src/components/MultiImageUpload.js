@@ -73,14 +73,6 @@ export function MultiImageUpload(props) {
     ));
   };
 
-  // useEffect(
-  //   () => () => {
-  //     // Make sure to revoke the data uris to avoid memory leaks
-  //     files.forEach(file => URL.revokeObjectURL(file.preview));
-  //   },
-  //   [files]
-  // );
-
   return (
     <section className="container">
       <div
