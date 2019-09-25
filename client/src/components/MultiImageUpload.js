@@ -36,7 +36,7 @@ const img = {
 
 export function MultiImageUpload(props) {
   const { files, setFiles } = props.filesArray;
-  console.log('HYYYY', files, setFiles);
+  console.log('HYYYY', files);
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
@@ -51,21 +51,35 @@ export function MultiImageUpload(props) {
     }
   });
 
-  const thumbs = files.map((file, index) => (
-    <div style={thumb} key={index}>
-      <div style={thumbInner}>
-        <img src={file.preview} style={img} />
+  const thumbs = () => {
+    const removeThumbnail = index => {
+      const newList = files.filter((file, i) => files[index] !== file);
+      setFiles(newList);
+    };
+    return files.map((file, index) => (
+      <div key={index}>
+        <p
+          style={{ color: 'red', marginBottom: '5px', cursor: 'pointer' }}
+          onClick={() => removeThumbnail(index)}
+        >
+          Remove
+        </p>
+        <div style={thumb} key={index}>
+          <div style={thumbInner}>
+            <img src={file.preview} style={img} />
+          </div>
+        </div>
       </div>
-    </div>
-  ));
+    ));
+  };
 
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
+  // useEffect(
+  //   () => () => {
+  //     // Make sure to revoke the data uris to avoid memory leaks
+  //     files.forEach(file => URL.revokeObjectURL(file.preview));
+  //   },
+  //   [files]
+  // );
 
   return (
     <section className="container">
@@ -86,7 +100,7 @@ export function MultiImageUpload(props) {
           Drag 'n' drop some files here, or click to icon
         </p>
       </div>
-      <aside style={thumbsContainer}>{thumbs}</aside>
+      <aside style={thumbsContainer}>{thumbs()}</aside>
     </section>
   );
 }

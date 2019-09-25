@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useAuth0 } from '../auth-wrapper.js';
 import axios from 'axios';
 import { MultiImageUpload } from './MultiImageUpload';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import '../SASS/ProjectForm.scss';
 
-const ProjectForm = () => {
+const ProjectForm = props => {
   const [files, setFiles] = useState([]);
+
   const { user } = useAuth0();
 
   const [state, setState] = useState({
@@ -23,6 +25,8 @@ const ProjectForm = () => {
   });
 
   const { name, description, figma, invision } = state.project;
+
+  console.log('props', props);
 
   const handleChanges = e => {
     setState({
@@ -77,12 +81,13 @@ const ProjectForm = () => {
         `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
         project
       );
-      console.log(id);
 
-      const data = await handleImageUpload(files, id);
-      console.log(data);
+      await handleImageUpload(files, id);
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
+      // } finally {
+      //   props.history.push(`/project/${projectId}`);
+      // }
     }
   };
 
@@ -158,4 +163,4 @@ const ProjectForm = () => {
   );
 };
 
-export default ProjectForm;
+export default withRouter(ProjectForm);
