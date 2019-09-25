@@ -9,6 +9,7 @@ import Loader from 'react-loader-spinner';
 import '../SASS/ProjectForm.scss';
 
 const ProjectForm = props => {
+  console.log('ProjectForm PROPS!!!!!!!!!!!!!!!', props);
   const [files, setFiles] = useState([]);
   const [disableButton, setDisableButton] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -99,7 +100,9 @@ const ProjectForm = props => {
 
   return (
     <div className="project-form-wrapper">
-      <h2>Create a project</h2>
+      <h2>
+        {props.isEditing && props.project ? 'Edit project' : 'Create a project'}
+      </h2>
       <form
         encType="multipart/form-data"
         className="project-form-container"
@@ -110,7 +113,9 @@ const ProjectForm = props => {
             <label htmlFor="name">Project title</label>
             <input
               type="text"
-              value={name}
+              value={
+                props.isEditing && props.project ? props.project.name : name
+              }
               name="name"
               id="name"
               placeholder="Enter project title here"
@@ -120,7 +125,11 @@ const ProjectForm = props => {
             <input
               id="description"
               name="description"
-              value={description}
+              value={
+                props.isEditing && props.project
+                  ? props.project.description
+                  : description
+              }
               type="text"
               placeholder="Enter project description here"
               onChange={handleChanges}
@@ -159,16 +168,22 @@ const ProjectForm = props => {
             <input
               type="text"
               name="figma"
-              value={figma}
+              value={
+                props.isEditing && props.project ? props.project.figma : figma
+              }
               placeholder="Enter Figma link here"
               id="figmaLink"
               onChange={handleChanges}
             />
-            <label htmlFor="invisionLink">Figma link</label>
+            <label htmlFor="invisionLink">InVision link</label>
             <input
               type="text"
               name="invision"
-              value={invision}
+              value={
+                props.isEditing && props.project
+                  ? props.project.invision
+                  : invision
+              }
               placeholder="Enter InVision link here"
               id="invisionLink"
               onChange={handleChanges}

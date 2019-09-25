@@ -10,6 +10,7 @@ import Settings from './components/Settings.js';
 import AddProject from './components/AddProject';
 
 import './SASS/DesignHub.scss';
+import EditProject from './components/EditProject';
 
 class DesignHub extends Component {
   constructor(props) {
@@ -48,6 +49,11 @@ class DesignHub extends Component {
               render={props => <Project {...props} activeUser={activeUser} />}
             />
             <Route exact path="/create" component={AddProject} />
+            <Route
+              exact
+              path="/project/:id/edit"
+              render={props => <EditProject {...props} />}
+            />
             <Route
               exact
               path="/settings"
