@@ -3,12 +3,15 @@ import { useAuth0 } from '../auth-wrapper.js';
 import axios from 'axios';
 import { MultiImageUpload } from './MultiImageUpload';
 import { withRouter, Redirect } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
 
 const ProjectForm = props => {
   const [files, setFiles] = useState([]);
   const [projectId, setProjectId] = useState(null);
+  const [disableButton, setDisableButton] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { user } = useAuth0();
 
@@ -27,8 +30,6 @@ const ProjectForm = props => {
 
   const { name, description, figma, invision } = state.project;
 
-  console.log('props', props);
-
   const handleChanges = e => {
     setState({
       project: {
@@ -39,6 +40,7 @@ const ProjectForm = props => {
   };
 
   const handleSubmit = e => {
+    setIsLoading(true);
     e.preventDefault();
     addProject(state.project);
   };
@@ -54,7 +56,6 @@ const ProjectForm = props => {
               id: projectId
             }
           );
-          console.group(key);
 
           await axios.put(url, file, {
             headers: {
@@ -66,10 +67,10 @@ const ProjectForm = props => {
             `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects`,
             { projectId: projectId, url: key }
           );
-          console.log(data);
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         } finally {
+          setIsLoading(false);
           props.history.push(`/project/${projectId}`);
         }
       });
@@ -126,6 +127,23 @@ const ProjectForm = props => {
               id="teamMembers"
             />
           </div>
+          {isLoading && (
+            <div style={{ position: 'relative' }}>
+              <Loader
+                style={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  margin: '-50px 0px 0px -50px'
+                }}
+                type="Grid"
+                color="#C0C0C0"
+                height={150}
+                width={150}
+                timeout={3000} //3 secs
+              />
+            </div>
+          )}
 
           <div className="project-form-right-column">
             <label htmlFor="image-upload">Attach files</label>
@@ -153,7 +171,11 @@ const ProjectForm = props => {
           </div>
         </div>
         <div className="form-buttons-container">
-          <button className="submit-button" type="submit">
+          <button
+            className="submit-button"
+            type="submit"
+            disabled={disableButton}
+          >
             Publish
           </button>
           <button type="button">Cancel</button>

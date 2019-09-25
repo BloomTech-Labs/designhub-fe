@@ -42,7 +42,7 @@ class Projects extends Component {
         `https://designhubx-staging.herokuapp.com/api/v1/photo/projects/${this.state.projectId}`
       )
       .then(res => {
-        console.log('Project photo response', res);
+        console.log('Project photo response', res.data);
         this.setState({ thumbnails: res.data });
       })
       .catch(err => console.log(err));
