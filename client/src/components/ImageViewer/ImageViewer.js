@@ -25,14 +25,14 @@ class ImageViewer extends Component {
       this.state.activeImg.id !== imgObj.id
     ) {
       this.setState({ activeImg: imgObj }, () =>
-        console.log(this.state.activeImg)
+        console.log('ImageViwer.js changeImg() activeImg', this.state.activeImg)
       );
     }
   };
 
   render() {
     const { activeImg, modal, allImgs } = this.state;
-    console.log(activeImg);
+    console.log('ImageViwer.js changeImg() activeImg', activeImg);
     if (activeImg === null) {
       return <h1>Loading</h1>;
     } else {

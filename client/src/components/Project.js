@@ -42,7 +42,10 @@ class Projects extends Component {
         `https://designhubx-staging.herokuapp.com/api/v1/photo/projects/${this.state.projectId}`
       )
       .then(res => {
-        console.log(res.data);
+        console.log(
+          'Project.js ComponentDidMount() photo/projects res.data',
+          res.data
+        );
         this.setState({ thumbnails: res.data });
       })
       .catch(err => console.log(err));
@@ -61,6 +64,7 @@ class Projects extends Component {
     const thisProject = this.state.projectInfo;
     const comments = this.state.comments;
     console.log('Project.js ### COMMENTS', comments);
+    console.log('Project.js ### projectInfo', thisProject);
 
     return (
       <div className="projects-container">

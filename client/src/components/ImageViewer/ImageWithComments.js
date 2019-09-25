@@ -61,7 +61,6 @@ export class ImageWithComments extends React.Component {
   }
   componentDidMount() {
     this.element = findDOMNode(this);
-    console.log(this.element);
     // GET ALL COMMENTS
     const projectComments = this.props.comments;
     this.setState({
@@ -92,7 +91,6 @@ export class ImageWithComments extends React.Component {
   };
 
   makeComment = (id, x, y) => {
-    console.log({ x, y });
     const newComment = {
       id: uuidv1(),
       img_id: id,
@@ -136,55 +134,12 @@ export class ImageWithComments extends React.Component {
   };
 
   updateElementPosition = (x, y) => {
-    console.log('!!! UPDATE ELEMENT POSITION');
-    console.log({ x, y });
     const rect = this.element.getBoundingClientRect();
     this.width = this.element.offsetWidth;
     this.height = this.element.offsetHeight;
     this.left = rect.left;
     this.top = rect.top;
-
     this.topOffset = rect.top > 0 ? y : y - rect.top;
     this.leftOffset = rect.left > 0 ? x : x - rect.left;
-
-    console.log('this.element.getBoundingClientRect()', rect);
-    // console.log('OFFSET WIDTH', this.element.offsetWidth);
-    // console.log('OFFSET HEIGHT', this.element.offsetHeight);
-    // console.log('TOP OFFSET',this.topOffset)
-
-    console.log('this.element.offsetLeft', this.element.offsetLeft);
-    console.log('this.element.scrollLeft', this.element.scrollLeft);
-    console.log('this.element.offsetTop', this.element.offsetTop);
-    console.log('this.element.scrollTop', this.element.scrollTop);
-    console.log('this.element.offsetParent', this.element.offsetParent);
-
-    let newPos = getPosition(this.element);
-    console.log('newPos', newPos);
-
-    function getPosition(el) {
-      var xPos = 0;
-      var yPos = 0;
-
-      while (el) {
-        if (el.tagName === 'BODY') {
-          // deal with browser quirks with body/window/document and page scroll
-          var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-          var yScroll = el.scrollTop || document.documentElement.scrollTop;
-
-          xPos += el.offsetLeft - xScroll + el.clientLeft;
-          yPos += el.offsetTop - yScroll + el.clientTop;
-        } else {
-          // for all other non-BODY elements
-          xPos += el.offsetLeft - el.scrollLeft + el.clientLeft;
-          yPos += el.offsetTop - el.scrollTop + el.clientTop;
-        }
-        console.log('el', el);
-        el = el.offsetParent;
-      }
-      return {
-        x: xPos,
-        y: yPos
-      };
-    }
   };
 }
