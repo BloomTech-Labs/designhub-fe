@@ -10,7 +10,6 @@ import '../SASS/ProjectForm.scss';
 
 const ProjectForm = props => {
   const [files, setFiles] = useState([]);
-  const [projectId, setProjectId] = useState(null);
   const [disableButton, setDisableButton] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
