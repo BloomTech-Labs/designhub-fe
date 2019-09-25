@@ -52,23 +52,28 @@ class UserProfile_Tabs extends Component {
               <div className="tab-content">
                 <h2>Recent Projects</h2>
                 <div className="projects-array">
-                  {projects.slice(0, 8).map(project => (
-                    <div className="project-content" key={project.id}>
-                      <Link to={`/project/${project.id}`}>
-                        <>
-                          <div className="project-info">
-                            <h1>{project.name}</h1>
-                          </div>
-                          <img
-                            src={project.mainImg ? project.mainImg : defaultImg}
-                            className="project-thumbnail"
-                            alt="test"
-                            key={project.id}
-                          />
-                        </>
-                      </Link>
-                    </div>
-                  ))}
+                  {projects
+                    .reverse()
+                    .slice(0, 8)
+                    .map(project => (
+                      <div className="project-content" key={project.id}>
+                        <Link to={`/project/${project.id}`}>
+                          <>
+                            <div className="project-info">
+                              <h1>{project.name}</h1>
+                            </div>
+                            <img
+                              src={
+                                project.mainImg ? project.mainImg : defaultImg
+                              }
+                              className="project-thumbnail"
+                              alt="test"
+                              key={project.id}
+                            />
+                          </>
+                        </Link>
+                      </div>
+                    ))}
                 </div>
               </div>
               <Heatmap />
@@ -77,7 +82,7 @@ class UserProfile_Tabs extends Component {
               <div className="tab-content">
                 <h2>Projects</h2>
                 <div className="projects-array">
-                  {projects.slice(0, 8).map(project => (
+                  {projects.map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
                         <>
