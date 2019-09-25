@@ -106,6 +106,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
         `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
         changes
       );
+      await handleImageUpload(files, id);
       await history.push(`/project/${id}`);
     } catch (err) {
       console.log('ProjectForm.js editProject ERROR', err);
