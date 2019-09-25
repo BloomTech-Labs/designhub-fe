@@ -11,37 +11,48 @@ export class TempComment extends React.Component {
     const { c } = this.props;
     const { top, left } = c;
     return (
-      <div
-        className="StickyComment"
-        style={{
-          position: 'absolute',
-          top: top,
-          left: left
-        }}
-      >
-        <section className="StickyComment__dot">
-          <div className="StickyComment__dot-center"> </div>
-        </section>
-
-        <hr className="StickyComment__midbar" />
-
-        <form className="StickyComment__form">
-          <textarea
-            ref={input => (this.nameInput = input)}
-            type="text"
-            value={comment}
-            onChange={e => this.setState({ comment: e.target.value })}
-          />
-        </form>
-
-        <button
-          className="StickyComments__submit-btn"
-          onClick={e => this.onSubmit(e, c)}
+      <>
+        <div
+          className="StickyComment__hover-space"
+          style={{
+            top: top,
+            left: left
+          }}
         >
-          <SendIcon />
-        </button>
-        {/* <button onClick={e => this.handleDelete(e, id)}>delete</button> */}
-      </div>
+          <section className="StickyComment__dot">
+            <div className="StickyComment__dot-center"> </div>
+          </section>
+        </div>
+
+        <main
+          className="StickyComment__container TempComment"
+          style={{
+            display: 'flex',
+            position: 'absolute',
+            top: top,
+            left: left
+          }}
+        >
+          <hr className="StickyComment__midbar" />
+
+          <form className="StickyComment__form">
+            <textarea
+              ref={input => (this.nameInput = input)}
+              type="text"
+              value={comment}
+              onChange={e => this.setState({ comment: e.target.value })}
+            />
+          </form>
+
+          <button
+            className="StickyComments__submit-btn"
+            onClick={e => this.onSubmit(e, c)}
+          >
+            <SendIcon />
+          </button>
+          {/* <button onClick={e => this.handleDelete(e, id)}>delete</button> */}
+        </main>
+      </>
     );
   }
 
