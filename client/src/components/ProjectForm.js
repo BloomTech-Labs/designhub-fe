@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { useAuth0 } from '../auth-wrapper.js';
-
-import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import axios from 'axios';
 
 import '../SASS/ProjectForm.scss';
-import ImageUploadForm from './ImageUploadForm.js';
 
 const ProjectForm = () => {
+  const [file, setFile] = useState(null);
+  const onFileChange = event => {
+    setFile(event.target.files[0]);
+  };
   const { user } = useAuth0();
 
   const [state, setState] = useState({
@@ -35,60 +35,80 @@ const ProjectForm = () => {
     });
   };
 
-  const addProject = project => {
-    axios
-      .post('http://localhost:8000/api/v1/projects', project)
-      .then(res => {
-        console.log(res.data.data[0].id);
-        let file = uploadInput.files[0];
-        let fileParts = uploadInput.files[0].name.split('.');
-        let fileType = fileParts[1];
-
-        const projectId = res.data.data[0].id;
-        const body = { id: projectId };
-        axios
-          .post(`http://localhost:8000/api/v1/photo/projects/signed`, body)
-          .then(res => {
-            console.log(res);
-            const photoProjectBody = {
-              projectId: projectId,
-              url: res.data.key
-            };
-            const putUrl = res.data.url;
-            axios
-              .post(
-                `http://localhost:8000/api/v1/photo/projects`,
-                photoProjectBody
-              )
-              .then(res => {
-                console.log('file!!!!!!', file);
-                console.log('PUT!!!!!', putUrl);
-                console.log('RES!!!!!', res);
-                axios
-                  .put(putUrl, file)
-                  .then(res => console.log(putUrl))
-                  .catch(err => console.log('we be getting this error!'));
-              });
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
-  const handleUpload = () => {
-    axios.post(`/api/v1/photo/projects/signed`);
-  };
-  let uploadInput;
   const handleSubmit = e => {
     e.preventDefault();
-
     addProject(state.project);
+  };
+
+  const addProject = async project => {
+    try {
+      const { data } = await axios.post(
+        'http://localhost:8000/api/v1/projects',
+        project
+      );
+      const projectId = data.data[0].id;
+      const body = { id: projectId };
+    } catch (err) {
+      console.log('ProjectForm.js addProject ERROR', err);
+    }
+
+    // .then(res => {
+    //   const projectId = res.data.data[0].id;
+    //   const body = { id: projectId };
+    //   axios
+    //     .post(`http://localhost:8000/api/v1/photo/projects/signed`, body)
+    //     .then(res => {
+    //       console.log(res);
+    //       const photoProjectBody = {
+    //         projectId: projectId,
+    //         url: res.data.key
+    //       };
+    //       const putUrl = res.data.url;
+    //       axios
+    //         .post(
+    //           `http://localhost:8000/api/v1/photo/projects`,
+    //           photoProjectBody
+    //         )
+    //         .then(res => {
+    //           axios
+    //             .put(putUrl, file)
+    //             .then(res => console.log(putUrl))
+    //             .catch(err => console.log('we be getting this error!'));
+    //         });
+    //     });
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
+  };
+
+  const handleImageUpload = async file => {
+    console.log(file);
+    try {
+      const {
+        data: { key, url }
+      } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
+        {
+          id: 8000
+        }
+      );
+      console.log(key, url);
+
+      await axios.put(url, file, {
+        headers: {
+          'Content-Type': 'image/*'
+        }
+      });
+      return `${process.env.S3_BUCKET_URL}${key}`;
+    } catch (err) {
+      console.log('OnboardingForm.js handleSubmit() ERROR', err);
+    }
   };
 
   return (
     <div className="project-form-wrapper">
-      {/* <h2>Create a project</h2>
+      <h2>Create a project</h2>
       <form
         encType="multipart/form-data"
         className="project-form-container"
@@ -123,22 +143,13 @@ const ProjectForm = () => {
           </div>
 
           <div className="project-form-right-column">
-<<<<<<< HEAD
             <label htmlFor="image-upload">Attach files</label>
             <input
-              ref={ref => {
-                uploadInput = ref;
-              }}
               type="file"
-              accept="image/*"
-              name="image-upload"
-              id="image-upload"
+              name="projectImage"
+              id="projectImage"
+              onChange={onFileChange}
             />{' '}
-=======
-            <label>Attach files</label>
-            <input type="file" name="pic" accept="image/*" />
-
->>>>>>> f2c163b546756b4ba8c87792896b65fa3b08384e
             <label>Included files</label>
             <p>File names will populate here</p>
             <label htmlFor="figmaLink">Figma link</label>
@@ -167,17 +178,9 @@ const ProjectForm = () => {
           </button>
           <button type="button">Cancel</button>
         </div>
-      </form> */}
-      <ImageUploadForm />
+      </form>
     </div>
   );
 };
 
-const mapSTateToProps = state => {
-  return {};
-};
-
-export default connect(
-  mapSTateToProps,
-  {}
-)(ProjectForm);
+export default ProjectForm;
