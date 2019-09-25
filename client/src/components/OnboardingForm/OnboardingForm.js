@@ -59,10 +59,11 @@ const OnboardingForm = props => {
       changes = { ...changes, avatar: newAvatar };
       console.log('newAvatar!!!!', newAvatar);
       console.log('changes!!!!', changes);
-      await axios.put(
+      const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
         changes
       );
+      console.log(res);
       props.history.push(`/profile/${id}/${changes.username}`);
 
       props.setOnboarding(false);

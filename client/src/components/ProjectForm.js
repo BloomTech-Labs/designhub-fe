@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '../auth-wrapper.js';
 import axios from 'axios';
+import { MultiImageUpload } from './MultiImageUpload';
 
 import '../SASS/ProjectForm.scss';
 
 const ProjectForm = () => {
-  const [file, setFile] = useState(null);
-  const onFileChange = event => {
-    setFile(event.target.files[0]);
-  };
+  const [files, setFiles] = useState([]);
   const { user } = useAuth0();
 
   const [state, setState] = useState({
@@ -39,70 +37,52 @@ const ProjectForm = () => {
     e.preventDefault();
     addProject(state.project);
   };
+  const handleImageUpload = async (file, projectId) => {
+    if (files.length > 0) {
+      files.map(async (file, index) => {
+        try {
+          const {
+            data: { key, url }
+          } = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
+            {
+              id: projectId
+            }
+          );
+          console.group(key);
+
+          await axios.put(url, file, {
+            headers: {
+              'Content-Type': 'image/*'
+            }
+          });
+
+          const { data } = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects`,
+            { projectId: projectId, url: key }
+          );
+          console.log(data);
+        } catch (err) {
+          console.error('ProjectForm.js handleSubmit() ERROR', err);
+        }
+      });
+    }
+  };
 
   const addProject = async project => {
     try {
-      const { data } = await axios.post(
-        'http://localhost:8000/api/v1/projects',
+      const {
+        data: { id }
+      } = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
         project
       );
-      const projectId = data.data[0].id;
-      const body = { id: projectId };
+      console.log(id);
+
+      const data = await handleImageUpload(files, id);
+      console.log(data);
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
-    }
-
-    // .then(res => {
-    //   const projectId = res.data.data[0].id;
-    //   const body = { id: projectId };
-    //   axios
-    //     .post(`http://localhost:8000/api/v1/photo/projects/signed`, body)
-    //     .then(res => {
-    //       console.log(res);
-    //       const photoProjectBody = {
-    //         projectId: projectId,
-    //         url: res.data.key
-    //       };
-    //       const putUrl = res.data.url;
-    //       axios
-    //         .post(
-    //           `http://localhost:8000/api/v1/photo/projects`,
-    //           photoProjectBody
-    //         )
-    //         .then(res => {
-    //           axios
-    //             .put(putUrl, file)
-    //             .then(res => console.log(putUrl))
-    //             .catch(err => console.log('we be getting this error!'));
-    //         });
-    //     });
-    // })
-    // .catch(err => {
-    //   console.log(err);
-    // });
-  };
-
-  const handleImageUpload = async file => {
-    console.log(file);
-    try {
-      const {
-        data: { key, url }
-      } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
-        {
-          id: 8000
-        }
-      );
-      console.log(key, url);
-
-      await axios.put(url, file, {
-        headers: {
-          'Content-Type': 'image/*'
-        }
-      });
-      return `${process.env.S3_BUCKET_URL}${key}`;
-    } catch (err) {
-      console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
@@ -144,14 +124,9 @@ const ProjectForm = () => {
 
           <div className="project-form-right-column">
             <label htmlFor="image-upload">Attach files</label>
-            <input
-              type="file"
-              name="projectImage"
-              id="projectImage"
-              onChange={onFileChange}
-            />{' '}
-            <label>Included files</label>
-            <p>File names will populate here</p>
+
+            <MultiImageUpload filesArray={{ files, setFiles }} />
+
             <label htmlFor="figmaLink">Figma link</label>
             <input
               type="text"

@@ -42,7 +42,7 @@ class Projects extends Component {
         `https://designhubx-staging.herokuapp.com/api/v1/photo/projects/${this.state.projectId}`
       )
       .then(res => {
-        console.log(res.data);
+        console.log('Project photo response', res);
         this.setState({ thumbnails: res.data });
       })
       .catch(err => console.log(err));
@@ -122,10 +122,12 @@ class Projects extends Component {
 
         <div className="project-body">
           {/* THIS IS THE IMAGE CAROUSEL */}
-          <ImageViewer
-            thisProject={thisProject}
-            thumbnails={this.state.thumbnails}
-          />
+          {this.state.thumbnails.length > 0 && (
+            <ImageViewer
+              thisProject={thisProject}
+              thumbnails={this.state.thumbnails}
+            />
+          )}
           <div className="project-comments">
             <div className="comments-header">Comments</div>
             <div className="comments-body">

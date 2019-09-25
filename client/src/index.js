@@ -12,6 +12,7 @@ import rootReducer from './store/reducers';
 import { Auth0Provider } from './auth-wrapper.js';
 import config from './auth_config.js';
 import * as Sentry from '@sentry/browser';
+console.log(process.env.REACT_APP_SENTRY_DSN);
 
 Sentry.init({ dsn: `${process.env.REACT_APP_SENTRY_DSN}` });
 
