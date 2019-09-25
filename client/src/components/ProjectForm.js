@@ -167,7 +167,9 @@ const ProjectForm = ({ isEditing, project, history }) => {
           )}
 
           <div className="project-form-right-column">
-            <label htmlFor="image-upload">Attach files</label>
+            <label htmlFor="image-upload">
+              {isEditing ? 'Add more files' : 'Attach files'}
+            </label>
 
             <MultiImageUpload filesArray={{ files, setFiles }} />
 
