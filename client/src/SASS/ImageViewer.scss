@@ -74,7 +74,7 @@
       width: 100%;
       z-index: 999999;
 
-      img {
+      img.ImageWithComments__full-img {
         max-width: 1200px;
         position: relative;
         z-index: 999;
@@ -82,7 +82,7 @@
         left: 160px;
       }
 
-      span {
+      span.modal--expand__background-overlay {
         background: rgba(0, 0, 0, 0.897);
         cursor: pointer;
         content: '';

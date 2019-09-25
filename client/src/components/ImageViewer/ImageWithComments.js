@@ -27,15 +27,18 @@ export class ImageWithComments extends React.Component {
   render() {
     const { id, url } = this.props.activeImg;
     const { comments, tempComments } = this.state;
-    let activeComments = comments.filter(c => c.img_id === id);
-    let activeTemp = tempComments.filter(c => c.img_id === id);
+    console.log('ImageWithComments.js render() comments', comments);
+    let activeComments = comments.filter(c => c.imageId === id);
+    console.log('ImageWithComments.js render() activeComments', activeComments);
+    let activeTemp = tempComments.filter(c => c.imageId === id);
     return (
       <div className="ImageWithComments">
         <img
-          src={url}
           alt={url}
-          // onMouseMove={this.onMouseMove}
+          className="ImageWithComments__full-img"
           onClick={e => this.handleClick(e, id)}
+          // onMouseMove={this.onMouseMove}
+          src={url}
         />
 
         {activeTemp[0] &&
@@ -63,9 +66,13 @@ export class ImageWithComments extends React.Component {
     this.element = findDOMNode(this);
     // GET ALL COMMENTS
     const projectComments = this.props.comments;
+    console.log(
+      'ImageWithComments.js componentDidMount() this.props.comments',
+      this.props.comments
+    );
     this.setState({
       ...this.state,
-      projectComments
+      comments: projectComments
     });
   }
 
@@ -93,7 +100,7 @@ export class ImageWithComments extends React.Component {
   makeComment = (id, x, y) => {
     const newComment = {
       id: uuidv1(),
-      img_id: id,
+      imageId: id,
       editing: false,
       left: `${x}px`,
       top: `${y}px`,

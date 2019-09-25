@@ -1,6 +1,14 @@
 import React from 'react';
 
-export const StickyComment = ({ id, commentDelete, top, left, text }) => {
+export const StickyComment = ({
+  id,
+  commentDelete,
+  top,
+  left,
+  text,
+  userAvatar,
+  username
+}) => {
   return (
     <div
       className="StickyComment"
@@ -15,14 +23,26 @@ export const StickyComment = ({ id, commentDelete, top, left, text }) => {
 
       <hr className="StickyComment__midbar" />
 
-      <div className="StickyComment__text">{text}</div>
-
-      <button
-        className="StickyComment__del-button"
-        onClick={() => commentDelete(id)}
-      >
-        X
-      </button>
+      <section className="StickyComment__body">
+        <img
+          src={userAvatar}
+          alt="avatar"
+          className="StickyComment__body__avatar"
+        />
+        <div className="StickyComment__body__text">
+          <header>
+            <em>{username}</em>
+            <p>3h</p>
+          </header>
+          <p>{text}</p>
+        </div>
+        <button
+          className="StickyComment__del-button"
+          onClick={() => commentDelete(id)}
+        >
+          <span>x</span>
+        </button>
+      </section>
     </div>
   );
 };

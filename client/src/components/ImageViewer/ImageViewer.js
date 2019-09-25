@@ -32,7 +32,11 @@ class ImageViewer extends Component {
 
   render() {
     const { activeImg, modal, allImgs } = this.state;
-    console.log('ImageViwer.js changeImg() activeImg', activeImg);
+    console.log('ImageViewer.js render() activeImg', activeImg);
+    console.log(
+      'ImageViewer.js render() this.props.comments',
+      this.props.comments
+    );
     if (activeImg === null) {
       return <h1>Loading</h1>;
     } else {
@@ -41,13 +45,15 @@ class ImageViewer extends Component {
           <main className="ImageViewer__body">
             <div className={modal ? 'modal--expand' : 'modal--close'}>
               <span
-                className="background-overlay"
+                className="modal--expand__background-overlay"
                 onClick={() => this.setState({ modal: false })}
               />
-              <ImageWithComments
-                activeImg={activeImg}
-                comments={this.props.comments}
-              />
+              {modal && (
+                <ImageWithComments
+                  activeImg={activeImg}
+                  comments={this.props.comments}
+                />
+              )}
             </div>
 
             <section className="ImageViewer__main-image">
