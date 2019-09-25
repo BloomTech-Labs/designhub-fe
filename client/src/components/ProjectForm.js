@@ -8,6 +8,7 @@ import '../SASS/ProjectForm.scss';
 
 const ProjectForm = props => {
   const [files, setFiles] = useState([]);
+  const [projectId, setProjectId] = useState(null);
 
   const { user } = useAuth0();
 
@@ -68,6 +69,8 @@ const ProjectForm = props => {
           console.log(data);
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
+        } finally {
+          props.history.push(`/project/${projectId}`);
         }
       });
     }
@@ -81,13 +84,10 @@ const ProjectForm = props => {
         `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
         project
       );
-
+      setProjectId(id);
       await handleImageUpload(files, id);
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
-      // } finally {
-      //   props.history.push(`/project/${projectId}`);
-      // }
     }
   };
 

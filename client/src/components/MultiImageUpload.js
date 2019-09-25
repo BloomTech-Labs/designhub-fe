@@ -7,7 +7,8 @@ const thumbsContainer = {
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
-  marginTop: 16
+  marginTop: 16,
+  justifyContent: 'space-evenly'
 };
 
 const thumb = {
@@ -16,8 +17,8 @@ const thumb = {
   border: '1px solid #eaeaea',
   marginBottom: 8,
   marginRight: 8,
-  width: 145,
-  height: 145,
+  width: 125,
+  height: 125,
   padding: 4,
   boxSizing: 'border-box'
 };
