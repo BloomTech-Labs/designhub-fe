@@ -128,6 +128,7 @@ class Projects extends Component {
           {/* THIS IS THE IMAGE CAROUSEL */}
 
           <ImageViewer
+            activeUser={activeUser}
             comments={this.state.comments}
             thisProject={thisProject}
             thumbnails={this.state.thumbnails}

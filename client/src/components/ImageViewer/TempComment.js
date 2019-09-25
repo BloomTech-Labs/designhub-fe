@@ -36,7 +36,7 @@ export class TempComment extends React.Component {
 
         <button
           className="StickyComments__submit-btn"
-          onClick={e => this.handleSubmit(e, c)}
+          onClick={e => this.onSubmit(e, c)}
         >
           <SendIcon />
         </button>
@@ -54,7 +54,7 @@ export class TempComment extends React.Component {
     this.props.commentDelete(id);
   }
 
-  handleSubmit = (e, c) => {
+  onSubmit = (e, c) => {
     e.preventDefault();
     const newComment = {
       ...c,

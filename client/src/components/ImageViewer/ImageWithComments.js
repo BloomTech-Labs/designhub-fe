@@ -1,6 +1,8 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 
+import axios from 'axios';
+
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
 import '../../SASS/StickyComment.scss';
@@ -31,6 +33,7 @@ export class ImageWithComments extends React.Component {
     let activeComments = comments.filter(c => c.imageId === id);
     console.log('ImageWithComments.js render() activeComments', activeComments);
     let activeTemp = tempComments.filter(c => c.imageId === id);
+    console.log('ImageWithComments.js render() tempComments', tempComments);
     return (
       <div className="ImageWithComments">
         <img
@@ -101,6 +104,9 @@ export class ImageWithComments extends React.Component {
     const newComment = {
       id: uuidv1(),
       imageId: id,
+      userId: this.props.activeUser.id,
+      username: this.props.activeUser.username,
+      projectId: this.props.thisProject.id,
       editing: false,
       left: `${x}px`,
       top: `${y}px`,
@@ -122,22 +128,34 @@ export class ImageWithComments extends React.Component {
     this.makeComment(id, x, y);
   };
 
-  handleSubmit = (e, c) => {
+  handleSubmit = async (e, c) => {
     e.preventDefault();
     const { comments, tempComments } = this.state;
     let updateTemp = tempComments.filter(i => i.id !== c.id);
-    let updateComments = [...comments];
-    if (updateComments.find(i => i.id === c.id)) {
-      updateComments = comments.map(i => {
-        if (i.id === c.id) return { ...c };
-        else return { ...i, editing: false };
+    const thisComment = { ...c };
+
+    // delete local state flags before submitting to database
+    delete thisComment.id;
+    delete thisComment.editing;
+    console.log('ImageWithComments.js handleSubmit() thisComment', thisComment);
+
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}api/v1/comments/photo`,
+        thisComment
+      );
+      const newComment = res.data.data[0];
+      //glue the avatar back on and insert into local state so we don't have to reload the component
+      newComment.userAvatar = this.props.activeUser.avatar;
+
+      this.setState({
+        ...this.state,
+        tempComments: updateTemp,
+        comments: [...comments, newComment]
       });
-    } else updateComments.push(c);
-    this.setState({
-      ...this.state,
-      tempComments: updateTemp,
-      comments: updateComments
-    });
+    } catch (err) {
+      console.log('ImageWithComments.js handleSubmit() ERROR', err);
+    }
   };
 
   updateElementPosition = (x, y) => {

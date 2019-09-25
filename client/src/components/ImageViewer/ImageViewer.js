@@ -50,8 +50,10 @@ class ImageViewer extends Component {
               />
               {modal && (
                 <ImageWithComments
+                  activeUser={this.props.activeUser}
                   activeImg={activeImg}
                   comments={this.props.comments}
+                  thisProject={this.props.thisProject}
                 />
               )}
             </div>
