@@ -4,10 +4,10 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Project from './components/Project';
-import ProjectForm from './components/ProjectForm';
 import PrivateRoute from './components/PrivateRoute';
 import UserProfileLI from './components/UserProfile/UserProfile_LI';
 import Settings from './components/Settings.js';
+import AddProject from './components/AddProject';
 
 import './SASS/DesignHub.scss';
 
@@ -47,7 +47,7 @@ class DesignHub extends Component {
               path="/project/:id"
               render={props => <Project {...props} activeUser={activeUser} />}
             />
-            <Route exact path="/create" component={ProjectForm} />
+            <Route exact path="/create" component={AddProject} />
             <Route
               exact
               path="/settings"
