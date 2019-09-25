@@ -5,6 +5,8 @@ import axios from 'axios';
 
 import Heatmap from './Heatmap.js';
 
+import defaultImg from '../../ASSETS/default_thumbnail.svg';
+
 class UserProfile_Tabs extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,6 @@ class UserProfile_Tabs extends Component {
 
   render() {
     const projects = this.props.projects;
-    const allUsers = this.state.allUsers;
     const followers = this.props.followers;
     const following = this.props.following;
     return (
@@ -59,7 +60,7 @@ class UserProfile_Tabs extends Component {
                             <h1>{project.name}</h1>
                           </div>
                           <img
-                            src={project.mainImg}
+                            src={project.mainImg ? project.mainImg : defaultImg}
                             className="project-thumbnail"
                             alt="test"
                             key={project.id}
@@ -84,7 +85,7 @@ class UserProfile_Tabs extends Component {
                             <h1>{project.name}</h1>
                           </div>
                           <img
-                            src={project.mainImg}
+                            src={project.mainImg ? project.mainImg : defaultImg}
                             className="project-thumbnail"
                             alt="test"
                             key={project.id}
@@ -170,7 +171,7 @@ class UserProfile_Tabs extends Component {
                             <h1>{project.name}</h1>
                           </div>
                           <img
-                            src={project.mainImg}
+                            src={project.mainImg ? project.mainImg : defaultImg}
                             className="project-thumbnail"
                             alt="test"
                             key={project.id}
