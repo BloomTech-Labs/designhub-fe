@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useAuth0 } from '../auth-wrapper.js';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { MultiImageUpload } from './MultiImageUpload';
-import { withRouter, Redirect } from 'react-router-dom';
+
+import { MultiImageUpload } from './MultiImageUpload.js';
 import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
@@ -39,7 +40,7 @@ const ProjectForm = props => {
     });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
     addProject(state.project);
@@ -67,11 +68,16 @@ const ProjectForm = props => {
             `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects`,
             { projectId: projectId, url: key }
           );
+
+          return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         }
       });
-      return await Promise.all(requestPromises);
+      return await Promise.all(requestPromises).then(res => {
+        console.log('Promise.all RES!!!!!', res[0]);
+        return res[0];
+      });
     }
   };
 
@@ -83,9 +89,10 @@ const ProjectForm = props => {
         `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
         project
       );
-      setProjectId(id);
-      await handleImageUpload(files, id);
+
+      const something = await handleImageUpload(files, id);
       await props.history.push(`/project/${id}`);
+      return something;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
