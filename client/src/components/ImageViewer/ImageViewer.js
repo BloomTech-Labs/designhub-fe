@@ -8,6 +8,7 @@ class ImageViewer extends Component {
     this.state = {
       activeImg: null,
       allImgs: null,
+      comments: this.props.comments,
       modal: false,
       thisProject: { ...this.props.thisProject }
     };
@@ -19,6 +20,13 @@ class ImageViewer extends Component {
     }
   }
 
+  addComments = newComments => {
+    this.setState({
+      ...this.state,
+      comments: newComments
+    });
+  };
+
   changeImg = imgObj => {
     if (
       this.state.activeImg === null ||
@@ -28,6 +36,10 @@ class ImageViewer extends Component {
         console.log('ImageViwer.js changeImg() activeImg', this.state.activeImg)
       );
     }
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
   };
 
   render() {
@@ -46,13 +58,19 @@ class ImageViewer extends Component {
             <div className={modal ? 'modal--expand' : 'modal--close'}>
               <span
                 className="modal--expand__background-overlay"
-                onClick={() => this.setState({ modal: false })}
+                onClick={this.closeModal}
               />
               {modal && (
                 <ImageWithComments
                   activeUser={this.props.activeUser}
                   activeImg={activeImg}
-                  comments={this.props.comments}
+                  addComments={this.addComments}
+                  closeModal={this.closeModal}
+                  comments={
+                    this.state.comments.length > 0
+                      ? this.state.comments
+                      : this.props.comments
+                  }
                   thisProject={this.props.thisProject}
                 />
               )}

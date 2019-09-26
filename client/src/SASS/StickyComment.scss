@@ -1,10 +1,33 @@
 @import './palette';
 
+.StickyComments__TopBar {
+  align-items: center;
+  background: none;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 105px;
+  position: fixed;
+  height: 71px;
+  width: 100%;
+  z-index: 9999999;
+
+  p {
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.11em;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+}
+
 .StickyComment__hover-space {
   align-items: center;
   display: flex;
   //negative margin compensates for centering
-  margin: -11px 0 0 -11px;
+  margin: -10px 0 0 -10px;
   position: absolute;
   z-index: 99999;
 
@@ -32,15 +55,16 @@
 }
 
 main.StickyComment__container.TempComment {
-  margin: -48px 0 0 9px;
+  margin: -47px 0 0 9px;
 }
 
 main.StickyComment__container {
   align-items: center;
   display: none;
+  // display: flex;
   flex-direction: row;
   //negative margin compensates for centering
-  margin: -24px 0 0 9px;
+  margin: -23px 0 0 10px;
   position: absolute;
   z-index: 99999;
 

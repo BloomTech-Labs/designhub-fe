@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
+import ModalXIcon from '../Icons/ModalXIcon.js';
 import '../../SASS/StickyComment.scss';
 
 const uuidv1 = require('uuid/v1');
@@ -35,34 +36,42 @@ export class ImageWithComments extends React.Component {
     let activeTemp = tempComments.filter(c => c.imageId === id);
     console.log('ImageWithComments.js render() tempComments', tempComments);
     return (
-      <div className="ImageWithComments">
-        <img
-          alt={url}
-          className="ImageWithComments__full-img"
-          onClick={e => this.handleClick(e, id)}
-          // onMouseMove={this.onMouseMove}
-          src={url}
-        />
+      <>
+        <div className="StickyComments__TopBar">
+          <p>Click anywhere on the image to leave a sticky comment</p>
+          <div onClick={this.props.closeModal}>
+            <ModalXIcon />
+          </div>
+        </div>
+        <div className="ImageWithComments">
+          <img
+            alt={url}
+            className="ImageWithComments__full-img"
+            onClick={e => this.handleClick(e, id)}
+            // onMouseMove={this.onMouseMove}
+            src={url}
+          />
 
-        {activeTemp[0] &&
-          activeTemp.map(c => (
-            <TempComment
-              c={c}
-              key={c.id}
-              onSubmit={this.handleSubmit}
-              commentDelete={this.commentDelete}
-            />
-          ))}
+          {activeTemp[0] &&
+            activeTemp.map(c => (
+              <TempComment
+                c={c}
+                key={c.id}
+                onSubmit={this.handleSubmit}
+                commentDelete={this.commentDelete}
+              />
+            ))}
 
-        {activeComments[0] &&
-          activeComments.map(s => (
-            <StickyComment
-              {...s}
-              key={s.id}
-              commentDelete={this.commentDelete}
-            />
-          ))}
-      </div>
+          {activeComments[0] &&
+            activeComments.map(s => (
+              <StickyComment
+                {...s}
+                key={s.id}
+                commentDelete={this.commentDelete}
+              />
+            ))}
+        </div>
+      </>
     );
   }
   componentDidMount() {
@@ -147,11 +156,13 @@ export class ImageWithComments extends React.Component {
       const newComment = res.data.data[0];
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = this.props.activeUser.avatar;
+      const updateComments = [...comments, newComment];
 
+      this.props.addComments(updateComments);
       this.setState({
         ...this.state,
         tempComments: updateTemp,
-        comments: [...comments, newComment]
+        comments: updateComments
       });
     } catch (err) {
       console.log('ImageWithComments.js handleSubmit() ERROR', err);

@@ -1,3 +1,5 @@
+@import './palette';
+
 .ImageViewer {
   // border: 1px solid white;
   color: white;
@@ -78,12 +80,12 @@
         max-width: 1200px;
         position: relative;
         z-index: 999;
-        top: 20px;
+        top: 71px;
         left: 160px;
       }
 
       span.modal--expand__background-overlay {
-        background: rgba(0, 0, 0, 0.897);
+        background: $modal-bg;
         cursor: pointer;
         content: '';
         position: fixed;
