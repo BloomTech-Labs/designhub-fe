@@ -43,8 +43,7 @@
 .StickyComment__hover-space {
   align-items: center;
   display: flex;
-  //negative margin compensates for centering
-  margin: -10px 0 0 -10px;
+  margin: -10px 0 0 -10px; //negative margin compensates for centering
   position: absolute;
   z-index: 99999;
 
@@ -78,16 +77,20 @@ main.StickyComment__container.TempComment {
 main.StickyComment__container {
   align-items: center;
   display: none;
+  // display: flex; //for dev testing only
   flex-direction: row;
-  //negative margin compensates for centering
-  margin: -23px 0 0 10px;
+  margin: -23px 0 0 10px; //negative margin compensates for centering
   position: absolute;
   z-index: 99999;
+
+  &:hover {
+    display: flex;
+  }
 
   hr.StickyComment__midbar {
     background: $blue;
     border-color: $blue;
-    width: 64px;
+    // width: 64px; //temp fix for small viewport display bug
   }
 
   .StickyComment__body {
@@ -114,6 +117,7 @@ main.StickyComment__container {
       header {
         display: flex;
         em {
+          align-self: center;
           font-weight: 900;
         }
         p {
