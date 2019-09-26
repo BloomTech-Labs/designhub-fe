@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import moment from 'moment';
 
 import avatar1 from '../ASSETS/avatar.jpg';
 import avatar2 from '../ASSETS/avatar_2.jpg';
@@ -11,7 +12,7 @@ import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
 import SendIcon from './Icons/SendIcon';
-import { axiosWithAuth } from '../utilities/axiosWithAuth'
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 import ImageViewer from './ImageViewer/ImageViewer.js';
 
@@ -33,26 +34,24 @@ class Projects extends Component {
     return axiosWithAuth()
       .get(`api/v1/projects/${this.state.projectId}`)
       .then(res => this.setState({ projectInfo: res.data[0] }))
-      .then(() => (
+      .then(() =>
         axiosWithAuth()
-        .get(`api/v1/photo/projects/${this.state.projectId}`)
-      .then(res => this.setState({ thumbnails: res.data }))
-      .catch(err => console.log(err))
-      ))
-      .then(() => (
+          .get(`api/v1/photo/projects/${this.state.projectId}`)
+          .then(res => this.setState({ thumbnails: res.data }))
+          .catch(err => console.log(err))
+      )
+      .then(() =>
         axiosWithAuth()
-      .get(`api/v1/comments/project/${this.state.projectId}`)
-      .then(res => this.setState({ comments: res.data }))
-      .catch(err => console.log(err))
-      ))
+          .get(`api/v1/comments/project/${this.state.projectId}`)
+          .then(res => this.setState({ comments: res.data }))
+          .catch(err => console.log(err))
+      )
       .catch(err => console.log(err));
-
-    
   }
 
   render() {
     if (!this.state.projectInfo) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     }
     console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
@@ -71,12 +70,17 @@ class Projects extends Component {
               <span>
                 Created by{' '}
                 <span className="project-header-username">
-                  <Link to={`/profile/${thisProject.userId}/`}>
-                    eriklambert
+                  <Link
+                    to={`/profile/${thisProject.userId}/${activeUser.username}`}
+                  >
+                    {activeUser.username}
                   </Link>
                 </span>
               </span>
-              <span>Created At: {thisProject.created_at}</span>
+              <span>
+                Created on{' '}
+                {moment(thisProject.created_at).format('MMM Do YYYY')}
+              </span>
             </p>
           </div>
           <div className="project-header-right">
@@ -87,26 +91,56 @@ class Projects extends Component {
             </div>
             <div className="project-header-links">
               <div className="project-header-button">
-                <img
-                  src={figmaIcon}
-                  className={
-                    thisProject.figma === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="figma"
-                />
+                {thisProject.figma ? (
+                  <a href={thisProject.figma}>
+                    <img
+                      src={figmaIcon}
+                      className={
+                        thisProject.figma === null || thisProject.figma === ''
+                          ? 'link-disabled'
+                          : 'link-enabled'
+                      }
+                      alt="figma"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={figmaIcon}
+                    className={
+                      thisProject.figma === null || thisProject.figma === ''
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="figma"
+                  />
+                )}
               </div>
               <div className="project-header-button">
-                <img
-                  src={invisionIcon}
-                  className={
-                    thisProject.invision === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="invision"
-                />
+                {thisProject.invision ? (
+                  <a href={thisProject.invision}>
+                    <img
+                      src={invisionIcon}
+                      className={
+                        thisProject.invision === '' ||
+                        thisProject.invision === null
+                          ? 'link-disabled'
+                          : 'link-enabled'
+                      }
+                      alt="invision"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={invisionIcon}
+                    className={
+                      thisProject.invision === '' ||
+                      thisProject.invision === null
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="invision"
+                  />
+                )}
               </div>
               <div className="download project-header-button">
                 <DownloadIcon />
