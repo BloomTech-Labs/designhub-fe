@@ -91,26 +91,56 @@ class Projects extends Component {
             </div>
             <div className="project-header-links">
               <div className="project-header-button">
-                <img
-                  src={figmaIcon}
-                  className={
-                    thisProject.figma === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="figma"
-                />
+                {thisProject.figma ? (
+                  <a href={thisProject.figma}>
+                    <img
+                      src={figmaIcon}
+                      className={
+                        thisProject.figma === null || thisProject.figma === ''
+                          ? 'link-disabled'
+                          : 'link-enabled'
+                      }
+                      alt="figma"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={figmaIcon}
+                    className={
+                      thisProject.figma === null || thisProject.figma === ''
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="figma"
+                  />
+                )}
               </div>
               <div className="project-header-button">
-                <img
-                  src={invisionIcon}
-                  className={
-                    thisProject.invision === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="invision"
-                />
+                {thisProject.invision ? (
+                  <a href={thisProject.invision}>
+                    <img
+                      src={invisionIcon}
+                      className={
+                        thisProject.invision === '' ||
+                        thisProject.invision === null
+                          ? 'link-disabled'
+                          : 'link-enabled'
+                      }
+                      alt="invision"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={invisionIcon}
+                    className={
+                      thisProject.invision === '' ||
+                      thisProject.invision === null
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="invision"
+                  />
+                )}
               </div>
               <div className="download project-header-button">
                 <DownloadIcon />
