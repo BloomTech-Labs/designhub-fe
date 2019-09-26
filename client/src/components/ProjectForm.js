@@ -71,12 +71,6 @@ const ProjectForm = ({ isEditing, project, history }) => {
             { projectId: projectId, url: key }
           );
 
-          console.log('TEST OBJECT ADFLJHDASKJFHKJADSJHFKLAFDH', {
-            userId: state.project.userId,
-            contribution: `Posted one photo to ${projectTitle}`,
-            projectId: projectId
-          });
-
           await axios.post(`${process.env.REACT_APP_BASE_URL}api/v1/heatmap`, {
             userId: state.project.userId,
             contribution: `Posted one photo to ${projectTitle}`,
