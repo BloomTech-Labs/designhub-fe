@@ -11,19 +11,23 @@ import '../../SASS/OnboardingForm.scss';
 const uuidv1 = require('uuid/v1');
 
 const OnboardingForm = props => {
+  // user data from auth0 context wrapper
   const { user } = useAuth0();
 
+  // individual form pages in an array
   const stepComponents = [Step1, Step2];
+
+  // state to track which page to display
   const [formStep, setFormStep] = useState(1);
+
+  //conditional render for next/submit/prev buttons
   const submitButton = formStep === stepComponents.length ? true : false;
   const showPrev = formStep === 1 ? false : true;
 
-  //avatar image handlers
-  const [file, setFile] = useState(null);
-  const onFileChange = event => {
-    setFile(event.target.files[0]);
-  };
+  //avatar image handler
+  const [files, setFiles] = useState([]);
 
+  //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
     avatar: user.picture || '',
     bio: '',
@@ -54,17 +58,16 @@ const OnboardingForm = props => {
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
     try {
-      const newAvatar = await handleImageUpload(file);
+      const newAvatar = await handleImageUpload(files);
       changes = { ...changes, avatar: newAvatar };
-      console.log('newAvatar!!!!', newAvatar);
-      console.log('changes!!!!', changes);
+      console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
+      console.log('OnboardingForm.js handleSubmit() changes', changes);
       const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
         changes
       );
-      console.log(res);
+      console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
-
       props.setOnboarding(false);
     } catch (err) {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
@@ -105,9 +108,10 @@ const OnboardingForm = props => {
               return (
                 <Step
                   key={formUser.id}
+                  files={files}
+                  setFiles={setFiles}
                   formUser={formUser}
                   onChange={handleChange}
-                  onFileChange={onFileChange}
                 />
               );
             } else return null;

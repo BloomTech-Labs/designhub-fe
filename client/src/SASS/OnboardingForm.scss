@@ -13,5 +13,78 @@
 
   form {
     @include onboard-form;
+
+    .upload-container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px;
+      border-radius: 10px;
+      background: $field-bg;
+      transition: all 0.1s ease-in-out;
+      cursor: pointer;
+    }
+    .upload-container:hover {
+      background: #33343b;
+    }
+
+    .drop-text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .upload-icon {
+        opacity: 0.2;
+        margin-bottom: 10px;
+      }
+
+      .drop-text {
+        margin-bottom: 10px;
+
+        mark {
+          background: none;
+          color: $blue;
+        }
+      }
+    }
   }
+}
+
+.thumbnail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.thumb {
+  border: 5px solid $black;
+  display: inline-flex;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  width: 10.9vw;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+.thumbnail {
+  object-fit: cover;
+  width: 100%;
+}
+
+.remove {
+  width: 20px;
+  position: absolute;
+  margin-top: -5px;
+  margin-left: -5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  opacity: 0.8;
+}
+
+.remove:hover {
+  transform: scale(1.2);
+  opacity: 1;
 }
