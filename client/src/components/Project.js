@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
+import moment from 'moment';
 
 import avatar1 from '../ASSETS/avatar.jpg';
 import avatar2 from '../ASSETS/avatar_2.jpg';
@@ -74,7 +75,10 @@ class Projects extends Component {
                   </Link>
                 </span>
               </span>
-              <span>Created At: {thisProject.created_at}</span>
+              <span>
+                Created On:{' '}
+                {moment(thisProject.created_at).format('MMM Do YYYY')}
+              </span>
             </p>
           </div>
           <div className="project-header-right">
