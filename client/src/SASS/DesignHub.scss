@@ -1,26 +1,26 @@
-// .DesignHub {
-//   transition: all 0.2s ease-in-out;
-//   .side-navigation {
-//     transition: all 0.2s ease-in-out;
-//   }
+.DesignHub {
+  transition: all 0.2s ease-in-out;
+  .side-navigation {
+    transition: all 0.2s ease-in-out;
+  }
 
-//   .side-navigation:hover ~ .workspace {
-//     transition: all 0.2s ease-in-out;
-//     // margin-left: 29%;
-//   }
+  .side-navigation:hover ~ .workspace {
+    transition: all 0.2s ease-in-out;
+    // margin-left: 29%;
+  }
 
-//   .workspace {
-//     transition: all 0.2s ease-in-out;
-//     width: 92%;
-//     margin-left: 7%;
-//   }
-// }
+  .workspace {
+    transition: all 0.2s ease-in-out;
+    width: 92%;
+    margin-left: 7%;
+  }
+}
 
-// @media (max-width: 1024px) {
-//   .DesignHub {
-//     .workspace {
-//       margin-left: 2%;
-//       width: 96%;
-//     }
-//   }
-// }
+@media (max-width: 1024px) {
+  .DesignHub {
+    .workspace {
+      margin-left: 2%;
+      width: 96%;
+    }
+  }
+}
