@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../SASS/ImageViewer.scss';
+import { ImageWithComments } from './ImageWithComments';
 
 class ImageViewer extends Component {
   constructor(props) {
@@ -7,6 +8,7 @@ class ImageViewer extends Component {
     this.state = {
       activeImg: null,
       allImgs: null,
+      comments: this.props.comments,
       modal: false,
       thisProject: { ...this.props.thisProject }
     };
@@ -18,20 +20,35 @@ class ImageViewer extends Component {
     }
   }
 
+  addComments = newComments => {
+    this.setState({
+      ...this.state,
+      comments: newComments
+    });
+  };
+
   changeImg = imgObj => {
     if (
       this.state.activeImg === null ||
       this.state.activeImg.id !== imgObj.id
     ) {
       this.setState({ activeImg: imgObj }, () =>
-        console.log(this.state.activeImg)
+        console.log('ImageViwer.js changeImg() activeImg', this.state.activeImg)
       );
     }
   };
 
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+
   render() {
     const { activeImg, modal, allImgs } = this.state;
-    console.log(activeImg);
+    console.log('ImageViewer.js render() activeImg', activeImg);
+    console.log(
+      'ImageViewer.js render() this.props.comments',
+      this.props.comments
+    );
     if (activeImg === null) {
       return <h1>Loading</h1>;
     } else {
@@ -39,11 +56,24 @@ class ImageViewer extends Component {
         <div className="ImageViewer">
           <main className="ImageViewer__body">
             <div className={modal ? 'modal--expand' : 'modal--close'}>
-              <img src={activeImg.url} alt="main project" />
               <span
-                className="background-overlay"
-                onClick={() => this.setState({ modal: false })}
+                className="modal--expand__background-overlay"
+                onClick={this.closeModal}
               />
+              {modal && (
+                <ImageWithComments
+                  activeUser={this.props.activeUser}
+                  activeImg={activeImg}
+                  addComments={this.addComments}
+                  closeModal={this.closeModal}
+                  comments={
+                    this.state.comments.length > 0
+                      ? this.state.comments
+                      : this.props.comments
+                  }
+                  thisProject={this.props.thisProject}
+                />
+              )}
             </div>
 
             <section className="ImageViewer__main-image">

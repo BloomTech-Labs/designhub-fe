@@ -2,7 +2,7 @@ import React from 'react';
 import UploadCloud from '../Icons/UploadCloud';
 
 const Step2 = ({ formUser, onChange, onFileChange }) => {
-  const { avatar } = formUser;
+  // const { avatar } = formUser;
   return (
     <>
       <header>

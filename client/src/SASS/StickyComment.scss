@@ -1,0 +1,159 @@
+@import './palette';
+
+.StickyComments__TopBar {
+  align-items: center;
+  background: none;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 105px;
+  position: absolute;
+  height: 71px;
+  width: 100%;
+  z-index: 9999999;
+
+  p {
+    font-size: 18px;
+    line-height: 21px;
+    letter-spacing: 0.11em;
+  }
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+.StickyComment__hover-space {
+  align-items: center;
+  display: flex;
+  //negative margin compensates for centering
+  margin: -10px 0 0 -10px;
+  position: absolute;
+  z-index: 99999;
+
+  &:hover + main.StickyComment__container {
+    display: flex;
+  }
+
+  .StickyComment__dot {
+    align-self: center;
+    align-items: center;
+    background: $blue;
+    border-radius: 50%;
+    display: flex;
+    height: 20px;
+    justify-content: center;
+    width: 20px;
+
+    .StickyComment__dot-center {
+      background: $white;
+      border-radius: 50%;
+      height: 6px;
+      width: 6px;
+    }
+  }
+}
+
+main.StickyComment__container.TempComment {
+  margin: -47px 0 0 9px;
+}
+
+main.StickyComment__container {
+  align-items: center;
+  display: none;
+  // display: flex;
+  flex-direction: row;
+  //negative margin compensates for centering
+  margin: -23px 0 0 10px;
+  position: absolute;
+  z-index: 99999;
+
+  hr.StickyComment__midbar {
+    background: $blue;
+    border-color: $blue;
+    width: 64px;
+  }
+
+  .StickyComment__body {
+    align-items: center;
+    align-self: center;
+    background: $blue;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    padding: 8px;
+
+    .StickyComment__body__avatar {
+      border-radius: 100%;
+      height: 30px;
+      object-fit: cover;
+      width: 30px;
+    }
+
+    .StickyComment__body__text {
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      padding: 0 8px;
+      header {
+        display: flex;
+        em {
+          font-weight: 900;
+        }
+        p {
+          margin: 0;
+          margin-left: 8px;
+        }
+      }
+      p {
+        font-weight: normal;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .StickyComment__form {
+    align-self: center;
+    border-radius: 10px;
+    display: flex;
+
+    textarea {
+      background-color: $blue;
+      border: none;
+      border-radius: 10px;
+      box-sizing: border-box;
+      color: $white;
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      padding: 8px;
+      resize: none;
+      height: 94px;
+      width: 283px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  button.StickyComments__submit-btn {
+    align-self: flex-end;
+    background-color: $blue;
+    border: 1px solid $white;
+    border-radius: 100%;
+    cursor: pointer;
+    height: 40px;
+    margin: 0 0 6px -45px;
+    outline: none;
+    width: 40px;
+    z-index: 9;
+    svg {
+      margin: 0 0 -3px -3px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    &:hover {
+      background: $btn-primary-hover;
+    }
+  }
+}
