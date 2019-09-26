@@ -11,6 +11,7 @@ import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
 import SendIcon from './Icons/SendIcon';
+import { axiosWithAuth } from '../utilities/axiosWithAuth'
 
 import ImageViewer from './ImageViewer/ImageViewer.js';
 
@@ -29,36 +30,18 @@ class Projects extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(
-        'https://designhubx-staging.herokuapp.com' +
-          `/api/v1/projects/${this.state.projectId}`
-      )
-      .then(res => {
-        console.log("in axios")
-        console.log(res.data)
-        this.setState({ projectInfo: res.data[0] })
-      })
+    return axiosWithAuth()
+      .get(`api/v1/projects/${this.state.projectId}`)
+      .then(res => this.setState({ projectInfo: res.data[0] }))
       .then(() => (
-        axios
-      .get(
-        `https://designhubx-staging.herokuapp.com/api/v1/photo/projects/${this.state.projectId}`
-      )
-      .then(res => {
-        console.log(
-          'Project.js ComponentDidMount() photo/projects res.data',
-          res.data
-        );
-        this.setState({ thumbnails: res.data });
-      })
+        axiosWithAuth()
+        .get(`api/v1/photo/projects/${this.state.projectId}`)
+      .then(res => this.setState({ thumbnails: res.data }))
       .catch(err => console.log(err))
       ))
       .then(() => (
-        axios
-      .get(
-        'https://designhubx-staging.herokuapp.com' +
-          `/api/v1/comments/project/${this.state.projectId}`
-      )
+        axiosWithAuth()
+      .get(`api/v1/comments/project/${this.state.projectId}`)
       .then(res => this.setState({ comments: res.data }))
       .catch(err => console.log(err))
       ))

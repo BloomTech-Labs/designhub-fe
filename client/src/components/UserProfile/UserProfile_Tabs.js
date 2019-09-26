@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from 'axios';
 
 import Heatmap from './Heatmap.js';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth'
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 
@@ -16,8 +17,8 @@ class UserProfile_Tabs extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get('https://designhubx-staging.herokuapp.com/api/v1/users')
+    axiosWithAuth()
+      .get('api/v1/users')
       .then(res => this.setState({ allUsers: res.data }))
       .catch(err => console.log(err));
   }
