@@ -6,6 +6,7 @@ import axios from 'axios';
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
 import ModalXIcon from '../Icons/ModalXIcon.js';
+import CommentBubbleIcon from '../Icons/CommentBubbleIcon.js';
 import '../../SASS/StickyComment.scss';
 
 const uuidv1 = require('uuid/v1');
@@ -14,41 +15,45 @@ export class ImageWithComments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activeImg: this.props.activeImg,
       comments: [],
-      tempComments: [],
-      activeImg: this.props.activeImg
+      hidden: false,
+      tempComments: []
     };
     this.element = null;
-    this.width = null;
-    this.height = null;
-    this.left = null;
     this.leftOffset = null;
-    this.top = null;
     this.topOffset = null;
   }
 
   render() {
     const { id, url } = this.props.activeImg;
-    const { comments, tempComments } = this.state;
-    console.log('ImageWithComments.js render() comments', comments);
+    const { hidden, comments, tempComments } = this.state;
+    // console.log('ImageWithComments.js render() comments', comments);
     let activeComments = comments.filter(c => c.imageId === id);
     console.log('ImageWithComments.js render() activeComments', activeComments);
     let activeTemp = tempComments.filter(c => c.imageId === id);
-    console.log('ImageWithComments.js render() tempComments', tempComments);
     return (
       <>
         <div className="StickyComments__TopBar">
           <p>Click anywhere on the image to leave a sticky comment</p>
-          <div onClick={this.props.closeModal}>
-            <ModalXIcon />
-          </div>
+          <section className="StickyComments__TopBar__Icons">
+            <div
+              className={hidden ? 'hidden' : null}
+              onClick={() => this.setState({ hidden: !this.state.hidden })}
+            >
+              <CommentBubbleIcon />
+            </div>
+            <div onClick={this.props.closeModal}>
+              <ModalXIcon />
+            </div>
+          </section>
         </div>
+
         <div className="ImageWithComments">
           <img
             alt={url}
             className="ImageWithComments__full-img"
             onClick={e => this.handleClick(e, id)}
-            // onMouseMove={this.onMouseMove}
             src={url}
           />
 
@@ -57,6 +62,7 @@ export class ImageWithComments extends React.Component {
               <TempComment
                 c={c}
                 key={c.id}
+                hidden={this.state.hidden}
                 onSubmit={this.handleSubmit}
                 commentDelete={this.commentDelete}
               />
@@ -66,6 +72,7 @@ export class ImageWithComments extends React.Component {
             activeComments.map(s => (
               <StickyComment
                 {...s}
+                hidden={this.state.hidden}
                 key={s.id}
                 commentDelete={this.commentDelete}
               />
@@ -78,10 +85,10 @@ export class ImageWithComments extends React.Component {
     this.element = findDOMNode(this);
     // GET ALL COMMENTS
     const projectComments = this.props.comments;
-    console.log(
-      'ImageWithComments.js componentDidMount() this.props.comments',
-      this.props.comments
-    );
+    // console.log(
+    //   'ImageWithComments.js componentDidMount() this.props.comments',
+    //   this.props.comments
+    // );
     this.setState({
       ...this.state,
       comments: projectComments
@@ -123,7 +130,7 @@ export class ImageWithComments extends React.Component {
     };
     this.setState({
       ...this.state,
-      tempComments: [...this.state.tempComments, newComment]
+      tempComments: [newComment]
     });
   };
 
@@ -139,14 +146,13 @@ export class ImageWithComments extends React.Component {
 
   handleSubmit = async (e, c) => {
     e.preventDefault();
-    const { comments, tempComments } = this.state;
-    let updateTemp = tempComments.filter(i => i.id !== c.id);
+    const { comments } = this.state;
     const thisComment = { ...c };
 
     // delete local state flags before submitting to database
     delete thisComment.id;
     delete thisComment.editing;
-    console.log('ImageWithComments.js handleSubmit() thisComment', thisComment);
+    // console.log('ImageWithComments.js handleSubmit() thisComment', thisComment);
 
     try {
       const res = await axios.post(
@@ -161,7 +167,7 @@ export class ImageWithComments extends React.Component {
       this.props.addComments(updateComments);
       this.setState({
         ...this.state,
-        tempComments: updateTemp,
+        tempComments: [],
         comments: updateComments
       });
     } catch (err) {
@@ -171,10 +177,6 @@ export class ImageWithComments extends React.Component {
 
   updateElementPosition = (x, y) => {
     const rect = this.element.getBoundingClientRect();
-    this.width = this.element.offsetWidth;
-    this.height = this.element.offsetHeight;
-    this.left = rect.left;
-    this.top = rect.top;
     this.topOffset = rect.top > 0 ? y : y - rect.top;
     this.leftOffset = rect.left > 0 ? x : x - rect.left;
   };

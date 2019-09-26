@@ -1,14 +1,27 @@
 import React from 'react';
+import moment from 'moment';
 
-export const StickyComment = ({ top, left, text, userAvatar, username }) => {
+export const StickyComment = ({
+  hidden,
+  created_at,
+  top,
+  left,
+  text,
+  userAvatar,
+  username
+}) => {
   return (
     <>
       <div
         className="StickyComment__hover-space"
-        style={{
-          top: top,
-          left: left
-        }}
+        style={
+          hidden
+            ? { display: 'none' }
+            : {
+                top: top,
+                left: left
+              }
+        }
       >
         <section className="StickyComment__dot">
           <div className="StickyComment__dot-center"> </div>
@@ -33,7 +46,7 @@ export const StickyComment = ({ top, left, text, userAvatar, username }) => {
           <div className="StickyComment__body__text">
             <header>
               <em>{username}</em>
-              <p>3h</p>
+              <p>{moment(created_at).fromNow()}</p>
             </header>
             <p>{text}</p>
           </div>
