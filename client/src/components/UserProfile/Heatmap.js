@@ -49,11 +49,10 @@ const Heatmap = props => {
       return {
         'data-tip': ` ${value.count} contributions on ${moment(
           value.date
-        ).format('MMMM Do YYYY')}`
+        ).format('MMM Do YYYY')}`
       };
     }
   };
-  console.log(heatmapArr);
 
   return (
     <div className="heatmap">
@@ -63,7 +62,6 @@ const Heatmap = props => {
         endDate={today}
         values={heatmapArr}
         tooltipDataAttrs={value => {
-          console.log('value', value);
           return renderToolTip(value);
         }}
         classForValue={value => {
