@@ -1,14 +1,25 @@
 import React from 'react';
 
-export const StickyComment = ({ top, left, text, userAvatar, username }) => {
+export const StickyComment = ({
+  hidden,
+  top,
+  left,
+  text,
+  userAvatar,
+  username
+}) => {
   return (
     <>
       <div
         className="StickyComment__hover-space"
-        style={{
-          top: top,
-          left: left
-        }}
+        style={
+          hidden
+            ? { display: 'none' }
+            : {
+                top: top,
+                left: left
+              }
+        }
       >
         <section className="StickyComment__dot">
           <div className="StickyComment__dot-center"> </div>

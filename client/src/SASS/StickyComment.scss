@@ -18,8 +18,25 @@
     letter-spacing: 0.11em;
   }
 
-  svg {
-    cursor: pointer;
+  .StickyComments__TopBar__Icons {
+    align-items: center;
+    display: flex;
+    svg {
+      cursor: pointer;
+      margin-left: 24px;
+      fill: $white;
+      &:hover {
+        fill: none;
+      }
+    }
+    div.hidden {
+      svg {
+        fill: none;
+        &:hover {
+          fill: $white;
+        }
+      }
+    }
   }
 }
 
