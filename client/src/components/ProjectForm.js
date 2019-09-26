@@ -123,39 +123,53 @@ const ProjectForm = ({ isEditing, project, history }) => {
 
   return (
     <div className="project-form-wrapper">
-      <h2>{isEditing ? 'Edit project' : 'Create a project'}</h2>
-      <form
-        encType="multipart/form-data"
-        className="project-form-container"
-        onSubmit={handleSubmit}
-      >
-        <div className="inner-form-container">
-          <div className="project-form-left-column">
-            <label htmlFor="name">Project title</label>
-            <input
-              type="text"
-              value={name}
-              name="name"
-              id="name"
-              placeholder="Enter project title here"
-              onChange={handleChanges}
-            />
-            <label htmlFor="description">Project description</label>
-            <input
-              id="description"
-              name="description"
-              value={description}
-              type="text"
-              placeholder="Enter project description here"
-              onChange={handleChanges}
-            />
-            <label htmlFor="teamMembers">Add team members</label>
-            <input
-              type="text"
-              placeholder="Enter team member usernames separated by a comma"
-              id="teamMembers"
-            />
-          </div>
+      <div className="left-container">
+        <h2 className="page-header">
+          {isEditing ? 'Edit project' : 'Create a project'}
+        </h2>
+        <label htmlFor="image-upload" className="label">
+          {isEditing ? 'Add more files' : 'Attach files'}
+        </label>
+
+        <MultiImageUpload filesArray={{ files, setFiles }} />
+      </div>
+      <div className="right-container">
+        <form
+          encType="multipart/form-data"
+          className="project-form-container"
+          onSubmit={handleSubmit}
+        >
+          <label htmlFor="name" className="label">
+            Project title
+          </label>
+          <input
+            type="text"
+            value={name}
+            name="name"
+            id="name"
+            placeholder="Enter project title here"
+            onChange={handleChanges}
+          />
+          <label htmlFor="description" className="label">
+            Project description
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            value={description}
+            type="text"
+            placeholder="Enter project description here"
+            onChange={handleChanges}
+            className="description"
+          />
+          <label htmlFor="teamMembers" className="label">
+            Add team members
+          </label>
+          <input
+            type="text"
+            placeholder="Enter team member usernames separated by a comma"
+            id="teamMembers"
+          />
           {isLoading && (
             <div style={{ position: 'relative' }}>
               <Loader
@@ -174,44 +188,42 @@ const ProjectForm = ({ isEditing, project, history }) => {
             </div>
           )}
 
-          <div className="project-form-right-column">
-            <label htmlFor="image-upload">
-              {isEditing ? 'Add more files' : 'Attach files'}
-            </label>
-
-            <MultiImageUpload filesArray={{ files, setFiles }} />
-
-            <label htmlFor="figmaLink">Figma link</label>
-            <input
-              type="text"
-              name="figma"
-              value={figma}
-              placeholder="Enter Figma link here"
-              id="figmaLink"
-              onChange={handleChanges}
-            />
-            <label htmlFor="invisionLink">InVision link</label>
-            <input
-              type="text"
-              name="invision"
-              value={invision}
-              placeholder="Enter InVision link here"
-              id="invisionLink"
-              onChange={handleChanges}
-            />
+          <label htmlFor="figmaLink" className="label">
+            Figma link
+          </label>
+          <input
+            type="text"
+            name="figma"
+            value={figma}
+            placeholder="Enter Figma link here"
+            id="figmaLink"
+            onChange={handleChanges}
+          />
+          <label htmlFor="invisionLink" className="label">
+            InVision link
+          </label>
+          <input
+            type="text"
+            name="invision"
+            value={invision}
+            placeholder="Enter InVision link here"
+            id="invisionLink"
+            onChange={handleChanges}
+          />
+          <div className="submit-cancel-container">
+            <button
+              className="submit-button"
+              type="submit"
+              disabled={disableButton}
+            >
+              {isEditing ? 'Save Changes' : 'Publish'}
+            </button>
+            <button type="button" className="cancel-btn">
+              Cancel
+            </button>
           </div>
-        </div>
-        <div className="form-buttons-container">
-          <button
-            className="submit-button"
-            type="submit"
-            disabled={disableButton}
-          >
-            {isEditing ? 'Save Changes' : 'Publish'}
-          </button>
-          <button type="button">Cancel</button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

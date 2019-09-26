@@ -2,89 +2,146 @@
 @import './palette';
 
 .project-form-wrapper {
-  margin-top: 78px;
   color: $white;
-  width: 90%;
-  h2 {
-    margin: 60px auto;
-    font-weight: 500;
-    font-size: 1.5rem;
-    line-height: 1.5rem;
-    letter-spacing: 0.11em;
-  }
-  label {
-    font-weight: normal;
-    font-size: 1rem;
-    line-height: 1rem;
-    letter-spacing: 0.11em;
-    margin-bottom: 16px;
-  }
-  input {
-    font-weight: normal;
-    font-size: 0.8rem;
-    margin-bottom: 40px;
-    background-color: $field-bg;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    letter-spacing: 0.11em;
-    color: $white;
-  }
-  button {
-    @include btn;
-    background: $dark-grey;
-    width: 188px;
-    text-align: center;
-    letter-spacing: 0.11em;
-    padding: 1.5vh 0px;
-  }
-  p {
-    letter-spacing: 0.11em;
-    color: $dark-grey;
-    font-style: italic;
-    font-weight: 500;
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-  }
-  #projectDescription {
-    height: 92px;
-    line-height: 92px;
-    input {
-      height: 92px;
-      line-height: 92px;
-    }
-  }
-  .attach-files {
-    padding: 1.5vh 0px;
-    margin-bottom: 24px;
-  }
-  .submit-button {
-    @include btn;
-    background: $btn-gradient;
-    margin-right: 16px;
-  }
-  .project-form-container {
-    .inner-form-container {
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
+  width: 98%;
+  margin-top: 14vh;
+  display: flex;
+
+  .left-container {
+    width: 50%;
+    margin: 0px 20px 0px 0px;
+
+    .page-header {
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      letter-spacing: 0.11em;
+      margin-bottom: 14px;
     }
 
+    .upload-container {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 20px;
+      border-radius: 10px;
+      background: $field-bg;
+      transition: all 0.1s ease-in-out;
+      cursor: pointer;
+    }
+    .upload-container:hover {
+      background: #33343b;
+    }
+
+    .drop-text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .upload-icon {
+        opacity: 0.2;
+        margin-bottom: 10px;
+      }
+
+      .drop-text {
+        margin-bottom: 10px;
+
+        mark {
+          background: none;
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  .thumbnail-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .thumb {
+    border: 5px solid $black;
+    display: inline-flex;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    width: 10.9vw;
+    height: 100px;
+    box-sizing: border-box;
+  }
+
+  .thumbnail {
+    object-fit: cover;
     width: 100%;
-    .project-form-left-column {
-      width: 47%;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: flex-start;
+  }
+
+  .remove {
+    width: 20px;
+    position: absolute;
+    margin-top: -5px;
+    margin-left: -5px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    opacity: 0.8;
+  }
+
+  .remove:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  .right-container {
+    width: 50%;
+    margin: 3% 0px 0px 20px;
+    display: flex;
+    flex-direction: column;
+
+    input {
+      width: 98%;
+      margin: 10px 0 20px 0;
+      padding: 10px 0;
+      background: $field-bg;
+      border: none;
+      color: white;
+      outline: none;
+      padding-left: 10px;
+      border-radius: 5px;
     }
-    .project-form-right-column {
-      width: 45%;
-      display: flex;
-      flex-flow: column nowrap;
-      justify-content: space-between;
+
+    .description {
+      width: 98%;
+      margin: 10px 0 20px 0;
+      padding: 10px 0;
+      background: $field-bg;
+      border: none;
+      color: white;
+      outline: none;
+      padding-left: 10px;
+      border-radius: 5px;
+      resize: vertical;
+      line-height: 2px;
+      font-size: 0.8rem;
     }
-    .form-buttons-container {
-      display: block;
+  }
+
+  .submit-cancel-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    .submit-button {
+      @include follow-btn;
+      margin-left: 10px;
+    }
+
+    .cancel-btn {
+      @include edit-profile-btn;
+      background: $field-bg;
     }
   }
 }

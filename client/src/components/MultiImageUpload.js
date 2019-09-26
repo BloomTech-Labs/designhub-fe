@@ -1,38 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import UploadCloud from './Icons/UploadCloud';
+import upload from '../ASSETS/upload-cloud.svg';
+import remove from '../ASSETS/remove.svg';
+
+import '../SASS/ProjectForm.scss';
 
 import { useDropzone } from 'react-dropzone';
-
-const thumbsContainer = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  marginTop: 16,
-  justifyContent: 'space-evenly'
-};
-
-const thumb = {
-  display: 'inline-flex',
-  borderRadius: 2,
-  border: '1px solid #eaeaea',
-  marginBottom: 8,
-  marginRight: 8,
-  width: 125,
-  height: 125,
-  padding: 4,
-  boxSizing: 'border-box'
-};
 
 const thumbInner = {
   display: 'flex',
   minWidth: 0,
   overflow: 'hidden'
-};
-
-const img = {
-  display: 'block',
-  width: 'auto',
-  height: '100%'
 };
 
 export function MultiImageUpload(props) {
@@ -59,15 +36,14 @@ export function MultiImageUpload(props) {
     };
     return files.map((file, index) => (
       <div key={index}>
-        <p
-          style={{ color: 'red', marginBottom: '5px', cursor: 'pointer' }}
+        <img
+          src={remove}
+          className="remove"
           onClick={() => removeThumbnail(index)}
-        >
-          Remove
-        </p>
-        <div style={thumb} key={index}>
+        />
+        <div className="thumb" key={index}>
           <div style={thumbInner}>
-            <img src={file.preview} style={img} />
+            <img src={file.preview} className="thumbnail" />
           </div>
         </div>
       </div>
@@ -78,22 +54,17 @@ export function MultiImageUpload(props) {
     <section className="container">
       <div
         {...getRootProps({ className: 'dropzone' })}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-          border: '1.2px dashed white',
-          padding: '20px'
-        }}
+        className="upload-container"
       >
         <input {...getInputProps()} multiple={true} />
-
-        <UploadCloud />
-        <p style={{ margin: '20px' }}>
-          Drag 'n' drop some files here, or click to icon
-        </p>
+        <div className="drop-text-container">
+          <img src={upload} className="upload-icon" alt="upload" />
+          <p className="drop-text">
+            Drag and drop images or <mark>browse</mark> to choose a files
+          </p>
+        </div>
       </div>
-      <aside style={thumbsContainer}>{thumbs()}</aside>
+      <aside className="thumbnail-container">{thumbs()}</aside>
     </section>
   );
 }
