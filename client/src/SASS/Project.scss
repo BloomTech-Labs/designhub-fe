@@ -76,6 +76,7 @@
 
       .link-disabled {
         filter: grayscale(100);
+        cursor: default;
       }
 
       .link-enabled {
