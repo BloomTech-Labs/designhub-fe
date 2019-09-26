@@ -34,7 +34,10 @@ class Projects extends Component {
         'https://designhubx-staging.herokuapp.com' +
           `/api/v1/projects/${this.state.projectId}`
       )
-      .then(res => this.setState({ projectInfo: res.data[0] }))
+      .then(res => {
+        console.log("in axios")
+        this.setState({ projectInfo: res.data[0] })
+      })
       .then(() => (
         axios
       .get(
