@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import axios from 'axios';
+import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
@@ -17,19 +18,42 @@ const Heatmap = props => {
     getHeatmap();
   }, []);
 
+  // This function is used to determine the start date based on what the current date is
   function shiftDate(date, numDays) {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + numDays);
     return newDate;
   }
 
-  console.log(heatmapArr);
+  // Grabs the array of heatmaps based on user Id
   const getHeatmap = async () => {
     const { data } = await axios.get(
       `http://localhost:8000/api/v1/heatmap/${params}`
     );
     setHeatmapArr(data);
   };
+
+  //conditionally renders the tool tip message when hovering over a square
+  const renderToolTip = value => {
+    if (value.date === null || value.count === null) {
+      return {
+        'data-tip': `No contributions on this date`
+      };
+    } else if (value.count === 1) {
+      return {
+        'data-tip': `${value.count} contribution on ${moment(value.date).format(
+          'MMM Do YYYY'
+        )}`
+      };
+    } else {
+      return {
+        'data-tip': ` ${value.count} contributions on ${moment(
+          value.date
+        ).format('MMMM Do YYYY')}`
+      };
+    }
+  };
+  console.log(heatmapArr);
 
   return (
     <div className="heatmap">
@@ -38,6 +62,10 @@ const Heatmap = props => {
         startDate={shiftDate(today, -150)}
         endDate={today}
         values={heatmapArr}
+        tooltipDataAttrs={value => {
+          console.log('value', value);
+          return renderToolTip(value);
+        }}
         classForValue={value => {
           if (!value) {
             return 'color-empty';
@@ -46,10 +74,8 @@ const Heatmap = props => {
         }}
         gutterSize={6}
         showWeekdayLabels={true}
-        tooltipDataAttrs={value => {
-          return { 'data-tooltip': 'Tooltip' + value };
-        }}
       />
+      <ReactTooltip />
     </div>
   );
 };
