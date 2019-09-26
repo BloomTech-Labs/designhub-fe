@@ -36,6 +36,7 @@ class Projects extends Component {
       )
       .then(res => {
         console.log("in axios")
+        console.log(res.data)
         this.setState({ projectInfo: res.data[0] })
       })
       .then(() => (
