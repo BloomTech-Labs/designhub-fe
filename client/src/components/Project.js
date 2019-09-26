@@ -35,9 +35,8 @@ class Projects extends Component {
           `/api/v1/projects/${this.state.projectId}`
       )
       .then(res => this.setState({ projectInfo: res.data[0] }))
-      .catch(err => console.log(err));
-
-    axios
+      .then(() => (
+        axios
       .get(
         `https://designhubx-staging.herokuapp.com/api/v1/photo/projects/${this.state.projectId}`
       )
@@ -48,15 +47,20 @@ class Projects extends Component {
         );
         this.setState({ thumbnails: res.data });
       })
-      .catch(err => console.log(err));
-
-    axios
+      .catch(err => console.log(err))
+      ))
+      .then(() => (
+        axios
       .get(
         'https://designhubx-staging.herokuapp.com' +
           `/api/v1/comments/project/${this.state.projectId}`
       )
       .then(res => this.setState({ comments: res.data }))
+      .catch(err => console.log(err))
+      ))
       .catch(err => console.log(err));
+
+    
   }
 
   render() {
