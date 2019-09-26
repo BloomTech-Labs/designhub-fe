@@ -1,7 +1,9 @@
 import React from 'react';
+import moment from 'moment';
 
 export const StickyComment = ({
   hidden,
+  created_at,
   top,
   left,
   text,
@@ -44,7 +46,7 @@ export const StickyComment = ({
           <div className="StickyComment__body__text">
             <header>
               <em>{username}</em>
-              <p>3h</p>
+              <p>{moment(created_at).fromNow()}</p>
             </header>
             <p>{text}</p>
           </div>

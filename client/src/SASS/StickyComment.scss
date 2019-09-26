@@ -78,7 +78,6 @@ main.StickyComment__container.TempComment {
 main.StickyComment__container {
   align-items: center;
   display: none;
-  // display: flex;
   flex-direction: row;
   //negative margin compensates for centering
   margin: -23px 0 0 10px;
@@ -120,6 +119,7 @@ main.StickyComment__container {
         p {
           margin: 0;
           margin-left: 8px;
+          margin-top: -1px;
         }
       }
       p {
