@@ -123,7 +123,7 @@ export class ImageWithComments extends React.Component {
     };
     this.setState({
       ...this.state,
-      tempComments: [...this.state.tempComments, newComment]
+      tempComments: [newComment]
     });
   };
 
@@ -139,8 +139,7 @@ export class ImageWithComments extends React.Component {
 
   handleSubmit = async (e, c) => {
     e.preventDefault();
-    const { comments, tempComments } = this.state;
-    let updateTemp = tempComments.filter(i => i.id !== c.id);
+    const { comments } = this.state;
     const thisComment = { ...c };
 
     // delete local state flags before submitting to database
@@ -161,7 +160,7 @@ export class ImageWithComments extends React.Component {
       this.props.addComments(updateComments);
       this.setState({
         ...this.state,
-        tempComments: updateTemp,
+        tempComments: [],
         comments: updateComments
       });
     } catch (err) {
