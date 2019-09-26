@@ -21,7 +21,7 @@ class Projects extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projectInfo: [],
+      projectInfo: null,
       projectId: this.props.match.params.id,
       thumbnails: [],
       comments: []
@@ -60,6 +60,9 @@ class Projects extends Component {
   }
 
   render() {
+    if (!this.state.projectInfo) {
+      return <h1>Loading...</h1>
+    }
     console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
     const thisProject = this.state.projectInfo;
