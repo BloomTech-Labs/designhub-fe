@@ -16,7 +16,9 @@ class UserProfile_LI extends Component {
       following: [],
       userId: this.props.match.params.id,
       userData: [],
-      projects: []
+      projects: [],
+      followersTab: [],
+      followingTab: []
     };
   }
 
@@ -41,21 +43,31 @@ class UserProfile_LI extends Component {
     function getUserProjects() {
       return axiosWithAuth().get(`/api/v1/projects/users/${paramsId}`);
     }
+    function getFollowers() {
+      return axiosWithAuth().get(`api/v1/followers/followers/${paramsId}`);
+    }
+    function getFollowing() {
+      return axiosWithAuth().get(`api/v1/followers/following/${paramsId}`);
+    }
 
     return axios
       .all([
         getUserData(paramsId),
         getFollowingCount(paramsId),
         getFollowerCount(paramsId),
-        getUserProjects()
+        getUserProjects(),
+        getFollowers(paramsId),
+        getFollowing(paramsId)
       ])
       .then(
-        axios.spread((a, b, c, d) => {
+        axios.spread((a, b, c, d, e, f) => {
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
             followers: c.data[0].count,
-            projects: d.data
+            projects: d.data,
+            followersTab: e.data,
+            followingTab: f.data
           });
         })
       )
@@ -133,7 +145,11 @@ class UserProfile_LI extends Component {
             </div>
           </div>
         </div>
-        <UserProfileTabs projects={projects} />
+        <UserProfileTabs
+          projects={projects}
+          followers={this.state.followersTab}
+          following={this.state.followingTab}
+        />
       </div>
     );
   }
