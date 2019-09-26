@@ -1,3 +1,5 @@
+@import './palette';
+
 .ImageViewer {
   // border: 1px solid white;
   color: white;
@@ -65,34 +67,32 @@
 
     .modal--expand {
       animation: fadeIn 0.2s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      height: 100%;
       opacity: 1;
       overflow-y: scroll;
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 999999;
       width: 100%;
-      height: 100%;
+      z-index: 999999;
 
-      img {
+      img.ImageWithComments__full-img {
+        max-width: 1200px;
         position: relative;
-        max-width: 80%;
         z-index: 999;
+        top: 71px;
+        left: 160px;
       }
 
-      span {
-        background: rgba(0, 0, 0, 0.897);
+      span.modal--expand__background-overlay {
+        background: $modal-bg;
         cursor: pointer;
         content: '';
         position: fixed;
+        height: 100vh;
         left: 0;
         top: 0;
         width: 100%;
-        height: 100vh;
         z-index: 99;
       }
 
