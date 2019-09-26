@@ -226,7 +226,13 @@ const ProjectForm = ({ isEditing, project, history }) => {
             >
               {isEditing ? 'Save Changes' : 'Publish'}
             </button>
-            <button type="button" className="cancel-btn">
+            <button
+              type="button"
+              className="cancel-btn"
+              onClick={() => {
+                history.goBack();
+              }}
+            >
               Cancel
             </button>
           </div>
