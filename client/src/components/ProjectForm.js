@@ -47,7 +47,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
       : addProject(state.project);
   };
 
-  const handleImageUpload = async (file, projectId) => {
+  const handleImageUpload = async (file, projectId, projectTitle) => {
     if (files.length > 0) {
       let requestPromises = files.map(async (file, index) => {
         try {
@@ -71,6 +71,18 @@ const ProjectForm = ({ isEditing, project, history }) => {
             { projectId: projectId, url: key }
           );
 
+          console.log('TEST OBJECT ADFLJHDASKJFHKJADSJHFKLAFDH', {
+            userId: state.project.userId,
+            contribution: `Posted one photo to ${projectTitle}`,
+            projectId: projectId
+          });
+
+          await axios.post(`${process.env.REACT_APP_BASE_URL}api/v1/heatmap`, {
+            userId: state.project.userId,
+            contribution: `Posted one photo to ${projectTitle}`,
+            projectId: projectId
+          });
+
           return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
@@ -87,12 +99,14 @@ const ProjectForm = ({ isEditing, project, history }) => {
   const addProject = async project => {
     try {
       const {
-        data: { id }
+        data: { id },
+        data
       } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
         project
       );
-      const something = await handleImageUpload(files, id);
+
+      const something = await handleImageUpload(files, id, data.data[0].name);
       const newProject = {
         ...project,
         mainImg: something
