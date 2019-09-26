@@ -90,7 +90,7 @@ const OnboardingForm = props => {
         }
       });
 
-      return `${process.env.S3_BUCKET_URL}${key}`;
+      return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
     } catch (err) {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }

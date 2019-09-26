@@ -60,6 +60,7 @@ class Projects extends Component {
   }
 
   render() {
+    console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
     const thisProject = this.state.projectInfo;
     const comments = this.state.comments;
@@ -119,7 +120,16 @@ class Projects extends Component {
               <div className="star project-header-button">
                 <StarIcon />
               </div>
-              <div className="edit project-header-button">Edit</div>
+              <div
+                className="edit project-header-button"
+                onClick={() => {
+                  this.props.history.push(
+                    `/project/${this.state.projectId}/edit`
+                  );
+                }}
+              >
+                Edit
+              </div>
             </div>
           </div>
         </div>
