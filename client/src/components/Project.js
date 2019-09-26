@@ -11,7 +11,7 @@ import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
 import SendIcon from './Icons/SendIcon';
-import { axiosWithAuth } from '../utilities/axiosWithAuth'
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 import ImageViewer from './ImageViewer/ImageViewer.js';
 
@@ -33,26 +33,24 @@ class Projects extends Component {
     return axiosWithAuth()
       .get(`api/v1/projects/${this.state.projectId}`)
       .then(res => this.setState({ projectInfo: res.data[0] }))
-      .then(() => (
+      .then(() =>
         axiosWithAuth()
-        .get(`api/v1/photo/projects/${this.state.projectId}`)
-      .then(res => this.setState({ thumbnails: res.data }))
-      .catch(err => console.log(err))
-      ))
-      .then(() => (
+          .get(`api/v1/photo/projects/${this.state.projectId}`)
+          .then(res => this.setState({ thumbnails: res.data }))
+          .catch(err => console.log(err))
+      )
+      .then(() =>
         axiosWithAuth()
-      .get(`api/v1/comments/project/${this.state.projectId}`)
-      .then(res => this.setState({ comments: res.data }))
-      .catch(err => console.log(err))
-      ))
+          .get(`api/v1/comments/project/${this.state.projectId}`)
+          .then(res => this.setState({ comments: res.data }))
+          .catch(err => console.log(err))
+      )
       .catch(err => console.log(err));
-
-    
   }
 
   render() {
     if (!this.state.projectInfo) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     }
     console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
@@ -72,7 +70,7 @@ class Projects extends Component {
                 Created by{' '}
                 <span className="project-header-username">
                   <Link to={`/profile/${thisProject.userId}/`}>
-                    eriklambert
+                    {activeUser.username}
                   </Link>
                 </span>
               </span>
