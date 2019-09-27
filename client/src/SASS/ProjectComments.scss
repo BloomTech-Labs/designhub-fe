@@ -34,7 +34,7 @@
 
   .ProjectComment__body {
     align-items: center;
-    align-self: center;
+    // align-self: center;
     background: $blue;
     border-radius: 10px;
     box-sizing: border-box;
@@ -48,6 +48,7 @@
     }
 
     .ProjectComment__body__avatar {
+      align-self: baseline;
       border-radius: 100%;
       height: 35px;
       object-fit: cover;
