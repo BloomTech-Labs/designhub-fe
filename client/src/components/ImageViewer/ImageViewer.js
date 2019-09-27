@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../SASS/ImageViewer.scss';
 import { ImageWithComments } from './ImageWithComments';
+import ProjectComments from './ProjectComments.js';
 
 class ImageViewer extends Component {
   constructor(props) {
@@ -53,53 +54,66 @@ class ImageViewer extends Component {
       return <h1>Loading</h1>;
     } else {
       return (
-        <div className="ImageViewer">
-          <main className="ImageViewer__body">
-            <div className={modal ? 'modal--expand' : 'modal--close'}>
-              <span
-                className="modal--expand__background-overlay"
-                onClick={this.closeModal}
-              />
-              {modal && (
-                <ImageWithComments
-                  activeUser={this.props.activeUser}
-                  activeImg={activeImg}
-                  addComments={this.addComments}
-                  closeModal={this.closeModal}
-                  comments={
-                    this.state.comments.length > 0
-                      ? this.state.comments
-                      : this.props.comments
-                  }
-                  thisProject={this.props.thisProject}
+        <>
+          <div className="ImageViewer">
+            <main className="ImageViewer__body">
+              <div className={modal ? 'modal--expand' : 'modal--close'}>
+                <span
+                  className="modal--expand__background-overlay"
+                  onClick={this.closeModal}
                 />
-              )}
-            </div>
-            <div className="main-image-container">
-              <section className="ImageViewer__main-image">
-                <img
-                  src={activeImg ? activeImg.url : this.props.thumbnails[0].url}
-                  alt="main project"
-                  onClick={() => this.setState({ modal: true })}
-                  className="main-image"
-                />
-              </section>
-              <section className="ImageViewer__thumbnails">
-                {allImgs
-                  ? allImgs
-                  : this.props.thumbnails.map(t => (
-                      <img
-                        key={t.url}
-                        src={t.url}
-                        alt="project-thumbnail"
-                        onClick={() => this.changeImg(t)}
-                        className="thumbnails"
-                      />
-                    ))}
-              </section>
-            </div>
-          </main>
-        </div>
+                {modal && (
+                  <ImageWithComments
+                    activeUser={this.props.activeUser}
+                    activeImg={activeImg}
+                    addComments={this.addComments}
+                    closeModal={this.closeModal}
+                    comments={
+                      this.state.comments.length > 0
+                        ? this.state.comments
+                        : this.props.comments
+                    }
+                    thisProject={this.props.thisProject}
+                  />
+                )}
+              </div>
+              <div className="main-image-container">
+                <section className="ImageViewer__main-image">
+                  <img
+                    src={
+                      activeImg ? activeImg.url : this.props.thumbnails[0].url
+                    }
+                    alt="main project"
+                    onClick={() => this.setState({ modal: true })}
+                    className="main-image"
+                  />
+                </section>
+                <section className="ImageViewer__thumbnails">
+                  {allImgs
+                    ? allImgs
+                    : this.props.thumbnails.map(t => (
+                        <img
+                          key={t.url}
+                          src={t.url}
+                          alt="project-thumbnail"
+                          onClick={() => this.changeImg(t)}
+                          className="thumbnails"
+                        />
+                      ))}
+                </section>
+              </div>
+            </main>
+          </div>
+
+          <ProjectComments
+            activeUser={this.props.activeUser}
+            comments={
+              this.state.comments.length > 0
+                ? this.state.comments
+                : this.props.comments
+            }
+          />
+        </>
       );
     }
   }
