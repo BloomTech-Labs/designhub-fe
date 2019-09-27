@@ -28,7 +28,7 @@ const Heatmap = props => {
   // Grabs the array of heatmaps based on user Id
   const getHeatmap = async () => {
     const { data } = await axios.get(
-      `https://designhubx-staging.herokuapp.com/api/v1/heatmap/${params}`
+      `https://designhubx.herokuapp.com/api/v1/heatmap/${params}`
     );
     setHeatmapArr(data);
   };
@@ -67,8 +67,11 @@ const Heatmap = props => {
         classForValue={value => {
           if (!value) {
             return 'color-empty';
+          } else if (value.count > 5) {
+            return `color-scale-high`;
+          } else {
+            return `color-scale-${value.count}`;
           }
-          return `color-scale-${value.count}`;
         }}
         gutterSize={6}
         showWeekdayLabels={true}

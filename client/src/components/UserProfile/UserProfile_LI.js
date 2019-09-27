@@ -7,6 +7,7 @@ import axios from 'axios';
 import UserProfileTabs from './UserProfile_Tabs.js';
 // ========== STYLES ========== //
 import '../../SASS/UserProfile.scss';
+import Loading from '../Loading.js';
 
 class UserProfile_LI extends Component {
   constructor(props) {
@@ -19,7 +20,9 @@ class UserProfile_LI extends Component {
       projects: [],
       followersTab: [],
       followingTab: [],
-      starred: []
+      starred: [],
+      myId: this.props.activeUser.id,
+      isFollowed: null
     };
   }
 
@@ -53,6 +56,9 @@ class UserProfile_LI extends Component {
     function getStarred() {
       return axiosWithAuth().get(`/api/v1/star/${paramsId}`);
     }
+    function getFollowStatus(userId, myId) {
+      return axiosWithAuth().get(`/api/v1/followers/${myId}/${userId}`);
+    }
 
     return axios
       .all([
@@ -62,10 +68,11 @@ class UserProfile_LI extends Component {
         getUserProjects(),
         getFollowers(paramsId),
         getFollowing(paramsId),
-        getStarred(paramsId)
+        getStarred(paramsId),
+        getFollowStatus(this.state.userId, this.state.myId)
       ])
       .then(
-        axios.spread((a, b, c, d, e, f, g) => {
+        axios.spread((a, b, c, d, e, f, g, h) => {
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
@@ -73,7 +80,8 @@ class UserProfile_LI extends Component {
             projects: d.data,
             followersTab: e.data,
             followingTab: f.data,
-            starred: g.data
+            starred: g.data,
+            isFollowed: h.data.isFollowed
           });
         })
       )
@@ -86,11 +94,73 @@ class UserProfile_LI extends Component {
     }
   }
 
+  followUser = () => {
+    const followingObj = {
+      followingId: this.state.myId,
+      followedId: this.state.userId
+    };
+    axios
+      .post(
+        'https://designhubx-staging.herokuapp.com/api/v1/followers',
+        followingObj
+      )
+      .then(res => {
+        console.log(res.data);
+      })
+      .then(() => {
+        return axiosWithAuth()
+          .get(`/api/v1/followers/count/followers/${this.state.userId}`)
+          .then(res => {
+            this.setState({ followers: res.data[0].count });
+          });
+      })
+      .then(() => {
+        return axiosWithAuth()
+          .get(`/api/v1/followers/${this.state.myId}/${this.state.userId}`)
+          .then(res => {
+            this.setState({ isFollowed: res.data.isFollowed });
+          });
+      })
+      .catch(err => console.log(err));
+  };
+
+  unfollowUser = () => {
+    const unFollowObj = {
+      id: this.state.myId
+    };
+    axios
+      .post(
+        `https://designhubx-staging.herokuapp.com/api/v1/followers/unfollow/${this.state.userId}`,
+        unFollowObj
+      )
+      .then(res => {
+        console.log(res.data);
+      })
+      .then(() => {
+        return axiosWithAuth()
+          .get(`/api/v1/followers/count/followers/${this.state.userId}`)
+          .then(res => {
+            this.setState({ followers: res.data[0].count });
+          });
+      })
+      .then(() => {
+        return axiosWithAuth()
+          .get(`/api/v1/followers/${this.state.myId}/${this.state.userId}`)
+          .then(res => {
+            this.setState({ isFollowed: res.data.isFollowed });
+          });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const userData = this.state.userData;
     const projects = this.state.projects;
     const activeUser = this.props.activeUser;
     window.scroll(0, 0);
+    if (projects.length === 0) {
+      return <Loading />;
+    }
     return (
       <div className="user-profile-container">
         <div className="user-header">
@@ -147,14 +217,25 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {activeUser.id === this.state.userId ? (
+                {activeUser.id == this.props.match.params.id ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>
                 ) : (
-                  <Link to="/settings">
-                    <button className="follow-btn">Follow</button>
-                  </Link>
+                  <>
+                    {this.state.isFollowed ? (
+                      <button
+                        className="edit-profile-btn"
+                        onClick={this.unfollowUser}
+                      >
+                        Unfollow
+                      </button>
+                    ) : (
+                      <button className="follow-btn" onClick={this.followUser}>
+                        Follow
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -165,6 +246,7 @@ class UserProfile_LI extends Component {
           followers={this.state.followersTab}
           following={this.state.followingTab}
           starred={this.state.starred}
+          isFollowed={this.state.isFollowed}
         />
       </div>
     );

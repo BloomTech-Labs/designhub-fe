@@ -4,6 +4,8 @@
 .Login-container {
   align-items: center;
   background: url('../ASSETS/loginpage-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: -40vh 0;
   color: $white;
   display: flex;
