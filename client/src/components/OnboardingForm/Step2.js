@@ -34,20 +34,19 @@ const Step2 = ({ formUser, files, setFiles }) => {
 
   const thumbs = () => {
     const removeThumbnail = index => {
-      console.log('clicked');
       const newList = files.filter(file => files[index] !== file);
       setFiles(newList);
     };
     if (files.length === 0) return <div className="avatarBlank">{''}</div>;
     else
       return files.map((file, index) => (
-        <div>
+        <div key={file.preview}>
           <img
             src={remove}
             className="remove"
             onClick={() => removeThumbnail(index)}
           />
-          <div className="thumb" key={index}>
+          <div className="thumb">
             <div style={thumbInner}>
               <img src={file.preview} className="thumbnail" />
             </div>

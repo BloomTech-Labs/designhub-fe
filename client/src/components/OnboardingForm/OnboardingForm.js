@@ -81,13 +81,13 @@ const OnboardingForm = props => {
     try {
       const newAvatar = await handleImageUpload(files);
       changes = { ...changes, avatar: newAvatar };
-      console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
-      console.log('OnboardingForm.js handleSubmit() changes', changes);
+      // console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
+      // console.log('OnboardingForm.js handleSubmit() changes', changes);
       const res = await axios.put(
         `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
         changes
       );
-      console.log('OnboardingForm.js handleSubmit() res.data', res.data);
+      // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
     } catch (err) {
@@ -96,17 +96,18 @@ const OnboardingForm = props => {
   };
 
   const handleImageUpload = async file => {
-    console.log('OnboardingForm.js handleImageUpload() file', file);
+    // console.log('OnboardingForm.js handleImageUpload() file', file);
+    console.log('user.sub', user.sub);
     try {
       const {
         data: { key, url }
       } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
         {
-          id: `user/69696969696969969696996`
+          id: user.sub
         }
       );
-      console.log('OnboardingForm.js handleImageUpload() key, url', key, url);
+      // console.log('OnboardingForm.js handleImageUpload() key, url', key, url);
 
       await axios.put(url, file[0], {
         headers: {
@@ -119,7 +120,6 @@ const OnboardingForm = props => {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
-  console.log('FILES', files);
   return (
     <div className="OnboardingForm">
       <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>

@@ -118,7 +118,9 @@
 
 .thumbnail {
   object-fit: cover;
-  width: 100%;
+  // width: 100%;
+  width: 180px;
+  height: 180px;
 }
 
 .remove {
