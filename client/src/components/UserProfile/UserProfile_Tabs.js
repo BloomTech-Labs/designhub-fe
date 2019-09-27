@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import axios from 'axios';
 
 import Heatmap from './Heatmap.js';
-import { axiosWithAuth } from '../../utilities/axiosWithAuth';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import empty from '../Icons/empty_project.svg';

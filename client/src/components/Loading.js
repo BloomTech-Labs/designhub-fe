@@ -11,7 +11,7 @@ const Loading = () => {
     wrapper: svgContainer,
     animType: 'svg',
     loop: true,
-    path: 'https://assets5.lottiefiles.com/datafiles/AX0rqrGV5ahKpWr/data.json'
+    path: '../ASSETS/loading.json'
   });
   return (
     <div className="Loading-container">
