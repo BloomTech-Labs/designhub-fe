@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "react-dropzone": "^10.1.9",
-    "react-loader-spinner": "^3.1.4"
-  }
-}

@@ -3,7 +3,7 @@
 
 .user-profile-container {
   color: $white;
-  width: 172vh;
+  width: 98%;
   margin-top: 7vh;
 
   .user-header {
@@ -15,17 +15,23 @@
     background: $black;
     border-radius: 10px;
 
+    .user-left-content {
+      display: flex;
+      align-items: center;
+    }
+
     .avatar {
-      height: 100px;
-      width: 100px;
+      width: 110px;
+      height: 110px;
+      box-sizing: content-box;
       border-radius: 50%;
       object-fit: cover;
-      padding: 4vh;
+      padding: 20px;
     }
 
     .user-info {
       height: 80%;
-      width: 60%;
+      width: 65%;
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
@@ -45,7 +51,7 @@
 
       .bio {
         margin: 0;
-        max-width: 80%;
+        max-width: max-content;
         line-height: 20px;
         font-size: 0.85rem;
         font-size: 14px;
@@ -169,20 +175,40 @@
       }
     }
 
+    .empty-state {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+
+      .empty-icon {
+        opacity: 0.05;
+      }
+      .no-projects {
+        width: 100%;
+        text-align: center;
+        color: $dark-grey;
+        margin-bottom: 20px;
+        user-select: none;
+        opacity: 0.6;
+      }
+    }
+
     .projects-array {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 22% 22% 22% 22%;
+      grid-column-gap: 3%;
       width: 100%;
 
       .project-content {
-        width: 280px;
-        height: 180px;
+        width: 100%;
+        height: 14vw;
         position: relative;
         transition: all 0.2s ease-in-out;
         border: 8px solid $field-bg;
         border-radius: 5px;
         overflow: hidden;
         margin: 10px 10px 10px 10px;
+        object-fit: cover;
 
         .project-info {
           position: absolute;
@@ -203,7 +229,8 @@
 
         .project-thumbnail {
           object-fit: cover;
-          width: 100%;
+          width: 103%;
+          height: 100%;
           transition: 0.1s ease-in-out;
           cursor: pointer;
         }
@@ -282,5 +309,155 @@
 
   .follow-btn {
     @include follow-btn;
+  }
+}
+
+// TABLET RESPONSIVE
+@media (max-width: 1024px) {
+  .user-profile-container {
+    .user-header {
+      flex-direction: column;
+      height: max-content;
+
+      .user-info {
+        width: 100%;
+
+        .username {
+          margin: 1% 0;
+        }
+        .bio {
+          max-width: 95%;
+        }
+      }
+
+      .user-data-container {
+        width: 100%;
+        align-content: center;
+
+        .user-data {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin: 0 auto;
+          border-top: 1px solid $almost-black;
+          border-bottom: 1px solid $almost-black;
+
+          .count-flex {
+            padding: 10px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+              margin: 1vh 0;
+            }
+          }
+        }
+
+        .teams-container {
+          text-align: center;
+          width: 100%;
+          justify-content: center;
+          margin: 0;
+
+          .edit-profile-btn {
+            margin: 6% 0;
+          }
+        }
+      }
+    }
+
+    .profile-tabs-container {
+      .nav-links {
+        width: 50%;
+        justify-content: space-between;
+
+        .links {
+          padding: 0;
+        }
+      }
+
+      .projects-array {
+        grid-template-columns: 29.5% 29.5% 29.5%;
+        grid-column-gap: 4%;
+        .project-content {
+          height: 25vh;
+        }
+      }
+    }
+  }
+}
+
+// MOBILE RESPONSIVE
+@media (max-width: 800px) {
+  .user-profile-container {
+    .user-header {
+      flex-direction: column;
+      height: max-content;
+
+      .user-info {
+        width: 100%;
+
+        .username {
+          margin: 1% 0;
+        }
+        .bio {
+          max-width: 95%;
+        }
+      }
+
+      .user-data-container {
+        width: 100%;
+        align-content: center;
+
+        .user-data {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin: 0 auto;
+          border-top: 1px solid $almost-black;
+          border-bottom: 1px solid $almost-black;
+
+          .count-flex {
+            padding: 10px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+              margin: 1vh 0;
+            }
+          }
+        }
+
+        .teams-container {
+          text-align: center;
+          width: 100%;
+          justify-content: center;
+          margin: 0;
+
+          .edit-profile-btn {
+            margin: 6% 0;
+          }
+        }
+      }
+    }
+    .profile-tabs-container {
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+
+        .links {
+          padding: 0;
+        }
+      }
+      .projects-array {
+        grid-template-columns: 45% 45%;
+        grid-column-gap: 5%;
+        .project-content {
+          height: 25vh;
+        }
+      }
+    }
   }
 }

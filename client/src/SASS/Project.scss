@@ -50,6 +50,7 @@
     text-align: right;
 
     .project-header-team {
+      visibility: hidden;
       img {
         padding: 0 5px;
         width: 42px;
@@ -76,7 +77,8 @@
 
       .link-disabled {
         filter: grayscale(100);
-        cursor: default;
+        pointer-events: none;
+        user-select: none;
       }
 
       .link-enabled {
@@ -97,11 +99,11 @@
   }
 
   .project-body {
-    // border: 1px solid magenta;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: flex-start;
+    height: 68vh;
 
     .project-comments {
       width: 40%;
@@ -215,17 +217,6 @@
     .project-body {
       display: flex;
       flex-direction: column;
-
-      .main-thumb-flex {
-        .project-main-image {
-          width: 60%;
-        }
-
-        .project-thumbnails {
-          width: 22%;
-          height: 66vh;
-        }
-      }
 
       .project-comments {
         width: 100%;

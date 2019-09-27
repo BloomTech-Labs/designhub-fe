@@ -10,8 +10,8 @@ import 'react-calendar-heatmap/dist/styles.css';
 import '../../SASS/Heatmap.scss';
 
 const Heatmap = props => {
-  const [today, setToday] = useState(new Date());
-  const [params, setParams] = useState(props.match.params.id);
+  const [today] = useState(new Date());
+  const [params] = useState(props.match.params.id);
   const [heatmapArr, setHeatmapArr] = useState([]);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const Heatmap = props => {
   // Grabs the array of heatmaps based on user Id
   const getHeatmap = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/api/v1/heatmap/${params}`
+      `https://designhubx-staging.herokuapp.com/api/v1/heatmap/${params}`
     );
     setHeatmapArr(data);
   };
@@ -47,7 +47,7 @@ const Heatmap = props => {
       };
     } else {
       return {
-        'data-tip': ` ${value.count} contributions on ${moment(
+        'data-tip': `${value.count} contributions on ${moment(
           value.date
         ).format('MMM Do YYYY')}`
       };
@@ -58,7 +58,7 @@ const Heatmap = props => {
     <div className="heatmap">
       <h1 className="header">Activity</h1>
       <CalendarHeatmap
-        startDate={shiftDate(today, -150)}
+        startDate={shiftDate(today, -270)}
         endDate={today}
         values={heatmapArr}
         tooltipDataAttrs={value => {
