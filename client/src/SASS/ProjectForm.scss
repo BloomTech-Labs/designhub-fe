@@ -101,6 +101,32 @@
     display: flex;
     flex-direction: column;
 
+    .alert-container {
+      display: none;
+    }
+
+    form.alert {
+      .alert-container {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+      }
+      input#name {
+        border: 2px solid $alert;
+        border-radius: 5px;
+      }
+      .errorIcon {
+        width: 20px;
+        position: absolute;
+        margin-left: 5px;
+        margin-top: -5px;
+        transition: all 0.1s ease-in-out;
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
     input {
       width: 98%;
       margin: 10px 0 20px 0;
@@ -111,7 +137,7 @@
       outline: none;
       padding-left: 10px;
       border-radius: 5px;
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .description {
@@ -125,7 +151,9 @@
       padding-left: 10px;
       border-radius: 5px;
       resize: vertical;
-      font-size: 0.8rem;
+      height: 50px;
+      font-size: 14px;
+      font-family: 'Roboto', sans-serif;
     }
   }
 

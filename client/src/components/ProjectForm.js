@@ -3,6 +3,7 @@ import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+import errorIcon from '../ASSETS/error-icon.svg';
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loader from 'react-loader-spinner';
 
@@ -10,8 +11,8 @@ import '../SASS/ProjectForm.scss';
 
 const ProjectForm = ({ isEditing, project, history }) => {
   const [files, setFiles] = useState([]);
-  const [disableButton, setDisableButton] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const { user } = useAuth0();
 
@@ -37,14 +38,23 @@ const ProjectForm = ({ isEditing, project, history }) => {
         [e.target.name]: e.target.value
       }
     });
+    setAlert(false);
   };
 
   const handleSubmit = async e => {
     setIsLoading(true);
+    console.log(e);
     e.preventDefault();
-    isEditing
-      ? editProject(state.project, project.id)
-      : addProject(state.project);
+    if (state.project.name.length === 0) {
+      console.log('NO PROJECT NAME!');
+      setIsLoading(false);
+      setAlert(true);
+      return;
+    } else {
+      isEditing
+        ? editProject(state.project, project.id)
+        : addProject(state.project);
+    }
   };
 
   const handleImageUpload = async (file, projectId, projectTitle) => {
@@ -131,6 +141,25 @@ const ProjectForm = ({ isEditing, project, history }) => {
 
   return (
     <div className="project-form-wrapper">
+      {isLoading && (
+        <div style={{ position: 'relative' }}>
+          <Loader
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: ' 100%',
+              top: '40vh',
+              left: '40vw',
+              margin: '0 auto'
+            }}
+            type="Grid"
+            color="#C0C0C0"
+            height={150}
+            width={150}
+            timeout={3000} //3 secs
+          />
+        </div>
+      )}
       <div className="left-container">
         <h2 className="page-header">
           {isEditing ? 'Edit project' : 'Create a project'}
@@ -143,13 +172,17 @@ const ProjectForm = ({ isEditing, project, history }) => {
       </div>
       <div className="right-container">
         <form
+          className={alert ? 'alert' : null}
           encType="multipart/form-data"
-          className="project-form-container"
+          className={`${alert ? 'alert' : null} project-form-container`}
           onSubmit={handleSubmit}
         >
           <label htmlFor="name" className="label">
-            Project title
+            Project title{alert && ' (required)'}
           </label>
+          <div className="alert-container">
+            <img className="errorIcon" src={errorIcon} />
+          </div>
           <input
             type="text"
             value={name}
@@ -178,23 +211,6 @@ const ProjectForm = ({ isEditing, project, history }) => {
             placeholder="Enter team member usernames separated by a comma"
             id="teamMembers"
           />
-          {isLoading && (
-            <div style={{ position: 'relative' }}>
-              <Loader
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  margin: '-50px 0px 0px -50px'
-                }}
-                type="Grid"
-                color="#C0C0C0"
-                height={150}
-                width={150}
-                timeout={3000} //3 secs
-              />
-            </div>
-          )}
 
           <label htmlFor="figmaLink" className="label">
             Figma link
@@ -222,7 +238,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
             <button
               className="submit-button"
               type="submit"
-              disabled={disableButton}
+              style={isLoading ? { display: 'none' } : null}
             >
               {isEditing ? 'Save Changes' : 'Publish'}
             </button>
