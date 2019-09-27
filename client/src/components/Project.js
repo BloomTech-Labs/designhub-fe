@@ -61,7 +61,7 @@ class Projects extends Component {
 
   render() {
     if (!this.state.projectInfo) {
-      return <h1>Loading...</h1>
+      return <h1>Loading...</h1>;
     }
     console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
@@ -96,26 +96,38 @@ class Projects extends Component {
             </div>
             <div className="project-header-links">
               <div className="project-header-button">
-                <img
-                  src={figmaIcon}
-                  className={
-                    thisProject.figma === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="figma"
-                />
+                <a
+                  href={thisProject.figma}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={figmaIcon}
+                    className={
+                      thisProject.figma === ''
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="figma"
+                  />
+                </a>
               </div>
               <div className="project-header-button">
-                <img
-                  src={invisionIcon}
-                  className={
-                    thisProject.invision === null
-                      ? 'link-disabled'
-                      : 'link-enabled'
-                  }
-                  alt="invision"
-                />
+                <a
+                  href={thisProject.invision}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src={invisionIcon}
+                    className={
+                      thisProject.invision === ''
+                        ? 'link-disabled'
+                        : 'link-enabled'
+                    }
+                    alt="invision"
+                  />
+                </a>
               </div>
               <div className="download project-header-button">
                 <DownloadIcon />

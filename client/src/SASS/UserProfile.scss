@@ -16,11 +16,12 @@
     border-radius: 10px;
 
     .avatar {
-      height: 100px;
-      width: 100px;
+      width: 110px;
+      height: 110px;
+      box-sizing: content-box;
       border-radius: 50%;
       object-fit: cover;
-      padding: 4vh;
+      padding: 20px;
     }
 
     .user-info {
@@ -173,6 +174,23 @@
       display: flex;
       flex-wrap: wrap;
       width: 100%;
+
+      .empty-state {
+        width: 100%;
+        text-align: center;
+
+        .empty-icon {
+          opacity: 0.05;
+        }
+        .no-projects {
+          width: 100%;
+          text-align: center;
+          color: $dark-grey;
+          margin-bottom: 20px;
+          user-select: none;
+          opacity: 0.6;
+        }
+      }
 
       .project-content {
         width: 280px;

@@ -6,26 +6,20 @@ import axios from 'axios';
 import Heatmap from './Heatmap.js';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
+import empty from '../Icons/empty_project.svg';
 
 class UserProfile_Tabs extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      allUsers: []
-    };
-  }
-
-  componentDidMount() {
-    axios
-      .get('https://designhubx-staging.herokuapp.com/api/v1/users')
-      .then(res => this.setState({ allUsers: res.data }))
-      .catch(err => console.log(err));
+    this.state = {};
   }
 
   render() {
     const projects = this.props.projects;
     const followers = this.props.followers;
     const following = this.props.following;
+    const starred = this.props.starred;
+
     return (
       <div className="profile-tabs-container">
         <div>
@@ -52,28 +46,31 @@ class UserProfile_Tabs extends Component {
               <div className="tab-content">
                 <h2>Recent Projects</h2>
                 <div className="projects-array">
-                  {projects
-                    .reverse()
-                    .slice(0, 8)
-                    .map(project => (
-                      <div className="project-content" key={project.id}>
-                        <Link to={`/project/${project.id}`}>
-                          <>
-                            <div className="project-info">
-                              <h1>{project.name}</h1>
-                            </div>
-                            <img
-                              src={
-                                project.mainImg ? project.mainImg : defaultImg
-                              }
-                              className="project-thumbnail"
-                              alt="test"
-                              key={project.id}
-                            />
-                          </>
-                        </Link>
-                      </div>
-                    ))}
+                  {projects.length === 0 && (
+                    <div className="empty-state">
+                      <img src={empty} alt="empty" className="empty-icon" />
+                      <h1 className="no-projects">
+                        No created have been projects yet.
+                      </h1>
+                    </div>
+                  )}
+                  {projects.slice(0, 8).map(project => (
+                    <div className="project-content" key={project.id}>
+                      <Link to={`/project/${project.id}`}>
+                        <>
+                          <div className="project-info">
+                            <h1>{project.name}</h1>
+                          </div>
+                          <img
+                            src={project.mainImg ? project.mainImg : defaultImg}
+                            className="project-thumbnail"
+                            alt="test"
+                            key={project.id}
+                          />
+                        </>
+                      </Link>
+                    </div>
+                  ))}
                 </div>
               </div>
               <Heatmap />
@@ -82,6 +79,14 @@ class UserProfile_Tabs extends Component {
               <div className="tab-content">
                 <h2>Projects</h2>
                 <div className="projects-array">
+                  {projects.length === 0 && (
+                    <div className="empty-state">
+                      <img src={empty} alt="empty" className="empty-icon" />
+                      <h1 className="no-projects">
+                        No created have been projects yet.
+                      </h1>
+                    </div>
+                  )}
                   {projects.map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
@@ -168,7 +173,13 @@ class UserProfile_Tabs extends Component {
               <div className="tab-content">
                 <h2>Starred</h2>
                 <div className="projects-array">
-                  {projects.slice(0, 8).map(project => (
+                  {starred.length === 0 && (
+                    <div className="empty-state">
+                      <img src={empty} alt="empty" className="empty-icon" />
+                      <h1 className="no-projects">No starred projects yet.</h1>
+                    </div>
+                  )}
+                  {starred.map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
                         <>

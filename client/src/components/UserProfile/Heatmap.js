@@ -10,8 +10,8 @@ import 'react-calendar-heatmap/dist/styles.css';
 import '../../SASS/Heatmap.scss';
 
 const Heatmap = props => {
-  const [today, setToday] = useState(new Date());
-  const [params, setParams] = useState(props.match.params.id);
+  const [today] = useState(new Date());
+  const [params] = useState(props.match.params.id);
   const [heatmapArr, setHeatmapArr] = useState([]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const Heatmap = props => {
     <div className="heatmap">
       <h1 className="header">Activity</h1>
       <CalendarHeatmap
-        startDate={shiftDate(today, -150)}
+        startDate={shiftDate(today, -270)}
         endDate={today}
         values={heatmapArr}
         tooltipDataAttrs={value => {

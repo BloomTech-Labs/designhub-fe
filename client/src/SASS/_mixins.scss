@@ -57,7 +57,9 @@
 @mixin follow-btn {
   @include btn;
   background: $btn-gradient;
-  padding: 10px 40px;
+  padding: 10px 60px;
+  margin-top: 3vh;
+  transition: 0.1s ease-in-out;
 }
 
 @mixin edit-profile-btn {
@@ -65,7 +67,7 @@
   margin-top: 3vh;
   background: $almost-black;
   transition: 0.1s ease-in-out;
-  padding: 10px 40px;
+  padding: 10px 60px;
   &:hover {
     background: #2f303a;
   }
