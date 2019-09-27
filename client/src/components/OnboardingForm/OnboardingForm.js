@@ -19,6 +19,7 @@ const OnboardingForm = props => {
 
   // state to track which page to display
   const [formStep, setFormStep] = useState(1);
+  const [submitting, setSubmitting] = useState(false);
 
   //conditional render for next/submit/prev buttons
   const submitButton = formStep === stepComponents.length ? true : false;
@@ -78,6 +79,7 @@ const OnboardingForm = props => {
   // click submit
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
+    setSubmitting(true);
     try {
       const newAvatar = await handleImageUpload(files);
       changes = { ...changes, avatar: newAvatar };
@@ -143,7 +145,12 @@ const OnboardingForm = props => {
 
         <div className="buttons">
           {showPrev && (
-            <button name="prev" className="prev-btn" onClick={handleClick}>
+            <button
+              name="prev"
+              className="prev-btn"
+              onClick={handleClick}
+              style={submitting ? { display: 'none' } : null}
+            >
               Previous
             </button>
           )}
@@ -151,6 +158,7 @@ const OnboardingForm = props => {
             <button
               className="next-btn"
               onClick={e => handleSubmit(e, formUser.id, formUser)}
+              style={submitting ? { display: 'none' } : null}
             >
               Submit
             </button>
