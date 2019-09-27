@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import moment from 'moment';
 
@@ -9,7 +10,7 @@ import avatar3 from '../ASSETS/avatar_3.jpg';
 import figmaIcon from '../ASSETS/figma-icon.png';
 import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
-import StarIcon from './Icons/StarIcon';
+import star from '../ASSETS/star.svg';
 import SendIcon from './Icons/SendIcon';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
@@ -25,7 +26,8 @@ class Projects extends Component {
       projectInfo: null,
       projectId: this.props.match.params.id,
       thumbnails: [],
-      comments: []
+      comments: [],
+      myId: this.props.activeUser.id
     };
   }
 
@@ -47,6 +49,19 @@ class Projects extends Component {
       )
       .catch(err => console.log(err));
   }
+
+  starProject = () => {
+    const starObj = {
+      userId: this.state.myId,
+      projectId: this.state.projectId
+    };
+    axios
+      .post('https://designhubx-staging.herokuapp.com/api/v1/star', starObj)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     if (!this.state.projectInfo) {
@@ -145,7 +160,12 @@ class Projects extends Component {
                 <DownloadIcon />
               </div>
               <div className="star project-header-button">
-                <StarIcon />
+                <img
+                  src={star}
+                  className="star-icon"
+                  alt="star project"
+                  onClick={this.starProject}
+                />
               </div>
               <div
                 className="edit project-header-button"
