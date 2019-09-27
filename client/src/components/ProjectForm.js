@@ -56,10 +56,6 @@ const ProjectForm = ({ isEditing, project, history }) => {
     }
   };
 
-  const validateProjectName = form => {
-    let projectNameInput = form;
-  };
-
   const handleImageUpload = async (file, projectId, projectTitle) => {
     if (files.length > 0) {
       let requestPromises = files.map(async (file, index) => {
