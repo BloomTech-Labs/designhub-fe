@@ -217,7 +217,7 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {activeUser.id === this.state.userId ? (
+                {activeUser.id == this.props.match.params.id ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>
