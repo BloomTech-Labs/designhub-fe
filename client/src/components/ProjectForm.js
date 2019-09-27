@@ -38,6 +38,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
         [e.target.name]: e.target.value
       }
     });
+    setAlert(false);
   };
 
   const handleSubmit = async e => {
