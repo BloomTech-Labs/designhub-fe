@@ -112,7 +112,8 @@
         width: 100%;
       }
       input#name {
-        outline: 2px solid $alert;
+        border: 2px solid $alert;
+        border-radius: 5px;
       }
       .errorIcon {
         width: 20px;
