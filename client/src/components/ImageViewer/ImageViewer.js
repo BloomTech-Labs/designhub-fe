@@ -75,26 +75,29 @@ class ImageViewer extends Component {
                 />
               )}
             </div>
-
-            <section className="ImageViewer__main-image">
-              <img
-                src={activeImg ? activeImg.url : this.props.thumbnails[0].url}
-                alt="main project"
-                onClick={() => this.setState({ modal: true })}
-              />
-            </section>
-            <section className="ImageViewer__thumbnails">
-              {allImgs
-                ? allImgs
-                : this.props.thumbnails.map(t => (
-                    <img
-                      key={t.url}
-                      src={t.url}
-                      alt="project-thumbnail"
-                      onClick={() => this.changeImg(t)}
-                    />
-                  ))}
-            </section>
+            <div className="main-image-container">
+              <section className="ImageViewer__main-image">
+                <img
+                  src={activeImg ? activeImg.url : this.props.thumbnails[0].url}
+                  alt="main project"
+                  onClick={() => this.setState({ modal: true })}
+                  className="main-image"
+                />
+              </section>
+              <section className="ImageViewer__thumbnails">
+                {allImgs
+                  ? allImgs
+                  : this.props.thumbnails.map(t => (
+                      <img
+                        key={t.url}
+                        src={t.url}
+                        alt="project-thumbnail"
+                        onClick={() => this.changeImg(t)}
+                        className="thumbnails"
+                      />
+                    ))}
+              </section>
+            </div>
           </main>
         </div>
       );

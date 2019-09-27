@@ -14,11 +14,12 @@ class UserProfile_LI extends Component {
     this.state = {
       followers: [],
       following: [],
-      userId: this.props.match.params.id,
+      userId: parseInt(this.props.match.params.id),
       userData: [],
       projects: [],
       followersTab: [],
-      followingTab: []
+      followingTab: [],
+      starred: []
     };
   }
 
@@ -41,13 +42,16 @@ class UserProfile_LI extends Component {
       return axiosWithAuth().get(`/api/v1/followers/count/followers/${id}`);
     }
     function getUserProjects() {
-      return axiosWithAuth().get(`/api/v1/projects/users/${paramsId}`);
+      return axiosWithAuth().get(`api/v1/projects/recent/${paramsId}`);
     }
     function getFollowers() {
       return axiosWithAuth().get(`api/v1/followers/followers/${paramsId}`);
     }
     function getFollowing() {
       return axiosWithAuth().get(`api/v1/followers/following/${paramsId}`);
+    }
+    function getStarred() {
+      return axiosWithAuth().get(`/api/v1/star/${paramsId}`);
     }
 
     return axios
@@ -57,17 +61,19 @@ class UserProfile_LI extends Component {
         getFollowerCount(paramsId),
         getUserProjects(),
         getFollowers(paramsId),
-        getFollowing(paramsId)
+        getFollowing(paramsId),
+        getStarred(paramsId)
       ])
       .then(
-        axios.spread((a, b, c, d, e, f) => {
+        axios.spread((a, b, c, d, e, f, g) => {
           this.setState({
             userData: a.data[0],
             following: b.data[0].count,
             followers: c.data[0].count,
             projects: d.data,
             followersTab: e.data,
-            followingTab: f.data
+            followingTab: f.data,
+            starred: g.data
           });
         })
       )
@@ -83,34 +89,37 @@ class UserProfile_LI extends Component {
   render() {
     const userData = this.state.userData;
     const projects = this.state.projects;
+    const activeUser = this.props.activeUser;
     window.scroll(0, 0);
     return (
       <div className="user-profile-container">
         <div className="user-header">
-          <img src={userData.avatar} className="avatar" alt="avatar" />
-          <div className="user-info">
-            <h1 className="userFLname">
-              {userData.firstName} {userData.lastName}
-            </h1>
-            <h2 className="username">{userData.username}</h2>
-            <p className="bio">{userData.bio}</p>
-            <div className="user-info-location-website">
-              <p>{userData.location}</p>
-              <a
-                href={userData.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="website"
-              >
-                {userData.website}
-              </a>
+          <div className="user-left-content">
+            <img src={userData.avatar} className="avatar" alt="avatar" />
+            <div className="user-info">
+              <h1 className="userFLname">
+                {userData.firstName} {userData.lastName}
+              </h1>
+              <h2 className="username">{userData.username}</h2>
+              <p className="bio">{userData.bio}</p>
+              <div className="user-info-location-website">
+                <p>{userData.location}</p>
+                <a
+                  href={userData.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="website"
+                >
+                  {userData.website}
+                </a>
+              </div>
             </div>
           </div>
           <div className="user-data-container">
             <div className="user-data">
               <div className="count-flex">
                 <h6>Projects</h6>
-                <p>12</p>
+                <p>{this.state.projects.length}</p>
               </div>
               <div className="count-flex">
                 <h6>Followers</h6>
@@ -122,7 +131,7 @@ class UserProfile_LI extends Component {
               </div>
               <div className="count-flex">
                 <h6>Starred</h6>
-                <p>143</p>
+                <p>{this.state.starred.length}</p>
               </div>
             </div>
             <div className="teams-container">
@@ -138,9 +147,15 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                <Link to="/settings">
-                  <button className="edit-profile-btn">Edit Profile</button>
-                </Link>
+                {activeUser.id === this.state.userId ? (
+                  <Link to="/settings">
+                    <button className="edit-profile-btn">Edit Profile</button>
+                  </Link>
+                ) : (
+                  <Link to="/settings">
+                    <button className="follow-btn">Follow</button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -149,6 +164,7 @@ class UserProfile_LI extends Component {
           projects={projects}
           followers={this.state.followersTab}
           following={this.state.followingTab}
+          starred={this.state.starred}
         />
       </div>
     );

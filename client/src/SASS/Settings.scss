@@ -4,25 +4,26 @@
 .Settings {
   margin-top: 15vh;
   background: $black;
-  width: 172vh;
+  width: 98%;
   border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: $white;
 
   img {
     margin-top: 5vh;
     border-radius: 100%;
-    width: 300px;
-    height: 300px;
-    max-width: 300px;
-    max-height: 300px;
-    object-fit: cover;
+    width: 100px;
+  }
+
+  .full-name {
+    margin: 20px 0;
   }
 
   button {
     @include edit-profile-btn;
-    margin: 5vh 0;
+    margin: 20px 0;
   }
 }
