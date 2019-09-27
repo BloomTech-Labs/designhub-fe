@@ -24,12 +24,12 @@
     input#username {
       outline: 2px solid $alert;
     }
+
     .errorIcon {
       width: 20px;
       position: absolute;
       margin-left: 9px;
       margin-top: -9px;
-      cursor: pointer;
       transition: all 0.1s ease-in-out;
       &:hover {
         transform: scale(1.2);
@@ -40,16 +40,28 @@
   form {
     @include onboard-form;
 
+    .avatar-upload-container {
+      align-items: center;
+      // border: 1px solid red;
+      display: flex;
+      justify-content: space-evenly;
+    }
+
+    .dropzone-container {
+      max-width: 50%;
+    }
+
     .upload-container {
       margin-top: 10px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 20px;
+      padding: 40px;
       border-radius: 10px;
       background: $field-bg;
       transition: all 0.1s ease-in-out;
       cursor: pointer;
+      width: 180px;
     }
     .upload-container:hover {
       background: #33343b;
@@ -62,11 +74,14 @@
 
       .upload-icon {
         opacity: 0.2;
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
       }
 
       .drop-text {
-        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
 
         mark {
           background: none;
@@ -78,21 +93,27 @@
 }
 
 .thumbnail-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-top: 16px;
-  flex-wrap: wrap;
+  // border: 1px solid white;
+  display: flex;
+  width: 180px;
+  height: 180px;
+  margin-top: 8px;
+}
+
+.avatarBlank {
+  border: 1px solid $almost-black;
+  border-radius: 10px;
+  background-color: $black;
+  background-image: -webkit-linear-gradient(
+    135deg,
+    $black 50%,
+    $almost-black 50%
+  );
+  width: 180px;
 }
 
 .thumb {
-  border: 5px solid $black;
   display: inline-flex;
-  border-radius: 10px;
-  margin-bottom: 8px;
-  margin-right: 8px;
-  width: 10.9vw;
-  height: 100px;
-  box-sizing: border-box;
 }
 
 .thumbnail {

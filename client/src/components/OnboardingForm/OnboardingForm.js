@@ -96,7 +96,7 @@ const OnboardingForm = props => {
   };
 
   const handleImageUpload = async file => {
-    console.log(file);
+    console.log('OnboardingForm.js handleImageUpload() file', file);
     try {
       const {
         data: { key, url }
@@ -106,7 +106,7 @@ const OnboardingForm = props => {
           id: 8000
         }
       );
-      console.log(key, url);
+      console.log('OnboardingForm.js handleImageUpload() key, url', key, url);
 
       await axios.put(url, file, {
         headers: {
