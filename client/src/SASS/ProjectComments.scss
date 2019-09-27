@@ -1,0 +1,124 @@
+@import './palette';
+
+.project-comments {
+  width: 40%;
+  height: 100%;
+  background-color: #15161a;
+  border: 5px solid #15161a;
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  margin: 0 0 0 1%;
+
+  .comments-header {
+    letter-spacing: 0.11em;
+    font-weight: normal;
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .comments-body {
+    height: 100%;
+    overflow-y: scroll;
+    font-size: 0.9rem;
+    line-height: 20px;
+  }
+
+  .ProjectComment__wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .ProjectComment__body {
+    align-items: center;
+    align-self: center;
+    background: $blue;
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    margin-top: 20px;
+    padding: 10px 8px;
+    width: fit-content;
+
+    &.--them {
+      background: none;
+    }
+
+    .ProjectComment__body__avatar {
+      border-radius: 100%;
+      height: 35px;
+      object-fit: cover;
+      width: 35px;
+    }
+
+    .ProjectComment__body__text {
+      font-size: 12px;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      padding: 0 8px;
+
+      header {
+        display: flex;
+
+        em {
+          align-self: center;
+          font-weight: 900;
+        }
+        p {
+          margin: 0;
+          margin-left: 8px;
+          margin-top: -1px;
+        }
+      }
+      p {
+        font-weight: normal;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .comments-form {
+    padding-top: 20px;
+    .form-wrapper {
+      position: relative;
+    }
+    input[type='text'] {
+      border: none;
+      background: #2a2b31;
+      border-radius: 10px;
+      box-sizing: border-box;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 400;
+      height: 53px;
+      outline: none;
+      resize: none;
+      width: 100%;
+      padding: 10px;
+    }
+    button {
+      background-color: #5557fe;
+      border: none;
+      border-radius: 100%;
+      cursor: pointer;
+      position: absolute;
+      height: 40px;
+      right: 6px;
+      top: 6px;
+      vertical-align: middle;
+      width: 40px;
+      z-index: 9;
+      svg {
+        margin: 0 0 -3px -3px;
+        text-align: center;
+        vertical-align: middle;
+      }
+      &:hover {
+        background: $btn-primary-hover;
+      }
+    }
+  }
+}

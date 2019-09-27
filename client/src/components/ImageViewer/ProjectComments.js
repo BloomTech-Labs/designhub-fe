@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import SendIcon from '../Icons/SendIcon';
+import '../../SASS/ProjectComments.scss';
 
 const ProjectComments = ({
   activeUser,
@@ -53,26 +55,42 @@ const ProjectComments = ({
 
   return (
     <div className="project-comments">
-      <div className="comments-header">Comments</div>
-      <div className="comments-body">
+      <header className="comments-header">Comments</header>
+
+      <section className="comments-body">
         {commentAnchor && scrollToBottom()}
-        {comments.map(comment => (
-          <div
-            key={comment.id}
-            className={
-              activeUser.id === comment.userId ? 'comment' : 'comment-li-user'
-            }
-          >
-            <img src={comment.userAvatar} alt="avatar" className="avatar" />
-            {activeUser.id === comment.userId ? (
-              <p className="you">You</p>
-            ) : null}
-            <p className="message">{comment.text}</p>
+
+        {comments.map(c => (
+          <div className="ProjectComment__wrapper">
+            <section
+              className={
+                activeUser.id === c.userId
+                  ? 'ProjectComment__body --you'
+                  : 'ProjectComment__body --them'
+              }
+            >
+              {activeUser.id === c.userId ? null : (
+                <img
+                  src={c.userAvatar}
+                  alt="avatar"
+                  className="ProjectComment__body__avatar"
+                />
+              )}
+              <div className="ProjectComment__body__text">
+                <header>
+                  <em>{activeUser.id === c.userId ? 'You' : c.username}</em>
+                  {/* <p>{moment(c.created_at).fromNow()}</p> */}
+                </header>
+                <p>{c.text}</p>
+              </div>
+            </section>
           </div>
         ))}
+
         <div ref={el => setCommentAnchor(el)}></div>
-      </div>
-      <div className="comments-form">
+      </section>
+
+      <section className="comments-form">
         <form onSubmit={handleSubmit}>
           <div className="form-wrapper">
             <input
@@ -86,7 +104,7 @@ const ProjectComments = ({
             </button>
           </div>
         </form>
-      </div>
+      </section>
     </div>
   );
 };
