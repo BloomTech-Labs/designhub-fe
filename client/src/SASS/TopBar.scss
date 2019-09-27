@@ -43,9 +43,10 @@
   .profile-pic-thumb {
     width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 100%;
     border: 2px solid $blue;
     margin: 0 15px;
+    object-fit: cover;
   }
 
   .dark-mode-switch {
