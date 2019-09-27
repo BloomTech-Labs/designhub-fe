@@ -56,7 +56,7 @@ class Projects extends Component {
       projectId: this.state.projectId
     };
     axios
-      .post('https://designhubx-staging.herokuapp.com/api/v1/star', starObj)
+      .post('https://designhubx.herokuapp.com/api/v1/star', starObj)
       .then(res => {
         console.log(res.data);
       })

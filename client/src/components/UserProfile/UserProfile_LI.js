@@ -100,10 +100,7 @@ class UserProfile_LI extends Component {
       followedId: this.state.userId
     };
     axios
-      .post(
-        'https://designhubx-staging.herokuapp.com/api/v1/followers',
-        followingObj
-      )
+      .post('https://designhubx.herokuapp.com/api/v1/followers', followingObj)
       .then(res => {
         console.log(res.data);
       })
@@ -130,7 +127,7 @@ class UserProfile_LI extends Component {
     };
     axios
       .post(
-        `https://designhubx-staging.herokuapp.com/api/v1/followers/unfollow/${this.state.userId}`,
+        `https://designhubx.herokuapp.com/api/v1/followers/unfollow/${this.state.userId}`,
         unFollowObj
       )
       .then(res => {
