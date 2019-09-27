@@ -103,12 +103,12 @@ const OnboardingForm = props => {
       } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
         {
-          id: 8000
+          id: `user/69696969696969969696996`
         }
       );
       console.log('OnboardingForm.js handleImageUpload() key, url', key, url);
 
-      await axios.put(url, file, {
+      await axios.put(url, file[0], {
         headers: {
           'Content-Type': 'image/*'
         }
@@ -119,7 +119,7 @@ const OnboardingForm = props => {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
-
+  console.log('FILES', files);
   return (
     <div className="OnboardingForm">
       <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>
