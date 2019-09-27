@@ -175,28 +175,29 @@
       }
     }
 
+    .empty-state {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+
+      .empty-icon {
+        opacity: 0.05;
+      }
+      .no-projects {
+        width: 100%;
+        text-align: center;
+        color: $dark-grey;
+        margin-bottom: 20px;
+        user-select: none;
+        opacity: 0.6;
+      }
+    }
+
     .projects-array {
       display: grid;
       grid-template-columns: 22% 22% 22% 22%;
       grid-column-gap: 3%;
       width: 100%;
-
-      .empty-state {
-        width: 100%;
-        text-align: center;
-
-        .empty-icon {
-          opacity: 0.05;
-        }
-        .no-projects {
-          width: 100%;
-          text-align: center;
-          color: $dark-grey;
-          margin-bottom: 20px;
-          user-select: none;
-          opacity: 0.6;
-        }
-      }
 
       .project-content {
         width: 100%;

@@ -46,15 +46,15 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="tab-content">
                 <h2>Recent Projects</h2>
+                {projects.length === 0 && (
+                  <div className="empty-state">
+                    <img src={empty} alt="empty" className="empty-icon" />
+                    <h1 className="no-projects">
+                      No created have been projects yet.
+                    </h1>
+                  </div>
+                )}
                 <div className="projects-array">
-                  {projects.length === 0 && (
-                    <div className="empty-state">
-                      <img src={empty} alt="empty" className="empty-icon" />
-                      <h1 className="no-projects">
-                        No created have been projects yet.
-                      </h1>
-                    </div>
-                  )}
                   {projects.slice(0, 8).map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
@@ -79,15 +79,15 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="tab-content">
                 <h2>Projects</h2>
+                {projects.length === 0 && (
+                  <div className="empty-state">
+                    <img src={empty} alt="empty" className="empty-icon" />
+                    <h1 className="no-projects">
+                      No created have been projects yet.
+                    </h1>
+                  </div>
+                )}
                 <div className="projects-array">
-                  {projects.length === 0 && (
-                    <div className="empty-state">
-                      <img src={empty} alt="empty" className="empty-icon" />
-                      <h1 className="no-projects">
-                        No created have been projects yet.
-                      </h1>
-                    </div>
-                  )}
                   {projects.map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
@@ -173,13 +173,13 @@ class UserProfile_Tabs extends Component {
             <TabPanel className="tabs-container">
               <div className="tab-content">
                 <h2>Starred</h2>
+                {starred.length === 0 && (
+                  <div className="empty-state">
+                    <img src={empty} alt="empty" className="empty-icon" />
+                    <h1 className="no-projects">No starred projects yet.</h1>
+                  </div>
+                )}
                 <div className="projects-array">
-                  {starred.length === 0 && (
-                    <div className="empty-state">
-                      <img src={empty} alt="empty" className="empty-icon" />
-                      <h1 className="no-projects">No starred projects yet.</h1>
-                    </div>
-                  )}
                   {starred.map(project => (
                     <div className="project-content" key={project.id}>
                       <Link to={`/project/${project.id}`}>
