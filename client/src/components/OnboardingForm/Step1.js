@@ -1,6 +1,7 @@
 import React from 'react';
+import errorIcon from '../../ASSETS/error-icon.svg';
 
-const Step1 = ({ formUser, onChange }) => {
+const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
   const {
     bio,
     email,
@@ -32,15 +33,23 @@ const Step1 = ({ formUser, onChange }) => {
         value={lastName}
         onChange={onChange}
       />
-      <label htmlFor="username">Username</label>
+
+      <label htmlFor="username">
+        Username{alert && ' (This username is already taken)'}
+      </label>
+      <div className="alert-container">
+        <img className="errorIcon" src={errorIcon} />
+      </div>
       <input
         required
+        ref={input => setUsernameInput(input)}
         id="username"
         name="username"
         type="text"
         value={username}
         onChange={onChange}
       />
+
       <label htmlFor="email">Email</label>
       <input
         required

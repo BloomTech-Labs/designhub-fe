@@ -11,6 +11,32 @@
   height: 100%;
   width: 100%;
 
+  .alert-container {
+    display: none;
+  }
+
+  form.alert {
+    .alert-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+    input#username {
+      outline: 2px solid $alert;
+    }
+    .errorIcon {
+      width: 20px;
+      position: absolute;
+      margin-left: 9px;
+      margin-top: -9px;
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+
   form {
     @include onboard-form;
 

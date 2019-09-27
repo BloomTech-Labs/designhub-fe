@@ -41,20 +41,41 @@ const OnboardingForm = props => {
     website: ''
   });
 
+  // alert state triggered by unique username fail
+  const [alert, setAlert] = useState(false);
+  // username <input/> ref for focus() on fail
+  const [usernameInput, setUsernameInput] = useState(null);
+
   const handleChange = e => {
+    setAlert(false);
     setFormUser({ ...formUser, [e.target.name]: e.target.value });
   };
 
-  const handleClick = e => {
+  // click 'next' or 'prev' button
+  const handleClick = async e => {
     e.preventDefault();
     const move = e.target.name === 'next' ? 'next' : 'prev';
     if (move === 'next' && formStep < stepComponents.length) {
-      setFormStep(n => ++n);
+      try {
+        const res = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}api/v1/users/check/${formUser.username}`
+        );
+        if (res.data.length === 0) {
+          setAlert(false);
+          setFormStep(n => ++n);
+        } else {
+          usernameInput.focus();
+          setAlert(true);
+        }
+      } catch (err) {
+        console.log('OnboardingForm.js handleClick() ERROR', err);
+      }
     } else if (move === 'prev' && formStep > 1) {
       setFormStep(n => --n);
     }
   };
 
+  // click submit
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
     try {
@@ -101,17 +122,19 @@ const OnboardingForm = props => {
 
   return (
     <div className="OnboardingForm">
-      <form onSubmit={handleSubmit}>
+      <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>
         <section className="stepComponents">
           {stepComponents.map((Step, i) => {
             if (i + 1 === formStep) {
               return (
                 <Step
                   key={formUser.id}
+                  alert={alert}
                   files={files}
                   setFiles={setFiles}
                   formUser={formUser}
                   onChange={handleChange}
+                  setUsernameInput={setUsernameInput}
                 />
               );
             } else return null;
