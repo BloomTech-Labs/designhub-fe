@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import Heatmap from './Heatmap.js';
-
+// Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import empty from '../Icons/empty_project.svg';
 
