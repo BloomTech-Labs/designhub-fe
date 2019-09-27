@@ -107,11 +107,13 @@ class ImageViewer extends Component {
 
           <ProjectComments
             activeUser={this.props.activeUser}
+            addComments={this.addComments}
             comments={
               this.state.comments.length > 0
                 ? this.state.comments
                 : this.props.comments
             }
+            thisProject={this.props.thisProject}
           />
         </>
       );
