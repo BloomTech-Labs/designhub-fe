@@ -51,7 +51,7 @@ export function MultiImageUpload(props) {
   };
 
   return (
-    <section className="container">
+    <section className="image-dropzone-container">
       <div
         {...getRootProps({ className: 'dropzone' })}
         className="upload-container"
