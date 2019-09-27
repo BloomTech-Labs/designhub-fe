@@ -78,7 +78,7 @@ class Projects extends Component {
               </span>
               <span>
                 Created on{' '}
-                {moment(thisProject.created_at).format('MMM Do YYYY')}
+                {moment(thisProject.created_at).format('MMM DD, YYYY')}
               </span>
             </p>
           </div>
