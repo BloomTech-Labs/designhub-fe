@@ -98,11 +98,11 @@
   }
 
   .project-body {
-    // border: 1px solid magenta;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: flex-start;
+    height: 68vh;
 
     .project-comments {
       width: 40%;
@@ -216,17 +216,6 @@
     .project-body {
       display: flex;
       flex-direction: column;
-
-      .main-thumb-flex {
-        .project-main-image {
-          width: 60%;
-        }
-
-        .project-thumbnails {
-          width: 22%;
-          height: 66vh;
-        }
-      }
 
       .project-comments {
         width: 100%;

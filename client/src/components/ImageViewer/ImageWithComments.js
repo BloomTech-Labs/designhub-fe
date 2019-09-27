@@ -44,7 +44,7 @@ export class ImageWithComments extends React.Component {
               <CommentBubbleIcon />
             </div>
             <div onClick={this.props.closeModal}>
-              <ModalXIcon />
+              <ModalXIcon className="close" />
             </div>
           </section>
         </div>

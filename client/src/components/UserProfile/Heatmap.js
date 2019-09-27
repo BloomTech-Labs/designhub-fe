@@ -28,7 +28,7 @@ const Heatmap = props => {
   // Grabs the array of heatmaps based on user Id
   const getHeatmap = async () => {
     const { data } = await axios.get(
-      `http://localhost:8000/api/v1/heatmap/${params}`
+      `https://designhubx-staging.herokuapp.com/api/v1/heatmap/${params}`
     );
     setHeatmapArr(data);
   };
@@ -47,7 +47,7 @@ const Heatmap = props => {
       };
     } else {
       return {
-        'data-tip': ` ${value.count} contributions on ${moment(
+        'data-tip': `${value.count} contributions on ${moment(
           value.date
         ).format('MMM Do YYYY')}`
       };

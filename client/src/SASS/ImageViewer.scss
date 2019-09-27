@@ -24,7 +24,7 @@
         overflow: hidden;
         text-align: center;
         height: 68vh;
-        width: 100%;
+        width: 48vw;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -33,7 +33,7 @@
       .ImageViewer__thumbnails {
         display: flex;
         flex-flow: column nowrap;
-        width: 30vw;
+        width: 20vw;
         height: 68vh;
         overflow-y: scroll;
         justify-content: flex-start;
@@ -42,7 +42,7 @@
 
         .thumbnails {
           width: 100%;
-          height: 151px;
+          height: 200px;
           border: 5px solid #15161a;
           box-sizing: border-box;
           border-radius: 10px;
@@ -107,4 +107,19 @@
 ::-webkit-scrollbar {
   width: 0px; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+@media (max-width: 1024px) {
+  .ImageViewer {
+    main.ImageViewer__body {
+      .main-image-container {
+        .main-image {
+          width: 65vw;
+        }
+        .ImageViewer__thumbnails {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

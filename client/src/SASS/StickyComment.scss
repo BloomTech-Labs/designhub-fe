@@ -13,22 +13,31 @@
   z-index: 9999999;
 
   p {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 21px;
     letter-spacing: 0.11em;
+    margin: 0 auto;
   }
 
   .StickyComments__TopBar__Icons {
+    position: absolute;
+    top: 20%;
+    right: 5.5%;
     align-items: center;
     display: flex;
+
     svg {
       cursor: pointer;
       margin-left: 24px;
       fill: $white;
+      stroke-opacity: 0.6;
+      width: 20px;
       &:hover {
         fill: none;
+        stroke-opacity: 1;
       }
     }
+
     div.hidden {
       svg {
         fill: none;
