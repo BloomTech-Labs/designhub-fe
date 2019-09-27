@@ -7,6 +7,7 @@ import axios from 'axios';
 import UserProfileTabs from './UserProfile_Tabs.js';
 // ========== STYLES ========== //
 import '../../SASS/UserProfile.scss';
+import Loading from '../Loading.js';
 
 class UserProfile_LI extends Component {
   constructor(props) {
@@ -91,6 +92,9 @@ class UserProfile_LI extends Component {
     const projects = this.state.projects;
     const activeUser = this.props.activeUser;
     window.scroll(0, 0);
+    if (projects.length === 0) {
+      return <Loading />;
+    }
     return (
       <div className="user-profile-container">
         <div className="user-header">
