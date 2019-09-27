@@ -94,23 +94,25 @@ class UserProfile_LI extends Component {
     return (
       <div className="user-profile-container">
         <div className="user-header">
-          <img src={userData.avatar} className="avatar" alt="avatar" />
-          <div className="user-info">
-            <h1 className="userFLname">
-              {userData.firstName} {userData.lastName}
-            </h1>
-            <h2 className="username">{userData.username}</h2>
-            <p className="bio">{userData.bio}</p>
-            <div className="user-info-location-website">
-              <p>{userData.location}</p>
-              <a
-                href={userData.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="website"
-              >
-                {userData.website}
-              </a>
+          <div className="user-left-content">
+            <img src={userData.avatar} className="avatar" alt="avatar" />
+            <div className="user-info">
+              <h1 className="userFLname">
+                {userData.firstName} {userData.lastName}
+              </h1>
+              <h2 className="username">{userData.username}</h2>
+              <p className="bio">{userData.bio}</p>
+              <div className="user-info-location-website">
+                <p>{userData.location}</p>
+                <a
+                  href={userData.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="website"
+                >
+                  {userData.website}
+                </a>
+              </div>
             </div>
           </div>
           <div className="user-data-container">

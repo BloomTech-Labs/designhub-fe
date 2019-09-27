@@ -3,7 +3,7 @@
 
 .user-profile-container {
   color: $white;
-  width: 172vh;
+  width: 98%;
   margin-top: 7vh;
 
   .user-header {
@@ -14,6 +14,11 @@
     margin: 5vh auto;
     background: $black;
     border-radius: 10px;
+
+    .user-left-content {
+      display: flex;
+      align-items: center;
+    }
 
     .avatar {
       width: 110px;
@@ -300,5 +305,61 @@
 
   .follow-btn {
     @include follow-btn;
+  }
+}
+
+@media (max-width: 1024px) {
+  .user-profile-container {
+    .user-header {
+      flex-direction: column;
+      height: max-content;
+
+      .user-info {
+        width: 100%;
+
+        .username {
+          margin: 1% 0;
+        }
+        .bio {
+          max-width: 95%;
+        }
+      }
+
+      .user-data-container {
+        width: 100%;
+        align-content: center;
+
+        .user-data {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin: 0 auto;
+          border-top: 1px solid $almost-black;
+          border-bottom: 1px solid $almost-black;
+
+          .count-flex {
+            padding: 10px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+              margin: 1vh 0;
+            }
+          }
+        }
+
+        .teams-container {
+          text-align: center;
+          width: 100%;
+          justify-content: center;
+          margin: 0;
+
+          .edit-profile-btn {
+            margin: 6% 0;
+          }
+        }
+      }
+    }
   }
 }
