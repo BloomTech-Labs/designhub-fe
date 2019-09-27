@@ -36,6 +36,10 @@ nav {
       }
     }
 
+    svg:hover ~ p {
+      color: $white;
+    }
+
     p {
       transition: all 0.2s ease-in-out;
       background: $black;
