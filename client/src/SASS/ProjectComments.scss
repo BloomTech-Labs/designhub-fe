@@ -29,7 +29,9 @@
 
   .ProjectComment__wrapper {
     display: flex;
-    justify-content: flex-end;
+    &.--you {
+      justify-content: flex-end;
+    }
   }
 
   .ProjectComment__body {
@@ -41,7 +43,8 @@
     display: flex;
     margin-top: 20px;
     padding: 10px 8px;
-    width: fit-content;
+    max-width: 100%;
+    max-width: fit-content;
 
     &.--them {
       background: none;

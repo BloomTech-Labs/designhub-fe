@@ -61,7 +61,13 @@ const ProjectComments = ({
         {commentAnchor && scrollToBottom()}
 
         {comments.map(c => (
-          <div className="ProjectComment__wrapper">
+          <div
+            className={
+              activeUser.id === c.userId
+                ? 'ProjectComment__wrapper --you'
+                : 'ProjectComment__wrapper --them'
+            }
+          >
             <section
               className={
                 activeUser.id === c.userId
