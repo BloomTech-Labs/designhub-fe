@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../SASS/ImageViewer.scss';
 import { ImageWithComments } from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
+import defaultImage from '../../ASSETS/default_thumbnail.svg';
 
 class ImageViewer extends Component {
   constructor(props) {
@@ -79,14 +80,23 @@ class ImageViewer extends Component {
               </div>
               <div className="main-image-container">
                 <section className="ImageViewer__main-image">
-                  <img
-                    src={
-                      activeImg ? activeImg.url : this.props.thumbnails[0].url
-                    }
-                    alt="main project"
-                    onClick={() => this.setState({ modal: true })}
-                    className="main-image"
-                  />
+                  {!activeImg ? (
+                    <img
+                      style={{ cursor: 'default' }}
+                      src={defaultImage}
+                      alt="main project"
+                      className="main-image"
+                    />
+                  ) : (
+                    <img
+                      src={
+                        activeImg ? activeImg.url : this.props.thumbnails[0].url
+                      }
+                      alt="main project"
+                      onClick={() => this.setState({ modal: true })}
+                      className="main-image"
+                    />
+                  )}
                 </section>
                 <section className="ImageViewer__thumbnails">
                   {allImgs
