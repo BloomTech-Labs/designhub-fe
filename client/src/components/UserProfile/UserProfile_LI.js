@@ -155,9 +155,7 @@ class UserProfile_LI extends Component {
     const projects = this.state.projects;
     const activeUser = this.props.activeUser;
     window.scroll(0, 0);
-    if (projects.length === 0) {
-      return <Loading />;
-    }
+
     return (
       <div className="user-profile-container">
         <div className="user-header">
