@@ -22,7 +22,7 @@ const Heatmap = props => {
   function shiftDate(date, numDays) {
     const newDate = new Date(date);
     newDate.setDate(newDate.getDate() + numDays);
-    return moment(newDate).format('YYYY-MM-DD');
+    return newDate;
   }
 
   // Grabs the array of heatmaps based on user Id
@@ -57,7 +57,7 @@ const Heatmap = props => {
     <div className="heatmap">
       <h1 className="header">Activity</h1>
       <CalendarHeatmap
-        startDate={shiftDate(today, -365)}
+        startDate={shiftDate(moment(today).format('YYYY-MM-DD'), -365)}
         endDate={moment(today).format('YYYY-MM-DD')}
         values={heatmapArr}
         tooltipDataAttrs={value => {
@@ -73,7 +73,6 @@ const Heatmap = props => {
           }
         }}
         gutterSize={6}
-        showWeekdayLabels={true}
       />
       <ReactTooltip />
     </div>
