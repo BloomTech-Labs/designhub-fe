@@ -3,6 +3,7 @@ import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import errorIcon from '../ASSETS/error-icon.svg';
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loader from 'react-loader-spinner';
@@ -63,12 +64,9 @@ const ProjectForm = ({ isEditing, project, history }) => {
         try {
           const {
             data: { key, url }
-          } = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
-            {
-              id: projectId
-            }
-          );
+          } = await axiosWithAuth().post(`api/v1/photo/projects/signed`, {
+            id: projectId
+          });
 
           await axios.put(url, file, {
             headers: {
@@ -76,12 +74,12 @@ const ProjectForm = ({ isEditing, project, history }) => {
             }
           });
 
-          const { data } = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects`,
-            { projectId: projectId, url: key }
-          );
+          const { data } = await axiosWithAuth().post(`api/v1/photo/projects`, {
+            projectId: projectId,
+            url: key
+          });
 
-          await axios.post(`${process.env.REACT_APP_BASE_URL}api/v1/heatmap`, {
+          await axiosWithAuth().post(`api/v1/heatmap`, {
             userId: state.project.userId,
             contribution: `Posted one photo to ${projectTitle}`,
             projectId: projectId
@@ -105,20 +103,14 @@ const ProjectForm = ({ isEditing, project, history }) => {
       const {
         data: { id },
         data
-      } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
-        project
-      );
+      } = await axiosWithAuth().post(`api/v1/projects`, project);
 
       const something = await handleImageUpload(files, id, data.data[0].name);
       const newProject = {
         ...project,
         mainImg: something
       };
-      await axios.put(
-        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
-        newProject
-      );
+      await axiosWithAuth().put(`api/v1/projects/${id}`, newProject);
       await history.push(`/project/${id}`);
       return something;
     } catch (err) {
@@ -128,10 +120,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
 
   const editProject = async (changes, id) => {
     try {
-      await axios.put(
-        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
-        changes
-      );
+      await axiosWithAuth().put(`api/v1/projects/${id}`, changes);
       await handleImageUpload(files, id);
       await history.push(`/project/${id}`);
     } catch (err) {
