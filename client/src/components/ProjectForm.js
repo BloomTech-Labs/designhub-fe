@@ -174,10 +174,15 @@ const ProjectForm = ({ isEditing, project, history }) => {
         />
         {state.modal && (
           <div className="delete-project-modal">
-            <p>Are you sure?</p>
+            <p>Are you sure you want to delete that?</p>
             <div className="delete-modal-button-container">
-              <button onClick={closeModal}>No</button>
-              <button onClick={() => deleteProject(project.id)}>Delete</button>
+              <button
+                className="delete-button"
+                onClick={() => deleteProject(project.id)}
+              >
+                Delete
+              </button>
+              <button onClick={closeModal}>Cancel</button>
             </div>
           </div>
         )}
