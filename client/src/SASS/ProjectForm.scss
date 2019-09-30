@@ -69,12 +69,13 @@
     margin-bottom: 8px;
     margin-right: 8px;
     width: 10.9vw;
-    height: 100px;
+    height: 140px;
     box-sizing: border-box;
   }
 
   .thumbnail {
     object-fit: cover;
+    object-position: center;
     width: 100%;
   }
 
