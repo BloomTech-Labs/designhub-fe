@@ -2,7 +2,10 @@ const puppeteer = require('puppeteer');
 
 class CustomPage {
   static async build() {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox']
+    });
     const page = await browser.newPage();
     const customPage = new CustomPage(page);
 
