@@ -1,5 +1,15 @@
-const puppeteer = require('puppeteer');
+const Page = require('../___test__helpers/page');
 jest.setTimeout(30000);
+let page;
+
+beforeEach(async () => {
+  page = await Page.build();
+  await page.goto('http://localhost:3000');
+});
+
+afterEach(async () => {
+  await page.close();
+});
 
 test('renders without crashing', () => {
   const condition = 1 + 2;
@@ -7,22 +17,7 @@ test('renders without crashing', () => {
 });
 
 test('login with auth0', async () => {
-  const browser = await puppeteer.launch({
-    headless: false
-  });
-  const page = await browser.newPage();
-  await page.goto('http://localhost:3000');
-  await page.click('.auth0-redirect-btn');
-
-  await page.waitForSelector('input[name="email"]', {
-    visible: true,
-    timeout: 5000
-  });
-  await page.type('input[name="email"]', 'test@test.com', { delay: 50 });
-  await page.type('input[name="password"]', 'Test1234', { delay: 50 });
-
-  await page.click('button[type="submit"]');
-  await page.waitFor('.edit-profile-btn');
+  await page.login();
   const text = await page.$eval('.edit-profile-btn', el => el.innerHTML);
   expect(text).toEqual('Edit Profile');
 });

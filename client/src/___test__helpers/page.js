@@ -1,12 +1,14 @@
+const puppeteer = require('puppeteer');
+
 class CustomPage {
   static async build() {
-    const browser = await puppeteer.launch({ headless: true });
-    page = await browser.newPage();
+    const browser = await puppeteer.launch({ headless: false });
+    const page = await browser.newPage();
     const customPage = new CustomPage(page);
 
     return new Proxy(customPage, {
       get: function(target, property) {
-        return customPage[propery] || browser[property] || page[property];
+        return customPage[property] || browser[property] || page[property];
       }
     });
   }
@@ -23,9 +25,11 @@ class CustomPage {
       timeout: 5000
     });
     await this.page.type('input[name="email"]', 'test@test.com', { delay: 50 });
-    await page.type('input[name="password"]', 'Test1234', { delay: 50 });
+    await this.page.type('input[name="password"]', 'Test1234', { delay: 50 });
 
     await this.page.click('button[type="submit"]');
     await this.page.waitFor('.edit-profile-btn');
   }
 }
+
+module.exports = CustomPage;
