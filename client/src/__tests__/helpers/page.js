@@ -10,4 +10,22 @@ class CustomPage {
       }
     });
   }
+
+  constructor(page) {
+    this.page = page;
+  }
+
+  async login() {
+    await this.page.click('.auth0-redirect-btn');
+
+    await this.page.waitForSelector('input[name="email"]', {
+      visible: true,
+      timeout: 5000
+    });
+    await this.page.type('input[name="email"]', 'test@test.com', { delay: 50 });
+    await page.type('input[name="password"]', 'Test1234', { delay: 50 });
+
+    await this.page.click('button[type="submit"]');
+    await this.page.waitFor('.edit-profile-btn');
+  }
 }
