@@ -165,7 +165,7 @@ class Projects extends Component {
                   onClick={this.starProject}
                 />
               </div>
-              {this.state.myId === this.state.projectInfo.userId ? (
+              {this.state.myId === this.state.projectInfo.userId && (
                 <div
                   className="edit project-header-button"
                   onClick={() => {
@@ -176,7 +176,7 @@ class Projects extends Component {
                 >
                   Edit
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
