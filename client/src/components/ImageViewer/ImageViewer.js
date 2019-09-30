@@ -122,6 +122,7 @@ class ImageViewer extends Component {
                 ? this.state.comments
                 : this.props.comments
             }
+            modal={modal}
             thisProject={this.props.thisProject}
           />
         </>

@@ -48,7 +48,7 @@ const Step2 = ({ formUser, files, setFiles }) => {
           />
           <div className="thumb">
             <div style={thumbInner}>
-              <img src={file.preview} className="thumbnail" />
+              <img src={file.preview} className="Step2-thumbnail" />
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ const Step2 = ({ formUser, files, setFiles }) => {
           </div>
         </section>
 
-        <aside className="thumbnail-container">{thumbs()}</aside>
+        <aside className="Step2-thumbnail-container">{thumbs()}</aside>
       </div>
     </>
   );

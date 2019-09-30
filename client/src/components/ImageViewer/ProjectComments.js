@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import moment from 'moment';
+// import moment from 'moment';
+import { useWindowDimensions } from './useWindowDimensions.js';
 import SendIcon from '../Icons/SendIcon';
 import '../../SASS/ProjectComments.scss';
 
@@ -8,16 +9,21 @@ const ProjectComments = ({
   activeUser,
   addComments,
   comments,
+  modal,
   thisProject
 }) => {
   // console.log('ProjectComments.js RENDER comments', comments);
   // console.log('ProjectComments.js RENDER activeUser', activeUser);
 
+  //custom hook to get window height/width
+  const { width } = useWindowDimensions();
   // ref for bottom of comments feed
   const [commentAnchor, setCommentAnchor] = useState(null);
   //function to autoscroll to commentAnchor
   const scrollToBottom = () => {
-    commentAnchor.scrollIntoView({ behavior: 'smooth' });
+    //scroll comments window ONLY at desktop widths
+    if (width <= 1024) return;
+    else commentAnchor.scrollIntoView({ behavior: 'smooth' });
   };
 
   //local state for form input
@@ -59,6 +65,7 @@ const ProjectComments = ({
       <section className="comments-body">
         {comments.map(c => (
           <div
+            key={c.id}
             className={
               activeUser.id === c.userId
                 ? 'ProjectComment__body --you'
@@ -81,7 +88,7 @@ const ProjectComments = ({
           </div>
         ))}
         <div ref={el => setCommentAnchor(el)}></div>
-        {commentAnchor && scrollToBottom()}
+        {commentAnchor && !modal && scrollToBottom()}
       </section>
 
       <section className="comments-form">
