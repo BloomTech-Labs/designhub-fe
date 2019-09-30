@@ -7,6 +7,57 @@
   margin-top: 14vh;
   display: flex;
 
+  .modal--close {
+    display: none;
+  }
+
+  .modal--expand {
+    animation: fadeIn 0.2s ease-in-out;
+    height: 100%;
+    opacity: 1;
+    width: 100%;
+    z-index: 9999;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+    span.modal--expand__background-overlay {
+      background: $modal-bg;
+      cursor: pointer;
+      content: '';
+      position: fixed;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 99;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  .delete-project-modal {
+    background: rgba(0, 0, 0, 0.3);
+    max-width: 489px;
+    height: 159px;
+    display: flex;
+    flex-direction: column;
+    z-index: 99999;
+    border-radius: 10px;
+    p {
+      font-size: 20px;
+      line-height: 23px;
+      letter-spacing: 0.11em;
+    }
+  }
+
   .left-container {
     width: 50%;
     margin: 0px 20px 0px 0px;
