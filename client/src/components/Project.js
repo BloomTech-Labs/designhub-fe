@@ -85,7 +85,7 @@ class Projects extends Component {
                   <Link
                     to={`/profile/${thisProject.userId}/${activeUser.username}`}
                   >
-                    {activeUser.username}
+                    {thisProject.username}
                   </Link>
                 </span>
               </span>
