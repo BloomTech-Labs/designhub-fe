@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
 import moment from 'moment';
 
 import avatar1 from '../ASSETS/avatar.jpg';
@@ -55,8 +53,8 @@ class Projects extends Component {
       userId: this.state.myId,
       projectId: this.state.projectId
     };
-    axios
-      .post('https://designhubx.herokuapp.com/api/v1/star', starObj)
+    return axiosWithAuth()
+      .post('api/v1/star', starObj)
       .then(res => {
         console.log(res.data);
       })

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { useAuth0 } from '../../auth-wrapper.js';
 
 import Step1 from './Step1.js';
@@ -58,8 +59,8 @@ const OnboardingForm = props => {
     const move = e.target.name === 'next' ? 'next' : 'prev';
     if (move === 'next' && formStep < stepComponents.length) {
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}api/v1/users/check/${formUser.username}`
+        const res = await axiosWithAuth().get(
+          `api/v1/users/check/${formUser.username}`
         );
         if (res.data.length === 0) {
           setAlert(false);
@@ -85,10 +86,7 @@ const OnboardingForm = props => {
       changes = { ...changes, avatar: newAvatar };
       // console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
       // console.log('OnboardingForm.js handleSubmit() changes', changes);
-      const res = await axios.put(
-        `${process.env.REACT_APP_BASE_URL}api/v1/users/${id}`,
-        changes
-      );
+      const res = await axiosWithAuth().put(`api/v1/users/${id}`, changes);
       // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
@@ -103,12 +101,9 @@ const OnboardingForm = props => {
     try {
       const {
         data: { key, url }
-      } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
-        {
-          id: user.sub
-        }
-      );
+      } = await axiosWithAuth().post(`api/v1/photo/projects/signed`, {
+        id: user.sub
+      });
       // console.log('OnboardingForm.js handleImageUpload() key, url', key, url);
 
       await axios.put(url, file[0], {
