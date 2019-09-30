@@ -83,6 +83,23 @@
   .left-container {
     width: 50%;
     margin: 0px 20px 0px 0px;
+    .delete-project-button {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      cursor: pointer;
+      color: $dark-grey;
+      letter-spacing: 0.11em;
+      p {
+        line-height: 24px;
+        vertical-align: middle;
+        display: inline;
+      }
+      svg {
+        vertical-align: middle;
+        margin-right: 6px;
+      }
+    }
 
     .page-header {
       font-weight: 500;

@@ -9,6 +9,7 @@ import { MultiImageUpload } from './MultiImageUpload.js';
 import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
+import DeleteIcon from './Icons/DeleteIcon.js';
 
 const ProjectForm = ({ isEditing, project, history }) => {
   const [files, setFiles] = useState([]);
@@ -197,7 +198,8 @@ const ProjectForm = ({ isEditing, project, history }) => {
 
         <MultiImageUpload filesArray={{ files, setFiles }} />
         {isEditing && (
-          <button
+          <div
+            className="delete-project-button"
             onClick={() =>
               setState({
                 ...state,
@@ -205,8 +207,9 @@ const ProjectForm = ({ isEditing, project, history }) => {
               })
             }
           >
-            Delete project
-          </button>
+            <DeleteIcon />
+            <p>Delete project</p>
+          </div>
         )}
       </div>
       <div className="right-container">
