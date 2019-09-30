@@ -16,7 +16,7 @@ test('renders without crashing', () => {
   expect(condition).toEqual(3);
 });
 
-test('login with auth0', async () => {
+test('User can login', async () => {
   await page.login();
   const text = await page.$eval('.edit-profile-btn', el => el.innerHTML);
   expect(text).toEqual('Edit Profile');
