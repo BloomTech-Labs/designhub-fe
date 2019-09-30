@@ -165,16 +165,18 @@ class Projects extends Component {
                   onClick={this.starProject}
                 />
               </div>
-              <div
-                className="edit project-header-button"
-                onClick={() => {
-                  this.props.history.push(
-                    `/project/${this.state.projectId}/edit`
-                  );
-                }}
-              >
-                Edit
-              </div>
+              {this.state.myId === this.state.projectInfo.userId && (
+                <div
+                  className="edit project-header-button"
+                  onClick={() => {
+                    this.props.history.push(
+                      `/project/${this.state.projectId}/edit`
+                    );
+                  }}
+                >
+                  Edit
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import { MultiImageUpload } from './MultiImageUpload.js';
 import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
+import DeleteIcon from './Icons/DeleteIcon.js';
 
 const ProjectForm = ({ isEditing, project, history }) => {
   const [files, setFiles] = useState([]);
@@ -16,6 +17,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
   const [alert, setAlert] = useState(false);
 
   const { user } = useAuth0();
+  console.log('', user);
 
   const [state, setState] = useState({
     project: {
@@ -27,7 +29,8 @@ const ProjectForm = ({ isEditing, project, history }) => {
       mainImg: isEditing ? project.mainImg : ''
     },
     success: false,
-    url: ''
+    url: '',
+    modal: false
   });
 
   const { name, description, figma, invision } = state.project;
@@ -128,6 +131,22 @@ const ProjectForm = ({ isEditing, project, history }) => {
     }
   };
 
+  const deleteProject = async id => {
+    try {
+      await axiosWithAuth().delete(`api/v1/projects/${id}`);
+      await history.push(`/profile/${project.userId}/${project.username}`);
+    } catch (err) {
+      console.log('ProjectForm.js deleteProject ERROR', err);
+    }
+  };
+
+  const closeModal = () => {
+    setState({
+      ...state,
+      modal: false
+    });
+  };
+
   return (
     <div className="project-form-wrapper">
       {isLoading && (
@@ -149,6 +168,26 @@ const ProjectForm = ({ isEditing, project, history }) => {
           />
         </div>
       )}
+      <div className={state.modal ? 'modal--expand' : 'modal--close'}>
+        <span
+          className="modal--expand__background-overlay"
+          onClick={closeModal}
+        />
+        {state.modal && (
+          <div className="delete-project-modal">
+            <p>Are you sure you want to delete that?</p>
+            <div className="delete-modal-button-container">
+              <button
+                className="delete-button"
+                onClick={() => deleteProject(project.id)}
+              >
+                Delete
+              </button>
+              <button onClick={closeModal}>Cancel</button>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="left-container">
         <h2 className="page-header">
           {isEditing ? 'Edit project' : 'Create a project'}
@@ -158,6 +197,20 @@ const ProjectForm = ({ isEditing, project, history }) => {
         </label>
 
         <MultiImageUpload filesArray={{ files, setFiles }} />
+        {isEditing && (
+          <div
+            className="delete-project-button"
+            onClick={() =>
+              setState({
+                ...state,
+                modal: true
+              })
+            }
+          >
+            <DeleteIcon />
+            <p>Delete project</p>
+          </div>
+        )}
       </div>
       <div className="right-container">
         <form
