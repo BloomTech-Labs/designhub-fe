@@ -85,7 +85,7 @@ main.StickyComment__container.TempComment {
 }
 
 main.StickyComment__container {
-  align-items: center;
+  align-items: flex-start;
   display: none;
   // display: flex; //for dev testing only
   flex-direction: row;
@@ -104,8 +104,6 @@ main.StickyComment__container {
   }
 
   .StickyComment__body {
-    align-items: center;
-    align-self: center;
     background: $blue;
     border-radius: 10px;
     box-sizing: border-box;
@@ -127,7 +125,6 @@ main.StickyComment__container {
       header {
         display: flex;
         em {
-          align-self: center;
           font-weight: 900;
         }
         p {
