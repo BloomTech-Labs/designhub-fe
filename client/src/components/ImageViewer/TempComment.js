@@ -35,22 +35,24 @@ export class TempComment extends React.Component {
         >
           <hr className="StickyComment__midbar" />
 
-          <form className="StickyComment__form">
+          <form
+            className="StickyComment__form"
+            onSubmit={e => this.onSubmit(e, c)}
+          >
             <textarea
               ref={input => (this.nameInput = input)}
               type="text"
               value={comment}
-              onChange={e => this.setState({ comment: e.target.value })}
+              onKeyDown={e => this.handleKeyDown(e, c)}
+              onChange={this.handleChange}
             />
+            <button
+              className="StickyComments__submit-btn"
+              onClick={e => this.onSubmit(e, c)}
+            >
+              <SendIcon />
+            </button>
           </form>
-
-          <button
-            className="StickyComments__submit-btn"
-            onClick={e => this.onSubmit(e, c)}
-          >
-            <SendIcon />
-          </button>
-          {/* <button onClick={e => this.handleDelete(e, id)}>delete</button> */}
         </main>
       </>
     );
@@ -58,6 +60,17 @@ export class TempComment extends React.Component {
 
   componentDidMount() {
     this.nameInput.focus();
+  }
+
+  handleChange = e => {
+    this.setState({ comment: e.target.value });
+  };
+
+  handleKeyDown(e, c) {
+    if (e.key === 'Enter') {
+      e.preventDefault(); // Prevents the addition of a new line in the <textarea/>
+      this.onSubmit(e, c);
+    }
   }
 
   handleDelete(e, id) {
