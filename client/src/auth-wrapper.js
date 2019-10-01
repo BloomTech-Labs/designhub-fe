@@ -1,6 +1,6 @@
 // src/react-auth0-wrapper.js
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { axiosWithAuth } from './utilities/axiosWithAuth.js';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
@@ -50,7 +50,7 @@ export const Auth0Provider = ({
         // );
 
         // post new user and return id and store that id to user state
-        const res = await axios.post('api/v1/users/', user);
+        const res = await axiosWithAuth().post('api/v1/users/', user);
         const [userFromResponse] = res.data.user;
 
         setUser({

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 
 import ProjectForm from './ProjectForm';
 
@@ -18,8 +18,8 @@ class EditProject extends Component {
   fetch() {
     const { id } = this.props.match.params;
 
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`)
+    return axiosWithAuth()
+      .get(`api/v1/projects/${id}`)
       .then(res => {
         this.setState({
           project: res.data[0]

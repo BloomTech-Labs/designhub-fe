@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CalendarHeatmap from 'react-calendar-heatmap';
-import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
@@ -27,11 +27,11 @@ const Heatmap = props => {
 
   // Grabs the array of heatmaps based on user Id
   const getHeatmap = async () => {
-    const { data } = await axios.get(
-      `https://designhubx.herokuapp.com/api/v1/heatmap/${params}`
-    );
+    const { data } = await axiosWithAuth().get(`api/v1/heatmap/${params}`);
     setHeatmapArr(data);
   };
+
+  console.log(heatmapArr);
 
   //conditionally renders the tool tip message when hovering over a square
   const renderToolTip = value => {
@@ -53,13 +53,12 @@ const Heatmap = props => {
       };
     }
   };
-
   return (
     <div className="heatmap">
       <h1 className="header">Activity</h1>
       <CalendarHeatmap
-        startDate={shiftDate(today, -270)}
-        endDate={today}
+        startDate={shiftDate(moment(today).format('YYYY-MM-DD'), -365)}
+        endDate={moment(today).format('YYYY-MM-DD')}
         values={heatmapArr}
         tooltipDataAttrs={value => {
           return renderToolTip(value);
@@ -74,7 +73,6 @@ const Heatmap = props => {
           }
         }}
         gutterSize={6}
-        showWeekdayLabels={true}
       />
       <ReactTooltip />
     </div>

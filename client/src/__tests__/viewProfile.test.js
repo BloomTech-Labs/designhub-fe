@@ -29,8 +29,10 @@ const getUserDataCounts = async (number, page) => {
 
 beforeEach(async () => {
   page = await Page.build();
+
   await page.goto('http://localhost:3000');
   await page.login();
+
 });
 
 afterEach(async () => {

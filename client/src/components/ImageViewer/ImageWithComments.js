@@ -1,7 +1,6 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
-
-import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
@@ -155,8 +154,8 @@ export class ImageWithComments extends React.Component {
     // console.log('ImageWithComments.js handleSubmit() thisComment', thisComment);
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/v1/comments/photo`,
+      const res = await axiosWithAuth().post(
+        `api/v1/comments/photo`,
         thisComment
       );
       const newComment = res.data.data[0];

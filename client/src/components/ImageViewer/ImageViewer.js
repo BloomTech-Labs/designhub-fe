@@ -114,7 +114,6 @@ class ImageViewer extends Component {
               </div>
             </main>
           </div>
-
           <ProjectComments
             activeUser={this.props.activeUser}
             addComments={this.addComments}
@@ -123,6 +122,7 @@ class ImageViewer extends Component {
                 ? this.state.comments
                 : this.props.comments
             }
+            modal={modal}
             thisProject={this.props.thisProject}
           />
         </>

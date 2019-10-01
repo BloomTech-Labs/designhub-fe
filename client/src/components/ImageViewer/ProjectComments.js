@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import moment from 'moment';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
+// import moment from 'moment';
+import { useWindowDimensions } from './useWindowDimensions.js';
 import SendIcon from '../Icons/SendIcon';
 import '../../SASS/ProjectComments.scss';
 
@@ -8,16 +9,21 @@ const ProjectComments = ({
   activeUser,
   addComments,
   comments,
+  modal,
   thisProject
 }) => {
   // console.log('ProjectComments.js RENDER comments', comments);
   // console.log('ProjectComments.js RENDER activeUser', activeUser);
 
+  //custom hook to get window height/width
+  const { width } = useWindowDimensions();
   // ref for bottom of comments feed
   const [commentAnchor, setCommentAnchor] = useState(null);
   //function to autoscroll to commentAnchor
   const scrollToBottom = () => {
-    commentAnchor.scrollIntoView({ behavior: 'smooth' });
+    //scroll comments window ONLY at desktop widths
+    if (width <= 1024) return;
+    else commentAnchor.scrollIntoView({ behavior: 'smooth' });
   };
 
   //local state for form input
@@ -37,8 +43,8 @@ const ProjectComments = ({
     // console.log('ProjectComments.js handleSubmit() thisCOmment', thisComment);
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/v1/comments/project`,
+      const res = await axiosWithAuth().post(
+        `api/v1/comments/project`,
         thisComment
       );
       const newComment = res.data.data[0];
@@ -56,44 +62,33 @@ const ProjectComments = ({
   return (
     <div className="project-comments">
       <header className="comments-header">Comments</header>
-
       <section className="comments-body">
-        {commentAnchor && scrollToBottom()}
-
         {comments.map(c => (
           <div
+            key={c.id}
             className={
               activeUser.id === c.userId
-                ? 'ProjectComment__wrapper --you'
-                : 'ProjectComment__wrapper --them'
+                ? 'ProjectComment__body --you'
+                : 'ProjectComment__body --them'
             }
           >
-            <section
-              className={
-                activeUser.id === c.userId
-                  ? 'ProjectComment__body --you'
-                  : 'ProjectComment__body --them'
-              }
-            >
-              {activeUser.id === c.userId ? null : (
-                <img
-                  src={c.userAvatar}
-                  alt="avatar"
-                  className="ProjectComment__body__avatar"
-                />
-              )}
-              <div className="ProjectComment__body__text">
-                <header>
-                  <em>{activeUser.id === c.userId ? 'You' : c.username}</em>
-                  {/* <p>{moment(c.created_at).fromNow()}</p> */}
-                </header>
-                <p>{c.text}</p>
-              </div>
-            </section>
+            {activeUser.id === c.userId ? null : (
+              <img
+                src={c.userAvatar}
+                alt="avatar"
+                className="ProjectComment__body__avatar"
+              />
+            )}
+            <div className="ProjectComment__body__text">
+              <p className="username">
+                {activeUser.id === c.userId ? 'You' : c.username}
+              </p>
+              <p>{c.text}</p>
+            </div>
           </div>
         ))}
-
         <div ref={el => setCommentAnchor(el)}></div>
+        {commentAnchor && !modal && scrollToBottom()}
       </section>
 
       <section className="comments-form">

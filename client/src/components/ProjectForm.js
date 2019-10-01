@@ -3,11 +3,13 @@ import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import errorIcon from '../ASSETS/error-icon.svg';
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
+import DeleteIcon from './Icons/DeleteIcon.js';
 
 const ProjectForm = ({ isEditing, project, history }) => {
   const [files, setFiles] = useState([]);
@@ -15,6 +17,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
   const [alert, setAlert] = useState(false);
 
   const { user } = useAuth0();
+  console.log('', user);
 
   const [state, setState] = useState({
     project: {
@@ -26,7 +29,8 @@ const ProjectForm = ({ isEditing, project, history }) => {
       mainImg: isEditing ? project.mainImg : ''
     },
     success: false,
-    url: ''
+    url: '',
+    modal: false
   });
 
   const { name, description, figma, invision } = state.project;
@@ -63,12 +67,9 @@ const ProjectForm = ({ isEditing, project, history }) => {
         try {
           const {
             data: { key, url }
-          } = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects/signed`,
-            {
-              id: projectId
-            }
-          );
+          } = await axiosWithAuth().post(`api/v1/photo/projects/signed`, {
+            id: projectId
+          });
 
           await axios.put(url, file, {
             headers: {
@@ -76,12 +77,12 @@ const ProjectForm = ({ isEditing, project, history }) => {
             }
           });
 
-          const { data } = await axios.post(
-            `${process.env.REACT_APP_BASE_URL}api/v1/photo/projects`,
-            { projectId: projectId, url: key }
-          );
+          const { data } = await axiosWithAuth().post(`api/v1/photo/projects`, {
+            projectId: projectId,
+            url: key
+          });
 
-          await axios.post(`${process.env.REACT_APP_BASE_URL}api/v1/heatmap`, {
+          await axiosWithAuth().post(`api/v1/heatmap`, {
             userId: state.project.userId,
             contribution: `Posted one photo to ${projectTitle}`,
             projectId: projectId
@@ -105,20 +106,14 @@ const ProjectForm = ({ isEditing, project, history }) => {
       const {
         data: { id },
         data
-      } = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}api/v1/projects`,
-        project
-      );
+      } = await axiosWithAuth().post(`api/v1/projects`, project);
 
       const something = await handleImageUpload(files, id, data.data[0].name);
       const newProject = {
         ...project,
         mainImg: something
       };
-      await axios.put(
-        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
-        newProject
-      );
+      await axiosWithAuth().put(`api/v1/projects/${id}`, newProject);
       await history.push(`/project/${id}`);
       return something;
     } catch (err) {
@@ -128,15 +123,28 @@ const ProjectForm = ({ isEditing, project, history }) => {
 
   const editProject = async (changes, id) => {
     try {
-      await axios.put(
-        `${process.env.REACT_APP_BASE_URL}api/v1/projects/${id}`,
-        changes
-      );
+      await axiosWithAuth().put(`api/v1/projects/${id}`, changes);
       await handleImageUpload(files, id);
       await history.push(`/project/${id}`);
     } catch (err) {
       console.log('ProjectForm.js editProject ERROR', err);
     }
+  };
+
+  const deleteProject = async id => {
+    try {
+      await axiosWithAuth().delete(`api/v1/projects/${id}`);
+      await history.push(`/profile/${project.userId}/${project.username}`);
+    } catch (err) {
+      console.log('ProjectForm.js deleteProject ERROR', err);
+    }
+  };
+
+  const closeModal = () => {
+    setState({
+      ...state,
+      modal: false
+    });
   };
 
   return (
@@ -160,6 +168,26 @@ const ProjectForm = ({ isEditing, project, history }) => {
           />
         </div>
       )}
+      <div className={state.modal ? 'modal--expand' : 'modal--close'}>
+        <span
+          className="modal--expand__background-overlay"
+          onClick={closeModal}
+        />
+        {state.modal && (
+          <div className="delete-project-modal">
+            <p>Are you sure you want to delete that?</p>
+            <div className="delete-modal-button-container">
+              <button
+                className="delete-button"
+                onClick={() => deleteProject(project.id)}
+              >
+                Delete
+              </button>
+              <button onClick={closeModal}>Cancel</button>
+            </div>
+          </div>
+        )}
+      </div>
       <div className="left-container">
         <h2 className="page-header">
           {isEditing ? 'Edit project' : 'Create a project'}
@@ -169,6 +197,20 @@ const ProjectForm = ({ isEditing, project, history }) => {
         </label>
 
         <MultiImageUpload filesArray={{ files, setFiles }} />
+        {isEditing && (
+          <div
+            className="delete-project-button"
+            onClick={() =>
+              setState({
+                ...state,
+                modal: true
+              })
+            }
+          >
+            <DeleteIcon />
+            <p>Delete project</p>
+          </div>
+        )}
       </div>
       <div className="right-container">
         <form
