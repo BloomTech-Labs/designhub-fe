@@ -86,7 +86,7 @@ const OnboardingForm = props => {
       changes = { ...changes, avatar: newAvatar };
       // console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
       // console.log('OnboardingForm.js handleSubmit() changes', changes);
-      const res = await axiosWithAuth().put(`api/v1/users/${id}`, changes);
+      await axiosWithAuth().put(`api/v1/users/${id}`, changes);
       // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
