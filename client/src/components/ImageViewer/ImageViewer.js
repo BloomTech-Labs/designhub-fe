@@ -12,13 +12,18 @@ class ImageViewer extends Component {
       allImgs: null,
       comments: this.props.comments,
       modal: false,
-      thisProject: { ...this.props.thisProject }
+      thisProject: { ...this.props.thisProject },
+      thumbnails: [],
+      deletePhotoLoading: false
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.thumbnails !== prevProps.thumbnails) {
-      this.setState({ activeImg: this.props.thumbnails[0] });
+      this.setState({
+        activeImg: this.props.thumbnails[0],
+        thumbnails: this.props.thumbnails
+      });
     }
   }
 
@@ -101,7 +106,7 @@ class ImageViewer extends Component {
                 <section className="ImageViewer__thumbnails">
                   {allImgs
                     ? allImgs
-                    : this.props.thumbnails.map(t => (
+                    : this.state.thumbnails.map(t => (
                         <img
                           key={t.url}
                           src={t.url}
