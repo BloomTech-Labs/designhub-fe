@@ -177,7 +177,7 @@ const ProjectForm = ({ isEditing, project, history }) => {
           className={`${alert ? 'alert' : null} project-form-container`}
           onSubmit={handleSubmit}
         >
-          <label htmlFor="name" className="label">
+          <label htmlFor="name" className="label project-label">
             Project title{alert && ' (required)'}
           </label>
           <div className="alert-container">
