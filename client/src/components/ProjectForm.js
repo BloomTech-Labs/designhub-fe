@@ -117,6 +117,7 @@ const ProjectForm = ({
       } = await axiosWithAuth().post(`api/v1/projects`, project);
 
       const something = await handleImageUpload(files, id, data.data[0].name);
+      console.log('something!!!!!!!!!!!!!!!!', something);
       const newProject = {
         ...project,
         mainImg: something
