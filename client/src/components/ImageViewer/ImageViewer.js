@@ -93,27 +93,38 @@ class ImageViewer extends Component {
                       className="main-image"
                     />
                   ) : (
-                    <img
-                      src={
-                        activeImg ? activeImg.url : this.props.thumbnails[0].url
-                      }
-                      alt="main project"
-                      onClick={() => this.setState({ modal: true })}
-                      className="main-image"
-                    />
+                    <div>
+                      {this.props.thisProject.userId ===
+                        this.props.activeUser.id && <h2>delete</h2>}
+                      {console.log(this.props)}
+                      <img
+                        src={
+                          activeImg
+                            ? activeImg.url
+                            : this.props.thumbnails[0].url
+                        }
+                        alt="main project"
+                        onClick={() => this.setState({ modal: true })}
+                        className="main-image"
+                      />
+                    </div>
                   )}
                 </section>
                 <section className="ImageViewer__thumbnails">
                   {allImgs
                     ? allImgs
                     : this.state.thumbnails.map(t => (
-                        <img
-                          key={t.url}
-                          src={t.url}
-                          alt="project-thumbnail"
-                          onClick={() => this.changeImg(t)}
-                          className="thumbnails"
-                        />
+                        <div>
+                          {this.props.thisProject.userId ===
+                            this.props.activeUser.id && <h2>delete</h2>}
+                          <img
+                            key={t.url}
+                            src={t.url}
+                            alt="project-thumbnail"
+                            onClick={() => this.changeImg(t)}
+                            className="thumbnails"
+                          />
+                        </div>
                       ))}
                 </section>
               </div>
