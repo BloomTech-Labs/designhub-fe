@@ -184,7 +184,7 @@ const ProjectForm = ({
               top: '40vh',
               left: '40vw',
               margin: '0 auto',
-              zIndex: '99' 
+              zIndex: '99'
             }}
             type="Grid"
             color="#C0C0C0"
@@ -197,21 +197,22 @@ const ProjectForm = ({
         <span
           className="modal--expand__background-overlay"
           onClick={closeModal}
-        />
-        {state.modal && (
-          <div className="delete-project-modal">
-            <p>Are you sure you want to delete that?</p>
-            <div className="delete-modal-button-container">
-              <button onClick={closeModal}>Cancel</button>
-              <button
-                className="delete-button"
-                onClick={() => deleteProject(project.id)}
-              >
-                Delete
-              </button>
+        >
+          {state.modal && (
+            <div className="delete-project-modal">
+              <p>Are you sure you want to delete that?</p>
+              <div className="delete-modal-button-container">
+                <button onClick={closeModal}>Cancel</button>
+                <button
+                  className="delete-button"
+                  onClick={() => deleteProject(project.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </span>
       </div>
       <div className="left-container">
         <h2 className="page-header">
