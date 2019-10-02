@@ -293,14 +293,6 @@ const ProjectForm = ({
               onChange={handleChanges}
               className="description"
             />
-            <label htmlFor="teamMembers" className="label">
-              Add team members
-            </label>
-            <input
-              type="text"
-              placeholder="Enter team member usernames separated by a comma"
-              id="teamMembers"
-            />
 
             <label htmlFor="figmaLink" className="label">
               Figma link
@@ -324,6 +316,15 @@ const ProjectForm = ({
               id="invisionLink"
               onChange={handleChanges}
             />
+            <label htmlFor="teamMembers" className="label">
+              Add team members
+            </label>
+            <input
+              type="text"
+              placeholder="Enter team member usernames separated by a comma"
+              id="teamMembers"
+            />
+
             <div className="submit-cancel-container">
               <button
                 className="submit-button"

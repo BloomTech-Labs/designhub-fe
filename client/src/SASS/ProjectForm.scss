@@ -236,6 +236,9 @@
       label {
         display: inline-block;
         margin-top: 15px;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 0.11em;
       }
 
       .project-label {
@@ -270,16 +273,27 @@
     }
 
     input {
-      width: 98%;
-      margin: 10px 0 20px 0;
-      padding: 10px 0;
       background: $field-bg;
       border: none;
-      color: white;
-      outline: none;
-      padding-left: 10px;
       border-radius: 5px;
+      color: white;
+      font-weight: 500;
       font-size: 14px;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      margin: 10px 0 20px 0;
+      outline: none;
+      padding: 10px 0;
+      padding-left: 10px;
+      width: 98%;
+    }
+
+    textarea {
+      font-weight: 500;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      font-family: inherit; // need this to override textarea defaults
+      font-size: inherit; // need this to override textarea defaults
     }
 
     .description {
