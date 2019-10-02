@@ -7,7 +7,8 @@ class EditProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      project: null
+      project: null,
+      projectPhotos: null
     };
   }
 
@@ -22,15 +23,28 @@ class EditProject extends Component {
       .get(`api/v1/projects/${id}`)
       .then(res => {
         this.setState({
+          ...this.state,
           project: res.data[0]
         });
+        return axiosWithAuth()
+          .get(`api/v1/photo/projects/${res.data[0].id}`)
+          .then(res => {
+            this.setState({ ...this.state, projectPhotos: res.data });
+          })
+          .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    if (this.state.project) {
-      return <ProjectForm isEditing={true} project={this.state.project} />;
+    if (this.state.project && this.state.projectPhotos) {
+      return (
+        <ProjectForm
+          isEditing={true}
+          project={this.state.project}
+          projectPhotos={this.state.projectPhotos}
+        />
+      );
     } else {
       return <h2>Loading...</h2>;
     }
