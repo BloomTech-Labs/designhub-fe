@@ -207,7 +207,7 @@ const ProjectForm = ({ isEditing, project, projectPhotos, history }) => {
 
         {isEditing && (
           <div>
-            <div className="current-project-photos">
+            <div className="thumbnail-container ">
               {projectPhotos.map((photo, index) => (
                 <div key={index}>
                   <img src={remove} className="remove" onClick={() => {}} />
