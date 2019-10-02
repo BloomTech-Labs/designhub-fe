@@ -15,7 +15,7 @@
   .settings-left-column {
     padding: 5vh 0;
     width: 12%;
-    border-right: 3px solid #212229;
+
     height: 100%;
     .settings-logout {
       color: $alert;
@@ -37,11 +37,12 @@
     width: 85%;
     text-align: left;
     padding: 40px 60px;
+    border-left: 3px solid #212229;
   }
 
   img {
     border-radius: 100%;
-    width: 100px;
+    width: 130px;
   }
 
   .full-name {
@@ -51,5 +52,37 @@
   button {
     @include edit-profile-btn;
     margin: 20px 0;
+  }
+}
+
+.account-form-container {
+  .account-form {
+    display: flex;
+    flex-flow: column nowrap;
+    label {
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.11em;
+      color: #ffffff;
+    }
+    input,
+    textarea {
+      background: #2a2b31;
+      border-radius: 5px;
+      border: none;
+      height: 31px;
+      margin: 4px 0 30px 0;
+      padding-left: 12px;
+      color: white;
+      &::placeholder {
+        color: #6d6d72;
+        font-family: Roboto;
+        font-size: 14px;
+        padding: 8px 0;
+      }
+    }
+    textarea {
+      height: 60px;
+    }
   }
 }
