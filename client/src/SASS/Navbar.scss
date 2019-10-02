@@ -36,6 +36,13 @@ nav {
       }
     }
 
+    .ProfileIcon {
+      svg {
+        width: 21px;
+        height: 21px;
+      }
+    }
+
     svg:hover ~ p {
       color: $white;
     }
