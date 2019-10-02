@@ -84,7 +84,7 @@ class Projects extends Component {
                 Created by{' '}
                 <span className="project-header-username">
                   <Link
-                    to={`/profile/${thisProject.userId}/${activeUser.username}`}
+                    to={`/profile/${thisProject.userId}/${thisProject.username}`}
                   >
                     {thisProject.username}
                   </Link>

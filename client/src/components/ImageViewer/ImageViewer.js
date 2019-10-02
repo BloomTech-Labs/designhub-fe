@@ -14,17 +14,14 @@ class ImageViewer extends Component {
       allImgs: null,
       comments: this.props.comments,
       modal: false,
-      thisProject: { ...this.props.thisProject },
-      thumbnails: [],
-      deletePhotoLoading: false
+      thisProject: { ...this.props.thisProject }
     };
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.thumbnails !== prevProps.thumbnails) {
       this.setState({
-        activeImg: this.props.thumbnails[0],
-        thumbnails: this.props.thumbnails
+        activeImg: this.props.thumbnails[0]
       });
     }
   }
@@ -49,22 +46,6 @@ class ImageViewer extends Component {
 
   closeModal = () => {
     this.setState({ modal: false });
-  };
-
-  deletePhoto = id => {
-    this.setState({ deletePhotoLoading: true });
-    let photos = this.state.thumbnails.filter(i => i.id !== id);
-    axios
-      .post('http://localhost:8000/api/v1/photo/projects/delete', {
-        id: id
-      })
-      .then(() =>
-        this.setState({
-          thumbnails: photos,
-          activeImg: photos[0],
-          deletePhotoLoading: false
-        })
-      );
   };
 
   render() {
@@ -111,50 +92,27 @@ class ImageViewer extends Component {
                       className="main-image"
                     />
                   ) : (
-                    <div>
-                      {this.props.thisProject.userId ===
-                        this.props.activeUser.id && (
-                        <h2
-                          onClick={() =>
-                            this.deletePhoto(this.state.activeImg.id)
-                          }
-                        >
-                          delete
-                        </h2>
-                      )}
-                      {console.log(this.state.activeImg.id)}
-                      <img
-                        src={
-                          activeImg
-                            ? activeImg.url
-                            : this.props.thumbnails[0].url
-                        }
-                        alt="main project"
-                        onClick={() => this.setState({ modal: true })}
-                        className="main-image"
-                      />
-                    </div>
+                    <img
+                      src={
+                        activeImg ? activeImg.url : this.props.thumbnails[0].url
+                      }
+                      alt="main project"
+                      onClick={() => this.setState({ modal: true })}
+                      className="main-image"
+                    />
                   )}
                 </section>
                 <section className="ImageViewer__thumbnails">
                   {allImgs
                     ? allImgs
-                    : this.state.thumbnails.map(t => (
-                        <div>
-                          {this.props.thisProject.userId ===
-                            this.props.activeUser.id && (
-                            <h2 onClick={() => this.deletePhoto(t.id)}>
-                              delete
-                            </h2>
-                          )}
-                          <img
-                            key={t.url}
-                            src={t.url}
-                            alt="project-thumbnail"
-                            onClick={() => this.changeImg(t)}
-                            className="thumbnails"
-                          />
-                        </div>
+                    : this.props.thumbnails.map(t => (
+                        <img
+                          key={t.url}
+                          src={t.url}
+                          alt="project-thumbnail"
+                          onClick={() => this.changeImg(t)}
+                          className="thumbnails"
+                        />
                       ))}
                 </section>
               </div>
