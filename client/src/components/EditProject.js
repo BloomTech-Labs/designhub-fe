@@ -7,13 +7,23 @@ class EditProject extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      project: null
+      project: null,
+      projectPhotos: null
     };
   }
 
   componentDidMount() {
     this.fetch();
   }
+
+  getProjectPhotos = id => {
+    return axiosWithAuth()
+      .get(`api/v1/photo/projects/${id}`)
+      .then(res => {
+        this.setState({ ...this.state, projectPhotos: res.data });
+      })
+      .catch(err => console.log(err));
+  };
 
   fetch() {
     const { id } = this.props.match.params;
@@ -22,15 +32,24 @@ class EditProject extends Component {
       .get(`api/v1/projects/${id}`)
       .then(res => {
         this.setState({
+          ...this.state,
           project: res.data[0]
         });
+        this.getProjectPhotos(res.data[0].id);
       })
       .catch(err => console.log(err));
   }
 
   render() {
-    if (this.state.project) {
-      return <ProjectForm isEditing={true} project={this.state.project} />;
+    if (this.state.project && this.state.projectPhotos) {
+      return (
+        <ProjectForm
+          isEditing={true}
+          project={this.state.project}
+          projectPhotos={this.state.projectPhotos}
+          getProjectPhotos={this.getProjectPhotos}
+        />
+      );
     } else {
       return <h2>Loading...</h2>;
     }

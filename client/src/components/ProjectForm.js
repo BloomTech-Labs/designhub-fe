@@ -10,14 +10,20 @@ import Loader from 'react-loader-spinner';
 
 import '../SASS/ProjectForm.scss';
 import DeleteIcon from './Icons/DeleteIcon.js';
+import remove from '../ASSETS/remove.svg';
 
-const ProjectForm = ({ isEditing, project, history }) => {
+const ProjectForm = ({
+  isEditing,
+  project,
+  projectPhotos,
+  history,
+  getProjectPhotos
+}) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
 
   const { user } = useAuth0();
-  console.log('', user);
 
   const [state, setState] = useState({
     project: {
@@ -30,7 +36,8 @@ const ProjectForm = ({ isEditing, project, history }) => {
     },
     success: false,
     url: '',
-    modal: false
+    modal: false,
+    projectPhotos: null
   });
 
   const { name, description, figma, invision } = state.project;
@@ -140,11 +147,27 @@ const ProjectForm = ({ isEditing, project, history }) => {
     }
   };
 
+  const deletePhoto = id => {
+    return axiosWithAuth()
+      .delete(`api/v1/photo/projects/${id}`)
+      .then(res => {
+        console.log(res);
+        getProjectPhotos(project.id);
+      })
+      .catch(err => console.log(err));
+  };
+
   const closeModal = () => {
     setState({
       ...state,
       modal: false
     });
+  };
+
+  const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
   };
 
   return (
@@ -197,18 +220,37 @@ const ProjectForm = ({ isEditing, project, history }) => {
         </label>
 
         <MultiImageUpload filesArray={{ files, setFiles }} />
+
         {isEditing && (
-          <div
-            className="delete-project-button"
-            onClick={() =>
-              setState({
-                ...state,
-                modal: true
-              })
-            }
-          >
-            <DeleteIcon />
-            <p>Delete project</p>
+          <div>
+            <div className="thumbnail-container ">
+              {projectPhotos.map((photo, index) => (
+                <div key={index}>
+                  <img
+                    src={remove}
+                    className="remove"
+                    onClick={() => deletePhoto(photo.id)}
+                  />
+                  <div className="thumb" key={index}>
+                    <div style={thumbInner}>
+                      <img src={photo.url} className="thumbnail" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div
+              className="delete-project-button"
+              onClick={() =>
+                setState({
+                  ...state,
+                  modal: true
+                })
+              }
+            >
+              <DeleteIcon />
+              <p>Delete project</p>
+            </div>
           </div>
         )}
       </div>
