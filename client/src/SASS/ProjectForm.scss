@@ -2,11 +2,45 @@
 @import './palette';
 
 .project-form-wrapper {
+  align-items: center;
   // border: 1px solid red;
   color: $white;
   width: 98%;
   margin-top: 80px;
   display: flex;
+  flex-direction: column;
+
+  .ProjectForm__header {
+    align-self: flex-start;
+    display: flex;
+    margin-left: 2%;
+    h2 {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+  }
+
+  .ProjectForm__body {
+    // border: 1px solid red;
+    display: flex;
+    margin-top: 16px;
+
+    @media (max-width: 700px) {
+      align-items: center;
+      flex-direction: column;
+
+      .left-container {
+        width: 100%;
+      }
+
+      .right-container {
+        margin-top: 5%;
+        width: 100%;
+      }
+    }
+  }
 
   .modal--close {
     display: none;
@@ -105,18 +139,33 @@
     }
 
     .upload-container {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 20px;
-      border-radius: 10px;
+      align-items: center;
+      border: 5px solid $black;
       background: $field-bg;
-      transition: all 0.1s ease-in-out;
+      border-radius: 10px;
       cursor: pointer;
-    }
-    .upload-container:hover {
-      background: #33343b;
+      display: flex;
+      height: 200px;
+      justify-content: center;
+      outline: none;
+      padding: 20px;
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        background: #33343b;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        letter-spacing: 0.11em;
+      }
+
+      svg {
+        stroke: $white;
+        width: 40%;
+      }
     }
 
     .drop-text-container {
@@ -142,21 +191,18 @@
 
   .thumbnail-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    // grid-gap: 10%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 7px;
     margin-top: 16px;
     flex-wrap: wrap;
   }
 
   .thumbnail {
     border: 5px solid $black;
-    display: inline-flex;
     border-radius: 10px;
-    height: 140px;
     box-sizing: border-box;
-  }
-
-  .thumbnail {
+    display: inline-flex;
+    height: 53px;
     object-fit: cover;
     object-position: center;
     width: 100%;
