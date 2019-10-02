@@ -92,7 +92,8 @@ const ProjectForm = ({
           await axiosWithAuth().post(`api/v1/heatmap`, {
             userId: state.project.userId,
             contribution: `Posted one photo to ${projectTitle}`,
-            projectId: projectId
+            projectId: projectId,
+            imageId: data.id
           });
 
           return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
