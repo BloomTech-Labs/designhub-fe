@@ -3,6 +3,8 @@ import '../../SASS/ImageViewer.scss';
 import { ImageWithComments } from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../ASSETS/default_thumbnail.svg';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth';
+import axios from 'axios';
 
 class ImageViewer extends Component {
   constructor(props) {
@@ -47,6 +49,22 @@ class ImageViewer extends Component {
 
   closeModal = () => {
     this.setState({ modal: false });
+  };
+
+  deletePhoto = id => {
+    this.setState({ deletePhotoLoading: true });
+    let photos = this.state.thumbnails.filter(i => i.id !== id);
+    axios
+      .post('http://localhost:8000/api/v1/photo/projects/delete', {
+        id: id
+      })
+      .then(() =>
+        this.setState({
+          thumbnails: photos,
+          activeImg: photos[0],
+          deletePhotoLoading: false
+        })
+      );
   };
 
   render() {
@@ -95,8 +113,16 @@ class ImageViewer extends Component {
                   ) : (
                     <div>
                       {this.props.thisProject.userId ===
-                        this.props.activeUser.id && <h2>delete</h2>}
-                      {console.log(this.props)}
+                        this.props.activeUser.id && (
+                        <h2
+                          onClick={() =>
+                            this.deletePhoto(this.state.activeImg.id)
+                          }
+                        >
+                          delete
+                        </h2>
+                      )}
+                      {console.log(this.state.activeImg.id)}
                       <img
                         src={
                           activeImg
@@ -116,7 +142,11 @@ class ImageViewer extends Component {
                     : this.state.thumbnails.map(t => (
                         <div>
                           {this.props.thisProject.userId ===
-                            this.props.activeUser.id && <h2>delete</h2>}
+                            this.props.activeUser.id && (
+                            <h2 onClick={() => this.deletePhoto(t.id)}>
+                              delete
+                            </h2>
+                          )}
                           <img
                             key={t.url}
                             src={t.url}
