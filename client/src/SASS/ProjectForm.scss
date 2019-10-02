@@ -2,9 +2,10 @@
 @import './palette';
 
 .project-form-wrapper {
+  // border: 1px solid red;
   color: $white;
   width: 98%;
-  margin-top: 14vh;
+  margin-top: 80px;
   display: flex;
 
   .modal--close {
@@ -74,8 +75,9 @@
   }
 
   .left-container {
-    width: 50%;
-    margin: 0px 20px 0px 0px;
+    // border: 1px solid red;
+    width: 60%;
+    padding: 0 2%;
     .delete-project-button {
       font-style: normal;
       font-weight: 500;
@@ -140,10 +142,10 @@
 
   .thumbnail-container {
     display: grid;
-    grid-template-columns: 10% 10% 10%;
-    grid-gap: 100%;
-    grid-row-gap: 1%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    // grid-gap: 10%;
     margin-top: 16px;
+    flex-wrap: wrap;
   }
 
   .thumbnail {
@@ -154,11 +156,11 @@
     box-sizing: border-box;
   }
 
-  // .thumbnail {
-  //   object-fit: cover;
-  //   object-position: center;
-  //   width: 100%;
-  // }
+  .thumbnail {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+  }
 
   .remove {
     width: 20px;
@@ -176,13 +178,15 @@
   }
 
   .right-container {
-    width: 42.5%;
-    margin: 3% 0px 0px 5%;
+    // border: 1px solid white;
+    width: 50%;
     display: flex;
-    flex-direction: column;
     overflow-y: scroll;
 
     form {
+      // border: 1px solid white;
+      width: 100%;
+
       label {
         display: inline-block;
         margin-top: 15px;
@@ -250,20 +254,26 @@
   }
 
   .submit-cancel-container {
-    width: 100%;
+    align-items: center;
+    // border: 1px solid red;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
 
     .submit-button {
       @include follow-btn;
-      margin-left: 10px;
+      width: 188px;
+      margin-top: 16px;
+      margin-right: 16px;
     }
 
     .cancel-btn {
       @include edit-profile-btn;
       background: $field-bg;
+      margin-top: 16px;
+      margin-left: 0;
+      width: 188px;
     }
   }
 }
