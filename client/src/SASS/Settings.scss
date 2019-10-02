@@ -63,7 +63,7 @@
       font-size: 14px;
       line-height: 16px;
       letter-spacing: 0.11em;
-      color: #ffffff;
+      color: #6d6d72;
     }
     input,
     textarea {
@@ -74,6 +74,7 @@
       margin: 4px 0 30px 0;
       padding-left: 12px;
       color: white;
+      letter-spacing: 0.11em;
       &::placeholder {
         color: #6d6d72;
         font-family: Roboto;
@@ -83,6 +84,8 @@
     }
     textarea {
       height: 60px;
+      font-family: Roboto;
+      padding: 8px 12px;
     }
   }
 }

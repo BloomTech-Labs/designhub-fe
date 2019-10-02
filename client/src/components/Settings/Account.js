@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 const Account = ({ activeUser }) => {
   console.log('activeUser!!!!!!!!!!!!!!!', activeUser);
   const [formUser, setFormUser] = useState({
-    avatar: '',
-    bio: '',
-    email: '',
-    firstName: '',
-    id: '',
-    lastName: '',
-    location: '',
-    username: '',
-    website: ''
+    avatar: activeUser.avatar ? `${activeUser.avatar}` : '',
+    bio: activeUser.bio ? `${activeUser.bio}` : '',
+    email: activeUser.email ? `${activeUser.email}` : '',
+    firstName: activeUser.firstName ? `${activeUser.firstName}` : '',
+    id: activeUser.id,
+    lastName: activeUser.lastName ? `${activeUser.lastName}` : '',
+    location: activeUser.location ? `${activeUser.location}` : '',
+    username: activeUser.username ? `${activeUser.username}` : '',
+    website: activeUser.website ? `${activeUser.website}` : '',
+    auth0Id: activeUser.auth0Id
   });
 
   const {
@@ -21,16 +23,25 @@ const Account = ({ activeUser }) => {
     lastName,
     location,
     username,
-    website
+    website,
+    auth0Id
   } = formUser;
 
   const handleChange = e => {
     setFormUser({ ...formUser, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    return axiosWithAuth()
+      .put(`/api/v1/users/${activeUser.id}`, formUser)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className="account-form-container">
-      <form className="account-form">
+      <form onSubmit={handleSubmit} className="account-form">
         <label htmlFor="firstName">First Name</label>
         <input
           id="firstName"
@@ -103,11 +114,8 @@ const Account = ({ activeUser }) => {
           onChange={handleChange}
           placeholder="i.e. https://eriklambert.ux"
         />
+        <button>Save Changes</button>
       </form>
-      <h1 className="full-name">
-        {activeUser.firstName} {activeUser.lastName}
-      </h1>
-      <h1 className="email">{activeUser.email}</h1>
     </div>
   );
 };
