@@ -182,13 +182,13 @@ const ProjectForm = ({
               height: ' 100%',
               top: '40vh',
               left: '40vw',
-              margin: '0 auto'
+              margin: '0 auto',
+              zIndex: '99' 
             }}
             type="Grid"
             color="#C0C0C0"
             height={150}
             width={150}
-            timeout={3000} //3 secs
           />
         </div>
       )}
