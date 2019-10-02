@@ -2,15 +2,15 @@
 @import './mixins';
 
 .OnboardingForm {
-  align-items: baseline;
+  align-items: center;
   background: $black;
   color: $white;
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 100vh;
-  position: fixed;
   overflow: scroll;
+  position: fixed;
+  width: 100%;
 
   .alert-container {
     display: none;
@@ -27,11 +27,11 @@
     }
 
     .errorIcon {
-      width: 20px;
-      position: absolute;
       margin-left: 9px;
       margin-top: -9px;
+      position: absolute;
       transition: all 0.1s ease-in-out;
+      width: 20px;
       &:hover {
         transform: scale(1.2);
       }
@@ -42,7 +42,6 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    max-width: 800px;
     width: 100%;
     header {
       h1 {
@@ -72,23 +71,18 @@
     @include onboard-form;
 
     .avatar-upload-container {
-      // border: 1px solid red;
+      // border: 1px solid white;
       align-items: center;
       display: flex;
       justify-content: center;
       margin-top: 20px;
     }
 
-    span.DottedLine {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 15%;
-    }
-
     .dropzone-container {
-      margin: 20px;
-      width: 30%;
+      // border: 1px solid red;
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
       z-index: 123456789;
     }
 
@@ -118,27 +112,31 @@
     }
 
     .drop-text-container {
+      align-items: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
-
-      .upload-icon {
-        opacity: 0.2;
-        // margin-bottom: 10px;
-      }
-
-      .drop-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 10px;
-
-        mark {
-          background: none;
-          color: $blue;
-        }
-      }
     }
+  }
+}
+
+span.DottedLine {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 4px;
+  svg {
+    transition: fill 0.5s ease-in;
+    fill: $dark-grey;
+  }
+
+  &.active {
+    svg {
+      fill: $blue;
+    }
+  }
+
+  @media (max-width: 700px) {
+    display: none;
   }
 }
 
@@ -147,11 +145,9 @@
   background: $field-bg;
   border-radius: 50%;
   box-sizing: border-box;
-  cursor: pointer;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  // padding: 80px;
   height: 258px;
   transition: all 0.1s ease-in-out;
   width: 258px;
@@ -167,6 +163,10 @@
   display: inline-flex;
 }
 
+.avatarBlank-container {
+  // border: 1px solid red;
+  width: 100%;
+}
 .avatarBlank {
   align-items: center;
   display: flex;
@@ -178,22 +178,23 @@
 .Step2-thumbnail {
   border: 7px solid $blue;
   border-radius: 50%;
+  height: 240px;
   object-fit: cover;
   width: 240px;
-  height: 240px;
+  z-index: 123456789;
 }
 
 .remove {
-  width: 20px;
-  position: absolute;
+  cursor: pointer;
   margin-top: -5px;
   margin-left: -5px;
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
   opacity: 0.8;
-}
+  position: absolute;
+  transition: all 0.1s ease-in-out;
+  width: 20px;
 
-.remove:hover {
-  transform: scale(1.2);
-  opacity: 1;
+  &:hover {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }

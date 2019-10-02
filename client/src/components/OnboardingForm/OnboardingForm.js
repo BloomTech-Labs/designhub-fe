@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { useAuth0 } from '../../auth-wrapper.js';
-import Loader from 'react-loader-spinner'
+import Loading from '../Loading.js';
 
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
@@ -13,7 +13,7 @@ import '../../SASS/OnboardingForm.scss';
 const uuidv1 = require('uuid/v1');
 
 const OnboardingForm = props => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
   const { user } = useAuth0();
 
@@ -84,7 +84,7 @@ const OnboardingForm = props => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      setLoading(true)
+      setLoading(true);
       const newAvatar = await handleImageUpload(files);
       //TODO ADD AUth0ID prop to changes object BEFORE SENDING
       changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
@@ -94,7 +94,7 @@ const OnboardingForm = props => {
       // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
-      setLoading(false)
+      setLoading(false);
     } catch (err) {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
@@ -122,58 +122,59 @@ const OnboardingForm = props => {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
-  return (
-    <>
-    <div className="OnboardingForm">
-     
-      <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>
-        <section className="stepComponents">
-          {stepComponents.map((Step, i) => {
-            if (i + 1 === formStep) {
-              return (
-                <Step
-                  key={formUser.id}
-                  alert={alert}
-                  files={files}
-                  setFiles={setFiles}
-                  formUser={formUser}
-                  onChange={handleChange}
-                  setUsernameInput={setUsernameInput}
-                />
-              );
-            } else return null;
-          })}
-        </section>
+  if (loading) return <Loading />;
+  else
+    return (
+      <>
+        <div className="OnboardingForm">
+          <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>
+            <section className="stepComponents">
+              {stepComponents.map((Step, i) => {
+                if (i + 1 === formStep) {
+                  return (
+                    <Step
+                      key={formUser.id}
+                      alert={alert}
+                      files={files}
+                      setFiles={setFiles}
+                      formUser={formUser}
+                      onChange={handleChange}
+                      setUsernameInput={setUsernameInput}
+                    />
+                  );
+                } else return null;
+              })}
+            </section>
 
-        <div className="buttons">
-          {showPrev && (
-            <button
-              name="prev"
-              className="prev-btn"
-              onClick={handleClick}
-              style={submitting ? { display: 'none' } : null}
-            >
-              Previous
-            </button>
-          )}
-          {submitButton ? (
-            <button
-              className="next-btn"
-              onClick={e => handleSubmit(e, formUser.id, formUser)}
-              style={submitting ? { display: 'none' } : null}
-            >
-              Submit
-            </button>
-          ) : (
-            <button name="next" className="next-btn" onClick={handleClick}>
-              Next
-            </button>
-          )}
+            <div className="buttons">
+              {showPrev && (
+                <button
+                  name="prev"
+                  className="prev-btn"
+                  onClick={handleClick}
+                  style={submitting ? { display: 'none' } : null}
+                >
+                  Previous
+                </button>
+              )}
+              {submitButton ? (
+                <button
+                  className="next-btn"
+                  onClick={e => handleSubmit(e, formUser.id, formUser)}
+                  style={submitting ? { display: 'none' } : null}
+                >
+                  Submit
+                </button>
+              ) : (
+                <button name="next" className="next-btn" onClick={handleClick}>
+                  Next
+                </button>
+              )}
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-    </>
-  );
+      </>
+    );
 };
 
 export default withRouter(OnboardingForm);

@@ -88,17 +88,17 @@ const Step2 = ({ formUser, files, setFiles }) => {
           >
             <input {...getInputProps()} id="avatarImage" name="avatarImage" />
             <div className="drop-text-container">
-              {/* <img src={upload} className="upload-icon" alt="upload" /> */}
               <UploadCloud />
             </div>
           </div>
         </section>
 
-        <span className="DottedLine">
+        <span className={files.length > 0 ? 'DottedLine active' : 'DottedLine'}>
           <DottedLine />
         </span>
-
-        <aside className="Step2-thumbnail-container">{thumbs()}</aside>
+        <span className="avatarBlank-container">
+          <aside className="Step2-thumbnail-container">{thumbs()}</aside>
+        </span>
       </div>
     </>
   );

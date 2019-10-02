@@ -17,7 +17,9 @@ const Navbar = ({ activeUser }) => {
           to={`/profile/${activeUser.id}/${activeUser.username}`}
           activeClassName="active-links"
         >
-          <ProfileIcon />
+          <div className="ProfileIcon">
+            <ProfileIcon />
+          </div>
         </NavLink>
         <NavLink
           to={`/profile/${activeUser.id}/${activeUser.username}`}

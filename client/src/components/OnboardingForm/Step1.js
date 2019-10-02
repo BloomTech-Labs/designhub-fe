@@ -40,7 +40,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         Username{alert && ' (This username is already taken)'}
       </label>
       <div className="alert-container">
-        <img className="errorIcon" src={errorIcon} />
+        <img className="errorIcon" src={errorIcon} alt="error icon" />
       </div>
       <input
         required
