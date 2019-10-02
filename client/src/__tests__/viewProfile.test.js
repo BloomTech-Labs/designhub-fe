@@ -2,6 +2,7 @@ const Page = require('../___test__helpers/page');
 jest.setTimeout(30000);
 //Global vars
 let page;
+let userDataHeaders = ['Projects', 'Followers', 'Following', 'Starred'];
 
 //helper functions
 
@@ -28,7 +29,10 @@ const getUserDataCounts = async (number, page) => {
 
 beforeEach(async () => {
   page = await Page.build();
-  await page.goto('https://localhost:3000');
+
+  await page.goto('http://localhost:3000');
+  await page.login();
+
 });
 
 afterEach(async () => {
@@ -36,46 +40,33 @@ afterEach(async () => {
 });
 
 describe('When logged in', () => {
-  beforeEach(async () => {
-    await page.login();
-  });
+  // beforeEach(async () => {
+
+  // });
 
   describe('And on view profile tab', () => {
-    test('Header for number of projects displays', async () => {
-      const value = await getUserDataHeaders(0, page);
+    test('Header for number of projects, followers, following, and starred displays', async () => {
+      const projects = await getUserDataHeaders(0, page);
+      const followers = await getUserDataHeaders(1, page);
+      const following = await getUserDataHeaders(2, page);
+      const starred = await getUserDataHeaders(3, page);
 
-      expect(value).toEqual('Projects');
+      expect([projects, followers, following, starred]).toEqual(
+        userDataHeaders
+      );
     });
-    test('Header for number of followers displays', async () => {
-      const value = await getUserDataHeaders(1, page);
 
-      expect(value).toEqual('Followers');
-    });
-    test('Header for number of following displays', async () => {
-      const value = await getUserDataHeaders(2, page);
-
-      expect(value).toEqual('Following');
-    });
-    test('Header for number of starred displays', async () => {
-      const value = await getUserDataHeaders(3, page);
-
-      expect(value).toEqual('Starred');
-    });
     test('Number of Projects is displaying', async () => {
-      const value = await getUserDataCounts(0, page);
-      expect(value).toEqual('string');
-    });
-    test('Number of Followers is displaying', async () => {
-      const value = await getUserDataCounts(1, page);
-      expect(value).toEqual('string');
-    });
-    test('Number of Following is displaying', async () => {
-      const value = await getUserDataCounts(2, page);
-      expect(value).toEqual('string');
-    });
-    test('Number of Starred is displaying', async () => {
-      const value = await getUserDataCounts(3, page);
-      expect(value).toEqual('string');
+      const projectsCount = await getUserDataCounts(0, page);
+      const followersCount = await getUserDataCounts(1, page);
+      const followingCount = await getUserDataCounts(2, page);
+      const starredCount = await getUserDataCounts(3, page);
+      expect([
+        projectsCount,
+        followersCount,
+        followingCount,
+        starredCount
+      ]).toEqual(['string', 'string', 'string', 'string']);
     });
   });
 });
