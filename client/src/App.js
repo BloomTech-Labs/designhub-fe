@@ -9,9 +9,10 @@ import LandingPage from './components/LandingPage.js';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 
 import './App.scss';
+import Loading from './components/Loading.js';
 
 function App(props) {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, loading } = useAuth0();
   const [onboarding, setOnboarding] = useState(false);
   const [ready, setReady] = useState(false);
   const [userData, setUserData] = useState({});
@@ -35,22 +36,24 @@ function App(props) {
     if (typeof user === 'object') getUser();
   }, [user, onboarding, props.history]);
 
-  if (!isAuthenticated) {
-    return <LandingPage />;
-  } else if (typeof user === 'object') {
-    return (
+
+  return (
+    <>
+    { loading ? (
+      <Loading />
+    ) : (
+      <>
+      {!isAuthenticated && (
+        <LandingPage />
+      )}
       <div className="App">
         {onboarding && <OnboardingForm setOnboarding={setOnboarding} />}
         {!onboarding && ready && <DesignHub user={userData} />}
       </div>
-    );
-  } else {
-    return (
-      <div className="isLoading">
-        DESIGN<em>HUB</em>
-      </div>
-    );
-  }
+      </>
+    )}
+    </>
+  )
 }
 
 export default withRouter(App);

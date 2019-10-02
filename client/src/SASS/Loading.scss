@@ -1,34 +1,16 @@
 .Loading-container {
-  #svgContainer {
-    max-width: 50%;
-    max-height: 50%;
-    position: absolute;
-    top: 0%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    opacity: 0.2;
-  }
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 
   .loading-text {
     position: absolute;
     width: max-content;
-    top: 60%;
-    left: 0;
-    right: 0;
     margin: 0 auto;
     color: white;
     opacity: 0.2;
-    animation: blink 0.8s alternate-reverse infinite ease-in-out;
-  }
-
-  @keyframes blink {
-    from {
-      opacity: 0.1;
-    }
-    to {
-      opacity: 0.2;
-    }
   }
 }

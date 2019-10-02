@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { useAuth0 } from '../../auth-wrapper.js';
+import Loader from 'react-loader-spinner'
 
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
@@ -12,6 +13,7 @@ import '../../SASS/OnboardingForm.scss';
 const uuidv1 = require('uuid/v1');
 
 const OnboardingForm = props => {
+  const [loading, setLoading] = useState(false)
   // user data from auth0 context wrapper
   const { user } = useAuth0();
 
@@ -82,6 +84,7 @@ const OnboardingForm = props => {
     e.preventDefault();
     setSubmitting(true);
     try {
+      setLoading(true)
       const newAvatar = await handleImageUpload(files);
       //TODO ADD AUth0ID prop to changes object BEFORE SENDING
       changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
@@ -91,6 +94,7 @@ const OnboardingForm = props => {
       // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
+      setLoading(false)
     } catch (err) {
       console.log('OnboardingForm.js handleSubmit() ERROR', err);
     }
@@ -119,7 +123,9 @@ const OnboardingForm = props => {
     }
   };
   return (
+    <>
     <div className="OnboardingForm">
+     
       <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>
         <section className="stepComponents">
           {stepComponents.map((Step, i) => {
@@ -166,6 +172,7 @@ const OnboardingForm = props => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 
 import ProjectForm from './ProjectForm';
+import Loading from './Loading.js';
 
 class EditProject extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class EditProject extends Component {
         />
       );
     } else {
-      return <h2>Loading...</h2>;
+      return <Loading />;
     }
   }
 }
