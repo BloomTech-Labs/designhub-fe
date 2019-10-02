@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-
 import moment from 'moment';
 
 import avatar1 from '../ASSETS/avatar.jpg';
@@ -55,8 +53,8 @@ class Projects extends Component {
       userId: this.state.myId,
       projectId: this.state.projectId
     };
-    axios
-      .post('https://designhubx.herokuapp.com/api/v1/star', starObj)
+    return axiosWithAuth()
+      .post('api/v1/star', starObj)
       .then(res => {
         console.log(res.data);
       })
@@ -87,7 +85,7 @@ class Projects extends Component {
                   <Link
                     to={`/profile/${thisProject.userId}/${activeUser.username}`}
                   >
-                    {activeUser.username}
+                    {thisProject.username}
                   </Link>
                 </span>
               </span>
@@ -167,16 +165,18 @@ class Projects extends Component {
                   onClick={this.starProject}
                 />
               </div>
-              <div
-                className="edit project-header-button"
-                onClick={() => {
-                  this.props.history.push(
-                    `/project/${this.state.projectId}/edit`
-                  );
-                }}
-              >
-                Edit
-              </div>
+              {this.state.myId === this.state.projectInfo.userId && (
+                <div
+                  className="edit project-header-button"
+                  onClick={() => {
+                    this.props.history.push(
+                      `/project/${this.state.projectId}/edit`
+                    );
+                  }}
+                >
+                  Edit
+                </div>
+              )}
             </div>
           </div>
         </div>

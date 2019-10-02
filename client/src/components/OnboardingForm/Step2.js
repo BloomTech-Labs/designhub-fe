@@ -46,7 +46,9 @@ const Step2 = ({ formUser, files, setFiles }) => {
             className="remove"
             onClick={() => removeThumbnail(index)}
           />
+
           <img src={file.preview} className="thumbnail" />
+
         </div>
       ));
   };
@@ -74,7 +76,7 @@ const Step2 = ({ formUser, files, setFiles }) => {
           </div>
         </section>
 
-        <aside className="thumbnail-container">{thumbs()}</aside>
+        <aside className="Step2-thumbnail-container">{thumbs()}</aside>
       </div>
     </>
   );
