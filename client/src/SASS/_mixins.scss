@@ -81,10 +81,9 @@
 @mixin onboard-form {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 2% 5%;
   max-width: 1024px;
-  padding: 20px;
-  width: 80%;
+  width: 90%;
 
   .stepComponents {
     label {
