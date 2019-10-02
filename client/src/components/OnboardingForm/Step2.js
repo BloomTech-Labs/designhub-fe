@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+
+import DottedLine from '../Icons/DottedLine.js';
 import UploadCloud from '../Icons/UploadCloud.js';
 import ProfileIcon from '../Icons/ProfileIcon.js';
 
@@ -91,6 +93,10 @@ const Step2 = ({ formUser, files, setFiles }) => {
             </div>
           </div>
         </section>
+
+        <span className="DottedLine">
+          <DottedLine />
+        </span>
 
         <aside className="Step2-thumbnail-container">{thumbs()}</aside>
       </div>

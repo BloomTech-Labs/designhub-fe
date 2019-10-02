@@ -72,15 +72,22 @@
     @include onboard-form;
 
     .avatar-upload-container {
+      border: 1px solid red;
       align-items: center;
       display: flex;
       justify-content: center;
       margin-top: 20px;
     }
 
+    span.DottedLine {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .dropzone-container {
       margin: 20px;
-      width: 50%;
+      width: 30%;
     }
 
     .upload-container {

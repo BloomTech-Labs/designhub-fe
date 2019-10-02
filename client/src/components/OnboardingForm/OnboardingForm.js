@@ -83,7 +83,8 @@ const OnboardingForm = props => {
     setSubmitting(true);
     try {
       const newAvatar = await handleImageUpload(files);
-      changes = { ...changes, avatar: newAvatar };
+      //TODO ADD AUth0ID prop to changes object BEFORE SENDING
+      changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
       // console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
       // console.log('OnboardingForm.js handleSubmit() changes', changes);
       await axiosWithAuth().put(`api/v1/users/${id}`, changes);
