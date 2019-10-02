@@ -12,7 +12,13 @@ import '../SASS/ProjectForm.scss';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
 
-const ProjectForm = ({ isEditing, project, projectPhotos, history }) => {
+const ProjectForm = ({
+  isEditing,
+  project,
+  projectPhotos,
+  history,
+  getProjectPhotos
+}) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [alert, setAlert] = useState(false);
@@ -141,6 +147,16 @@ const ProjectForm = ({ isEditing, project, projectPhotos, history }) => {
     }
   };
 
+  const deletePhoto = id => {
+    return axiosWithAuth()
+      .delete(`api/v1/photo/projects/${id}`)
+      .then(res => {
+        console.log(res);
+        getProjectPhotos(project.id);
+      })
+      .catch(err => console.log(err));
+  };
+
   const closeModal = () => {
     setState({
       ...state,
@@ -210,7 +226,11 @@ const ProjectForm = ({ isEditing, project, projectPhotos, history }) => {
             <div className="thumbnail-container ">
               {projectPhotos.map((photo, index) => (
                 <div key={index}>
-                  <img src={remove} className="remove" onClick={() => {}} />
+                  <img
+                    src={remove}
+                    className="remove"
+                    onClick={() => deletePhoto(photo.id)}
+                  />
                   <div className="thumb" key={index}>
                     <div style={thumbInner}>
                       <img src={photo.url} className="thumbnail" />

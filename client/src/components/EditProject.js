@@ -16,6 +16,15 @@ class EditProject extends Component {
     this.fetch();
   }
 
+  getProjectPhotos = id => {
+    return axiosWithAuth()
+      .get(`api/v1/photo/projects/${id}`)
+      .then(res => {
+        this.setState({ ...this.state, projectPhotos: res.data });
+      })
+      .catch(err => console.log(err));
+  };
+
   fetch() {
     const { id } = this.props.match.params;
 
@@ -26,12 +35,7 @@ class EditProject extends Component {
           ...this.state,
           project: res.data[0]
         });
-        return axiosWithAuth()
-          .get(`api/v1/photo/projects/${res.data[0].id}`)
-          .then(res => {
-            this.setState({ ...this.state, projectPhotos: res.data });
-          })
-          .catch(err => console.log(err));
+        this.getProjectPhotos(res.data[0].id);
       })
       .catch(err => console.log(err));
   }
@@ -43,6 +47,7 @@ class EditProject extends Component {
           isEditing={true}
           project={this.state.project}
           projectPhotos={this.state.projectPhotos}
+          getProjectPhotos={this.getProjectPhotos}
         />
       );
     } else {
