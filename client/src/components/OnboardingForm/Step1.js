@@ -24,6 +24,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         type="text"
         value={firstName}
         onChange={onChange}
+        placeholder="i.e. Erik"
       />
       <label htmlFor="lastName">Last Name</label>
       <input
@@ -32,6 +33,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         type="text"
         value={lastName}
         onChange={onChange}
+        placeholder="i.e. Lambert"
       />
 
       <label htmlFor="username">
@@ -48,6 +50,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         type="text"
         value={username}
         onChange={onChange}
+        placeholder="i.e. eriklambert"
       />
 
       <label htmlFor="email">Email</label>
@@ -58,6 +61,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         type="text"
         value={email}
         onChange={onChange}
+        placeholder="i.e. eriklambert@designhubx.com"
       />
       <label htmlFor="bio">Description</label>
       <textarea
@@ -67,6 +71,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         id="bio"
         value={bio}
         onChange={onChange}
+        placeholder="Describe yourself! This will appear on your profile in your bio!"
       />
       <label htmlFor="location">Location</label>
       <input
@@ -75,6 +80,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         type="text"
         value={location}
         onChange={onChange}
+        placeholder="i.e. Austin, TX"
       />
 
       <label htmlFor="website">Website</label>
@@ -84,6 +90,7 @@ const Step1 = ({ alert, formUser, onChange, setUsernameInput }) => {
         type="text"
         value={website}
         onChange={onChange}
+        placeholder="i.e. https://eriklambert.ux"
       />
     </>
   );

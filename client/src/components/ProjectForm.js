@@ -183,13 +183,13 @@ const ProjectForm = ({
               height: ' 100%',
               top: '40vh',
               left: '40vw',
-              margin: '0 auto'
+              margin: '0 auto',
+              zIndex: '99' 
             }}
             type="Grid"
             color="#C0C0C0"
             height={150}
             width={150}
-            timeout={3000} //3 secs
           />
         </div>
       )}
@@ -263,7 +263,7 @@ const ProjectForm = ({
           className={`${alert ? 'alert' : null} project-form-container`}
           onSubmit={handleSubmit}
         >
-          <label htmlFor="name" className="label">
+          <label htmlFor="name" className="label project-label">
             Project title{alert && ' (required)'}
           </label>
           <div className="alert-container">

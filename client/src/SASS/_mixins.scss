@@ -82,33 +82,11 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 1024px;
   padding: 20px;
   width: 80%;
 
-  header {
-    h1 {
-      font-size: 36px;
-      line-height: 42px;
-      letter-spacing: 0.11em;
-      margin-top: 30px;
-    }
-
-    h2 {
-      font-size: 24px;
-      line-height: 28px;
-      letter-spacing: 0.11em;
-      margin-top: 30px;
-    }
-  }
-
   .stepComponents {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    max-width: 800px;
-    width: 100%;
-
     label {
       color: $dark-grey;
       font-style: normal;
@@ -142,7 +120,7 @@
       border-radius: 2px;
       color: $white;
       font-weight: 400;
-      font-size: 16px;
+      font-size: 14px;
       line-height: 21px;
       letter-spacing: 0.11em;
       margin-top: 4px;
@@ -153,18 +131,6 @@
       &:hover {
         outline: auto 4px -webkit-focus-ring-color;
       }
-    }
-
-    .uploadImage {
-      align-items: center;
-      align-self: center;
-      background: $field-bg;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      height: 300px;
-      margin-top: 30px;
-      width: 694px;
     }
   }
 

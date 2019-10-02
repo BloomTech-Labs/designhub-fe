@@ -38,34 +38,83 @@
     }
   }
 
+  .stepComponents {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 800px;
+    width: 100%;
+    header {
+      h1 {
+        font-size: 36px;
+        line-height: 42px;
+        letter-spacing: 0.11em;
+      }
+
+      h2 {
+        font-size: 24px;
+        line-height: 28px;
+        letter-spacing: 0.11em;
+        margin-top: 10px;
+      }
+      p {
+        color: $dark-grey;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 0.11em;
+        margin-top: 20px;
+      }
+    }
+  }
+
   form {
     @include onboard-form;
 
     .avatar-upload-container {
-      align-items: center;
       // border: 1px solid red;
+      align-items: center;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    span.DottedLine {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 15%;
     }
 
     .dropzone-container {
-      max-width: 50%;
+      margin: 20px;
+      width: 30%;
+      z-index: 123456789;
     }
 
     .upload-container {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 40px;
-      border-radius: 10px;
+      align-items: center;
+      border: 7px solid $blue;
       background: $field-bg;
-      transition: all 0.1s ease-in-out;
+      border-radius: 50%;
+      box-sizing: border-box;
       cursor: pointer;
-      width: 180px;
-    }
-    .upload-container:hover {
-      background: #33343b;
+      display: flex;
+      flex-wrap: wrap;
+      height: 258px;
+      justify-content: center;
+      outline: none;
+      transition: all 0.1s ease-in-out;
+      width: 258px;
+
+      &:hover {
+        background: #33343b;
+      }
+
+      svg {
+        stroke: $blue;
+        width: 40%;
+      }
     }
 
     .drop-text-container {
@@ -94,32 +143,44 @@
 }
 
 .Step2-thumbnail-container {
+  align-items: center;
+  background: $field-bg;
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
   display: flex;
-  width: 180px;
-  height: 180px;
-}
+  flex-wrap: wrap;
+  justify-content: center;
+  // padding: 80px;
+  height: 258px;
+  transition: all 0.1s ease-in-out;
+  width: 258px;
 
-.avatarBlank {
-  border: 1px solid $almost-black;
-  border-radius: 10px;
-  background-color: $black;
-  background-image: -webkit-linear-gradient(
-    135deg,
-    $black 50%,
-    $almost-black 50%
-  );
-  width: 180px;
+  svg {
+    fill: none;
+    stroke: $dark-grey;
+    width: 100px;
+  }
 }
 
 .thumb {
   display: inline-flex;
 }
 
+.avatarBlank {
+  align-items: center;
+  display: flex;
+  height: 251px;
+  justify-content: center;
+  width: 251px;
+}
+
 .Step2-thumbnail {
+  border: 7px solid $blue;
+  border-radius: 50%;
   object-fit: cover;
-  // width: 100%;
-  width: 180px;
-  height: 180px;
+  width: 240px;
+  height: 240px;
 }
 
 .remove {

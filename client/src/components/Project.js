@@ -15,6 +15,7 @@ import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import ImageViewer from './ImageViewer/ImageViewer.js';
 
 import '../SASS/Project.scss';
+import Loading from './Loading';
 // import Comments from './Comments';
 
 class Projects extends Component {
@@ -63,7 +64,7 @@ class Projects extends Component {
 
   render() {
     if (!this.state.projectInfo) {
-      return <h1>Loading...</h1>;
+      return <Loading />;
     }
     console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
