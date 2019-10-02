@@ -8,12 +8,38 @@
   border-radius: 10px;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row nowrap;
   align-items: center;
   color: $white;
+  box-sizing: border-box;
+  .settings-left-column {
+    padding: 5vh 0;
+    width: 12%;
+    border-right: 3px solid #212229;
+    height: 100%;
+    .settings-logout {
+      color: $alert;
+    }
+    h4 {
+      letter-spacing: 0.11em;
+      color: #6d6d72;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 16px;
+      margin-top: 40px;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+  .settings-right-column {
+    width: 85%;
+    text-align: left;
+    padding: 40px 60px;
+  }
 
   img {
-    margin-top: 5vh;
     border-radius: 100%;
     width: 100px;
   }
