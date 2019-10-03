@@ -6,7 +6,7 @@ import axios from 'axios';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import errorIcon from '../ASSETS/error-icon.svg';
 import { MultiImageUpload } from './MultiImageUpload.js';
-import Loader from 'react-loader-spinner';
+import Loading from './Loading';
 
 import '../SASS/ProjectForm.scss';
 import DeleteIcon from './Icons/DeleteIcon.js';
@@ -202,25 +202,7 @@ const ProjectForm = ({
 
   return (
     <div className="project-form-wrapper">
-      {isLoading && (
-        <div style={{ position: 'relative' }}>
-          <Loader
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: ' 100%',
-              top: '40vh',
-              left: '40vw',
-              margin: '0 auto',
-              zIndex: '99'
-            }}
-            type="Grid"
-            color="#C0C0C0"
-            height={150}
-            width={150}
-          />
-        </div>
-      )}
+      {isLoading && <Loading />}
       <div className={state.modal ? 'modal--expand' : 'modal--close'}>
         <span
           className="modal--expand__background-overlay"
