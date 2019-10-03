@@ -8,24 +8,37 @@ import PrivateRoute from './components/PrivateRoute';
 import UserProfileLI from './components/UserProfile/UserProfile_LI';
 import Settings from './components/Settings.js';
 import AddProject from './components/AddProject';
-
+import SearchPage from './components/SearchPage';
+import axios from 'axios';
 import './SASS/DesignHub.scss';
 import EditProject from './components/EditProject';
+import { axiosWithAuth } from './utilities/axiosWithAuth';
 
 class DesignHub extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeUser: this.props.user,
-      users: []
+      users: [],
+      search: []
     };
   }
+
+  getSearch = (text, history) => {
+    const { data } = axios.post('http://localhost:8000/api/v1/search', {
+      searchText: text
+    });
+    this.setState({ search: data });
+    history.push('/search');
+  };
 
   render() {
     const activeUser = this.state.activeUser;
     return (
       <div className="DesignHub">
         <TopBar
+          searchData={this.state.search}
+          getSearch={this.getSearch}
           activeUser={activeUser}
           darkMode={this.state.darkMode}
           toggleLightMode={this.toggleLightMode}
@@ -58,6 +71,18 @@ class DesignHub extends Component {
               exact
               path="/settings"
               render={props => <Settings {...props} activeUser={activeUser} />}
+            />
+            <Route
+              exact
+              path="/search"
+              render={props => (
+                <SearchPage
+                  {...props}
+                  activeUser={activeUser}
+                  searchData={this.state.search}
+                  getSearch={this.getSearch}
+                />
+              )}
             />
           </Switch>
         </main>
