@@ -220,8 +220,12 @@
       }
       @media screen and (max-width: 1024px) {
         width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      @media screen and (max-width: 700px) {
+        margin-top: 40px;
         padding: 20px;
-        margin-top: 30px;
       }
     }
   }
