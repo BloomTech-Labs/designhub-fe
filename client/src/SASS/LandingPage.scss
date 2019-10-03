@@ -16,6 +16,9 @@
   top: 0;
   left: 0;
   animation: bgAnimation 10s ease-in-out alternate-reverse infinite;
+  @media screen and (max-width: 700px) {
+    flex-flow: column nowrap;
+  }
 }
 
 @keyframes bgAnimation {
@@ -28,14 +31,17 @@
 }
 
 .left-side {
-  margin-left: 6vh;
+  margin-left: 4rem;
   max-width: 50%;
   h1 {
     font-weight: 900;
     font-size: 90px;
     line-height: 112px;
     letter-spacing: 0.11em;
-
+    @media screen and (max-width: 1300px) {
+      font-size: 65px;
+      line-height: 80px;
+    }
     em {
       color: hsla(360, 100%, 100%, 0);
       -webkit-text-fill-color: hsla(
@@ -53,6 +59,10 @@
     font-size: 24px;
     line-height: 28px;
     letter-spacing: 0.11em;
+    @media screen and (max-width: 1300px) {
+      font-size: 20px;
+      line-height: 22px;
+    }
   }
 
   .paragraphs {
@@ -66,6 +76,10 @@
       font-size: 18px;
       line-height: 21px;
       letter-spacing: 0.11em;
+      @media screen and (max-width: 1300px) {
+        font-size: 16px;
+        line-height: 18px;
+      }
     }
 
     p {
@@ -106,7 +120,7 @@
     align-items: center;
 
     .logo {
-      padding-bottom: 4vh;
+      padding-bottom: 1.2rem;
       text-align: left;
       width: 80px;
     }
@@ -121,18 +135,30 @@
       text-decoration: none;
       text-align: left;
       width: 48%;
+      @media screen and (max-width: 1300px) {
+        font-size: 1.1rem;
+        line-height: 24px;
+      }
     }
 
     .join-head {
       color: $black;
       font-size: 1.2rem;
       font-weight: 900;
-      margin-top: 6vh;
+      margin-top: 2.3rem;
+      @media screen and (max-width: 1300px) {
+        font-size: 1rem;
+        line-height: 24px;
+      }
     }
 
     .auth0-redirect-btn {
       @include auth0-redirect-btn;
       margin-top: 3.5vh;
+      &:hover {
+        background: $btn-gradient;
+        color: white;
+      }
     }
   }
 }
