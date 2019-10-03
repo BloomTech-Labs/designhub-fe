@@ -19,17 +19,26 @@ const Heatmap = props => {
   console.log(width);
 
   useEffect(() => {
-    if (width >= 1100) {
+    if (width > 1024) {
       setDays(-365);
     }
-    if (width <= 900) {
-      setDays(-260);
+    if (width <= 1024) {
+      setDays(-305);
     }
-    if (width <= 700) {
+    if (width <= 900) {
+      setDays(-280);
+    }
+    if (width <= 850) {
+      setDays(-230);
+    }
+    if (width <= 740) {
       setDays(-180);
     }
+    if (width <= 600) {
+      setDays(-160);
+    }
     if (width <= 500) {
-      setDays(-90);
+      setDays(-120);
     }
   }, [width]);
 
