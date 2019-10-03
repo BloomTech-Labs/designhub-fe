@@ -160,20 +160,13 @@ const ProjectForm = ({
                     console.log(newChanges);
                     history.push(`/project/${id}`);
                   })
-                  .catch();
+                  .catch(err => console.log(err));
               }
             })
             .catch(err => console.log(err));
         }
       })
       .catch(err => console.log(err));
-    // try {
-    //   await axiosWithAuth().put(`api/v1/projects/${id}`, changes);
-    //   await handleImageUpload(files, id);
-    //   await history.push(`/project/${id}`);
-    // } catch (err) {
-    //   console.log('ProjectForm.js editProject ERROR', err);
-    // }
   };
 
   const deleteProject = async id => {
