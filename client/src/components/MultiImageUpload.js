@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import UploadCloud from './Icons/UploadCloud.js';
 import upload from '../ASSETS/upload-cloud.svg';
 import remove from '../ASSETS/remove.svg';
 
@@ -58,10 +59,8 @@ export function MultiImageUpload(props) {
       >
         <input {...getInputProps()} multiple={true} />
         <div className="drop-text-container">
-          <img src={upload} className="upload-icon" alt="upload" />
-          <p className="drop-text">
-            Drag and drop images or <mark>browse</mark> to choose a files
-          </p>
+          <UploadCloud />
+          <p className="drop-text">drag and drop images or click here</p>
         </div>
       </div>
       <aside className="thumbnail-container">{thumbs()}</aside>

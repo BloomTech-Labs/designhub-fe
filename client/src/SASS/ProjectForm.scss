@@ -2,10 +2,46 @@
 @import './palette';
 
 .project-form-wrapper {
+  align-items: center;
+  // border: 1px solid red;
   color: $white;
   width: 98%;
-  margin-top: 14vh;
+  margin-top: 80px;
   display: flex;
+  flex-direction: column;
+
+  .ProjectForm__header {
+    align-self: flex-start;
+    display: flex;
+    margin-left: 2%;
+    h2 {
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+  }
+
+  .ProjectForm__body {
+    // border: 1px solid red;
+    display: flex;
+    margin-top: 16px;
+
+    @media (max-width: 700px) {
+      align-items: center;
+      flex-direction: column;
+
+      .left-container {
+        width: 100%;
+      }
+
+      .right-container {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        width: 100%;
+      }
+    }
+  }
 
   .modal--close {
     display: none;
@@ -74,8 +110,9 @@
   }
 
   .left-container {
-    width: 50%;
-    margin: 0px 20px 0px 0px;
+    // border: 1px solid red;
+    width: 60%;
+    padding: 0 2%;
     .delete-project-button {
       font-style: normal;
       font-weight: 500;
@@ -103,18 +140,33 @@
     }
 
     .upload-container {
-      margin-top: 10px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 20px;
-      border-radius: 10px;
+      align-items: center;
+      border: 5px solid $black;
       background: $field-bg;
-      transition: all 0.1s ease-in-out;
+      border-radius: 10px;
       cursor: pointer;
-    }
-    .upload-container:hover {
-      background: #33343b;
+      display: flex;
+      height: 200px;
+      justify-content: center;
+      outline: none;
+      padding: 20px;
+      transition: all 0.1s ease-in-out;
+
+      &:hover {
+        background: #33343b;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        letter-spacing: 0.11em;
+      }
+
+      svg {
+        stroke: $white;
+        width: 40%;
+      }
     }
 
     .drop-text-container {
@@ -140,25 +192,22 @@
 
   .thumbnail-container {
     display: grid;
-    grid-template-columns: 10% 10% 10%;
-    grid-gap: 100%;
-    grid-row-gap: 1%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 7px;
     margin-top: 16px;
+    flex-wrap: wrap;
   }
 
   .thumbnail {
     border: 5px solid $black;
-    display: inline-flex;
     border-radius: 10px;
-    height: 140px;
     box-sizing: border-box;
+    display: inline-flex;
+    height: 53px;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
   }
-
-  // .thumbnail {
-  //   object-fit: cover;
-  //   object-position: center;
-  //   width: 100%;
-  // }
 
   .remove {
     width: 20px;
@@ -176,16 +225,21 @@
   }
 
   .right-container {
-    width: 42.5%;
-    margin: 3% 0px 0px 5%;
+    // border: 1px solid white;
+    width: 50%;
     display: flex;
-    flex-direction: column;
     overflow-y: scroll;
 
     form {
+      // border: 1px solid white;
+      width: 100%;
+
       label {
         display: inline-block;
         margin-top: 15px;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 0.11em;
       }
 
       .project-label {
@@ -220,16 +274,27 @@
     }
 
     input {
-      width: 98%;
-      margin: 10px 0 20px 0;
-      padding: 10px 0;
       background: $field-bg;
       border: none;
-      color: white;
-      outline: none;
-      padding-left: 10px;
       border-radius: 5px;
+      color: white;
+      font-weight: 500;
       font-size: 14px;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      margin: 10px 0 20px 0;
+      outline: none;
+      padding: 10px 0;
+      padding-left: 10px;
+      width: 98%;
+    }
+
+    textarea {
+      font-weight: 500;
+      line-height: 14px;
+      letter-spacing: 0.11em;
+      font-family: inherit; // need this to override textarea defaults
+      font-size: inherit; // need this to override textarea defaults
     }
 
     .description {
@@ -250,20 +315,26 @@
   }
 
   .submit-cancel-container {
-    width: 100%;
+    align-items: center;
+    // border: 1px solid red;
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
 
     .submit-button {
       @include follow-btn;
-      margin-left: 10px;
+      width: 188px;
+      margin-top: 16px;
+      margin-right: 16px;
     }
 
     .cancel-btn {
       @include edit-profile-btn;
       background: $field-bg;
+      margin-top: 16px;
+      margin-left: 0;
+      width: 188px;
     }
   }
 }
