@@ -86,7 +86,13 @@
   .comments-form {
     padding-top: 20px;
     .form-wrapper {
-      position: relative;
+      align-items: center;
+      // border: 1px solid red;
+      background: #2a2b31;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      padding: 2%;
     }
     input[type='text'] {
       border: none;
@@ -97,8 +103,8 @@
       font-size: 0.8rem;
       font-weight: 400;
       outline: none;
-      width: 100%;
-      padding: 20px;
+      width: 85%;
+      padding: 2%;
       overflow-wrap: break-word;
       max-height: 200px;
     }
@@ -107,13 +113,10 @@
       border: none;
       border-radius: 100%;
       cursor: pointer;
-      position: absolute;
       height: 40px;
-      right: 6px;
-      top: 6px;
-      vertical-align: middle;
       width: 40px;
       z-index: 9;
+      margin-bottom: 2%;
       svg {
         margin: 0 0 -3px -3px;
         text-align: center;
