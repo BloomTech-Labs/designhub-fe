@@ -18,6 +18,17 @@ class SearchPage extends Component {
     });
   };
 
+  displayProjects = () => {
+    this.props.projects.map((project, index) => {
+      return (
+        <div key={index}>
+          <h3>{project.name}</h3>
+          <img src={project.mainImg} alt="project" />
+        </div>
+      );
+    });
+  };
+
   render() {
     console.log(this.props);
     return (
