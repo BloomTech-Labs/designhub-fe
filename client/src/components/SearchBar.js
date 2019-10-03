@@ -15,7 +15,6 @@ const SearchBar = ({ getSearch, history }) => {
         setData({ ...data, search: '' });
       }}
     >
-      {console.log(history)}
       <input
         className="search-bar-input"
         type="search"
