@@ -24,11 +24,14 @@ class DesignHub extends Component {
     };
   }
 
-  getSearch = (text, history) => {
-    const { data } = axios.post('http://localhost:8000/api/v1/search', {
+  getSearch = async (event, text, history) => {
+    event.preventDefault();
+    const {
+      data: { projects, users }
+    } = await axios.post('http://localhost:8000/api/v1/search', {
       searchText: text
     });
-    this.setState({ search: data });
+    this.setState({ search: { projects, users } });
     history.push('/search');
   };
 

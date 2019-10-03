@@ -9,7 +9,13 @@ const SearchBar = ({ getSearch, history }) => {
   };
 
   return (
-    <form onSubmit={getSearch(data.search, history)}>
+    <form
+      onSubmit={event => {
+        getSearch(event, data.search, history);
+        setData({ ...data, search: '' });
+      }}
+    >
+      {console.log(history)}
       <input
         className="search-bar-input"
         type="search"
