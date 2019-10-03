@@ -2,21 +2,30 @@
 @import './palette';
 
 .Settings {
-  margin-top: 15vh;
+  margin-top: 6rem;
   background: $black;
   width: 98%;
   border-radius: 10px;
   text-align: center;
   display: flex;
-  flex-direction: row nowrap;
+  flex-flow: row nowrap;
   align-items: center;
   color: $white;
   box-sizing: border-box;
+  @media screen and (max-width: 700px) {
+    display: flex;
+    flex-flow: column nowrap;
+  }
   .settings-left-column {
-    padding: 5vh 0;
     width: 12%;
-
+    min-width: 10rem;
     height: 100%;
+    @media screen and (max-width: 700px) {
+      margin-top: 20px;
+      img {
+        margin-bottom: 10px;
+      }
+    }
     .settings-logout {
       color: $alert;
     }
@@ -30,6 +39,9 @@
       cursor: pointer;
       &:hover {
         color: white;
+      }
+      @media screen and (max-width: 700px) {
+        margin-top: 15px;
       }
     }
   }
@@ -46,11 +58,6 @@
   }
 
   .full-name {
-    margin: 20px 0;
-  }
-
-  button {
-    @include edit-profile-btn;
     margin: 20px 0;
   }
 }
@@ -87,5 +94,17 @@
       font-family: Roboto;
       padding: 8px 12px;
     }
+    button {
+      @include edit-profile-btn;
+      background: $btn-gradient;
+      margin: 20px 0;
+      width: 188px;
+      @media screen and (max-width: 700px) {
+        width: 100%;
+      }
+    }
   }
+}
+
+@media (max-width: 1024px) {
 }

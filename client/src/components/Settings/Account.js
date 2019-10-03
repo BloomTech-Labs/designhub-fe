@@ -140,7 +140,7 @@ const Account = ({ activeUser, setUserData }) => {
           onChange={handleChange}
           placeholder="i.e. https://eriklambert.ux"
         />
-        <button>Save Changes</button>
+        <button>Save</button>
       </form>
     </div>
   );
