@@ -87,3 +87,90 @@ nav:hover {
     display: none;
   }
 }
+
+@media (min-width: 1800px) {
+  nav {
+    position: fixed;
+    z-index: 9999;
+    margin-top: 16%;
+    margin-left: 1.2%;
+    width: 8.5rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background: $black;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    overflow: hidden;
+
+    .navlinks {
+      display: flex;
+      align-items: center;
+      width: max-content;
+
+      .links {
+        text-decoration: none;
+      }
+
+      .active-links {
+        p {
+          color: $white;
+        }
+
+        svg {
+          fill: none;
+          padding: 3rem 5px 3rem 50px;
+          stroke: $white;
+        }
+      }
+
+      .ProfileIcon {
+        svg {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+      }
+
+      svg:hover ~ p {
+        color: $white;
+      }
+
+      p {
+        transition: all 0.2s ease-in-out;
+        background: $black;
+        border-radius: 0 10px 10px 0;
+        color: $dark-grey;
+        padding: 0 50px 0 50px;
+        width: max-content;
+        transition: all 0.2s ease-in-out;
+        font-size: 1.4rem;
+      }
+
+      p:hover {
+        color: $white;
+      }
+
+      svg {
+        fill: none;
+        padding: 3rem 5px 3rem 50px;
+        stroke: $dark-grey;
+        transition: all 0.2s ease-in-out;
+        width: 2.5rem;
+        height: 2.5rem;
+
+        &:hover {
+          stroke: $white;
+        }
+      }
+    }
+  }
+
+  nav:hover {
+    width: 20rem;
+    transition: all 0.2s ease-in-out;
+    p {
+      display: inline;
+    }
+  }
+}
