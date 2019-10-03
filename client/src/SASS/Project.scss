@@ -125,6 +125,15 @@
         width: 100%;
         margin: 3% 0;
         height: max-content;
+
+        .form-wrapper {
+          // border: 1px solid red;
+          padding: 0;
+
+          button {
+            margin: 2%;
+          }
+        }
       }
     }
   }

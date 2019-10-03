@@ -5,7 +5,7 @@
   align-items: center;
   // border: 1px solid red;
   color: $white;
-  width: 98%;
+  width: 100%;
   margin-top: 80px;
   display: flex;
   flex-direction: column;
@@ -23,9 +23,10 @@
   }
 
   .ProjectForm__body {
-    // border: 1px solid red;
+    // border: 1px solid white;
     display: flex;
-    margin-top: 16px;
+    margin: 16px 0;
+    width: 100%;
 
     @media (max-width: 700px) {
       align-items: center;
@@ -111,7 +112,7 @@
 
   .left-container {
     // border: 1px solid red;
-    width: 60%;
+    width: 40%;
     padding: 0 2%;
     .delete-project-button {
       font-style: normal;
@@ -165,7 +166,7 @@
 
       svg {
         stroke: $white;
-        width: 40%;
+        max-width: 25%;
       }
     }
 
@@ -191,11 +192,12 @@
   }
 
   .thumbnail-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 7px;
-    margin-top: 16px;
+    // border: 1px solid cyan;
+    align-items: center;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
   }
 
   .thumbnail {
@@ -203,10 +205,11 @@
     border-radius: 10px;
     box-sizing: border-box;
     display: inline-flex;
-    height: 53px;
+    margin: 4px;
     object-fit: cover;
     object-position: center;
-    width: 100%;
+    width: 6rem;
+    height: 6rem;
   }
 
   .remove {
@@ -315,8 +318,6 @@
   }
 
   .submit-cancel-container {
-    align-items: center;
-    // border: 1px solid red;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -324,7 +325,8 @@
 
     .submit-button {
       @include follow-btn;
-      width: 188px;
+      padding: 10px 40px;
+      letter-spacing: 0.11rem;
       margin-top: 16px;
       margin-right: 16px;
     }
@@ -334,7 +336,9 @@
       background: $field-bg;
       margin-top: 16px;
       margin-left: 0;
-      width: 188px;
+      padding: 10px 40px;
+      letter-spacing: 0.11rem;
+      margin-top: 16px;
     }
   }
 }
