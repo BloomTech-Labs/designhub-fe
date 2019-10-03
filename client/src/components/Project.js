@@ -9,7 +9,6 @@ import figmaIcon from '../ASSETS/figma-icon.png';
 import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
 import star from '../ASSETS/star.svg';
-import SendIcon from './Icons/SendIcon';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 import ImageViewer from './ImageViewer/ImageViewer.js';
@@ -66,12 +65,9 @@ class Projects extends Component {
     if (!this.state.projectInfo) {
       return <Loading />;
     }
-    console.log('Project PROPS!!!!!!', this.props);
     const activeUser = this.props.activeUser;
     const thisProject = this.state.projectInfo;
     const comments = this.state.comments;
-    console.log('Project.js ### COMMENTS', comments);
-    console.log('Project.js ### projectInfo', thisProject);
 
     return (
       <div className="projects-container">

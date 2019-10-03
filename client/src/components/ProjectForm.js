@@ -6,7 +6,7 @@ import axios from 'axios';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import errorIcon from '../ASSETS/error-icon.svg';
 import { MultiImageUpload } from './MultiImageUpload.js';
-import Loader from 'react-loader-spinner';
+import Loading from './Loading';
 
 import '../SASS/ProjectForm.scss';
 import DeleteIcon from './Icons/DeleteIcon.js';
@@ -54,10 +54,8 @@ const ProjectForm = ({
 
   const handleSubmit = async e => {
     setIsLoading(true);
-    console.log(e);
     e.preventDefault();
     if (state.project.name.length === 0) {
-      console.log('NO PROJECT NAME!');
       setIsLoading(false);
       setAlert(true);
       return;
@@ -102,8 +100,6 @@ const ProjectForm = ({
         }
       });
       return await Promise.all(requestPromises).then(res => {
-        console.log('Promise.all RES!!!!!', res[0]);
-
         return res[0];
       });
     }
@@ -115,9 +111,7 @@ const ProjectForm = ({
         data: { id },
         data
       } = await axiosWithAuth().post(`api/v1/projects`, project);
-
       const something = await handleImageUpload(files, id, data.data[0].name);
-      console.log('something!!!!!!!!!!!!!!!!', something);
       const newProject = {
         ...project,
         mainImg: something
@@ -130,14 +124,47 @@ const ProjectForm = ({
     }
   };
 
-  const editProject = async (changes, id) => {
-    try {
-      await axiosWithAuth().put(`api/v1/projects/${id}`, changes);
-      await handleImageUpload(files, id);
-      await history.push(`/project/${id}`);
-    } catch (err) {
-      console.log('ProjectForm.js editProject ERROR', err);
-    }
+  const editProject = (changes, id) => {
+    handleImageUpload(files, id)
+      .then(res => {
+        if (res) {
+          const newChanges = { ...changes, mainImg: res };
+          return axiosWithAuth()
+            .put(`api/v1/projects/${id}`, newChanges)
+            .then(res => {
+              console.log(newChanges);
+              history.push(`/project/${id}`);
+            })
+            .catch();
+        } else {
+          return axiosWithAuth()
+            .get(`/api/v1/photo/projects/${id}`)
+            .then(res => {
+              if (res.data.length === 0) {
+                const newChanges = { ...changes, mainImg: null };
+                return axiosWithAuth()
+                  .put(`api/v1/projects/${id}`, newChanges)
+                  .then(res => {
+                    history.push(`/project/${id}`);
+                  })
+                  .catch();
+              } else {
+                const newChanges = {
+                  ...changes,
+                  mainImg: res.data[0].url
+                };
+                return axiosWithAuth()
+                  .put(`api/v1/projects/${id}`, newChanges)
+                  .then(res => {
+                    history.push(`/project/${id}`);
+                  })
+                  .catch(err => console.log(err));
+              }
+            })
+            .catch(err => console.log(err));
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   const deleteProject = async id => {
@@ -153,7 +180,6 @@ const ProjectForm = ({
     return axiosWithAuth()
       .delete(`api/v1/photo/projects/${id}`)
       .then(res => {
-        console.log(res);
         getProjectPhotos(project.id);
       })
       .catch(err => console.log(err));
@@ -174,25 +200,7 @@ const ProjectForm = ({
 
   return (
     <div className="project-form-wrapper">
-      {isLoading && (
-        <div style={{ position: 'relative' }}>
-          <Loader
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: ' 100%',
-              top: '40vh',
-              left: '40vw',
-              margin: '0 auto',
-              zIndex: '99'
-            }}
-            type="Grid"
-            color="#C0C0C0"
-            height={150}
-            width={150}
-          />
-        </div>
-      )}
+      {isLoading && <Loading />}
       <div className={state.modal ? 'modal--expand' : 'modal--close'}>
         <span
           className="modal--expand__background-overlay"
@@ -233,13 +241,18 @@ const ProjectForm = ({
                 {projectPhotos.map((photo, index) => (
                   <div key={index}>
                     <img
+                      alt=""
                       src={remove}
                       className="remove"
                       onClick={() => deletePhoto(photo.id)}
                     />
                     <div className="thumb" key={index}>
                       <div style={thumbInner}>
-                        <img src={photo.url} className="thumbnail" />
+                        <img
+                          alt="project thumbnail"
+                          src={photo.url}
+                          className="thumbnail"
+                        />
                       </div>
                     </div>
                   </div>
@@ -262,7 +275,6 @@ const ProjectForm = ({
         </div>
         <div className="right-container">
           <form
-            className={alert ? 'alert' : null}
             encType="multipart/form-data"
             className={`${alert ? 'alert' : null} project-form-container`}
             onSubmit={handleSubmit}
@@ -271,7 +283,7 @@ const ProjectForm = ({
               Project title{alert && ' (required)'}
             </label>
             <div className="alert-container">
-              <img className="errorIcon" src={errorIcon} />
+              <img alt="error icon" className="errorIcon" src={errorIcon} />
             </div>
             <input
               type="text"
