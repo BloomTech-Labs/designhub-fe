@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import UploadCloud from './Icons/UploadCloud.js';
-import upload from '../ASSETS/upload-cloud.svg';
 import remove from '../ASSETS/remove.svg';
 
 import '../SASS/ProjectForm.scss';
@@ -15,7 +14,6 @@ const thumbInner = {
 
 export function MultiImageUpload(props) {
   const { files, setFiles } = props.filesArray;
-  console.log('HYYYY', files);
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
@@ -38,13 +36,18 @@ export function MultiImageUpload(props) {
     return files.map((file, index) => (
       <div key={index}>
         <img
+          alt=""
           src={remove}
           className="remove"
           onClick={() => removeThumbnail(index)}
         />
         <div className="thumb" key={index}>
           <div style={thumbInner}>
-            <img src={file.preview} className="thumbnail" />
+            <img
+              alt="project thumbnail"
+              src={file.preview}
+              className="thumbnail"
+            />
           </div>
         </div>
       </div>

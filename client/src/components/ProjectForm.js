@@ -127,9 +127,6 @@ const ProjectForm = ({
   const editProject = (changes, id) => {
     handleImageUpload(files, id)
       .then(res => {
-        console.log(res);
-        console.log(changes);
-
         if (res) {
           const newChanges = { ...changes, mainImg: res };
           return axiosWithAuth()
@@ -143,7 +140,6 @@ const ProjectForm = ({
           return axiosWithAuth()
             .get(`/api/v1/photo/projects/${id}`)
             .then(res => {
-              console.log('GET existing photos RES!!!!!!!', res.data.length);
               if (res.data.length === 0) {
                 const newChanges = { ...changes, mainImg: null };
                 return axiosWithAuth()
@@ -153,11 +149,13 @@ const ProjectForm = ({
                   })
                   .catch();
               } else {
-                const newChanges = { ...changes, mainImg: res.data[0].url };
+                const newChanges = {
+                  ...changes,
+                  mainImg: res.data[0].url
+                };
                 return axiosWithAuth()
                   .put(`api/v1/projects/${id}`, newChanges)
                   .then(res => {
-                    console.log(newChanges);
                     history.push(`/project/${id}`);
                   })
                   .catch(err => console.log(err));
@@ -243,13 +241,18 @@ const ProjectForm = ({
                 {projectPhotos.map((photo, index) => (
                   <div key={index}>
                     <img
+                      alt=""
                       src={remove}
                       className="remove"
                       onClick={() => deletePhoto(photo.id)}
                     />
                     <div className="thumb" key={index}>
                       <div style={thumbInner}>
-                        <img src={photo.url} className="thumbnail" />
+                        <img
+                          alt="project thumbnail"
+                          src={photo.url}
+                          className="thumbnail"
+                        />
                       </div>
                     </div>
                   </div>
@@ -272,7 +275,6 @@ const ProjectForm = ({
         </div>
         <div className="right-container">
           <form
-            className={alert ? 'alert' : null}
             encType="multipart/form-data"
             className={`${alert ? 'alert' : null} project-form-container`}
             onSubmit={handleSubmit}
@@ -281,7 +283,7 @@ const ProjectForm = ({
               Project title{alert && ' (required)'}
             </label>
             <div className="alert-container">
-              <img className="errorIcon" src={errorIcon} />
+              <img alt="error icon" className="errorIcon" src={errorIcon} />
             </div>
             <input
               type="text"
