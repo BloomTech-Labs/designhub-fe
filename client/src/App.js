@@ -36,24 +36,23 @@ function App(props) {
     if (typeof user === 'object') getUser();
   }, [user, onboarding, props.history]);
 
-
   return (
     <>
-    { loading ? (
-      <Loading />
-    ) : (
-      <>
-      {!isAuthenticated && (
-        <LandingPage />
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
+          {!isAuthenticated && <LandingPage />}
+          <div className="App">
+            {onboarding && <OnboardingForm setOnboarding={setOnboarding} />}
+            {!onboarding && ready && (
+              <DesignHub setUserData={setUserData} user={userData} />
+            )}
+          </div>
+        </>
       )}
-      <div className="App">
-        {onboarding && <OnboardingForm setOnboarding={setOnboarding} />}
-        {!onboarding && ready && <DesignHub user={userData} />}
-      </div>
-      </>
-    )}
     </>
-  )
+  );
 }
 
 export default withRouter(App);

@@ -10,7 +10,7 @@ const Notifications = () => <div>Notifications Tab</div>;
 const LinkedProfiles = () => <div>Linked Profiles Tab</div>;
 const DownloadData = () => <div>Download Data Tab</div>;
 
-const Settings = ({ activeUser, match }) => {
+const Settings = ({ activeUser, match, history, setUserData }) => {
   const { logout } = useAuth0();
   const { path } = match;
   console.log('path!!!!!!!!!!!!!!', path);
@@ -37,7 +37,13 @@ const Settings = ({ activeUser, match }) => {
           <Route
             path={`${path}`}
             exact
-            render={props => <Account activeUser={activeUser} {...props} />}
+            render={props => (
+              <Account
+                setUserData={setUserData}
+                activeUser={activeUser}
+                {...props}
+              />
+            )}
           />
         </Switch>
       </div>

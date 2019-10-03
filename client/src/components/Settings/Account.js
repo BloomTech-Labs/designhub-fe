@@ -1,20 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
-const Account = ({ activeUser }) => {
-  console.log('activeUser!!!!!!!!!!!!!!!', activeUser);
+const Account = ({ activeUser, setUserData }) => {
   const [formUser, setFormUser] = useState({
-    avatar: activeUser.avatar ? `${activeUser.avatar}` : '',
-    bio: activeUser.bio ? `${activeUser.bio}` : '',
-    email: activeUser.email ? `${activeUser.email}` : '',
-    firstName: activeUser.firstName ? `${activeUser.firstName}` : '',
+    avatar: activeUser.avatar,
+    bio: '',
+    email: '',
+    firstName: '',
     id: activeUser.id,
-    lastName: activeUser.lastName ? `${activeUser.lastName}` : '',
-    location: activeUser.location ? `${activeUser.location}` : '',
-    username: activeUser.username ? `${activeUser.username}` : '',
-    website: activeUser.website ? `${activeUser.website}` : '',
+    lastName: '',
+    location: '',
+    username: '',
+    website: '',
     auth0Id: activeUser.auth0Id
   });
+
+  const getCurrentUserInfo = id => {
+    return axiosWithAuth()
+      .get(`/api/v1/users/${id}`)
+      .then(res => {
+        const user = res.data[0];
+        console.log(user);
+        setFormUser({
+          avatar: user.avatar ? `${user.avatar}` : '',
+          bio: user.bio ? `${user.bio}` : '',
+          email: user.email ? `${user.email}` : '',
+          firstName: user.firstName ? `${user.firstName}` : '',
+          id: user.id,
+          lastName: user.lastName ? `${user.lastName}` : '',
+          location: user.location ? `${user.location}` : '',
+          username: user.username ? `${user.username}` : '',
+          website: user.website ? `${user.website}` : '',
+          auth0Id: user.auth0Id
+        });
+      })
+      .catch();
+  };
+
+  useEffect(() => {
+    getCurrentUserInfo(activeUser.id);
+  }, [activeUser]);
 
   const {
     bio,
@@ -35,7 +61,9 @@ const Account = ({ activeUser }) => {
     e.preventDefault();
     return axiosWithAuth()
       .put(`/api/v1/users/${activeUser.id}`, formUser)
-      .then(res => console.log(res))
+      .then(res => {
+        setUserData(formUser);
+      })
       .catch(err => console.log(err));
   };
 
@@ -61,9 +89,7 @@ const Account = ({ activeUser }) => {
           placeholder="i.e. Lambert"
         />
 
-        <label htmlFor="username">
-          Username{alert && ' (This username is already taken)'}
-        </label>
+        <label htmlFor="username">Username</label>
 
         <input
           required
