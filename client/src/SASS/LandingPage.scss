@@ -31,14 +31,17 @@
 }
 
 .left-side {
-  margin-left: 4rem;
-  margin-right: 2rem;
+  margin: 0 2rem 0 4rem;
   max-width: 50%;
   @media screen and (max-width: 1300px) {
     margin-left: 3rem;
   }
   @media screen and (max-width: 1024px) {
     margin: 0 1.5rem 0 1.8rem;
+  }
+  @media screen and (max-width: 700px) {
+    max-width: 80%;
+    margin: 50px;
   }
   h1 {
     font-weight: 900;
@@ -52,6 +55,10 @@
     @media screen and (max-width: 1024px) {
       font-size: 55px;
       line-height: 70px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 35px;
+      line-height: 50px;
     }
     em {
       color: hsla(360, 100%, 100%, 0);
@@ -78,6 +85,10 @@
       font-size: 18px;
       line-height: 20px;
     }
+    @media screen and (max-width: 700px) {
+      font-size: 16px;
+      line-height: 18px;
+    }
   }
 
   .paragraphs {
@@ -89,6 +100,9 @@
     @media screen and (max-width: 1024px) {
       grid-template-columns: 40px 320px;
     }
+    @media screen and (max-width: 700px) {
+      grid-template-columns: 40px 220px;
+    }
     h2 {
       font-size: 18px;
       line-height: 21px;
@@ -99,6 +113,10 @@
       }
       @media screen and (max-width: 1024px) {
         font-size: 14px;
+        line-height: 16px;
+      }
+      @media screen and (max-width: 700px) {
+        font-size: 13px;
         line-height: 16px;
       }
     }
@@ -168,6 +186,12 @@
         font-size: 1rem;
         line-height: 24px;
       }
+      @media screen and (max-width: 700px) {
+        text-align: center;
+        width: 60%;
+        font-size: 1rem;
+        line-height: 24px;
+      }
     }
 
     .join-head {
@@ -178,6 +202,9 @@
       @media screen and (max-width: 1300px) {
         font-size: 1rem;
         line-height: 24px;
+      }
+      @media screen and (max-width: 700px) {
+        text-align: center;
       }
     }
 
