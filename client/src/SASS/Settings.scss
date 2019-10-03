@@ -2,28 +2,109 @@
 @import './palette';
 
 .Settings {
-  margin-top: 15vh;
+  margin-top: 6rem;
   background: $black;
   width: 98%;
   border-radius: 10px;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-flow: row nowrap;
   align-items: center;
   color: $white;
+  box-sizing: border-box;
+  @media screen and (max-width: 700px) {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+  .settings-left-column {
+    width: 12%;
+    min-width: 10rem;
+    height: 100%;
+    @media screen and (max-width: 700px) {
+      margin-top: 20px;
+      img {
+        margin-bottom: 10px;
+      }
+    }
+    .settings-logout {
+      color: $alert;
+    }
+    h4 {
+      letter-spacing: 0.11em;
+      color: #6d6d72;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 16px;
+      margin-top: 40px;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+      @media screen and (max-width: 700px) {
+        margin-top: 15px;
+      }
+    }
+  }
+  .settings-right-column {
+    width: 85%;
+    text-align: left;
+    padding: 40px 60px;
+    border-left: 3px solid #212229;
+  }
 
   img {
-    margin-top: 5vh;
     border-radius: 100%;
-    width: 100px;
+    width: 130px;
   }
 
   .full-name {
     margin: 20px 0;
   }
+}
 
-  button {
-    @include edit-profile-btn;
-    margin: 20px 0;
+.account-form-container {
+  .account-form {
+    display: flex;
+    flex-flow: column nowrap;
+    label {
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.11em;
+      color: #6d6d72;
+    }
+    input,
+    textarea {
+      background: #2a2b31;
+      border-radius: 5px;
+      border: none;
+      height: 31px;
+      margin: 4px 0 30px 0;
+      padding-left: 12px;
+      color: white;
+      letter-spacing: 0.11em;
+      &::placeholder {
+        color: #6d6d72;
+        font-family: Roboto;
+        font-size: 14px;
+        padding: 8px 0;
+      }
+    }
+    textarea {
+      height: 60px;
+      font-family: Roboto;
+      padding: 8px 12px;
+    }
+    button {
+      @include edit-profile-btn;
+      background: $btn-gradient;
+      margin: 20px 0;
+      width: 188px;
+      @media screen and (max-width: 700px) {
+        width: 100%;
+      }
+    }
   }
+}
+
+@media (max-width: 1024px) {
 }
