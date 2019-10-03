@@ -4,6 +4,7 @@ import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import moment from 'moment';
 import { withRouter } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
+import { useWindowDimensions } from '../ImageViewer/useWindowDimensions';
 
 import 'react-calendar-heatmap/dist/styles.css';
 
@@ -13,10 +14,24 @@ const Heatmap = props => {
   const [today] = useState(new Date());
   const [params] = useState(props.match.params.id);
   const [heatmapArr, setHeatmapArr] = useState([]);
+  const [days, setDays] = useState(-365);
+  const { width } = useWindowDimensions();
+  console.log(width);
 
   useEffect(() => {
-    getHeatmap();
-  }, []);
+    if (width >= 1100) {
+      setDays(-365);
+    }
+    if (width <= 900) {
+      setDays(-260);
+    }
+    if (width <= 700) {
+      setDays(-180);
+    }
+    if (width <= 500) {
+      setDays(-90);
+    }
+  }, [width]);
 
   // This function is used to determine the start date based on what the current date is
   function shiftDate(date, numDays) {
@@ -31,7 +46,11 @@ const Heatmap = props => {
     setHeatmapArr(data);
   };
 
-  console.log(heatmapArr);
+  useEffect(() => {
+    getHeatmap();
+    // eslint-disable-next-line
+  }, []);
+  console.log(days);
 
   //conditionally renders the tool tip message when hovering over a square
   const renderToolTip = value => {
@@ -57,7 +76,7 @@ const Heatmap = props => {
     <div className="heatmap">
       <h1 className="header">Activity</h1>
       <CalendarHeatmap
-        startDate={shiftDate(moment(today).format('YYYY-MM-DD'), -365)}
+        startDate={shiftDate(moment(today).format('YYYY-MM-DD'), days)}
         endDate={moment(today).format('YYYY-MM-DD')}
         values={heatmapArr}
         tooltipDataAttrs={value => {
