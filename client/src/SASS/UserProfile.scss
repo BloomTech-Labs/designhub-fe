@@ -4,15 +4,18 @@
 .user-profile-container {
   color: $white;
   width: 98%;
-  margin-top: 7vh;
+  // margin-top: 7vh;
+  margin-top: 46px;
 
   .user-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 20vh;
-    margin: 5vh auto;
+    // height: 20vh;
+    // margin: 5vh auto;
+    height: auto;
+    margin: 33px auto;
     background: $black;
     border-radius: 10px;
 
@@ -22,8 +25,8 @@
     }
 
     .avatar {
-      width: 110px;
-      height: 110px;
+      width: 6.875rem;
+      height: 6.875rem;
       box-sizing: content-box;
       border-radius: 50%;
       object-fit: cover;
@@ -65,7 +68,8 @@
         margin-top: 10px;
 
         .website {
-          margin-left: 2vh;
+          // margin-left: 2vh;
+          margin-left: 14px;
           text-decoration: none;
           color: $white;
           transition: 0.1s ease-in-out;
@@ -162,10 +166,11 @@
   .tabs-container {
     width: 100%;
     margin: 4vh 0;
+    margin: 29px 0;
 
     .tab-content {
       background: $black;
-      padding: 2vh;
+      padding: 16px;
       border-radius: 10px;
 
       h2 {
@@ -203,6 +208,7 @@
       .project-content {
         width: 100%;
         height: 14vw;
+        // height: 11.5rem;
         position: relative;
         transition: all 0.2s ease-in-out;
         border: 8px solid $field-bg;
