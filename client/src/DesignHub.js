@@ -28,7 +28,7 @@ class DesignHub extends Component {
     event.preventDefault();
     const {
       data: { projects, users }
-    } = await axios.post('http://localhost:8000/api/v1/search', {
+    } = await axios.post(`${process.env.REACT_APP_BASE_URL}api/v1/search`, {
       searchText: text
     });
     this.setState({ search: { projects, users } });
