@@ -214,133 +214,138 @@ const ProjectForm = ({
           )}
         </span>
       </div>
-      <div className="left-container">
+      <header className="ProjectForm__header">
         <h2 className="page-header">
           {isEditing ? 'Edit project' : 'Create a project'}
         </h2>
-        <label htmlFor="image-upload" className="label">
+      </header>
+      <section className="ProjectForm__body">
+        <div className="left-container">
+          {/* <label htmlFor="image-upload" className="label">
           {isEditing ? 'Add more files' : 'Attach files'}
-        </label>
+        </label> */}
 
-        <MultiImageUpload filesArray={{ files, setFiles }} />
+          <MultiImageUpload filesArray={{ files, setFiles }} />
 
-        {isEditing && (
-          <div>
-            <div className="thumbnail-container ">
-              {projectPhotos.map((photo, index) => (
-                <div key={index}>
-                  <img
-                    src={remove}
-                    className="remove"
-                    onClick={() => deletePhoto(photo.id)}
-                  />
-                  <div className="thumb" key={index}>
-                    <div style={thumbInner}>
-                      <img src={photo.url} className="thumbnail" />
+          {isEditing && (
+            <div>
+              <div className="thumbnail-container ">
+                {projectPhotos.map((photo, index) => (
+                  <div key={index}>
+                    <img
+                      src={remove}
+                      className="remove"
+                      onClick={() => deletePhoto(photo.id)}
+                    />
+                    <div className="thumb" key={index}>
+                      <div style={thumbInner}>
+                        <img src={photo.url} className="thumbnail" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div
+                className="delete-project-button"
+                onClick={() =>
+                  setState({
+                    ...state,
+                    modal: true
+                  })
+                }
+              >
+                <DeleteIcon />
+                <p>Delete project</p>
+              </div>
             </div>
-            <div
-              className="delete-project-button"
-              onClick={() =>
-                setState({
-                  ...state,
-                  modal: true
-                })
-              }
-            >
-              <DeleteIcon />
-              <p>Delete project</p>
+          )}
+        </div>
+        <div className="right-container">
+          <form
+            className={alert ? 'alert' : null}
+            encType="multipart/form-data"
+            className={`${alert ? 'alert' : null} project-form-container`}
+            onSubmit={handleSubmit}
+          >
+            <label htmlFor="name" className="label project-label">
+              Project title{alert && ' (required)'}
+            </label>
+            <div className="alert-container">
+              <img className="errorIcon" src={errorIcon} />
             </div>
-          </div>
-        )}
-      </div>
-      <div className="right-container">
-        <form
-          className={alert ? 'alert' : null}
-          encType="multipart/form-data"
-          className={`${alert ? 'alert' : null} project-form-container`}
-          onSubmit={handleSubmit}
-        >
-          <label htmlFor="name" className="label project-label">
-            Project title{alert && ' (required)'}
-          </label>
-          <div className="alert-container">
-            <img className="errorIcon" src={errorIcon} />
-          </div>
-          <input
-            type="text"
-            value={name}
-            name="name"
-            id="name"
-            placeholder="Enter project title here"
-            onChange={handleChanges}
-          />
-          <label htmlFor="description" className="label">
-            Project description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            value={description}
-            type="text"
-            placeholder="Enter project description here"
-            onChange={handleChanges}
-            className="description"
-          />
-          <label htmlFor="teamMembers" className="label">
-            Add team members
-          </label>
-          <input
-            type="text"
-            placeholder="Enter team member usernames separated by a comma"
-            id="teamMembers"
-          />
+            <input
+              type="text"
+              value={name}
+              name="name"
+              id="name"
+              placeholder="Enter project title here"
+              onChange={handleChanges}
+            />
+            <label htmlFor="description" className="label">
+              Project description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={description}
+              type="text"
+              placeholder="Enter project description here"
+              onChange={handleChanges}
+              className="description"
+            />
 
-          <label htmlFor="figmaLink" className="label">
-            Figma link
-          </label>
-          <input
-            type="text"
-            name="figma"
-            value={figma}
-            placeholder="Enter Figma link here"
-            id="figmaLink"
-            onChange={handleChanges}
-          />
-          <label htmlFor="invisionLink" className="label">
-            InVision link
-          </label>
-          <input
-            type="text"
-            name="invision"
-            value={invision}
-            placeholder="Enter InVision link here"
-            id="invisionLink"
-            onChange={handleChanges}
-          />
-          <div className="submit-cancel-container">
-            <button
-              className="submit-button"
-              type="submit"
-              style={isLoading ? { display: 'none' } : null}
-            >
-              {isEditing ? 'Save Changes' : 'Publish'}
-            </button>
-            <button
-              type="button"
-              className="cancel-btn"
-              onClick={() => {
-                history.goBack();
-              }}
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
+            <label htmlFor="figmaLink" className="label">
+              Figma link
+            </label>
+            <input
+              type="text"
+              name="figma"
+              value={figma}
+              placeholder="Enter Figma link here"
+              id="figmaLink"
+              onChange={handleChanges}
+            />
+            <label htmlFor="invisionLink" className="label">
+              InVision link
+            </label>
+            <input
+              type="text"
+              name="invision"
+              value={invision}
+              placeholder="Enter InVision link here"
+              id="invisionLink"
+              onChange={handleChanges}
+            />
+            <label htmlFor="teamMembers" className="label">
+              Add team members
+            </label>
+            <input
+              type="text"
+              placeholder="Enter team member usernames separated by a comma"
+              id="teamMembers"
+            />
+
+            <div className="submit-cancel-container">
+              <button
+                className="submit-button"
+                type="submit"
+                style={isLoading ? { display: 'none' } : null}
+              >
+                {isEditing ? 'Save Changes' : 'Publish'}
+              </button>
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
     </div>
   );
 };
