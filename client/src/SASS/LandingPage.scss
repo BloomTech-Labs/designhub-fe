@@ -40,8 +40,8 @@
     margin: 0 1.5rem 0 1.8rem;
   }
   @media screen and (max-width: 700px) {
-    max-width: 80%;
-    margin: 50px;
+    min-width: 85%;
+    margin: 50px auto;
   }
   h1 {
     font-weight: 900;
@@ -57,7 +57,7 @@
       line-height: 70px;
     }
     @media screen and (max-width: 700px) {
-      font-size: 35px;
+      font-size: 40px;
       line-height: 50px;
     }
     em {
@@ -70,6 +70,9 @@
       ); /* Will override color (regardless of order) */
       -webkit-text-stroke-width: 2px;
       -webkit-text-stroke-color: $white;
+      @media screen and (max-width: 700px) {
+        -webkit-text-stroke-width: 1px;
+      }
     }
   }
   p {
@@ -101,7 +104,7 @@
       grid-template-columns: 40px 320px;
     }
     @media screen and (max-width: 700px) {
-      grid-template-columns: 40px 220px;
+      grid-template-columns: 50px 90%;
     }
     h2 {
       font-size: 18px;
@@ -188,7 +191,7 @@
       }
       @media screen and (max-width: 700px) {
         text-align: center;
-        width: 60%;
+        width: 90%;
         font-size: 1rem;
         line-height: 24px;
       }
@@ -217,8 +220,8 @@
       }
       @media screen and (max-width: 1024px) {
         width: auto;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 20px;
+        margin-top: 30px;
       }
     }
   }
