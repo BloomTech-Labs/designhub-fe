@@ -54,10 +54,8 @@ const ProjectForm = ({
 
   const handleSubmit = async e => {
     setIsLoading(true);
-    console.log(e);
     e.preventDefault();
     if (state.project.name.length === 0) {
-      console.log('NO PROJECT NAME!');
       setIsLoading(false);
       setAlert(true);
       return;
@@ -102,8 +100,6 @@ const ProjectForm = ({
         }
       });
       return await Promise.all(requestPromises).then(res => {
-        console.log('Promise.all RES!!!!!', res[0]);
-
         return res[0];
       });
     }
@@ -115,9 +111,7 @@ const ProjectForm = ({
         data: { id },
         data
       } = await axiosWithAuth().post(`api/v1/projects`, project);
-
       const something = await handleImageUpload(files, id, data.data[0].name);
-      console.log('something!!!!!!!!!!!!!!!!', something);
       const newProject = {
         ...project,
         mainImg: something
@@ -130,14 +124,56 @@ const ProjectForm = ({
     }
   };
 
-  const editProject = async (changes, id) => {
-    try {
-      await axiosWithAuth().put(`api/v1/projects/${id}`, changes);
-      await handleImageUpload(files, id);
-      await history.push(`/project/${id}`);
-    } catch (err) {
-      console.log('ProjectForm.js editProject ERROR', err);
-    }
+  const editProject = (changes, id) => {
+    handleImageUpload(files, id)
+      .then(res => {
+        console.log(res);
+        console.log(changes);
+
+        if (res) {
+          const newChanges = { ...changes, mainImg: res };
+          return axiosWithAuth()
+            .put(`api/v1/projects/${id}`, newChanges)
+            .then(res => {
+              console.log(newChanges);
+              history.push(`/project/${id}`);
+            })
+            .catch();
+        } else {
+          return axiosWithAuth()
+            .get(`/api/v1/photo/projects/${id}`)
+            .then(res => {
+              console.log('GET existing photos RES!!!!!!!', res.data.length);
+              if (res.data.length === 0) {
+                const newChanges = { ...changes, mainImg: null };
+                return axiosWithAuth()
+                  .put(`api/v1/projects/${id}`, newChanges)
+                  .then(res => {
+                    history.push(`/project/${id}`);
+                  })
+                  .catch();
+              } else {
+                const newChanges = { ...changes, mainImg: res.data[0].url };
+                return axiosWithAuth()
+                  .put(`api/v1/projects/${id}`, newChanges)
+                  .then(res => {
+                    console.log(newChanges);
+                    history.push(`/project/${id}`);
+                  })
+                  .catch();
+              }
+            })
+            .catch(err => console.log(err));
+        }
+      })
+      .catch(err => console.log(err));
+    // try {
+    //   await axiosWithAuth().put(`api/v1/projects/${id}`, changes);
+    //   await handleImageUpload(files, id);
+    //   await history.push(`/project/${id}`);
+    // } catch (err) {
+    //   console.log('ProjectForm.js editProject ERROR', err);
+    // }
   };
 
   const deleteProject = async id => {
@@ -153,7 +189,6 @@ const ProjectForm = ({
     return axiosWithAuth()
       .delete(`api/v1/photo/projects/${id}`)
       .then(res => {
-        console.log(res);
         getProjectPhotos(project.id);
       })
       .catch(err => console.log(err));

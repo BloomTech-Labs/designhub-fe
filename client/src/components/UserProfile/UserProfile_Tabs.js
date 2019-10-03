@@ -49,7 +49,7 @@ class UserProfile_Tabs extends Component {
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
                     <h1 className="no-projects">
-                      No created have been projects yet.
+                      No projects have been created yet.
                     </h1>
                   </div>
                 )}
@@ -82,7 +82,7 @@ class UserProfile_Tabs extends Component {
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
                     <h1 className="no-projects">
-                      No created have been projects yet.
+                      No projects have been created yet.
                     </h1>
                   </div>
                 )}
