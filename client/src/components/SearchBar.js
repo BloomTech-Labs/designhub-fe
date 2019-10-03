@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
-const SearchBar = () => {
+const SearchBar = ({ getSearch, history }) => {
+  const [data, setData] = useState({ search: '' });
+
+  const handleChange = name => event => {
+    setData({ ...data, [name]: event.target.value });
+  };
+
   return (
-    <input
-      className="search-bar-input"
-      type="text"
-      placeholder="search projects, users, teams..."
-    />
+    <form
+      onSubmit={event => {
+        getSearch(event, data.search, history);
+        setData({ ...data, search: '' });
+      }}
+    >
+      <input
+        className="search-bar-input"
+        type="search"
+        onChange={handleChange('search')}
+        placeholder="Search by name"
+        value={data.search}
+      />
+    </form>
   );
 };
 
-export default SearchBar;
+export default withRouter(SearchBar);
