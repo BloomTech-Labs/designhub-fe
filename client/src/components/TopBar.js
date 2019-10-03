@@ -8,7 +8,7 @@ import DarkModeSwitch from './Icons/DarkModeSwitch.js';
 
 import '../SASS/TopBar.scss';
 
-const TopBar = ({ activeUser }) => {
+const TopBar = ({ activeUser, searchData, getSearch }) => {
   return (
     <div className="top-bar-container">
       <div className="nav-content">
@@ -20,7 +20,7 @@ const TopBar = ({ activeUser }) => {
             <MagnifyingGlass />
           </div>
 
-          <SearchBar />
+          <SearchBar searchData={searchData} getSearch={getSearch} />
         </div>
         <div className="top-bar-user-info">
           <p>{activeUser.username}</p>
