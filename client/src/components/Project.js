@@ -8,7 +8,7 @@ import avatar3 from '../ASSETS/avatar_3.jpg';
 import figmaIcon from '../ASSETS/figma-icon.png';
 import invisionIcon from '../ASSETS/invision-icon.png';
 import DownloadIcon from './Icons/DownloadIcon';
-import star from '../ASSETS/star.svg';
+import StarIcon from './Icons/StarIcon';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 import ImageViewer from './ImageViewer/ImageViewer.js';
@@ -155,12 +155,7 @@ class Projects extends Component {
                 <DownloadIcon />
               </div>
               <div className="star project-header-button">
-                <img
-                  src={star}
-                  className="star-icon"
-                  alt="star project"
-                  onClick={this.starProject}
-                />
+                <StarIcon onClick={this.starProject} />
               </div>
               {this.state.myId === this.state.projectInfo.userId && (
                 <div

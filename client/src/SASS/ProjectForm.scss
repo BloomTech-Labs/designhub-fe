@@ -9,6 +9,9 @@
   margin-top: 80px;
   display: flex;
   flex-direction: column;
+  @include themify($themes) {
+    color: themed('text');
+  }
 
   .ProjectForm__header {
     align-self: flex-start;
@@ -54,6 +57,9 @@
     border-radius: 10px;
     background-color: $black;
     padding: 40px;
+    @include themify($themes) {
+      background-color: themed('bg2');
+    }
 
     .delete-modal-button-container {
       // border: 1px solid red;
@@ -125,9 +131,24 @@
       outline: none;
       padding: 20px;
       transition: all 0.1s ease-in-out;
+      @include themify($themes) {
+        background: themed('upload-grey');
+        border: 5px solid themed('bg2');
+        color: themed('link');
+      }
 
       &:hover {
         background: #33343b;
+        @include themify($themes) {
+          background: themed('bg');
+          border: 5px solid themed('bg2');
+          color: themed('text');
+        }
+        svg {
+          @include themify($themes) {
+            stroke: themed('text');
+          }
+        }
       }
 
       p {
@@ -140,6 +161,9 @@
       svg {
         stroke: $white;
         max-width: 25%;
+        @include themify($themes) {
+          stroke: themed('link');
+        }
       }
     }
 
@@ -183,6 +207,9 @@
     object-position: center;
     width: 6rem;
     height: 6rem;
+    @include themify($themes) {
+      border: 5px solid themed('bg2');
+    }
   }
 
   .remove {
@@ -210,12 +237,18 @@
     form {
       // border: 1px solid white;
       @include onboard-form;
+      @include themify($themes) {
+        background-color: themed('bg');
+      }
       margin: 0;
       width: 100%;
 
       input {
         font-size: 12px;
         margin-bottom: 20px;
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
       }
 
       .description {
@@ -223,6 +256,9 @@
         margin-bottom: 20px;
         resize: vertical;
         height: 50px;
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
       }
 
       label {

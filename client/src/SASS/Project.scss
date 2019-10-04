@@ -1,7 +1,13 @@
+@import './palette';
+@import './mixins';
+
 .projects-container {
   color: white;
   margin-top: 10vh;
   width: 99%;
+  @include themify($themes) {
+    color: themed('text');
+  }
 
   .project-header {
     display: flex;
@@ -93,6 +99,9 @@
         text-align: center;
         line-height: 42px;
         cursor: pointer;
+        @include themify($themes) {
+          background: themed('bg2');
+        }
       }
     }
   }
