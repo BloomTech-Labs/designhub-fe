@@ -162,3 +162,38 @@
     outline: auto 4px -webkit-focus-ring-color;
   }
 }
+
+@mixin modal {
+  div {
+    &.modal--close {
+      display: none;
+    }
+    &.modal--expand {
+      span.modal--expand__background-overlay {
+        animation: fadeIn 0.2s ease-in-out;
+        background: $modal-bg;
+        cursor: pointer;
+        content: '';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        z-index: 1234567;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
