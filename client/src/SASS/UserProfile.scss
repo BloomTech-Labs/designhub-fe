@@ -189,6 +189,9 @@
 
       .links:hover {
         color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
       }
     }
   }
