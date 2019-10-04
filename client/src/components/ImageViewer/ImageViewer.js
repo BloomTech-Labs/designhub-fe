@@ -50,11 +50,7 @@ class ImageViewer extends Component {
 
   render() {
     const { activeImg, modal, allImgs } = this.state;
-    console.log('ImageViewer.js render() activeImg', activeImg);
-    console.log(
-      'ImageViewer.js render() this.props.comments',
-      this.props.comments
-    );
+
     if (activeImg === null) {
       return <h1>Loading</h1>;
     } else {

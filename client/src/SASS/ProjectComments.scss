@@ -1,4 +1,5 @@
 @import './palette';
+@import './mixins';
 
 .project-comments {
   width: 31%;
@@ -11,6 +12,10 @@
   display: flex;
   flex-flow: column nowrap;
   margin: 0 0 0 1%;
+  @include themify($themes) {
+    background: themed('bg2');
+    border: 5px solid themed('bg2');
+  }
 
   .comments-header {
     letter-spacing: 0.11em;
@@ -40,6 +45,9 @@
       padding: 10px 8px;
       width: max-content;
       height: auto;
+      &.--you {
+        color: white;
+      }
 
       &.--them {
         background: none;
@@ -93,6 +101,9 @@
       display: flex;
       justify-content: space-between;
       padding: 2%;
+      @include themify($themes) {
+        background: themed('bg');
+      }
     }
     input[type='text'] {
       border: none;
@@ -107,6 +118,9 @@
       padding: 2%;
       overflow-wrap: break-word;
       max-height: 200px;
+      @include themify($themes) {
+        background: themed('bg');
+      }
     }
     button {
       background-color: #5557fe;

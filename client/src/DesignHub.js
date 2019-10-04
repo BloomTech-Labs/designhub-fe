@@ -48,6 +48,9 @@ class DesignHub extends Component {
           togglDarkMode={this.togglDarkMode}
         />
         <div className="nav-workspace">
+          <div>
+            <span />
+          </div>
           <div className="side-navigation">
             <Navbar activeUser={activeUser} />
           </div>

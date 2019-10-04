@@ -9,11 +9,16 @@ import DarkModeSwitch from './Icons/DarkModeSwitch.js';
 import '../SASS/TopBar.scss';
 
 const TopBar = ({ activeUser, searchData, getSearch }) => {
+  const setLightMode = () => {
+    document.documentElement.classList.toggle('theme-light');
+  };
   return (
     <div className="top-bar-container">
       <div className="nav-content">
         <div className="logo-container">
-          <SampleLogo />
+          <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+            <SampleLogo />
+          </Link>
         </div>
         <div className="search-bar-container">
           <div className="magnifying-glass-container">
@@ -31,7 +36,7 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
               alt="user avatar"
             />
           </Link>
-          <div className="dark-mode-switch">
+          <div className="dark-mode-switch" onClick={setLightMode}>
             <DarkModeSwitch />
           </div>
         </div>

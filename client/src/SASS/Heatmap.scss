@@ -1,10 +1,14 @@
 @import './palette';
+@import './mixins';
 
 .heatmap {
   margin: 4vh 0;
   background: $black;
   padding: 1.5%;
   border-radius: 10px;
+  @include themify($themes) {
+    background: themed('bg2');
+  }
 
   .header {
     margin: 0 0 2vh 0;
@@ -38,6 +42,9 @@
 
     .color-empty {
       fill: #212229;
+      @include themify($themes) {
+        fill: themed('bg');
+      }
     }
   }
 }

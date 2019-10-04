@@ -1,4 +1,5 @@
 @import './palette';
+@import './mixins';
 
 nav {
   display: flex;
@@ -15,6 +16,9 @@ nav {
     background: $black;
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
+    @include themify($themes) {
+      background: themed('bg2');
+    }
 
     .navlinks {
       .links {
@@ -24,8 +28,10 @@ nav {
       .active-links {
         svg {
           fill: none;
-
           stroke: $white;
+          @include themify($themes) {
+            stroke: themed('link');
+          }
         }
       }
 
@@ -45,6 +51,9 @@ nav {
 
         &:hover {
           stroke: $white;
+          @include themify($themes) {
+            stroke: themed('text');
+          }
         }
       }
     }
@@ -61,6 +70,9 @@ nav {
     overflow: hidden;
     margin-left: -10px;
     transition: all 0.2s ease-in-out;
+    @include themify($themes) {
+      background: themed('bg2');
+    }
 
     .links {
       text-decoration: none;
@@ -68,10 +80,17 @@ nav {
       color: $dark-grey;
       margin-left: 20px;
       transition: all 0.2s ease-in-out;
+      @include themify($themes) {
+        background: themed('bg2');
+        color: themed('link');
+      }
     }
 
     .active-links {
       color: $white;
+      @include themify($themes) {
+        color: themed('text');
+      }
     }
   }
 

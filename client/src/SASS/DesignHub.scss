@@ -10,12 +10,12 @@
 
     .side-navigation {
       width: auto;
-      position: relative;
+      position: fixed;
       z-index: 9999;
       height: max-content;
       margin-left: 0;
       padding-bottom: 0;
-      align-self: center;
+      margin-top: 22vh;
     }
 
     .workspace {
