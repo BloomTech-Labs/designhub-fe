@@ -1,18 +1,29 @@
 .DesignHub {
   transition: all 0.2s ease-in-out;
-  .side-navigation {
-    transition: all 0.2s ease-in-out;
-  }
 
-  .side-navigation:hover ~ .workspace {
-    transition: all 0.2s ease-in-out;
-    // margin-left: 29%;
-  }
+  .nav-workspace {
+    display: grid;
+    grid-template-columns: 5% 93%;
+    grid-column-gap: 2%;
+    max-width: 96%;
+    margin: 0 auto;
 
-  .workspace {
-    transition: all 0.2s ease-in-out;
-    width: 92%;
-    margin-left: 7%;
+    .side-navigation {
+      width: auto;
+      position: relative;
+      z-index: 9999;
+      height: max-content;
+      margin-left: 0;
+      padding-bottom: 0;
+      align-self: center;
+    }
+
+    .workspace {
+      transition: all 0.2s ease-in-out;
+      width: auto;
+      margin-top: 5.5rem;
+      margin-left: 0;
+    }
   }
 }
 

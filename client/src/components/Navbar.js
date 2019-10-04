@@ -12,61 +12,69 @@ import '../SASS/Navbar.scss';
 const Navbar = ({ activeUser }) => {
   return (
     <nav>
-      <div className="navlinks">
-        <NavLink
-          to={`/profile/${activeUser.id}/${activeUser.username}`}
-          activeClassName="active-links"
-        >
-          <div className="ProfileIcon">
-            <ProfileIcon />
-          </div>
-        </NavLink>
+      <div className="icon-links">
+        <div className="navlinks">
+          <NavLink
+            to={`/profile/${activeUser.id}/${activeUser.username}`}
+            activeClassName="active-links"
+          >
+            <div className="ProfileIcon">
+              <ProfileIcon />
+            </div>
+          </NavLink>
+        </div>
+
+        <div className="navlinks">
+          <NavLink to="/create" activeClassName="active-links">
+            <CreateNewProjectIcon />
+          </NavLink>
+        </div>
+
+        <div className="navlinks">
+          <NavLink to="/explore" activeClassName="active-links">
+            <MyProjectsIcon />
+          </NavLink>
+        </div>
+
+        <div className="navlinks">
+          <NavLink to="/onboard" activeClassName="active-links">
+            <InboxIcon />
+          </NavLink>
+        </div>
+
+        <div className="navlinks">
+          <NavLink to="/settings" activeClassName="active-links">
+            <SettingsIcon />
+          </NavLink>
+        </div>
+      </div>
+      <div className="text-links">
         <NavLink
           to={`/profile/${activeUser.id}/${activeUser.username}`}
           className="links"
           activeClassName="active-links"
         >
-          <p className="A">Profile</p>
+          Profile
         </NavLink>
-      </div>
 
-      <div className="navlinks">
-        <NavLink to="/create" activeClassName="active-links">
-          <CreateNewProjectIcon />
-        </NavLink>
         <NavLink to="/create" className="links" activeClassName="active-links">
-          <p className="B">New Project</p>
+          New Project
         </NavLink>
-      </div>
 
-      <div className="navlinks">
-        <NavLink to="/explore" activeClassName="active-links">
-          <MyProjectsIcon />
-        </NavLink>
         <NavLink to="/explore" className="links" activeClassName="active-links">
-          <p className="C">Explore</p>
+          Explore
         </NavLink>
-      </div>
 
-      <div className="navlinks">
-        <NavLink to="/onboard" activeClassName="active-links">
-          <InboxIcon />
-        </NavLink>
         <NavLink to="/onboard" className="links" activeClassName="active-links">
-          <p className="D">Onboard</p>
+          Onboard
         </NavLink>
-      </div>
 
-      <div className="navlinks">
-        <NavLink to="/settings" activeClassName="active-links">
-          <SettingsIcon />
-        </NavLink>
         <NavLink
           to="/settings"
           className="links"
           activeClassName="active-links"
         >
-          <p className="E">Settings</p>
+          Settings
         </NavLink>
       </div>
     </nav>
