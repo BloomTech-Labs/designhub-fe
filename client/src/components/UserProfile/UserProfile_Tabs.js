@@ -43,8 +43,10 @@ class UserProfile_Tabs extends Component {
             </TabList>
 
             <TabPanel className="tabs-container">
-              <div className="tab-content">
+              <div className="tabs-header">
                 <h2>Recent Projects</h2>
+              </div>
+              <div className="tab-content">
                 {projects.length === 0 && (
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
@@ -76,8 +78,10 @@ class UserProfile_Tabs extends Component {
               <Heatmap />
             </TabPanel>
             <TabPanel className="tabs-container">
-              <div className="tab-content">
+              <div className="tabs-header">
                 <h2>Projects</h2>
+              </div>
+              <div className="tab-content">
                 {projects.length === 0 && (
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
@@ -170,8 +174,10 @@ class UserProfile_Tabs extends Component {
               </div>
             </TabPanel>
             <TabPanel className="tabs-container">
-              <div className="tab-content">
+              <div className="tabs-header">
                 <h2>Starred</h2>
+              </div>
+              <div className="tab-content">
                 {starred.length === 0 && (
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />

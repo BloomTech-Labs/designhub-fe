@@ -208,20 +208,29 @@
     width: 100%;
     margin: 4vh 0;
     margin: 29px 0;
-
-    .tab-content {
+    .tabs-header {
+      height: 40px;
+      width: 18rem;
       background: $black;
-      padding: 16px;
-      border-radius: 10px;
+      border-radius: 10px 10px 0 0;
+      clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
+      padding: 24px 26px 0 26px;
+      box-sizing: border-box;
       @include themify($themes) {
         background: themed('bg2');
       }
-
       h2 {
         font-weight: 400;
         margin: 0;
-        margin-bottom: 2vh;
-        margin-left: 12px;
+        letter-spacing: 0.11em;
+      }
+    }
+    .tab-content {
+      background: $black;
+      padding: 16px;
+      border-radius: 0 10px 10px 10px;
+      @include themify($themes) {
+        background: themed('bg2');
       }
     }
 
