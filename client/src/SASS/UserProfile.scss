@@ -357,6 +357,8 @@
     .user-header {
       flex-direction: column;
       height: max-content;
+      padding: 0;
+      padding-top: 1.5rem;
 
       .user-info {
         width: 100%;
@@ -372,7 +374,7 @@
       .user-data-container {
         width: 100%;
         align-content: center;
-
+        margin: 1.5rem 0;
         .user-data {
           display: flex;
           justify-content: space-between;
@@ -412,7 +414,8 @@
 
     .profile-tabs-container {
       .nav-links {
-        width: 50%;
+        width: auto;
+
         justify-content: space-between;
 
         .links {

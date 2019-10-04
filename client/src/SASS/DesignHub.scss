@@ -3,10 +3,20 @@
 
   .nav-workspace {
     display: grid;
-    grid-template-columns: 5% 93%;
+    grid-template-columns: 4.5rem auto;
     grid-column-gap: 2%;
     max-width: 96%;
     margin: 0 auto;
+
+    // span {
+    //   display: inline-block;
+    //   content: '';
+    //   width: 4.5rem;
+    //   height: 20px;
+    //   border: 1px solid red;
+    //   background: red;
+    //   margin-top: 40%;
+    // }
 
     .side-navigation {
       width: auto;
@@ -21,7 +31,7 @@
     .workspace {
       transition: all 0.2s ease-in-out;
       width: auto;
-      margin-top: 5.5rem;
+      margin-top: 5.2rem;
       margin-left: 0;
     }
   }
@@ -29,9 +39,31 @@
 
 @media (max-width: 1024px) {
   .DesignHub {
-    .workspace {
-      margin-left: 2%;
-      width: 96%;
+    transition: all 0.2s ease-in-out;
+
+    .nav-workspace {
+      display: grid;
+      grid-template-columns: auto;
+      grid-column-gap: 2%;
+      max-width: 96%;
+      margin: 0 auto;
+
+      .side-navigation {
+        width: auto;
+        position: fixed;
+        z-index: 9999;
+        height: max-content;
+        margin-left: 0;
+        padding-bottom: 0;
+        margin-top: 22vh;
+      }
+
+      .workspace {
+        transition: all 0.2s ease-in-out;
+        width: auto;
+        margin-top: 5.5rem;
+        margin-left: 0;
+      }
     }
   }
 }
