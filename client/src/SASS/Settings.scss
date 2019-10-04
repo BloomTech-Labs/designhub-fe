@@ -4,15 +4,21 @@
 .Settings {
   margin-top: 6rem;
   margin-bottom: 2%;
-  background: $black;
+  background: $bg2;
   width: 98%;
   border-radius: 10px;
   text-align: center;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  color: $white;
+  color: $text;
   box-sizing: border-box;
+
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('bg2');
+  }
+
   @media screen and (max-width: 700px) {
     display: flex;
     flex-flow: column nowrap;
@@ -39,14 +45,14 @@
     }
     h4 {
       letter-spacing: 0.11em;
-      color: #6d6d72;
+      color: $link;
       font-size: 14px;
       font-weight: normal;
       line-height: 16px;
       margin-top: 40px;
       cursor: pointer;
       &:hover {
-        color: white;
+        color: $text;
       }
       @media screen and (max-width: 700px) {
         margin-top: 15px;
@@ -55,10 +61,13 @@
   }
   .settings-right-column {
     // border: 1px solid white;
-    border-left: 3px solid #212229;
+    border-left: 3px solid $bg;
     text-align: left;
     padding: 0 60px;
     width: 85%;
+    @include themify($themes) {
+      border-left: 3px solid themed('bg');
+    }
   }
 
   img {

@@ -5,6 +5,9 @@
   color: $white;
   width: auto;
   margin: 6rem auto;
+  @include themify($themes) {
+    color: themed('text');
+  }
 
   .user-header {
     display: flex;
@@ -16,6 +19,9 @@
     border-radius: 10px;
     padding: 1.5rem;
     margin-bottom: 2rem;
+    @include themify($themes) {
+      background: themed('bg2');
+    }
 
     .user-left-content {
       display: flex;
@@ -49,6 +55,9 @@
         font-size: 16px;
         font-weight: 500;
         color: $dark-grey;
+        @include themify($themes) {
+          color: themed('link');
+        }
       }
 
       .bio {
@@ -71,10 +80,16 @@
           text-decoration: none;
           color: $white;
           transition: 0.1s ease-in-out;
+          @include themify($themes) {
+            color: themed('text');
+          }
         }
 
         .website:hover {
           color: $dark-grey;
+          @include themify($themes) {
+            color: themed('link');
+          }
         }
       }
     }
@@ -86,6 +101,9 @@
 
       h6 {
         color: $dark-grey;
+        @include themify($themes) {
+          color: themed('link');
+        }
       }
 
       .user-data {
@@ -125,6 +143,9 @@
             width: 5vh;
             height: 5vh;
             border: 5px solid $black;
+            @include themify($themes) {
+              border: 5px solid themed('bg');
+            }
           }
         }
 
@@ -138,6 +159,9 @@
   .profile-tabs-container {
     color: $white;
     width: 100%;
+    @include themify($themes) {
+      color: themed('text');
+    }
 
     .nav-links {
       display: flex;
@@ -154,6 +178,9 @@
         position: relative;
         z-index: 100;
         padding: 0px 20px 0px 0px;
+        @include themify($themes) {
+          color: themed('link');
+        }
       }
 
       .active-link {
@@ -175,6 +202,9 @@
       background: $black;
       padding: 16px;
       border-radius: 10px;
+      @include themify($themes) {
+        background: themed('bg2');
+      }
 
       h2 {
         font-weight: 400;
@@ -219,6 +249,10 @@
         overflow: hidden;
         margin: 10px 10px 10px 10px;
         object-fit: cover;
+
+        @include themify($themes) {
+          border: 8px solid themed('bg');
+        }
 
         .project-info {
           position: absolute;

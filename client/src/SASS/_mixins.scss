@@ -86,8 +86,15 @@
   background: $almost-black;
   transition: 0.1s ease-in-out;
   padding: 10px 60px;
+  @include themify($themes) {
+    background: themed('bg');
+    color: themed('text');
+  }
   &:hover {
     background: #2f303a;
+    @include themify($themes) {
+      color: themed('bg2');
+    }
   }
 }
 
@@ -101,6 +108,11 @@
   flex-direction: column;
   margin: 2% 5%;
   width: 90%;
+
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('bg2');
+  }
 
   label {
     @include onboard-form__label;
@@ -121,6 +133,9 @@
   line-height: 16px;
   letter-spacing: 0.11em;
   margin-top: 30px;
+  @include themify($themes) {
+    color: themed('form-label');
+  }
 }
 
 @mixin onboard-form__input {
@@ -136,6 +151,10 @@
   outline: none;
   font-family: inherit; // need this to override textarea defaults
   font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+  }
   &:hover,
   &:focus {
     outline: auto 4px -webkit-focus-ring-color;
@@ -156,7 +175,10 @@
   resize: none;
   font-family: inherit; // need this to override textarea defaults
   font-size: inherit; // need this to override textarea defaults
-
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+  }
   &:focus,
   &:hover {
     outline: auto 4px -webkit-focus-ring-color;
@@ -196,4 +218,28 @@
       }
     }
   }
+}
+
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value
+          )
+        ) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
 }

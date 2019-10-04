@@ -1,4 +1,5 @@
 @import './palette';
+@import './mixins';
 
 .ImageViewer {
   color: white;
@@ -27,6 +28,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        @include themify($themes) {
+          border: 5px solid themed('bg2');
+          background-color: themed('bg2');
+        }
       }
 
       .ImageViewer__thumbnails {
@@ -47,6 +52,9 @@
           border-radius: 10px;
           margin-bottom: 16px;
           object-fit: cover;
+          @include themify($themes) {
+            border: 5px solid themed('bg2');
+          }
 
           &:hover {
             border: 5px solid #5557fe;

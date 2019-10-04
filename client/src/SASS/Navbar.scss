@@ -1,4 +1,5 @@
 @import './palette';
+@import './mixins';
 
 nav {
   position: fixed;
@@ -14,6 +15,9 @@ nav {
   border-radius: 10px;
   transition: all 0.2s ease-in-out;
   overflow: hidden;
+  @include themify($themes) {
+    background: themed('bg2');
+  }
 
   .navlinks {
     display: flex;
@@ -27,12 +31,18 @@ nav {
     .active-links {
       p {
         color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
       }
 
       svg {
         fill: none;
         padding: 20px 5px 20px 25px;
         stroke: $white;
+        @include themify($themes) {
+          stroke: themed('link');
+        }
       }
     }
 
@@ -43,10 +53,6 @@ nav {
       }
     }
 
-    svg:hover ~ p {
-      color: $white;
-    }
-
     p {
       transition: all 0.2s ease-in-out;
       background: $black;
@@ -55,10 +61,17 @@ nav {
       padding: 0 20px 0 20px;
       width: max-content;
       transition: all 0.2s ease-in-out;
+      @include themify($themes) {
+        background: themed('bg2');
+        color: themed('link');
+      }
     }
 
     p:hover {
       color: $white;
+      @include themify($themes) {
+        color: themed('text');
+      }
     }
 
     svg {
@@ -66,9 +79,15 @@ nav {
       padding: 20px 5px 20px 25px;
       stroke: $dark-grey;
       transition: all 0.2s ease-in-out;
+      @include themify($themes) {
+        stroke: themed('link');
+      }
 
       &:hover {
         stroke: $white;
+        @include themify($themes) {
+          stroke: themed('text');
+        }
       }
     }
   }
