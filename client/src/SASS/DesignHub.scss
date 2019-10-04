@@ -3,7 +3,7 @@
 
   .nav-workspace {
     display: grid;
-    grid-template-columns: 4.5rem 90%;
+    grid-template-columns: 4.5rem auto;
     grid-column-gap: 2%;
     max-width: 96%;
     margin: 0 auto;
@@ -20,7 +20,7 @@
 
     .workspace {
       transition: all 0.2s ease-in-out;
-      width: 100%;
+      width: auto;
       margin-top: 5.2rem;
       margin-left: 0;
     }
