@@ -73,6 +73,25 @@
     // border: 1px solid red;
     @include onboard-form;
 
+    .buttons {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      margin-top: 30px;
+
+      button {
+        &.next-btn {
+          @include primary-btn;
+          justify-self: end;
+          grid-column: 2;
+        }
+        &.prev-btn {
+          @include secondary-btn;
+          grid-column: 1;
+          justify-self: start;
+        }
+      }
+    }
+
     .avatar-upload-container {
       // border: 1px solid white;
       align-items: center;

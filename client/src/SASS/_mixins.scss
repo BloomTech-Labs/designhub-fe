@@ -38,6 +38,24 @@
   text-align: center;
 }
 
+@mixin primary-btn {
+  @include btn;
+  background: $btn-primary;
+  width: 188px;
+  &:hover {
+    background: $btn-primary-hover;
+  }
+}
+
+@mixin secondary-btn {
+  @include btn;
+  background: $dark-grey;
+  width: 188px;
+  &:hover {
+    background: $btn-grey-hover;
+  }
+}
+
 @mixin auth0-redirect-btn {
   @include btn;
   background: none;
@@ -82,10 +100,8 @@
   display: flex;
   flex-direction: column;
   margin: 2% 5%;
-  // max-width: 1024px;
   width: 90%;
 
-  // .stepComponents {
   label {
     @include onboard-form__label;
   }
@@ -94,35 +110,6 @@
   }
   textarea {
     @include onboard-form__textarea;
-  }
-  // }
-
-  .buttons {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin-top: 30px;
-
-    button {
-      @include btn;
-      width: 188px;
-
-      &.next-btn {
-        background: $btn-primary;
-        justify-self: end;
-        grid-column: 2;
-        &:hover {
-          background: $btn-primary-hover;
-        }
-      }
-      &.prev-btn {
-        background: $dark-grey;
-        grid-column: 1;
-        justify-self: start;
-        &:hover {
-          background: $btn-grey-hover;
-        }
-      }
-    }
   }
 }
 

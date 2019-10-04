@@ -18,10 +18,13 @@
     flex-flow: column nowrap;
   }
   .settings-left-column {
+    align-self: flex-start;
     width: 12%;
+    margin: 2% 0;
     min-width: 10rem;
     height: 100%;
     @media screen and (max-width: 700px) {
+      align-self: center;
       margin-top: 20px;
       img {
         margin-bottom: 10px;
@@ -29,6 +32,10 @@
     }
     .settings-logout {
       color: $alert;
+    }
+
+    a {
+      text-decoration: none;
     }
     h4 {
       letter-spacing: 0.11em;
@@ -72,10 +79,8 @@
     width: 100%;
 
     button {
-      @include edit-profile-btn;
-      background: $btn-gradient;
-      margin: 20px 0;
-      width: 188px;
+      @include primary-btn;
+      margin: 30px 0;
       @media screen and (max-width: 700px) {
         width: 100%;
       }
