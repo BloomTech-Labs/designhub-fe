@@ -112,7 +112,7 @@
 
   .left-container {
     // border: 1px solid red;
-    width: 40%;
+    width: 100%;
     padding: 0 2%;
     .delete-project-button {
       font-style: normal;
@@ -229,20 +229,33 @@
 
   .right-container {
     // border: 1px solid white;
-    width: 50%;
+    width: 100%;
     display: flex;
     overflow-y: scroll;
+    padding: 0 2%;
 
     form {
       // border: 1px solid white;
+      @include onboard-form;
+      margin: 0;
       width: 100%;
 
+      input {
+        font-size: 12px;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 12px;
+        margin-bottom: 20px;
+        resize: vertical;
+        height: 50px;
+      }
+
       label {
-        display: inline-block;
         margin-top: 15px;
         font-size: 18px;
         line-height: 21px;
-        letter-spacing: 0.11em;
       }
 
       .project-label {
@@ -275,46 +288,6 @@
         }
       }
     }
-
-    input {
-      background: $field-bg;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 14px;
-      letter-spacing: 0.11em;
-      margin: 10px 0 20px 0;
-      outline: none;
-      padding: 10px 0;
-      padding-left: 10px;
-      width: 98%;
-    }
-
-    textarea {
-      font-weight: 500;
-      line-height: 14px;
-      letter-spacing: 0.11em;
-      font-family: inherit; // need this to override textarea defaults
-      font-size: inherit; // need this to override textarea defaults
-    }
-
-    .description {
-      width: 98%;
-      margin: 10px 0 20px 0;
-      padding: 10px 0;
-      background: $field-bg;
-      border: none;
-      color: white;
-      outline: none;
-      padding-left: 10px;
-      border-radius: 5px;
-      resize: vertical;
-      height: 50px;
-      font-size: 14px;
-      font-family: 'Roboto', sans-serif;
-    }
   }
 
   .submit-cancel-container {
@@ -324,20 +297,13 @@
     width: 100%;
 
     .submit-button {
-      @include follow-btn;
-      padding: 10px 40px;
-      letter-spacing: 0.11rem;
+      @include primary-btn;
       margin-top: 16px;
       margin-right: 16px;
     }
 
     .cancel-btn {
-      @include edit-profile-btn;
-      background: $field-bg;
-      margin-top: 16px;
-      margin-left: 0;
-      padding: 10px 40px;
-      letter-spacing: 0.11rem;
+      @include secondary-btn;
       margin-top: 16px;
     }
   }
