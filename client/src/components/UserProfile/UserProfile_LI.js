@@ -3,11 +3,15 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import axios from 'axios';
+
 // ========== IMPORTED COMPONENTS ========== //
 import UserProfileTabs from './UserProfile_Tabs.js';
+import Loading from '../Loading.js';
+import Location from '../Icons/Location.js';
+import WebsiteLink from '../Icons/Link.js';
+
 // ========== STYLES ========== //
 import '../../SASS/UserProfile.scss';
-import Loading from '../Loading.js';
 
 class UserProfile_LI extends Component {
   constructor(props) {
@@ -165,6 +169,7 @@ class UserProfile_LI extends Component {
               <h2 className="username">{userData.username}</h2>
               <p className="bio">{userData.bio}</p>
               <div className="user-info-location-website">
+                <Location />
                 <p>{userData.location}</p>
                 <a
                   href={userData.website}
@@ -172,6 +177,7 @@ class UserProfile_LI extends Component {
                   rel="noopener noreferrer"
                   className="website"
                 >
+                  <WebsiteLink />
                   {userData.website}
                 </a>
               </div>

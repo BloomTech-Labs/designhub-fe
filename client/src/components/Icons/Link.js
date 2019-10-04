@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Link = () => {
+const WebsiteLink = () => {
   return (
     <svg
       width="14"
@@ -37,4 +37,4 @@ const Link = () => {
   );
 };
 
-export default Link;
+export default WebsiteLink;
