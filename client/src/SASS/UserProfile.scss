@@ -3,7 +3,6 @@
 
 .user-profile-container {
   color: $white;
-  width: 100%;
 
   @include themify($themes) {
     color: themed('text');
@@ -29,12 +28,12 @@
     }
 
     .avatar {
-      width: 6.875rem;
-      height: 6.875rem;
+      width: 120px;
+      height: 120px;
       box-sizing: content-box;
       border-radius: 50%;
       object-fit: cover;
-      margin-right: 1.5rem;
+      margin-right: 30px;
     }
 
     .user-info {
@@ -46,14 +45,18 @@
       font-size: 16px;
 
       .userFLname {
+        font-size: 16px;
         font-weight: 400;
         margin: 0;
+        letter-spacing: 0.11em;
       }
 
       .username {
         margin: 0.5em 0;
         font-weight: 500;
+        font-size: 12px;
         color: $dark-grey;
+        letter-spacing: 0.11em;
         @include themify($themes) {
           color: themed('link');
         }
@@ -61,15 +64,22 @@
 
       .bio {
         margin: 0;
-        width: 100%;
-        line-height: 30px;
+        max-width: max-content;
+        line-height: 20px;
+        font-size: 0.85rem;
+        font-size: 12px;
+        letter-spacing: 0.11em;
       }
 
       .user-info-location-website {
         display: flex;
         width: max-content;
-        margin-top: 10px;
-
+        font-size: 12px;
+        margin-top: 15px;
+        letter-spacing: 0.11em;
+        svg {
+          margin-right: 8px;
+        }
         .website {
           margin-left: 14px;
           text-decoration: none;
@@ -90,9 +100,10 @@
     }
 
     .user-data-container {
-      width: 45rem;
+      width: 55rem;
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
 
       h6 {
         color: $dark-grey;
@@ -104,8 +115,8 @@
       .user-data {
         display: flex;
         justify-content: space-between;
-        width: 90%;
-
+        width: 50%;
+        letter-spacing: 0.11em;
         .count-flex {
           display: flex;
           flex-direction: column;
@@ -117,7 +128,7 @@
           }
 
           p {
-            margin: 1vh 0;
+            margin: 10px 0;
           }
         }
       }
@@ -128,7 +139,7 @@
         align-items: center;
 
         .teams {
-          margin-top: 1vh;
+          margin-top: 5px;
 
           .team-avatar {
             margin-top: 1vh;
@@ -146,6 +157,7 @@
 
         .edit-profile-btn {
           @include edit-profile-btn;
+          background-color: $dark-grey;
         }
       }
     }
@@ -184,6 +196,9 @@
 
       .links:hover {
         color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
       }
     }
   }
@@ -390,7 +405,7 @@
             align-items: center;
 
             p {
-              margin: 1vh 0;
+              margin: 5px 0;
             }
           }
         }
@@ -402,7 +417,7 @@
           margin: 0;
 
           .edit-profile-btn {
-            margin: 6% 0;
+            margin: 30px 0 10px 0;
           }
 
           .follow-btn {
@@ -455,7 +470,7 @@
       .user-data-container {
         width: 100%;
         align-content: center;
-
+        margin-top: 20px;
         .user-data {
           display: flex;
           justify-content: center;
@@ -483,7 +498,7 @@
           margin: 0;
 
           .edit-profile-btn {
-            margin: 6% 0;
+            margin: 30px 0 10px 0;
           }
         }
       }

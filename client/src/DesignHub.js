@@ -12,7 +12,6 @@ import SearchPage from './components/SearchPage';
 import axios from 'axios';
 import './SASS/DesignHub.scss';
 import EditProject from './components/EditProject';
-import { axiosWithAuth } from './utilities/axiosWithAuth';
 
 class DesignHub extends Component {
   constructor(props) {

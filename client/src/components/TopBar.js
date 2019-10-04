@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import SampleLogo from './Icons/SampleLogo.js';
 import MagnifyingGlass from './Icons/MagnifyingGlass.js';
 import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
+import sunMode from '../ASSETS/sun-mode.svg';
 
 import '../SASS/TopBar.scss';
 
 const TopBar = ({ activeUser, searchData, getSearch }) => {
+  const [light, setLight] = useState(false);
   const setLightMode = () => {
     document.documentElement.classList.toggle('theme-light');
+    setLight(!light);
   };
   return (
     <div className="top-bar-container">
@@ -37,7 +40,11 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
             />
           </Link>
           <div className="dark-mode-switch" onClick={setLightMode}>
-            <DarkModeSwitch />
+            {light ? (
+              <img alt="sun-mode switch" src={sunMode} />
+            ) : (
+              <DarkModeSwitch />
+            )}
           </div>
         </div>
       </div>

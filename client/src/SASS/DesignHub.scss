@@ -3,20 +3,10 @@
 
   .nav-workspace {
     display: grid;
-    grid-template-columns: 4.5rem auto;
+    grid-template-columns: 4.5rem 90%;
     grid-column-gap: 2%;
     max-width: 96%;
     margin: 0 auto;
-
-    // span {
-    //   display: inline-block;
-    //   content: '';
-    //   width: 4.5rem;
-    //   height: 20px;
-    //   border: 1px solid red;
-    //   background: red;
-    //   margin-top: 40%;
-    // }
 
     .side-navigation {
       width: auto;
@@ -30,7 +20,7 @@
 
     .workspace {
       transition: all 0.2s ease-in-out;
-      width: auto;
+      width: 100%;
       margin-top: 5.2rem;
       margin-left: 0;
     }
