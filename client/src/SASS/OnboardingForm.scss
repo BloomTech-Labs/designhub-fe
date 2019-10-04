@@ -2,8 +2,9 @@
 @import './mixins';
 
 .OnboardingForm {
+  // border: 1px solid cyan;
   align-items: center;
-  background: $black;
+  background: $almost-black;
   color: $white;
   display: flex;
   flex-direction: column;
@@ -39,6 +40,7 @@
   }
 
   .stepComponents {
+    // border: 1px solid white;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -68,7 +70,27 @@
   }
 
   form {
+    // border: 1px solid red;
     @include onboard-form;
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      margin-top: 30px;
+
+      button {
+        &.next-btn {
+          @include primary-btn;
+          justify-self: end;
+          grid-column: 2;
+        }
+        &.prev-btn {
+          @include secondary-btn;
+          grid-column: 1;
+          justify-self: start;
+        }
+      }
+    }
 
     .avatar-upload-container {
       // border: 1px solid white;

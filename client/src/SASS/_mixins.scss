@@ -38,6 +38,24 @@
   text-align: center;
 }
 
+@mixin primary-btn {
+  @include btn;
+  background: $btn-primary;
+  width: 188px;
+  &:hover {
+    background: $btn-primary-hover;
+  }
+}
+
+@mixin secondary-btn {
+  @include btn;
+  background: $dark-grey;
+  width: 188px;
+  &:hover {
+    background: $btn-grey-hover;
+  }
+}
+
 @mixin auth0-redirect-btn {
   @include btn;
   background: none;
@@ -82,80 +100,98 @@
   display: flex;
   flex-direction: column;
   margin: 2% 5%;
-  max-width: 1024px;
   width: 90%;
 
-  .stepComponents {
-    label {
-      color: $dark-grey;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
-      letter-spacing: 0.11em;
-      margin-top: 30px;
-    }
-
-    input {
-      background-color: $field-bg;
-      border: none;
-      border-radius: 2px;
-      color: $white;
-      font-weight: normal;
-      font-size: 0.8rem;
-      letter-spacing: 0.11em;
-      margin-top: 4px;
-      padding: 10px;
-      outline: none;
-      &:hover,
-      &:focus {
-        outline: auto 4px -webkit-focus-ring-color;
-      }
-    }
-
-    textarea {
-      background-color: $field-bg;
-      border: none;
-      border-radius: 2px;
-      color: $white;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0.11em;
-      margin-top: 4px;
-      padding: 4px;
-      resize: none;
-
-      &:focus,
-      &:hover {
-        outline: auto 4px -webkit-focus-ring-color;
-      }
-    }
+  label {
+    @include onboard-form__label;
   }
+  input {
+    @include onboard-form__input;
+  }
+  textarea {
+    @include onboard-form__textarea;
+  }
+}
 
-  .buttons {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    margin-top: 30px;
+@mixin onboard-form__label {
+  color: $white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.11em;
+  margin-top: 30px;
+}
 
-    button {
-      @include btn;
-      width: 188px;
+@mixin onboard-form__input {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11em;
+  margin-top: 4px;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  &:hover,
+  &:focus {
+    outline: auto 4px -webkit-focus-ring-color;
+  }
+}
 
-      &.next-btn {
-        background: $btn-primary;
-        justify-self: end;
-        grid-column: 2;
-        &:hover {
-          background: $btn-primary-hover;
-        }
+@mixin onboard-form__textarea {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  color: $white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.11em;
+  margin-top: 4px;
+  padding: 10px;
+  resize: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+
+  &:focus,
+  &:hover {
+    outline: auto 4px -webkit-focus-ring-color;
+  }
+}
+
+@mixin modal {
+  div {
+    &.modal--close {
+      display: none;
+    }
+    &.modal--expand {
+      span.modal--expand__background-overlay {
+        animation: fadeIn 0.2s ease-in-out;
+        background: $modal-bg;
+        cursor: pointer;
+        content: '';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        z-index: 1234567;
       }
-      &.prev-btn {
-        background: $dark-grey;
-        grid-column: 1;
-        justify-self: start;
-        &:hover {
-          background: $btn-grey-hover;
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
         }
       }
     }

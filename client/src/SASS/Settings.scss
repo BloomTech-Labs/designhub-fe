@@ -3,6 +3,7 @@
 
 .Settings {
   margin-top: 6rem;
+  margin-bottom: 2%;
   background: $black;
   width: 98%;
   border-radius: 10px;
@@ -17,10 +18,13 @@
     flex-flow: column nowrap;
   }
   .settings-left-column {
+    align-self: flex-start;
     width: 12%;
+    margin: 2% 0;
     min-width: 10rem;
     height: 100%;
     @media screen and (max-width: 700px) {
+      align-self: center;
       margin-top: 20px;
       img {
         margin-bottom: 10px;
@@ -28,6 +32,10 @@
     }
     .settings-logout {
       color: $alert;
+    }
+
+    a {
+      text-decoration: none;
     }
     h4 {
       letter-spacing: 0.11em;
@@ -46,10 +54,11 @@
     }
   }
   .settings-right-column {
-    width: 85%;
-    text-align: left;
-    padding: 40px 60px;
+    // border: 1px solid white;
     border-left: 3px solid #212229;
+    text-align: left;
+    padding: 0 60px;
+    width: 85%;
   }
 
   img {
@@ -64,41 +73,14 @@
 
 .account-form-container {
   .account-form {
-    display: flex;
-    flex-flow: column nowrap;
-    label {
-      font-size: 14px;
-      line-height: 16px;
-      letter-spacing: 0.11em;
-      color: #6d6d72;
-    }
-    input,
-    textarea {
-      background: #2a2b31;
-      border-radius: 5px;
-      border: none;
-      height: 31px;
-      margin: 4px 0 30px 0;
-      padding-left: 12px;
-      color: white;
-      letter-spacing: 0.11em;
-      &::placeholder {
-        color: #6d6d72;
-        font-family: Roboto;
-        font-size: 14px;
-        padding: 8px 0;
-      }
-    }
-    textarea {
-      height: 60px;
-      font-family: Roboto;
-      padding: 8px 12px;
-    }
+    // border: 1px solid red;
+    @include onboard-form;
+    margin: 0;
+    width: 100%;
+
     button {
-      @include edit-profile-btn;
-      background: $btn-gradient;
-      margin: 20px 0;
-      width: 188px;
+      @include primary-btn;
+      margin: 30px 0;
       @media screen and (max-width: 700px) {
         width: 100%;
       }

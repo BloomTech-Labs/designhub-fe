@@ -44,75 +44,48 @@
     }
   }
 
-  .modal--close {
-    display: none;
-  }
+  @include modal;
 
-  .modal--expand {
-    animation: fadeIn 0.2s ease-in-out;
+  .delete-project-modal {
+    // border: 1px solid white;
+    display: flex;
+    max-width: 489px;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: $black;
+    padding: 40px;
 
-    span.modal--expand__background-overlay {
-      background: $modal-bg;
-      cursor: pointer;
-      content: '';
-      position: fixed;
-      height: 100vh;
-      left: 0;
-      top: 0;
-      text-align: center;
-      width: 100%;
-      z-index: 9999999;
-      .delete-project-modal {
-        max-width: 489px;
-        width: 489px;
-        height: 159px;
-        display: flex;
-        flex-direction: column;
-        z-index: 999999999;
-        border-radius: 10px;
-        background-color: $black;
-        padding: 40px;
-        box-sizing: border-box;
-        position: absolute;
-        top: 40%;
-        left: 40%;
-        .delete-modal-button-container {
-          display: flex;
-          flex-flow: row nowrap;
-          justify-content: space-between;
-          .delete-button {
-            background: $alert;
-          }
-          button {
-            @include btn;
-            padding: 10px 60px;
-            margin-top: 3vh;
-            transition: 0.1s ease-in-out;
-            background: $dark-grey;
-          }
+    .delete-modal-button-container {
+      // border: 1px solid red;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+
+      .delete-button {
+        background: $alert;
+        &:hover {
+          background: $white;
+          color: $alert;
         }
-        p {
-          text-align: center;
-          font-size: 20px;
-          line-height: 23px;
-          letter-spacing: 0.11em;
-        }
+      }
+
+      button {
+        @include secondary-btn;
+        margin-top: 20px;
+        transition: 0.1s ease-in-out;
       }
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
+    p {
+      text-align: center;
+      font-size: 20px;
+      line-height: 23px;
+      letter-spacing: 0.11em;
     }
   }
 
   .left-container {
     // border: 1px solid red;
-    width: 40%;
+    width: 100%;
     padding: 0 2%;
     .delete-project-button {
       font-style: normal;
@@ -229,20 +202,33 @@
 
   .right-container {
     // border: 1px solid white;
-    width: 50%;
+    width: 100%;
     display: flex;
     overflow-y: scroll;
+    padding: 0 2%;
 
     form {
       // border: 1px solid white;
+      @include onboard-form;
+      margin: 0;
       width: 100%;
 
+      input {
+        font-size: 12px;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 12px;
+        margin-bottom: 20px;
+        resize: vertical;
+        height: 50px;
+      }
+
       label {
-        display: inline-block;
         margin-top: 15px;
         font-size: 18px;
         line-height: 21px;
-        letter-spacing: 0.11em;
       }
 
       .project-label {
@@ -275,46 +261,6 @@
         }
       }
     }
-
-    input {
-      background: $field-bg;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-weight: 500;
-      font-size: 14px;
-      line-height: 14px;
-      letter-spacing: 0.11em;
-      margin: 10px 0 20px 0;
-      outline: none;
-      padding: 10px 0;
-      padding-left: 10px;
-      width: 98%;
-    }
-
-    textarea {
-      font-weight: 500;
-      line-height: 14px;
-      letter-spacing: 0.11em;
-      font-family: inherit; // need this to override textarea defaults
-      font-size: inherit; // need this to override textarea defaults
-    }
-
-    .description {
-      width: 98%;
-      margin: 10px 0 20px 0;
-      padding: 10px 0;
-      background: $field-bg;
-      border: none;
-      color: white;
-      outline: none;
-      padding-left: 10px;
-      border-radius: 5px;
-      resize: vertical;
-      height: 50px;
-      font-size: 14px;
-      font-family: 'Roboto', sans-serif;
-    }
   }
 
   .submit-cancel-container {
@@ -324,20 +270,13 @@
     width: 100%;
 
     .submit-button {
-      @include follow-btn;
-      padding: 10px 40px;
-      letter-spacing: 0.11rem;
+      @include primary-btn;
       margin-top: 16px;
       margin-right: 16px;
     }
 
     .cancel-btn {
-      @include edit-profile-btn;
-      background: $field-bg;
-      margin-top: 16px;
-      margin-left: 0;
-      padding: 10px 40px;
-      letter-spacing: 0.11rem;
+      @include secondary-btn;
       margin-top: 16px;
     }
   }
