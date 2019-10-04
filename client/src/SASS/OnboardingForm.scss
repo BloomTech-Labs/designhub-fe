@@ -2,6 +2,7 @@
 @import './mixins';
 
 .OnboardingForm {
+  // border: 1px solid cyan;
   align-items: center;
   background: $black;
   color: $white;
@@ -39,6 +40,7 @@
   }
 
   .stepComponents {
+    // border: 1px solid white;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -68,6 +70,7 @@
   }
 
   form {
+    // border: 1px solid red;
     @include onboard-form;
 
     .avatar-upload-container {

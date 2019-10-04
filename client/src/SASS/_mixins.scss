@@ -82,56 +82,20 @@
   display: flex;
   flex-direction: column;
   margin: 2% 5%;
-  max-width: 1024px;
+  // max-width: 1024px;
   width: 90%;
 
-  .stepComponents {
-    label {
-      color: $dark-grey;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 16px;
-      letter-spacing: 0.11em;
-      margin-top: 30px;
-    }
-
-    input {
-      background-color: $field-bg;
-      border: none;
-      border-radius: 2px;
-      color: $white;
-      font-weight: normal;
-      font-size: 0.8rem;
-      letter-spacing: 0.11em;
-      margin-top: 4px;
-      padding: 10px;
-      outline: none;
-      &:hover,
-      &:focus {
-        outline: auto 4px -webkit-focus-ring-color;
-      }
-    }
-
-    textarea {
-      background-color: $field-bg;
-      border: none;
-      border-radius: 2px;
-      color: $white;
-      font-weight: 400;
-      font-size: 14px;
-      line-height: 21px;
-      letter-spacing: 0.11em;
-      margin-top: 4px;
-      padding: 4px;
-      resize: none;
-
-      &:focus,
-      &:hover {
-        outline: auto 4px -webkit-focus-ring-color;
-      }
-    }
+  // .stepComponents {
+  label {
+    @include onboard-form__label;
   }
+  input {
+    @include onboard-form__input;
+  }
+  textarea {
+    @include onboard-form__textarea;
+  }
+  // }
 
   .buttons {
     display: grid;
@@ -159,5 +123,55 @@
         }
       }
     }
+  }
+}
+
+@mixin onboard-form__label {
+  color: $white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.11em;
+  margin-top: 30px;
+}
+
+@mixin onboard-form__input {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11em;
+  margin-top: 4px;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  &:hover,
+  &:focus {
+    outline: auto 4px -webkit-focus-ring-color;
+  }
+}
+
+@mixin onboard-form__textarea {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  color: $white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.11em;
+  margin-top: 4px;
+  padding: 10px;
+  resize: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+
+  &:focus,
+  &:hover {
+    outline: auto 4px -webkit-focus-ring-color;
   }
 }
