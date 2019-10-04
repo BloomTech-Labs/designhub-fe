@@ -15,7 +15,7 @@ const uuidv1 = require('uuid/v1');
 const OnboardingForm = props => {
   const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
-  const { user } = useAuth0();
+  const { user, logout } = useAuth0();
 
   // individual form pages in an array
   const stepComponents = [Step1, Step2];
@@ -147,7 +147,7 @@ const OnboardingForm = props => {
             </section>
 
             <div className="buttons">
-              {showPrev && (
+              {showPrev ? (
                 <button
                   name="prev"
                   className="prev-btn"
@@ -155,6 +155,10 @@ const OnboardingForm = props => {
                   style={submitting ? { display: 'none' } : null}
                 >
                   Previous
+                </button>
+              ) : (
+                <button name="cancel" className="prev-btn" onClick={logout}>
+                  Cancel
                 </button>
               )}
               {submitButton ? (
