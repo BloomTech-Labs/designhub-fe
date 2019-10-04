@@ -49,44 +49,46 @@
   }
 
   .modal--expand {
-    animation: fadeIn 0.2s ease-in-out;
-
     span.modal--expand__background-overlay {
+      // border: 1px solid red;
+      animation: fadeIn 0.2s ease-in-out;
       background: $modal-bg;
       cursor: pointer;
       content: '';
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: fixed;
       height: 100vh;
       left: 0;
       top: 0;
       text-align: center;
       width: 100%;
-      z-index: 9999999;
+      z-index: 1234567;
+
       .delete-project-modal {
-        max-width: 489px;
-        width: 489px;
-        height: 159px;
+        // border: 1px solid white;
         display: flex;
+        max-width: 489px;
         flex-direction: column;
-        z-index: 999999999;
         border-radius: 10px;
         background-color: $black;
         padding: 40px;
-        box-sizing: border-box;
-        position: absolute;
-        top: 40%;
-        left: 40%;
+
         .delete-modal-button-container {
+          // border: 1px solid red;
           display: flex;
           flex-flow: row nowrap;
           justify-content: space-between;
+
           .delete-button {
             background: $alert;
           }
+
           button {
             @include btn;
             padding: 10px 60px;
-            margin-top: 3vh;
+            margin-top: 20px;
             transition: 0.1s ease-in-out;
             background: $dark-grey;
           }
