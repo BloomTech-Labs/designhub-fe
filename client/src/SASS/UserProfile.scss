@@ -216,6 +216,9 @@
       clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
       padding: 24px 26px 0 26px;
       box-sizing: border-box;
+      @include themify($themes) {
+        background: themed('bg2');
+      }
       h2 {
         font-weight: 400;
         margin: 0;
