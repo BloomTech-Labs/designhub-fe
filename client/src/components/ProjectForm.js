@@ -151,12 +151,7 @@ const ProjectForm = ({
                   ...changes,
                   mainImg: res.data[0].url
                 };
-                return axiosWithAuth()
-                  .put(`api/v1/projects/${id}`, newChanges)
-                  .then(res => {
-                    history.push(`/project/${id}`);
-                  })
-                  .catch(err => console.log(err));
+                updateMainImg(newChanges, id);
               }
             })
             .catch(err => console.log(err));
