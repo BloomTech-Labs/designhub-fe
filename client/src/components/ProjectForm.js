@@ -37,6 +37,7 @@ const ProjectForm = ({
     success: false,
     url: '',
     modal: false,
+    deletingImage: null,
     projectPhotos: null
   });
 
@@ -213,7 +214,14 @@ const ProjectForm = ({
                 <button onClick={closeModal}>Cancel</button>
                 <button
                   className="delete-button"
-                  onClick={() => deleteProject(project.id)}
+                  onClick={() => {
+                    if (state.deletingImage) {
+                      console.log('deleting image!!!!');
+                      deletePhoto(state.deletingImage);
+                    } else {
+                      deleteProject(project.id);
+                    }
+                  }}
                 >
                   Delete
                 </button>
@@ -244,7 +252,14 @@ const ProjectForm = ({
                       alt=""
                       src={remove}
                       className="remove"
-                      onClick={() => deletePhoto(photo.id)}
+                      onClick={e => {
+                        setState({
+                          ...state,
+                          deletingImage: photo.id,
+                          modal: true
+                        });
+                      }}
+                      /* onClick={() => deletePhoto(photo.id)} */
                     />
                     <div className="thumb" key={index}>
                       <div style={thumbInner}>
