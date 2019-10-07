@@ -22,6 +22,7 @@
 
     .tabs-container {
       height: 90vh;
+      padding: 20px 30px;
     }
     .nav-links {
       display: flex;
@@ -47,7 +48,7 @@
   letter-spacing: 0.11em;
   height: 82px;
   align-items: center;
-  margin: 21px 30px;
+  margin-bottom: 40px;
   .user-card-avatar {
     img {
       width: 82px;

@@ -48,15 +48,7 @@ class SearchPage extends Component {
                 Projects
               </Tab>
             </TabList>
-            <TabPanel
-              className="tabs-container"
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                padding: '10px',
-                flexWrap: 'wrap'
-              }}
-            >
+            <TabPanel className="tabs-container">
               {this.props.searchData.users && this.displayUsers()}
             </TabPanel>
             <TabPanel className="tabs-container">
