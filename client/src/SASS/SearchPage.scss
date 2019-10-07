@@ -1,0 +1,54 @@
+@import './mixins';
+@import './palette';
+
+.search-container {
+  width: 100%;
+  color: $white;
+  margin-top: 15px;
+  p {
+    letter-spacing: 0.11em;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
+    span {
+      font-weight: bold;
+    }
+  }
+  .search-tabs-container {
+    background: $black;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+
+    .tabs-container {
+      height: 90vh;
+    }
+    .nav-links {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 22px 36px;
+      border-bottom: 1px solid $almost-black;
+      .links {
+        margin-right: 50px;
+        letter-spacing: 0.11em;
+        color: $dark-grey;
+      }
+      .active-link {
+        color: $white;
+      }
+    }
+  }
+}
+
+.search-user-card-container {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 300px;
+  .user-card-avatar {
+    img {
+      width: 82px;
+      height: 82px;
+      border-radius: 100%;
+    }
+  }
+}
