@@ -19,6 +19,10 @@
     border-radius: 10px;
     margin-top: 20px;
     width: 100%;
+    a {
+      text-decoration: none;
+      color: $white;
+    }
 
     .tabs-container {
       height: 90vh;
@@ -33,6 +37,7 @@
         margin-right: 50px;
         letter-spacing: 0.11em;
         color: $dark-grey;
+        cursor: pointer;
       }
       .active-link {
         color: $white;
@@ -44,6 +49,7 @@
 .search-user-card-container {
   display: flex;
   flex-flow: row nowrap;
+  box-sizing: border-box;
   width: 300px;
   letter-spacing: 0.11em;
   height: 82px;
