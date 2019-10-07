@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 class CustomPage {
   static async build() {
     const browser = await puppeteer.launch({
+      ignoreDefaultArgs: ['--disable-extensions'],
       headless: false
     });
     const page = await browser.newPage();
