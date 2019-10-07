@@ -81,7 +81,7 @@
 
 main.StickyComment__container.TempComment {
   margin: -47px 0 0 9px;
-  z-index: 99999999;
+  z-index: 123456789;
 }
 
 main.StickyComment__container {
@@ -91,13 +91,14 @@ main.StickyComment__container {
   flex-direction: row;
   margin: -23px 0 0 10px; //negative margin compensates for centering
   position: absolute;
-  z-index: 99999;
+  z-index: 123456789;
 
   &:hover {
     display: flex;
   }
 
   hr.StickyComment__midbar {
+    display: none;
     background: $blue;
     border-color: $blue;
     // width: 64px; //temp fix for small viewport display bug

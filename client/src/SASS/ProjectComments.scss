@@ -120,6 +120,7 @@
       max-height: 200px;
       @include themify($themes) {
         background: themed('bg');
+        color: themed('text');
       }
     }
     button {
