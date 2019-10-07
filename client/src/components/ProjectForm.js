@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
@@ -133,7 +133,6 @@ const ProjectForm = ({
           return axiosWithAuth()
             .put(`api/v1/projects/${id}`, newChanges)
             .then(res => {
-              console.log(newChanges);
               history.push(`/project/${id}`);
             })
             .catch();
@@ -181,6 +180,7 @@ const ProjectForm = ({
     return axiosWithAuth()
       .delete(`api/v1/photo/projects/${id}`)
       .then(res => {
+        closeModal();
         getProjectPhotos(project.id);
       })
       .catch(err => console.log(err));
@@ -189,7 +189,8 @@ const ProjectForm = ({
   const closeModal = () => {
     setState({
       ...state,
-      modal: false
+      modal: false,
+      deletingImage: null
     });
   };
 
@@ -216,7 +217,6 @@ const ProjectForm = ({
                   className="delete-button"
                   onClick={() => {
                     if (state.deletingImage) {
-                      console.log('deleting image!!!!');
                       deletePhoto(state.deletingImage);
                     } else {
                       deleteProject(project.id);
