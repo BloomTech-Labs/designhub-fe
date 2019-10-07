@@ -85,13 +85,15 @@ const OnboardingForm = props => {
     setSubmitting(true);
     try {
       setLoading(true);
-      const newAvatar = await handleImageUpload(files);
+      let newAvatar;
+      if (files.length === 0) {
+        newAvatar = user.picture;
+      } else {
+        newAvatar = await handleImageUpload(files);
+      }
       //TODO ADD AUth0ID prop to changes object BEFORE SENDING
       changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
-      // console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
-      // console.log('OnboardingForm.js handleSubmit() changes', changes);
       await axiosWithAuth().put(`api/v1/users/${id}`, changes);
-      // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
       setLoading(false);
@@ -136,6 +138,7 @@ const OnboardingForm = props => {
                       key={formUser.id}
                       alert={alert}
                       files={files}
+                      picture={user.picture}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
