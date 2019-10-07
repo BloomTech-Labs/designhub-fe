@@ -26,5 +26,5 @@ script:
   - cd client
   - npm install
   # - npm test
-  - npm run test:integration
+  - npm run test
   - npm run build
