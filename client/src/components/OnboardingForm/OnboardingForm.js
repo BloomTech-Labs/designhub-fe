@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
@@ -30,6 +30,8 @@ const OnboardingForm = props => {
 
   //avatar image handler
   const [files, setFiles] = useState([]);
+
+  // fetch avatar on load
 
   //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
@@ -136,6 +138,7 @@ const OnboardingForm = props => {
                       key={formUser.id}
                       alert={alert}
                       files={files}
+                      picture={user.picture}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
