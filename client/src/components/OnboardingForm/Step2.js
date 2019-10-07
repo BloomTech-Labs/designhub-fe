@@ -34,7 +34,7 @@ const Step2 = ({ formUser, files, setFiles, picture }) => {
     },
     [files]
   );
-  console.log(picture);
+
   const thumbs = () => {
     const removeThumbnail = index => {
       const newList = files.filter(file => files[index] !== file);
