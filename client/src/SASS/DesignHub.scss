@@ -3,10 +3,11 @@
 
   .nav-workspace {
     display: grid;
-    grid-template-columns: 4.5rem auto;
-    grid-column-gap: 2%;
+    grid-template-columns: auto 93%;
     max-width: 96%;
     margin: 0 auto;
+    justify-content: center;
+    grid-column-gap: 6rem;
 
     .side-navigation {
       width: auto;
