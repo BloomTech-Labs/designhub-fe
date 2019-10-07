@@ -31,8 +31,6 @@ const OnboardingForm = props => {
   //avatar image handler
   const [files, setFiles] = useState([]);
 
-  // fetch avatar on load
-
   //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
     avatar: user.picture || '',
