@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Link } from 'react-router-dom';
+import defaultImg from '../ASSETS/default_thumbnail.svg';
 
 import SearchUserCard from './SearchUserCard';
 
 import '../SASS/SearchPage.scss';
+import '../SASS/UserProfile.scss';
 
 class SearchPage extends Component {
   constructor(props) {
@@ -19,13 +22,20 @@ class SearchPage extends Component {
   displayProjects = () => {
     return this.props.searchData.projects.map((project, index) => {
       return (
-        <div key={index}>
-          <h3 style={{ color: 'white' }}>{project.name}</h3>
-          <img
-            src={project.mainImg}
-            alt="project"
-            style={{ height: '30%', width: '30%' }}
-          />
+        <div className="project-content" key={index}>
+          <Link to={`/project/${project.id}`}>
+            <>
+              <div className="project-info">
+                <h1>{project.name}</h1>
+              </div>
+              <img
+                src={project.mainImg ? project.mainImg : defaultImg}
+                className="project-thumbnail"
+                alt="test"
+                key={project.id}
+              />
+            </>
+          </Link>
         </div>
       );
     });
@@ -48,12 +58,16 @@ class SearchPage extends Component {
                 Projects
               </Tab>
             </TabList>
-            <TabPanel className="tabs-container">
-              {this.props.searchData.users && this.displayUsers()}
-            </TabPanel>
-            <TabPanel className="tabs-container">
-              {this.props.searchData.projects && this.displayProjects()}
-            </TabPanel>
+            <div className="tabs-container">
+              <TabPanel>
+                {this.props.searchData.users && this.displayUsers()}
+              </TabPanel>
+              <TabPanel>
+                <div className="projects-array">
+                  {this.props.searchData.projects && this.displayProjects()}
+                </div>
+              </TabPanel>
+            </div>
           </Tabs>
         </div>
       </div>

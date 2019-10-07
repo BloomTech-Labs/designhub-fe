@@ -25,8 +25,75 @@
     }
 
     .tabs-container {
-      height: 90vh;
+      height: 100%;
       padding: 20px 30px;
+      .projects-array {
+        display: grid;
+        grid-template-columns: 22% 22% 22% 22%;
+        grid-column-gap: 3%;
+        width: 100%;
+
+        .project-content {
+          width: 100%;
+          height: 14vw;
+          // height: 11.5rem;
+          position: relative;
+          transition: all 0.2s ease-in-out;
+          border: 8px solid $field-bg;
+          border-radius: 5px;
+          overflow: hidden;
+          margin: 10px 10px 10px 10px;
+          object-fit: cover;
+
+          @include themify($themes) {
+            border: 8px solid themed('bg');
+          }
+
+          .project-info {
+            position: absolute;
+            bottom: 0;
+            width: 103%;
+            color: $white;
+            text-decoration: none;
+            background: $blue;
+            overflow: hidden;
+            height: 50px;
+            display: none;
+            pointer-events: none;
+
+            h1 {
+              padding: 20px;
+            }
+          }
+
+          .project-thumbnail {
+            object-fit: cover;
+            width: 103%;
+            height: 100%;
+            transition: 0.1s ease-in-out;
+            cursor: pointer;
+          }
+        }
+        .project-content:hover {
+          border: 8px solid $blue;
+        }
+      }
+
+      .project-content:hover {
+        .project-info {
+          display: inline;
+          animation: slideUp 0.25s ease-in-out;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          height: 0px;
+        }
+        to {
+          height: 50px;
+        }
+      }
     }
     .nav-links {
       display: flex;
