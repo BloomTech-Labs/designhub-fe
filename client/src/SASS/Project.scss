@@ -3,7 +3,6 @@
 
 .projects-container {
   color: white;
-  margin-top: 10vh;
   width: 99%;
   @include themify($themes) {
     color: themed('text');

@@ -12,7 +12,6 @@ import SearchPage from './components/SearchPage';
 import axios from 'axios';
 import './SASS/DesignHub.scss';
 import EditProject from './components/EditProject';
-import { axiosWithAuth } from './utilities/axiosWithAuth';
 
 class DesignHub extends Component {
   constructor(props) {
@@ -47,54 +46,59 @@ class DesignHub extends Component {
           toggleLightMode={this.toggleLightMode}
           togglDarkMode={this.togglDarkMode}
         />
-        <div className="side-navigation">
-          <Navbar activeUser={activeUser} />
+        <div className="nav-workspace">
+          <div>
+            <span />
+          </div>
+          <div className="side-navigation">
+            <Navbar activeUser={activeUser} />
+          </div>
+          <main className="workspace">
+            <Switch>
+              <Route
+                exact
+                path="/profile/:id/:username"
+                render={props => (
+                  <UserProfileLI {...props} activeUser={activeUser} />
+                )}
+              />
+              <PrivateRoute
+                exact
+                path="/project/:id"
+                render={props => <Project {...props} activeUser={activeUser} />}
+              />
+              <Route exact path="/create" component={AddProject} />
+              <Route
+                exact
+                path="/project/:id/edit"
+                render={props => <EditProject {...props} />}
+              />
+              <Route
+                exact
+                path="/settings"
+                render={props => (
+                  <Settings
+                    setUserData={this.props.setUserData}
+                    {...props}
+                    activeUser={activeUser}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/search"
+                render={props => (
+                  <SearchPage
+                    {...props}
+                    activeUser={activeUser}
+                    searchData={this.state.search}
+                    getSearch={this.getSearch}
+                  />
+                )}
+              />
+            </Switch>
+          </main>
         </div>
-        <main className="workspace">
-          <Switch>
-            <Route
-              exact
-              path="/profile/:id/:username"
-              render={props => (
-                <UserProfileLI {...props} activeUser={activeUser} />
-              )}
-            />
-            <PrivateRoute
-              exact
-              path="/project/:id"
-              render={props => <Project {...props} activeUser={activeUser} />}
-            />
-            <Route exact path="/create" component={AddProject} />
-            <Route
-              exact
-              path="/project/:id/edit"
-              render={props => <EditProject {...props} />}
-            />
-            <Route
-              exact
-              path="/settings"
-              render={props => (
-                <Settings
-                  setUserData={this.props.setUserData}
-                  {...props}
-                  activeUser={activeUser}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/search"
-              render={props => (
-                <SearchPage
-                  {...props}
-                  activeUser={activeUser}
-                  searchData={this.state.search}
-                  getSearch={this.getSearch}
-                />
-              )}
-            />
-          </Switch>
-        </main>
       </div>
     );
   }
