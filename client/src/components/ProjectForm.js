@@ -126,28 +126,26 @@ const ProjectForm = ({
   };
 
   const editProject = (changes, id) => {
+    const updateMainImg = (changes, id) => {
+      return axiosWithAuth()
+        .put(`api/v1/projects/${id}`, changes)
+        .then(res => {
+          history.push(`/project/${id}`);
+        })
+        .catch();
+    };
     handleImageUpload(files, id)
       .then(res => {
         if (res) {
           const newChanges = { ...changes, mainImg: res };
-          return axiosWithAuth()
-            .put(`api/v1/projects/${id}`, newChanges)
-            .then(res => {
-              history.push(`/project/${id}`);
-            })
-            .catch();
+          updateMainImg(newChanges, id);
         } else {
           return axiosWithAuth()
             .get(`/api/v1/photo/projects/${id}`)
             .then(res => {
               if (res.data.length === 0) {
                 const newChanges = { ...changes, mainImg: null };
-                return axiosWithAuth()
-                  .put(`api/v1/projects/${id}`, newChanges)
-                  .then(res => {
-                    history.push(`/project/${id}`);
-                  })
-                  .catch();
+                updateMainImg(newChanges, id);
               } else {
                 const newChanges = {
                   ...changes,
