@@ -44,11 +44,28 @@
   display: flex;
   flex-flow: row nowrap;
   width: 300px;
+  letter-spacing: 0.11em;
+  height: 82px;
+  align-items: center;
+  margin: 21px 30px;
   .user-card-avatar {
     img {
       width: 82px;
       height: 82px;
       border-radius: 100%;
+      border: 3px solid $blue;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+  }
+  .user-card-info {
+    h3 {
+      font-size: 18px;
+      line-height: 21px;
+    }
+    p {
+      font-size: 12px;
+      line-height: 14px;
     }
   }
 }

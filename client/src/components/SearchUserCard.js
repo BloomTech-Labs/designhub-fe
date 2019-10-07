@@ -9,7 +9,7 @@ const SearchUserCard = ({ user }) => {
       </div>
       <div className="user-card-info">
         <h3>{`${user.firstName} ${user.lastName}`}</h3>
-        <p>{user.username}</p>
+        <p>@{user.username}</p>
       </div>
     </div>
   );
