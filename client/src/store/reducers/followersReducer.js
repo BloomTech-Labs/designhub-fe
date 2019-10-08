@@ -32,7 +32,7 @@ const initialState = {
   isFollowed: false
 };
 
-export const photosReducer = (state = initialState, action) => {
+export const followersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_FOLLOWERS_START:
       return {
