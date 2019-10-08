@@ -173,6 +173,7 @@
   margin-top: 4px;
   padding: 10px;
   resize: none;
+  height: auto;
   font-family: inherit; // need this to override textarea defaults
   font-size: inherit; // need this to override textarea defaults
   @include themify($themes) {

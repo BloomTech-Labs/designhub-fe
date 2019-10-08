@@ -24,9 +24,9 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
           </Link>
         </div>
         <div className="search-bar-container">
-          <div className="magnifying-glass-container">
+          {/* <div className="magnifying-glass-container">
             <MagnifyingGlass />
-          </div>
+          </div> */}
 
           <SearchBar searchData={searchData} getSearch={getSearch} />
         </div>

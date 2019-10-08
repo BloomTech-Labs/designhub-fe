@@ -19,7 +19,7 @@ const SearchBar = ({ getSearch, history }) => {
         className="search-bar-input"
         type="search"
         onChange={handleChange('search')}
-        placeholder="Search by name"
+        placeholder="search projects, users, teams..."
         value={data.search}
       />
     </form>
