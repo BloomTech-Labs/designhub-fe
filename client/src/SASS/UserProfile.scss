@@ -3,6 +3,9 @@
 
 .user-profile-container {
   color: $white;
+  width: 100%;
+  position: relative;
+  position: relative;
 
   @include themify($themes) {
     color: themed('text');
@@ -100,13 +103,14 @@
     }
 
     .user-data-container {
-      width: 55rem;
+      width: max-content;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
 
       h6 {
         color: $dark-grey;
+        margin: 0 10px;
         @include themify($themes) {
           color: themed('link');
         }
@@ -114,9 +118,8 @@
 
       .user-data {
         display: flex;
-        justify-content: space-between;
-        width: 50%;
         letter-spacing: 0.11em;
+        justify-content: space-evenly;
         .count-flex {
           display: flex;
           flex-direction: column;

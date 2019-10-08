@@ -7,7 +7,7 @@ import ProfileIcon from '../Icons/ProfileIcon.js';
 
 import remove from '../../ASSETS/remove.svg';
 
-const Step2 = ({ formUser, files, setFiles }) => {
+const Step2 = ({ formUser, files, setFiles, picture }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
@@ -35,7 +35,7 @@ const Step2 = ({ formUser, files, setFiles }) => {
     if (files.length === 0)
       return (
         <div className="avatarBlank">
-          <ProfileIcon />
+          <img src={picture} alt="default avatar" className="Step2-thumbnail" />
         </div>
       );
     return files.map((file, index) => (

@@ -22,6 +22,7 @@ class EditProject extends Component {
       .get(`api/v1/photo/projects/${id}`)
       .then(res => {
         this.setState({ ...this.state, projectPhotos: res.data });
+        return true;
       })
       .catch(err => console.log(err));
   };
