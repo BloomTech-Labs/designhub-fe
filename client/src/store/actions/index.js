@@ -51,6 +51,20 @@ export const DELETE_COMMENT_START = 'DELETE_COMMENT_START';
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
 export const DELETE_COMMENT_FAILURE = 'DELETE_COMMENT_FAILURE';
 
+//Photos
+export const GET_PROJECT_PHOTOS_START = 'GET_PROJECT_PHOTOS_START';
+export const GET_PROJECT_PHOTOS_SUCCESS = 'GET_PROJECT_PHOTOS_SUCCESS';
+export const GET_PROJECT_PHOTOS_FAILURE = 'GET_PROJECT_PHOTOS_FAILURE';
+export const GET_SINGLE_PHOTO_START = 'GET_SINGLE_PHOTO_START';
+export const GET_SINGLE_PHOTO_SUCCESS = 'GET_SINGLE_PHOTO_SUCCESS';
+export const GET_SINGLE_PHOTO_FAILURE = 'GET_SINGLE_PHOTO_FAILURE';
+export const ADD_PROJECT_PHOTO_START = 'ADD_PROJECT_PHOTO_START';
+export const ADD_PROJECT_PHOTO_SUCCESS = 'ADD_PROJECT_PHOTO_SUCCESS';
+export const ADD_PROJECT_PHOTO_FAILURE = 'ADD_PROJECT_PHOTO_FAILURE';
+export const DELETE_PHOTO_START = 'DELETE_PHOTO_START';
+export const DELETE_PHOTO_SUCCESS = 'DELETE_PHOTO_SUCCESS';
+export const DELETE_PHOTO_FAILURE = 'DELETE_PHOTO_FAILURE';
+
 // Users Actions
 export const getAllUsers = () => dispatch => {
   dispatch({ type: GET_ALL_USERS_START });
@@ -254,5 +268,54 @@ export const deleteComment = id => dispatch => {
         type: DELETE_COMMENT_FAILURE,
         payload: err.data.message
       });
+    });
+};
+
+//Photos Actions
+export const getProjectPhotos = projectId => dispatch => {
+  dispatch({ type: GET_PROJECT_PHOTOS_START });
+  return axiosWithAuth()
+    .get(`/api/v1/photo/projects/${projectId}`)
+    .then(res => {
+      dispatch({ type: GET_PROJECT_PHOTOS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_PROJECT_PHOTOS_FAILURE });
+    });
+};
+
+export const getSinglePhoto = photoId => dispatch => {
+  dispatch({ type: GET_SINGLE_PHOTO_START });
+  return axiosWithAuth()
+    .get(`/api/v1/photo/projects/one/${photoId}`)
+    .then(res => {
+      dispatch({ type: GET_SINGLE_PHOTO_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_SINGLE_PHOTO_FAILURE });
+    });
+};
+
+export const addPhoto = photo => dispatch => {
+  dispatch({ type: ADD_PROJECT_PHOTO_START });
+  return axiosWithAuth()
+    .post('/api/v1/photo/projects', photo)
+    .then(res => {
+      dispatch({ type: ADD_PROJECT_PHOTO_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PROJECT_PHOTO_FAILURE });
+    });
+};
+
+export const deletePhoto = photoId => dispatch => {
+  dispatch({ type: DELETE_PHOTO_START });
+  return axiosWithAuth()
+    .delete(`/api/v1/photo/projects/${photoId}`)
+    .then(res => {
+      dispatch({ type: DELETE_PHOTO_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PHOTO_FAILURE });
     });
 };
