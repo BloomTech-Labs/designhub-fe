@@ -24,6 +24,9 @@ export const UPDATE_PROJECT_FAILURE = 'UPDATE_PROJECT_FAILURE';
 export const DELETE_PROJECT_START = 'DELETE_PROJECT_START';
 export const DELETE_PROJECT_SUCCESS = 'DELETE_PROJECT_SUCCESS';
 export const DELETE_PROJECT_FAILURE = 'DELETE_PROJECT_FAILURE';
+export const GET_USERS_PROJECTS_START = 'GET_USERS_PROJECTS_START';
+export const GET_USERS_PROJECTS_SUCCESS = 'GET_USERS_PROJECTS_SUCCESS';
+export const GET_USERS_PROJECTS_FAILURE = 'GET_USERS_PROJECTS_FAILURE';
 
 // Users actions
 
@@ -121,5 +124,17 @@ export const deleteProject = id => dispatch => {
     })
     .catch(err => {
       dispatch({ type: DELETE_PROJECT_FAILURE, error: err });
+    });
+};
+
+export const getProjectsByUser = id => dispatch => {
+  dispatch({ type: GET_USERS_PROJECTS_START });
+  return axiosWithAuth()
+    .get(`/api/v1/projects/recent/${id}`)
+    .then(res => {
+      dispatch({ type: GET_USERS_PROJECTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_USERS_PROJECTS_FAILURE, payload: err });
     });
 };
