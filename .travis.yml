@@ -22,7 +22,7 @@ before_install:
   - 'sh -e /etc/init.d/xvfb start'
   - cd client
 install:
-  - npm i
+  - npm install
 script:
   # - npm test
   - npm run test
