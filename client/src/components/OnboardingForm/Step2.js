@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import DottedLine from '../Icons/DottedLine.js';
 import UploadCloud from '../Icons/UploadCloud.js';
-import ProfileIcon from '../Icons/ProfileIcon.js';
-
 import remove from '../../ASSETS/remove.svg';
 
 const Step2 = ({ formUser, files, setFiles, picture }) => {
@@ -26,14 +24,6 @@ const Step2 = ({ formUser, files, setFiles, picture }) => {
     minWidth: 0,
     overflow: 'hidden'
   };
-
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
 
   const thumbs = () => {
     const removeThumbnail = index => {
@@ -68,7 +58,7 @@ const Step2 = ({ formUser, files, setFiles, picture }) => {
   };
 
   return (
-    <>
+    <div className="FormStep">
       <header>
         <h1>Welcome, {`${formUser.firstName}`}!</h1>
         <h2>
@@ -100,7 +90,7 @@ const Step2 = ({ formUser, files, setFiles, picture }) => {
           <aside className="Step2-thumbnail-container">{thumbs()}</aside>
         </span>
       </div>
-    </>
+    </div>
   );
 };
 
