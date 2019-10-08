@@ -10,19 +10,14 @@ import Step2 from './Step2.js';
 
 import '../../SASS/OnboardingForm.scss';
 
-const uuidv1 = require('uuid/v1');
-
 const OnboardingForm = props => {
   const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
   const { user, logout } = useAuth0();
 
-  // individual form pages in an array
+  // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
-
-  // state to track which page to display
   const [formStep, setFormStep] = useState(1);
-  const [submitting, setSubmitting] = useState(false);
 
   //conditional render for next/submit/prev buttons
   const submitButton = formStep === stepComponents.length ? true : false;
@@ -40,52 +35,62 @@ const OnboardingForm = props => {
     id: user.id,
     lastName: user.family_name || '',
     location: '',
-    phoneNumber: uuidv1(),
     username: user.nickname || '',
     website: ''
   });
 
-  // alert state triggered by unique username fail
-  const [alert, setAlert] = useState(false);
-  // username <input/> ref for focus() on fail
-  const [usernameInput, setUsernameInput] = useState(null);
+  // alert state for required form inputs
+  const [alert, setAlert] = useState({
+    username: false,
+    firstName: false,
+    lastName: false,
+    email: false
+  });
 
   const handleChange = e => {
-    setAlert(false);
+    setAlert({
+      ...alert,
+      [e.target.name]: false
+    });
     setFormUser({ ...formUser, [e.target.name]: e.target.value });
   };
 
-  // click 'next' or 'prev' button
-  const handleClick = async e => {
+  const handleNextButton = async e => {
     e.preventDefault();
-    const move = e.target.name === 'next' ? 'next' : 'prev';
-    if (move === 'next' && formStep < stepComponents.length) {
+    const { username, firstName, lastName, email } = formUser;
+    const newAlert = {};
+    if (username.trim().length === 0) newAlert.username = true;
+    if (firstName.trim().length === 0) newAlert.firstName = true;
+    if (lastName.trim().length === 0) newAlert.lastName = true;
+    if (email.trim().length === 0) newAlert.email = true;
+    if (!newAlert.username) {
       try {
         const res = await axiosWithAuth().get(
           `api/v1/users/check/${formUser.username}`
         );
-        if (res.data.length === 0) {
-          setAlert(false);
-          setFormStep(n => ++n);
-        } else {
-          usernameInput.focus();
-          setAlert(true);
-        }
+        if (res.data.length !== 0) newAlert.username = 'taken';
       } catch (err) {
-        console.log('OnboardingForm.js handleClick() ERROR', err);
+        console.error('OnboardingForm.js handleNextButton() ERROR', err);
       }
-    } else if (move === 'prev' && formStep > 1) {
-      setFormStep(n => --n);
     }
+    const v = Object.values(newAlert);
+    if (v.includes(true) || v.includes('taken')) {
+      setAlert({ ...alert, ...newAlert });
+    } else setFormStep(n => ++n);
   };
 
-  // click submit
-  const handleSubmit = async (e, id, changes) => {
+  const handlePrevButton = async e => {
     e.preventDefault();
-    setSubmitting(true);
+    setFormStep(n => --n);
+  };
+
+  const handleSubmit = async (e, id, changes) => {
+    console.log('handleSubmit() e', e);
+    e.preventDefault();
     try {
       setLoading(true);
       const newAvatar = await handleImageUpload(files);
+
       //TODO ADD AUth0ID prop to changes object BEFORE SENDING
       changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
       // console.log('OnboardingForm.js handleSubmit() newAvatar', newAvatar);
@@ -94,15 +99,12 @@ const OnboardingForm = props => {
       // console.log('OnboardingForm.js handleSubmit() res.data', res.data);
       props.history.push(`/profile/${id}/${changes.username}`);
       props.setOnboarding(false);
-      setLoading(false);
     } catch (err) {
-      console.log('OnboardingForm.js handleSubmit() ERROR', err);
+      console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
   const handleImageUpload = async file => {
-    // console.log('OnboardingForm.js handleImageUpload() file', file);
-    console.log('user.sub', user.sub);
     try {
       const {
         data: { key, url }
@@ -116,30 +118,32 @@ const OnboardingForm = props => {
           'Content-Type': 'image/*'
         }
       });
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file.preview));
 
       return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
     } catch (err) {
-      console.log('OnboardingForm.js handleSubmit() ERROR', err);
+      console.error('OnboardingForm.js handleImageUpload() ERROR', err);
     }
   };
+
   if (loading) return <Loading />;
   else
     return (
       <>
         <div className="OnboardingForm">
-          <form className={alert ? 'alert' : null} onSubmit={handleSubmit}>
+          <form onSubmit={e => handleSubmit(e, formUser.id, formUser)}>
             <section className="stepComponents">
               {stepComponents.map((Step, i) => {
                 if (i + 1 === formStep) {
                   return (
                     <Step
-                      key={formUser.id}
+                      key={i}
                       alert={alert}
                       files={files}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
-                      setUsernameInput={setUsernameInput}
                     />
                   );
                 } else return null;
@@ -151,8 +155,7 @@ const OnboardingForm = props => {
                 <button
                   name="prev"
                   className="prev-btn"
-                  onClick={handleClick}
-                  style={submitting ? { display: 'none' } : null}
+                  onClick={handlePrevButton}
                 >
                   Previous
                 </button>
@@ -162,15 +165,15 @@ const OnboardingForm = props => {
                 </button>
               )}
               {submitButton ? (
-                <button
-                  className="next-btn"
-                  onClick={e => handleSubmit(e, formUser.id, formUser)}
-                  style={submitting ? { display: 'none' } : null}
-                >
+                <button className="next-btn" type="submit">
                   Submit
                 </button>
               ) : (
-                <button name="next" className="next-btn" onClick={handleClick}>
+                <button
+                  name="next"
+                  className="next-btn"
+                  onClick={handleNextButton}
+                >
                   Next
                 </button>
               )}

@@ -27,14 +27,6 @@ const Step2 = ({ formUser, files, setFiles }) => {
     overflow: 'hidden'
   };
 
-  useEffect(
-    () => () => {
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
-    },
-    [files]
-  );
-
   const thumbs = () => {
     const removeThumbnail = index => {
       const newList = files.filter(file => files[index] !== file);
@@ -68,7 +60,7 @@ const Step2 = ({ formUser, files, setFiles }) => {
   };
 
   return (
-    <>
+    <div className="FormStep">
       <header>
         <h1>Welcome, {`${formUser.firstName}`}!</h1>
         <h2>
@@ -100,7 +92,7 @@ const Step2 = ({ formUser, files, setFiles }) => {
           <aside className="Step2-thumbnail-container">{thumbs()}</aside>
         </span>
       </div>
-    </>
+    </div>
   );
 };
 

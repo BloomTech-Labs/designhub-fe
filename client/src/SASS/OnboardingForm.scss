@@ -13,38 +13,14 @@
   position: fixed;
   width: 100%;
 
-  .alert-container {
-    display: none;
-  }
-
-  form.alert {
-    .alert-container {
+  .stepComponents {
+    .FormStep {
+      // border: 1px solid white;
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
+      margin: 0 auto;
       width: 100%;
     }
-    input#username {
-      outline: 2px solid $alert;
-    }
-
-    .errorIcon {
-      margin-left: 9px;
-      margin-top: -9px;
-      position: absolute;
-      transition: all 0.1s ease-in-out;
-      width: 20px;
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-  }
-
-  .stepComponents {
-    // border: 1px solid white;
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
     header {
       h1 {
         font-size: 36px;
@@ -72,6 +48,33 @@
   form {
     // border: 1px solid red;
     @include onboard-form;
+
+    div.required {
+      display: flex;
+      flex-direction: column;
+    }
+
+    div.required.alert {
+      &:after {
+        margin: 0.4rem;
+        content: 'This field is required';
+        color: $alert;
+      }
+
+      &.taken input {
+        outline: 2px solid $alert;
+      }
+
+      &.taken:after {
+        content: 'This username is already taken';
+      }
+    }
+
+    input {
+      &:not(:focus):invalid {
+        outline: 2px solid $alert;
+      }
+    }
 
     .buttons {
       display: grid;
