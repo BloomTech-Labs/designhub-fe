@@ -88,6 +88,20 @@ export const GET_IS_FOLLOWED_START = 'GET_IS_FOLLOWED_START';
 export const GET_IS_FOLLOWED_SUCCESS = 'GET_IS_FOLLOWED_SUCCESS';
 export const GET_IS_FOLLOWED_FAILURE = 'GET_IS_FOLLOWED_FAILURE';
 
+//Stars
+export const STAR_PROJECT_START = 'STAR_PROJECT_START';
+export const STAR_PROJECT_SUCCESS = 'STAR_PROJECT_SUCCESS';
+export const STAR_PROJECT_FAILURE = 'STAR_PROJECT_FAILURE';
+export const UNSTAR_PROJECT_START = 'UNSTAR_PROJECT_START';
+export const UNSTAR_PROJECT_SUCCESS = 'UNSTAR_PROJECT_SUCCESS';
+export const UNSTAR_PROJECT_FAILURE = 'UNSTAR_PROJECT_FAILURE';
+export const GET_STARRED_PROJECTS_START = 'GET_STARRED_PROJECTS_START';
+export const GET_STARRED_PROJECTS_SUCCESS = 'GET_STARRED_PROJECTS_SUCCESS';
+export const GET_STARRED_PROJECTS_FAILURE = 'GET_STARRED_PROJECTS_FAILURE';
+export const GET_PROJECT_STAR_COUNT_START = 'GET_PROJECT_STAR_COUNT_START';
+export const GET_PROJECT_STAR_COUNT_SUCCESS = 'GET_PROJECT_STAR_COUNT_SUCCESS';
+export const GET_PROJECT_STAR_COUNT_FAILURE = 'GET_PROJECT_STAR_COUNT_FAILURE';
+
 // Users Actions
 export const getAllUsers = () => dispatch => {
   dispatch({ type: GET_ALL_USERS_START });
@@ -303,7 +317,7 @@ export const getProjectPhotos = projectId => dispatch => {
       dispatch({ type: GET_PROJECT_PHOTOS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_PROJECT_PHOTOS_FAILURE });
+      dispatch({ type: GET_PROJECT_PHOTOS_FAILURE, payload: err.data });
     });
 };
 
@@ -315,7 +329,7 @@ export const getSinglePhoto = photoId => dispatch => {
       dispatch({ type: GET_SINGLE_PHOTO_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_SINGLE_PHOTO_FAILURE });
+      dispatch({ type: GET_SINGLE_PHOTO_FAILURE, payload: err.data });
     });
 };
 
@@ -327,7 +341,7 @@ export const addPhoto = photo => dispatch => {
       dispatch({ type: ADD_PROJECT_PHOTO_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: ADD_PROJECT_PHOTO_FAILURE });
+      dispatch({ type: ADD_PROJECT_PHOTO_FAILURE, payload: err.data });
     });
 };
 
@@ -339,7 +353,7 @@ export const deletePhoto = photoId => dispatch => {
       dispatch({ type: DELETE_PHOTO_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: DELETE_PHOTO_FAILURE });
+      dispatch({ type: DELETE_PHOTO_FAILURE, payload: err.data });
     });
 };
 
@@ -352,7 +366,7 @@ export const getFollowers = userId => dispatch => {
       dispatch({ type: GET_FOLLOWERS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWERS_FAILURE });
+      dispatch({ type: GET_FOLLOWERS_FAILURE, payload: err.data });
     });
 };
 
@@ -367,7 +381,7 @@ export const getFollowersCount = userId => dispatch => {
       });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWERS_COUNT_FAILURE });
+      dispatch({ type: GET_FOLLOWERS_COUNT_FAILURE, payload: err.data });
     });
 };
 
@@ -379,7 +393,7 @@ export const getFollowing = userId => dispatch => {
       dispatch({ type: GET_FOLLOWING_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWING_FAILURE });
+      dispatch({ type: GET_FOLLOWING_FAILURE, payload: err.data });
     });
 };
 
@@ -394,7 +408,7 @@ export const getFollowingCount = userId => dispatch => {
       });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWING_COUNT_FAILURE });
+      dispatch({ type: GET_FOLLOWING_COUNT_FAILURE, payload: err.data });
     });
 };
 
@@ -408,7 +422,7 @@ export const addFollow = followObject => dispatch => {
       });
     })
     .catch(err => {
-      dispatch({ type: ADD_FOLLOW_FAILURE });
+      dispatch({ type: ADD_FOLLOW_FAILURE, payload: err.data });
     });
 };
 
@@ -420,7 +434,7 @@ export const deleteFollow = (myId, theirId) => dispatch => {
       dispatch({ type: DELETE_FOLLOW_SUCCESS, payload: res.data.message });
     })
     .catch(err => {
-      dispatch({ type: DELETE_FOLLOW_FAILURE });
+      dispatch({ type: DELETE_FOLLOW_FAILURE, payload: err.data });
     });
 };
 
@@ -432,6 +446,56 @@ export const getIsFollowed = (myId, theirId) => dispatch => {
       dispatch({ type: GET_IS_FOLLOWED_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_IS_FOLLOWED_FAILURE });
+      dispatch({ type: GET_IS_FOLLOWED_FAILURE, payload: err.data });
+    });
+};
+
+//Stars Actions
+
+export const starProject = starObject => dispatch => {
+  dispatch({ type: STAR_PROJECT_START });
+  return axiosWithAuth()
+    .post('/api/v1/star/', starObject)
+    .then(res => {
+      dispatch({ type: STAR_PROJECT_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: STAR_PROJECT_FAILURE, payload: err.data });
+    });
+};
+
+export const unstarProject = (userId, projectId) => dispatch => {
+  dispatch({ type: UNSTAR_PROJECT_START });
+  return axiosWithAuth()
+    .post(`/api/v1/star/unstar/${projectId}`, projectId)
+    .then(res => {
+      dispatch({ type: UNSTAR_PROJECT_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: UNSTAR_PROJECT_FAILURE, payload: err.data });
+    });
+};
+
+export const getStarredProjects = userId => dispatch => {
+  dispatch({ type: GET_STARRED_PROJECTS_START });
+  return axiosWithAuth()
+    .get(`/api/v1/star/${userId}`)
+    .then(res => {
+      dispatch({ type: GET_STARRED_PROJECTS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_STARRED_PROJECTS_FAILURE, payload: err.data });
+    });
+};
+
+export const getProjectStarCount = userId => dispatch => {
+  dispatch({ type: GET_PROJECT_STAR_COUNT_START });
+  return axiosWithAuth()
+    .get(`/api/v1/star/count/${userId}`)
+    .then(res => {
+      dispatch({ type: GET_PROJECT_STAR_COUNT_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_PROJECT_STAR_COUNT_FAILURE, payload: err.data });
     });
 };
