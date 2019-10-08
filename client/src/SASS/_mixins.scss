@@ -124,6 +124,27 @@
   textarea {
     @include onboard-form__textarea;
   }
+
+  div.required {
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.required.alert {
+    &:after {
+      margin: 0.4rem;
+      content: 'This field is required';
+      color: $alert;
+    }
+
+    &.taken input {
+      outline: 2px solid $alert;
+    }
+
+    &.taken:after {
+      content: 'This username is already taken';
+    }
+  }
 }
 
 @mixin onboard-form__label {
@@ -160,6 +181,9 @@
   &:hover,
   &:focus {
     outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    outline: 2px solid $alert;
   }
 }
 

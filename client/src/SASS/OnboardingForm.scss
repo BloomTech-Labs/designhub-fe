@@ -49,33 +49,6 @@
     // border: 1px solid red;
     @include onboard-form;
 
-    div.required {
-      display: flex;
-      flex-direction: column;
-    }
-
-    div.required.alert {
-      &:after {
-        margin: 0.4rem;
-        content: 'This field is required';
-        color: $alert;
-      }
-
-      &.taken input {
-        outline: 2px solid $alert;
-      }
-
-      &.taken:after {
-        content: 'This username is already taken';
-      }
-    }
-
-    input {
-      &:not(:focus):invalid {
-        outline: 2px solid $alert;
-      }
-    }
-
     .buttons {
       display: grid;
       grid-template-columns: 50% 50%;

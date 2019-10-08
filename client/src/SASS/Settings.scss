@@ -93,6 +93,10 @@
     button {
       @include primary-btn;
       margin: 30px 0;
+
+      &.formSuccess-btn {
+        background: green;
+      }
       @media screen and (max-width: 700px) {
         width: 100%;
       }

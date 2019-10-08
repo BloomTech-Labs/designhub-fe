@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
 import DottedLine from '../Icons/DottedLine.js';
 import UploadCloud from '../Icons/UploadCloud.js';
-import ProfileIcon from '../Icons/ProfileIcon.js';
-
 import remove from '../../ASSETS/remove.svg';
 
 const Step2 = ({ formUser, files, setFiles, picture }) => {
