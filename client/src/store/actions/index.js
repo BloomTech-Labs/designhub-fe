@@ -102,6 +102,32 @@ export const GET_PROJECT_STAR_COUNT_START = 'GET_PROJECT_STAR_COUNT_START';
 export const GET_PROJECT_STAR_COUNT_SUCCESS = 'GET_PROJECT_STAR_COUNT_SUCCESS';
 export const GET_PROJECT_STAR_COUNT_FAILURE = 'GET_PROJECT_STAR_COUNT_FAILURE';
 
+//Heatmap
+export const CREATE_HEATMAP_START = 'CREATE_HEATMAP_START';
+export const CREATE_HEATMAP_SUCCESS = 'CREATE_HEATMAP_SUCCESS';
+export const CREATE_HEATMAP_FAILURE = 'CREATE_HEATMAP_FAILURE';
+
+export const GET_HEATMAP_START = 'GET_HEATMAP_START';
+export const GET_HEATMAP_SUCCESS = 'GET_HEATMAP_SUCCESS';
+export const GET_HEATMAP_FAILURE = 'GET_HEATMAP_FAILURE';
+
+export const GET_ALL_CONTRIBS_START = 'GET_ALL_CONTRIBS_START';
+export const GET_ALL_CONTRIBS_SUCCESS = 'GET_ALL_CONTRIBS_SUCCESS';
+export const GET_ALL_CONTRIBS_FAILURE = 'GET_ALL_CONTRIBS_FAILURE';
+
+export const GET_CONTRIBS_COUNT_START = 'GET_TOTAL_HEATMAP_CONTRIBS_START';
+export const GET_CONTRIBS_COUNT_SUCCESS = 'GET_TOTAL_HEATMAP_CONTRIBS_SUCCESS';
+export const GET_CONTRIBS_COUNT_FAILURE = 'GET_TOTAL_HEATMAP_CONTRIBS_FAILURE';
+
+export const UPDATE_HEATMAP_START = 'UPDATE_HEATMAP_START';
+export const UPDATE_HEATMAP_SUCCESS = 'UPDATE_HEATMAP_SUCCESS';
+export const UPDATE_HEATMAP_FAILURE = 'UPDATE_HEATMAP_FAILURE';
+
+export const DELETE_HEATMAP_START = 'DELETE_HEATMAP_START';
+export const DELETE_HEATMAP_SUCCESS = 'DELETE_HEATMAP_SUCCESS';
+export const DELETE_HEATMAP_FAILURE = 'DELETE_HEATMAP_FAILURE';
+
+//############# ACTIONS #############
 // Users Actions
 export const getAllUsers = () => dispatch => {
   dispatch({ type: GET_ALL_USERS_START });
@@ -451,7 +477,6 @@ export const getIsFollowed = (myId, theirId) => dispatch => {
 };
 
 //Stars Actions
-
 export const starProject = starObject => dispatch => {
   dispatch({ type: STAR_PROJECT_START });
   return axiosWithAuth()
@@ -497,5 +522,78 @@ export const getProjectStarCount = userId => dispatch => {
     })
     .catch(err => {
       dispatch({ type: GET_PROJECT_STAR_COUNT_FAILURE, payload: err.data });
+    });
+};
+
+//Heatmap Actions
+export const createHeatmap = userId => dispatch => {
+  dispatch({ type: CREATE_HEATMAP_START });
+  return axiosWithAuth()
+    .post('/api/v1/heatmap', userId)
+    .then(res => {
+      dispatch({ type: CREATE_HEATMAP_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: CREATE_HEATMAP_FAILURE, payload: err.data.message });
+    });
+};
+
+export const getHeatmapsFromUserId = userId => dispatch => {
+  dispatch({ type: GET_HEATMAP_START });
+  return axiosWithAuth()
+    .get(`/api/v1/heatmap/${userId}`)
+    .then(res => {
+      dispatch({ type: GET_HEATMAP_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_HEATMAP_FAILURE, payload: err.data.message });
+    });
+};
+
+export const getAllContributionsFromUserId = userId => dispatch => {
+  dispatch({ type: GET_ALL_CONTRIBS_START });
+  return axiosWithAuth()
+    .get(`/api/v1/heatmap/all/${userId}`)
+    .then(res => {
+      dispatch({ type: GET_ALL_CONTRIBS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_ALL_CONTRIBS_FAILURE, payload: err.data.message });
+    });
+};
+
+export const getContributionsCount = userId => dispatch => {
+  dispatch({ type: GET_CONTRIBS_COUNT_START });
+  return axiosWithAuth()
+    .get(`/api/v1/heatmap/count/${userId}`)
+    .then(res => {
+      dispatch({ type: GET_CONTRIBS_COUNT_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_CONTRIBS_COUNT_FAILURE, payload: err.data.message });
+    });
+};
+
+export const updateHeatmap = (changes, userId) => dispatch => {
+  dispatch({ type: UPDATE_HEATMAP_START });
+  return axiosWithAuth()
+    .put(`/api/v1/heatmap/${userId}`, changes)
+    .then(res => {
+      dispatch({ type: UPDATE_HEATMAP_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_HEATMAP_FAILURE, payload: err.data.message });
+    });
+};
+
+export const deleteHeatmap = id => dispatch => {
+  dispatch({ type: DELETE_HEATMAP_START });
+  return axiosWithAuth()
+    .delete(`/api/v1/heatmap/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_HEATMAP_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_HEATMAP_FAILURE, payload: err.data.message });
     });
 };
