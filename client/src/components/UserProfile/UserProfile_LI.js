@@ -6,7 +6,6 @@ import axios from 'axios';
 
 // ========== IMPORTED COMPONENTS ========== //
 import UserProfileTabs from './UserProfile_Tabs.js';
-import Loading from '../Loading.js';
 import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
 
@@ -215,7 +214,7 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {activeUser.id == this.props.match.params.id ? (
+                {activeUser.id === this.props.match.params.id ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>
