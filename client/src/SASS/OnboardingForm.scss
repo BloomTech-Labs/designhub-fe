@@ -12,14 +12,12 @@
   position: fixed;
   width: 100%;
 
-  .alert-container {
-    display: none;
-  }
-
-  form.alert {
-    .alert-container {
+  .stepComponents {
+    .FormStep {
+      // border: 1px solid white;
       display: flex;
-      justify-content: flex-end;
+      flex-direction: column;
+      margin: 0 auto;
       width: 100%;
     }
     input#username {

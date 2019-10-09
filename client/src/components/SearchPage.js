@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Link } from 'react-router-dom';
+import defaultImg from '../ASSETS/default_thumbnail.svg';
+
+import SearchUserCard from './SearchUserCard';
+
+import '../SASS/SearchPage.scss';
+import '../SASS/UserProfile.scss';
 
 class SearchPage extends Component {
   constructor(props) {
@@ -8,36 +15,27 @@ class SearchPage extends Component {
 
   displayUsers = () => {
     return this.props.searchData.users.map((user, index) => {
-      return (
-        <div
-          key={index}
-          style={{
-            color: 'white'
-          }}
-        >
-          <h3 style={{ color: 'white' }}>{user.username}</h3>
-          <p style={{ color: 'white' }}>{user.email}</p>
-          <img
-            src={user.avatar}
-            alt="avatar"
-            style={{ height: '200px', width: '200px' }}
-          />
-          <p style={{ color: 'white', width: '350px' }}>{user.bio}</p>
-        </div>
-      );
+      return <SearchUserCard user={user} key={index} />;
     });
   };
 
   displayProjects = () => {
     return this.props.searchData.projects.map((project, index) => {
       return (
-        <div key={index}>
-          <h3 style={{ color: 'white' }}>{project.name}</h3>
-          <img
-            src={project.mainImg}
-            alt="project"
-            style={{ height: '30%', width: '30%' }}
-          />
+        <div className="project-content" key={index}>
+          <Link to={`/project/${project.id}`}>
+            <>
+              <div className="project-info">
+                <h1>{project.name}</h1>
+              </div>
+              <img
+                src={project.mainImg ? project.mainImg : defaultImg}
+                className="project-thumbnail"
+                alt="test"
+                key={project.id}
+              />
+            </>
+          </Link>
         </div>
       );
     });
@@ -46,40 +44,32 @@ class SearchPage extends Component {
   render() {
     console.log(this.props);
     return (
-      <div>
-        <Tabs style={{ marginTop: '100px' }}>
-          <TabList className="nav-links">
-            <Tab
-              className="links"
-              selectedClassName="active-link"
-              style={{ color: 'white' }}
-            >
-              Users
-            </Tab>
-            <Tab
-              className="links"
-              selectedClassName="active-link"
-              style={{ color: 'white' }}
-            >
-              Projects
-            </Tab>
-          </TabList>
-          <TabPanel
-            className="tabs-container"
-            style={{
-              border: '1px solid white',
-              display: 'flex',
-              justifyContent: 'space-between',
-              padding: '10px',
-              flexWrap: 'wrap'
-            }}
-          >
-            {this.props.searchData.users && this.displayUsers()}
-          </TabPanel>
-          <TabPanel className="tabs-container">
-            {this.props.searchData.projects && this.displayProjects()}
-          </TabPanel>
-        </Tabs>
+      <div className="search-container">
+        <p>
+          results for <span>searchterm</span>
+        </p>
+        <div className="search-tabs-container">
+          <Tabs>
+            <TabList className="nav-links">
+              <Tab className="links" selectedClassName="active-link">
+                Users
+              </Tab>
+              <Tab className="links" selectedClassName="active-link">
+                Projects
+              </Tab>
+            </TabList>
+            <div className="tabs-container">
+              <TabPanel>
+                {this.props.searchData.users && this.displayUsers()}
+              </TabPanel>
+              <TabPanel>
+                <div className="projects-array">
+                  {this.props.searchData.projects && this.displayProjects()}
+                </div>
+              </TabPanel>
+            </div>
+          </Tabs>
+        </div>
       </div>
     );
   }

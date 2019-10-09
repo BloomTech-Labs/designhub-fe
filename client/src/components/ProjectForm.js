@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
@@ -37,6 +37,7 @@ const ProjectForm = ({
     success: false,
     url: '',
     modal: false,
+    deletingImage: null,
     projectPhotos: null
   });
 
@@ -125,40 +126,32 @@ const ProjectForm = ({
   };
 
   const editProject = (changes, id) => {
+    const updateMainImg = (changes, id) => {
+      return axiosWithAuth()
+        .put(`api/v1/projects/${id}`, changes)
+        .then(res => {
+          history.push(`/project/${id}`);
+        })
+        .catch();
+    };
     handleImageUpload(files, id)
       .then(res => {
         if (res) {
           const newChanges = { ...changes, mainImg: res };
-          return axiosWithAuth()
-            .put(`api/v1/projects/${id}`, newChanges)
-            .then(res => {
-              console.log(newChanges);
-              history.push(`/project/${id}`);
-            })
-            .catch();
+          updateMainImg(newChanges, id);
         } else {
           return axiosWithAuth()
             .get(`/api/v1/photo/projects/${id}`)
             .then(res => {
               if (res.data.length === 0) {
                 const newChanges = { ...changes, mainImg: null };
-                return axiosWithAuth()
-                  .put(`api/v1/projects/${id}`, newChanges)
-                  .then(res => {
-                    history.push(`/project/${id}`);
-                  })
-                  .catch();
+                updateMainImg(newChanges, id);
               } else {
                 const newChanges = {
                   ...changes,
                   mainImg: res.data[0].url
                 };
-                return axiosWithAuth()
-                  .put(`api/v1/projects/${id}`, newChanges)
-                  .then(res => {
-                    history.push(`/project/${id}`);
-                  })
-                  .catch(err => console.log(err));
+                updateMainImg(newChanges, id);
               }
             })
             .catch(err => console.log(err));
@@ -180,6 +173,7 @@ const ProjectForm = ({
     return axiosWithAuth()
       .delete(`api/v1/photo/projects/${id}`)
       .then(res => {
+        closeModal();
         getProjectPhotos(project.id);
       })
       .catch(err => console.log(err));
@@ -188,7 +182,8 @@ const ProjectForm = ({
   const closeModal = () => {
     setState({
       ...state,
-      modal: false
+      modal: false,
+      deletingImage: null
     });
   };
 
@@ -213,7 +208,13 @@ const ProjectForm = ({
                 <button onClick={closeModal}>Cancel</button>
                 <button
                   className="delete-button"
-                  onClick={() => deleteProject(project.id)}
+                  onClick={() => {
+                    if (state.deletingImage) {
+                      deletePhoto(state.deletingImage);
+                    } else {
+                      deleteProject(project.id);
+                    }
+                  }}
                 >
                   Delete
                 </button>
@@ -244,7 +245,14 @@ const ProjectForm = ({
                       alt=""
                       src={remove}
                       className="remove"
-                      onClick={() => deletePhoto(photo.id)}
+                      onClick={e => {
+                        setState({
+                          ...state,
+                          deletingImage: photo.id,
+                          modal: true
+                        });
+                      }}
+                      /* onClick={() => deletePhoto(photo.id)} */
                     />
                     <div className="thumb" key={index}>
                       <div style={thumbInner}>
