@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
@@ -9,16 +10,15 @@ import UserProfileLI from './components/UserProfile/UserProfile_LI';
 import Settings from './components/Settings.js';
 import AddProject from './components/AddProject';
 import SearchPage from './components/SearchPage';
-import axios from 'axios';
-import './SASS/DesignHub.scss';
 import EditProject from './components/EditProject';
+
+import './SASS/DesignHub.scss';
 
 class DesignHub extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeUser: this.props.user,
-      users: [],
       search: []
     };
   }
@@ -42,9 +42,6 @@ class DesignHub extends Component {
           searchData={this.state.search}
           getSearch={this.getSearch}
           activeUser={activeUser}
-          darkMode={this.state.darkMode}
-          toggleLightMode={this.toggleLightMode}
-          togglDarkMode={this.togglDarkMode}
         />
         <div className="nav-workspace">
           <div>

@@ -22,27 +22,21 @@ function App({
   initUser
 }) {
   const { isAuthenticated, user, loading } = useAuth0();
-  const [onboarding, setOnboarding] = useState(false);
-  const [ready, setReady] = useState(false);
-  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     if (typeof user === 'object') initUser(user);
-  }, [user, onboarding, history]);
+  }, [user, history]);
 
   return (
     <>
-      {loading ? (
+      {loading || isLoading ? (
         <Loading />
       ) : (
         <>
           {!isAuthenticated && <LandingPage />}
           <div className="App">
-            {console.log('isOnboarding', isOnboarding)}
             {isOnboarding && <OnboardingForm />}
-            {!isOnboarding && isLoggedIn && (
-              <DesignHub setUserData={setUserData} user={userData} />
-            )}
+            {!isOnboarding && isLoggedIn && <DesignHub user={currentUser} />}
           </div>
         </>
       )}
