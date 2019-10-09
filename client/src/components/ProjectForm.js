@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
-import errorIcon from '../ASSETS/error-icon.svg';
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
 
@@ -21,6 +20,7 @@ const ProjectForm = ({
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [titleRef, setTitleRef] = useState(null);
   const [alert, setAlert] = useState(false);
 
   const { user } = useAuth0();
@@ -44,13 +44,13 @@ const ProjectForm = ({
   const { name, description, figma, invision } = state.project;
 
   const handleChanges = e => {
+    setAlert(false);
     setState({
       project: {
         ...state.project,
         [e.target.name]: e.target.value
       }
     });
-    setAlert(false);
   };
 
   const handleSubmit = async e => {
@@ -59,6 +59,7 @@ const ProjectForm = ({
     if (state.project.name.length === 0) {
       setIsLoading(false);
       setAlert(true);
+      titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     } else {
       isEditing
@@ -230,10 +231,6 @@ const ProjectForm = ({
       </header>
       <section className="ProjectForm__body">
         <div className="left-container">
-          {/* <label htmlFor="image-upload" className="label">
-          {isEditing ? 'Add more files' : 'Attach files'}
-        </label> */}
-
           <MultiImageUpload filesArray={{ files, setFiles }} />
 
           {isEditing && (
@@ -252,7 +249,6 @@ const ProjectForm = ({
                           modal: true
                         });
                       }}
-                      /* onClick={() => deletePhoto(photo.id)} */
                     />
                     <div className="thumb" key={index}>
                       <div style={thumbInner}>
@@ -284,23 +280,25 @@ const ProjectForm = ({
         <div className="right-container">
           <form
             encType="multipart/form-data"
-            className={`${alert ? 'alert' : null} project-form-container`}
-            onSubmit={handleSubmit}
+            className="project-form-container"
           >
-            <label htmlFor="name" className="label project-label">
-              Project title{alert && ' (required)'}
-            </label>
-            <div className="alert-container">
-              <img alt="error icon" className="errorIcon" src={errorIcon} />
+            <div className={alert ? 'required alert' : 'required'}>
+              <label htmlFor="name" className="label project-label">
+                Project title
+              </label>
+              <input
+                required
+                autoFocus={true}
+                type="text"
+                value={name}
+                name="name"
+                id="name"
+                placeholder="Enter project title here"
+                onChange={handleChanges}
+                ref={setTitleRef}
+              />
             </div>
-            <input
-              type="text"
-              value={name}
-              name="name"
-              id="name"
-              placeholder="Enter project title here"
-              onChange={handleChanges}
-            />
+
             <label htmlFor="description" className="label">
               Project description
             </label>
@@ -349,6 +347,7 @@ const ProjectForm = ({
               <button
                 className="submit-button"
                 type="submit"
+                onClick={handleSubmit}
                 style={isLoading ? { display: 'none' } : null}
               >
                 {isEditing ? 'Save Changes' : 'Publish'}
@@ -359,6 +358,7 @@ const ProjectForm = ({
                 onClick={() => {
                   history.goBack();
                 }}
+                style={isLoading ? { display: 'none' } : null}
               >
                 Cancel
               </button>
