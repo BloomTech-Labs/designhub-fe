@@ -95,4 +95,30 @@
       color: themed('header');
     }
   }
+
+  .mobile-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .top-bar-container {
+    .nav-content {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: inline-flex;
+      justify-content: space-between;
+      border: 1px solid red;
+      width: 96%;
+      margin: 0 auto;
+
+      .mobile-logo-container {
+        margin-top: 5px;
+        width: auto;
+        margin-left: 20px;
+      }
+    }
+  }
 }

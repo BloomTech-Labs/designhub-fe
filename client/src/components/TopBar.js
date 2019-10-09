@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import SampleLogo from './Icons/SampleLogo.js';
-import MagnifyingGlass from './Icons/MagnifyingGlass.js';
+import menu from '../ASSETS/menu.svg';
 import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
 import sunMode from '../ASSETS/sun-mode.svg';
@@ -47,6 +47,14 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
             )}
           </div>
         </div>
+      </div>
+      <div className="mobile-nav">
+        <div className="mobile-logo-container">
+          <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+            <SampleLogo />
+          </Link>
+        </div>
+        <img src={menu} alt="menu" className="mobile-menu" />
       </div>
     </div>
   );
