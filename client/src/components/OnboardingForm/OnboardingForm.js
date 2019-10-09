@@ -3,14 +3,17 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { useAuth0 } from '../../auth-wrapper.js';
-import Loading from '../Loading.js';
+import { connect } from 'react-redux';
 
+import Loading from '../Loading.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
 
+import { updateUser } from '../../store/actions/usersActions';
+
 import '../../SASS/OnboardingForm.scss';
 
-const OnboardingForm = props => {
+const OnboardingForm = ({ history, updateUser, isLoading }) => {
   const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
   const { user, logout } = useAuth0();
@@ -97,9 +100,11 @@ const OnboardingForm = props => {
       }
       //TODO ADD AUth0ID prop to changes object BEFORE SENDING
       changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
-      await axiosWithAuth().put(`api/v1/users/${id}`, changes);
-      props.history.push(`/profile/${id}/${changes.username}`);
-      props.setOnboarding(false);
+      updateUser(id, changes).then(res => {
+        if (res && !isLoading) {
+          history.push(`/profile/${id}/${changes.username}`);
+        }
+      });
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
@@ -186,4 +191,15 @@ const OnboardingForm = props => {
     );
 };
 
-export default withRouter(OnboardingForm);
+const mapStateToProps = state => {
+  return {
+    isLoading: state.users.isLoading
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { updateUser }
+  )(OnboardingForm)
+);

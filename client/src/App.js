@@ -1,40 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import { useAuth0 } from './auth-wrapper.js';
 import { axiosWithAuth } from './utilities/axiosWithAuth.js';
 
 import DesignHub from './DesignHub.js';
 import LandingPage from './components/LandingPage.js';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
-
-import './App.scss';
 import Loading from './components/Loading.js';
 
-function App(props) {
+import { initUser } from './store/actions/usersActions.js';
+
+import './App.scss';
+
+function App({
+  history,
+  currentUser,
+  isOnboarding,
+  isLoggedIn,
+  isLoading,
+  initUser
+}) {
   const { isAuthenticated, user, loading } = useAuth0();
   const [onboarding, setOnboarding] = useState(false);
   const [ready, setReady] = useState(false);
   const [userData, setUserData] = useState({});
 
   useEffect(() => {
-    const getUser = async () => {
-      try {
-        const res = await axiosWithAuth().post('api/v1/users/', user);
-        const [userFromResponse] = res.data.user;
-        setUserData(userFromResponse);
-        const isOnboarding = userFromResponse.username === null ? true : false;
-        if (isOnboarding) {
-          setOnboarding(isOnboarding);
-        } else {
-          setReady(true);
-        }
-      } catch (err) {
-        console.log('App.js useEffect() ERROR', err);
-      }
-    };
-    if (typeof user === 'object') getUser();
-  }, [user, onboarding, props.history]);
+    if (typeof user === 'object') initUser(user);
+  }, [user, onboarding, history]);
 
   return (
     <>
@@ -44,8 +38,9 @@ function App(props) {
         <>
           {!isAuthenticated && <LandingPage />}
           <div className="App">
-            {onboarding && <OnboardingForm setOnboarding={setOnboarding} />}
-            {!onboarding && ready && (
+            {console.log('isOnboarding', isOnboarding)}
+            {isOnboarding && <OnboardingForm />}
+            {!isOnboarding && isLoggedIn && (
               <DesignHub setUserData={setUserData} user={userData} />
             )}
           </div>
@@ -55,4 +50,18 @@ function App(props) {
   );
 }
 
-export default withRouter(App);
+const mapStateToProps = state => {
+  return {
+    currentUser: state.users.currentUser,
+    isOnboarding: state.users.onboarding,
+    isLoggedIn: state.users.loggedIn,
+    isLoading: state.users.isLoading
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { initUser }
+  )(App)
+);

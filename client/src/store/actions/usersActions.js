@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}`;
 
 export const INIT_USER = 'INIT_USER';
@@ -13,13 +14,12 @@ export const SET_LOGGEDIN = 'SET_LOGGEDIN';
 export const initUser = user => async dispatch => {
   dispatch({ type: SET_LOADING });
   try {
-    const { id } = user;
-    const res = await axios.get(`api/v1/users/${id}`);
-    const [thisUser] = res.data;
-    console.log('usersActions initUser() res.data', thisUser);
+    const res = await axiosWithAuth().post('api/v1/users/', user);
+    const [userFromResponse] = res.data.user;
+    console.log('usersActions initUser() res.data', userFromResponse);
 
-    dispatch({ type: INIT_USER, payload: thisUser });
-    const { username } = thisUser;
+    dispatch({ type: INIT_USER, payload: userFromResponse });
+    const { username } = userFromResponse;
     if (username === null || username === '') {
       dispatch({ type: ONBOARD_START });
     } else {
@@ -37,6 +37,8 @@ export const updateUser = (id, changes) => async dispatch => {
     console.log('usersActions updateUser() res.data', res.data);
     const updates = res.data[0];
     dispatch({ type: UPDATE_USER_SUCCESS, payload: updates });
+    dispatch({ type: SET_LOGGEDIN });
+    return true;
   } catch (err) {
     console.log('usersActions updateUser() ERROR', err);
     dispatch({ type: UPDATE_USER_FAILURE, error: err });

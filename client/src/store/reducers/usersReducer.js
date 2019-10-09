@@ -35,7 +35,8 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: payload,
-        isLoading: false
+        isLoading: false,
+        loggedIn: false
       };
     case SET_LOADING:
       return {
