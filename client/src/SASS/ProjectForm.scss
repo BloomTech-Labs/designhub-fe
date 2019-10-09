@@ -251,6 +251,10 @@
         }
       }
 
+      .required.alert input {
+        margin-bottom: 0;
+      }
+
       .description {
         font-size: 12px;
         margin-bottom: 20px;
@@ -269,32 +273,6 @@
 
       .project-label {
         margin-top: 0px;
-      }
-    }
-
-    .alert-container {
-      display: none;
-    }
-
-    form.alert {
-      .alert-container {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-      }
-      input#name {
-        border: 2px solid $alert;
-        border-radius: 5px;
-      }
-      .errorIcon {
-        width: 20px;
-        position: absolute;
-        margin-left: 5px;
-        margin-top: -5px;
-        transition: all 0.1s ease-in-out;
-        &:hover {
-          transform: scale(1.2);
-        }
       }
     }
   }
