@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
-const Account = ({ activeUser, setUserData }) => {
+import { getSingleUser, updateUser } from '../../store/actions';
+
+const Account = ({ activeUser, getSingleUser, updateUser }) => {
   const [formUser, setFormUser] = useState({
     avatar: activeUser.avatar,
     bio: '',
@@ -60,6 +63,7 @@ const Account = ({ activeUser, setUserData }) => {
   }, [alert, usernameRef, emailRef, firstNameRef, lastNameRef]);
 
   useEffect(() => {
+    // getSingleUser(activeUser.id).then(res => console.log(res));
     getCurrentUserInfo(activeUser.id);
   }, [activeUser]);
 
@@ -99,9 +103,9 @@ const Account = ({ activeUser, setUserData }) => {
     const validForm = await validateForm();
     if (validForm) {
       try {
-        await axiosWithAuth().put(`/api/v1/users/${activeUser.id}`, formUser);
-        setFormSuccess(true);
-        setUserData(formUser);
+        // await axiosWithAuth().put(`/api/v1/users/${activeUser.id}`, formUser);
+        await updateUser(activeUser.id, formUser);
+        await setFormSuccess(true);
       } catch (err) {
         console.error('Account.js handleSubmit() ERROR', err);
       }
@@ -233,4 +237,7 @@ const Account = ({ activeUser, setUserData }) => {
   );
 };
 
-export default Account;
+export default connect(
+  null,
+  { getSingleUser, updateUser }
+)(Account);
