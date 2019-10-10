@@ -8,7 +8,9 @@ import {
   addProject,
   addPhoto,
   createHeatmap,
-  updateProject
+  updateProject,
+  deletePhoto,
+  deleteProject
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
@@ -28,7 +30,9 @@ const ProjectForm = ({
   addProject,
   addPhoto,
   createHeatmap,
-  updateProject
+  updateProject,
+  deletePhoto,
+  deleteProject
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -155,8 +159,7 @@ const ProjectForm = ({
           const newChanges = { ...changes, mainImg: res };
           updateMainImg(newChanges, id);
         } else {
-          return axiosWithAuth()
-            .get(`/api/v1/photo/projects/${id}`)
+          getProjectPhotos(id)
             .then(res => {
               if (res.data.length === 0) {
                 const newChanges = { ...changes, mainImg: null };
@@ -175,18 +178,17 @@ const ProjectForm = ({
       .catch(err => console.log(err));
   };
 
-  const deleteProject = async id => {
+  const handleDeleteProject = async id => {
     try {
-      await axiosWithAuth().delete(`api/v1/projects/${id}`);
+      await deleteProject(id);
       await history.push(`/profile/${project.userId}/${project.username}`);
     } catch (err) {
-      console.log('ProjectForm.js deleteProject ERROR', err);
+      console.log('ProjectForm.js handleDeleteProject ERROR', err);
     }
   };
 
-  const deletePhoto = id => {
-    return axiosWithAuth()
-      .delete(`api/v1/photo/projects/${id}`)
+  const handleDeletePhoto = id => {
+    deletePhoto(id)
       .then(res => {
         closeModal();
         getProjectPhotos(project.id);
@@ -225,9 +227,9 @@ const ProjectForm = ({
                   className="delete-button"
                   onClick={() => {
                     if (state.deletingImage) {
-                      deletePhoto(state.deletingImage);
+                      handleDeletePhoto(state.deletingImage);
                     } else {
-                      deleteProject(project.id);
+                      handleDeleteProject(project.id);
                     }
                   }}
                 >
@@ -387,6 +389,13 @@ const ProjectForm = ({
 export default withRouter(
   connect(
     null,
-    { addProject, addPhoto, createHeatmap, updateProject }
+    {
+      addProject,
+      addPhoto,
+      createHeatmap,
+      updateProject,
+      deletePhoto,
+      deleteProject
+    }
   )(ProjectForm)
 );
