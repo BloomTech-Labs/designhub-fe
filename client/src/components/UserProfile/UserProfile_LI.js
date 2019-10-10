@@ -6,7 +6,6 @@ import axios from 'axios';
 
 // ========== IMPORTED COMPONENTS ========== //
 import UserProfileTabs from './UserProfile_Tabs.js';
-import Loading from '../Loading.js';
 import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
 
@@ -98,6 +97,22 @@ class UserProfile_LI extends Component {
     }
   }
 
+  //sends follow notification to user you followed
+  followNotification = (props, followId) => {
+    const {
+      activeUser: { username, id, avatar },
+      match: { params }
+    } = props;
+    axios.post('http://localhost:8000/api/v1/invite/follow', {
+      activeUsername: username,
+      invitedUserId: params.id,
+      activeUserId: id,
+      followersId: followId,
+      activeUserAvatar: avatar,
+      type: 'follow'
+    });
+  };
+
   followUser = () => {
     const followingObj = {
       followingId: this.state.myId,
@@ -106,7 +121,7 @@ class UserProfile_LI extends Component {
     return axiosWithAuth()
       .post('api/v1/followers', followingObj)
       .then(res => {
-        console.log(res.data);
+        this.followNotification(this.props, res.data.data[0].id);
       })
       .then(() => {
         return axiosWithAuth()
@@ -152,6 +167,7 @@ class UserProfile_LI extends Component {
   };
 
   render() {
+    console.log(this.props);
     const userData = this.state.userData;
     const projects = this.state.projects;
     const activeUser = this.props.activeUser;
@@ -215,7 +231,7 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {activeUser.id == this.props.match.params.id ? (
+                {activeUser.id === this.props.match.params.id ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>

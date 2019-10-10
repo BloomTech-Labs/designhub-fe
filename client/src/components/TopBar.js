@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import SampleLogo from './Icons/SampleLogo.js';
-import MagnifyingGlass from './Icons/MagnifyingGlass.js';
+import menu from '../ASSETS/menu.svg';
+import logo from '../ASSETS/logo.svg';
 import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
 import sunMode from '../ASSETS/sun-mode.svg';
@@ -15,39 +16,118 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
     document.documentElement.classList.toggle('theme-light');
     setLight(!light);
   };
+
+  const [open, mobileNav] = useState(true);
+  const toggleNav = () => {
+    document.documentElement.classList.toggle('mobile-navlinks');
+    mobileNav(!open);
+  };
+
+  const showHideClassName = open
+    ? 'mobile-navlinks display-none'
+    : 'mobile-navlinks display-block';
+
+  const showHideOverlayClassName = open
+    ? 'mobile-overlay display-none'
+    : 'mobile-overlay display-block';
+
   return (
     <div className="top-bar-container">
-      <div className="nav-content">
-        <div className="logo-container">
-          <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
-            <SampleLogo />
-          </Link>
-        </div>
-        <div className="search-bar-container">
-          <div className="magnifying-glass-container">
+      <>
+        <div className="nav-content">
+          <div className="logo-container">
+            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+              <SampleLogo />
+            </Link>
+          </div>
+          <div className="search-bar-container">
+            {/* <div className="magnifying-glass-container">
             <MagnifyingGlass />
-          </div>
+          </div> */}
 
-          <SearchBar searchData={searchData} getSearch={getSearch} />
-        </div>
-        <div className="top-bar-user-info">
-          <p>{activeUser.username}</p>
-          <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
-            <img
-              className="profile-pic-thumb"
-              src={activeUser.avatar}
-              alt="user avatar"
-            />
-          </Link>
-          <div className="dark-mode-switch" onClick={setLightMode}>
-            {light ? (
-              <img alt="sun-mode switch" src={sunMode} />
-            ) : (
-              <DarkModeSwitch />
-            )}
+            <SearchBar searchData={searchData} getSearch={getSearch} />
+          </div>
+          <div className="top-bar-user-info">
+            <p>{activeUser.username}</p>
+            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+              <img
+                className="profile-pic-thumb"
+                src={activeUser.avatar}
+                alt="user avatar"
+              />
+            </Link>
+            <div className="dark-mode-switch" onClick={setLightMode}>
+              {light ? (
+                <img alt="sun-mode switch" src={sunMode} />
+              ) : (
+                <DarkModeSwitch />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+        <div className="mobile-nav">
+          <div className="mobile-logo-container">
+            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+              <img src={logo} className="mobile-logo" alt="logo" />
+            </Link>
+          </div>
+          <img
+            src={menu}
+            alt="menu"
+            className="mobile-menu"
+            onClick={toggleNav}
+          />
+        </div>
+        <div className={showHideClassName}>
+          <div className="mobile-search">
+            <SearchBar searchData={searchData} getSearch={getSearch} />
+          </div>
+          <NavLink
+            to={`/profile/${activeUser.id}/${activeUser.username}`}
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            Profile
+          </NavLink>
+          <NavLink
+            to="/create"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            New Project
+          </NavLink>
+
+          <NavLink
+            to="/explore"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            Explore
+          </NavLink>
+
+          <NavLink
+            to="/onboard"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            Onboard
+          </NavLink>
+
+          <NavLink
+            to="/settings"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            Settings
+          </NavLink>
+        </div>
+        <span className={showHideOverlayClassName} onClick={toggleNav} />
+      </>
     </div>
   );
 };

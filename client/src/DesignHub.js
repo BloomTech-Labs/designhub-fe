@@ -10,7 +10,9 @@ import UserProfileLI from './components/UserProfile/UserProfile_LI';
 import Settings from './components/Settings.js';
 import AddProject from './components/AddProject';
 import SearchPage from './components/SearchPage';
+import Notifications from './components/Notifications';
 import EditProject from './components/EditProject';
+import Explore from './components/Explore/Explore';
 
 import './SASS/DesignHub.scss';
 
@@ -59,6 +61,13 @@ class DesignHub extends Component {
                   <UserProfileLI {...props} activeUser={activeUser} />
                 )}
               />
+              <Route
+                exact
+                path="/notifications/:id/:username"
+                render={props => (
+                  <Notifications {...props} activeUser={activeUser} />
+                )}
+              />
               <PrivateRoute
                 exact
                 path="/project/:id"
@@ -88,6 +97,11 @@ class DesignHub extends Component {
                     getSearch={this.getSearch}
                   />
                 )}
+              />
+              <Route
+                exact
+                path="/explore"
+                render={props => <Explore {...props} activeUser={activeUser} />}
               />
             </Switch>
           </main>
