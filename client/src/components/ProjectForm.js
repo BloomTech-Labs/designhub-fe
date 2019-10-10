@@ -109,7 +109,7 @@ const ProjectForm = ({
             projectId: projectId,
             imageId: data.id
           });
-          const imageUrl = `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
+          const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
 
           return imageUrl;
         } catch (err) {
