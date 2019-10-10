@@ -66,7 +66,7 @@ const Navbar = ({ activeUser }) => {
         </NavLink>
 
         <NavLink to="/onboard" className="links" activeClassName="active-links">
-          Onboard
+          Notifications
         </NavLink>
 
         <NavLink
