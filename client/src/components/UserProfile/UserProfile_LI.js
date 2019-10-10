@@ -98,6 +98,22 @@ class UserProfile_LI extends Component {
     }
   }
 
+  //sends follow notification to user you followed
+  followNotification = (props, followId) => {
+    const {
+      activeUser: { username, id, avatar },
+      match: { params }
+    } = props;
+    axios.post('http://localhost:8000/api/v1/invite/follow', {
+      activeUsername: username,
+      invitedUserId: params.id,
+      activeUserId: id,
+      followersId: followId,
+      activeUserAvatar: avatar,
+      type: 'follow'
+    });
+  };
+
   followUser = () => {
     const followingObj = {
       followingId: this.state.myId,
@@ -106,7 +122,7 @@ class UserProfile_LI extends Component {
     return axiosWithAuth()
       .post('api/v1/followers', followingObj)
       .then(res => {
-        console.log(res.data);
+        this.followNotification(this.props, res.data.data[0].id);
       })
       .then(() => {
         return axiosWithAuth()
@@ -152,6 +168,7 @@ class UserProfile_LI extends Component {
   };
 
   render() {
+    console.log(this.props);
     const userData = this.state.userData;
     const projects = this.state.projects;
     const activeUser = this.props.activeUser;
