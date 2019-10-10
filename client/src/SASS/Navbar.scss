@@ -61,7 +61,7 @@ nav {
 
   .text-links {
     display: flex;
-    width: 0vw;
+    width: 0rem;
     flex-direction: column;
     align-items: left;
     justify-content: space-around;
@@ -70,6 +70,7 @@ nav {
     overflow: hidden;
     margin-left: -10px;
     transition: all 0.2s ease-in-out;
+
     @include themify($themes) {
       background: themed('bg2');
     }
@@ -96,11 +97,11 @@ nav {
 
   .icon-links:hover ~ .text-links {
     transition: all 0.2s ease-in-out;
-    width: 9vw;
+    width: 10rem;
   }
 
   .text-links:hover {
-    width: 9vw;
+    width: 10rem;
   }
 
   .links:hover {
