@@ -13,6 +13,7 @@ import Notifications from './components/Notifications';
 import axios from 'axios';
 import './SASS/DesignHub.scss';
 import EditProject from './components/EditProject';
+import Explore from './components/Explore/Explore';
 
 class DesignHub extends Component {
   constructor(props) {
@@ -103,6 +104,11 @@ class DesignHub extends Component {
                     getSearch={this.getSearch}
                   />
                 )}
+              />
+              <Route
+                exact
+                path="/explore"
+                render={props => <Explore {...props} activeUser={activeUser} />}
               />
             </Switch>
           </main>
