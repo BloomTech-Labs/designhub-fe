@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+
+import {
+  addProject,
+  addPhoto,
+  createHeatmap,
+  updateProject
+} from '../store/actions';
+
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
-
-import '../SASS/ProjectForm.scss';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
+
+import '../SASS/ProjectForm.scss';
 
 const ProjectForm = ({
   isEditing,
@@ -17,7 +24,11 @@ const ProjectForm = ({
   projectPhotos,
   history,
   getProjectPhotos,
-  user
+  user,
+  addProject,
+  addPhoto,
+  createHeatmap,
+  updateProject
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,13 +74,13 @@ const ProjectForm = ({
     } else {
       isEditing
         ? editProject(state.project, project.id)
-        : addProject(state.project);
+        : createProject(state.project);
     }
   };
 
   const handleImageUpload = async (file, projectId, projectTitle) => {
     if (files.length > 0) {
-      let requestPromises = files.map(async (file, index) => {
+      let requestPromises = files.map(async file => {
         try {
           const {
             data: { key, url }
@@ -83,19 +94,20 @@ const ProjectForm = ({
             }
           });
 
-          const { data } = await axiosWithAuth().post(`api/v1/photo/projects`, {
+          const { data } = await addPhoto({
             projectId: projectId,
             url: key
           });
 
-          await axiosWithAuth().post(`api/v1/heatmap`, {
+          await createHeatmap({
             userId: state.project.userId,
             contribution: `Posted one photo to ${projectTitle}`,
             projectId: projectId,
             imageId: data.id
           });
+          const imageUrl = `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
 
-          return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
+          return imageUrl;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         }
@@ -106,20 +118,24 @@ const ProjectForm = ({
     }
   };
 
-  const addProject = async project => {
+  const createProject = async project => {
     try {
       const {
         data: { id },
         data
-      } = await axiosWithAuth().post(`api/v1/projects`, project);
-      const something = await handleImageUpload(files, id, data.data[0].name);
+      } = await addProject(project);
+      const uploadedImage = await handleImageUpload(
+        files,
+        id,
+        data.data[0].name
+      );
       const newProject = {
         ...project,
-        mainImg: something
+        mainImg: uploadedImage
       };
-      await axiosWithAuth().put(`api/v1/projects/${id}`, newProject);
+      await updateProject(id, newProject);
       await history.push(`/project/${id}`);
-      return something;
+      return uploadedImage;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
@@ -127,8 +143,7 @@ const ProjectForm = ({
 
   const editProject = (changes, id) => {
     const updateMainImg = (changes, id) => {
-      return axiosWithAuth()
-        .put(`api/v1/projects/${id}`, changes)
+      updateProject(id, changes)
         .then(res => {
           history.push(`/project/${id}`);
         })
@@ -347,7 +362,7 @@ const ProjectForm = ({
                 className="submit-button"
                 type="submit"
                 onClick={handleSubmit}
-                style={isLoading ? { display: 'none' } : null}
+                disabled={isLoading}
               >
                 {isEditing ? 'Save Changes' : 'Publish'}
               </button>
@@ -357,7 +372,7 @@ const ProjectForm = ({
                 onClick={() => {
                   history.goBack();
                 }}
-                style={isLoading ? { display: 'none' } : null}
+                disabled={isLoading}
               >
                 Cancel
               </button>
@@ -369,4 +384,9 @@ const ProjectForm = ({
   );
 };
 
-export default withRouter(ProjectForm);
+export default withRouter(
+  connect(
+    null,
+    { addProject, addPhoto, createHeatmap, updateProject }
+  )(ProjectForm)
+);

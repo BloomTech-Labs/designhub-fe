@@ -282,6 +282,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    button {
+      &:disabled {
+        background: grey;
+        cursor: default;
+      }
+    }
 
     .submit-button {
       @include primary-btn;

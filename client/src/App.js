@@ -26,7 +26,7 @@ function App({
   useEffect(() => {
     if (typeof user === 'object') initUser(user);
   }, [user, history]);
-
+  console.log('process.env!!!!!!!!!!!!!!', process.env);
   return (
     <>
       {loading || isLoading ? (

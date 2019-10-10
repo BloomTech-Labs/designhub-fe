@@ -179,6 +179,7 @@ export const addProject = project => dispatch => {
     .post('/api/v1/projects', project)
     .then(res => {
       dispatch({ type: ADD_PROJECT_SUCCESS, payload: res.data });
+      return res;
     })
     .catch(err => {
       dispatch({ type: ADD_PROJECT_FAILURE, error: err });
@@ -203,9 +204,11 @@ export const updateProject = (id, changes) => dispatch => {
     .put(`/api/v1/projects/${id}`, changes)
     .then(res => {
       dispatch({ type: UPDATE_PROJECT_SUCCESS, payload: res.data });
+      return true;
     })
     .catch(err => {
       dispatch({ type: UPDATE_PROJECT_FAILURE, error: err });
+      return false;
     });
 };
 
@@ -360,6 +363,7 @@ export const addPhoto = photo => dispatch => {
     .post('/api/v1/photo/projects', photo)
     .then(res => {
       dispatch({ type: ADD_PROJECT_PHOTO_SUCCESS });
+      return res;
     })
     .catch(err => {
       dispatch({ type: ADD_PROJECT_PHOTO_FAILURE, payload: err.data });

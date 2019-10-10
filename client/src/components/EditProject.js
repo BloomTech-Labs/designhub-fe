@@ -46,6 +46,7 @@ class EditProject extends Component {
     if (this.state.project && this.state.projectPhotos) {
       return (
         <ProjectForm
+          user={this.props.activeUser}
           isEditing={true}
           project={this.state.project}
           projectPhotos={this.state.projectPhotos}
