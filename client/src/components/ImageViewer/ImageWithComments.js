@@ -156,7 +156,7 @@ export class ImageWithComments extends React.Component {
     activeUserAvatar,
     type
   ) => {
-    axios.post('http://localhost:8000/api/v1/invite/comments', {
+    axiosWithAuth().post('api/v1/invite/comments', {
       activeUsername: username,
       commentText: commentText,
       projectId: projectId,

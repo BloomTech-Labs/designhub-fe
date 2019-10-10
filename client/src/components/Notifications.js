@@ -12,7 +12,21 @@ const Notifications = props => {
         const { data } = await axiosWithAuth().get(`api/v1/invite/${id}`);
         setState(data);
       };
+
       getNotifications(id);
+      //   const turnToRead = async () => {
+      //     if (state.unReadNotifications) {
+      //       return await Promise.all(
+      //         state.unReadNotifications.map(async i => {
+      //           console.log('ran');
+      //           await axiosWithAuth().put(`api/v1/invite/${i.id}`, {
+      //             unread: false
+      //           });
+      //         })
+      //       );
+      //     }
+      //   };
+      //   setTimeout(() => turnToRead(), 100);
     } catch (err) {
       console.error(err);
     }
@@ -23,6 +37,7 @@ const Notifications = props => {
     if (item.type === 'comment') {
       return (
         <div
+          key={item.id}
           style={{
             marginBotton: '20px',
             marginTop: '20px',
@@ -51,6 +66,7 @@ const Notifications = props => {
     } else if (item.type === 'follow') {
       return (
         <div
+          key={item.id}
           style={{
             marginBotton: '20px',
             marginTop: '20px',
@@ -85,6 +101,7 @@ const Notifications = props => {
   return (
     <div>
       {state.unReadNotifications && renderUnread(state.unReadNotifications)}
+      {state.readNotifications && renderRead(state.readNotifications)}
     </div>
   );
 };
