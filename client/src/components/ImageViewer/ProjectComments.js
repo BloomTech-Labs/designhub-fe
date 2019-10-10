@@ -69,12 +69,26 @@ const ProjectComments = ({
     };
     // console.log('ProjectComments.js handleSubmit() thisCOmment', thisComment);
 
+    await this.postCommentNotification(
+      activeUser.username,
+      newComment.text,
+      thisProject.id,
+      thisProject.userId,
+      activeUser.id,
+      thisProject.mainImgUrl,
+      newComment.id,
+      activeUser.avatar,
+      'comment'
+    );
+
     try {
       const res = await axiosWithAuth().post(
         `api/v1/comments/project`,
         thisComment
       );
       const newComment = res.data.data[0];
+
+      await postCommentNotification();
 
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = activeUser.avatar;
