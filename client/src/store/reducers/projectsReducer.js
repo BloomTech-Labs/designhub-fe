@@ -59,7 +59,7 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        singleProject: action.payload[0]
+        singleProject: action.payload
       };
     case GET_SINGLE_PROJECT_FAILURE:
       return {

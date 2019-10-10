@@ -191,7 +191,7 @@ export const getSingleProject = id => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/projects/${id}`)
     .then(res => {
-      dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data });
+      dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data[0] });
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_PROJECT_FAILURE, error: err });
