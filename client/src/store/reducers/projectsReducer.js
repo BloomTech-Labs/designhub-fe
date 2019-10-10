@@ -5,6 +5,9 @@ import {
   GET_SINGLE_PROJECT_START,
   GET_SINGLE_PROJECT_SUCCESS,
   GET_SINGLE_PROJECT_FAILURE,
+  GET_USERS_PROJECTS_START,
+  GET_USERS_PROJECTS_SUCCESS,
+  GET_USERS_PROJECTS_FAILURE,
   ADD_PROJECT_START,
   ADD_PROJECT_SUCCESS,
   ADD_PROJECT_FAILURE,
@@ -18,9 +21,9 @@ import {
 
 const initialState = {
   error: null,
-  message: null,
   allProjects: [],
   singleProject: null,
+  usersProjects: null,
   isLoading: false
 };
 
@@ -62,6 +65,24 @@ export const projectsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+        isLoading: false
+      };
+    case GET_USERS_PROJECTS_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_USERS_PROJECTS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false
+      };
+    case GET_USERS_PROJECTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
         isLoading: false
       };
     case ADD_PROJECT_START:
