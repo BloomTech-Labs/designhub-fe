@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-
+import axios from 'axios';
 // import moment from 'moment';
 import { useWindowDimensions } from './useWindowDimensions.js';
 import SendIcon from '../Icons/SendIcon';
@@ -43,7 +43,7 @@ const ProjectComments = ({
     activeUserAvatar,
     type
   ) => {
-    axiosWithAuth().post('http://localhost:8000/api/v1/invite/comments', {
+    axios.post('http://localhost:8000/api/v1/invite/comments', {
       activeUsername: username,
       commentText: commentText,
       projectId: projectId,
@@ -75,7 +75,7 @@ const ProjectComments = ({
         thisComment
       );
       const newComment = res.data.data[0];
-      console.log('HHHHHHH', activeUser, thisProject, newComment);
+
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = activeUser.avatar;
       const updateComments = [...comments, newComment];
