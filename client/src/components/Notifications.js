@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
+import moment from 'moment';
 
 const Notifications = props => {
   const [state, setState] = useState([]);
@@ -17,14 +18,30 @@ const Notifications = props => {
     }
   }, []);
 
-  const renderBasedOnType = item => {};
+  const renderBasedOnType = item => {
+    if (item.type === 'comment') {
+      return (
+        <div>
+          {item.unRead === true && <h2>UNREAD</h2>}
+          <img src={item.activeUserAvatar} />
+          <p>
+            <span>{item.activeUsername} commented</span>
+            {item.commentText}
+          </p>
+          <p>{moment(item.created_at).fromNow()} </p>
+          <img src={item.mainImgUrl} />
+        </div>
+      );
+    } else if (item.type === 'follow') {
+    }
+  };
 
   const renderUnread = array => {};
 
   const renderRead = array => {};
 
   console.log(state);
-  return <div>{JSON.stringify(state)}</div>;
+  return <div>{'notifications'}</div>;
 };
 
 export default Notifications;
