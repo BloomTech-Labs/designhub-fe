@@ -29,6 +29,8 @@ const ProjectComments = ({
   //local state for form input
   const [newComment, setNewComment] = useState('');
 
+  //function for sending comment notifications
+
   //click submit
   const handleSubmit = async e => {
     e.preventDefault();
@@ -48,7 +50,7 @@ const ProjectComments = ({
         thisComment
       );
       const newComment = res.data.data[0];
-
+      console.log('HHHHHHH', activeUser, thisProject, newComment);
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = activeUser.avatar;
       const updateComments = [...comments, newComment];

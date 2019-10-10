@@ -1,6 +1,7 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
+import axios from 'axios';
 
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
@@ -26,6 +27,7 @@ export class ImageWithComments extends React.Component {
 
   render() {
     const { id, url } = this.props.activeImg;
+
     const { hidden, comments, tempComments } = this.state;
     // console.log('ImageWithComments.js render() comments', comments);
     let activeComments = comments.filter(c => c.imageId === id);
@@ -143,6 +145,30 @@ export class ImageWithComments extends React.Component {
     this.makeComment(id, x, y);
   };
 
+  postCommentNotification = async (
+    username,
+    commentText,
+    projectId,
+    invitedUserId,
+    activeUserId,
+    mainImgUrl,
+    commentsId,
+    activeUserAvatar,
+    type
+  ) => {
+    axios.post('http://localhost:8000/api/v1/invite/comments', {
+      activeUsername: username,
+      commentText: commentText,
+      projectId: projectId,
+      invitedUserId: invitedUserId,
+      activeUserId: activeUserId,
+      mainImgUrl: mainImgUrl,
+      commentsId: commentsId,
+      activeUserAvatar: activeUserAvatar,
+      type: type
+    });
+  };
+
   handleSubmit = async (e, c) => {
     e.preventDefault();
     const { comments } = this.state;
@@ -159,6 +185,7 @@ export class ImageWithComments extends React.Component {
         thisComment
       );
       const newComment = res.data.data[0];
+
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = this.props.activeUser.avatar;
       const updateComments = [...comments, newComment];
@@ -169,6 +196,18 @@ export class ImageWithComments extends React.Component {
         tempComments: [],
         comments: updateComments
       });
+
+      await this.postCommentNotification(
+        this.props.activeUser.username,
+        newComment.text,
+        this.props.thisProject.id,
+        this.props.thisProject.userId,
+        this.props.activeUser.id,
+        this.props.activeImg.url,
+        newComment.id,
+        this.props.activeUser.avatar,
+        'comment'
+      );
     } catch (err) {
       console.log('ImageWithComments.js handleSubmit() ERROR', err);
     }
