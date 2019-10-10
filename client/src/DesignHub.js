@@ -62,6 +62,13 @@ class DesignHub extends Component {
                   <UserProfileLI {...props} activeUser={activeUser} />
                 )}
               />
+              <Route
+                exact
+                path="/notifications/:id/:username"
+                render={props => (
+                  <UserProfileLI {...props} activeUser={activeUser} />
+                )}
+              />
               <PrivateRoute
                 exact
                 path="/project/:id"

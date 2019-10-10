@@ -65,7 +65,11 @@ const Navbar = ({ activeUser }) => {
           Explore
         </NavLink>
 
-        <NavLink to="/onboard" className="links" activeClassName="active-links">
+        <NavLink
+          to={`/notifications/${activeUser.id}/${activeUser.username}`}
+          className="links"
+          activeClassName="active-links"
+        >
           Notifications
         </NavLink>
 
