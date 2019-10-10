@@ -16,14 +16,13 @@ const ProjectForm = ({
   project,
   projectPhotos,
   history,
-  getProjectPhotos
+  getProjectPhotos,
+  user
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [alert, setAlert] = useState(false);
-
-  const { user } = useAuth0();
 
   const [state, setState] = useState({
     project: {

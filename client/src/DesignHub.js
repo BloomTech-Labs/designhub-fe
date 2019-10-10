@@ -73,11 +73,19 @@ class DesignHub extends Component {
                 path="/project/:id"
                 render={props => <Project {...props} activeUser={activeUser} />}
               />
-              <Route exact path="/create" component={AddProject} />
+              <Route
+                exact
+                path="/create"
+                render={props => (
+                  <AddProject {...props} activeUser={activeUser} />
+                )}
+              />
               <Route
                 exact
                 path="/project/:id/edit"
-                render={props => <EditProject {...props} />}
+                render={props => (
+                  <EditProject {...props} activeUser={activeUser} />
+                )}
               />
               <Route
                 exact
