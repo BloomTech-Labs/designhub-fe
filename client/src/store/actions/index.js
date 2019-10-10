@@ -339,6 +339,7 @@ export const getProjectPhotos = projectId => dispatch => {
     .get(`/api/v1/photo/projects/${projectId}`)
     .then(res => {
       dispatch({ type: GET_PROJECT_PHOTOS_SUCCESS, payload: res.data });
+      return res;
     })
     .catch(err => {
       dispatch({ type: GET_PROJECT_PHOTOS_FAILURE, payload: err.data });
