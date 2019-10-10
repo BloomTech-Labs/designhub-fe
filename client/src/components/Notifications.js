@@ -77,7 +77,9 @@ const Notifications = props => {
     return array.map(i => renderBasedOnType(i));
   };
 
-  const renderRead = array => {};
+  const renderRead = array => {
+    return array.map(i => renderBasedOnType(i));
+  };
 
   console.log(state);
   return (
