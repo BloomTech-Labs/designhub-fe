@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
+import axios from 'axios';
 // import moment from 'moment';
 import { useWindowDimensions } from './useWindowDimensions.js';
 import SendIcon from '../Icons/SendIcon';
@@ -29,6 +30,32 @@ const ProjectComments = ({
   //local state for form input
   const [newComment, setNewComment] = useState('');
 
+  //function for sending comment notifications
+
+  const postCommentNotification = async (
+    username,
+    commentText,
+    projectId,
+    invitedUserId,
+    activeUserId,
+    mainImgUrl,
+    commentsId,
+    activeUserAvatar,
+    type
+  ) => {
+    axiosWithAuth().post('api/v1/invite/comments', {
+      activeUsername: username,
+      commentText: commentText,
+      projectId: projectId,
+      invitedUserId: invitedUserId,
+      activeUserId: activeUserId,
+      mainImgUrl: mainImgUrl,
+      commentsId: commentsId,
+      activeUserAvatar: activeUserAvatar,
+      type: type
+    });
+  };
+
   //click submit
   const handleSubmit = async e => {
     e.preventDefault();
@@ -48,6 +75,18 @@ const ProjectComments = ({
         thisComment
       );
       const newComment = res.data.data[0];
+
+      await postCommentNotification(
+        activeUser.username,
+        newComment.text,
+        thisProject.id,
+        thisProject.userId,
+        activeUser.id,
+        thisProject.mainImg,
+        newComment.id,
+        activeUser.avatar,
+        'comment'
+      );
 
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = activeUser.avatar;
