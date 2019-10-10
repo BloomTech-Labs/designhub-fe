@@ -2,6 +2,7 @@
 @import './mixins';
 
 .OnboardingForm {
+  // border: 1px solid cyan;
   align-items: center;
   background: $almost-black;
   color: $white;
@@ -20,37 +21,15 @@
       margin: 0 auto;
       width: 100%;
     }
-    input#username {
-      outline: 2px solid $alert;
-    }
-
-    .errorIcon {
-      margin-left: 9px;
-      margin-top: -9px;
-      position: absolute;
-      transition: all 0.1s ease-in-out;
-      width: 20px;
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-  }
-
-  .stepComponents {
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    width: 100%;
-
     header {
       h1 {
-        font-size: 32px;
+        font-size: 36px;
         line-height: 42px;
         letter-spacing: 0.11em;
       }
 
       h2 {
-        font-size: 16px;
+        font-size: 24px;
         line-height: 28px;
         letter-spacing: 0.11em;
         margin-top: 10px;
@@ -67,12 +46,8 @@
   }
 
   form {
+    // border: 1px solid red;
     @include onboard-form;
-    width: 512px;
-
-    @media (max-width: 625px) {
-      width: 90%;
-    }
 
     .buttons {
       display: grid;
@@ -94,13 +69,15 @@
     }
 
     .avatar-upload-container {
+      // border: 1px solid white;
       align-items: center;
       display: flex;
       justify-content: center;
-      margin-top: 2.5rem;
+      margin-top: 20px;
     }
 
     .dropzone-container {
+      // border: 1px solid red;
       display: flex;
       justify-content: flex-end;
       width: 100%;
