@@ -20,7 +20,6 @@ import {
 
 const initialState = {
   error: null,
-  message: null,
   currentUser: null,
   singleUser: null,
   allUsers: [],
