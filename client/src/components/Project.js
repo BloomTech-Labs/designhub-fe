@@ -15,7 +15,6 @@ import ImageViewer from './ImageViewer/ImageViewer.js';
 
 import '../SASS/Project.scss';
 import Loading from './Loading';
-// import Comments from './Comments';
 
 class Projects extends Component {
   constructor(props) {
@@ -67,7 +66,6 @@ class Projects extends Component {
     }
     const activeUser = this.props.activeUser;
     const thisProject = this.state.projectInfo;
-    const comments = this.state.comments;
 
     return (
       <div className="projects-container">

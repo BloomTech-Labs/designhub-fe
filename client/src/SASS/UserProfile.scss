@@ -160,7 +160,7 @@
 
         .edit-profile-btn {
           @include edit-profile-btn;
-          background-color: $dark-grey;
+          background: $almost-black;
         }
       }
     }
@@ -279,7 +279,7 @@
         .project-info {
           position: absolute;
           bottom: 0;
-          width: 103%;
+          width: 104%;
           color: $white;
           text-decoration: none;
           background: $blue;
