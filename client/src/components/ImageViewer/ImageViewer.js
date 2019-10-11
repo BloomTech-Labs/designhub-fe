@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import '../../SASS/ImageViewer.scss';
+
 import ImageWithComments from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../ASSETS/default_thumbnail.svg';
-import { axiosWithAuth } from '../../utilities/axiosWithAuth';
-import axios from 'axios';
 import Loading from '../Loading';
+
+import '../../SASS/ImageViewer.scss';
 
 class ImageViewer extends Component {
   constructor(props) {

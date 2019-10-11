@@ -89,7 +89,7 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        singleUser: action.payload.data[0]
+        singleUser: action.payload
       };
     case GET_SINGLE_USER_FAILURE:
       return {
