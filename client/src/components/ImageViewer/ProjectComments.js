@@ -76,17 +76,19 @@ const ProjectComments = ({
       );
       const newComment = res.data.data[0];
 
-      await postCommentNotification(
-        activeUser.username,
-        newComment.text,
-        thisProject.id,
-        thisProject.userId,
-        activeUser.id,
-        thisProject.mainImg,
-        newComment.id,
-        activeUser.avatar,
-        'comment'
-      );
+      if (thisProject.id !== activeUser.id) {
+        await postCommentNotification(
+          activeUser.username,
+          newComment.text,
+          thisProject.id,
+          thisProject.userId,
+          activeUser.id,
+          thisProject.mainImg,
+          newComment.id,
+          activeUser.avatar,
+          'comment'
+        );
+      }
 
       //glue the avatar back on and insert into local state so we don't have to reload the component
       newComment.userAvatar = activeUser.avatar;
