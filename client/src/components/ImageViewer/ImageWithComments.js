@@ -29,7 +29,7 @@ export class ImageWithComments extends React.Component {
     const { id, url } = this.props.activeImg;
 
     const { hidden, comments, tempComments } = this.state;
-    // console.log('ImageWithComments.js render() comments', comments);
+
     let activeComments = comments.filter(c => c.imageId === id);
     console.log('ImageWithComments.js render() activeComments', activeComments);
     let activeTemp = tempComments.filter(c => c.imageId === id);

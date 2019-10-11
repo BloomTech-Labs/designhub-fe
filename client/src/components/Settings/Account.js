@@ -63,7 +63,6 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
   }, [alert, usernameRef, emailRef, firstNameRef, lastNameRef]);
 
   useEffect(() => {
-    // getSingleUser(activeUser.id).then(res => console.log(res));
     getCurrentUserInfo(activeUser.id);
   }, [activeUser]);
 

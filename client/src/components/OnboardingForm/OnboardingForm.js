@@ -117,7 +117,6 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
       } = await axiosWithAuth().post(`api/v1/photo/projects/signed`, {
         id: user.sub
       });
-      // console.log('OnboardingForm.js handleImageUpload() key, url', key, url);
 
       await axios.put(url, file[0], {
         headers: {
@@ -133,7 +132,7 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     }
   };
 
-  if (loading) return <Loading />;
+  if (loading || isLoading) return <Loading />;
   else
     return (
       <>
