@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+import { connect } from 'react-redux';
+import { getProjectPhotos, getSingleProject } from '../store/actions';
 
 import ProjectForm from './ProjectForm';
 import Loading from './Loading.js';
@@ -7,49 +9,23 @@ import Loading from './Loading.js';
 class EditProject extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      project: null,
-      projectPhotos: null
-    };
   }
 
   componentDidMount() {
-    this.fetch();
-  }
-
-  getProjectPhotos = id => {
-    return axiosWithAuth()
-      .get(`api/v1/photo/projects/${id}`)
-      .then(res => {
-        this.setState({ ...this.state, projectPhotos: res.data });
-        return true;
-      })
-      .catch(err => console.log(err));
-  };
-
-  fetch() {
     const { id } = this.props.match.params;
-
-    return axiosWithAuth()
-      .get(`api/v1/projects/${id}`)
-      .then(res => {
-        this.setState({
-          ...this.state,
-          project: res.data[0]
-        });
-        this.getProjectPhotos(res.data[0].id);
-      })
-      .catch(err => console.log(err));
+    this.props.getSingleProject(id);
+    this.props.getProjectPhotos(id);
   }
 
   render() {
-    if (this.state.project && this.state.projectPhotos) {
+    if (this.props.project && this.props.projectPhotos) {
       return (
         <ProjectForm
+          user={this.props.activeUser}
           isEditing={true}
-          project={this.state.project}
-          projectPhotos={this.state.projectPhotos}
-          getProjectPhotos={this.getProjectPhotos}
+          project={this.props.project}
+          projectPhotos={this.props.projectPhotos}
+          getProjectPhotos={this.props.getProjectPhotos}
         />
       );
     } else {
@@ -58,4 +34,14 @@ class EditProject extends Component {
   }
 }
 
-export default EditProject;
+const mapStateToProps = state => {
+  return {
+    project: state.projects.singleProject,
+    projectPhotos: state.photos.projectPhotos
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getProjectPhotos, getSingleProject }
+)(EditProject);

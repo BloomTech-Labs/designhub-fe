@@ -59,7 +59,7 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: false,
-        singleProject: action.payload[0]
+        singleProject: action.payload
       };
     case GET_SINGLE_PROJECT_FAILURE:
       return {
@@ -77,7 +77,8 @@ export const projectsReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        isLoading: false
+        isLoading: false,
+        usersProjects: action.payload
       };
     case GET_USERS_PROJECTS_FAILURE:
       return {

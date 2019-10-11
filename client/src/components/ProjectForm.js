@@ -1,29 +1,43 @@
 import React, { useState } from 'react';
-import { useAuth0 } from '../auth-wrapper.js';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-
+import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+
+import {
+  addProject,
+  addPhoto,
+  createHeatmap,
+  updateProject,
+  deletePhoto,
+  deleteProject
+} from '../store/actions';
+
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
-
-import '../SASS/ProjectForm.scss';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
+
+import '../SASS/ProjectForm.scss';
 
 const ProjectForm = ({
   isEditing,
   project,
   projectPhotos,
   history,
-  getProjectPhotos
+  getProjectPhotos,
+  user,
+  addProject,
+  addPhoto,
+  createHeatmap,
+  updateProject,
+  deletePhoto,
+  deleteProject
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [alert, setAlert] = useState(false);
-
-  const { user } = useAuth0();
 
   const [state, setState] = useState({
     project: {
@@ -64,13 +78,13 @@ const ProjectForm = ({
     } else {
       isEditing
         ? editProject(state.project, project.id)
-        : addProject(state.project);
+        : createProject(state.project);
     }
   };
 
   const handleImageUpload = async (file, projectId, projectTitle) => {
     if (files.length > 0) {
-      let requestPromises = files.map(async (file, index) => {
+      let requestPromises = files.map(async file => {
         try {
           const {
             data: { key, url }
@@ -84,19 +98,20 @@ const ProjectForm = ({
             }
           });
 
-          const { data } = await axiosWithAuth().post(`api/v1/photo/projects`, {
+          const { data } = await addPhoto({
             projectId: projectId,
             url: key
           });
 
-          await axiosWithAuth().post(`api/v1/heatmap`, {
+          await createHeatmap({
             userId: state.project.userId,
             contribution: `Posted one photo to ${projectTitle}`,
             projectId: projectId,
             imageId: data.id
           });
+          const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
 
-          return `http://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
+          return imageUrl;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         }
@@ -107,20 +122,24 @@ const ProjectForm = ({
     }
   };
 
-  const addProject = async project => {
+  const createProject = async project => {
     try {
       const {
         data: { id },
         data
-      } = await axiosWithAuth().post(`api/v1/projects`, project);
-      const something = await handleImageUpload(files, id, data.data[0].name);
+      } = await addProject(project);
+      const uploadedImage = await handleImageUpload(
+        files,
+        id,
+        data.data[0].name
+      );
       const newProject = {
         ...project,
-        mainImg: something
+        mainImg: uploadedImage
       };
-      await axiosWithAuth().put(`api/v1/projects/${id}`, newProject);
+      await updateProject(id, newProject);
       await history.push(`/project/${id}`);
-      return something;
+      return uploadedImage;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
@@ -128,8 +147,7 @@ const ProjectForm = ({
 
   const editProject = (changes, id) => {
     const updateMainImg = (changes, id) => {
-      return axiosWithAuth()
-        .put(`api/v1/projects/${id}`, changes)
+      updateProject(id, changes)
         .then(res => {
           history.push(`/project/${id}`);
         })
@@ -141,8 +159,7 @@ const ProjectForm = ({
           const newChanges = { ...changes, mainImg: res };
           updateMainImg(newChanges, id);
         } else {
-          return axiosWithAuth()
-            .get(`/api/v1/photo/projects/${id}`)
+          getProjectPhotos(id)
             .then(res => {
               if (res.data.length === 0) {
                 const newChanges = { ...changes, mainImg: null };
@@ -161,18 +178,17 @@ const ProjectForm = ({
       .catch(err => console.log(err));
   };
 
-  const deleteProject = async id => {
+  const handleDeleteProject = async id => {
     try {
-      await axiosWithAuth().delete(`api/v1/projects/${id}`);
+      await deleteProject(id);
       await history.push(`/profile/${project.userId}/${project.username}`);
     } catch (err) {
-      console.log('ProjectForm.js deleteProject ERROR', err);
+      console.log('ProjectForm.js handleDeleteProject ERROR', err);
     }
   };
 
-  const deletePhoto = id => {
-    return axiosWithAuth()
-      .delete(`api/v1/photo/projects/${id}`)
+  const handleDeletePhoto = id => {
+    deletePhoto(id)
       .then(res => {
         closeModal();
         getProjectPhotos(project.id);
@@ -211,9 +227,9 @@ const ProjectForm = ({
                   className="delete-button"
                   onClick={() => {
                     if (state.deletingImage) {
-                      deletePhoto(state.deletingImage);
+                      handleDeletePhoto(state.deletingImage);
                     } else {
-                      deleteProject(project.id);
+                      handleDeleteProject(project.id);
                     }
                   }}
                 >
@@ -348,7 +364,7 @@ const ProjectForm = ({
                 className="submit-button"
                 type="submit"
                 onClick={handleSubmit}
-                style={isLoading ? { display: 'none' } : null}
+                disabled={isLoading}
               >
                 {isEditing ? 'Save Changes' : 'Publish'}
               </button>
@@ -358,7 +374,7 @@ const ProjectForm = ({
                 onClick={() => {
                   history.goBack();
                 }}
-                style={isLoading ? { display: 'none' } : null}
+                disabled={isLoading}
               >
                 Cancel
               </button>
@@ -370,4 +386,16 @@ const ProjectForm = ({
   );
 };
 
-export default withRouter(ProjectForm);
+export default withRouter(
+  connect(
+    null,
+    {
+      addProject,
+      addPhoto,
+      createHeatmap,
+      updateProject,
+      deletePhoto,
+      deleteProject
+    }
+  )(ProjectForm)
+);

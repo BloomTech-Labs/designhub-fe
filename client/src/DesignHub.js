@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
@@ -10,17 +11,16 @@ import Settings from './components/Settings.js';
 import AddProject from './components/AddProject';
 import SearchPage from './components/SearchPage';
 import Notifications from './components/Notifications';
-import axios from 'axios';
-import './SASS/DesignHub.scss';
 import EditProject from './components/EditProject';
 import Explore from './components/Explore/Explore';
+
+import './SASS/DesignHub.scss';
 
 class DesignHub extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeUser: this.props.user,
-      users: [],
       search: []
     };
   }
@@ -44,9 +44,6 @@ class DesignHub extends Component {
           searchData={this.state.search}
           getSearch={this.getSearch}
           activeUser={activeUser}
-          darkMode={this.state.darkMode}
-          toggleLightMode={this.toggleLightMode}
-          togglDarkMode={this.togglDarkMode}
         />
         <div className="nav-workspace">
           <div>
@@ -76,21 +73,25 @@ class DesignHub extends Component {
                 path="/project/:id"
                 render={props => <Project {...props} activeUser={activeUser} />}
               />
-              <Route exact path="/create" component={AddProject} />
+              <Route
+                exact
+                path="/create"
+                render={props => (
+                  <AddProject {...props} activeUser={activeUser} />
+                )}
+              />
               <Route
                 exact
                 path="/project/:id/edit"
-                render={props => <EditProject {...props} />}
+                render={props => (
+                  <EditProject {...props} activeUser={activeUser} />
+                )}
               />
               <Route
                 exact
                 path="/settings"
                 render={props => (
-                  <Settings
-                    setUserData={this.props.setUserData}
-                    {...props}
-                    activeUser={activeUser}
-                  />
+                  <Settings {...props} activeUser={activeUser} />
                 )}
               />
               <Route

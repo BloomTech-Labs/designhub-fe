@@ -16,7 +16,6 @@ const Heatmap = props => {
   const [heatmapArr, setHeatmapArr] = useState([]);
   const [days, setDays] = useState(-365);
   const { width } = useWindowDimensions();
-  console.log(width);
 
   useEffect(() => {
     if (width > 1024) {
@@ -59,7 +58,6 @@ const Heatmap = props => {
     getHeatmap();
     // eslint-disable-next-line
   }, []);
-  console.log(days);
 
   //conditionally renders the tool tip message when hovering over a square
   const renderToolTip = value => {

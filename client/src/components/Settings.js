@@ -4,13 +4,8 @@ import { useAuth0 } from '../auth-wrapper.js';
 
 import '../SASS/Settings.scss';
 import Account from './Settings/Account.js';
-import Privacy from './Settings/Privacy.js';
 
-const Notifications = () => <div>Notifications Tab</div>;
-const LinkedProfiles = () => <div>Linked Profiles Tab</div>;
-const DownloadData = () => <div>Download Data Tab</div>;
-
-const Settings = ({ activeUser, match, history, setUserData }) => {
+const Settings = ({ activeUser, match }) => {
   const { logout } = useAuth0();
   const { path } = match;
   console.log('path!!!!!!!!!!!!!!', path);
@@ -37,13 +32,7 @@ const Settings = ({ activeUser, match, history, setUserData }) => {
           <Route
             path={`${path}`}
             exact
-            render={props => (
-              <Account
-                setUserData={setUserData}
-                activeUser={activeUser}
-                {...props}
-              />
-            )}
+            render={props => <Account activeUser={activeUser} {...props} />}
           />
         </Switch>
       </div>

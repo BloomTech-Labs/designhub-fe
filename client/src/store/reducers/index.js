@@ -5,6 +5,7 @@ import { photosReducer } from './photosReducer';
 import { teamsReducer } from './teamsReducer';
 import { followersReducer } from './followersReducer';
 import { commentsReducer } from './commentsReducer';
+import { starsReducer } from './starsReducer';
 
 const rootReducer = combineReducers({
   users: usersReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   teams: teamsReducer,
   photos: photosReducer,
   followers: followersReducer,
-  comments: commentsReducer
+  comments: commentsReducer,
+  stars: starsReducer
 });
 
 export default rootReducer;

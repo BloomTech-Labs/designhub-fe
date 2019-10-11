@@ -141,7 +141,8 @@ export const getSingleUser = id => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/users/${id}`)
     .then(res => {
-      dispatch({ type: GET_SINGLE_USER_SUCCESS, payload: res.data });
+      dispatch({ type: GET_SINGLE_USER_SUCCESS, payload: res.data[0] });
+      return true;
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_USER_FAILURE, error: err });
@@ -179,6 +180,7 @@ export const addProject = project => dispatch => {
     .post('/api/v1/projects', project)
     .then(res => {
       dispatch({ type: ADD_PROJECT_SUCCESS, payload: res.data });
+      return res;
     })
     .catch(err => {
       dispatch({ type: ADD_PROJECT_FAILURE, error: err });
@@ -190,7 +192,7 @@ export const getSingleProject = id => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/projects/${id}`)
     .then(res => {
-      dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data });
+      dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data[0] });
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_PROJECT_FAILURE, error: err });
@@ -203,9 +205,11 @@ export const updateProject = (id, changes) => dispatch => {
     .put(`/api/v1/projects/${id}`, changes)
     .then(res => {
       dispatch({ type: UPDATE_PROJECT_SUCCESS, payload: res.data });
+      return true;
     })
     .catch(err => {
       dispatch({ type: UPDATE_PROJECT_FAILURE, error: err });
+      return false;
     });
 };
 
@@ -267,6 +271,7 @@ export const addProjectComment = comment => dispatch => {
         type: ADD_PROJECT_COMMENT_SUCCESS,
         payload: res.data.data[0]
       });
+      return res;
     })
     .catch(err => {
       dispatch({
@@ -285,6 +290,7 @@ export const addPhotoComment = comment => dispatch => {
         type: ADD_PHOTO_COMMENT_SUCCESS,
         payload: res.data.data[0]
       });
+      return res;
     })
     .catch(err => {
       dispatch({
@@ -336,6 +342,7 @@ export const getProjectPhotos = projectId => dispatch => {
     .get(`/api/v1/photo/projects/${projectId}`)
     .then(res => {
       dispatch({ type: GET_PROJECT_PHOTOS_SUCCESS, payload: res.data });
+      return res;
     })
     .catch(err => {
       dispatch({ type: GET_PROJECT_PHOTOS_FAILURE, payload: err.data });
@@ -360,6 +367,7 @@ export const addPhoto = photo => dispatch => {
     .post('/api/v1/photo/projects', photo)
     .then(res => {
       dispatch({ type: ADD_PROJECT_PHOTO_SUCCESS });
+      return res;
     })
     .catch(err => {
       dispatch({ type: ADD_PROJECT_PHOTO_FAILURE, payload: err.data });
