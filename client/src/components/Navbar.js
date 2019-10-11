@@ -53,7 +53,7 @@ const Navbar = ({ activeUser }) => {
             to={`/notifications/${activeUser.id}/${activeUser.username}`}
             activeClassName="active-links"
           >
-            <InboxIcon />
+            <InboxIcon onClick={() => setBool(false)} />
             {bool ? (
               <span
                 style={{
@@ -102,7 +102,7 @@ const Navbar = ({ activeUser }) => {
           className="links"
           activeClassName="active-links"
         >
-          Notifications
+          <span onClick={() => setBool(false)}>Notifications</span>
         </NavLink>
 
         <NavLink

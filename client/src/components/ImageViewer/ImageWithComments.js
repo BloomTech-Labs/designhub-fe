@@ -197,17 +197,19 @@ export class ImageWithComments extends React.Component {
         comments: updateComments
       });
 
-      await this.postCommentNotification(
-        this.props.activeUser.username,
-        newComment.text,
-        this.props.thisProject.id,
-        this.props.thisProject.userId,
-        this.props.activeUser.id,
-        this.props.activeImg.url,
-        newComment.id,
-        this.props.activeUser.avatar,
-        'comment'
-      );
+      if (this.props.activeUser.id !== this.props.thisProject.userId) {
+        await this.postCommentNotification(
+          this.props.activeUser.username,
+          newComment.text,
+          this.props.thisProject.id,
+          this.props.thisProject.userId,
+          this.props.activeUser.id,
+          this.props.activeImg.url,
+          newComment.id,
+          this.props.activeUser.avatar,
+          'comment'
+        );
+      }
     } catch (err) {
       console.log('ImageWithComments.js handleSubmit() ERROR', err);
     }
