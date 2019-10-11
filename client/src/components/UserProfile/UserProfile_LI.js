@@ -39,13 +39,13 @@ class UserProfile_LI extends Component {
     const paramsId = this.props.match.params.id;
     // const userId = this.state.userId;
     function getUserData(id) {
-      return axiosWithAuth().get(`/api/v1/users/${id}`);
+      return axiosWithAuth().get(`api/v1/users/${id}`);
     }
     function getFollowingCount(id) {
-      return axiosWithAuth().get(`/api/v1/followers/count/following/${id}`);
+      return axiosWithAuth().get(`api/v1/followers/count/following/${id}`);
     }
     function getFollowerCount(id) {
-      return axiosWithAuth().get(`/api/v1/followers/count/followers/${id}`);
+      return axiosWithAuth().get(`api/v1/followers/count/followers/${id}`);
     }
     function getUserProjects() {
       return axiosWithAuth().get(`api/v1/projects/recent/${paramsId}`);
@@ -57,10 +57,10 @@ class UserProfile_LI extends Component {
       return axiosWithAuth().get(`api/v1/followers/following/${paramsId}`);
     }
     function getStarred() {
-      return axiosWithAuth().get(`/api/v1/star/${paramsId}`);
+      return axiosWithAuth().get(`api/v1/star/${paramsId}`);
     }
     function getFollowStatus(userId, myId) {
-      return axiosWithAuth().get(`/api/v1/followers/${myId}/${userId}`);
+      return axiosWithAuth().get(`api/v1/followers/${myId}/${userId}`);
     }
 
     return axios
@@ -103,7 +103,7 @@ class UserProfile_LI extends Component {
       activeUser: { username, id, avatar },
       match: { params }
     } = props;
-    axios.post('http://localhost:8000/api/v1/invite/follow', {
+    axiosWithAuth().post('api/v1/invite/follow', {
       activeUsername: username,
       invitedUserId: params.id,
       activeUserId: id,
@@ -125,14 +125,14 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         return axiosWithAuth()
-          .get(`/api/v1/followers/count/followers/${this.state.userId}`)
+          .get(`api/v1/followers/count/followers/${this.state.userId}`)
           .then(res => {
             this.setState({ followers: res.data[0].count });
           });
       })
       .then(() => {
         return axiosWithAuth()
-          .get(`/api/v1/followers/${this.state.myId}/${this.state.userId}`)
+          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
           .then(res => {
             this.setState({ isFollowed: res.data.isFollowed });
           });
@@ -151,14 +151,14 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         return axiosWithAuth()
-          .get(`/api/v1/followers/count/followers/${this.state.userId}`)
+          .get(`api/v1/followers/count/followers/${this.state.userId}`)
           .then(res => {
             this.setState({ followers: res.data[0].count });
           });
       })
       .then(() => {
         return axiosWithAuth()
-          .get(`/api/v1/followers/${this.state.myId}/${this.state.userId}`)
+          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
           .then(res => {
             this.setState({ isFollowed: res.data.isFollowed });
           });
