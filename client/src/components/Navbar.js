@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import ProfileIcon from './Icons/ProfileIcon';
 import CreateNewProjectIcon from './Icons/CreateNewProjectIcon';
 import MyProjectsIcon from './Icons/MyProjectsIcon';
@@ -10,8 +10,20 @@ import SettingsIcon from './Icons/SettingsIcon';
 import '../SASS/Navbar.scss';
 
 const Navbar = ({ activeUser }) => {
+  const [bool, setBool] = useState(null);
+
+  useEffect(() => {
+    const getNotifyBool = async id => {
+      const { data } = await axiosWithAuth().get(`api/v1/invite/bool/${id}`);
+
+      setBool(data);
+    };
+    getNotifyBool(activeUser.id);
+  });
+
   return (
     <nav>
+      {console.log(bool)}
       <div className="icon-links">
         <div className="navlinks">
           <NavLink
@@ -37,8 +49,28 @@ const Navbar = ({ activeUser }) => {
         </div>
 
         <div className="navlinks">
-          <NavLink to="/onboard" activeClassName="active-links">
+          <NavLink
+            to={`/notifications/${activeUser.id}/${activeUser.username}`}
+            activeClassName="active-links"
+          >
             <InboxIcon />
+            {bool ? (
+              <span
+                style={{
+                  marginTop: '-10px',
+                  color: 'blue',
+                  fontSize: '28px',
+                  display: 'block',
+                  marginLeft: '5px',
+                  textDecoration: 'none',
+                  borderBottom: 'none'
+                }}
+              >
+                •
+              </span>
+            ) : (
+              ''
+            )}
           </NavLink>
         </div>
 
