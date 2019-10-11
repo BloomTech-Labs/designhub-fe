@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../SASS/ImageViewer.scss';
-import { ImageWithComments } from './ImageWithComments';
+import ImageWithComments from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../ASSETS/default_thumbnail.svg';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth';
@@ -12,10 +12,8 @@ class ImageViewer extends Component {
     super(props);
     this.state = {
       activeImg: null,
-      allImgs: null,
       comments: this.props.comments,
-      modal: false,
-      thisProject: { ...this.props.thisProject }
+      modal: false
     };
   }
 
@@ -50,7 +48,7 @@ class ImageViewer extends Component {
   };
 
   render() {
-    const { activeImg, modal, allImgs } = this.state;
+    const { activeImg, modal } = this.state;
 
     if (activeImg === null) {
       return <Loading />;
@@ -100,17 +98,15 @@ class ImageViewer extends Component {
                   )}
                 </section>
                 <section className="ImageViewer__thumbnails">
-                  {allImgs
-                    ? allImgs
-                    : this.props.thumbnails.map(t => (
-                        <img
-                          key={t.url}
-                          src={t.url}
-                          alt="project-thumbnail"
-                          onClick={() => this.changeImg(t)}
-                          className="thumbnails"
-                        />
-                      ))}
+                  {this.props.thumbnails.map(t => (
+                    <img
+                      key={t.url}
+                      src={t.url}
+                      alt="project-thumbnail"
+                      onClick={() => this.changeImg(t)}
+                      className="thumbnails"
+                    />
+                  ))}
                 </section>
               </div>
             </main>

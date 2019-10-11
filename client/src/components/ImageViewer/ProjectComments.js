@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import axios from 'axios';
+import { connect } from 'react-redux';
 // import moment from 'moment';
 import { useWindowDimensions } from './useWindowDimensions.js';
 import SendIcon from '../Icons/SendIcon';
+
+import { addProjectComment } from '../../store/actions';
+
 import '../../SASS/ProjectComments.scss';
 
 const ProjectComments = ({
@@ -11,7 +14,8 @@ const ProjectComments = ({
   addComments,
   comments,
   modal,
-  thisProject
+  thisProject,
+  addProjectComment
 }) => {
   // console.log('ProjectComments.js RENDER comments', comments);
   // console.log('ProjectComments.js RENDER activeUser', activeUser);
@@ -70,10 +74,12 @@ const ProjectComments = ({
     // console.log('ProjectComments.js handleSubmit() thisCOmment', thisComment);
 
     try {
-      const res = await axiosWithAuth().post(
-        `api/v1/comments/project`,
-        thisComment
-      );
+      const res = await addProjectComment(thisComment);
+      console.log('res from addProjectComment', res);
+      // const res = await axiosWithAuth().post(
+      //   `api/v1/comments/project`,
+      //   thisComment
+      // );
       const newComment = res.data.data[0];
 
       if (thisProject.id !== activeUser.id) {
@@ -151,4 +157,7 @@ const ProjectComments = ({
   );
 };
 
-export default ProjectComments;
+export default connect(
+  null,
+  { addProjectComment }
+)(ProjectComments);

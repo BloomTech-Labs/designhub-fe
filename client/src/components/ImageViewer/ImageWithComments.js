@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
@@ -9,9 +9,10 @@ import ModalXIcon from '../Icons/ModalXIcon.js';
 import CommentBubbleIcon from '../Icons/CommentBubbleIcon.js';
 import '../../SASS/StickyComment.scss';
 
+import { addPhotoComment } from '../../store/actions';
 const uuidv1 = require('uuid/v1');
 
-export class ImageWithComments extends React.Component {
+class ImageWithComments extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -180,10 +181,9 @@ export class ImageWithComments extends React.Component {
     // console.log('ImageWithComments.js handleSubmit() thisComment', thisComment);
 
     try {
-      const res = await axiosWithAuth().post(
-        `api/v1/comments/photo`,
-        thisComment
-      );
+      const res = await this.props.addPhotoComment(thisComment);
+      console.log('addPhotoComment res', res);
+
       const newComment = res.data.data[0];
 
       //glue the avatar back on and insert into local state so we don't have to reload the component
@@ -221,3 +221,8 @@ export class ImageWithComments extends React.Component {
     this.leftOffset = rect.left > 0 ? x : x - rect.left;
   };
 }
+
+export default connect(
+  null,
+  { addPhotoComment }
+)(ImageWithComments);

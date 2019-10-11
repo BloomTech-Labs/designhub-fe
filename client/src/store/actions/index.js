@@ -270,6 +270,7 @@ export const addProjectComment = comment => dispatch => {
         type: ADD_PROJECT_COMMENT_SUCCESS,
         payload: res.data.data[0]
       });
+      return res;
     })
     .catch(err => {
       dispatch({
@@ -288,6 +289,7 @@ export const addPhotoComment = comment => dispatch => {
         type: ADD_PHOTO_COMMENT_SUCCESS,
         payload: res.data.data[0]
       });
+      return res;
     })
     .catch(err => {
       dispatch({
