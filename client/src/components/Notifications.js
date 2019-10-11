@@ -8,25 +8,25 @@ const Notifications = props => {
 
   useEffect(() => {
     try {
+      const turnToRead = async data => {
+        if (data.unReadNotifications) {
+          return await Promise.all(
+            data.unReadNotifications.map(async i => {
+              console.log('ran');
+              await axiosWithAuth().put(`api/v1/invite/${i.id}`, {
+                unread: false
+              });
+            })
+          );
+        }
+      };
       const getNotifications = async id => {
         const { data } = await axiosWithAuth().get(`api/v1/invite/${id}`);
         setState(data);
+        turnToRead(data);
       };
 
       getNotifications(id);
-      //   const turnToRead = async () => {
-      //     if (state.unReadNotifications) {
-      //       return await Promise.all(
-      //         state.unReadNotifications.map(async i => {
-      //           console.log('ran');
-      //           await axiosWithAuth().put(`api/v1/invite/${i.id}`, {
-      //             unread: false
-      //           });
-      //         })
-      //       );
-      //     }
-      //   };
-      //   setTimeout(() => turnToRead(), 100);
     } catch (err) {
       console.error(err);
     }
