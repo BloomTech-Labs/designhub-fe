@@ -13,14 +13,7 @@ import { initUser } from './store/actions/usersActions.js';
 
 import './App.scss';
 
-function App({
-  history,
-  currentUser,
-  isOnboarding,
-  isLoggedIn,
-  isLoading,
-  initUser
-}) {
+function App({ history, currentUser, isOnboarding, isLoggedIn, initUser }) {
   const { isAuthenticated, user, loading } = useAuth0();
 
   useEffect(() => {
@@ -29,7 +22,7 @@ function App({
 
   return (
     <>
-      {loading || isLoading ? (
+      {loading ? (
         <Loading />
       ) : (
         <>
@@ -48,8 +41,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.users.currentUser,
     isOnboarding: state.users.onboarding,
-    isLoggedIn: state.users.loggedIn,
-    isLoading: state.users.isLoading
+    isLoggedIn: state.users.loggedIn
   };
 };
 

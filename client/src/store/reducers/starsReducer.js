@@ -16,7 +16,7 @@ import {
 const initialState = {
   error: null,
   isLoading: false,
-  starredProjects: null,
+  starredProjects: [],
   projectStarCount: null
 };
 
@@ -63,7 +63,7 @@ export const starsReducer = (state = initialState, action) => {
         ...state,
         error: null,
         isLoading: true,
-        starredProjects: null
+        starredProjects: []
       };
     case GET_STARRED_PROJECTS_SUCCESS:
       return {
