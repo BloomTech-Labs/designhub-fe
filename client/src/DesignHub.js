@@ -24,6 +24,12 @@ class DesignHub extends Component {
       search: []
     };
   }
+  componentDidMount() {
+    if (this.props.history.location.pathname === '/') {
+      const { id, username } = this.state.activeUser;
+      this.props.history.push(`/profile/${id}/${username}`);
+    }
+  }
 
   getSearch = async (event, text, history) => {
     event.preventDefault();
@@ -121,12 +127,6 @@ class DesignHub extends Component {
       </div>
     );
   }
-  // componentDidMount() {
-  //   if (this.props.history.location.pathname === '/') {
-  //     const { id, username } = this.state.activeUser;
-  //     this.props.history.push(`/profile/${id}/${username}`);
-  //   }
-  // }
 }
 
 export default withRouter(DesignHub);

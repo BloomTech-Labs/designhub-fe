@@ -65,11 +65,11 @@ class UserProfile_LI extends Component {
       });
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.props.match.params.id !== prevProps.match.params.id) {
-  //     this.fetch();
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      this.fetch();
+    }
+  }
 
   //sends follow notification to user you followed
   followNotification = (props, followId) => {
