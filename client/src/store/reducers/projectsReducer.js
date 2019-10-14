@@ -23,7 +23,7 @@ const initialState = {
   error: null,
   allProjects: [],
   singleProject: null,
-  usersProjects: null,
+  usersProjects: [],
   isLoading: false
 };
 
