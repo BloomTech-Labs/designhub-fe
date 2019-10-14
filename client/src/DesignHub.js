@@ -43,14 +43,14 @@ class DesignHub extends Component {
         <TopBar
           searchData={this.state.search}
           getSearch={this.getSearch}
-          activeUser={activeUser}
+          activeUser={this.props.user}
         />
         <div className="nav-workspace">
           <div>
             <span />
           </div>
           <div className="side-navigation">
-            <Navbar activeUser={activeUser} />
+            <Navbar activeUser={this.props.user} />
           </div>
           <main className="workspace">
             <Switch>
@@ -58,40 +58,42 @@ class DesignHub extends Component {
                 exact
                 path="/profile/:id/:username"
                 render={props => (
-                  <UserProfileLI {...props} activeUser={activeUser} />
+                  <UserProfileLI {...props} activeUser={this.props.user} />
                 )}
               />
               <Route
                 exact
                 path="/notifications/:id/:username"
                 render={props => (
-                  <Notifications {...props} activeUser={activeUser} />
+                  <Notifications {...props} activeUser={this.props.user} />
                 )}
               />
               <PrivateRoute
                 exact
                 path="/project/:id"
-                render={props => <Project {...props} activeUser={activeUser} />}
+                render={props => (
+                  <Project {...props} activeUser={this.props.user} />
+                )}
               />
               <Route
                 exact
                 path="/create"
                 render={props => (
-                  <AddProject {...props} activeUser={activeUser} />
+                  <AddProject {...props} activeUser={this.props.user} />
                 )}
               />
               <Route
                 exact
                 path="/project/:id/edit"
                 render={props => (
-                  <EditProject {...props} activeUser={activeUser} />
+                  <EditProject {...props} activeUser={this.props.user} />
                 )}
               />
               <Route
                 exact
                 path="/settings"
                 render={props => (
-                  <Settings {...props} activeUser={activeUser} />
+                  <Settings {...props} activeUser={this.props.user} />
                 )}
               />
               <Route
@@ -100,7 +102,7 @@ class DesignHub extends Component {
                 render={props => (
                   <SearchPage
                     {...props}
-                    activeUser={activeUser}
+                    activeUser={this.props.user}
                     searchData={this.state.search}
                     getSearch={this.getSearch}
                   />
@@ -109,7 +111,9 @@ class DesignHub extends Component {
               <Route
                 exact
                 path="/explore"
-                render={props => <Explore {...props} activeUser={activeUser} />}
+                render={props => (
+                  <Explore {...props} activeUser={this.props.user} />
+                )}
               />
             </Switch>
           </main>
