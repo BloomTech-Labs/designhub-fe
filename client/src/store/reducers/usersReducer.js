@@ -21,7 +21,20 @@ import {
 const initialState = {
   error: null,
   currentUser: null,
-  singleUser: null,
+  singleUser: {
+    auth0Id: '',
+    avatar: '',
+    bio: '',
+    created_at: '',
+    email: '',
+    firstName: '',
+    id: null,
+    lastName: '',
+    location: '',
+    phoneNumber: null,
+    username: '',
+    website: ''
+  },
   allUsers: [],
   isLoading: false,
   loggedIn: false,

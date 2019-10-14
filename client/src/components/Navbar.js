@@ -19,7 +19,7 @@ const Navbar = ({ activeUser }) => {
       setBool(data);
     };
     getNotifyBool(activeUser.id);
-  });
+  }, []);
 
   return (
     <nav>

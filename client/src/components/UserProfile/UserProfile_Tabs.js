@@ -47,7 +47,7 @@ class UserProfile_Tabs extends Component {
                 <h2>Recent Projects</h2>
               </div>
               <div className="tab-content">
-                {projects.length === 0 && (
+                {projects === null && (
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
                     <h1 className="no-projects">
@@ -56,23 +56,26 @@ class UserProfile_Tabs extends Component {
                   </div>
                 )}
                 <div className="projects-array">
-                  {projects.slice(0, 8).map(project => (
-                    <div className="project-content" key={project.id}>
-                      <Link to={`/project/${project.id}`}>
-                        <>
-                          <div className="project-info">
-                            <h1>{project.name}</h1>
-                          </div>
-                          <img
-                            src={project.mainImg ? project.mainImg : defaultImg}
-                            className="project-thumbnail"
-                            alt="test"
-                            key={project.id}
-                          />
-                        </>
-                      </Link>
-                    </div>
-                  ))}
+                  {projects !== null &&
+                    projects.slice(0, 8).map(project => (
+                      <div className="project-content" key={project.id}>
+                        <Link to={`/project/${project.id}`}>
+                          <>
+                            <div className="project-info">
+                              <h1>{project.name}</h1>
+                            </div>
+                            <img
+                              src={
+                                project.mainImg ? project.mainImg : defaultImg
+                              }
+                              className="project-thumbnail"
+                              alt="test"
+                              key={project.id}
+                            />
+                          </>
+                        </Link>
+                      </div>
+                    ))}
                 </div>
               </div>
               <Heatmap />

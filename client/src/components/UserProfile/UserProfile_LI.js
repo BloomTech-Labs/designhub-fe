@@ -1,6 +1,7 @@
 // ========== DEPENDENCIES ========== //
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import axios from 'axios';
 
@@ -9,6 +10,17 @@ import UserProfileTabs from './UserProfile_Tabs.js';
 import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
 
+import {
+  getSingleUser,
+  getFollowingCount,
+  getFollowersCount,
+  getProjectsByUser,
+  getFollowers,
+  getFollowing,
+  getStarredProjects,
+  getIsFollowed
+} from '../../store/actions';
+
 // ========== STYLES ========== //
 import '../../SASS/UserProfile.scss';
 
@@ -16,16 +28,8 @@ class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      followers: [],
-      following: [],
       userId: parseInt(this.props.match.params.id),
-      userData: [],
-      projects: [],
-      followersTab: [],
-      followingTab: [],
-      starred: [],
-      myId: this.props.activeUser.id,
-      isFollowed: null
+      myId: this.props.activeUser.id
     };
   }
 
@@ -36,59 +40,29 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
-    const paramsId = this.props.match.params.id;
-    // const userId = this.state.userId;
-    function getUserData(id) {
-      return axiosWithAuth().get(`api/v1/users/${id}`);
-    }
-    function getFollowingCount(id) {
-      return axiosWithAuth().get(`api/v1/followers/count/following/${id}`);
-    }
-    function getFollowerCount(id) {
-      return axiosWithAuth().get(`api/v1/followers/count/followers/${id}`);
-    }
-    function getUserProjects() {
-      return axiosWithAuth().get(`api/v1/projects/recent/${paramsId}`);
-    }
-    function getFollowers() {
-      return axiosWithAuth().get(`api/v1/followers/followers/${paramsId}`);
-    }
-    function getFollowing() {
-      return axiosWithAuth().get(`api/v1/followers/following/${paramsId}`);
-    }
-    function getStarred() {
-      return axiosWithAuth().get(`api/v1/star/${paramsId}`);
-    }
-    function getFollowStatus(userId, myId) {
-      return axiosWithAuth().get(`api/v1/followers/${myId}/${userId}`);
-    }
-
-    return axios
-      .all([
-        getUserData(paramsId),
-        getFollowingCount(paramsId),
-        getFollowerCount(paramsId),
-        getUserProjects(),
-        getFollowers(paramsId),
-        getFollowing(paramsId),
-        getStarred(paramsId),
-        getFollowStatus(this.state.userId, this.state.myId)
-      ])
-      .then(
-        axios.spread((a, b, c, d, e, f, g, h) => {
-          this.setState({
-            userData: a.data[0],
-            following: b.data[0].count,
-            followers: c.data[0].count,
-            projects: d.data,
-            followersTab: e.data,
-            followingTab: f.data,
-            starred: g.data,
-            isFollowed: h.data.isFollowed
-          });
-        })
-      )
-      .catch(err => err);
+    this.props
+      .getSingleUser(this.state.userId, this.state.myId)
+      .then(() => {
+        this.props.getFollowingCount(this.state.userId);
+      })
+      .then(() => {
+        this.props.getFollowersCount(this.state.userId);
+      })
+      .then(() => {
+        this.props.getProjectsByUser(this.state.userId);
+      })
+      .then(() => {
+        this.props.getFollowers(this.state.userId);
+      })
+      .then(() => {
+        this.props.getFollowing(this.state.userId);
+      })
+      .then(() => {
+        this.props.getStarredProjects(this.state.userId);
+      })
+      .then(() => {
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
+      });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -167,35 +141,40 @@ class UserProfile_LI extends Component {
   };
 
   render() {
-    console.log(this.props);
-    const userData = this.state.userData;
-    const projects = this.state.projects;
-    const activeUser = this.props.activeUser;
     window.scroll(0, 0);
-    console.log('activeUser', activeUser);
-    console.log('this.props.match.params.id', this.props.match.params.id);
+    // if (this.state.userData.avatar === undefined) {
+    //   return <div>Loading</div>;
+    // }
+    console.log('this.props.userData', this.props.userData);
+    if (this.props.isUsersLoading && this.props.userData === null) {
+      return <div>Loading...</div>;
+    }
     return (
       <div className="user-profile-container">
         <div className="user-header">
           <div className="user-left-content">
-            <img src={userData.avatar} className="avatar" alt="avatar" />
+            <img
+              src={this.props.userData.avatar}
+              className="avatar"
+              alt="avatar"
+            />
             <div className="user-info">
               <h1 className="userFLname">
-                {userData.firstName} {userData.lastName}
+                {this.props.userData.firstName} {this.props.userData.lastName}
               </h1>
-              <h2 className="username">{userData.username}</h2>
-              <p className="bio">{userData.bio}</p>
+              <h2 className="username">{this.props.userData.username}</h2>
+              <p className="bio">{this.props.userData.bio}</p>
               <div className="user-info-location-website">
                 <Location />
-                <p>{userData.location}</p>
+                <p>{this.props.userData.location}</p>
                 <a
-                  href={userData.website}
+                  href={this.props.userData.website}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="website"
                 >
                   <WebsiteLink />
-                  {userData.website}
+                  {this.props.userData.website}
                 </a>
               </div>
             </div>
@@ -204,19 +183,25 @@ class UserProfile_LI extends Component {
             <div className="user-data">
               <div className="count-flex">
                 <h6>Projects</h6>
-                <p>{this.state.projects.length}</p>
+                <p>
+                  {this.props.projects === null
+                    ? 0
+                    : this.props.projects.length}
+                </p>
               </div>
               <div className="count-flex">
                 <h6>Followers</h6>
-                <p>{this.state.followers}</p>
+                <p>{this.props.followers ? this.props.followers : 0}</p>
               </div>
               <div className="count-flex">
                 <h6>Following</h6>
-                <p>{this.state.following}</p>
+                <p>{this.props.following ? this.props.following : 0}</p>
               </div>
               <div className="count-flex">
                 <h6>Starred</h6>
-                <p>{this.state.starred.length}</p>
+                <p>
+                  {this.props.starred === null ? 0 : this.props.starred.length}
+                </p>
               </div>
             </div>
             <div className="teams-container">
@@ -232,13 +217,13 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {activeUser.id === this.state.userId ? (
+                {this.props.activeUser.id === this.state.userId ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>
                 ) : (
                   <>
-                    {this.state.isFollowed ? (
+                    {this.props.isFollowed ? (
                       <button
                         className="edit-profile-btn"
                         onClick={this.unfollowUser}
@@ -257,15 +242,41 @@ class UserProfile_LI extends Component {
           </div>
         </div>
         <UserProfileTabs
-          projects={projects}
-          followers={this.state.followersTab}
-          following={this.state.followingTab}
-          starred={this.state.starred}
-          isFollowed={this.state.isFollowed}
+          projects={this.props.projects}
+          followers={this.props.followersTab}
+          following={this.props.followingTab}
+          starred={this.props.starred}
+          isFollowed={this.props.isFollowed}
         />
       </div>
     );
   }
 }
 
-export default UserProfile_LI;
+const mapStateToProps = state => {
+  return {
+    followers: state.followers.followersCount,
+    following: state.followers.followingCount,
+    followersTab: state.followers.followers,
+    followingTab: state.followers.following,
+    userData: state.users.singleUser,
+    projects: state.projects.usersProjects,
+    starred: state.stars.starredProjects,
+    isFollowed: state.followers.isFollowed,
+    isUsersLoading: state.users.isLoading
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    getSingleUser,
+    getFollowingCount,
+    getFollowersCount,
+    getProjectsByUser,
+    getFollowers,
+    getFollowing,
+    getStarredProjects,
+    getIsFollowed
+  }
+)(UserProfile_LI);

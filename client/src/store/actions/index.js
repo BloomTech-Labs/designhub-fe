@@ -136,13 +136,13 @@ export const getAllUsers = () => dispatch => {
     });
 };
 
-export const getSingleUser = id => dispatch => {
+export const getSingleUser = (id, theirId) => dispatch => {
+  console.log('hello world from action');
   dispatch({ type: GET_SINGLE_USER_START });
   return axiosWithAuth()
     .get(`/api/v1/users/${id}`)
     .then(res => {
       dispatch({ type: GET_SINGLE_USER_SUCCESS, payload: res.data[0] });
-      return true;
     })
     .catch(err => {
       dispatch({ type: GET_SINGLE_USER_FAILURE, error: err });
