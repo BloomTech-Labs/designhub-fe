@@ -172,7 +172,8 @@ class UserProfile_LI extends Component {
     const projects = this.state.projects;
     const activeUser = this.props.activeUser;
     window.scroll(0, 0);
-
+    console.log('activeUser', activeUser);
+    console.log('this.props.match.params.id', this.props.match.params.id);
     return (
       <div className="user-profile-container">
         <div className="user-header">
@@ -231,7 +232,7 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {activeUser.id === this.props.match.params.id ? (
+                {activeUser.id === this.state.userId ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>
