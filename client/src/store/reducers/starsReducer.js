@@ -10,14 +10,18 @@ import {
   GET_STARRED_PROJECTS_FAILURE,
   GET_PROJECT_STAR_COUNT_START,
   GET_PROJECT_STAR_COUNT_SUCCESS,
-  GET_PROJECT_STAR_COUNT_FAILURE
+  GET_PROJECT_STAR_COUNT_FAILURE,
+  GET_STAR_STATUS_START,
+  GET_STAR_STATUS_SUCCESS,
+  GET_STAR_STATUS_FAILURE
 } from '../actions';
 
 const initialState = {
   error: null,
   isLoading: false,
   starredProjects: [],
-  projectStarCount: null
+  projectStarCount: null,
+  isStarred: false
 };
 
 export const starsReducer = (state = initialState, action) => {
@@ -93,6 +97,25 @@ export const starsReducer = (state = initialState, action) => {
         projectStarCount: action.payload
       };
     case GET_PROJECT_STAR_COUNT_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      };
+    case GET_STAR_STATUS_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_STAR_STATUS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        isStarred: action.payload
+      };
+    case GET_STAR_STATUS_FAILURE:
       return {
         ...state,
         error: action.payload,

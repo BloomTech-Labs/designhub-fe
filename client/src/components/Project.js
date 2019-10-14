@@ -18,7 +18,8 @@ import {
   getSingleProject,
   getProjectPhotos,
   getProjectComments,
-  starProject
+  starProject,
+  getStarStatus
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -30,6 +31,10 @@ class Projects extends Component {
   }
 
   componentDidMount() {
+    this.props.getStarStatus(
+      this.props.activeUser.id,
+      this.props.match.params.id
+    );
     this.props
       .getSingleProject(this.projectId)
       .then(() => {
@@ -45,10 +50,12 @@ class Projects extends Component {
       userId: this.props.activeUser.id,
       projectId: this.projectId
     };
+
     this.props.starProject(starObj);
   };
 
   render() {
+    console.log('this.props.isStarred', this.props.isStarred);
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
     if (thisProject && activeUser && this.props.projectPhotos) {
@@ -138,7 +145,10 @@ class Projects extends Component {
                   <DownloadIcon />
                 </div>
                 <div className="star project-header-button">
-                  <StarIcon onClick={this.starProject} />
+                  <StarIcon
+                    isStarred={this.props.isStarred}
+                    onClick={this.starProject}
+                  />
                 </div>
                 {this.props.activeUser.id === this.props.project.userId && (
                   <div
@@ -177,11 +187,18 @@ const mapStateToProps = state => {
   return {
     project: state.projects.singleProject,
     projectPhotos: state.photos.projectPhotos,
-    projectComments: state.comments.projectComments
+    projectComments: state.comments.projectComments,
+    isStarred: state.stars.isStarred
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getSingleProject, getProjectPhotos, getProjectComments, starProject }
+  {
+    getSingleProject,
+    getProjectPhotos,
+    getProjectComments,
+    starProject,
+    getStarStatus
+  }
 )(Projects);
