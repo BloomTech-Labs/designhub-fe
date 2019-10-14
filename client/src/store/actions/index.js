@@ -122,6 +122,11 @@ export const DELETE_HEATMAP_START = 'DELETE_HEATMAP_START';
 export const DELETE_HEATMAP_SUCCESS = 'DELETE_HEATMAP_SUCCESS';
 export const DELETE_HEATMAP_FAILURE = 'DELETE_HEATMAP_FAILURE';
 
+//Stars
+export const GET_STAR_STATUS_START = 'GET_STAR_STATUS_START';
+export const GET_STAR_STATUS_SUCCESS = 'GET_STAR_STATUS_SUCCESS';
+export const GET_STAR_STATUS_FAILURE = 'GET_STAR_STATUS_FAILURE';
+
 //############# ACTIONS #############
 // Users Actions
 export const getAllUsers = () => dispatch => {
@@ -598,5 +603,19 @@ export const deleteHeatmap = id => dispatch => {
     })
     .catch(err => {
       dispatch({ type: DELETE_HEATMAP_FAILURE, payload: err.data.message });
+    });
+};
+
+export const getStarStatus = (userId, projectId) => dispatch => {
+  dispatch({ type: GET_STAR_STATUS_START });
+  return axiosWithAuth()
+    .get(`/api/v1/star/status/${userId}/${projectId}`)
+    .then(res => {
+      console.log('getStarStatus', res.data.isStarred);
+
+      dispatch({ type: GET_STAR_STATUS_SUCCESS, payload: res.data.isStarred });
+    })
+    .catch(err => {
+      dispatch({ type: GET_STAR_STATUS_FAILURE, payload: err.message });
     });
 };
