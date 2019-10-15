@@ -19,7 +19,8 @@ import {
   getProjectPhotos,
   getProjectComments,
   starProject,
-  getStarStatus
+  getStarStatus,
+  unstarProject
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -51,7 +52,24 @@ class Projects extends Component {
       projectId: this.projectId
     };
 
-    this.props.starProject(starObj);
+    this.props.starProject(starObj).then(() => {
+      this.props.getStarStatus(
+        this.props.activeUser.id,
+        this.props.match.params.id
+      );
+    });
+  };
+
+  unstarProject = () => {
+    const starObj = {
+      id: this.props.activeUser.id
+    };
+    this.props.unstarProject(starObj, this.props.match.params.id).then(() => {
+      this.props.getStarStatus(
+        this.props.activeUser.id,
+        this.props.match.params.id
+      );
+    });
   };
 
   render() {
@@ -199,6 +217,7 @@ export default connect(
     getProjectPhotos,
     getProjectComments,
     starProject,
-    getStarStatus
+    getStarStatus,
+    unstarProject
   }
 )(Projects);
