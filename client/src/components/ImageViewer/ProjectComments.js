@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { connect } from 'react-redux';
-// import moment from 'moment';
 import { useWindowDimensions } from './useWindowDimensions.js';
 import SendIcon from '../Icons/SendIcon';
 

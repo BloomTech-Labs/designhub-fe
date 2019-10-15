@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import { connect } from 'react-redux';
 
 import avatar1 from '../ASSETS/avatar.jpg';

@@ -125,8 +125,6 @@ export const DELETE_HEATMAP_START = 'DELETE_HEATMAP_START';
 export const DELETE_HEATMAP_SUCCESS = 'DELETE_HEATMAP_SUCCESS';
 export const DELETE_HEATMAP_FAILURE = 'DELETE_HEATMAP_FAILURE';
 
-//Stars
-
 //############# ACTIONS #############
 // Users Actions
 export const getAllUsers = () => dispatch => {
