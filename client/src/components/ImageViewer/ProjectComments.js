@@ -11,15 +11,11 @@ import '../../SASS/ProjectComments.scss';
 
 const ProjectComments = ({
   activeUser,
-  addComments,
   comments,
   modal,
   thisProject,
   addProjectComment
 }) => {
-  // console.log('ProjectComments.js RENDER comments', comments);
-  // console.log('ProjectComments.js RENDER activeUser', activeUser);
-
   //custom hook to get window height/width
   const { width } = useWindowDimensions();
   // ref for bottom of comments feed
@@ -71,15 +67,9 @@ const ProjectComments = ({
       projectId: thisProject.id,
       text: newComment
     };
-    // console.log('ProjectComments.js handleSubmit() thisCOmment', thisComment);
 
     try {
       const res = await addProjectComment(thisComment);
-      console.log('res from addProjectComment', res);
-      // const res = await axiosWithAuth().post(
-      //   `api/v1/comments/project`,
-      //   thisComment
-      // );
       const newComment = res.data.data[0];
 
       if (thisProject.id !== activeUser.id) {
@@ -97,9 +87,6 @@ const ProjectComments = ({
       }
 
       //glue the avatar back on and insert into local state so we don't have to reload the component
-      newComment.userAvatar = activeUser.avatar;
-      const updateComments = [...comments, newComment];
-      addComments(updateComments);
       setNewComment('');
     } catch (err) {
       console.log('ProjectComments.js handleSubmit() ERROR', err);

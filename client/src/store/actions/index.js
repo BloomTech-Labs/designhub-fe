@@ -142,7 +142,6 @@ export const getAllUsers = () => dispatch => {
 };
 
 export const getSingleUser = (id, theirId) => dispatch => {
-  console.log('hello world from action');
   dispatch({ type: GET_SINGLE_USER_START });
   return axiosWithAuth()
     .get(`/api/v1/users/${id}`)
@@ -611,8 +610,6 @@ export const getStarStatus = (userId, projectId) => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/star/status/${userId}/${projectId}`)
     .then(res => {
-      console.log('getStarStatus', res.data.isStarred);
-
       dispatch({ type: GET_STAR_STATUS_SUCCESS, payload: res.data.isStarred });
     })
     .catch(err => {

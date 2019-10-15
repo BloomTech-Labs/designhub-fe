@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import ImageWithComments from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../ASSETS/default_thumbnail.svg';
 import Loading from '../Loading';
-
-import { getProjectComments } from '../../store/actions';
 
 import '../../SASS/ImageViewer.scss';
 
@@ -35,21 +32,12 @@ class ImageViewer extends Component {
     }
   }
 
-  addComments = newComments => {
-    this.setState({
-      ...this.state,
-      comments: newComments
-    });
-  };
-
   changeImg = imgObj => {
     if (
       this.state.activeImg === null ||
       this.state.activeImg.id !== imgObj.id
     ) {
-      this.setState({ activeImg: imgObj }, () =>
-        console.log('ImageViwer.js changeImg() activeImg', this.state.activeImg)
-      );
+      this.setState({ activeImg: imgObj });
     }
   };
 
@@ -60,7 +48,6 @@ class ImageViewer extends Component {
   render() {
     const { activeImg, modal } = this.state;
 
-    console.log('comments in ImageViewer', this.state.comments);
     if (activeImg === null) {
       return <Loading />;
     } else {
@@ -77,7 +64,6 @@ class ImageViewer extends Component {
                   <ImageWithComments
                     activeUser={this.props.activeUser}
                     activeImg={activeImg}
-                    addComments={this.addComments}
                     closeModal={this.closeModal}
                     comments={
                       this.state.comments.length > 0
@@ -124,12 +110,6 @@ class ImageViewer extends Component {
           </div>
           <ProjectComments
             activeUser={this.props.activeUser}
-            addComments={this.addComments}
-            /* comments={
-              this.state.comments.length > 0
-                ? this.state.comments
-                : this.props.comments
-            } */
             modal={modal}
             thisProject={this.props.thisProject}
           />
@@ -139,7 +119,4 @@ class ImageViewer extends Component {
   }
 }
 
-export default connect(
-  null,
-  { getProjectComments }
-)(ImageViewer);
+export default ImageViewer;
