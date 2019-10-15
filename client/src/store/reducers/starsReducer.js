@@ -121,6 +121,7 @@ export const starsReducer = (state = initialState, action) => {
         error: action.payload,
         isLoading: false
       };
+
     default:
       return state;
   }

@@ -101,6 +101,9 @@ export const GET_STARRED_PROJECTS_FAILURE = 'GET_STARRED_PROJECTS_FAILURE';
 export const GET_PROJECT_STAR_COUNT_START = 'GET_PROJECT_STAR_COUNT_START';
 export const GET_PROJECT_STAR_COUNT_SUCCESS = 'GET_PROJECT_STAR_COUNT_SUCCESS';
 export const GET_PROJECT_STAR_COUNT_FAILURE = 'GET_PROJECT_STAR_COUNT_FAILURE';
+export const GET_STAR_STATUS_START = 'GET_STAR_STATUS_START';
+export const GET_STAR_STATUS_SUCCESS = 'GET_STAR_STATUS_SUCCESS';
+export const GET_STAR_STATUS_FAILURE = 'GET_STAR_STATUS_FAILURE';
 
 //Heatmap
 export const CREATE_HEATMAP_START = 'CREATE_HEATMAP_START';
@@ -123,9 +126,6 @@ export const DELETE_HEATMAP_SUCCESS = 'DELETE_HEATMAP_SUCCESS';
 export const DELETE_HEATMAP_FAILURE = 'DELETE_HEATMAP_FAILURE';
 
 //Stars
-export const GET_STAR_STATUS_START = 'GET_STAR_STATUS_START';
-export const GET_STAR_STATUS_SUCCESS = 'GET_STAR_STATUS_SUCCESS';
-export const GET_STAR_STATUS_FAILURE = 'GET_STAR_STATUS_FAILURE';
 
 //############# ACTIONS #############
 // Users Actions
@@ -500,7 +500,7 @@ export const starProject = starObject => dispatch => {
 export const unstarProject = (userId, projectId) => dispatch => {
   dispatch({ type: UNSTAR_PROJECT_START });
   return axiosWithAuth()
-    .post(`/api/v1/star/unstar/${projectId}`, projectId)
+    .post(`/api/v1/star/unstar/${projectId}`, userId)
     .then(res => {
       dispatch({ type: UNSTAR_PROJECT_SUCCESS });
     })
