@@ -51,7 +51,6 @@ class Projects extends Component {
       userId: this.props.activeUser.id,
       projectId: this.projectId
     };
-
     this.props.starProject(starObj).then(() => {
       this.props.getStarStatus(
         this.props.activeUser.id,
@@ -162,11 +161,13 @@ class Projects extends Component {
                 <div className="download project-header-button">
                   <DownloadIcon />
                 </div>
-                <div className="star project-header-button">
-                  <StarIcon
-                    isStarred={this.props.isStarred}
-                    onClick={this.starProject}
-                  />
+                <div
+                  onClick={
+                    this.props.isStarred ? this.unstarProject : this.starProject
+                  }
+                  className="star project-header-button"
+                >
+                  <StarIcon isStarred={this.props.isStarred} />
                 </div>
                 {this.props.activeUser.id === this.props.project.userId && (
                   <div
