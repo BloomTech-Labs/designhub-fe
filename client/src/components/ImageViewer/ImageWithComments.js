@@ -9,7 +9,7 @@ import ModalXIcon from '../Icons/ModalXIcon.js';
 import CommentBubbleIcon from '../Icons/CommentBubbleIcon.js';
 import '../../SASS/StickyComment.scss';
 
-import { addPhotoComment } from '../../store/actions';
+import { addPhotoComment, getPhotoComments } from '../../store/actions';
 const uuidv1 = require('uuid/v1');
 
 class ImageWithComments extends Component {
@@ -31,7 +31,9 @@ class ImageWithComments extends Component {
 
     const { hidden, comments, tempComments } = this.state;
 
-    let activeComments = comments.filter(c => c.imageId === id);
+    // let activeComments = comments.filter(c => c.imageId === id);
+    console.log('this.props.photoComments', this.props.photoComments);
+    let activeComments = this.props.photoComments;
     console.log('ImageWithComments.js render() activeComments', activeComments);
     let activeTemp = tempComments.filter(c => c.imageId === id);
     return (
@@ -69,7 +71,7 @@ class ImageWithComments extends Component {
                 commentDelete={this.commentDelete}
               />
             ))}
-
+          {console.log('ImageWithComments activeComments', activeComments)}
           {activeComments[0] &&
             activeComments.map(s => (
               <StickyComment
@@ -87,6 +89,7 @@ class ImageWithComments extends Component {
     this.element = findDOMNode(this);
     // GET ALL COMMENTS
     const projectComments = this.props.comments;
+    this.props.getPhotoComments(this.props.activeImg.id);
     // console.log(
     //   'ImageWithComments.js componentDidMount() this.props.comments',
     //   this.props.comments
@@ -222,7 +225,13 @@ class ImageWithComments extends Component {
   };
 }
 
+const mapStateToProps = state => {
+  return {
+    photoComments: state.comments.photoComments
+  };
+};
+
 export default connect(
-  null,
-  { addPhotoComment }
+  mapStateToProps,
+  { addPhotoComment, getPhotoComments }
 )(ImageWithComments);

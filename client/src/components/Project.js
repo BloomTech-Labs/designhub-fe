@@ -42,7 +42,7 @@ class Projects extends Component {
         this.props.getProjectPhotos(this.projectId);
       })
       .then(() => {
-        this.props.getProjectComments(this.projectId);
+        this.props.getProjectComments(this.props.match.params.id);
       });
   }
 
@@ -72,6 +72,7 @@ class Projects extends Component {
   };
 
   render() {
+    console.log('this.props.projectComments', this.props.projectComments);
     console.log('this.props.isStarred', this.props.isStarred);
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
@@ -187,6 +188,7 @@ class Projects extends Component {
 
           <div className="project-body">
             {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
+
             <ImageViewer
               activeUser={activeUser}
               comments={this.props.projectComments}

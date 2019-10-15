@@ -110,30 +110,31 @@ const ProjectComments = ({
     <div className="project-comments">
       <header className="comments-header">Comments</header>
       <section className="comments-body">
-        {comments.map(c => (
-          <div
-            key={c.id}
-            className={
-              activeUser.id === c.userId
-                ? 'ProjectComment__body --you'
-                : 'ProjectComment__body --them'
-            }
-          >
-            {activeUser.id === c.userId ? null : (
-              <img
-                src={c.userAvatar}
-                alt="avatar"
-                className="ProjectComment__body__avatar"
-              />
-            )}
-            <div className="ProjectComment__body__text">
-              <p className="username">
-                {activeUser.id === c.userId ? 'You' : c.username}
-              </p>
-              <p>{c.text}</p>
+        {comments &&
+          comments.map(c => (
+            <div
+              key={c.id}
+              className={
+                activeUser.id === c.userId
+                  ? 'ProjectComment__body --you'
+                  : 'ProjectComment__body --them'
+              }
+            >
+              {activeUser.id === c.userId ? null : (
+                <img
+                  src={c.userAvatar}
+                  alt="avatar"
+                  className="ProjectComment__body__avatar"
+                />
+              )}
+              <div className="ProjectComment__body__text">
+                <p className="username">
+                  {activeUser.id === c.userId ? 'You' : c.username}
+                </p>
+                <p>{c.text}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
         <div ref={el => setCommentAnchor(el)}></div>
         {commentAnchor && !modal && scrollToBottom()}
       </section>
@@ -157,7 +158,13 @@ const ProjectComments = ({
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    comments: state.comments.projectComments
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { addProjectComment }
 )(ProjectComments);
