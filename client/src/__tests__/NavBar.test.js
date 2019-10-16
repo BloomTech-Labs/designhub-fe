@@ -1,5 +1,5 @@
 import React from 'react'
-import NavBar from '../components/NavBar'
+import NavBar from '../components/Navbar.js'
 
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
