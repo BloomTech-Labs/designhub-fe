@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useAuth0 } from './auth-wrapper.js';
-import { axiosWithAuth } from './utilities/axiosWithAuth.js';
 
 import DesignHub from './DesignHub.js';
 import LandingPage from './components/LandingPage.js';

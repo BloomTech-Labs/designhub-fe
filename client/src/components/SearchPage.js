@@ -9,10 +9,6 @@ import '../SASS/SearchPage.scss';
 import '../SASS/UserProfile.scss';
 
 class SearchPage extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   displayUsers = () => {
     return this.props.searchData.users.map((user, index) => {
       return <SearchUserCard user={user} key={index} />;

@@ -18,8 +18,7 @@ class UserProfile_Tabs extends Component {
     const followers = this.props.followers;
     const following = this.props.following;
     const starred = this.props.starred;
-    const isFollowed = this.props.isFollowed;
-    console.log('hEOOOOOO', projects)
+    console.log('hEOOOOOO', projects);
     return (
       <div className="profile-tabs-container">
         <div>

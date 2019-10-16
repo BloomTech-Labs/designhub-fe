@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import moment from 'moment';
 
@@ -38,21 +39,32 @@ const Notifications = props => {
     console.log(item.unread);
     if (item.type === 'comment') {
       return (
-        <div key={item.id} className="notification_body">
-          {item.unread === true ? <h2>UNREAD</h2> : <h2>READ</h2>}
-          <img src={item.activeUserAvatar} />
-          <p>
-            <span>{item.activeUsername} commented</span> {item.commentText}
-          </p>
-          <p>{moment(item.created_at).fromNow()} </p>
-          <img src={item.mainImgUrl} />
+        <div key={item.id} className="commented_notification">
+          <div className="commented_left">
+            {item.unread === true ? <h2>UNREAD</h2> : <h2>READ</h2>}
+            <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
+            <p className="commented">
+              {item.activeUsername} commented
+              <mark className="comment_text">
+                &nbsp;{item.commentText}&nbsp;
+              </mark>
+            </p>
+            <p>&nbsp;{moment(item.created_at).fromNow()}&nbsp;</p>
+          </div>
+          <Link to={`/project/${item.projectId}`}>
+            <img
+              src={item.mainImgUrl}
+              className="thumbnail_preview"
+              alt="thumbnail"
+            />
+          </Link>
         </div>
       );
     } else if (item.type === 'follow') {
       return (
         <div key={item.id} className="notification">
           {item.unread === true && <h2>UNREAD</h2>}
-          <img src={item.activeUserAvatar} className="avatar" />
+          <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
           <p className="followed_you">
             {item.activeUsername}&nbsp;followed&nbsp;
           </p>
