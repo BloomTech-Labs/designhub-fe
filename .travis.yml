@@ -12,7 +12,7 @@ cache:
 script:
   - cd client
   - npm install
-  - npm test
+  - npm test -u
   - npm run build
 
 notification:

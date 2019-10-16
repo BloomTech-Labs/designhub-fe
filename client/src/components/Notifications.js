@@ -70,8 +70,6 @@ const Notifications = props => {
   const renderRead = array => {
     return array.map(i => renderBasedOnType(i));
   };
-
-  console.log(state);
   return (
     <div className="notification-container">
       {state.unReadNotifications && renderUnread(state.unReadNotifications)}
