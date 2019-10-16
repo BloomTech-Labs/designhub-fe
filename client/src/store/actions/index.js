@@ -87,6 +87,9 @@ export const DELETE_FOLLOW_FAILURE = 'DELETE_FOLLOW_FAILURE';
 export const GET_IS_FOLLOWED_START = 'GET_IS_FOLLOWED_START';
 export const GET_IS_FOLLOWED_SUCCESS = 'GET_IS_FOLLOWED_SUCCESS';
 export const GET_IS_FOLLOWED_FAILURE = 'GET_IS_FOLLOWED_FAILURE';
+export const FOLLOW_NOTIFICATION_START = 'FOLLOW_NOTIFICATION_START';
+export const FOLLOW_NOTIFICATION_SUCCESS = 'FOLLOW_NOTIFICATION_SUCCESS';
+export const FOLLOW_NOTIFICATION_FAILURE = 'FOLLOW_NOTIFICATION_FAILURE';
 
 //Stars
 export const STAR_PROJECT_START = 'STAR_PROJECT_START';
@@ -392,6 +395,25 @@ export const deletePhoto = photoId => dispatch => {
 };
 
 //Followers Actions
+
+export const followNotification = (followId, activeUser, params) => dispatch => {
+  dispatch({ type: FOLLOW_NOTIFICATION_START })
+  return axiosWithAuth().post('api/v1/invite/follow', {
+    activeUsername: activeUser.username,
+    invitedUserId: params.id,
+    activeUserId: activeUser.id,
+    followersId: followId,
+    activeUserAvatar: activeUser.avatar,
+    type: 'follow'
+  })
+  .then((res) => {
+    dispatch({ type: FOLLOW_NOTIFICATION_SUCCESS })
+  })
+  .catch(err => {
+    dispatch({ type: FOLLOW_NOTIFICATION_FAILURE, payload: err.message })
+  })
+}
+
 export const getFollowers = userId => dispatch => {
   dispatch({ type: GET_FOLLOWERS_START });
   return axiosWithAuth()
@@ -454,6 +476,7 @@ export const addFollow = followObject => dispatch => {
       dispatch({
         type: ADD_FOLLOW_SUCCESS
       });
+      return res
     })
     .catch(err => {
       dispatch({ type: ADD_FOLLOW_FAILURE, payload: err.message });
@@ -483,6 +506,7 @@ export const getIsFollowed = (myId, theirId) => dispatch => {
       dispatch({ type: GET_IS_FOLLOWED_FAILURE, payload: err.message });
     });
 };
+
 
 //Stars Actions
 export const starProject = starObject => dispatch => {
