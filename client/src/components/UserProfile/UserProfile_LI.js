@@ -140,7 +140,9 @@ class UserProfile_LI extends Component {
       .catch(err => console.log(err));
   };
 
+  
   render() {
+    console.log('HOOOoooo', this.props.isFollowed)
     window.scroll(0, 0);
     // if (this.state.userData.avatar === undefined) {
     //   return <div>Loading</div>;
@@ -223,7 +225,7 @@ class UserProfile_LI extends Component {
                   </Link>
                 ) : (
                   <>
-                    {this.props.isFollowed ? (
+                    {this.props.isFollowed === true ? (
                       <button
                         className="edit-profile-btn"
                         onClick={this.unfollowUser}
