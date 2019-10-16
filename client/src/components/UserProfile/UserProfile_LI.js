@@ -18,7 +18,10 @@ import {
   getFollowers,
   getFollowing,
   getStarredProjects,
-  getIsFollowed
+  getIsFollowed,
+  deleteFollow,
+  addFollow,
+  followNotification
 } from '../../store/actions';
 
 // ========== STYLES ========== //
@@ -71,45 +74,24 @@ class UserProfile_LI extends Component {
     }
   }
 
-  //sends follow notification to user you followed
-  followNotification = (props, followId) => {
-    const {
-      activeUser: { username, id, avatar },
-      match: { params }
-    } = props;
-    axiosWithAuth().post('api/v1/invite/follow', {
-      activeUsername: username,
-      invitedUserId: params.id,
-      activeUserId: id,
-      followersId: followId,
-      activeUserAvatar: avatar,
-      type: 'follow'
-    });
-  };
-
   followUser = () => {
     const followingObj = {
       followingId: this.state.myId,
       followedId: this.state.userId
     };
-    return axiosWithAuth()
-      .post('api/v1/followers', followingObj)
+    this.props.addFollow(followingObj)
       .then(res => {
-        this.followNotification(this.props, res.data.data[0].id);
+        this.props.followNotification(
+          res.data.data[0].id, 
+          this.props.activeUser, 
+          this.props.match.params
+        );
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/count/followers/${this.state.userId}`)
-          .then(res => {
-            this.setState({ followers: res.data[0].count });
-          });
+        this.props.getFollowersCount(this.state.userId);
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
-          .then(res => {
-            this.setState({ isFollowed: res.data.isFollowed });
-          });
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
       })
       .catch(err => console.log(err));
   };
@@ -118,28 +100,17 @@ class UserProfile_LI extends Component {
     const unFollowObj = {
       id: this.state.myId
     };
-    axiosWithAuth()
-      .post(`api/v1/followers/unfollow/${this.state.userId}`, unFollowObj)
-      .then(res => {
-        console.log(res.data);
+    this.props.deleteFollow(this.state.userId, unFollowObj)
+      .then(() => {
+        this.props.getFollowersCount(this.state.userId);
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/count/followers/${this.state.userId}`)
-          .then(res => {
-            this.setState({ followers: res.data[0].count });
-          });
-      })
-      .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
-          .then(res => {
-            this.setState({ isFollowed: res.data.isFollowed });
-          });
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
       })
       .catch(err => console.log(err));
   };
 
+  
   render() {
     window.scroll(0, 0);
     // if (this.state.userData.avatar === undefined) {
@@ -277,6 +248,9 @@ export default connect(
     getFollowers,
     getFollowing,
     getStarredProjects,
-    getIsFollowed
+    getIsFollowed,
+    deleteFollow,
+    addFollow,
+    followNotification
   }
 )(UserProfile_LI);
