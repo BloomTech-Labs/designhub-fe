@@ -24,84 +24,69 @@ const ExploreTabs = ({ recent, popular, following }) => {
           </TabList>
           {/* // ======== Popular Tab ======== // */}
           <TabPanel className="tabs-container">
-            <div className="header-popular-projects">
+            <div className="explore-projects-array">
               {popular.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg ? project.mainImg : defaultImg}
-                    alt={project.name}
-                    className="large-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
-              ))}
-            </div>
-            <div className="popular-projects-array">
-              {popular.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg ? project.mainImg : defaultImg}
-                    alt={project.name}
-                    className="small-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
+                <div className="project-content" key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <>
+                      <div className="project-info">
+                        <h1>{project.name}</h1>
+                      </div>
+                      <img
+                        src={project.mainImg ? project.mainImg : defaultImg}
+                        className="project-thumbnail"
+                        alt="test"
+                        key={project.id}
+                      />
+                    </>
+                  </Link>
+                </div>
               ))}
             </div>
           </TabPanel>
 
           {/* // ======== Recents Tab ======== // */}
           <TabPanel className="tabs-container">
-            <div className="header-popular-projects">
+            <div className="explore-projects-array">
               {recent.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg ? project.mainImg : defaultImg}
-                    alt={project.name}
-                    className="large-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
-              ))}
-            </div>
-            <div className="popular-projects-array">
-              {recent.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg ? project.mainImg : defaultImg}
-                    alt={project.name}
-                    className="small-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
+                <div className="project-content" key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <>
+                      <div className="project-info">
+                        <h1>{project.name}</h1>
+                      </div>
+                      <img
+                        src={project.mainImg ? project.mainImg : defaultImg}
+                        className="project-thumbnail"
+                        alt="test"
+                        key={project.id}
+                      />
+                    </>
+                  </Link>
+                </div>
               ))}
             </div>
           </TabPanel>
 
           {/* // ======== Following Tab ======== // */}
           <TabPanel className="tabs-container">
-            <div className="header-popular-projects">
+            <div className="explore-projects-array">
               {following.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg ? project.mainImg : defaultImg}
-                    alt={project.name}
-                    className="large-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
-              ))}
-            </div>
-            <div className="popular-projects-array">
-              {following.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg ? project.mainImg : defaultImg}
-                    alt={project.name}
-                    className="small-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
+                <div className="project-content" key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <>
+                      <div className="project-info">
+                        <h1>{project.name}</h1>
+                      </div>
+                      <img
+                        src={project.mainImg ? project.mainImg : defaultImg}
+                        className="project-thumbnail"
+                        alt="test"
+                        key={project.id}
+                      />
+                    </>
+                  </Link>
+                </div>
               ))}
             </div>
           </TabPanel>

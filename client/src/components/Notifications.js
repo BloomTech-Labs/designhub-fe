@@ -53,7 +53,9 @@ const Notifications = props => {
         <div key={item.id} className="notification">
           {item.unread === true && <h2>UNREAD</h2>}
           <img src={item.activeUserAvatar} className="avatar" />
-          <p>{item.activeUsername}&nbsp;followed&nbsp;</p>
+          <p className="followed_you">
+            {item.activeUsername}&nbsp;followed&nbsp;
+          </p>
           <p>&nbsp;you&nbsp;</p>
           <p>&nbsp;{moment(item.created_at).fromNow()} </p>
         </div>
