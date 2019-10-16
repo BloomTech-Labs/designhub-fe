@@ -20,11 +20,11 @@
   }
 
   .StickyComments__TopBar__Icons {
+    align-items: center;
+    display: flex;
     position: absolute;
     top: 20%;
     right: 5.5%;
-    align-items: center;
-    display: flex;
 
     svg {
       cursor: pointer;
@@ -80,16 +80,16 @@
 }
 
 main.StickyComment__container.TempComment {
-  margin: -47px 0 0 9px;
+  margin: -47px 0 0 9px; //negative margin compensates for centering
   z-index: 123456789;
 }
 
 main.StickyComment__container {
   align-items: flex-start;
   display: none;
-  // display: flex; //for dev testing only
   flex-direction: row;
   margin: -23px 0 0 10px; //negative margin compensates for centering
+  max-width: 400px;
   position: absolute;
   z-index: 123456789;
 
@@ -99,9 +99,6 @@ main.StickyComment__container {
 
   hr.StickyComment__midbar {
     display: none;
-    background: $blue;
-    border-color: $blue;
-    // width: 64px; //temp fix for small viewport display bug
   }
 
   .StickyComment__body {
@@ -166,8 +163,8 @@ main.StickyComment__container {
 
   button.StickyComments__submit-btn {
     align-self: flex-end;
-    background-color: $blue;
-    border: 1px solid $white;
+    background: rgba(0, 0, 0, 0.357);
+    border: none;
     border-radius: 100%;
     cursor: pointer;
     height: 40px;
