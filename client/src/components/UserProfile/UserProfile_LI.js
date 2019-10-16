@@ -44,32 +44,33 @@ class UserProfile_LI extends Component {
 
   fetch() {
     this.props
-      .getSingleUser(this.state.userId, this.state.myId)
+      .getSingleUser(this.props.match.params.id, this.props.activeUser.id)
       .then(() => {
-        this.props.getFollowingCount(this.state.userId);
+        this.props.getFollowingCount(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getFollowersCount(this.state.userId);
+        this.props.getFollowersCount(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getProjectsByUser(this.state.userId);
+        this.props.getProjectsByUser(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getFollowers(this.state.userId);
+        this.props.getFollowers(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getFollowing(this.state.userId);
+        this.props.getFollowing(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getStarredProjects(this.state.userId);
+        this.props.getStarredProjects(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getIsFollowed(this.state.myId, this.state.userId);
+        this.props.getIsFollowed(this.props.activeUser.id, this.props.match.params.id);
       });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
+      console.log('HDFKSFDhelooOOooOOOOOO')
       this.fetch();
     }
   }
