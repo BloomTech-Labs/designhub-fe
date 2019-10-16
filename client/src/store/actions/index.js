@@ -284,7 +284,7 @@ export const addProjectComment = comment => dispatch => {
     .catch(err => {
       dispatch({
         type: ADD_PROJECT_COMMENT_FAILURE,
-        payload: err.message.message
+        payload: err.message
       });
     });
 };
@@ -303,7 +303,7 @@ export const addPhotoComment = comment => dispatch => {
     .catch(err => {
       dispatch({
         type: ADD_PHOTO_COMMENT_FAILURE,
-        payload: err.message.message
+        payload: err.message
       });
     });
 };
@@ -321,7 +321,7 @@ export const updateComment = (changes, id) => dispatch => {
     .catch(err => {
       dispatch({
         type: UPDATE_COMMENT_FAILURE,
-        payload: err.message.message
+        payload: err.message
       });
     });
 };
@@ -338,7 +338,7 @@ export const deleteComment = id => dispatch => {
     .catch(err => {
       dispatch({
         type: DELETE_COMMENT_FAILURE,
-        payload: err.message.message
+        payload: err.message
       });
     });
 };
@@ -566,7 +566,7 @@ export const createHeatmap = userId => dispatch => {
       dispatch({ type: CREATE_HEATMAP_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: CREATE_HEATMAP_FAILURE, payload: err.message.message });
+      dispatch({ type: CREATE_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
@@ -578,7 +578,7 @@ export const getHeatmapsFromUserId = userId => dispatch => {
       dispatch({ type: GET_HEATMAP_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_HEATMAP_FAILURE, payload: err.message.message });
+      dispatch({ type: GET_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
@@ -590,7 +590,7 @@ export const getAllContributionsFromUserId = userId => dispatch => {
       dispatch({ type: GET_ALL_CONTRIBS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_ALL_CONTRIBS_FAILURE, payload: err.message.message });
+      dispatch({ type: GET_ALL_CONTRIBS_FAILURE, payload: err.message });
     });
 };
 
@@ -602,7 +602,7 @@ export const getContributionsCount = userId => dispatch => {
       dispatch({ type: GET_CONTRIBS_COUNT_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_CONTRIBS_COUNT_FAILURE, payload: err.message.message });
+      dispatch({ type: GET_CONTRIBS_COUNT_FAILURE, payload: err.message });
     });
 };
 
@@ -614,7 +614,7 @@ export const updateHeatmap = (changes, userId) => dispatch => {
       dispatch({ type: UPDATE_HEATMAP_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: UPDATE_HEATMAP_FAILURE, payload: err.message.message });
+      dispatch({ type: UPDATE_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
@@ -626,7 +626,7 @@ export const deleteHeatmap = id => dispatch => {
       dispatch({ type: DELETE_HEATMAP_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: DELETE_HEATMAP_FAILURE, payload: err.message.message });
+      dispatch({ type: DELETE_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
