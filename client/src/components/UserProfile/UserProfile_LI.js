@@ -30,10 +30,7 @@ import '../../SASS/UserProfile.scss';
 class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userId: parseInt(this.props.match.params.id),
-      myId: this.props.activeUser.id
-    };
+    this.state = {};
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
@@ -77,8 +74,8 @@ class UserProfile_LI extends Component {
 
   followUser = () => {
     const followingObj = {
-      followingId: this.state.myId,
-      followedId: this.state.userId
+      followingId: this.props.activeUser.id,
+      followedId: parseInt(this.props.match.params.id)
     };
     this.props.addFollow(followingObj)
       .then(res => {
@@ -89,24 +86,24 @@ class UserProfile_LI extends Component {
         );
       })
       .then(() => {
-        this.props.getFollowersCount(this.state.userId);
+        this.props.getFollowersCount(parseInt(this.props.match.params.id));
       })
       .then(() => {
-        this.props.getIsFollowed(this.state.myId, this.state.userId);
+        this.props.getIsFollowed(this.props.activeUser.id, parseInt(this.props.match.params.id));
       })
       .catch(err => console.log(err));
   };
 
   unfollowUser = () => {
     const unFollowObj = {
-      id: this.state.myId
+      id: this.props.activeUser.id
     };
-    this.props.deleteFollow(this.state.userId, unFollowObj)
+    this.props.deleteFollow(parseInt(this.props.match.params.id), unFollowObj)
       .then(() => {
-        this.props.getFollowersCount(this.state.userId);
+        this.props.getFollowersCount(parseInt(this.props.match.params.id));
       })
       .then(() => {
-        this.props.getIsFollowed(this.state.myId, this.state.userId);
+        this.props.getIsFollowed(this.props.activeUser.id, parseInt(this.props.match.params.id));
       })
       .catch(err => console.log(err));
   };
@@ -189,7 +186,7 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {this.props.activeUser.id === this.state.userId ? (
+                {this.props.activeUser.id === Number(this.props.match.params.id) ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>
