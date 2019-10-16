@@ -19,7 +19,7 @@ class UserProfile_Tabs extends Component {
     const following = this.props.following;
     const starred = this.props.starred;
     const isFollowed = this.props.isFollowed;
-
+    console.log('hEOOOOOO', projects)
     return (
       <div className="profile-tabs-container">
         <div>
@@ -47,7 +47,7 @@ class UserProfile_Tabs extends Component {
                 <h2>Recent Projects</h2>
               </div>
               <div className="tab-content">
-                {projects === null && (
+                {projects.length === 0 && (
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
                     <h1 className="no-projects">
