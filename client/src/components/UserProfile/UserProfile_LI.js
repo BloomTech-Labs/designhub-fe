@@ -17,7 +17,10 @@ import {
   getFollowers,
   getFollowing,
   getStarredProjects,
-  getIsFollowed
+  getIsFollowed,
+  deleteFollow,
+  addFollow,
+  followNotification
 } from '../../store/actions';
 
 // ========== STYLES ========== //
@@ -40,75 +43,55 @@ class UserProfile_LI extends Component {
 
   fetch() {
     this.props
-      .getSingleUser(this.state.userId, this.state.myId)
+      .getSingleUser(this.props.match.params.id, this.props.activeUser.id)
       .then(() => {
-        this.props.getFollowingCount(this.state.userId);
+        this.props.getFollowingCount(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getFollowersCount(this.state.userId);
+        this.props.getFollowersCount(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getProjectsByUser(this.state.userId);
+        this.props.getProjectsByUser(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getFollowers(this.state.userId);
+        this.props.getFollowers(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getFollowing(this.state.userId);
+        this.props.getFollowing(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getStarredProjects(this.state.userId);
+        this.props.getStarredProjects(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getIsFollowed(this.state.myId, this.state.userId);
+        this.props.getIsFollowed(this.props.activeUser.id, this.props.match.params.id);
       });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
+      console.log('HDFKSFDhelooOOooOOOOOO')
       this.fetch();
     }
   }
-
-  //sends follow notification to user you followed
-  followNotification = (props, followId) => {
-    const {
-      activeUser: { username, id, avatar },
-      match: { params }
-    } = props;
-    axiosWithAuth().post('api/v1/invite/follow', {
-      activeUsername: username,
-      invitedUserId: params.id,
-      activeUserId: id,
-      followersId: followId,
-      activeUserAvatar: avatar,
-      type: 'follow'
-    });
-  };
 
   followUser = () => {
     const followingObj = {
       followingId: this.state.myId,
       followedId: this.state.userId
     };
-    return axiosWithAuth()
-      .post('api/v1/followers', followingObj)
+    this.props.addFollow(followingObj)
       .then(res => {
-        this.followNotification(this.props, res.data.data[0].id);
+        this.props.followNotification(
+          res.data.data[0].id, 
+          this.props.activeUser, 
+          this.props.match.params
+        );
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/count/followers/${this.state.userId}`)
-          .then(res => {
-            this.setState({ followers: res.data[0].count });
-          });
+        this.props.getFollowersCount(this.state.userId);
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
-          .then(res => {
-            this.setState({ isFollowed: res.data.isFollowed });
-          });
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
       })
       .catch(err => console.log(err));
   };
@@ -117,28 +100,17 @@ class UserProfile_LI extends Component {
     const unFollowObj = {
       id: this.state.myId
     };
-    axiosWithAuth()
-      .post(`api/v1/followers/unfollow/${this.state.userId}`, unFollowObj)
-      .then(res => {
-        console.log(res.data);
+    this.props.deleteFollow(this.state.userId, unFollowObj)
+      .then(() => {
+        this.props.getFollowersCount(this.state.userId);
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/count/followers/${this.state.userId}`)
-          .then(res => {
-            this.setState({ followers: res.data[0].count });
-          });
-      })
-      .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
-          .then(res => {
-            this.setState({ isFollowed: res.data.isFollowed });
-          });
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
       })
       .catch(err => console.log(err));
   };
 
+  
   render() {
     window.scroll(0, 0);
     // if (this.state.userData.avatar === undefined) {
@@ -276,6 +248,9 @@ export default connect(
     getFollowers,
     getFollowing,
     getStarredProjects,
-    getIsFollowed
+    getIsFollowed,
+    deleteFollow,
+    addFollow,
+    followNotification
   }
 )(UserProfile_LI);

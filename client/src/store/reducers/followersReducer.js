@@ -19,7 +19,10 @@ import {
   DELETE_FOLLOW_FAILURE,
   GET_IS_FOLLOWED_START,
   GET_IS_FOLLOWED_SUCCESS,
-  GET_IS_FOLLOWED_FAILURE
+  GET_IS_FOLLOWED_FAILURE,
+  FOLLOW_NOTIFICATION_START,
+  FOLLOW_NOTIFICATION_SUCCESS,
+  FOLLOW_NOTIFICATION_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -34,6 +37,22 @@ const initialState = {
 
 export const followersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case FOLLOW_NOTIFICATION_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case FOLLOW_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      };
+    case FOLLOW_NOTIFICATION_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     case GET_FOLLOWERS_START:
       return {
         ...state,

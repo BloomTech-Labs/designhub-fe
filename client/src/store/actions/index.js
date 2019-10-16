@@ -87,6 +87,9 @@ export const DELETE_FOLLOW_FAILURE = 'DELETE_FOLLOW_FAILURE';
 export const GET_IS_FOLLOWED_START = 'GET_IS_FOLLOWED_START';
 export const GET_IS_FOLLOWED_SUCCESS = 'GET_IS_FOLLOWED_SUCCESS';
 export const GET_IS_FOLLOWED_FAILURE = 'GET_IS_FOLLOWED_FAILURE';
+export const FOLLOW_NOTIFICATION_START = 'FOLLOW_NOTIFICATION_START';
+export const FOLLOW_NOTIFICATION_SUCCESS = 'FOLLOW_NOTIFICATION_SUCCESS';
+export const FOLLOW_NOTIFICATION_FAILURE = 'FOLLOW_NOTIFICATION_FAILURE';
 
 //Stars
 export const STAR_PROJECT_START = 'STAR_PROJECT_START';
@@ -281,7 +284,7 @@ export const addProjectComment = comment => dispatch => {
     .catch(err => {
       dispatch({
         type: ADD_PROJECT_COMMENT_FAILURE,
-        payload: err.data.message
+        payload: err.message
       });
     });
 };
@@ -300,7 +303,7 @@ export const addPhotoComment = comment => dispatch => {
     .catch(err => {
       dispatch({
         type: ADD_PHOTO_COMMENT_FAILURE,
-        payload: err.data.message
+        payload: err.message
       });
     });
 };
@@ -318,7 +321,7 @@ export const updateComment = (changes, id) => dispatch => {
     .catch(err => {
       dispatch({
         type: UPDATE_COMMENT_FAILURE,
-        payload: err.data.message
+        payload: err.message
       });
     });
 };
@@ -335,7 +338,7 @@ export const deleteComment = id => dispatch => {
     .catch(err => {
       dispatch({
         type: DELETE_COMMENT_FAILURE,
-        payload: err.data.message
+        payload: err.message
       });
     });
 };
@@ -350,7 +353,7 @@ export const getProjectPhotos = projectId => dispatch => {
       return res;
     })
     .catch(err => {
-      dispatch({ type: GET_PROJECT_PHOTOS_FAILURE, payload: err.data });
+      dispatch({ type: GET_PROJECT_PHOTOS_FAILURE, payload: err.message });
     });
 };
 
@@ -362,7 +365,7 @@ export const getSinglePhoto = photoId => dispatch => {
       dispatch({ type: GET_SINGLE_PHOTO_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_SINGLE_PHOTO_FAILURE, payload: err.data });
+      dispatch({ type: GET_SINGLE_PHOTO_FAILURE, payload: err.message });
     });
 };
 
@@ -375,7 +378,7 @@ export const addPhoto = photo => dispatch => {
       return res;
     })
     .catch(err => {
-      dispatch({ type: ADD_PROJECT_PHOTO_FAILURE, payload: err.data });
+      dispatch({ type: ADD_PROJECT_PHOTO_FAILURE, payload: err.message });
     });
 };
 
@@ -387,11 +390,30 @@ export const deletePhoto = photoId => dispatch => {
       dispatch({ type: DELETE_PHOTO_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: DELETE_PHOTO_FAILURE, payload: err.data });
+      dispatch({ type: DELETE_PHOTO_FAILURE, payload: err.message });
     });
 };
 
 //Followers Actions
+
+export const followNotification = (followId, activeUser, params) => dispatch => {
+  dispatch({ type: FOLLOW_NOTIFICATION_START })
+  return axiosWithAuth().post('api/v1/invite/follow', {
+    activeUsername: activeUser.username,
+    invitedUserId: params.id,
+    activeUserId: activeUser.id,
+    followersId: followId,
+    activeUserAvatar: activeUser.avatar,
+    type: 'follow'
+  })
+  .then((res) => {
+    dispatch({ type: FOLLOW_NOTIFICATION_SUCCESS })
+  })
+  .catch(err => {
+    dispatch({ type: FOLLOW_NOTIFICATION_FAILURE, payload: err.message })
+  })
+}
+
 export const getFollowers = userId => dispatch => {
   dispatch({ type: GET_FOLLOWERS_START });
   return axiosWithAuth()
@@ -400,7 +422,7 @@ export const getFollowers = userId => dispatch => {
       dispatch({ type: GET_FOLLOWERS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWERS_FAILURE, payload: err.data });
+      dispatch({ type: GET_FOLLOWERS_FAILURE, payload: err.message });
     });
 };
 
@@ -415,7 +437,7 @@ export const getFollowersCount = userId => dispatch => {
       });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWERS_COUNT_FAILURE, payload: err.data });
+      dispatch({ type: GET_FOLLOWERS_COUNT_FAILURE, payload: err.message });
     });
 };
 
@@ -427,7 +449,7 @@ export const getFollowing = userId => dispatch => {
       dispatch({ type: GET_FOLLOWING_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWING_FAILURE, payload: err.data });
+      dispatch({ type: GET_FOLLOWING_FAILURE, payload: err.message });
     });
 };
 
@@ -442,7 +464,7 @@ export const getFollowingCount = userId => dispatch => {
       });
     })
     .catch(err => {
-      dispatch({ type: GET_FOLLOWING_COUNT_FAILURE, payload: err.data });
+      dispatch({ type: GET_FOLLOWING_COUNT_FAILURE, payload: err.message });
     });
 };
 
@@ -454,9 +476,10 @@ export const addFollow = followObject => dispatch => {
       dispatch({
         type: ADD_FOLLOW_SUCCESS
       });
+      return res
     })
     .catch(err => {
-      dispatch({ type: ADD_FOLLOW_FAILURE, payload: err.data });
+      dispatch({ type: ADD_FOLLOW_FAILURE, payload: err.message });
     });
 };
 
@@ -468,7 +491,7 @@ export const deleteFollow = (myId, theirId) => dispatch => {
       dispatch({ type: DELETE_FOLLOW_SUCCESS, payload: res.data.message });
     })
     .catch(err => {
-      dispatch({ type: DELETE_FOLLOW_FAILURE, payload: err.data });
+      dispatch({ type: DELETE_FOLLOW_FAILURE, payload: err.message });
     });
 };
 
@@ -477,12 +500,13 @@ export const getIsFollowed = (myId, theirId) => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/followers/${myId}/${theirId}`)
     .then(res => {
-      dispatch({ type: GET_IS_FOLLOWED_SUCCESS, payload: res.data });
+      dispatch({ type: GET_IS_FOLLOWED_SUCCESS, payload: res.data.isFollowed });
     })
     .catch(err => {
-      dispatch({ type: GET_IS_FOLLOWED_FAILURE, payload: err.data });
+      dispatch({ type: GET_IS_FOLLOWED_FAILURE, payload: err.message });
     });
 };
+
 
 //Stars Actions
 export const starProject = starObject => dispatch => {
@@ -493,7 +517,7 @@ export const starProject = starObject => dispatch => {
       dispatch({ type: STAR_PROJECT_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: STAR_PROJECT_FAILURE, payload: err.data });
+      dispatch({ type: STAR_PROJECT_FAILURE, payload: err.message });
     });
 };
 
@@ -505,7 +529,7 @@ export const unstarProject = (userId, projectId) => dispatch => {
       dispatch({ type: UNSTAR_PROJECT_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: UNSTAR_PROJECT_FAILURE, payload: err.data });
+      dispatch({ type: UNSTAR_PROJECT_FAILURE, payload: err.message });
     });
 };
 
@@ -517,7 +541,7 @@ export const getStarredProjects = userId => dispatch => {
       dispatch({ type: GET_STARRED_PROJECTS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_STARRED_PROJECTS_FAILURE, payload: err.data });
+      dispatch({ type: GET_STARRED_PROJECTS_FAILURE, payload: err.message });
     });
 };
 
@@ -529,7 +553,7 @@ export const getProjectStarCount = userId => dispatch => {
       dispatch({ type: GET_PROJECT_STAR_COUNT_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_PROJECT_STAR_COUNT_FAILURE, payload: err.data });
+      dispatch({ type: GET_PROJECT_STAR_COUNT_FAILURE, payload: err.message });
     });
 };
 
@@ -542,7 +566,7 @@ export const createHeatmap = userId => dispatch => {
       dispatch({ type: CREATE_HEATMAP_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: CREATE_HEATMAP_FAILURE, payload: err.data.message });
+      dispatch({ type: CREATE_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
@@ -554,7 +578,7 @@ export const getHeatmapsFromUserId = userId => dispatch => {
       dispatch({ type: GET_HEATMAP_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_HEATMAP_FAILURE, payload: err.data.message });
+      dispatch({ type: GET_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
@@ -566,7 +590,7 @@ export const getAllContributionsFromUserId = userId => dispatch => {
       dispatch({ type: GET_ALL_CONTRIBS_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_ALL_CONTRIBS_FAILURE, payload: err.data.message });
+      dispatch({ type: GET_ALL_CONTRIBS_FAILURE, payload: err.message });
     });
 };
 
@@ -578,7 +602,7 @@ export const getContributionsCount = userId => dispatch => {
       dispatch({ type: GET_CONTRIBS_COUNT_SUCCESS, payload: res.data });
     })
     .catch(err => {
-      dispatch({ type: GET_CONTRIBS_COUNT_FAILURE, payload: err.data.message });
+      dispatch({ type: GET_CONTRIBS_COUNT_FAILURE, payload: err.message });
     });
 };
 
@@ -590,7 +614,7 @@ export const updateHeatmap = (changes, userId) => dispatch => {
       dispatch({ type: UPDATE_HEATMAP_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: UPDATE_HEATMAP_FAILURE, payload: err.data.message });
+      dispatch({ type: UPDATE_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
@@ -602,7 +626,7 @@ export const deleteHeatmap = id => dispatch => {
       dispatch({ type: DELETE_HEATMAP_SUCCESS });
     })
     .catch(err => {
-      dispatch({ type: DELETE_HEATMAP_FAILURE, payload: err.data.message });
+      dispatch({ type: DELETE_HEATMAP_FAILURE, payload: err.message });
     });
 };
 
