@@ -105,11 +105,7 @@ class UserProfile_LI extends Component {
           });
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
-          .then(res => {
-            this.setState({ isFollowed: res.data.isFollowed });
-          });
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
       })
       .catch(err => console.log(err));
   };
@@ -131,11 +127,7 @@ class UserProfile_LI extends Component {
           });
       })
       .then(() => {
-        return axiosWithAuth()
-          .get(`api/v1/followers/${this.state.myId}/${this.state.userId}`)
-          .then(res => {
-            this.setState({ isFollowed: res.data.isFollowed });
-          });
+        this.props.getIsFollowed(this.state.myId, this.state.userId);
       })
       .catch(err => console.log(err));
   };
@@ -225,7 +217,7 @@ class UserProfile_LI extends Component {
                   </Link>
                 ) : (
                   <>
-                    {this.props.isFollowed === true ? (
+                    {this.props.isFollowed ? (
                       <button
                         className="edit-profile-btn"
                         onClick={this.unfollowUser}
