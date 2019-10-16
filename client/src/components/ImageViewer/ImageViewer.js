@@ -12,9 +12,16 @@ class ImageViewer extends Component {
     super(props);
     this.state = {
       activeImg: null,
-      comments: this.props.comments,
+      comments: [],
       modal: false
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      ...this.state,
+      comments: this.props.comments
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -25,21 +32,12 @@ class ImageViewer extends Component {
     }
   }
 
-  addComments = newComments => {
-    this.setState({
-      ...this.state,
-      comments: newComments
-    });
-  };
-
   changeImg = imgObj => {
     if (
       this.state.activeImg === null ||
       this.state.activeImg.id !== imgObj.id
     ) {
-      this.setState({ activeImg: imgObj }, () =>
-        console.log('ImageViwer.js changeImg() activeImg', this.state.activeImg)
-      );
+      this.setState({ activeImg: imgObj });
     }
   };
 
@@ -66,7 +64,6 @@ class ImageViewer extends Component {
                   <ImageWithComments
                     activeUser={this.props.activeUser}
                     activeImg={activeImg}
-                    addComments={this.addComments}
                     closeModal={this.closeModal}
                     comments={
                       this.state.comments.length > 0
@@ -113,12 +110,6 @@ class ImageViewer extends Component {
           </div>
           <ProjectComments
             activeUser={this.props.activeUser}
-            addComments={this.addComments}
-            comments={
-              this.state.comments.length > 0
-                ? this.state.comments
-                : this.props.comments
-            }
             modal={modal}
             thisProject={this.props.thisProject}
           />

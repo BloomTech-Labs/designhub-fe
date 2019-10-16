@@ -9,7 +9,11 @@ import ModalXIcon from '../Icons/ModalXIcon.js';
 import CommentBubbleIcon from '../Icons/CommentBubbleIcon.js';
 import '../../SASS/StickyComment.scss';
 
-import { addPhotoComment } from '../../store/actions';
+import {
+  addPhotoComment,
+  getPhotoComments,
+  getProjectComments
+} from '../../store/actions';
 const uuidv1 = require('uuid/v1');
 
 class ImageWithComments extends Component {
@@ -29,10 +33,11 @@ class ImageWithComments extends Component {
   render() {
     const { id, url } = this.props.activeImg;
 
-    const { hidden, comments, tempComments } = this.state;
+    const { hidden, tempComments } = this.state;
 
-    let activeComments = comments.filter(c => c.imageId === id);
-    console.log('ImageWithComments.js render() activeComments', activeComments);
+    // let activeComments = comments.filter(c => c.imageId === id);
+
+    let activeComments = this.props.photoComments;
     let activeTemp = tempComments.filter(c => c.imageId === id);
     return (
       <>
@@ -69,7 +74,6 @@ class ImageWithComments extends Component {
                 commentDelete={this.commentDelete}
               />
             ))}
-
           {activeComments[0] &&
             activeComments.map(s => (
               <StickyComment
@@ -87,36 +91,12 @@ class ImageWithComments extends Component {
     this.element = findDOMNode(this);
     // GET ALL COMMENTS
     const projectComments = this.props.comments;
-    // console.log(
-    //   'ImageWithComments.js componentDidMount() this.props.comments',
-    //   this.props.comments
-    // );
+    this.props.getPhotoComments(this.props.activeImg.id);
     this.setState({
       ...this.state,
       comments: projectComments
     });
   }
-
-  commentDelete = id => {
-    let updateTemp = this.state.tempComments.filter(i => i.id !== id);
-    let updateComments = this.state.comments.filter(i => i.id !== id);
-    this.setState({
-      ...this.state,
-      tempComments: updateTemp,
-      comments: updateComments
-    });
-  };
-
-  commentEdit = id => {
-    let updateComments = this.state.comments.map(i => {
-      if (i.id === id) return { ...i, editing: true };
-      else return { ...i, editing: false };
-    });
-    this.setState({
-      ...this.state,
-      comments: updateComments
-    });
-  };
 
   makeComment = (id, x, y) => {
     const newComment = {
@@ -178,19 +158,13 @@ class ImageWithComments extends Component {
     // delete local state flags before submitting to database
     delete thisComment.id;
     delete thisComment.editing;
-    // console.log('ImageWithComments.js handleSubmit() thisComment', thisComment);
 
     try {
       const res = await this.props.addPhotoComment(thisComment);
-      console.log('addPhotoComment res', res);
-
       const newComment = res.data.data[0];
-
-      //glue the avatar back on and insert into local state so we don't have to reload the component
-      newComment.userAvatar = this.props.activeUser.avatar;
       const updateComments = [...comments, newComment];
-
-      this.props.addComments(updateComments);
+      this.props.getPhotoComments(this.props.activeImg.id);
+      this.props.getProjectComments(this.props.thisProject.id);
       this.setState({
         ...this.state,
         tempComments: [],
@@ -222,7 +196,13 @@ class ImageWithComments extends Component {
   };
 }
 
+const mapStateToProps = state => {
+  return {
+    photoComments: state.comments.photoComments
+  };
+};
+
 export default connect(
-  null,
-  { addPhotoComment }
+  mapStateToProps,
+  { addPhotoComment, getPhotoComments, getProjectComments }
 )(ImageWithComments);
