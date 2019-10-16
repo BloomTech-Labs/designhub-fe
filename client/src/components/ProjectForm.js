@@ -323,30 +323,30 @@ const ProjectForm = ({
               name="description"
               value={description}
               type="text"
-              placeholder="Enter project description here"
+              placeholder="Enter description here"
               onChange={handleChanges}
               className="description"
             />
 
             <label htmlFor="figmaLink" className="label">
-              Figma link
+              Figma
             </label>
             <input
               type="text"
               name="figma"
               value={figma}
-              placeholder="Enter Figma link here"
+              placeholder="Enter link here (optional)"
               id="figmaLink"
               onChange={handleChanges}
             />
             <label htmlFor="invisionLink" className="label">
-              InVision link
+              Prototype
             </label>
             <input
               type="text"
               name="invision"
               value={invision}
-              placeholder="Enter InVision link here"
+              placeholder="Enter link here (optional)"
               id="invisionLink"
               onChange={handleChanges}
             />
@@ -355,7 +355,7 @@ const ProjectForm = ({
             </label>
             <input
               type="text"
-              placeholder="Enter team member usernames separated by a comma"
+              placeholder="Enter team member usernames separated by a comma (optional)"
               id="teamMembers"
             />
 
