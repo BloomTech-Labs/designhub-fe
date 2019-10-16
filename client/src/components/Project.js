@@ -72,7 +72,6 @@ class Projects extends Component {
   };
 
   render() {
-    console.log('this.props.isStarred', this.props.isStarred);
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
     if (thisProject && activeUser && this.props.projectPhotos) {
