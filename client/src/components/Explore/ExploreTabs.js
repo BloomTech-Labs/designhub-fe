@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import defaultImg from '../../ASSETS/default_thumbnail.svg';
+
 import '../../SASS/Explore.scss';
 
-const ExploreTabs = ({ popularProjects }) => {
+const ExploreTabs = ({ recent, popular, following }) => {
   return (
     <div className="explore-tabs-container">
       <div>
@@ -20,30 +22,71 @@ const ExploreTabs = ({ popularProjects }) => {
               Following
             </Tab>
           </TabList>
-
+          {/* // ======== Popular Tab ======== // */}
           <TabPanel className="tabs-container">
-            <div className="header-popular-projects">
-              {popularProjects.slice(0, 2).map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg}
-                    alt={project.name}
-                    className="large-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
+            <div className="explore-projects-array">
+              {popular.map(project => (
+                <div className="project-content" key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <>
+                      <div className="project-info">
+                        <h1>{project.name}</h1>
+                      </div>
+                      <img
+                        src={project.mainImg ? project.mainImg : defaultImg}
+                        className="project-thumbnail"
+                        alt="test"
+                        key={project.id}
+                      />
+                    </>
+                  </Link>
+                </div>
               ))}
             </div>
-            <div className="popular-projects-array">
-              {popularProjects.map(project => (
-                <Link to={`/project/${project.id}`}>
-                  <img
-                    src={project.mainImg}
-                    alt={project.name}
-                    className="small-project-thumbnail"
-                    key={project.id}
-                  />
-                </Link>
+          </TabPanel>
+
+          {/* // ======== Recents Tab ======== // */}
+          <TabPanel className="tabs-container">
+            <div className="explore-projects-array">
+              {recent.map(project => (
+                <div className="project-content" key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <>
+                      <div className="project-info">
+                        <h1>{project.name}</h1>
+                      </div>
+                      <img
+                        src={project.mainImg ? project.mainImg : defaultImg}
+                        className="project-thumbnail"
+                        alt="test"
+                        key={project.id}
+                      />
+                    </>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </TabPanel>
+
+          {/* // ======== Following Tab ======== // */}
+          <TabPanel className="tabs-container">
+            <div className="explore-projects-array">
+              {following.map(project => (
+                <div className="project-content" key={project.id}>
+                  <Link to={`/project/${project.id}`}>
+                    <>
+                      <div className="project-info">
+                        <h1>{project.name}</h1>
+                      </div>
+                      <img
+                        src={project.mainImg ? project.mainImg : defaultImg}
+                        className="project-thumbnail"
+                        alt="test"
+                        key={project.id}
+                      />
+                    </>
+                  </Link>
+                </div>
               ))}
             </div>
           </TabPanel>

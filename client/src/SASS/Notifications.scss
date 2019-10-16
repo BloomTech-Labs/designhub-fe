@@ -1,0 +1,67 @@
+@import './mixins';
+@import './palette';
+
+.notification-container {
+  width: 97%;
+  color: white;
+
+  .commented_notification {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: $black;
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 10px;
+
+    h2 {
+      margin-right: 10px;
+    }
+
+    .commented_left {
+      display: flex;
+      align-items: center;
+
+      .commented {
+        margin-left: 20px;
+
+        .comment_text {
+          font-style: italic;
+          background: none;
+          color: white;
+        }
+      }
+    }
+    .avatar {
+      border-radius: 500px;
+      width: 100px;
+      height: 100px;
+    }
+    .thumbnail_preview {
+      width: 12rem;
+      height: 8rem;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+
+  .notification {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: $black;
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 10px;
+
+    .avatar {
+      border-radius: 500px;
+      width: 100px;
+      height: 100px;
+    }
+    .followed_you {
+      margin-left: 20px;
+    }
+  }
+}

@@ -43,7 +43,6 @@ class DesignHub extends Component {
   };
 
   render() {
-    const activeUser = this.state.activeUser;
     return (
       <div className="DesignHub">
         <TopBar

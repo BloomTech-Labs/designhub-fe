@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import axios from 'axios';
 
 // ========== IMPORTED COMPONENTS ========== //
 import UserProfileTabs from './UserProfile_Tabs.js';
@@ -61,13 +59,16 @@ class UserProfile_LI extends Component {
         this.props.getStarredProjects(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getIsFollowed(this.props.activeUser.id, this.props.match.params.id);
+        this.props.getIsFollowed(
+          this.props.activeUser.id,
+          this.props.match.params.id
+        );
       });
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      console.log('HDFKSFDhelooOOooOOOOOO')
+      console.log('HDFKSFDhelooOOooOOOOOO');
       this.fetch();
     }
   }
@@ -77,11 +78,12 @@ class UserProfile_LI extends Component {
       followingId: this.props.activeUser.id,
       followedId: parseInt(this.props.match.params.id)
     };
-    this.props.addFollow(followingObj)
+    this.props
+      .addFollow(followingObj)
       .then(res => {
         this.props.followNotification(
-          res.data.data[0].id, 
-          this.props.activeUser, 
+          res.data.data[0].id,
+          this.props.activeUser,
           this.props.match.params
         );
       })
@@ -89,7 +91,10 @@ class UserProfile_LI extends Component {
         this.props.getFollowersCount(parseInt(this.props.match.params.id));
       })
       .then(() => {
-        this.props.getIsFollowed(this.props.activeUser.id, parseInt(this.props.match.params.id));
+        this.props.getIsFollowed(
+          this.props.activeUser.id,
+          parseInt(this.props.match.params.id)
+        );
       })
       .catch(err => console.log(err));
   };
@@ -98,17 +103,20 @@ class UserProfile_LI extends Component {
     const unFollowObj = {
       id: this.props.activeUser.id
     };
-    this.props.deleteFollow(parseInt(this.props.match.params.id), unFollowObj)
+    this.props
+      .deleteFollow(parseInt(this.props.match.params.id), unFollowObj)
       .then(() => {
         this.props.getFollowersCount(parseInt(this.props.match.params.id));
       })
       .then(() => {
-        this.props.getIsFollowed(this.props.activeUser.id, parseInt(this.props.match.params.id));
+        this.props.getIsFollowed(
+          this.props.activeUser.id,
+          parseInt(this.props.match.params.id)
+        );
       })
       .catch(err => console.log(err));
   };
 
-  
   render() {
     window.scroll(0, 0);
     // if (this.state.userData.avatar === undefined) {
@@ -186,7 +194,8 @@ class UserProfile_LI extends Component {
                 ))} */}
               </div>
               <div>
-                {this.props.activeUser.id === Number(this.props.match.params.id) ? (
+                {this.props.activeUser.id ===
+                Number(this.props.match.params.id) ? (
                   <Link to="/settings">
                     <button className="edit-profile-btn">Edit Profile</button>
                   </Link>

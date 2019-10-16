@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
 import { connect } from 'react-redux';
 import { getProjectPhotos, getSingleProject } from '../store/actions';
 
@@ -7,10 +6,6 @@ import ProjectForm from './ProjectForm';
 import Loading from './Loading.js';
 
 class EditProject extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.getSingleProject(id);

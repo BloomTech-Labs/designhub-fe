@@ -9,7 +9,10 @@ class Explore extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      popularProjects: []
+      recent: [],
+      popular: [],
+      following: [],
+      myId: this.props.activeUser.id
     };
   }
 
@@ -18,16 +21,25 @@ class Explore extends Component {
   }
 
   fetch() {
-    function getPopularProjects() {
-      return axiosWithAuth().get('/api/v1/projects');
+    const myId = this.state.myId;
+    function getRecent() {
+      return axiosWithAuth().get(`/api/v1/explore/${myId}`);
+    }
+    function getPopular() {
+      return axiosWithAuth().get(`/api/v1/explore/${myId}`);
+    }
+    function getFollowing() {
+      return axiosWithAuth().get(`/api/v1/explore/${myId}`);
     }
 
     return axios
-      .all([getPopularProjects()])
+      .all([getRecent(), getPopular(), getFollowing()])
       .then(
-        axios.spread(a => {
+        axios.spread((a, b, c) => {
           this.setState({
-            popularProjects: a.data
+            recent: a.data.recent,
+            popular: b.data.popular,
+            following: c.data.following
           });
         })
       )
@@ -35,7 +47,9 @@ class Explore extends Component {
   }
 
   render() {
-    const popularProjects = this.state.popularProjects;
+    const recent = this.state.recent;
+    const popular = this.state.popular;
+    const following = this.state.following;
     return (
       <div className="explore-container">
         <header>
@@ -45,7 +59,7 @@ class Explore extends Component {
             Illustrators, and Graphic Designers
           </p>
         </header>
-        <ExploreTabs popularProjects={popularProjects} />
+        <ExploreTabs recent={recent} popular={popular} following={following} />
       </div>
     );
   }

@@ -6,7 +6,7 @@
   // border: 1px solid red;
   color: $white;
   width: 100%;
-  margin-top: 80px;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   @include themify($themes) {
