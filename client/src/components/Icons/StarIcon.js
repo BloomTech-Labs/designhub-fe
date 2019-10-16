@@ -1,7 +1,6 @@
 import React from 'react';
 
 const StarIcon = ({ isStarred }) => {
-  console.log('isStarred', isStarred);
   return (
     <svg
       width="20"

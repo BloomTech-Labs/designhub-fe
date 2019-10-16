@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
-import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import { connect } from 'react-redux';
 
 import avatar1 from '../ASSETS/avatar.jpg';
@@ -42,7 +41,7 @@ class Projects extends Component {
         this.props.getProjectPhotos(this.projectId);
       })
       .then(() => {
-        this.props.getProjectComments(this.projectId);
+        this.props.getProjectComments(this.props.match.params.id);
       });
   }
 
@@ -72,7 +71,6 @@ class Projects extends Component {
   };
 
   render() {
-    console.log('this.props.isStarred', this.props.isStarred);
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
     if (thisProject && activeUser && this.props.projectPhotos) {
@@ -187,6 +185,7 @@ class Projects extends Component {
 
           <div className="project-body">
             {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
+
             <ImageViewer
               activeUser={activeUser}
               comments={this.props.projectComments}
