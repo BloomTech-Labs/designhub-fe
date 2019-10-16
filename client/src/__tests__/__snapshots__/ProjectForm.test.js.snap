@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectForm /> should match the previous snapshot of the component tests that the component has not changed and matched the previous snapshot 1`] = `
+<div
+  className="project-form-wrapper"
+>
+  <div
+    className="modal--close"
+  >
+    <span
+      className="modal--expand__background-overlay"
+      onClick={[Function]}
+    />
+  </div>
+  <header
+    className="ProjectForm__header"
+  >
+    <h2
+      className="page-header"
+    >
+      Create a project
+    </h2>
+  </header>
+  <section
+    className="ProjectForm__body"
+  >
+    <div
+      className="left-container"
+    >
+      <section
+        className="image-dropzone-container"
+      >
+        <div
+          className="upload-container"
+          onBlur={[Function]}
+          onClick={[Function]}
+          onDragEnter={[Function]}
+          onDragLeave={[Function]}
+          onDragOver={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+        >
+          <input
+            accept="image/*"
+            autoComplete="off"
+            multiple={true}
+            onChange={[Function]}
+            onClick={[Function]}
+            style={
+              Object {
+                "display": "none",
+              }
+            }
+            tabIndex={-1}
+            type="file"
+          />
+          <div
+            className="drop-text-container"
+          >
+            <svg
+              fill="none"
+              viewBox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M32 32L24 24L16 32"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="3.5"
+              />
+              <path
+                d="M24 24V42"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="3.5"
+              />
+              <path
+                d="M40.7809 36.78C42.7316 35.7165 44.2726 34.0337 45.1606 31.9972C46.0487 29.9607 46.2333 27.6864 45.6853 25.5334C45.1373 23.3803 43.8879 21.471 42.1342 20.1069C40.3806 18.7427 38.2226 18.0014 36.0009 18H33.4809C32.8755 15.6585 31.7472 13.4846 30.1808 11.642C28.6144 9.79927 26.6506 8.33567 24.4371 7.36118C22.2236 6.3867 19.818 5.92669 17.4011 6.01573C14.9843 6.10478 12.619 6.74057 10.4833 7.8753C8.34747 9.01003 6.49672 10.6142 5.07014 12.5671C3.64356 14.5201 2.67828 16.771 2.24686 19.1508C1.81544 21.5305 1.92911 23.977 2.57932 26.3065C3.22954 28.636 4.39938 30.7877 6.0009 32.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="3.5"
+              />
+              <path
+                d="M32 32L24 24L16 32"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="3.5"
+              />
+            </svg>
+            <p
+              className="drop-text"
+            >
+              drag and drop images or click here
+            </p>
+          </div>
+        </div>
+        <aside
+          className="thumbnail-container"
+        />
+      </section>
+    </div>
+    <div
+      className="right-container"
+    >
+      <form
+        className="project-form-container"
+        encType="multipart/form-data"
+      >
+        <div
+          className="required"
+        >
+          <label
+            className="label project-label"
+            htmlFor="name"
+          >
+            Project title
+          </label>
+          <input
+            autoFocus={true}
+            id="name"
+            name="name"
+            onChange={[Function]}
+            placeholder="Enter project title here"
+            required={true}
+            type="text"
+            value=""
+          />
+        </div>
+        <label
+          className="label"
+          htmlFor="description"
+        >
+          Project description
+        </label>
+        <textarea
+          className="description"
+          id="description"
+          name="description"
+          onChange={[Function]}
+          placeholder="Enter project description here"
+          type="text"
+          value=""
+        />
+        <label
+          className="label"
+          htmlFor="figmaLink"
+        >
+          Figma link
+        </label>
+        <input
+          id="figmaLink"
+          name="figma"
+          onChange={[Function]}
+          placeholder="Enter Figma link here"
+          type="text"
+          value=""
+        />
+        <label
+          className="label"
+          htmlFor="invisionLink"
+        >
+          InVision link
+        </label>
+        <input
+          id="invisionLink"
+          name="invision"
+          onChange={[Function]}
+          placeholder="Enter InVision link here"
+          type="text"
+          value=""
+        />
+        <label
+          className="label"
+          htmlFor="teamMembers"
+        >
+          Add team members
+        </label>
+        <input
+          id="teamMembers"
+          placeholder="Enter team member usernames separated by a comma"
+          type="text"
+        />
+        <div
+          className="submit-cancel-container"
+        >
+          <button
+            className="submit-button"
+            disabled={false}
+            onClick={[Function]}
+            type="submit"
+          >
+            Publish
+          </button>
+          <button
+            className="cancel-btn"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+`;
