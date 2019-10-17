@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import SampleLogo from './Icons/SampleLogo.js';
-import menu from '../ASSETS/menu.svg';
 import logo from '../ASSETS/logo.svg';
 import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
@@ -71,12 +70,35 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
               <img src={logo} className="mobile-logo" alt="logo" />
             </Link>
           </div>
-          <img
-            src={menu}
+          <svg
             alt="menu"
             className="mobile-menu"
             onClick={toggleNav}
-          />
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3.75 15H26.25"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3.75 7.5H26.25"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M3.75 22.5H26.25"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
         <div className={showHideClassName}>
           <div className="mobile-search">

@@ -84,7 +84,7 @@
     letter-spacing: 0.11rem;
     outline: none;
     @include themify($themes) {
-      background: themed('bg');
+      background: themed('bg2');
       color: themed('text');
     }
   }
@@ -132,6 +132,10 @@
         width: 40px;
         cursor: pointer;
         transition: all 0.15s ease-in-out;
+        stroke: white;
+        @include themify($themes) {
+          stroke: themed('link');
+        }
 
         &:hover {
           transform: rotate(90deg);
@@ -152,6 +156,10 @@
       height: 500px;
       overflow: hidden;
       animation: slideDown 0.6s ease-in-out;
+      @include themify($themes) {
+        background: themed('bg');
+        color: themed('text');
+      }
 
       @keyframes slideDown {
         from {
