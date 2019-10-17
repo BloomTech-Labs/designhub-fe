@@ -122,16 +122,6 @@
       border: 8px solid $blue;
       p {
         color: $blue;
-        font-size: 18px;
-        line-height: 21px;
-        text-align: center;
-        letter-spacing: 0.11em;
-      }
-      svg {
-        max-width: 25%;
-        @include themify($themes) {
-          stroke: themed('link');
-        }
       }
     }
 
@@ -188,6 +178,7 @@
       svg {
         stroke: $white;
         max-width: 25%;
+
         @include themify($themes) {
           stroke: themed('link');
         }

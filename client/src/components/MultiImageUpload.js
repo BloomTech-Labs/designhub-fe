@@ -78,13 +78,13 @@ export function MultiImageUpload(props) {
           {isDragActive && !isDragReject && (
             <>
               <UploadCloud color="#5557fe" />
-              <p>drop your images here</p>
+              <p className="drop-text">drop your images here</p>
             </>
           )}
           {isDragReject && (
             <div className="error">
               <UploadCloud color="#e64c4d" />
-              <p>Image files only please</p>
+              <p className="drop-text">image files only please</p>
             </div>
           )}
         </div>
