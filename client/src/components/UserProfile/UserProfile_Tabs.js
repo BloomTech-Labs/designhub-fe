@@ -61,7 +61,11 @@ class UserProfile_Tabs extends Component {
                         <Link to={`/project/${project.id}`}>
                           <>
                             <div className="project-info">
-                              <h1>{project.name}</h1>
+                              {project.name.length > 35 ? (
+                                <h1>{project.name.slice(0, 35)}...</h1>
+                              ) : (
+                                <h1>{project.name}</h1>
+                              )}
                             </div>
                             <img
                               src={
@@ -98,7 +102,11 @@ class UserProfile_Tabs extends Component {
                       <Link to={`/project/${project.id}`}>
                         <>
                           <div className="project-info">
-                            <h1>{project.name}</h1>
+                            {project.name.length > 35 ? (
+                              <h1>{project.name.slice(0, 35)}...</h1>
+                            ) : (
+                              <h1>{project.name}</h1>
+                            )}
                           </div>
                           <img
                             src={project.mainImg ? project.mainImg : defaultImg}
@@ -115,6 +123,13 @@ class UserProfile_Tabs extends Component {
             </TabPanel>
             <TabPanel className="tabs-container">
               <div className="follower-following-container">
+                {followers.length === 0 && (
+                  <div className="empty-state">
+                    <h1 className="no-projects">
+                      This user does not have any followers. 😬
+                    </h1>
+                  </div>
+                )}
                 {followers.map(follower => (
                   <div className="follow-container" key={follower.id}>
                     <div className="follow-info-flex">
@@ -146,6 +161,13 @@ class UserProfile_Tabs extends Component {
             </TabPanel>
             <TabPanel className="tabs-container">
               <div className="follower-following-container">
+                {following.length === 0 && (
+                  <div className="empty-state">
+                    <h1 className="no-projects">
+                      This user does not follow anyone. 💅
+                    </h1>
+                  </div>
+                )}
                 {following.map(follower => (
                   <div className="follow-container" key={follower.id}>
                     <div className="follow-info-flex">
@@ -192,7 +214,11 @@ class UserProfile_Tabs extends Component {
                       <Link to={`/project/${project.projectId}`}>
                         <>
                           <div className="project-info">
-                            <h1>{project.name}</h1>
+                            {project.name.length > 35 ? (
+                              <h1>{project.name.slice(0, 35)}...</h1>
+                            ) : (
+                              <h1>{project.name}</h1>
+                            )}
                           </div>
                           <img
                             src={project.img ? project.img : defaultImg}

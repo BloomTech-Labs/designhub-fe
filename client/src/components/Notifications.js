@@ -41,7 +41,7 @@ const Notifications = props => {
       return (
         <div key={item.id} className="commented_notification">
           <div className="commented_left">
-            {item.unread === true ? <h2>UNREAD</h2> : <h2>READ</h2>}
+            {item.unread === true ? <h2 className="unread">.</h2> : <h2></h2>}
             <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
             <p className="commented">
               {item.activeUsername} commented:

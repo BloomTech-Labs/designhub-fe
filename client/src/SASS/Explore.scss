@@ -74,7 +74,7 @@
       .project-info {
         position: absolute;
         bottom: 0;
-        width: 104%;
+        width: 100%;
         color: $white;
         text-decoration: none;
         background: $blue;
@@ -84,7 +84,7 @@
         pointer-events: none;
 
         h1 {
-          padding: 20px;
+          margin-top: 20px;
         }
       }
 
