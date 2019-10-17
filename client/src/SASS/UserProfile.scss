@@ -27,12 +27,13 @@
 
     .user-left-content {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .avatar {
       width: 120px;
       height: 120px;
+      min-width: 120px;
       box-sizing: content-box;
       border-radius: 50%;
       object-fit: cover;
@@ -340,9 +341,9 @@
       .follow-avatar {
         border-radius: 100%;
         object-fit: cover;
-        width: 8vh;
-        height: 8vh;
-        min-width: 8vh;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
       }
 
       .follow-info-flex {
@@ -381,6 +382,7 @@
 
   .follow-btn {
     @include follow-btn;
+    margin: 0;
   }
 }
 
