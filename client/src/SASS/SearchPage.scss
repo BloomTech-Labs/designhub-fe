@@ -5,6 +5,9 @@
   width: 100%;
   color: $white;
   margin-top: 15px;
+  @include themify($themes) {
+    color: themed('text');
+  }
   p {
     letter-spacing: 0.11em;
     font-size: 16px;
@@ -19,9 +22,17 @@
     border-radius: 10px;
     margin-top: 20px;
     width: 100%;
+    @include themify($themes) {
+      background: themed('bg2');
+    }
+
     a {
       text-decoration: none;
       color: $white;
+      @include themify($themes) {
+        background: themed('bg2');
+        color: themed('link');
+      }
     }
 
     .tabs-container {
@@ -109,6 +120,9 @@
       }
       .active-link {
         color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
       }
     }
   }
