@@ -54,23 +54,7 @@ const Navbar = ({ activeUser }) => {
             activeClassName="active-links"
           >
             <InboxIcon onClick={() => setBool(false)} />
-            {bool ? (
-              <span
-                style={{
-                  marginTop: '-10px',
-                  color: 'blue',
-                  fontSize: '28px',
-                  display: 'block',
-                  marginLeft: '5px',
-                  textDecoration: 'none',
-                  borderBottom: 'none'
-                }}
-              >
-                •
-              </span>
-            ) : (
-              ''
-            )}
+            {bool ? <span className="notification-indicator">•</span> : ''}
           </NavLink>
         </div>
 

@@ -21,6 +21,15 @@ nav {
     }
 
     .navlinks {
+      .notification-indicator {
+        position: absolute;
+        margin-top: -8px;
+        color: $blue;
+        font-size: 28px;
+        display: block;
+        margin-left: 5px;
+        text-decoration: none;
+      }
       .links {
         text-decoration: none;
       }
