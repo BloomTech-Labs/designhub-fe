@@ -138,7 +138,8 @@ class UserProfile_LI extends Component {
               <h2 className="username">{this.props.userData.username}</h2>
               <p className="bio">{this.props.userData.bio}</p>
               <div className="user-info-location-website">
-                <Location />
+                {this.props.userData.location ? <Location /> : null}
+                {/* <Location /> */}
                 <p>{this.props.userData.location}</p>
                 <a
                   href={this.props.userData.website}
@@ -146,7 +147,7 @@ class UserProfile_LI extends Component {
                   rel="noopener noreferrer"
                   className="website"
                 >
-                  <WebsiteLink />
+                  {this.props.userData.website ? <WebsiteLink /> : null}
                   {this.props.userData.website}
                 </a>
               </div>
