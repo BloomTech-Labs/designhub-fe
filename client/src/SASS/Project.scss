@@ -3,7 +3,7 @@
 
 .projects-container {
   color: white;
-  width: 99%;
+  width: 100%;
   @include themify($themes) {
     color: themed('text');
   }
@@ -13,7 +13,7 @@
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    margin: 22px auto;
+    margin: 0 auto;
   }
   .project-details {
     width: 50%;
@@ -111,6 +111,7 @@
     justify-content: space-between;
     align-items: flex-start;
     height: 68vh;
+    margin-top: 1rem;
   }
 }
 

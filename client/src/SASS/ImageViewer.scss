@@ -37,7 +37,7 @@
       .ImageViewer__thumbnails {
         display: flex;
         flex-flow: column nowrap;
-        width: 20vw;
+        width: 16vw;
         height: 68vh;
         overflow-y: scroll;
         justify-content: flex-start;
@@ -46,7 +46,7 @@
 
         .thumbnails {
           width: 100%;
-          height: 200px;
+          height: 150px;
           border: 5px solid #15161a;
           box-sizing: border-box;
           border-radius: 10px;

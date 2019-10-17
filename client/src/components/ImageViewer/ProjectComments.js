@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { connect } from 'react-redux';
 import { useWindowDimensions } from './useWindowDimensions.js';
+import { Link } from 'react-router-dom';
 import SendIcon from '../Icons/SendIcon';
 
 import { addProjectComment } from '../../store/actions';
@@ -107,16 +108,23 @@ const ProjectComments = ({
               }
             >
               {activeUser.id === c.userId ? null : (
-                <img
-                  src={c.userAvatar}
-                  alt="avatar"
-                  className="ProjectComment__body__avatar"
-                />
+                <Link to={`/profile/${c.userId}/${c.username}`}>
+                  <img
+                    src={c.userAvatar}
+                    alt="avatar"
+                    className="ProjectComment__body__avatar"
+                  />
+                </Link>
               )}
               <div className="ProjectComment__body__text">
-                <p className="username">
-                  {activeUser.id === c.userId ? 'You' : c.username}
-                </p>
+                <Link
+                  to={`/profile/${c.userId}/${c.username}`}
+                  className="user-links"
+                >
+                  <p className="username">
+                    {activeUser.id === c.userId ? 'You' : c.username}
+                  </p>
+                </Link>
                 <p>{c.text}</p>
               </div>
             </div>

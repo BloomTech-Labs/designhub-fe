@@ -44,12 +44,14 @@ const Notifications = props => {
             {item.unread === true ? <h2>UNREAD</h2> : <h2>READ</h2>}
             <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
             <p className="commented">
-              {item.activeUsername} commented
+              {item.activeUsername} commented:
               <mark className="comment_text">
                 &nbsp;{item.commentText}&nbsp;
               </mark>
+              <mark className="from_now">
+                {moment(item.created_at).fromNow()}&nbsp;
+              </mark>
             </p>
-            <p>&nbsp;{moment(item.created_at).fromNow()}&nbsp;</p>
           </div>
           <Link to={`/project/${item.projectId}`}>
             <img
