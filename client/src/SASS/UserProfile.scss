@@ -177,7 +177,10 @@
     .nav-links {
       display: flex;
       width: 34%;
-
+      li {
+        letter-spacing: 0.11em;
+        font-size: 1rem;
+      }
       .links {
         color: $dark-grey;
         text-decoration: none;
@@ -336,7 +339,15 @@
       @include themify($themes) {
         background: themed('bg2');
       }
-
+      .follow-btn {
+        @include follow-btn;
+        margin: 0;
+      }
+      .edit-profile-btn {
+        @include edit-profile-btn;
+        background: $almost-black;
+        margin: 0;
+      }
       .follow-avatar {
         border-radius: 100%;
         object-fit: cover;
@@ -386,7 +397,6 @@
 
   .follow-btn {
     @include follow-btn;
-    margin: 0;
   }
 }
 

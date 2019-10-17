@@ -128,15 +128,26 @@ class UserProfile_Tabs extends Component {
                       </Link>
                       <div className="follow-content">
                         <div className="follow-content-flex">
-                          <h1 className="follow-FLname">{follower.name}</h1>
+                          <h1 className="follow-FLname">
+                            {console.log('Follower:', follower)}
+                            {follower.name}
+                          </h1>
                           <h1 className="follow-username">
                             {follower.username}
                           </h1>
                         </div>
-                        <p className="follower-bio">{follower.bio}</p>
+                        <p className="follower-bio">{`${
+                          follower.bio.length > 100
+                            ? follower.bio.slice(0, 100) + '...'
+                            : follower.bio
+                        }`}</p>
                       </div>
                     </div>
-                    <button className="follow-btn">Follow</button>
+                    {this.props.activeUser.id === this.props.paramsId ? (
+                      <button className="follow-btn">Follow</button>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 ))}
               </div>
@@ -163,6 +174,7 @@ class UserProfile_Tabs extends Component {
                           </h1>
                         </div>
                         <p className="follower-bio">
+                          {console.log('Following:', follower)}
                           {`${
                             follower.bio.length > 100
                               ? follower.bio.slice(0, 100) + '...'
@@ -171,7 +183,21 @@ class UserProfile_Tabs extends Component {
                         </p>
                       </div>
                     </div>
-                    <button className="follow-btn">Follow</button>
+                    {this.props.activeUser.id === this.props.paramsId ? (
+                      <button
+                        onClick={() =>
+                          this.props.unfollowUser(
+                            this.props.activeUser.id,
+                            follower.userId
+                          )
+                        }
+                        className="edit-profile-btn"
+                      >
+                        Unfollow
+                      </button>
+                    ) : (
+                      ''
+                    )}
                   </div>
                 ))}
               </div>
