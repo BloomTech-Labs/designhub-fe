@@ -1,6 +1,6 @@
 # DesignHub
 
-- A seamless collaborative design asset platform for designers by designers.
+- A seamless collaborative design asset platform for designers by designers
 
 - You can find the deployed project at [https://www.designhubx.com](https://www.designhubx.com)
 
@@ -9,7 +9,7 @@
 ![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)
 ![Travic-ci](https://travis-ci.com/Lambda-School-Labs/designhub-fe.svg?branch=master)
 
-🚫 more info on using badges [here](https://github.com/badges/shields)
+<!-- more info on using badges [here](https://github.com/badges/shields) -->
 
 ## Contributors
 
@@ -30,50 +30,43 @@ Team Lead|Web Developer|Web Developer|Web Developer|Web Developer|UX Designer|UX
 
 ### Key Features
 
-- v1.0
-- Users can create a new public project that includes all relevant links to design assets
-- Users can display public project projects in browser with thumbnails and convenient navigation
-- Users can add comments to a project
-- Users can view activity on a heatmap
+- v 1.0
+	- Users can create a new public project that includes all relevant links to design assets
+	- Users can display public project projects in browser with thumbnails and convenient navigation
+	- Users can add comments to a project
+	- Users can view activity on a heatmap
+
+- v 1.1 (`current`)
+	- Users can discover relevant projects on the explore page
+	- Users can search for other users, projects and teams
+	- Users can receive email notification about interactions and feedback
+
+- v 1.2
+	- Users can create design teams
+	- Users can create private projects
+	- Users can invite team-members to access projects
 
 ## Tech Stack
 
-* React.js
+* React
 * Redux
 * Sass
 * Auth0
 
-#### Front end deployed to `🚫insert service here`
-
-<!-- # Content Licenses
-
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
-
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             | -->
-
 # Testing
 
-🚫Document what you used for testing and why
+- Travis CI
+- Jest
+- Enzyme
 
 # Installation Instructions
 
 To get the apprunning locally:
 
 * Clone this repo
+* **cd client**
 * **yarn** to install required dependencies
 * **yarn start** to start the localhost
-
-<!-- ## Other Scripts
-
-🚫replace these examples with your own
-
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them -->
 
 # Contributing
 
