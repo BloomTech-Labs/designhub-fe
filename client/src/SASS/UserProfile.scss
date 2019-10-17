@@ -76,10 +76,12 @@
 
       .user-info-location-website {
         display: flex;
+        align-items: center;
         width: max-content;
         font-size: 12px;
         margin-top: 15px;
         letter-spacing: 0.11em;
+
         svg {
           margin-right: 8px;
         }
@@ -87,7 +89,6 @@
           margin-left: 14px;
           text-decoration: none;
           color: $white;
-          transition: 0.1s ease-in-out;
           @include themify($themes) {
             color: themed('text');
           }
@@ -303,6 +304,7 @@
       }
       .project-content:hover {
         border: 8px solid $blue;
+        text-align: left;
       }
     }
 

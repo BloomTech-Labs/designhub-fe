@@ -22,21 +22,28 @@
     .commented_left {
       display: flex;
       align-items: center;
+      width: 80%;
 
       .commented {
         margin-left: 20px;
+        line-height: 20px;
 
         .comment_text {
-          font-style: italic;
+          font-weight: 400;
           background: none;
           color: white;
+        }
+
+        .from_now {
+          color: $dark-grey;
+          background: none;
         }
       }
     }
     .avatar {
       border-radius: 500px;
-      width: 100px;
-      height: 100px;
+      width: 50px;
+      height: 50px;
     }
     .thumbnail_preview {
       width: 12rem;
@@ -57,8 +64,8 @@
 
     .avatar {
       border-radius: 500px;
-      width: 100px;
-      height: 100px;
+      width: 50px;
+      height: 50px;
     }
     .followed_you {
       margin-left: 20px;
