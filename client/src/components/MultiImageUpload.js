@@ -14,7 +14,12 @@ const thumbInner = {
 
 export function MultiImageUpload(props) {
   const { files, setFiles } = props.filesArray;
-  const { getRootProps, getInputProps } = useDropzone({
+  const {
+    isDragActive,
+    isDragReject,
+    getRootProps,
+    getInputProps
+  } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
       setFiles([
@@ -58,12 +63,30 @@ export function MultiImageUpload(props) {
     <section className="image-dropzone-container">
       <div
         {...getRootProps({ className: 'dropzone' })}
-        className="upload-container"
+        className={`upload-container${isDragActive ? ' active' : ''}${
+          isDragReject ? ' rejected' : ''
+        }`}
       >
         <input {...getInputProps()} multiple={true} />
         <div className="drop-text-container">
-          <UploadCloud />
-          <p className="drop-text">drag and drop images or click here</p>
+          {!isDragActive && (
+            <>
+              <UploadCloud />
+              <p className="drop-text">drag and drop images or click here</p>
+            </>
+          )}
+          {isDragActive && !isDragReject && (
+            <>
+              <UploadCloud color="#5557fe" />
+              <p>drop your images here</p>
+            </>
+          )}
+          {isDragReject && (
+            <div className="error">
+              <UploadCloud color="#e64c4d" />
+              <p>Image files only please</p>
+            </div>
+          )}
         </div>
       </div>
       <aside className="thumbnail-container">{thumbs()}</aside>

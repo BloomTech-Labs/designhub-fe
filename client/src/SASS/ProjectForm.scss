@@ -118,6 +118,33 @@
       letter-spacing: 0.11em;
       margin-bottom: 14px;
     }
+    .upload-container.active {
+      border: 8px solid $blue;
+      p {
+        color: $blue;
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        letter-spacing: 0.11em;
+      }
+      svg {
+        max-width: 25%;
+        @include themify($themes) {
+          stroke: themed('link');
+        }
+      }
+    }
+
+    .upload-container.rejected {
+      border: 8px solid $alert;
+      p {
+        color: $alert;
+      }
+    }
+    .error {
+      color: $alert;
+      text-align: center;
+    }
 
     .upload-container {
       align-items: center;
