@@ -340,8 +340,9 @@
       .follow-avatar {
         border-radius: 100%;
         object-fit: cover;
-        width: 10vh;
-        height: 10vh;
+        width: 8vh;
+        height: 8vh;
+        min-width: 8vh;
       }
 
       .follow-info-flex {

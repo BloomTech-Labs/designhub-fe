@@ -30,7 +30,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
                   <Link to={`/project/${project.id}`}>
                     <>
                       <div className="project-info">
-                        <h1>{project.name}</h1>
+                        {project.name.length > 35 ? (
+                          <h1>{project.name.slice(0, 35)}...</h1>
+                        ) : (
+                          <h1>{project.name}</h1>
+                        )}
                       </div>
                       <img
                         src={project.mainImg ? project.mainImg : defaultImg}
@@ -53,7 +57,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
                   <Link to={`/project/${project.id}`}>
                     <>
                       <div className="project-info">
-                        <h1>{project.name}</h1>
+                        {project.name.length > 35 ? (
+                          <h1>{project.name.slice(0, 35)}...</h1>
+                        ) : (
+                          <h1>{project.name}</h1>
+                        )}
                       </div>
                       <img
                         src={project.mainImg ? project.mainImg : defaultImg}
@@ -76,7 +84,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
                   <Link to={`/project/${project.id}`}>
                     <>
                       <div className="project-info">
-                        <h1>{project.name}</h1>
+                        {project.name.length > 35 ? (
+                          <h1>{project.name.slice(0, 35)}...</h1>
+                        ) : (
+                          <h1>{project.name}</h1>
+                        )}
                       </div>
                       <img
                         src={project.mainImg ? project.mainImg : defaultImg}
