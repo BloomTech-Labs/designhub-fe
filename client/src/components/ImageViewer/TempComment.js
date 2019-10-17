@@ -33,6 +33,7 @@ export class TempComment extends React.Component {
             left: left
           }}
         >
+          {/* this <hr> is part of the UX design that became problematic to implement, it is currently display:none */}
           <hr className="StickyComment__midbar" />
 
           <form
@@ -40,7 +41,7 @@ export class TempComment extends React.Component {
             onSubmit={e => this.onSubmit(e, c)}
           >
             <textarea
-              ref={input => (this.nameInput = input)}
+              autoFocus={true}
               type="text"
               value={comment}
               onKeyDown={e => this.handleKeyDown(e, c)}
@@ -58,10 +59,6 @@ export class TempComment extends React.Component {
     );
   }
 
-  componentDidMount() {
-    this.nameInput.focus();
-  }
-
   handleChange = e => {
     this.setState({ comment: e.target.value });
   };
@@ -73,10 +70,11 @@ export class TempComment extends React.Component {
     }
   }
 
-  handleDelete(e, id) {
-    e.preventDefault();
-    this.props.commentDelete(id);
-  }
+  // not currently implemented
+  // handleDelete(e, id) {
+  //   e.preventDefault();
+  //   this.props.commentDelete(id);
+  // }
 
   onSubmit = (e, c) => {
     e.preventDefault();

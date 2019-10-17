@@ -25,6 +25,7 @@ class ImageWithComments extends Component {
       hidden: false,
       tempComments: []
     };
+    //location of the dom node, this is definitely a better way to do this using refs
     this.element = null;
     this.leftOffset = null;
     this.topOffset = null;
@@ -32,12 +33,10 @@ class ImageWithComments extends Component {
 
   render() {
     const { id, url } = this.props.activeImg;
-
     const { hidden, tempComments } = this.state;
-
-    // let activeComments = comments.filter(c => c.imageId === id);
-
+    //activeComments are EXISTING COMMENTS related to the current image
     let activeComments = this.props.photoComments;
+    // tempComments are the sticky comment submit form
     let activeTemp = tempComments.filter(c => c.imageId === id);
     return (
       <>
@@ -88,6 +87,7 @@ class ImageWithComments extends Component {
     );
   }
   componentDidMount() {
+    //refactor this into refs?
     this.element = findDOMNode(this);
     // GET ALL COMMENTS
     const projectComments = this.props.comments;
@@ -106,6 +106,7 @@ class ImageWithComments extends Component {
       username: this.props.activeUser.username,
       projectId: this.props.thisProject.id,
       editing: false,
+      // left&top are coordinates used to render the sticky comment dot, they are in relation to the dom element (this.element)
       left: `${x}px`,
       top: `${y}px`,
       text: ''
@@ -118,6 +119,7 @@ class ImageWithComments extends Component {
 
   handleClick = async (e, id) => {
     e.persist();
+    //grab the mouseclick location and apply offset from the parent dom node, there is probably a better way to do this
     let x = e.nativeEvent.clientX;
     let y = e.nativeEvent.clientY;
     await this.updateElementPosition(x, y);
@@ -190,7 +192,9 @@ class ImageWithComments extends Component {
   };
 
   updateElementPosition = (x, y) => {
+    //get the size of the dom element
     const rect = this.element.getBoundingClientRect();
+    // compensate for window scroll position
     this.topOffset = rect.top > 0 ? y : y - rect.top;
     this.leftOffset = rect.left > 0 ? x : x - rect.left;
   };
