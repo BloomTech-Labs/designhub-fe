@@ -225,6 +225,8 @@ class UserProfile_LI extends Component {
           following={this.props.followingTab}
           starred={this.props.starred}
           isFollowed={this.props.isFollowed}
+          followUser={this.followUser}
+          unfollowUser={this.unfollowUser}
         />
       </div>
     );

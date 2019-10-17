@@ -18,7 +18,6 @@ class UserProfile_Tabs extends Component {
     const followers = this.props.followers;
     const following = this.props.following;
     const starred = this.props.starred;
-    console.log('hEOOOOOO', projects);
     return (
       <div className="profile-tabs-container">
         <div>
@@ -129,9 +128,7 @@ class UserProfile_Tabs extends Component {
                       </Link>
                       <div className="follow-content">
                         <div className="follow-content-flex">
-                          <h1 className="follow-FLname">
-                            {follower.firstName} {follower.lastName}
-                          </h1>
+                          <h1 className="follow-FLname">{follower.name}</h1>
                           <h1 className="follow-username">
                             {follower.username}
                           </h1>
@@ -160,14 +157,18 @@ class UserProfile_Tabs extends Component {
                       </Link>
                       <div className="follow-content">
                         <div className="follow-content-flex">
-                          <h1 className="follow-FLname">
-                            {follower.firstName} {follower.lastName}
-                          </h1>
+                          <h1 className="follow-FLname">{follower.name}</h1>
                           <h1 className="follow-username">
                             {follower.username}
                           </h1>
                         </div>
-                        <p className="follower-bio">{follower.bio}</p>
+                        <p className="follower-bio">
+                          {`${
+                            follower.bio.length > 100
+                              ? follower.bio.slice(0, 100) + '...'
+                              : follower.bio
+                          }`}
+                        </p>
                       </div>
                     </div>
                     <button className="follow-btn">Follow</button>

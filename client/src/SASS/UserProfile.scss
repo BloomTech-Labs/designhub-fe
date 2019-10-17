@@ -326,7 +326,7 @@
 
     .follow-container {
       background: $black;
-      padding: 2vh;
+      padding: 20px;
       border-radius: 10px;
       display: flex;
       align-items: center;
@@ -347,39 +347,46 @@
       .follow-info-flex {
         display: flex;
         align-items: center;
+        width: 30%;
       }
 
       .follow-content-flex {
         display: flex;
-        margin-left: 2vh;
+        margin-left: 25px;
 
         .follow-FLname {
           font-weight: 400;
           font-size: 1rem;
           margin: 0;
+          letter-spacing: 0.11em;
         }
 
         .follow-username {
           margin: 0;
-          margin-left: 1vh;
+          margin-left: 10px;
           font-weight: 400;
-          font-size: 1rem;
+          font-size: 0.8rem;
+          line-height: 0.8rem;
           color: $dark-grey;
+          letter-spacing: 0.11em;
+          align-self: flex-end;
         }
       }
       .follower-bio {
         margin: 0;
         margin-top: 2vh;
-        margin-left: 2vh;
+        margin-left: 25px;
         max-width: 90%;
-        font-size: 0.9rem;
+        font-size: 0.75rem;
         line-height: 20px;
+        letter-spacing: 0.11em;
       }
     }
   }
 
   .follow-btn {
     @include follow-btn;
+    margin: 0;
   }
 }
 
