@@ -13,7 +13,7 @@ const Settings = ({ activeUser, match }) => {
     <div className="Settings">
       <div className="settings-left-column">
         <img src={activeUser.avatar} alt="avatar" />
-        <Link to={`${path}`} className="settings-link">
+        <Link exact to={`${path}`} className="settings-link">
           <h4>Account</h4>
         </Link>
         <Link to={`${path}/privacy`} className="settings-link">
