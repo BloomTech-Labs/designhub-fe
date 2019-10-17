@@ -95,7 +95,6 @@ class DesignHub extends Component {
                 )}
               />
               <Route
-                exact
                 path="/settings"
                 render={props => (
                   <Settings {...props} activeUser={this.props.user} />
