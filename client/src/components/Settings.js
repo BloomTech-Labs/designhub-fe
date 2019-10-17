@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route, NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from '../auth-wrapper.js';
 
 import '../SASS/Settings.scss';
