@@ -85,6 +85,8 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         this.props.getFollowersCount(theirID);
+        this.props.getFollowers(yourId);
+        this.props.getFollowing(yourId);
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirID);
@@ -102,7 +104,7 @@ class UserProfile_LI extends Component {
       .deleteFollow(theirId, unFollowObj)
       .then(() => {
         this.props.getFollowersCount(theirId);
-        this.props.getFollowers(theirId);
+        this.props.getFollowers(yourId);
         this.props.getFollowing(yourId);
       })
       .then(() => {
@@ -234,10 +236,11 @@ class UserProfile_LI extends Component {
           following={this.props.followingTab}
           starred={this.props.starred}
           isFollowed={this.props.isFollowed}
+          getIsFollowed={this.props.getIsFollowed}
           followUser={this.followUser}
           unfollowUser={this.unfollowUser}
           activeUser={this.props.activeUser}
-          paramsId={Number(this.props.match.params.id)}
+          params={this.props.match.params}
         />
       </div>
     );

@@ -114,42 +114,77 @@ class UserProfile_Tabs extends Component {
             </TabPanel>
             <TabPanel className="tabs-container">
               <div className="follower-following-container">
-                {followers.map(follower => (
-                  <div className="follow-container" key={follower.id}>
-                    <div className="follow-info-flex">
-                      <Link
-                        to={`/profile/${follower.userId}/${follower.username}`}
-                      >
-                        <img
-                          src={follower.avatar}
-                          className="follow-avatar"
-                          alt="avatar"
-                        />
-                      </Link>
-                      <div className="follow-content">
-                        <div className="follow-content-flex">
-                          <h1 className="follow-FLname">
-                            {console.log('Follower:', follower)}
-                            {follower.name}
-                          </h1>
-                          <h1 className="follow-username">
-                            {follower.username}
-                          </h1>
+                {followers.map(follower => {
+                  let alsoFollowing = false;
+                  following.map(following => {
+                    if (following.userId === follower.userId) {
+                      alsoFollowing = true;
+                    }
+                  });
+                  return (
+                    <div className="follow-container" key={follower.id}>
+                      <div className="follow-info-flex">
+                        <Link
+                          to={`/profile/${follower.userId}/${follower.username}`}
+                        >
+                          <img
+                            src={follower.avatar}
+                            className="follow-avatar"
+                            alt="avatar"
+                          />
+                        </Link>
+                        <div className="follow-content">
+                          <div className="follow-content-flex">
+                            <h1 className="follow-FLname">
+                              {console.log('Follower:', follower)}
+                              {follower.name}
+                            </h1>
+                            <h1 className="follow-username">
+                              {follower.username}
+                            </h1>
+                          </div>
+                          <p className="follower-bio">{`${
+                            follower.bio.length > 100
+                              ? follower.bio.slice(0, 100) + '...'
+                              : follower.bio
+                          }`}</p>
                         </div>
-                        <p className="follower-bio">{`${
-                          follower.bio.length > 100
-                            ? follower.bio.slice(0, 100) + '...'
-                            : follower.bio
-                        }`}</p>
                       </div>
+                      {this.props.activeUser.id ===
+                      Number(this.props.params.id) ? (
+                        !alsoFollowing ? (
+                          <button
+                            onClick={() =>
+                              this.props.followUser(
+                                this.props.activeUser.id,
+                                follower.userId,
+                                this.props.activeUser,
+                                this.props.params
+                              )
+                            }
+                            className="follow-btn"
+                          >
+                            Follow
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() =>
+                              this.props.unfollowUser(
+                                this.props.activeUser.id,
+                                follower.userId
+                              )
+                            }
+                            className="edit-profile-btn"
+                          >
+                            Unfollow
+                          </button>
+                        )
+                      ) : (
+                        ''
+                      )}
                     </div>
-                    {this.props.activeUser.id === this.props.paramsId ? (
-                      <button className="follow-btn">Follow</button>
-                    ) : (
-                      ''
-                    )}
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </TabPanel>
             <TabPanel className="tabs-container">
@@ -183,7 +218,8 @@ class UserProfile_Tabs extends Component {
                         </p>
                       </div>
                     </div>
-                    {this.props.activeUser.id === this.props.paramsId ? (
+                    {this.props.activeUser.id ===
+                    Number(this.props.params.id) ? (
                       <button
                         onClick={() =>
                           this.props.unfollowUser(
