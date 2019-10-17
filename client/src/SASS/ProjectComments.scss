@@ -42,7 +42,7 @@
       display: flex;
       flex-direction: row-reverse;
       margin-top: 20px;
-      padding: 10px 8px;
+      padding: 10px 0;
       width: max-content;
       max-width: 100%;
       height: auto;
@@ -53,10 +53,16 @@
       &.--them {
         background: none;
         flex-direction: row;
+        align-items: flex-start;
         width: 100%;
         .ProjectComment__body__text {
           text-align: left;
         }
+      }
+
+      .user-links {
+        text-decoration: none;
+        color: white;
       }
 
       .ProjectComment__body__avatar {
@@ -72,6 +78,7 @@
         line-height: 14px;
         letter-spacing: 0.11em;
         padding: 0 8px;
+        margin-left: 5px;
         width: max-content;
         max-width: 250px;
         overflow-wrap: break-word;
@@ -87,6 +94,7 @@
         }
         .username {
           margin-bottom: 10px;
+          font-weight: 900;
         }
       }
     }
