@@ -103,7 +103,7 @@ class UserProfile_LI extends Component {
       .then(() => {
         this.props.getFollowersCount(theirId);
         this.props.getFollowers(theirId);
-        this.props.getFollowing(theirId);
+        this.props.getFollowing(yourId);
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirId);
