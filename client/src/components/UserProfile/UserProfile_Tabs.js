@@ -148,22 +148,26 @@ class UserProfile_Tabs extends Component {
                             alt="avatar"
                           />
                         </Link>
-                        <div className="follow-content">
-                          <div className="follow-content-flex">
-                            <h1 className="follow-FLname">
-                              {console.log('Follower:', follower)}
-                              {follower.name}
-                            </h1>
-                            <h1 className="follow-username">
-                              {follower.username}
-                            </h1>
+                        <Link
+                          to={`/profile/${follower.userId}/${follower.username}`}
+                        >
+                          <div className="follow-content">
+                            <div className="follow-content-flex">
+                              <h1 className="follow-FLname">
+                                {console.log('Follower:', follower)}
+                                {follower.name}
+                              </h1>
+                              <h1 className="follow-username">
+                                {follower.username}
+                              </h1>
+                            </div>
+                            <p className="follower-bio">{`${
+                              follower.bio.length > 100
+                                ? follower.bio.slice(0, 100) + '...'
+                                : follower.bio
+                            }`}</p>
                           </div>
-                          <p className="follower-bio">{`${
-                            follower.bio.length > 100
-                              ? follower.bio.slice(0, 100) + '...'
-                              : follower.bio
-                          }`}</p>
-                        </div>
+                        </Link>
                       </div>
                       {this.props.activeUser.id ===
                       Number(this.props.params.id) ? (
