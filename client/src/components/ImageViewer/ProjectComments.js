@@ -129,6 +129,7 @@ const ProjectComments = ({
               </div>
             </div>
           ))}
+        {/* this ref grabs the bottom of the comments display and scrolls it into view, automatically disabled at the column-view breakpoint */}
         <div ref={el => setCommentAnchor(el)}></div>
         {commentAnchor && !modal && scrollToBottom()}
       </section>

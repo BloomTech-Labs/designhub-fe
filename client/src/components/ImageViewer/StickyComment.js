@@ -12,6 +12,7 @@ export const StickyComment = ({
 }) => {
   return (
     <>
+      {/* this div wrapper renders at the stored coordinates and displays the comment body on hover */}
       <div
         className="StickyComment__hover-space"
         style={
@@ -35,6 +36,7 @@ export const StickyComment = ({
           left: left
         }}
       >
+        {/* this <hr> is part of the UX design that became problematic to implement, it is currently display:none */}
         <hr className="StickyComment__midbar" />
 
         <section className="StickyComment__body">
