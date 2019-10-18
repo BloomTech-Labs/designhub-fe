@@ -84,7 +84,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
                   <Link to={`/project/${project.id}`}>
                     <>
                       <div className="project-info">
-                        {project.name.length > 35 ? (
+                        {project.name && project.name.length > 35 ? (
                           <h1>{project.name.slice(0, 35)}...</h1>
                         ) : (
                           <h1>{project.name}</h1>

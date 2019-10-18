@@ -16,6 +16,7 @@ nav {
     background: $black;
     border-radius: 10px;
     transition: all 0.2s ease-in-out;
+    border: 1px solid $almost-black;
     @include themify($themes) {
       background: themed('bg2');
     }
@@ -79,6 +80,8 @@ nav {
     overflow: hidden;
     margin-left: -10px;
     transition: all 0.2s ease-in-out;
+    border-top: 1px solid $almost-black;
+    border-bottom: 1px solid $almost-black;
 
     @include themify($themes) {
       background: themed('bg2');
@@ -107,10 +110,12 @@ nav {
   .icon-links:hover ~ .text-links {
     transition: all 0.2s ease-in-out;
     width: 10rem;
+    border-right: 1px solid $almost-black;
   }
 
   .text-links:hover {
     width: 10rem;
+    border-right: 1px solid $almost-black;
   }
 
   .links:hover {

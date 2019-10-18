@@ -150,40 +150,16 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
+                      showPrev={showPrev}
+                      handlePrevButton={handlePrevButton}
+                      handleNextButton={handleNextButton}
+                      logout={logout}
+                      submitButton={submitButton}
                     />
                   );
                 } else return null;
               })}
             </section>
-
-            <div className="buttons">
-              {showPrev ? (
-                <button
-                  name="prev"
-                  className="prev-btn"
-                  onClick={handlePrevButton}
-                >
-                  Previous
-                </button>
-              ) : (
-                <button name="cancel" className="prev-btn" onClick={logout}>
-                  Cancel
-                </button>
-              )}
-              {submitButton ? (
-                <button className="next-btn" type="submit">
-                  Submit
-                </button>
-              ) : (
-                <button
-                  name="next"
-                  className="next-btn"
-                  onClick={handleNextButton}
-                >
-                  Next
-                </button>
-              )}
-            </div>
           </form>
         </div>
       </>

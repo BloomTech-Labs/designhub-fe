@@ -84,7 +84,7 @@
     letter-spacing: 0.11rem;
     outline: none;
     @include themify($themes) {
-      background: themed('bg2');
+      background: themed('bg');
       color: themed('text');
     }
   }

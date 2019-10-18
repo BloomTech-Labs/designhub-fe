@@ -84,6 +84,8 @@
   img {
     border-radius: 50%;
     width: 130px;
+    min-width: 130px;
+    object-fit: cover;
     height: 130px;
   }
 
