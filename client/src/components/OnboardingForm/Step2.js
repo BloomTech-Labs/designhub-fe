@@ -4,8 +4,19 @@ import { useDropzone } from 'react-dropzone';
 import DottedLine from '../Icons/DottedLine.js';
 import UploadCloud from '../Icons/UploadCloud.js';
 import remove from '../../ASSETS/remove.svg';
+import welcome from '../../ASSETS/welcome.svg';
 
-const Step2 = ({ formUser, files, setFiles, picture }) => {
+const Step2 = ({
+  formUser,
+  files,
+  setFiles,
+  picture,
+  showPrev,
+  handleNextButton,
+  handlePrevButton,
+  logout,
+  submitButton
+}) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
     onDrop: acceptedFiles => {
@@ -59,36 +70,84 @@ const Step2 = ({ formUser, files, setFiles, picture }) => {
 
   return (
     <div className="FormStep">
-      <header>
-        <h1>Welcome, {`${formUser.firstName}`}!</h1>
-        <h2>
-          Customize your profile even more by uploading a profile picture!
-        </h2>
-        <p>
-          Click or drag and drop on the upload icon to upload your profile
-          picture
-        </p>
-      </header>
+      <div className="left-side">
+        <h6 className="steps">Step 2 / 2</h6>
+        <div className="left-container">
+          <header>
+            <h1>Welcome to the community, {`${formUser.firstName}`}!</h1>
+            <h2>
+              Customize your profile even more by uploading a profile picture.
+            </h2>
+          </header>
 
-      <div className="avatar-upload-container">
-        <section className="dropzone-container">
-          <div
-            {...getRootProps({ className: 'dropzone' })}
-            className="upload-container"
-          >
-            <input {...getInputProps()} id="avatarImage" name="avatarImage" />
-            <div className="drop-text-container">
-              <UploadCloud />
-            </div>
+          <div className="avatar-upload-container">
+            <section className="dropzone-container">
+              <div
+                {...getRootProps({ className: 'dropzone' })}
+                className="upload-container"
+              >
+                <input
+                  {...getInputProps()}
+                  id="avatarImage"
+                  name="avatarImage"
+                />
+                <div className="drop-text-container">
+                  <UploadCloud />
+                </div>
+              </div>
+            </section>
+
+            <span
+              className={files.length > 0 ? 'DottedLine active' : 'DottedLine'}
+            >
+              <DottedLine />
+            </span>
+            <span className="avatarBlank-container">
+              <aside className="Step2-thumbnail-container">{thumbs()}</aside>
+            </span>
           </div>
-        </section>
-
-        <span className={files.length > 0 ? 'DottedLine active' : 'DottedLine'}>
-          <DottedLine />
-        </span>
-        <span className="avatarBlank-container">
-          <aside className="Step2-thumbnail-container">{thumbs()}</aside>
-        </span>
+          <p className="upload-help">
+            Click or drag and drop on the upload icon to upload your profile
+            picture
+          </p>
+          <div className="buttons">
+            {showPrev ? (
+              <button
+                name="prev"
+                className="prev-btn"
+                onClick={handlePrevButton}
+              >
+                Previous
+              </button>
+            ) : (
+              <button name="cancel" className="prev-btn" onClick={logout}>
+                Cancel
+              </button>
+            )}
+            {submitButton ? (
+              <button className="next-btn" type="submit">
+                Submit
+              </button>
+            ) : (
+              <button
+                name="next"
+                className="next-btn"
+                onClick={handleNextButton}
+              >
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+      <div className="right-side">
+        <header>
+          <img src={welcome} alt="welcome to designhub" className="welcome" />
+          <h2>
+            Discover new designers, get inspiration, and share your work with
+            the community
+          </h2>
+        </header>
       </div>
     </div>
   );

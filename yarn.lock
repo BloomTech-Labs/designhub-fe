@@ -2,12 +2,3 @@
 # yarn lockfile v1
 
 
-bodymovin@^4.13.0:
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/bodymovin/-/bodymovin-4.13.0.tgz#06d97c0130e2334dccb33bea638136f88a74540b"
-  integrity sha1-Btl8ATDiM03MszvqY4E2+Ip0VAs=
-
-lottie-web@^5.5.9:
-  version "5.5.9"
-  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.5.9.tgz#f8775e8c36dfada428f9acea826ab674750419a8"
-  integrity sha512-3Zdxnuyi6WXnMj+0ZfwDd17EXCM87Hcbhd+sVFq6EPGfkVoGzoIkZt9OafcgXw4mzjyILOkPDLaBumrgGKoCaw==

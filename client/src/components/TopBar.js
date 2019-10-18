@@ -47,7 +47,9 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
             <SearchBar searchData={searchData} getSearch={getSearch} />
           </div>
           <div className="top-bar-user-info">
-            <p>{activeUser.username}</p>
+            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+              <p>{activeUser.username}</p>
+            </Link>
             <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
               <img
                 className="profile-pic-thumb"

@@ -138,18 +138,21 @@ class UserProfile_LI extends Component {
               <h2 className="username">{this.props.userData.username}</h2>
               <p className="bio">{this.props.userData.bio}</p>
               <div className="user-info-location-website">
-                {this.props.userData.location ? <Location /> : null}
-                {/* <Location /> */}
-                <p>{this.props.userData.location}</p>
-                <a
-                  href={this.props.userData.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="website"
-                >
-                  {this.props.userData.website ? <WebsiteLink /> : null}
-                  {this.props.userData.website}
-                </a>
+                <div className="location-website-flex">
+                  {this.props.userData.location ? <Location /> : null}
+                  <p className="location">{this.props.userData.location}</p>
+                </div>
+                <div className="location-website-flex">
+                  <a
+                    href={this.props.userData.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="website"
+                  >
+                    {this.props.userData.website ? <WebsiteLink /> : null}
+                    {this.props.userData.website}
+                  </a>
+                </div>
               </div>
             </div>
           </div>

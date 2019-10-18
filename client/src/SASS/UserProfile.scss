@@ -58,7 +58,7 @@
       .username {
         margin: 0.5em 0;
         font-weight: 500;
-        font-size: 12px;
+        font-size: 14px;
         color: $dark-grey;
         letter-spacing: 0.11em;
         @include themify($themes) {
@@ -70,13 +70,14 @@
         margin: 0;
         max-width: max-content;
         line-height: 20px;
-        font-size: 0.85rem;
-        font-size: 12px;
+        font-size: 14px;
         letter-spacing: 0.11em;
       }
 
       .user-info-location-website {
-        display: flex;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 20px;
         align-items: center;
         width: max-content;
         font-size: 12px;
@@ -86,8 +87,13 @@
         svg {
           margin-right: 8px;
         }
+
+        .location-website-flex {
+          display: flex;
+          align-items: center;
+        }
+
         .website {
-          margin-left: 14px;
           text-decoration: none;
           color: $white;
           @include themify($themes) {
@@ -247,7 +253,7 @@
       text-align: center;
 
       .empty-icon {
-        opacity: 0.05;
+        opacity: 0.018;
       }
       .no-projects {
         width: 100%;
