@@ -73,46 +73,42 @@ class UserProfile_LI extends Component {
     }
   }
 
-  followUser = () => {
+  followUser = (yourId, theirID, activeUser, params) => {
     const followingObj = {
-      followingId: this.props.activeUser.id,
-      followedId: parseInt(this.props.match.params.id)
+      followingId: yourId,
+      followedId: theirID
     };
     this.props
       .addFollow(followingObj)
       .then(res => {
-        this.props.followNotification(
-          res.data.data[0].id,
-          this.props.activeUser,
-          this.props.match.params
-        );
+        this.props.followNotification(res.data.data[0].id, activeUser, params);
       })
       .then(() => {
-        this.props.getFollowersCount(parseInt(this.props.match.params.id));
+        this.props.getFollowersCount(theirID);
+        this.props.getFollowers(yourId);
+        this.props.getFollowing(yourId);
       })
       .then(() => {
-        this.props.getIsFollowed(
-          this.props.activeUser.id,
-          parseInt(this.props.match.params.id)
-        );
+        this.props.getIsFollowed(yourId, theirID);
       })
       .catch(err => console.log(err));
   };
 
-  unfollowUser = () => {
+  unfollowUser = (yourId, theirId) => {
+    console.log('yourId', yourId);
+    console.log('theirId', theirId);
     const unFollowObj = {
-      id: this.props.activeUser.id
+      id: yourId
     };
     this.props
-      .deleteFollow(parseInt(this.props.match.params.id), unFollowObj)
+      .deleteFollow(theirId, unFollowObj)
       .then(() => {
-        this.props.getFollowersCount(parseInt(this.props.match.params.id));
+        this.props.getFollowersCount(theirId);
+        this.props.getFollowers(yourId);
+        this.props.getFollowing(yourId);
       })
       .then(() => {
-        this.props.getIsFollowed(
-          this.props.activeUser.id,
-          parseInt(this.props.match.params.id)
-        );
+        this.props.getIsFollowed(yourId, theirId);
       })
       .catch(err => console.log(err));
   };
@@ -205,12 +201,27 @@ class UserProfile_LI extends Component {
                     {this.props.isFollowed ? (
                       <button
                         className="edit-profile-btn"
-                        onClick={this.unfollowUser}
+                        onClick={() =>
+                          this.unfollowUser(
+                            this.props.activeUser.id,
+                            parseInt(this.props.match.params.id)
+                          )
+                        }
                       >
                         Unfollow
                       </button>
                     ) : (
-                      <button className="follow-btn" onClick={this.followUser}>
+                      <button
+                        className="follow-btn"
+                        onClick={() =>
+                          this.followUser(
+                            this.props.activeUser.id,
+                            parseInt(this.props.match.params.id),
+                            this.props.activeUser,
+                            this.props.match.params
+                          )
+                        }
+                      >
                         Follow
                       </button>
                     )}
@@ -226,6 +237,11 @@ class UserProfile_LI extends Component {
           following={this.props.followingTab}
           starred={this.props.starred}
           isFollowed={this.props.isFollowed}
+          getIsFollowed={this.props.getIsFollowed}
+          followUser={this.followUser}
+          unfollowUser={this.unfollowUser}
+          activeUser={this.props.activeUser}
+          params={this.props.match.params}
         />
       </div>
     );
