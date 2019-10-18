@@ -61,6 +61,7 @@ class ImageViewer extends Component {
                   onClick={this.closeModal}
                 />
                 {modal && (
+                  // STICKY COMMENTS are managed by <ImageWithComments/>
                   <ImageWithComments
                     activeUser={this.props.activeUser}
                     activeImg={activeImg}
