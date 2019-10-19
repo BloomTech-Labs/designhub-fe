@@ -7,7 +7,7 @@ const Loading = () => {
     <div className="Loading-container">
       <Loader
         className="loading-text"
-        type="Grid"
+        type="Triangle"
         color="#C0C0C0"
         height={150}
         width={150}

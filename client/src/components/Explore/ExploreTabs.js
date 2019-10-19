@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import moment from 'moment';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 
@@ -35,6 +36,9 @@ const ExploreTabs = ({ recent, popular, following }) => {
                         ) : (
                           <h1>{project.name}</h1>
                         )}
+                        <h1 className="created">
+                          {moment(project.created_at).format('MMM DD, YYYY')}
+                        </h1>
                       </div>
                       <img
                         src={project.mainImg ? project.mainImg : defaultImg}
@@ -62,6 +66,9 @@ const ExploreTabs = ({ recent, popular, following }) => {
                         ) : (
                           <h1>{project.name}</h1>
                         )}
+                        <h1 className="created">
+                          {moment(project.created_at).format('MMM DD, YYYY')}
+                        </h1>
                       </div>
                       <img
                         src={project.mainImg ? project.mainImg : defaultImg}
@@ -89,6 +96,9 @@ const ExploreTabs = ({ recent, popular, following }) => {
                         ) : (
                           <h1>{project.name}</h1>
                         )}
+                        <h1 className="created">
+                          {moment(project.created_at).format('MMM DD, YYYY')}
+                        </h1>
                       </div>
                       <img
                         src={project.mainImg ? project.mainImg : defaultImg}

@@ -44,27 +44,32 @@
   .explore-projects-array {
     margin-top: 1rem;
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 40px;
     justify-content: flex-start;
-    grid-template-columns: 23% 23% 23% 23%;
-    grid-gap: 2%;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 400px) {
+      grid-template-columns: 1fr;
+    }
 
     .small-project-thumbnail {
-      width: 100%;
-      height: 230px;
       object-fit: cover;
       border-radius: 5px;
       border: 8px solid $field-bg;
     }
 
     .project-content {
-      width: 100%;
-      height: 14vw;
+      width: 96%;
+      height: 17rem;
       position: relative;
       transition: all 0.2s ease-in-out;
       border: 8px solid $field-bg;
       border-radius: 5px;
       overflow: hidden;
-      margin: 10px 10px 10px 10px;
       object-fit: cover;
 
       @include themify($themes) {
@@ -84,13 +89,20 @@
         pointer-events: none;
 
         h1 {
-          margin-top: 20px;
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .created {
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.507);
         }
       }
 
       .project-thumbnail {
         object-fit: cover;
-        width: 103%;
+        width: 100%;
         height: 100%;
         transition: 0.1s ease-in-out;
         cursor: pointer;
