@@ -2,36 +2,27 @@
 @import './palette';
 
 .project-form-wrapper {
-  align-items: center;
-  // border: 1px solid red;
   color: $white;
   width: 100%;
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
+
   @include themify($themes) {
     color: themed('text');
   }
 
   .ProjectForm__header {
-    align-self: flex-start;
-    display: flex;
-    margin-left: 2%;
     h2 {
       font-weight: 500;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 28px;
-      letter-spacing: 0.11em;
     }
   }
 
   .ProjectForm__body {
-    // border: 1px solid white;
     display: flex;
     margin: 16px 0;
     width: 100%;
 
-    @media (max-width: 700px) {
+    @media (max-width: 1024px) {
       align-items: center;
       flex-direction: column;
 
@@ -90,9 +81,10 @@
   }
 
   .left-container {
-    // border: 1px solid red;
     width: 100%;
-    padding: 0 2%;
+    // max-width: 100%;
+    margin-right: 2%;
+
     .delete-project-button {
       font-style: normal;
       font-weight: 500;
@@ -139,11 +131,11 @@
     .upload-container {
       align-items: center;
       border: 5px solid $black;
-      background: $field-bg;
+      background: $almost-black;
       border-radius: 10px;
       cursor: pointer;
       display: flex;
-      height: 200px;
+      height: 9rem;
       justify-content: center;
       outline: none;
       padding: 20px;
@@ -173,11 +165,15 @@
         line-height: 21px;
         text-align: center;
         letter-spacing: 0.11em;
+        font-weight: 500;
+        color: $white;
       }
 
       svg {
         stroke: $white;
-        max-width: 25%;
+        width: 4rem;
+        height: 4rem;
+        opacity: 0.2;
 
         @include themify($themes) {
           stroke: themed('link');
@@ -197,6 +193,7 @@
 
       .drop-text {
         margin-bottom: 10px;
+        font-size: 14px;
 
         mark {
           background: none;
@@ -207,27 +204,31 @@
   }
 
   .thumbnail-container {
-    // border: 1px solid cyan;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+    grid-gap: 1rem;
+    justify-content: flex-start;
     margin-top: 8px;
     margin-bottom: 8px;
-  }
 
-  .thumbnail {
-    border: 5px solid $black;
-    border-radius: 10px;
-    box-sizing: border-box;
-    display: inline-flex;
-    margin: 4px;
-    object-fit: cover;
-    object-position: center;
-    width: 6rem;
-    height: 6rem;
-    @include themify($themes) {
-      border: 5px solid themed('bg2');
+    .thumb {
+      margin: 0;
+      padding: 0;
+      width: max-content;
+
+      .thumbnail {
+        border: 5px solid $black;
+        border-radius: 10px;
+        box-sizing: border-box;
+        display: inline-block;
+        object-fit: cover;
+        object-position: center;
+        width: 7rem;
+        height: 6rem;
+        @include themify($themes) {
+          border: 5px solid themed('bg2');
+        }
+      }
     }
   }
 
@@ -235,7 +236,7 @@
     width: 20px;
     position: absolute;
     margin-top: -5px;
-    margin-left: -5px;
+    margin-left: 6rem;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
     opacity: 0.8;
@@ -247,14 +248,12 @@
   }
 
   .right-container {
-    // border: 1px solid white;
     width: 100%;
     display: flex;
     overflow-y: scroll;
-    padding: 0 2%;
+    margin-top: 2rem;
 
     form {
-      // border: 1px solid white;
       @include onboard-form;
       @include themify($themes) {
         background-color: themed('bg');
@@ -265,6 +264,7 @@
       input {
         font-size: 12px;
         margin-bottom: 20px;
+        border: 1px solid $field-stroke;
         @include themify($themes) {
           background-color: themed('bg2');
         }
@@ -278,15 +278,17 @@
         font-size: 12px;
         margin-bottom: 20px;
         resize: vertical;
-        height: 50px;
+        height: 80px;
+        border: 1px solid $field-stroke;
         @include themify($themes) {
           background-color: themed('bg2');
         }
       }
 
       label {
-        margin-top: 15px;
-        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 15px;
         line-height: 21px;
       }
 
@@ -294,12 +296,17 @@
         margin-top: 0px;
       }
     }
+
+    .required-help {
+      color: $dark-grey;
+    }
   }
 
   .submit-cancel-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-end;
     width: 100%;
     button {
       &:disabled {
@@ -311,12 +318,35 @@
     .submit-button {
       @include primary-btn;
       margin-top: 16px;
-      margin-right: 16px;
     }
 
     .cancel-btn {
       @include secondary-btn;
       margin-top: 16px;
+      margin-right: 16px;
+    }
+  }
+
+  .delete-project-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
+    opacity: 0.6;
+    width: max-content;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    p {
+      margin-left: 10px;
+      color: $dark-grey;
+      cursor: pointer;
+    }
+
+    svg {
+      cursor: pointer;
     }
   }
 }

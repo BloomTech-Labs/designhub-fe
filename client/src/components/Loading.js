@@ -1,17 +1,11 @@
 import React from 'react';
-import Loader from 'react-loader-spinner';
+import { GooSpinner } from 'react-spinners-kit';
 import '../SASS/Loading.scss';
 
 const Loading = () => {
   return (
     <div className="Loading-container">
-      <Loader
-        className="loading-text"
-        type="Triangle"
-        color="#C0C0C0"
-        height={150}
-        width={150}
-      />
+      <GooSpinner size={80} color="#5557fe" className="loader" />
     </div>
   );
 };

@@ -240,13 +240,14 @@ const ProjectForm = ({
           )}
         </span>
       </div>
-      <header className="ProjectForm__header">
-        <h2 className="page-header">
-          {isEditing ? 'Edit project' : 'Create a project'}
-        </h2>
-      </header>
+
       <section className="ProjectForm__body">
         <div className="left-container">
+          <header className="ProjectForm__header">
+            <h2 className="page-header">
+              {isEditing ? 'Edit project' : 'Create a project'}
+            </h2>
+          </header>
           <MultiImageUpload filesArray={{ files, setFiles }} />
 
           {isEditing && (
@@ -278,18 +279,6 @@ const ProjectForm = ({
                   </div>
                 ))}
               </div>
-              <div
-                className="delete-project-button"
-                onClick={() =>
-                  setState({
-                    ...state,
-                    modal: true
-                  })
-                }
-              >
-                <DeleteIcon />
-                <p>Delete project</p>
-              </div>
             </div>
           )}
         </div>
@@ -300,7 +289,7 @@ const ProjectForm = ({
           >
             <div className={alert ? 'required alert' : 'required'}>
               <label htmlFor="name" className="label project-label">
-                Project title
+                Project title *
               </label>
               <input
                 required
@@ -350,24 +339,17 @@ const ProjectForm = ({
               id="invisionLink"
               onChange={handleChanges}
             />
-            <label htmlFor="teamMembers" className="label">
+            <p className="required-help">* Required</p>
+            {/* <label htmlFor="teamMembers" className="label">
               Add team members
             </label>
             <input
               type="text"
               placeholder="Enter team member usernames separated by a comma (optional)"
               id="teamMembers"
-            />
+            /> */}
 
             <div className="submit-cancel-container">
-              <button
-                className="submit-button"
-                type="submit"
-                onClick={handleSubmit}
-                disabled={isLoading}
-              >
-                {isEditing ? 'Save Changes' : 'Publish'}
-              </button>
               <button
                 type="button"
                 className="cancel-btn"
@@ -378,6 +360,26 @@ const ProjectForm = ({
               >
                 Cancel
               </button>
+              <button
+                className="submit-button"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isLoading}
+              >
+                {isEditing ? 'Save Changes' : 'Publish'}
+              </button>
+            </div>
+            <div
+              className="delete-project-button"
+              onClick={() =>
+                setState({
+                  ...state,
+                  modal: true
+                })
+              }
+            >
+              <DeleteIcon />
+              <p>Delete project</p>
             </div>
           </form>
         </div>

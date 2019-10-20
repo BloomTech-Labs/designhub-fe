@@ -44,17 +44,18 @@
   .explore-projects-array {
     margin-top: 1rem;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
     grid-gap: 40px;
-    justify-content: flex-start;
+    justify-items: center;
+    width: 100%;
 
-    @media (max-width: 1200px) {
-      grid-template-columns: 1fr 1fr;
-    }
+    // @media (max-width: 1200px) {
+    //   grid-template-columns: 1fr 1fr;
+    // }
 
-    @media (max-width: 400px) {
-      grid-template-columns: 1fr;
-    }
+    // @media (max-width: 400px) {
+    //   grid-template-columns: 1fr;
+    // }
 
     .small-project-thumbnail {
       object-fit: cover;
@@ -63,7 +64,7 @@
     }
 
     .project-content {
-      width: 96%;
+      width: 24rem;
       height: 17rem;
       position: relative;
       transition: all 0.2s ease-in-out;
