@@ -15,6 +15,7 @@ class UserProfile_Tabs extends Component {
 
   render() {
     const projects = this.props.projects;
+    const recentProjects = this.props.recentProjects
     const followers = this.props.followers;
     const following = this.props.following;
     const starred = this.props.starred;
@@ -54,8 +55,8 @@ class UserProfile_Tabs extends Component {
                   </div>
                 )}
                 <div className="projects-array">
-                  {projects !== null &&
-                    projects.slice(0, 8).map(project => (
+                  {recentProjects !== null &&
+                    recentProjects.map(project => (
                       <div className="project-content" key={project.id}>
                         <Link to={`/project/${project.id}`}>
                           <>
