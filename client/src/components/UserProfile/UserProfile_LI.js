@@ -19,7 +19,8 @@ import {
   getIsFollowed,
   deleteFollow,
   addFollow,
-  followNotification
+  followNotification,
+  getRecentProjectsByUser
 } from '../../store/actions';
 
 // ========== STYLES ========== //
@@ -48,6 +49,9 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         this.props.getProjectsByUser(this.props.match.params.id);
+      })
+      .then(() => {
+        this.props.getRecentProjectsByUser(this.props.match.params.id);
       })
       .then(() => {
         this.props.getFollowers(this.props.match.params.id);
@@ -236,6 +240,7 @@ class UserProfile_LI extends Component {
         </div>
         <UserProfileTabs
           projects={this.props.projects}
+          recentProjects={this.props.recentProjects}
           followers={this.props.followersTab}
           following={this.props.followingTab}
           starred={this.props.starred}
@@ -259,6 +264,7 @@ const mapStateToProps = state => {
     followingTab: state.followers.following,
     userData: state.users.singleUser,
     projects: state.projects.usersProjects,
+    recentProjects: state.projects.usersRecentProjects,
     starred: state.stars.starredProjects,
     isFollowed: state.followers.isFollowed,
     isUsersLoading: state.users.isLoading
@@ -278,6 +284,7 @@ export default connect(
     getIsFollowed,
     deleteFollow,
     addFollow,
-    followNotification
+    followNotification,
+    getRecentProjectsByUser
   }
 )(UserProfile_LI);
