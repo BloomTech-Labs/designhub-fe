@@ -85,8 +85,8 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         this.props.getFollowersCount(theirID);
-        this.props.getFollowers(yourId);
-        this.props.getFollowing(yourId);
+        this.props.getFollowers(theirID);
+        this.props.getFollowing(theirID);
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirID);
@@ -104,8 +104,8 @@ class UserProfile_LI extends Component {
       .deleteFollow(theirId, unFollowObj)
       .then(() => {
         this.props.getFollowersCount(theirId);
-        this.props.getFollowers(yourId);
-        this.props.getFollowing(yourId);
+        this.props.getFollowers(theirId);
+        this.props.getFollowing(theirId);
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirId);
