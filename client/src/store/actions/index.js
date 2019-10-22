@@ -30,9 +30,9 @@ export const DELETE_PROJECT_FAILURE = 'DELETE_PROJECT_FAILURE';
 export const GET_USERS_PROJECTS_START = 'GET_USERS_PROJECTS_START';
 export const GET_USERS_PROJECTS_SUCCESS = 'GET_USERS_PROJECTS_SUCCESS';
 export const GET_USERS_PROJECTS_FAILURE = 'GET_USERS_PROJECTS_FAILURE';
-export const GET_RECENT_PROJECTS_START = 'GET_RECENT_PROJECTS_START'
-export const GET_RECENT_PROJECTS_SUCCESS = 'GET_RECENT_PROJECTS_SUCCESS'
-export const GET_RECENT_PROJECTS_FAILURE = 'GET_RECENT_PROJECTS_FAILURE'
+export const GET_RECENT_PROJECTS_START = 'GET_RECENT_PROJECTS_START';
+export const GET_RECENT_PROJECTS_SUCCESS = 'GET_RECENT_PROJECTS_SUCCESS';
+export const GET_RECENT_PROJECTS_FAILURE = 'GET_RECENT_PROJECTS_FAILURE';
 
 //Comments
 export const GET_PROJECT_COMMENTS_START = 'GET_PROJECT_COMMENTS_START';
@@ -408,23 +408,28 @@ export const deletePhoto = photoId => dispatch => {
 
 //Followers Actions
 
-export const followNotification = (followId, activeUser, params) => dispatch => {
-  dispatch({ type: FOLLOW_NOTIFICATION_START })
-  return axiosWithAuth().post('api/v1/invite/follow', {
-    activeUsername: activeUser.username,
-    invitedUserId: params.id,
-    activeUserId: activeUser.id,
-    followersId: followId,
-    activeUserAvatar: activeUser.avatar,
-    type: 'follow'
-  })
-  .then((res) => {
-    dispatch({ type: FOLLOW_NOTIFICATION_SUCCESS })
-  })
-  .catch(err => {
-    dispatch({ type: FOLLOW_NOTIFICATION_FAILURE, payload: err.message })
-  })
-}
+export const followNotification = (
+  followId,
+  activeUser,
+  theirId
+) => dispatch => {
+  dispatch({ type: FOLLOW_NOTIFICATION_START });
+  return axiosWithAuth()
+    .post('api/v1/invite/follow', {
+      activeUsername: activeUser.username,
+      invitedUserId: theirId,
+      activeUserId: activeUser.id,
+      followersId: followId,
+      activeUserAvatar: activeUser.avatar,
+      type: 'follow'
+    })
+    .then(res => {
+      dispatch({ type: FOLLOW_NOTIFICATION_SUCCESS });
+    })
+    .catch(err => {
+      dispatch({ type: FOLLOW_NOTIFICATION_FAILURE, payload: err.message });
+    });
+};
 
 export const getFollowers = userId => dispatch => {
   dispatch({ type: GET_FOLLOWERS_START });
@@ -488,7 +493,7 @@ export const addFollow = followObject => dispatch => {
       dispatch({
         type: ADD_FOLLOW_SUCCESS
       });
-      return res
+      return res;
     })
     .catch(err => {
       dispatch({ type: ADD_FOLLOW_FAILURE, payload: err.message });
@@ -518,7 +523,6 @@ export const getIsFollowed = (myId, theirId) => dispatch => {
       dispatch({ type: GET_IS_FOLLOWED_FAILURE, payload: err.message });
     });
 };
-
 
 //Stars Actions
 export const starProject = starObject => dispatch => {

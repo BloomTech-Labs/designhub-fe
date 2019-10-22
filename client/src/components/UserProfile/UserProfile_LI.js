@@ -86,10 +86,28 @@ class UserProfile_LI extends Component {
       .addFollow(followingObj)
       .then(res => {
         console.log('res', res);
-        this.props.followNotification(res.data.data[0].id, activeUser, params);
+        if (
+          Number(this.props.match.params.id) ===
+          Number(this.props.activeUser.id)
+        ) {
+          this.props.followNotification(
+            res.data.data[0].id,
+            activeUser,
+            theirId
+          );
+        } else {
+          this.props.followNotification(
+            res.data.data[0].id,
+            activeUser,
+            params.id
+          );
+        }
       })
       .then(() => {
-        if (+this.props.match.params.id === +this.props.activeUser.id) {
+        if (
+          Number(this.props.match.params.id) ===
+          Number(this.props.activeUser.id)
+        ) {
           this.props.getFollowersCount(yourId);
           this.props.getFollowers(yourId);
           this.props.getFollowing(yourId);
@@ -112,7 +130,10 @@ class UserProfile_LI extends Component {
     this.props
       .deleteFollow(theirId, unFollowObj)
       .then(() => {
-        if (+this.props.match.params.id === +this.props.activeUser.id) {
+        if (
+          Number(this.props.match.params.id) ===
+          Number(this.props.activeUser.id)
+        ) {
           this.props.getFollowersCount(yourId);
           this.props.getFollowers(yourId);
           this.props.getFollowing(yourId);
