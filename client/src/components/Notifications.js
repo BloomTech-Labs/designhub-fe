@@ -65,12 +65,12 @@ const Notifications = props => {
     } else if (item.type === 'follow') {
       return (
         <div key={item.id} className="notification">
-          {item.unread === true && <h2>UNREAD</h2>}
+          {item.unread === true && <h2 className="unread">.</h2>}
           <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
           <p className="followed_you">
             {item.activeUsername}&nbsp;followed&nbsp;
           </p>
-          <p>&nbsp;you&nbsp;</p>
+          <p>you</p>
           <p>&nbsp;{moment(item.created_at).fromNow()} </p>
         </div>
       );

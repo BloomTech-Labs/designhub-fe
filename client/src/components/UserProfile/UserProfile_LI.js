@@ -85,6 +85,7 @@ class UserProfile_LI extends Component {
     this.props
       .addFollow(followingObj)
       .then(res => {
+        console.log('res', res);
         this.props.followNotification(res.data.data[0].id, activeUser, params);
       })
       .then(() => {
