@@ -147,6 +147,10 @@
 
       .active-link {
         color: white;
+        @include themify($themes) {
+          color: $black;
+          font-weight: bold;
+        }
       }
     }
   }

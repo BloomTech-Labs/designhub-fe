@@ -73,15 +73,14 @@ class UserProfile_LI extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      console.log('HDFKSFDhelooOOooOOOOOO');
       this.fetch();
     }
   }
 
-  followUser = (yourId, theirID, activeUser, params) => {
+  followUser = (yourId, theirId, activeUser, params) => {
     const followingObj = {
       followingId: yourId,
-      followedId: theirID
+      followedId: theirId
     };
     this.props
       .addFollow(followingObj)
@@ -89,28 +88,38 @@ class UserProfile_LI extends Component {
         this.props.followNotification(res.data.data[0].id, activeUser, params);
       })
       .then(() => {
-        this.props.getFollowersCount(theirID);
-        this.props.getFollowers(theirID);
-        this.props.getFollowing(theirID);
+        if (+this.props.match.params.id === +this.props.activeUser.id) {
+          this.props.getFollowersCount(yourId);
+          this.props.getFollowers(yourId);
+          this.props.getFollowing(yourId);
+        } else {
+          this.props.getFollowersCount(theirId);
+          this.props.getFollowers(theirId);
+          this.props.getFollowing(theirId);
+        }
       })
       .then(() => {
-        this.props.getIsFollowed(yourId, theirID);
+        this.props.getIsFollowed(yourId, theirId);
       })
       .catch(err => console.log(err));
   };
 
   unfollowUser = (yourId, theirId) => {
-    console.log('yourId', yourId);
-    console.log('theirId', theirId);
     const unFollowObj = {
       id: yourId
     };
     this.props
       .deleteFollow(theirId, unFollowObj)
       .then(() => {
-        this.props.getFollowersCount(theirId);
-        this.props.getFollowers(theirId);
-        this.props.getFollowing(theirId);
+        if (+this.props.match.params.id === +this.props.activeUser.id) {
+          this.props.getFollowersCount(yourId);
+          this.props.getFollowers(yourId);
+          this.props.getFollowing(yourId);
+        } else {
+          this.props.getFollowersCount(theirId);
+          this.props.getFollowers(theirId);
+          this.props.getFollowing(theirId);
+        }
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirId);
@@ -120,10 +129,6 @@ class UserProfile_LI extends Component {
 
   render() {
     window.scroll(0, 0);
-    // if (this.state.userData.avatar === undefined) {
-    //   return <div>Loading</div>;
-    // }
-    console.log('this.props.userData', this.props.userData);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
     }
