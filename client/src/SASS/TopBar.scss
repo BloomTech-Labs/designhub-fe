@@ -7,7 +7,7 @@
   z-index: 999999;
   width: 100%;
   background: $almost-black;
-  height: 70px;
+
   @include themify($themes) {
     background: themed('bg2');
     border-bottom: themed('bg');
@@ -18,15 +18,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8%;
     width: 96%;
     margin: 0 auto;
   }
 
   .logo-container {
-    margin-top: 5px;
     width: auto;
     margin-left: 20px;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   .search-bar-container {
@@ -58,8 +61,8 @@
   }
 
   .profile-pic-thumb {
-    width: 40px;
-    height: 40px;
+    width: 2rem;
+    height: 2rem;
     border-radius: 100%;
     border: 2px solid $blue;
     margin: 0 15px;
@@ -68,13 +71,14 @@
 
   .dark-mode-switch {
     cursor: pointer;
-    width: 42px;
-    height: 42px;
+    width: auto;
+    height: auto;
+    margin: 5px 0;
   }
 
   .search-bar-input {
     width: 369px;
-    height: 31px;
+    height: 2rem;
     color: $white;
     background: $field-bg;
     border-radius: 2px;
@@ -125,7 +129,8 @@
       z-index: 99999999;
 
       .mobile-logo {
-        width: 40px;
+        width: 2rem;
+        margin: 10px 0;
       }
 
       .mobile-menu {

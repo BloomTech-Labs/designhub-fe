@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import UserProfileTabs from './UserProfile_Tabs.js';
 import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
+import Loading from '../Loading.js';
 
 import {
   getSingleUser,
@@ -124,7 +125,7 @@ class UserProfile_LI extends Component {
     // }
     console.log('this.props.userData', this.props.userData);
     if (this.props.isUsersLoading && this.props.userData === null) {
-      return <div>Loading...</div>;
+      return <Loading />;
     }
     return (
       <div className="user-profile-container">
