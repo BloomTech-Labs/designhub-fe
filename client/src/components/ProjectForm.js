@@ -369,18 +369,20 @@ const ProjectForm = ({
                 {isEditing ? 'Save Changes' : 'Publish'}
               </button>
             </div>
-            <div
-              className="delete-project-button"
-              onClick={() =>
-                setState({
-                  ...state,
-                  modal: true
-                })
-              }
-            >
-              <DeleteIcon />
-              <p>Delete project</p>
-            </div>
+            {isEditing && (
+              <div
+                className="delete-project-button"
+                onClick={() =>
+                  setState({
+                    ...state,
+                    modal: true
+                  })
+                }
+              >
+                <DeleteIcon />
+                <p>Delete project</p>
+              </div>
+            )}
           </form>
         </div>
       </section>
