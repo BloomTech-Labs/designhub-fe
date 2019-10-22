@@ -91,17 +91,22 @@ const ExploreTabs = ({ recent, popular, following }) => {
                   <Link to={`/project/${project.id}`}>
                     <>
                       <div className="project-info">
-                        {project.name && project.name.length > 35 ? (
-                          <h1>{project.name.slice(0, 35)}...</h1>
+                        {project.projectName &&
+                        project.projectName.length > 35 ? (
+                          <h1>{project.projectName.slice(0, 35)}...</h1>
                         ) : (
-                          <h1>{project.name}</h1>
+                          <h1>{project.projectName}</h1>
                         )}
                         <h1 className="created">
                           {moment(project.created_at).format('MMM DD, YYYY')}
                         </h1>
                       </div>
                       <img
-                        src={project.mainImg ? project.mainImg : defaultImg}
+                        src={
+                          project.projectImage
+                            ? project.projectImage
+                            : defaultImg
+                        }
                         className="project-thumbnail"
                         alt="test"
                         key={project.id}
