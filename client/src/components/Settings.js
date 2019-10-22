@@ -8,7 +8,6 @@ import Account from './Settings/Account.js';
 const Settings = ({ activeUser, match }) => {
   const { logout } = useAuth0();
   const { path } = match;
-  console.log('path!!!!!!!!!!!!!!', path);
   return (
     <div className="Settings">
       <div className="settings-left-column">

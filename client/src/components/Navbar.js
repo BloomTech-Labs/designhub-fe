@@ -19,11 +19,10 @@ const Navbar = ({ activeUser }) => {
       setBool(data);
     };
     getNotifyBool(activeUser.id);
-  }, []);
+  }, [activeUser.id]);
 
   return (
     <nav>
-      {console.log(bool)}
       <div className="icon-links">
         <div className="navlinks">
           <NavLink

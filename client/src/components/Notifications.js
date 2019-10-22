@@ -15,7 +15,6 @@ const Notifications = props => {
         if (data.unReadNotifications) {
           return await Promise.all(
             data.unReadNotifications.map(async i => {
-              console.log('ran');
               await axiosWithAuth().put(`api/v1/invite/${i.id}`, {
                 unread: false
               });
@@ -33,15 +32,14 @@ const Notifications = props => {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [id]);
 
   const renderBasedOnType = item => {
-    console.log(item.unread);
     if (item.type === 'comment') {
       return (
         <div key={item.id} className="commented_notification">
           <div className="commented_left">
-            {item.unread === true ? <h2 className="unread">.</h2> : <h2></h2>}
+            {item.unread === true ? <h2 className="unread">.</h2> : null}
             <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
             <p className="commented">
               {item.activeUsername} commented:

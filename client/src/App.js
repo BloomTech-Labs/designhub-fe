@@ -17,7 +17,7 @@ function App({ history, currentUser, isOnboarding, isLoggedIn, initUser }) {
 
   useEffect(() => {
     if (typeof user === 'object') initUser(user);
-  }, [user, history]);
+  }, [user, history, initUser]);
 
   return (
     <>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAuth0 } from '../auth-wrapper';
-import { NavLink } from 'react-router-dom';
 import '../SASS/LandingPage.scss';
 
 import x from '../ASSETS/logo.svg';
