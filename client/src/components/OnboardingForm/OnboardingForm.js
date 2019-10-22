@@ -88,7 +88,6 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
   };
 
   const handleSubmit = async (e, id, changes) => {
-    console.log('handleSubmit() e', e);
     e.preventDefault();
     try {
       setLoading(true);

@@ -50,10 +50,6 @@ class UserProfile_Tabs extends Component {
                 {projects.length === 0 && (
                   <div className="empty-state">
                     <img src={empty} alt="empty" className="empty-icon" />
-                    {console.log(
-                      'document.documentElement',
-                      document.documentElement.className
-                    )}
                     <h1 className="no-projects">
                       No projects have been created yet
                     </h1>
@@ -141,7 +137,10 @@ class UserProfile_Tabs extends Component {
                 {followers.length === 0 && (
                   <div className="empty-state">
                     <h1 className="no-projects">
-                      This user does not have any followers. 😬
+                      This user does not have any followers.{' '}
+                      <span aria-label="grimacing face" role="img">
+                        😬
+                      </span>
                     </h1>
                   </div>
                 )}
@@ -151,6 +150,7 @@ class UserProfile_Tabs extends Component {
                     if (following.userId === follower.userId) {
                       alsoFollowing = true;
                     }
+                    return following;
                   });
                   return (
                     <div className="follow-container" key={follower.id}>
@@ -169,10 +169,7 @@ class UserProfile_Tabs extends Component {
                         >
                           <div className="follow-content">
                             <div className="follow-content-flex">
-                              <h1 className="follow-FLname">
-                                {console.log('Follower:', follower)}
-                                {follower.name}
-                              </h1>
+                              <h1 className="follow-FLname">{follower.name}</h1>
                               <h1 className="follow-username">
                                 {follower.username}
                               </h1>
@@ -227,7 +224,10 @@ class UserProfile_Tabs extends Component {
                 {following.length === 0 && (
                   <div className="empty-state">
                     <h1 className="no-projects">
-                      This user does not follow anyone. 💅
+                      This user does not follow anyone.{' '}
+                      <span aria-label="nail polish" role="img">
+                        💅
+                      </span>
                     </h1>
                   </div>
                 )}

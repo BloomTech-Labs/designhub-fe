@@ -16,8 +16,6 @@ export const initUser = user => async dispatch => {
   try {
     const res = await axiosWithAuth().post('api/v1/users/', user);
     const [userFromResponse] = res.data.user;
-    console.log('usersActions initUser() res.data', userFromResponse);
-
     dispatch({ type: INIT_USER, payload: userFromResponse });
     const { username } = userFromResponse;
     if (username === null || username === '') {
@@ -34,7 +32,6 @@ export const updateUser = (id, changes) => async dispatch => {
   dispatch({ type: UPDATE_USER_START });
   try {
     const res = await axios.put(`/api/v1/users/${id}`, changes);
-    console.log('usersActions updateUser() res.data', res.data);
     const updates = res.data[0];
     dispatch({ type: UPDATE_USER_SUCCESS, payload: updates });
     dispatch({ type: SET_LOGGEDIN });

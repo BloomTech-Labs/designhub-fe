@@ -85,7 +85,6 @@ class UserProfile_LI extends Component {
     this.props
       .addFollow(followingObj)
       .then(res => {
-        console.log('res', res);
         if (
           Number(this.props.match.params.id) ===
           Number(this.props.activeUser.id)
