@@ -112,6 +112,12 @@
     }
     .upload-container.active {
       border: 8px solid $blue;
+      @include themify($themes) {
+        border: 8px solid $blue;
+        p {
+          color: $blue;
+        }
+      }
       p {
         color: $blue;
       }
@@ -119,6 +125,12 @@
 
     .upload-container.rejected {
       border: 8px solid $alert;
+      @include themify($themes) {
+        border: 8px solid $alert;
+        p {
+          color: $alert;
+        }
+      }
       p {
         color: $alert;
       }
@@ -194,6 +206,9 @@
       .drop-text {
         margin-bottom: 10px;
         font-size: 14px;
+        @include themify($themes) {
+          color: $dark-grey;
+        }
 
         mark {
           background: none;

@@ -134,9 +134,6 @@ class UserProfile_LI extends Component {
 
   render() {
     window.scroll(0, 0);
-    // if (this.state.userData.avatar === undefined) {
-    //   return <div>Loading</div>;
-    // }
     console.log('this.props.userData', this.props.userData);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
