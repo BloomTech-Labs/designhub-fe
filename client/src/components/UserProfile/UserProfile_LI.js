@@ -78,10 +78,10 @@ class UserProfile_LI extends Component {
     }
   }
 
-  followUser = (yourId, theirID, activeUser, params) => {
+  followUser = (yourId, theirId, activeUser, params) => {
     const followingObj = {
       followingId: yourId,
-      followedId: theirID
+      followedId: theirId
     };
     this.props
       .addFollow(followingObj)
@@ -89,12 +89,18 @@ class UserProfile_LI extends Component {
         this.props.followNotification(res.data.data[0].id, activeUser, params);
       })
       .then(() => {
-        this.props.getFollowersCount(theirID);
-        this.props.getFollowers(theirID);
-        this.props.getFollowing(theirID);
+        if (activeUser.id === params.id) {
+          this.props.getFollowersCount(yourId);
+          this.props.getFollowers(yourId);
+          this.props.getFollowing(yourId);
+        } else {
+          this.props.getFollowersCount(theirId);
+          this.props.getFollowers(theirId);
+          this.props.getFollowing(theirId);
+        }
       })
       .then(() => {
-        this.props.getIsFollowed(yourId, theirID);
+        this.props.getIsFollowed(yourId, theirId);
       })
       .catch(err => console.log(err));
   };
@@ -108,9 +114,17 @@ class UserProfile_LI extends Component {
     this.props
       .deleteFollow(theirId, unFollowObj)
       .then(() => {
-        this.props.getFollowersCount(theirId);
-        this.props.getFollowers(theirId);
-        this.props.getFollowing(theirId);
+        if (yourId === theirId) {
+          this.props.getFollowersCount(yourId);
+          this.props.getFollowers(yourId);
+          this.props.getFollowing(yourId);
+        } else {
+          this.props.getFollowersCount(theirId);
+          this.props.getFollowers(theirId);
+          this.props.getFollowing(theirId);
+        }
+        this.props.getFollowers(yourId);
+        this.props.getFollowing(yourId);
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirId);
