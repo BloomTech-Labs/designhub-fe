@@ -73,7 +73,6 @@ class UserProfile_LI extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      console.log('HDFKSFDhelooOOooOOOOOO');
       this.fetch();
     }
   }
@@ -89,7 +88,7 @@ class UserProfile_LI extends Component {
         this.props.followNotification(res.data.data[0].id, activeUser, params);
       })
       .then(() => {
-        if (activeUser.id === params.id) {
+        if (+this.props.match.params.id === +this.props.activeUser.id) {
           this.props.getFollowersCount(yourId);
           this.props.getFollowers(yourId);
           this.props.getFollowing(yourId);
@@ -106,15 +105,13 @@ class UserProfile_LI extends Component {
   };
 
   unfollowUser = (yourId, theirId) => {
-    console.log('yourId', yourId);
-    console.log('theirId', theirId);
     const unFollowObj = {
       id: yourId
     };
     this.props
       .deleteFollow(theirId, unFollowObj)
       .then(() => {
-        if (yourId === theirId) {
+        if (+this.props.match.params.id === +this.props.activeUser.id) {
           this.props.getFollowersCount(yourId);
           this.props.getFollowers(yourId);
           this.props.getFollowing(yourId);
@@ -123,8 +120,6 @@ class UserProfile_LI extends Component {
           this.props.getFollowers(theirId);
           this.props.getFollowing(theirId);
         }
-        this.props.getFollowers(yourId);
-        this.props.getFollowing(yourId);
       })
       .then(() => {
         this.props.getIsFollowed(yourId, theirId);
@@ -134,7 +129,6 @@ class UserProfile_LI extends Component {
 
   render() {
     window.scroll(0, 0);
-    console.log('this.props.userData', this.props.userData);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
     }
