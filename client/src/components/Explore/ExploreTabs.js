@@ -27,8 +27,8 @@ const ExploreTabs = ({ recent, popular, following }) => {
           <TabPanel className="tabs-container">
             <div className="explore-projects-array">
               {popular.map(project => (
-                <div className="project-content" key={project.id}>
-                  <Link to={`/project/${project.id}`}>
+                <div className="project-content" key={project.projectId}>
+                  <Link to={`/project/${project.projectId}`}>
                     <>
                       <div className="project-info">
                         {project.name.length > 35 ? (
@@ -44,7 +44,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
                         src={project.mainImg ? project.mainImg : defaultImg}
                         className="project-thumbnail"
                         alt="test"
-                        key={project.id}
+                        key={project.projectId}
                       />
                     </>
                   </Link>
