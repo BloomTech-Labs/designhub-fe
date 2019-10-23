@@ -253,6 +253,10 @@
   }
 }
 
+// this code comes from Dmitry Borody
+// https://medium.com/@dmitriy.borodiy/easy-color-theming-with-scss-bc38fd5734d1
+// the themify function draws on the $themes map inside palette.scss
+// theme switching happens inside TopBar.js, the toggle switch adds 'theme-light' to the classList of the root <html> element
 @mixin themify($themes: $themes) {
   @each $theme, $map in $themes {
     .theme-#{$theme} & {
