@@ -37,6 +37,10 @@ $form-field: $light-black;
 $form-label: $white;
 
 //MAP FOR themify() FUNCTION
+// this code comes from Dmitry Borody
+// https://medium.com/@dmitriy.borodiy/easy-color-theming-with-scss-bc38fd5734d1
+// the $themes map populates the @themify function inside mixins.scss
+// theme switching happens inside TopBar.js, the toggle switch adds 'theme-light' to the classList of the root <html> element
 $themes: (
   light: (
     bg: $lightmode-bg,

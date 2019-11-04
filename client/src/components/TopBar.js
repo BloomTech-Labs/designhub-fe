@@ -11,6 +11,8 @@ import '../SASS/TopBar.scss';
 
 const TopBar = ({ activeUser, searchData, getSearch }) => {
   const [light, setLight] = useState(false);
+
+  // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
     document.documentElement.classList.toggle('theme-light');
     setLight(!light);
