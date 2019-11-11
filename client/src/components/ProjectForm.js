@@ -67,9 +67,6 @@ const ProjectForm = ({
         [e.target.name]: e.target.value
       }
     });
-
-    console.log("privacy", state.project.privateProject);
-
   };
 
   const handlePrivacySetting = e => {
@@ -142,7 +139,6 @@ const ProjectForm = ({
   };
 
   const createProject = async project => {
-    console.log("project", project);
     try {
       const {
         data: { id },
