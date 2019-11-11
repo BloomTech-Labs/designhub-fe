@@ -38,6 +38,7 @@ const ProjectForm = ({
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [alert, setAlert] = useState(false);
+  const [privacy, setPrivacy] = useState("public");
 
   const [state, setState] = useState({
     project: {
@@ -46,6 +47,7 @@ const ProjectForm = ({
       description: isEditing ? project.description : '',
       figma: isEditing ? project.figma : '',
       invision: isEditing ? project.invision : '',
+      privateProjects: isEditing ? project.privateProjects: false,
       mainImg: isEditing ? project.mainImg : ''
     },
     success: false,
@@ -65,11 +67,15 @@ const ProjectForm = ({
         [e.target.name]: e.target.value
       }
     });
+
+    console.log("privacy", state.project.privateProject);
+
   };
 
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
+    
     if (state.project.name.length === 0) {
       setIsLoading(false);
       setAlert(true);
@@ -123,6 +129,7 @@ const ProjectForm = ({
   };
 
   const createProject = async project => {
+    console.log("project", project);
     try {
       const {
         data: { id },
@@ -339,6 +346,29 @@ const ProjectForm = ({
               id="invisionLink"
               onChange={handleChanges}
             />
+
+            <label htmlFor="privacyLink" className="label">
+              Privacy
+            </label> {/*PROTOTYPE LABEL AND TEXT FIELD*/}
+            <select
+              type="select"
+              name="privacy"
+              value={privacy}
+              placeholder="Select privacy settings"
+              id="privacy"
+              onChange={handleChanges}
+            >
+            {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
+               IT DEFAULTS TO FALSE (0) or PUBLIC*/}
+               {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
+               {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
+                OR SELECT * FROM USER_PROJECTS WHERE PRIVATE */}
+               <option value = "public">Public</option>   
+               <option value = "private">Private</option> 
+                
+            </select>           
+
+
             <p className="required-help">* Required</p>
             {/* <label htmlFor="teamMembers" className="label">
               Add team members
