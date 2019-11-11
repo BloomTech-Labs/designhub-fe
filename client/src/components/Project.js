@@ -95,6 +95,9 @@ class Projects extends Component {
                   Created on{' '}
                   {moment(thisProject.created_at).format('MMM DD, YYYY')}
                 </span>
+                <span>
+                  {thisProject.privateProjects === true ? "Private" : "Public"}
+                </span>
               </p>
             </div>
             <div className="project-header-right">
@@ -118,16 +121,16 @@ class Projects extends Component {
                       />
                     </a>
                   ) : (
-                    <img
-                      src={figmaIcon}
-                      className={
-                        thisProject.figma === null || thisProject.figma === ''
-                          ? 'link-disabled'
-                          : 'link-enabled'
-                      }
-                      alt="figma"
-                    />
-                  )}
+                      <img
+                        src={figmaIcon}
+                        className={
+                          thisProject.figma === null || thisProject.figma === ''
+                            ? 'link-disabled'
+                            : 'link-enabled'
+                        }
+                        alt="figma"
+                      />
+                    )}
                 </div>
                 <div className="project-header-button">
                   {thisProject.invision ? (
@@ -136,7 +139,7 @@ class Projects extends Component {
                         src={invisionIcon}
                         className={
                           thisProject.invision === '' ||
-                          thisProject.invision === null
+                            thisProject.invision === null
                             ? 'link-disabled'
                             : 'link-enabled'
                         }
@@ -144,17 +147,17 @@ class Projects extends Component {
                       />
                     </a>
                   ) : (
-                    <img
-                      src={invisionIcon}
-                      className={
-                        thisProject.invision === '' ||
-                        thisProject.invision === null
-                          ? 'link-disabled'
-                          : 'link-enabled'
-                      }
-                      alt="invision"
-                    />
-                  )}
+                      <img
+                        src={invisionIcon}
+                        className={
+                          thisProject.invision === '' ||
+                            thisProject.invision === null
+                            ? 'link-disabled'
+                            : 'link-enabled'
+                        }
+                        alt="invision"
+                      />
+                    )}
                 </div>
                 <div className="download project-header-button">
                   <DownloadIcon />

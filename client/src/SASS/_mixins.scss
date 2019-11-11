@@ -127,6 +127,9 @@
   input {
     @include onboard-form__input;
   }
+  select{
+    @include onboard-form__select;
+  }
   textarea {
     @include onboard-form__textarea;
   }
@@ -189,7 +192,34 @@
     outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
-    outline: 2px solid $alert;
+    border: 2px solid $alert;
+  }
+}
+
+@mixin onboard-form__select {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11rem;
+  margin-top: 0.4rem;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+  }
+  &:hover,
+  &:focus {
+    outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    border: 2px solid $alert;
   }
 }
 

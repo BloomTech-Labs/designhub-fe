@@ -285,6 +285,16 @@
         }
       }
 
+      select {
+        font-size: 12px;
+        margin-bottom: 20px;
+        border: 1px solid $field-stroke;
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
+      }
+      
+
       .required.alert input {
         margin-bottom: 0;
       }
