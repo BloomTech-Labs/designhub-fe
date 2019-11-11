@@ -72,6 +72,19 @@ const ProjectForm = ({
 
   };
 
+  const handlePrivacySetting = e => {
+    setPrivacy(e.target.value);
+    const isPrivate = e.target.value === 'private' ? true : false;
+
+    setState({
+      ...state,
+      project: {
+        ...state.project,
+        privateProjects: isPrivate
+      }
+    })
+  }
+
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
@@ -356,7 +369,7 @@ const ProjectForm = ({
               value={privacy}
               placeholder="Select privacy settings"
               id="privacy"
-              onChange={handleChanges}
+              onChange={handlePrivacySetting}
             >
             {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
                IT DEFAULTS TO FALSE (0) or PUBLIC*/}
