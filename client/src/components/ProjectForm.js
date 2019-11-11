@@ -38,7 +38,7 @@ const ProjectForm = ({
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [alert, setAlert] = useState(false);
-  const [privacy, setPrivacy] = useState(project.privateProjects ? "private" : "public");
+  const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
 
   const [state, setState] = useState({
     project: {
