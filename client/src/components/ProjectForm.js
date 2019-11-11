@@ -38,7 +38,7 @@ const ProjectForm = ({
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [alert, setAlert] = useState(false);
-  const [privacy, setPrivacy] = useState("public");
+  const [privacy, setPrivacy] = useState(project.privateProjects ? "private" : "public");
 
   const [state, setState] = useState({
     project: {
@@ -47,7 +47,7 @@ const ProjectForm = ({
       description: isEditing ? project.description : '',
       figma: isEditing ? project.figma : '',
       invision: isEditing ? project.invision : '',
-      privateProjects: isEditing ? project.privateProjects: false,
+      privateProjects: isEditing ? project.privateProjects : false,
       mainImg: isEditing ? project.mainImg : ''
     },
     success: false,
