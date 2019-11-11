@@ -13,8 +13,6 @@ class EditProject extends Component {
   }
 
   render() {
-    console.log(this.props.project);
-
     if (this.props.project && this.props.projectPhotos) {
       return (
         <ProjectForm
