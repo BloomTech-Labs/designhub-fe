@@ -37,7 +37,7 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
       <>
         <div className="nav-content">
           <div className="logo-container">
-            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+            <Link to={`/explore`}>
               <SampleLogo />
             </Link>
           </div>
