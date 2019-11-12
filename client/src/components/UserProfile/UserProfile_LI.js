@@ -52,7 +52,7 @@ class UserProfile_LI extends Component {
         this.props.getProjectsByUser(this.props.match.params.id);
       })
       .then(() => {
-        this.props.getRecentProjectsByUser(this.props.activeUser.id);
+        this.props.getRecentProjectsByUser(this.props.match.params.id);
       })
       .then(() => {
         this.props.getFollowers(this.props.match.params.id);
