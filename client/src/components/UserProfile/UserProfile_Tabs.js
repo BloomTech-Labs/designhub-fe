@@ -17,7 +17,6 @@ class UserProfile_Tabs extends Component {
   render() {
     const projects = this.props.projects;
     const recentProjects = this.props.recentProjects;
-    const recentPublicProjects = this.props.recentPublicProjects; //TEST
     const followers = this.props.followers;
     const following = this.props.following;
     const starred = this.props.starred;
