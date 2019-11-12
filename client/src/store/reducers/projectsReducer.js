@@ -17,9 +17,11 @@ import {
   DELETE_PROJECT_START,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAILURE,
+
   GET_RECENT_PROJECTS_START,
   GET_RECENT_PROJECTS_SUCCESS,
   GET_RECENT_PROJECTS_FAILURE
+
 } from '../actions';
 
 const initialState = {
@@ -27,7 +29,7 @@ const initialState = {
   allProjects: [],
   singleProject: null,
   usersProjects: [],
-  usersRecentProjects: [],
+  usersRecentProjects: [],  
   isLoading: false
 };
 

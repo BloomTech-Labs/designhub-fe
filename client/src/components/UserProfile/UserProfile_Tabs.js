@@ -44,7 +44,7 @@ class UserProfile_Tabs extends Component {
 
             <TabPanel className="tabs-container">
               <div className="tabs-header">
-                <h2>Recent Projects</h2>
+                <h2>Recent Projects</h2> {/*RECENT PROJECTS*/}
               </div>
               <div className="tab-content">
                 {projects.length === 0 && (
@@ -87,6 +87,8 @@ class UserProfile_Tabs extends Component {
                     ))}
                 </div>
               </div>
+
+              
               <Heatmap />
             </TabPanel>
             <TabPanel className="tabs-container">

@@ -75,7 +75,7 @@ class DesignHub extends Component {
               />
               <PrivateRoute
                 exact
-                path="/project/:id"
+                path="/project/:id" 
                 render={props => (
                   <Project {...props} activeUser={this.props.user} />
                 )}
