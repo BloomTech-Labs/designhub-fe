@@ -30,9 +30,16 @@ export const DELETE_PROJECT_FAILURE = 'DELETE_PROJECT_FAILURE';
 export const GET_USERS_PROJECTS_START = 'GET_USERS_PROJECTS_START';
 export const GET_USERS_PROJECTS_SUCCESS = 'GET_USERS_PROJECTS_SUCCESS';
 export const GET_USERS_PROJECTS_FAILURE = 'GET_USERS_PROJECTS_FAILURE';
+
 export const GET_RECENT_PROJECTS_START = 'GET_RECENT_PROJECTS_START';
 export const GET_RECENT_PROJECTS_SUCCESS = 'GET_RECENT_PROJECTS_SUCCESS';
 export const GET_RECENT_PROJECTS_FAILURE = 'GET_RECENT_PROJECTS_FAILURE';
+
+export const CLEAR_RECENT_PROJECTS = 'CLEAR_RECENT_PROJECTS';
+
+export const GET_RECENT_PUBLIC_PROJECTS_START = 'GET_RECENT_PUBLIC_PROJECTS_START';
+export const GET_RECENT_PUBLIC_PROJECTS_SUCCESS = 'GET_RECENT_PUBLIC_PROJECTS_SUCCESS';
+export const GET_RECENT_PUBLIC_PROJECTS_FAILURE = 'GET_RECENT_PUBLIC_PROJECTS_FAILURE';
 
 //Comments
 export const GET_PROJECT_COMMENTS_START = 'GET_PROJECT_COMMENTS_START';
@@ -233,6 +240,7 @@ export const deleteProject = id => dispatch => {
     });
 };
 
+//getRecentProjectByUserId - BE
 export const getRecentProjectsByUser = id => dispatch => {
   dispatch({ type: GET_RECENT_PROJECTS_START });
   return axiosWithAuth()
@@ -245,6 +253,21 @@ export const getRecentProjectsByUser = id => dispatch => {
     });
 };
 
+//getRecentPublicProjectsByUserId - BE
+export const getRecentPublicProjectsByUser = id => dispatch => {
+  dispatch({ type: GET_RECENT_PUBLIC_PROJECTS_START });
+  return axiosWithAuth()
+    .get(`/api/v1/projects/recent/public/${id}`)
+    .then(res => {
+      dispatch({ type: GET_RECENT_PUBLIC_PROJECTS_SUCCESS, payload: res.data });
+      console.log("public projects", res.data);
+    })
+    .catch(err => {
+      dispatch({ type: GET_RECENT_PUBLIC_PROJECTS_FAILURE, payload: err });
+    });
+};
+
+//getProjectByUserId
 export const getProjectsByUser = id => dispatch => {
   dispatch({ type: GET_USERS_PROJECTS_START });
   return axiosWithAuth()

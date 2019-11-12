@@ -17,9 +17,15 @@ import {
   DELETE_PROJECT_START,
   DELETE_PROJECT_SUCCESS,
   DELETE_PROJECT_FAILURE,
+
   GET_RECENT_PROJECTS_START,
   GET_RECENT_PROJECTS_SUCCESS,
-  GET_RECENT_PROJECTS_FAILURE
+  GET_RECENT_PROJECTS_FAILURE,
+ 
+  GET_RECENT_PUBLIC_PROJECTS_START,
+  GET_RECENT_PUBLIC_PROJECTS_SUCCESS,
+  GET_RECENT_PUBLIC_PROJECTS_FAILURE 
+
 } from '../actions';
 
 const initialState = {
@@ -27,7 +33,7 @@ const initialState = {
   allProjects: [],
   singleProject: null,
   usersProjects: [],
-  usersRecentProjects: [],
+  usersRecentProjects: [],  
   isLoading: false
 };
 
@@ -109,6 +115,26 @@ export const projectsReducer = (state = initialState, action) => {
         error: action.payload,
         isLoading: false
       };
+    
+    case GET_RECENT_PUBLIC_PROJECTS_START: 
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_RECENT_PUBLIC_PROJECTS_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        usersRecentProjects: action.payload
+      };
+    case GET_RECENT_PUBLIC_PROJECTS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false
+      }; 
     case ADD_PROJECT_START:
       return {
         ...state,

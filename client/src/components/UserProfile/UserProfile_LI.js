@@ -21,7 +21,8 @@ import {
   deleteFollow,
   addFollow,
   followNotification,
-  getRecentProjectsByUser
+  getRecentProjectsByUser,
+  getRecentPublicProjectsByUser
 } from '../../store/actions';
 
 // ========== STYLES ========== //
@@ -51,8 +52,21 @@ class UserProfile_LI extends Component {
       .then(() => {
         this.props.getProjectsByUser(this.props.match.params.id);
       })
-      .then(() => {
-        this.props.getRecentProjectsByUser(this.props.match.params.id);
+      .then(() => { /**************************TEST****************/
+        
+        if (
+          Number(this.props.match.params.id) ===
+          Number(this.props.activeUser.id)
+        ) {
+          this.props.getRecentProjectsByUser(Number(this.props.activeUser.id));
+          console.log("active user", this.props.activeUser.id);
+          
+        } else {  
+                 
+          this.props.getRecentPublicProjectsByUser(this.props.match.params.id);
+          console.log("non active user", this.props.match.params.id);
+          
+        }
       })
       .then(() => {
         this.props.getFollowers(this.props.match.params.id);
@@ -267,7 +281,8 @@ class UserProfile_LI extends Component {
         </div>
         <UserProfileTabs
           projects={this.props.projects}
-          recentProjects={this.props.recentProjects}
+          recentProjects={this.props.recentProjects}   
+          recentPublicProjects={this.props.recentPublicProjects} //TEST  
           followers={this.props.followersTab}
           following={this.props.followingTab}
           starred={this.props.starred}
@@ -292,6 +307,7 @@ const mapStateToProps = state => {
     userData: state.users.singleUser,
     projects: state.projects.usersProjects,
     recentProjects: state.projects.usersRecentProjects,
+    recentPublicProjects: state.projects.usersRecentPublicProjects, //TEST
     starred: state.stars.starredProjects,
     isFollowed: state.followers.isFollowed,
     isUsersLoading: state.users.isLoading
@@ -312,6 +328,7 @@ export default connect(
     deleteFollow,
     addFollow,
     followNotification,
-    getRecentProjectsByUser
+    getRecentProjectsByUser,
+    getRecentPublicProjectsByUser //TEST
   }
 )(UserProfile_LI);
