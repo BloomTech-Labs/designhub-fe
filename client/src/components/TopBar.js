@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef} from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAuth0 } from '../auth-wrapper.js';
+import Tooltip from "react-power-tooltip";
 
 import SampleLogo from './Icons/SampleLogo.js';
 import logo from '../ASSETS/logo.svg';
@@ -7,10 +9,21 @@ import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
 import sunMode from '../ASSETS/sun-mode.svg';
 
+
 import '../SASS/TopBar.scss';
 
 const TopBar = ({ activeUser, searchData, getSearch }) => {
+  const { logout } = useAuth0();
+
   const [light, setLight] = useState(false);
+
+  //Labs18 21-22
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+
+  function loadSettingsPage() {
+    window.location.assign('/settings');
+}
 
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
@@ -35,9 +48,10 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
   return (
     <div className="top-bar-container">
       <>
-        <div className="nav-content">
+      <div className="nav-content">
           <div className="logo-container">
-            <Link to={`/explore`}>
+          
+            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
               <SampleLogo />
             </Link>
           </div>
@@ -52,13 +66,31 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
             <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
               <p>{activeUser.username}</p>
             </Link>
-            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
-              <img
-                className="profile-pic-thumb"
+
+    {/* Labs18 67-79*/}
+          <div>
+            <img className="profile-pic-thumb"
                 src={activeUser.avatar}
-                alt="user avatar"
-              />
-            </Link>
+                alt="user avatar" 
+                variant="danger"
+                ref={target} 
+                onClick={() => setShow(!show)}/>
+        
+                <Tooltip
+                      show={show}
+                      arrowAlign="center"
+                      backgroundColor = "#212229"
+                      hoverColor ="#212229"
+                      border = "1px solid #ffffff"
+                      position="bottom right"
+                      moveRight = "-100px"
+                      lineSeparated>
+                      <span onClick={() => logout()} to={`/profile/${activeUser.id}/${activeUser.username}`}>Log Out</span>
+                      <span onClick={() => loadSettingsPage()} to={`/profile/${activeUser.id}/${activeUser.username}`}>Edit Account</span>
+        
+                </Tooltip>
+                </div>
+                
             <div className="dark-mode-switch" onClick={setLightMode}>
               {light ? (
                 <img alt="sun-mode switch" src={sunMode} />
