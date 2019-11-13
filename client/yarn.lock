@@ -8963,6 +8963,11 @@ react-modal@^3.6.1:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
+react-power-tooltip@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-power-tooltip/-/react-power-tooltip-1.0.2.tgz#1a7c9821542ea84ddcbf1168a09bff4fcb75fe07"
+  integrity sha512-c/aCR92wxOPj+mYp3X3WPOEafIEZCEdjXQJzY72SXaVfCp7lhoaBi0UZcJnqMPcWVwFmtDbhQykqhkBlBsGA4A==
+
 react-redux@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.1.tgz#ce6eee1b734a7a76e0788b3309bf78ff6b34fa0a"
