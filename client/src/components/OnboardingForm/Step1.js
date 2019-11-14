@@ -147,7 +147,7 @@ const Step1 = ({
               id="bio"
               value={bio}
               onChange={onChange}
-              maxLength="180"
+              maxLength="240"
               placeholder="Describe yourself! This will appear on your profile in your bio!"
             />
           </div>

@@ -203,6 +203,7 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
           value={bio}
           onChange={handleChange}
           placeholder="Describe yourself! This will appear on your profile in your bio!"
+          maxLength ="240"
         />
         <label htmlFor="location">Location</label>
         <input
