@@ -6,7 +6,7 @@
   text-align: left;
   width: 100%;
   margin-bottom: 5rem;
-  margin-left: 3rem;
+  margin: 0rem 1rem 1rem 2rem;
   @include themify($themes) {
     color: themed('text');
   }
@@ -52,7 +52,7 @@
     margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
-    grid-gap: 40px;
+    grid-gap: 2rem;
     justify-items: left;
     width: 100%;
 
@@ -71,8 +71,8 @@
     }
 
     .project-content {
-      width: 24rem;
-      height: 17rem;
+      width: 22rem;
+      height: 15rem;
       position: relative;
       transition: all 0.2s ease-in-out;
       border: 8px solid $field-bg;
