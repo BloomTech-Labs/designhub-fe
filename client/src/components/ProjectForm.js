@@ -37,7 +37,7 @@ const ProjectForm = ({
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
-  const [alert, setAlert] = useState(false);
+  const [error, setError] = useState('');
   const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
 
   const [state, setState] = useState({
@@ -60,7 +60,7 @@ const ProjectForm = ({
   const { name, description, figma, invision } = state.project;
 
   const handleChanges = e => {
-    setAlert(false);
+    setError('');
     setState({
       project: {
         ...state.project,
@@ -86,10 +86,16 @@ const ProjectForm = ({
     setIsLoading(true);
     e.preventDefault();
     
+    console.log(state.project.mainImg);
+
     if (state.project.name.length === 0) {
       setIsLoading(false);
-      setAlert(true);
+      setError('Project title is required');
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    } else if(!state.project.mainImg) {
+      setIsLoading(false);
+      setError('Please upload at least one image');
       return;
     } else {
       isEditing
@@ -268,7 +274,7 @@ const ProjectForm = ({
 
           {isEditing && (
             <div>
-              <div className="thumbnail-container ">
+              <div className="thumbnail-container">
                 {projectPhotos.map((photo, index) => (
                   <div key={index}>
                     <img
@@ -303,7 +309,7 @@ const ProjectForm = ({
             encType="multipart/form-data"
             className="project-form-container"
           >
-            <div className={alert ? 'required alert' : 'required'}>
+            <div className={'required'}>
               <label htmlFor="name" className="label project-label">
                 Project title *
               </label>
@@ -408,6 +414,11 @@ const ProjectForm = ({
                 {isEditing ? 'Save Changes' : 'Publish'}
               </button>
             </div>
+
+            <div className='error'>
+              <span>{error}</span>
+            </div>
+
             {isEditing && (
               <div
                 className="delete-project-button"
