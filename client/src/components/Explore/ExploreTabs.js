@@ -30,20 +30,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
             </TabList>
             {/* // ======== Popular Tab ======== // */}
             <TabPanel className="tabs-container">
-
-              {/***************IF THERE ARE NO POPULAR PROJECTS**************/}
-              <div className="tab-content">
-                {popular.length === 0 && (
-                  <div className="empty-state">
-                    <img src={empty} alt="empty" className="empty-icon" />
-                    <h1 className="no-projects">
-                      There are no popular projects.
-                    </h1>
-                  </div>
-                )}
-
-              </div>
-
+             
               <div className="explore-projects-array">
                 {popular.map(project => (
                   <div className="project-content" key={project.id}>
@@ -73,21 +60,8 @@ const ExploreTabs = ({ recent, popular, following }) => {
             </TabPanel>
 
             {/* // ======== Recents Tab ======== // */}
-            <TabPanel className="tabs-container">
+            <TabPanel className="tabs-container">          
               
-              {/***************IF THERE ARE NO RECENT PROJECTS**************/}
-              <div className="tab-content">
-                {recent.length === 0 && (
-                  <div className="empty-state">
-                    <img src={empty} alt="empty" className="empty-icon" />
-                    <h1 className="no-projects">
-                      There are no recent projects.
-                    </h1>
-                  </div>
-                )}
-
-              </div>
-
               <div className="explore-projects-array">
                 {recent.map(project => (
                   <div className="project-content" key={project.id}>
@@ -117,20 +91,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
             </TabPanel>
 
             {/* // ======== Following Tab ======== // */}
-            <TabPanel className="tabs-container">
-
-               {/***************IF THERE ARE NO RECENT FOLLOWING PROJECTS**************/}
-               <div className="tab-content">
-                {following.length === 0 && (
-                  <div className="empty-state">
-                    <img src={empty} alt="empty" className="empty-icon" />
-                    <h1 className="no-projects">
-                      You are not following any projects.
-                    </h1>
-                  </div>
-                )}
-
-              </div>
+            <TabPanel className="tabs-container">              
               
               <div className="explore-projects-array">
                 {following.map(project => (
