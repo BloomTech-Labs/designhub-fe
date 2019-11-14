@@ -23,7 +23,7 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
 
   function loadSettingsPage() {
     window.location.assign('/settings');
-}
+  }
 
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {

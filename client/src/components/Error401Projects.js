@@ -5,11 +5,9 @@ function Error401Projects(props){
     return(
 
         <div>
-            This project does not exist!!!!!
+           You are not authorized to view this project!!!!!
         </div>
-
     );
-
 
 }
 

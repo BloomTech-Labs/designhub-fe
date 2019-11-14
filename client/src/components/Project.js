@@ -13,6 +13,7 @@ import StarIcon from './Icons/StarIcon';
 import ImageViewer from './ImageViewer/ImageViewer.js';
 import Loading from './Loading';
 import Error401Projects from './Error401Projects';
+import Error404Projects from './Error404Projects';
 
 import {
   getSingleProject,
@@ -41,6 +42,7 @@ class Projects extends Component {
       .then(() => {
         if(this.props.singleProjectError !== null){
           console.log("single project error", this.props.singleProjectError);
+          return;
         }
         else {
           this.props.getSingleProject(this.projectId)
@@ -214,9 +216,15 @@ class Projects extends Component {
           </div>
         </div>
       );
-    } else {
-      //return <Loading />;
+    } else if(this.props.singleProjectError === 404){      
+      return <Error404Projects />;
+
+    } else if(this.props.singleProjectError === 401){      
       return <Error401Projects />;
+    }
+    else {
+      return <Loading />;
+      
     }
   }
 }

@@ -204,8 +204,8 @@ export const getSingleProject = id => dispatch => {
       dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data[0] });
     })
     .catch(err => {
-      dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.message });
-      console.log("action error", err);
+      dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response.status });
+      console.log("action error", err.response.status);
     });
 };
 
