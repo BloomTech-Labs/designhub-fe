@@ -226,13 +226,11 @@ class UserProfile_Tabs extends Component {
                 <div className="follower-following-container">
                   {following.length === 0 && (
                     <div className="empty-state">
-                      <h1 className="no-projects">
-                        This user does not follow anyone.{' '}
-                        <span aria-label="nail polish" role="img">
-                          💅
-                        </span>
-                      </h1>
-                    </div>
+                    <img src={empty} alt="empty" className="empty-icon" />
+                    <h1 className="no-projects">
+                      This user does not follow anyone.
+                    </h1>
+                  </div>
                   )}
                   {following.map(follower => (
                     <div className="follow-container" key={follower.id}>
