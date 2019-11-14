@@ -3,7 +3,7 @@
 
 .explore-container {
   color: white;
-  text-align: center;
+  text-align: left;
   width: 100%;
   margin-bottom: 5rem;
   @include themify($themes) {
@@ -19,12 +19,14 @@
       font-size: 1.2rem;
       font-weight: 500;
       margin: 1rem 0;
+      margin-top: 2rem;
     }
 
     p {
       font-size: 1rem;
       font-weight: 500;
       margin: 1rem 0;
+      margin-bottom: 3rem;
     }
   }
 
