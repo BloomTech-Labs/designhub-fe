@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import welcome from '../../ASSETS/welcome.svg';
 
+import CharacterCount from '../CharacterCount';
+
 const Step1 = ({
   alert,
   formUser,
@@ -147,11 +149,11 @@ const Step1 = ({
               id="bio"
               value={bio}
               onChange={onChange}
-              maxLength="180"
+              maxLength="240"
               placeholder="Describe yourself! This will appear on your profile in your bio!"
             />
+            <CharacterCount string={bio} limit={240} />
           </div>
-
           <div className="location-website-flex">
             <div className="input-field">
               <label htmlFor="location">Location</label>
@@ -186,23 +188,23 @@ const Step1 = ({
                 Previous
               </button>
             ) : (
-              <button name="cancel" className="prev-btn" onClick={logout}>
-                Cancel
+                <button name="cancel" className="prev-btn" onClick={logout}>
+                  Cancel
               </button>
-            )}
+              )}
             {submitButton ? (
               <button className="next-btn" type="submit">
                 Submit
               </button>
             ) : (
-              <button
-                name="next"
-                className="next-btn"
-                onClick={handleNextButton}
-              >
-                Next
+                <button
+                  name="next"
+                  className="next-btn"
+                  onClick={handleNextButton}
+                >
+                  Next
               </button>
-            )}
+              )}
           </div>
         </div>
       </div>

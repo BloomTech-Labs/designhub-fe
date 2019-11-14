@@ -17,6 +17,7 @@ import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
+import CharacterCount from './CharacterCount';
 
 import '../SASS/ProjectForm.scss';
 
@@ -85,7 +86,7 @@ const ProjectForm = ({
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
-    
+
     if (state.project.name.length === 0) {
       setIsLoading(false);
       setAlert(true);
@@ -331,8 +332,9 @@ const ProjectForm = ({
               placeholder="Enter description here"
               onChange={handleChanges}
               className="description"
+              maxLength="240"
             />
-
+            <CharacterCount string={description} limit={240} />
             <label htmlFor="figmaLink" className="label">
               Figma
             </label>
@@ -367,15 +369,15 @@ const ProjectForm = ({
               id="privacy"
               onChange={handlePrivacySetting}
             >
-            {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
+              {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
                IT DEFAULTS TO FALSE (0) or PUBLIC*/}
-               {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
-               {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
+              {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
+              {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
                 OR SELECT * FROM USER_PROJECTS WHERE PRIVATE */}
-               <option value = "public">Public</option>   
-               <option value = "private">Private</option> 
-                
-            </select>           
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+
+            </select>
 
 
             <p className="required-help">* Required</p>
