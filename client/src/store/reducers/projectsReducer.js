@@ -70,7 +70,7 @@ export const projectsReducer = (state = initialState, action) => {
     case GET_SINGLE_PROJECT_FAILURE:
       return {
         ...state,
-        error: action.error,
+        error: action.payload,
         isLoading: false
       };
     case GET_USERS_PROJECTS_START:

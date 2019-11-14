@@ -12,6 +12,7 @@ import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
 import ImageViewer from './ImageViewer/ImageViewer.js';
 import Loading from './Loading';
+import Error401Projects from './Error401Projects';
 
 import {
   getSingleProject,
@@ -38,11 +39,26 @@ class Projects extends Component {
     this.props
       .getSingleProject(this.projectId)
       .then(() => {
+        if(this.props.singleProjectError !== null){
+          console.log("single project error", this.props.singleProjectError);
+        }
+        else {
+          this.props.getSingleProject(this.projectId)
+          .then(() => {
+            this.props.getProjectPhotos(this.projectId);
+          })
+          .then(() => {
+            this.props.getProjectComments(this.props.match.params.id);
+          });
+
+        }
+      })
+      /*.then(() => {
         this.props.getProjectPhotos(this.projectId);
       })
       .then(() => {
         this.props.getProjectComments(this.props.match.params.id);
-      });
+      });*/
   }
 
   starProject = () => {
@@ -199,7 +215,8 @@ class Projects extends Component {
         </div>
       );
     } else {
-      return <Loading />;
+      //return <Loading />;
+      return <Error401Projects />;
     }
   }
 }
@@ -207,6 +224,7 @@ class Projects extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projects.singleProject,
+    singleProjectError: state.projects.error,
     projectPhotos: state.photos.projectPhotos,
     projectComments: state.comments.projectComments,
     isStarred: state.stars.isStarred
