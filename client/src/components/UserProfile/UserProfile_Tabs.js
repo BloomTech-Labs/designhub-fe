@@ -7,6 +7,7 @@ import Heatmap from './Heatmap.js';
 // Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import empty from '../Icons/empty_project.svg';
+import Loading from '../Loading';
 
 class UserProfile_Tabs extends Component {
   constructor(props) {
