@@ -13,14 +13,14 @@ const ExploreTabs = ({ recent, popular, following }) => {
       <div>
         <Tabs>
           <TabList className="explore-nav-links">
+          <Tab className="links" selectedClassName="active-link">
+              Following
+            </Tab>
             <Tab className="links" selectedClassName="active-link">
               Popular
             </Tab>
             <Tab className="links" selectedClassName="active-link">
               Recents
-            </Tab>
-            <Tab className="links" selectedClassName="active-link">
-              Following
             </Tab>
           </TabList>
           {/* // ======== Popular Tab ======== // */}
