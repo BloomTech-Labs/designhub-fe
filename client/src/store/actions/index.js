@@ -204,6 +204,7 @@ export const getSingleProject = id => dispatch => {
       dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data[0] });
     })
     .catch(err => {
+      //assigns the error status code (401 or 404) returned from the server to payload
       dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response.status });
       console.log("action error", err.response.status);
     });
