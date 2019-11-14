@@ -33,8 +33,7 @@ const ProjectForm = ({
   createHeatmap,
   updateProject,
   deletePhoto,
-  deleteProject,
-  currentUser
+  deleteProject
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -229,7 +228,7 @@ const ProjectForm = ({
   };
 
   return (
-    isEditing && currentUser.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
+    isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
@@ -432,16 +431,11 @@ const ProjectForm = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.users.currentUser
-  }
-}
 
 
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     {
       addProject,
       addPhoto,
