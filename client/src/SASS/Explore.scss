@@ -144,14 +144,20 @@
       border-bottom: 1px solid $field-bg;
 
       .links {
-        margin: 2rem 1.5rem;
+        margin: 2rem 1.5rem 1.5rem 0;
         color: $dark-grey;
         font-weight: 500;
         cursor: pointer;
+        width: 5.5rem;
+        padding: .5rem;
+        border-radius: 5px;
+        text-align: center;
+
       }
 
       .active-link {
         color: white;
+        background-color: $blue;
         @include themify($themes) {
           color: $black;
           font-weight: bold;
