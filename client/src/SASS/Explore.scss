@@ -11,7 +11,7 @@
   }
 
   header {
-    border-bottom: 1px solid $field-bg;
+    // border-bottom: 1px solid $field-bg;
     width: 100%;
 
     h1 {
@@ -141,7 +141,7 @@
       width: 100%;
       text-align: left;
       display: flex;
-      border-bottom: 1px solid $field-bg;
+      // border-bottom: 1px solid $field-bg;
 
       .links {
         margin: 2rem 1.5rem 1.5rem 0;
