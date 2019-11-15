@@ -22,7 +22,11 @@ class UserProfile_Tabs extends Component {
     const following = this.props.following;
     const starred = this.props.starred;
 
-    if (projects && recentProjects && followers && following && starred) {
+    
+    if (!this.props.isProjectsLoading) {
+        
+      console.log("recent projects", recentProjects);
+      
       return (
         <div className="profile-tabs-container">
           <div>
@@ -328,7 +332,7 @@ class UserProfile_Tabs extends Component {
       );
     }//end if
     else{
-      return <Loading />;    
+      return <Loading />; //diplay spinner while content is being fetched 
     }
 
   }//end render 
