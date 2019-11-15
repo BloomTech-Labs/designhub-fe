@@ -38,7 +38,7 @@ const ProjectForm = ({
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
-  const [alert, setAlert] = useState(false);
+  const [error, setError] = useState('');
   const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
 
   const [state, setState] = useState({
@@ -61,7 +61,7 @@ const ProjectForm = ({
   const { name, description, figma, invision } = state.project;
 
   const handleChanges = e => {
-    setAlert(false);
+    setError('');
     setState({
       project: {
         ...state.project,
@@ -89,8 +89,12 @@ const ProjectForm = ({
 
     if (state.project.name.length === 0) {
       setIsLoading(false);
-      setAlert(true);
+      setError('Project title is required');
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    } else if(!state.project.mainImg) {
+      setIsLoading(false);
+      setError('Please upload at least one image');
       return;
     } else {
       isEditing
@@ -259,55 +263,56 @@ const ProjectForm = ({
           </span>
         </div>
 
-        <section className="ProjectForm__body">
-          <div className="left-container">
-            <header className="ProjectForm__header">
-              <h2 className="page-header">
-                {isEditing ? 'Edit project' : 'Create a project'}
-              </h2>
-            </header>
-            <MultiImageUpload filesArray={{ files, setFiles }} />
+      <section className="ProjectForm__body">
+        <div className="left-container">
+          <header className="ProjectForm__header">
+            <h2 className="page-header">
+              {isEditing ? 'Edit project' : 'Create a project'}
+            </h2>
+          </header>
+          <MultiImageUpload filesArray={{ files, setFiles }} />
 
-            {isEditing && (
-              <div>
-                <div className="thumbnail-container ">
-                  {projectPhotos.map((photo, index) => (
-                    <div key={index}>
-                      <img
-                        alt=""
-                        src={remove}
-                        className="remove"
-                        onClick={e => {
-                          setState({
-                            ...state,
-                            deletingImage: photo.id,
-                            modal: true
-                          });
-                        }}
-                      />
-                      <div className="thumb" key={index}>
-                        <div style={thumbInner}>
-                          <img
-                            alt="project thumbnail"
-                            src={photo.url}
-                            className="thumbnail"
-                          />
-                        </div>
+          {isEditing && (
+            <div>
+              <div className="thumbnail-container">
+                {projectPhotos.map((photo, index) => (
+                  <div key={index}>
+                    <img
+                      alt=""
+                      src={remove}
+                      className="remove"
+                      onClick={e => {
+                        setState({
+                          ...state,
+                          deletingImage: photo.id,
+                          modal: true
+                        });
+                      }}
+                    />
+                    <div className="thumb" key={index}>
+                      <div style={thumbInner}>
+                        <img
+                          alt="project thumbnail"
+                          src={photo.url}
+                          className="thumbnail"
+                        />
                       </div>
                     </div>
+                    </div>
                   ))}
-                </div>
               </div>
-            )}
-          </div>
-          <div className="right-container">
-            <form
-              encType="multipart/form-data"
-              className="project-form-container"
-            >
-              <div className={alert ? 'required alert' : 'required'}>
-                <label htmlFor="name" className="label project-label">
-                  Project title *
+            </div>
+          )}
+        </div>
+        <div className="right-container">
+          <form
+            encType="multipart/form-data"
+            className="project-form-container"
+          >
+            <div className={'required'}>
+              <label htmlFor="name" className="label project-label">
+                Project title *
+
               </label>
                 <input
                   required
@@ -401,14 +406,25 @@ const ProjectForm = ({
                 >
                   Cancel
               </button>
-                <button
-                  className="submit-button"
-                  type="submit"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
-                >
-                  {isEditing ? 'Save Changes' : 'Publish'}
-                </button>
+            </div>
+
+            <div className='error'>
+              <span>{error}</span>
+            </div>
+
+            {isEditing && (
+              <div
+                className="delete-project-button"
+                onClick={() =>
+                  setState({
+                    ...state,
+                    modal: true
+                  })
+                }
+              >
+                <DeleteIcon />
+                <p>Delete project</p>
+
               </div>
               {isEditing && (
                 <div
