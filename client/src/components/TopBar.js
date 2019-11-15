@@ -73,9 +73,7 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
             ref={target}
             onClick={() => setShow(!show)}
           >
-            <Link>
-              <p className='top-bar-user-info'>{activeUser.username}</p>
-            </Link>
+            <p className='top-bar-user-info'>{activeUser.username}</p>
 
             <div>
               <img
