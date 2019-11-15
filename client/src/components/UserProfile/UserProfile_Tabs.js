@@ -23,9 +23,7 @@ class UserProfile_Tabs extends Component {
     const starred = this.props.starred;
 
     
-    if (!this.props.isProjectsLoading) {
-        
-      console.log("recent projects", recentProjects);
+    if (!this.props.isProjectsLoading) {        
       
       return (
         <div className="profile-tabs-container">

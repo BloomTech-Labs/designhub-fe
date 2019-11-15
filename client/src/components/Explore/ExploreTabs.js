@@ -11,7 +11,7 @@ import '../../SASS/Explore.scss';
 
 const ExploreTabs = ({ recent, popular, following }) => {
 
-  if (recent && popular && following) {
+  if (recent && popular && following) {    
 
     return (
       <div className="explore-tabs-container">
