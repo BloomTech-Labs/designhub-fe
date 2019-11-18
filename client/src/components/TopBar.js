@@ -1,7 +1,7 @@
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth0 } from '../auth-wrapper.js';
-import Tooltip from "react-power-tooltip";
+import Tooltip from 'react-power-tooltip';
 
 import SampleLogo from './Icons/SampleLogo.js';
 import logo from '../ASSETS/logo.svg';
@@ -9,21 +9,28 @@ import SearchBar from './SearchBar.js';
 import DarkModeSwitch from './Icons/DarkModeSwitch.js';
 import sunMode from '../ASSETS/sun-mode.svg';
 
-
 import '../SASS/TopBar.scss';
 
-const TopBar = ({ activeUser, searchData, getSearch }) => {
+const TopBar = ({ history, activeUser, searchData, getSearch }) => {
   const { logout } = useAuth0();
 
   const [light, setLight] = useState(false);
-
-  //Labs18 21-22
   const [show, setShow] = useState(false);
-  const target = useRef(null);
+  const target = useRef();
 
-  function loadSettingsPage() {
-    window.location.assign('/settings');
-}
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClick);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, []);
+
+  const handleClick = e => {
+    if (!target.current.contains(e.target)) {
+      setShow(false);
+    }
+  };
+
 
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
@@ -48,10 +55,9 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
   return (
     <div className="top-bar-container">
       <>
-      <div className="nav-content">
+        <div className="nav-content">
           <div className="logo-container">
-          
-            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+            <Link to={`/explore`}>
               <SampleLogo />
             </Link>
           </div>
@@ -62,42 +68,62 @@ const TopBar = ({ activeUser, searchData, getSearch }) => {
 
             <SearchBar searchData={searchData} getSearch={getSearch} />
           </div>
-          <div className="top-bar-user-info">
-            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
-              <p>{activeUser.username}</p>
-            </Link>
+          <div
+            className="top-bar-user-info"
+            ref={target}
+            onClick={() => setShow(!show)}
+          >
+            <p className='top-bar-user-info'>{activeUser.username}</p>
 
-    {/* Labs18 67-79*/}
-          <div>
-            <img className="profile-pic-thumb"
+            <div>
+              <img
+                className="profile-pic-thumb"
                 src={activeUser.avatar}
-                alt="user avatar" 
+                alt="user avatar"
                 variant="danger"
-                ref={target} 
-                onClick={() => setShow(!show)}/>
-        
-                <Tooltip
-                      show={show}
-                      arrowAlign="center"
-                      backgroundColor = "#212229"
-                      hoverColor ="#212229"
-                      border = "1px solid #ffffff"
-                      position="bottom right"
-                      moveRight = "-100px"
-                      lineSeparated>
-                      <span onClick={() => logout()} to={`/profile/${activeUser.id}/${activeUser.username}`}>Log Out</span>
-                      <span onClick={() => loadSettingsPage()} to={`/profile/${activeUser.id}/${activeUser.username}`}>Edit Account</span>
-        
-                </Tooltip>
-                </div>
-                
-            <div className="dark-mode-switch" onClick={setLightMode}>
-              {light ? (
-                <img alt="sun-mode switch" src={sunMode} />
-              ) : (
-                <DarkModeSwitch />
-              )}
+              />
+
+              <Tooltip
+                show={show}
+                arrowAlign="center"
+                backgroundColor={light ? undefined : "#212229"}
+                // hoverColor="#212229"
+                border="1px solid #ffffff"
+                position="bottom right"
+                moveRight="-100px"
+                lineSeparated
+              >
+                <span
+                  onClick={() =>
+                    history.push(
+                      `/profile/${activeUser.id}/${activeUser.username}`
+                    )
+                  }
+                  to={`/profile/${activeUser.id}/${activeUser.username}`}
+                >
+                  My Profile
+                </span>
+                <span
+                  onClick={() => history.push('/settings')}
+                  to={`/profile/${activeUser.id}/${activeUser.username}`}
+                >
+                  Settings
+                </span>
+                <span
+                  onClick={() => logout()}
+                  to={`/profile/${activeUser.id}/${activeUser.username}`}
+                >
+                  Log Out
+                </span>
+              </Tooltip>
             </div>
+          </div>
+          <div className="dark-mode-switch" onClick={setLightMode}>
+            {light ? (
+              <img alt="sun-mode switch" src={sunMode} />
+            ) : (
+              <DarkModeSwitch />
+            )}
           </div>
         </div>
         <div className="mobile-nav">
