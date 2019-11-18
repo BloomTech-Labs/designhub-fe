@@ -20,7 +20,6 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClick);
-
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
@@ -31,6 +30,7 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
       setShow(false);
     }
   };
+
 
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
