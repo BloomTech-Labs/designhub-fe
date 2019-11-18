@@ -230,16 +230,16 @@
 }
 
 .rpt-textbox-container {
-  border: 1px solid white;
+  border: 1px solid $white;
   box-shadow: none;
 }
 .rpt-arrow {
-  border: 1px solid white;
+  border: 1px solid $white;
   border-bottom: none;
   border-radius: 3px;
 }
 .tooltip-settings-link:hover {
-  color: #212229;
+  color: $almost-black;
 }
 
 

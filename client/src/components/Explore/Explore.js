@@ -55,8 +55,7 @@ class Explore extends Component {
         <header>
           <h1>Explore</h1>
           <p>
-            Discover projects from our talented community of UI&UX Designers,
-            Illustrators, and Graphic Designers
+            Discover projects from our talented community Designers
           </p>
         </header>
         <ExploreTabs recent={recent} popular={popular} following={following} />
