@@ -45,11 +45,17 @@ class DesignHub extends Component {
   render() {
     return (
       <div className="DesignHub">
-        <TopBar
-          searchData={this.state.search}
-          getSearch={this.getSearch}
-          activeUser={this.props.user}
-        />
+        <Route
+          path='/'
+          render={props => (
+            <TopBar
+              {...props}
+              searchData={this.state.search}
+              getSearch={this.getSearch}
+              activeUser={this.props.user}
+            />
+          )}
+          />
         <div className="nav-workspace">
           <div>
             <span />
