@@ -19,6 +19,7 @@ nav {
     border: 1px solid $almost-black;
     @include themify($themes) {
       background: themed('bg2');
+      border: 1px solid #662a2b31;
     }
 
     .navlinks {

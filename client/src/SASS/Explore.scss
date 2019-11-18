@@ -16,6 +16,9 @@
     border-bottom: 1px solid $field-bg;
     width: 100%;
     margin-bottom: 1rem;
+    @include themify($themes) {
+      border-bottom: 1px solid #662a2b31;
+    }
 
     h1 {
       // text-transform: uppercase;
@@ -163,7 +166,7 @@
         color: white;
         background-color: $blue;
         @include themify($themes) {
-          color: $black;
+          color: $white;
           font-weight: bold;
         }
       }
