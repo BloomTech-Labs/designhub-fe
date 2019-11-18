@@ -325,6 +325,14 @@
     .required-help {
       color: $dark-grey;
     }
+
+    .error {
+      font-size: 17px;
+      text-align: right;
+      margin: 1.5rem 0;
+      color: $alert;
+      user-select: none;
+    }
   }
 
   .submit-cancel-container {

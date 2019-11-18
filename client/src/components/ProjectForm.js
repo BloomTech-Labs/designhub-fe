@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
@@ -12,6 +12,7 @@ import {
   deletePhoto,
   deleteProject
 } from '../store/actions';
+
 
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
@@ -38,7 +39,7 @@ const ProjectForm = ({
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
-  const [alert, setAlert] = useState(false);
+  const [error, setError] = useState('');
   const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
 
   const [state, setState] = useState({
@@ -61,7 +62,7 @@ const ProjectForm = ({
   const { name, description, figma, invision } = state.project;
 
   const handleChanges = e => {
-    setAlert(false);
+    setError('');
     setState({
       project: {
         ...state.project,
@@ -89,8 +90,12 @@ const ProjectForm = ({
 
     if (state.project.name.length === 0) {
       setIsLoading(false);
-      setAlert(true);
+      setError('Project title is required');
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    } else if(!state.project.mainImg) {
+      setIsLoading(false);
+      setError('Please upload at least one image');
       return;
     } else {
       isEditing
@@ -228,6 +233,7 @@ const ProjectForm = ({
   };
 
   return (
+    isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
     <div className="project-form-wrapper">
       {isLoading && <Loading />}
       <div className={state.modal ? 'modal--expand' : 'modal--close'}>
@@ -257,7 +263,6 @@ const ProjectForm = ({
           )}
         </span>
       </div>
-
       <section className="ProjectForm__body">
         <div className="left-container">
           <header className="ProjectForm__header">
@@ -266,7 +271,6 @@ const ProjectForm = ({
             </h2>
           </header>
           <MultiImageUpload filesArray={{ files, setFiles }} />
-
           {isEditing && (
             <div>
               <div className="thumbnail-container ">
@@ -320,7 +324,6 @@ const ProjectForm = ({
                 ref={setTitleRef}
               />
             </div>
-
             <label htmlFor="description" className="label">
               Project description
             </label>
@@ -357,7 +360,6 @@ const ProjectForm = ({
               id="invisionLink"
               onChange={handleChanges}
             />
-
             <label htmlFor="privacyLink" className="label">
               Privacy
             </label> {/*PROTOTYPE LABEL AND TEXT FIELD*/}
@@ -376,10 +378,7 @@ const ProjectForm = ({
                 OR SELECT * FROM USER_PROJECTS WHERE PRIVATE */}
               <option value="public">Public</option>
               <option value="private">Private</option>
-
             </select>
-
-
             <p className="required-help">* Required</p>
             {/* <label htmlFor="teamMembers" className="label">
               Add team members
@@ -389,7 +388,6 @@ const ProjectForm = ({
               placeholder="Enter team member usernames separated by a comma (optional)"
               id="teamMembers"
             /> */}
-
             <div className="submit-cancel-container">
               <button
                 type="button"
@@ -430,7 +428,6 @@ const ProjectForm = ({
     </div>
   );
 };
-
 export default withRouter(
   connect(
     null,
@@ -444,3 +441,5 @@ export default withRouter(
     }
   )(ProjectForm)
 );
+
+
