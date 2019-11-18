@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
@@ -13,10 +13,12 @@ import {
   deleteProject
 } from '../store/actions';
 
+
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
+import CharacterCount from './CharacterCount';
 
 import '../SASS/ProjectForm.scss';
 
@@ -37,7 +39,7 @@ const ProjectForm = ({
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
-  const [alert, setAlert] = useState(false);
+  const [error, setError] = useState('');
   const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
 
   const [state, setState] = useState({
@@ -60,7 +62,7 @@ const ProjectForm = ({
   const { name, description, figma, invision } = state.project;
 
   const handleChanges = e => {
-    setAlert(false);
+    setError('');
     setState({
       project: {
         ...state.project,
@@ -85,11 +87,15 @@ const ProjectForm = ({
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
-    
+
     if (state.project.name.length === 0) {
       setIsLoading(false);
-      setAlert(true);
+      setError('Project title is required');
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    } else if(!state.project.mainImg) {
+      setIsLoading(false);
+      setError('Please upload at least one image');
       return;
     } else {
       isEditing
@@ -227,6 +233,7 @@ const ProjectForm = ({
   };
 
   return (
+    isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
     <div className="project-form-wrapper">
       {isLoading && <Loading />}
       <div className={state.modal ? 'modal--expand' : 'modal--close'}>
@@ -256,7 +263,6 @@ const ProjectForm = ({
           )}
         </span>
       </div>
-
       <section className="ProjectForm__body">
         <div className="left-container">
           <header className="ProjectForm__header">
@@ -265,7 +271,6 @@ const ProjectForm = ({
             </h2>
           </header>
           <MultiImageUpload filesArray={{ files, setFiles }} />
-
           {isEditing && (
             <div>
               <div className="thumbnail-container ">
@@ -319,7 +324,6 @@ const ProjectForm = ({
                 ref={setTitleRef}
               />
             </div>
-
             <label htmlFor="description" className="label">
               Project description
             </label>
@@ -331,8 +335,9 @@ const ProjectForm = ({
               placeholder="Enter description here"
               onChange={handleChanges}
               className="description"
+              maxLength="240"
             />
-
+            <CharacterCount string={description} limit={240} />
             <label htmlFor="figmaLink" className="label">
               Figma
             </label>
@@ -355,7 +360,6 @@ const ProjectForm = ({
               id="invisionLink"
               onChange={handleChanges}
             />
-
             <label htmlFor="privacyLink" className="label">
               Privacy
             </label> {/*PROTOTYPE LABEL AND TEXT FIELD*/}
@@ -367,17 +371,14 @@ const ProjectForm = ({
               id="privacy"
               onChange={handlePrivacySetting}
             >
-            {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
+              {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
                IT DEFAULTS TO FALSE (0) or PUBLIC*/}
-               {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
-               {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
+              {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
+              {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
                 OR SELECT * FROM USER_PROJECTS WHERE PRIVATE */}
-               <option value = "public">Public</option>   
-               <option value = "private">Private</option> 
-                
-            </select>           
-
-
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
             <p className="required-help">* Required</p>
             {/* <label htmlFor="teamMembers" className="label">
               Add team members
@@ -387,7 +388,6 @@ const ProjectForm = ({
               placeholder="Enter team member usernames separated by a comma (optional)"
               id="teamMembers"
             /> */}
-
             <div className="submit-cancel-container">
               <button
                 type="button"
@@ -428,7 +428,6 @@ const ProjectForm = ({
     </div>
   );
 };
-
 export default withRouter(
   connect(
     null,
@@ -442,3 +441,5 @@ export default withRouter(
     }
   )(ProjectForm)
 );
+
+

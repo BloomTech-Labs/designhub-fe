@@ -54,6 +54,7 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     @include themify($themes) {
       color: themed('text');
@@ -67,6 +68,14 @@
     border: 2px solid $blue;
     margin: 0 15px;
     object-fit: cover;
+  }
+
+  .tooltip {
+
+    @include themify($themes) {
+      background: themed('bg2');
+      color: themed('text');
+    }
   }
 
   .dark-mode-switch {

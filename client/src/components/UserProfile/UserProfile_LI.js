@@ -277,6 +277,7 @@ class UserProfile_LI extends Component {
           unfollowUser={this.unfollowUser}
           activeUser={this.props.activeUser}
           params={this.props.match.params}
+          isProjectsLoading = {this.props.isProjectsLoading}
         />
       </div>
     );
@@ -294,7 +295,8 @@ const mapStateToProps = state => {
     recentProjects: state.projects.usersRecentProjects,
     starred: state.stars.starredProjects,
     isFollowed: state.followers.isFollowed,
-    isUsersLoading: state.users.isLoading
+    isUsersLoading: state.users.isLoading,
+    isProjectsLoading: state.projects.isLoading
   };
 };
 

@@ -304,7 +304,7 @@
 
       .description {
         font-size: 12px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         resize: vertical;
         height: 80px;
         border: 1px solid $field-stroke;
@@ -327,6 +327,14 @@
 
     .required-help {
       color: $dark-grey;
+    }
+
+    .error {
+      font-size: 17px;
+      text-align: right;
+      margin: 1.5rem 0;
+      color: $alert;
+      user-select: none;
     }
   }
 
