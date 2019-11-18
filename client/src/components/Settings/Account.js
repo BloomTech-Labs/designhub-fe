@@ -5,6 +5,8 @@ import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 import { getSingleUser, updateUser } from '../../store/actions';
 
+import CharacterCount from '../CharacterCount';
+
 const Account = ({ activeUser, getSingleUser, updateUser }) => {
   const [formUser, setFormUser] = useState({
     avatar: activeUser.avatar,
@@ -18,6 +20,7 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
     website: '',
     auth0Id: activeUser.auth0Id
   });
+
 
   const {
     bio,
@@ -203,7 +206,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
           value={bio}
           onChange={handleChange}
           placeholder="Describe yourself! This will appear on your profile in your bio!"
+          maxLength="240"
         />
+        <CharacterCount string={bio} limit={240} />
         <label htmlFor="location">Location</label>
         <input
           id="location"
@@ -229,8 +234,8 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             Account Updated
           </button>
         ) : (
-          <button onClick={handleSubmit}>Save</button>
-        )}
+            <button onClick={handleSubmit}>Save</button>
+          )}
       </form>
     </div>
   );

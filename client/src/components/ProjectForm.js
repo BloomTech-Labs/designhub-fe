@@ -18,6 +18,7 @@ import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
+import CharacterCount from './CharacterCount';
 
 import '../SASS/ProjectForm.scss';
 
@@ -233,36 +234,35 @@ const ProjectForm = ({
 
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
-      <div className="project-form-wrapper">
-        {isLoading && <Loading />}
-        <div className={state.modal ? 'modal--expand' : 'modal--close'}>
-          <span
-            className="modal--expand__background-overlay"
-            onClick={closeModal}
-          >
-            {state.modal && (
-              <div className="delete-project-modal">
-                <p>Are you sure you want to delete that?</p>
-                <div className="delete-modal-button-container">
-                  <button onClick={closeModal}>Cancel</button>
-                  <button
-                    className="delete-button"
-                    onClick={() => {
-                      if (state.deletingImage) {
-                        handleDeletePhoto(state.deletingImage);
-                      } else {
-                        handleDeleteProject(project.id);
-                      }
-                    }}
-                  >
-                    Delete
+    <div className="project-form-wrapper">
+      {isLoading && <Loading />}
+      <div className={state.modal ? 'modal--expand' : 'modal--close'}>
+        <span
+          className="modal--expand__background-overlay"
+          onClick={closeModal}
+        >
+          {state.modal && (
+            <div className="delete-project-modal">
+              <p>Are you sure you want to delete that?</p>
+              <div className="delete-modal-button-container">
+                <button onClick={closeModal}>Cancel</button>
+                <button
+                  className="delete-button"
+                  onClick={() => {
+                    if (state.deletingImage) {
+                      handleDeletePhoto(state.deletingImage);
+                    } else {
+                      handleDeleteProject(project.id);
+                    }
+                  }}
+                >
+                  Delete
                 </button>
-                </div>
               </div>
-            )}
-          </span>
-        </div>
-
+            </div>
+          )}
+        </span>
+      </div>
       <section className="ProjectForm__body">
         <div className="left-container">
           <header className="ProjectForm__header">
@@ -271,10 +271,9 @@ const ProjectForm = ({
             </h2>
           </header>
           <MultiImageUpload filesArray={{ files, setFiles }} />
-
           {isEditing && (
             <div>
-              <div className="thumbnail-container">
+              <div className="thumbnail-container ">
                 {projectPhotos.map((photo, index) => (
                   <div key={index}>
                     <img
@@ -298,8 +297,8 @@ const ProjectForm = ({
                         />
                       </div>
                     </div>
-                    </div>
-                  ))}
+                  </div>
+                ))}
               </div>
             </div>
           )}
@@ -309,84 +308,79 @@ const ProjectForm = ({
             encType="multipart/form-data"
             className="project-form-container"
           >
-            <div className={'required'}>
+            <div className={alert ? 'required alert' : 'required'}>
               <label htmlFor="name" className="label project-label">
                 Project title *
-
               </label>
-                <input
-                  required
-                  autoFocus={true}
-                  type="text"
-                  value={name}
-                  name="name"
-                  id="name"
-                  placeholder="Enter project title here"
-                  onChange={handleChanges}
-                  ref={setTitleRef}
-                />
-              </div>
-
-              <label htmlFor="description" className="label">
-                Project description
-            </label>
-              <textarea
-                id="description"
-                name="description"
-                value={description}
-                type="text"
-                placeholder="Enter description here"
-                onChange={handleChanges}
-                className="description"
-              />
-
-              <label htmlFor="figmaLink" className="label">
-                Figma
-            </label>
               <input
+                required
+                autoFocus={true}
                 type="text"
-                name="figma"
-                value={figma}
-                placeholder="Enter link here (optional)"
-                id="figmaLink"
+                value={name}
+                name="name"
+                id="name"
+                placeholder="Enter project title here"
                 onChange={handleChanges}
+                ref={setTitleRef}
               />
-              <label htmlFor="invisionLink" className="label">
-                Prototype
+            </div>
+            <label htmlFor="description" className="label">
+              Project description
             </label>
-              <input
-                type="text"
-                name="invision"
-                value={invision}
-                placeholder="Enter link here (optional)"
-                id="invisionLink"
-                onChange={handleChanges}
-              />
-
-              <label htmlFor="privacyLink" className="label">
-                Privacy
+            <textarea
+              id="description"
+              name="description"
+              value={description}
+              type="text"
+              placeholder="Enter description here"
+              onChange={handleChanges}
+              className="description"
+              maxLength="240"
+            />
+            <CharacterCount string={description} limit={240} />
+            <label htmlFor="figmaLink" className="label">
+              Figma
+            </label>
+            <input
+              type="text"
+              name="figma"
+              value={figma}
+              placeholder="Enter link here (optional)"
+              id="figmaLink"
+              onChange={handleChanges}
+            />
+            <label htmlFor="invisionLink" className="label">
+              Prototype
+            </label>
+            <input
+              type="text"
+              name="invision"
+              value={invision}
+              placeholder="Enter link here (optional)"
+              id="invisionLink"
+              onChange={handleChanges}
+            />
+            <label htmlFor="privacyLink" className="label">
+              Privacy
             </label> {/*PROTOTYPE LABEL AND TEXT FIELD*/}
-              <select
-                type="select"
-                name="privacy"
-                value={privacy}
-                placeholder="Select privacy settings"
-                id="privacy"
-                onChange={handlePrivacySetting}
-              >
-                {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
+            <select
+              type="select"
+              name="privacy"
+              value={privacy}
+              placeholder="Select privacy settings"
+              id="privacy"
+              onChange={handlePrivacySetting}
+            >
+              {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
                IT DEFAULTS TO FALSE (0) or PUBLIC*/}
-                {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
-                {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
+              {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
+              {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
                 OR SELECT * FROM USER_PROJECTS WHERE PRIVATE */}
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-
-              </select>
-
-
-              <p className="required-help">* Required</p>
-              {/* <label htmlFor="teamMembers" className="label">
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+            <p className="required-help">* Required</p>
+            {/* <label htmlFor="teamMembers" className="label">
               Add team members
             </label>
             <input
@@ -394,24 +388,26 @@ const ProjectForm = ({
               placeholder="Enter team member usernames separated by a comma (optional)"
               id="teamMembers"
             /> */}
-
-              <div className="submit-cancel-container">
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => {
-                    history.goBack();
-                  }}
-                  disabled={isLoading}
-                >
-                  Cancel
+            <div className="submit-cancel-container">
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={() => {
+                  history.goBack();
+                }}
+                disabled={isLoading}
+              >
+                Cancel
+              </button>
+              <button
+                className="submit-button"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isLoading}
+              >
+                {isEditing ? 'Save Changes' : 'Publish'}
               </button>
             </div>
-
-            <div className='error'>
-              <span>{error}</span>
-            </div>
-
             {isEditing && (
               <div
                 className="delete-project-button"
@@ -424,31 +420,14 @@ const ProjectForm = ({
               >
                 <DeleteIcon />
                 <p>Delete project</p>
-
               </div>
-              {isEditing && (
-                <div
-                  className="delete-project-button"
-                  onClick={() =>
-                    setState({
-                      ...state,
-                      modal: true
-                    })
-                  }
-                >
-                  <DeleteIcon />
-                  <p>Delete project</p>
-                </div>
-              )}
-            </form>
-          </div>
-        </section>
-      </div>
+            )}
+          </form>
+        </div>
+      </section>
+    </div>
   );
 };
-
-
-
 export default withRouter(
   connect(
     null,
@@ -462,3 +441,5 @@ export default withRouter(
     }
   )(ProjectForm)
 );
+
+
