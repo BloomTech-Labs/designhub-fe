@@ -12,6 +12,8 @@ import DownloadIcon from './Icons/DownloadIcon';
 import StarIcon from './Icons/StarIcon';
 import ImageViewer from './ImageViewer/ImageViewer.js';
 import Loading from './Loading';
+import Error401Projects from './Error401Projects';
+import Error404Projects from './Error404Projects';
 
 import {
   getSingleProject,
@@ -36,13 +38,24 @@ class Projects extends Component {
       this.props.match.params.id
     );
     this.props
-      .getSingleProject(this.projectId)
+      .getSingleProject(this.projectId) //gets a single project from the database
       .then(() => {
-        this.props.getProjectPhotos(this.projectId);
-      })
-      .then(() => {
-        this.props.getProjectComments(this.props.match.params.id);
-      });
+        //if there is an error skip the rest of this if/else block
+        if(this.props.singleProjectError !== null){ 
+          console.log("single project error", this.props.singleProjectError);
+          return;
+        }
+        else {//if there are no errors, get the project, photos, and comments
+          this.props.getSingleProject(this.projectId)
+          .then(() => {
+            this.props.getProjectPhotos(this.projectId);
+          })
+          .then(() => {
+            this.props.getProjectComments(this.props.match.params.id);
+          });
+
+        }
+      })     
   }
 
   starProject = () => {
@@ -198,8 +211,18 @@ class Projects extends Component {
           </div>
         </div>
       );
-    } else {
-      return <Loading />;
+    } else if(this.props.singleProjectError === 404){    
+
+      return <Error404Projects />; //if the project was not found
+
+    } else if(this.props.singleProjectError === 401){     
+
+      return <Error401Projects />; //if the user is unauthorized to view the project
+    }
+    else {
+
+      return <Loading />; //if it wasn't a 401 or 404 error, display the spinner
+      
     }
   }
 }
@@ -207,6 +230,7 @@ class Projects extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projects.singleProject,
+    singleProjectError: state.projects.error, //assign 401 or 404 to singleProjectsError
     projectPhotos: state.photos.projectPhotos,
     projectComments: state.comments.projectComments,
     isStarred: state.stars.isStarred
