@@ -308,7 +308,7 @@ const ProjectForm = ({
             encType="multipart/form-data"
             className="project-form-container"
           >
-            <div className={alert ? 'required alert' : 'required'}>
+            <div className='required'>
               <label htmlFor="name" className="label project-label">
                 Project title *
               </label>
@@ -407,6 +407,9 @@ const ProjectForm = ({
               >
                 {isEditing ? 'Save Changes' : 'Publish'}
               </button>
+            </div>
+            <div className='error'>
+              {error}
             </div>
             {isEditing && (
               <div
