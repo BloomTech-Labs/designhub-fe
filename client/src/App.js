@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { useAuth0 } from './auth-wrapper.js';
 
 import DesignHub from './DesignHub.js';
-import LandingPage from './components/LandingPage.js';
+// import LandingPage from './components/LandingPage.js';
+import NewLandingPage from './components/NewLandingPage';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 import Loading from './components/Loading.js';
 
@@ -25,7 +26,7 @@ function App({ history, currentUser, isOnboarding, isLoggedIn, initUser }) {
         <Loading />
       ) : (
         <>
-          {!isAuthenticated && <LandingPage />}
+          {!isAuthenticated && <NewLandingPage />}
           <div className="App">
             {isOnboarding && <OnboardingForm />}
             {!isOnboarding && isLoggedIn && <DesignHub user={currentUser} />}
