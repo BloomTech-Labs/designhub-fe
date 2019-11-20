@@ -1,10 +1,14 @@
 import React from 'react';
 import {useAuth0} from '../auth-wrapper';
+import {Link, animateScroll as scroll} from 'react-scroll';
 
 const NewLandingPage = () =>{
   const {loginWithRedirect} = useAuth0();
   return(
     <>
+    <div className="landing-nav">
+      
+    </div>
     <div className="top-left">
       <p>WELCOME TO</p>
       <h1>
