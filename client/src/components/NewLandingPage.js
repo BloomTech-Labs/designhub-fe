@@ -1,14 +1,18 @@
 import React from 'react';
 import {useAuth0} from '../auth-wrapper';
-import {Link, animateScroll as scroll} from 'react-scroll';
+import {Element} from 'react-scroll';
+
+import LandingPageNav from './LandingPageNav';
+import '../SASS/NewLandingPage.scss';
+
 
 const NewLandingPage = () =>{
   const {loginWithRedirect} = useAuth0();
   return(
     <>
-    <div className="landing-nav">
-      
-    </div>
+    <div className="page-container">
+    <LandingPageNav />
+    <Element name="home">
     <div className="top-left">
       <p>WELCOME TO</p>
       <h1>
@@ -28,6 +32,8 @@ const NewLandingPage = () =>{
     <div className="top-right">
       <p>this will be the mac image</p>
     </div>
+    </Element>
+    <Element name="about">
     <div className="how-it-works">
       <div className="step1">
         <p>this will be a screenshot of login</p>
@@ -52,6 +58,8 @@ const NewLandingPage = () =>{
         <p>Not sure where to start? Check out projects by other designers on the Explore page for inspiration!</p>
       </div>
     </div>
+    </Element>
+    <Element name="features">
     <div className="features">
       <h3>DesignHub is built for designers by designers</h3>
       <h4>Features</h4>
@@ -86,10 +94,12 @@ const NewLandingPage = () =>{
         <p>Give and receive feedback on projects easily including using sticky comments to comment directly on a specific element of the design</p>
       </div>
     </div>
+    </Element>
     <div className="testimonials">
       <h3>But don't take our word for it...</h3>
       <h4>See what actual users are saying about DesignHub</h4>
       <p>This is the carosel</p>
+    </div>
     </div>
     </>
   )
