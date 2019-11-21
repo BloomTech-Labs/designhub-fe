@@ -1,13 +1,7 @@
 import React, {Component} from 'react';
 import {Link, animateScroll as scroll} from 'react-scroll';
 
-import ScrollToTop from './Icons/ScrollToTop';
-import arrow from '../ASSETS/arrow.svg';
-
 export default class LandingPageNav extends Component{
-  scrollToTop = () =>{
-    scroll.scrollToTop();
-  };
 
   render() {
     return(

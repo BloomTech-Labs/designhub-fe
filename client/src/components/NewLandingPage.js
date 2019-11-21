@@ -3,7 +3,6 @@ import {useAuth0} from '../auth-wrapper';
 import {Element, animateScroll as scroll} from 'react-scroll';
 
 import LandingPageNav from './LandingPageNav';
-import ScrollToTop from './Icons/ScrollToTop';
 import arrow from '../ASSETS/arrow.svg';
 import '../SASS/NewLandingPage.scss';
 
