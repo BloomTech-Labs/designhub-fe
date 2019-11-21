@@ -152,7 +152,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             onChange={handleChange}
             placeholder="i.e. Erik"
             ref={setFirstNameRef}
+            maxLength='40'
           />
+          <CharacterCount string={firstName} limit={40} />
         </div>
 
         <div className={alert.lastName ? 'required alert' : 'required'}>
@@ -166,7 +168,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             onChange={handleChange}
             placeholder="i.e. Lambert"
             ref={setLastNameRef}
+            maxLength="40"
           />
+          <CharacterCount string={lastName} limit={40} />
         </div>
 
         <div className={userNameAlertClass}>
@@ -180,7 +184,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             onChange={handleChange}
             placeholder="i.e. eriklambert"
             ref={setUsernameRef}
+            maxLength="80"
           />
+          <CharacterCount string={username} limit={80} />
         </div>
 
         <div className={alert.email ? 'required alert' : 'required'}>
@@ -194,7 +200,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             onChange={handleChange}
             placeholder="i.e. eriklambert@designhubx.com"
             ref={setEmailRef}
+            maxLength="80"
           />
+          <CharacterCount string={email} limit={80} />
         </div>
 
         <label htmlFor="bio">Bio</label>
@@ -219,7 +227,7 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
           maxLength="180"
           placeholder="i.e. Austin, TX"
         />
-
+        <CharacterCount string={location} limit={180} />
         <label htmlFor="website">Website</label>
         <input
           id="website"
