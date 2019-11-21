@@ -1,13 +1,19 @@
 import React from 'react';
 import {useAuth0} from '../auth-wrapper';
-import {Element} from 'react-scroll';
+import {Element, animateScroll as scroll} from 'react-scroll';
 
 import LandingPageNav from './LandingPageNav';
+import ScrollToTop from './Icons/ScrollToTop';
+import arrow from '../ASSETS/arrow.svg';
 import '../SASS/NewLandingPage.scss';
 
 
 const NewLandingPage = () =>{
   const {loginWithRedirect} = useAuth0();
+
+  const scrollToTop = () =>{
+    scroll.scrollToTop();
+  };
   return(
     <>
     <div className="page-container">
@@ -100,6 +106,10 @@ const NewLandingPage = () =>{
       <h4>See what actual users are saying about DesignHub</h4>
       <p>This is the carosel</p>
     </div>
+    <img
+      src={arrow} 
+      onClick={scrollToTop}
+    />
     </div>
     </>
   )
