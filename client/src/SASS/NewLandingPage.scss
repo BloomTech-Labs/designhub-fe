@@ -1,6 +1,13 @@
 @import './palette';
 @import './mixins';
 
+
+
+.background {
+  position: absolute;
+      width:100%;
+}
 .page-container{
+  position: relative;
   font-size: 5rem;
 }

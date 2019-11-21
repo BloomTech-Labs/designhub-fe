@@ -4,6 +4,7 @@ import {Element, animateScroll as scroll} from 'react-scroll';
 
 import LandingPageNav from './LandingPageNav';
 import arrow from '../ASSETS/arrow.svg';
+import background from '../ASSETS/landing.svg';
 import '../SASS/NewLandingPage.scss';
 import TestimonialCarousel from './TestimonialCarousel';
 
@@ -16,6 +17,8 @@ const NewLandingPage = () =>{
   };
   return(
     <>
+    <div className="landing-background">
+      <img src={background} className="background" alt="Landing page background image" />
     <div className="page-container">
     <LandingPageNav />
     <Element name="home">
@@ -111,6 +114,7 @@ const NewLandingPage = () =>{
       onClick={scrollToTop}
     />
     </div>
+   </div>
     </>
   )
 }
