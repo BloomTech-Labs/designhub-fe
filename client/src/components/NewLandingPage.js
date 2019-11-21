@@ -33,10 +33,10 @@ const NewLandingPage = () =>{
       >
         Create an account or Sign in
       </button>
-      <h1>
+      <p classname='tagline'>
         Super-charge your design workflow now and start collaborating like
         a beast
-      </h1>
+      </p>
     </div>
     <div className="top-right">
       <p>this will be the mac image</p>

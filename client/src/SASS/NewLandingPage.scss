@@ -6,8 +6,84 @@
 .background {
   position: absolute;
       width:100%;
+      z-index: -1;
 }
+
 .page-container{
   position: relative;
-  font-size: 5rem;
+  font-size: 2rem;
+
+  h1 {
+    font-weight: 900;
+    font-size: 90px;
+    color: $field-stroke;
+    line-height: 112px;
+    letter-spacing: 0.11em;
+    @media screen and (max-width: 1300px) {
+      font-size: 65px;
+      line-height: 80px;
+    }
+    @media screen and (max-width: 1024px) {
+      font-size: 55px;
+      line-height: 70px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 40px;
+      line-height: 50px;
+    }
+    em {
+      color: hsla(360, 100%, 100%, 0);
+      -webkit-text-fill-color: hsla(
+        360,
+        100%,
+        100%,
+        0
+      ); /* Will override color (regardless of order) */
+      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: $field-stroke;
+      @media screen and (max-width: 700px) {
+        -webkit-text-stroke-width: 1px;
+      }
+    }
+  }
+
+  p {
+    font-weight: 900;
+    font-size: 24px;
+    color: $field-stroke;
+    line-height: 28px;
+    letter-spacing: 0.11em;
+    @media screen and (max-width: 1300px) {
+      font-size: 20px;
+      line-height: 22px;
+    }
+    @media screen and (max-width: 1024px) {
+      font-size: 18px;
+      line-height: 20px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+
+  .auth0-redirect-btn {
+    @include auth0-redirect-btn;
+    margin-top: 3.5vh;
+    background: $btn-gradient;
+    color: $white;
+    &:hover {
+      background: $white;
+      color: $btn-gradient;
+    }
+    @media screen and (max-width: 1024px) {
+      width: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @media screen and (max-width: 700px) {
+      margin-top: 40px;
+      padding: 20px;
+    }
+  }
 }

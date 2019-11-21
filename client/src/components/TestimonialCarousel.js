@@ -8,7 +8,7 @@ const TestimonialCarousel = () => {
       <MDBCarousel
         activeItem={1}
         length={3}
-        showControls={false}
+        showControls={true}
         showIndicators={true}
         className="z-depth-1"
       >
