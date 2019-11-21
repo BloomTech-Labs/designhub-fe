@@ -2,14 +2,9 @@ import React, {Component} from 'react';
 import {Link, animateScroll as scroll} from 'react-scroll';
 
 export default class LandingPageNav extends Component{
-  scrollTo(offset){
-    scroll.scrollTo({
-      duration: 800,
-      delay: 0,
-      smooth: 'easeInOutQuart',
-      offset: offset
-    })
-  }
+  scrollToTop = () =>{
+    scroll.scrollToTop();
+  };
 
   render() {
     return(
@@ -17,36 +12,48 @@ export default class LandingPageNav extends Component{
         <div className="nav-content">
           <ul className="nav-items">
           <li className="nav-item">
-              <a
+              <Link
                 to="home"
-                onClick={() => this.scrollTo(-50)}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
               >
                 Home
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 to="about"
-                onClick={() => this.scrollTo(-50)}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
               >
                 About
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 to="features"
-                onClick={() => this.scrollTo(-50)}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
               >
                 Features
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a
+              <Link
                 to="contact"
-                onClick={() => this.scrollTo(-50)}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
               >
                 Contact
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
