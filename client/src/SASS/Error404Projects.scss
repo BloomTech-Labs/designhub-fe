@@ -10,13 +10,23 @@
     .no-projects-title {
         margin-top: 25px;
         margin-bottom: 0;
-        width: 100%;
-        font-size: 8vw;
+        width: 100%;       
+        font-size: 5vw;        
         text-align: center;
         color: $dark-grey;
         margin-bottom: 20px;
         user-select: none;
         opacity: 0.6;
+
+        @media (max-width: 800px) {
+          
+          
+        }
+    
+        @media (max-width: 500px) {
+          
+          
+        }
     }
 
     .empty-icon {
@@ -24,7 +34,7 @@
     }
 
     .no-projects {
-      width: 100%;
+      width: 100%;      
       text-align: center;
       color: $dark-grey;
       margin-bottom: 20px;
