@@ -9,24 +9,25 @@
 
     .no-projects-title {
         margin-top: 25px;
-        margin-bottom: 0;
+        margin-bottom: 0;        
         width: 100%;       
         font-size: 5vw;        
         text-align: center;
         color: $dark-grey;
         margin-bottom: 20px;
         user-select: none;
-        opacity: 0.6;
+        opacity: 0.6;     
+        
+        @media (max-width: 800px) {              
+              font-size: 7vw;    
+              
+        }
 
-        @media (max-width: 800px) {
-          
-          
-        }
-    
-        @media (max-width: 500px) {
-          
+        @media (max-width: 500px) {              
+          font-size: 10vw;    
           
         }
+
     }
 
     .empty-icon {
@@ -41,4 +42,7 @@
       user-select: none;
       opacity: 0.6;
     }
-  }
+}
+
+
+
