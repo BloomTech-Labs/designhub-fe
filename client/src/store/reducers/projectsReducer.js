@@ -20,7 +20,11 @@ import {
 
   GET_RECENT_PROJECTS_START,
   GET_RECENT_PROJECTS_SUCCESS,
-  GET_RECENT_PROJECTS_FAILURE
+  GET_RECENT_PROJECTS_FAILURE,
+
+  GET_INVITES_BY_PROJECTID_START,
+  GET_INVITES_BY_PROJECTID_SUCCESS,
+  GET_INVITES_BY_PROJECTID_FAILURE
 
 } from '../actions';
 
@@ -30,7 +34,8 @@ const initialState = {
   singleProject: null,
   usersProjects: [],
   usersRecentProjects: [],  
-  isLoading: false
+  isLoading: false,
+  projectInvites: []
 };
 
 export const projectsReducer = (state = initialState, action) => {
@@ -162,6 +167,24 @@ export const projectsReducer = (state = initialState, action) => {
         error: null
       };
     case DELETE_PROJECT_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      };
+    case GET_INVITES_BY_PROJECTID_START:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case GET_INVITES_BY_PROJECTID_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        projectInvites:action.payload
+      };
+    case GET_INVITES_BY_PROJECTID_FAILURE:
       return {
         ...state,
         isLoading: false,
