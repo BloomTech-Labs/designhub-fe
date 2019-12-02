@@ -10,7 +10,8 @@ import {
   createHeatmap,
   updateProject,
   deletePhoto,
-  deleteProject
+  deleteProject,
+  getUserByEmail
 } from '../store/actions';
 
 
@@ -34,7 +35,9 @@ const ProjectForm = ({
   createHeatmap,
   updateProject,
   deletePhoto,
-  deleteProject
+  deleteProject,
+  projectInvites,
+  inviteUser
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,14 +53,17 @@ const ProjectForm = ({
       figma: isEditing ? project.figma : '',
       invision: isEditing ? project.invision : '',
       privateProjects: isEditing ? project.privateProjects : false,
-      mainImg: isEditing ? project.mainImg : ''
+      mainImg: isEditing ? project.mainImg : '',
+      projectInvites: projectInvites
     },
     success: false,
     url: '',
     modal: false,
     deletingImage: null,
     inviteModal: false,
-    projectPhotos: null
+    projectPhotos: null,
+    inviteList: [],
+    email: '',
   });
 
   const { name, description, figma, invision } = state.project;
@@ -65,6 +71,7 @@ const ProjectForm = ({
   const handleChanges = e => {
     setError('');
     setState({
+      ...state,
       project: {
         ...state.project,
         [e.target.name]: e.target.value
@@ -234,12 +241,27 @@ const ProjectForm = ({
     })
   }
 
+  const handleInviteChanges = e => {
+    setError('');
+    setState({ ...state, [e.target.name]: e.target.value })
+  }
+
   const thumbInner = {
     display: 'flex',
     minWidth: 0,
     overflow: 'hidden'
   };
 
+  const handleInvites = async e => {
+    e.preventDefault();
+    try {
+      await getUserByEmail(state.email);
+      setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });
+      console.log(inviteUser);
+    } catch (error) {
+      console.log('GET user by email error ', error)
+    }
+  }
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
@@ -274,16 +296,28 @@ const ProjectForm = ({
         <div className="project-form-wrapper">
           {isLoading && <Loading />}
           <div className={state.inviteModal ? 'modal--expand' : 'modal--close'}>
-            <span
+            {/* <span
               className="modal--expand__background-overlay"
               onClick={closeInviteModal}
-            >
-              {state.inviteModal && (
-                <div>
-                  collab
-             </div>
-              )}
-            </span>
+            > */}
+            {state.inviteModal && (
+              <div className="invite-modal">
+                <form onSubmit={handleInvites}>
+                  <label htmlFor='invite-input' className='label'>Invite People</label>
+                  <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
+                </form>
+                <label htmlFor="collab-field" className='label'>Project Collaborators</label>
+                <div id='collab-field' className='collab-view'>
+                  {//map over project invites
+                  }
+                  Collab PlaceHolder
+                  </div>
+                <button>
+                  Add Members
+                  </button>
+              </div>
+            )}
+            {/* </span> */}
           </div>
         </div>
         <section className="ProjectForm__body">
@@ -460,16 +494,24 @@ const ProjectForm = ({
       </div>
   );
 };
+
+const mapStateToProps = state => {
+  return {
+    inviteUser: state.users.singleUser,
+  }
+}
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     {
       addProject,
       addPhoto,
       createHeatmap,
       updateProject,
       deletePhoto,
-      deleteProject
+      deleteProject,
+      getUserByEmail
     }
   )(ProjectForm)
 );
