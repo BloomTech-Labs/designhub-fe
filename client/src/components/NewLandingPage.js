@@ -5,6 +5,7 @@ import {Element, animateScroll as scroll} from 'react-scroll';
 import LandingPageNav from './LandingPageNav';
 import arrow from '../ASSETS/arrow.svg';
 import footerLogo from '../ASSETS/landing-footer-logo.svg';
+import poweredBy from '../ASSETS/powered-by.svg';
 import background from '../ASSETS/landing.svg';
 import '../SASS/NewLandingPage.scss';
 import TestimonialCarousel from './TestimonialCarousel';
@@ -115,7 +116,38 @@ const NewLandingPage = () =>{
       onClick={scrollToTop}
     />
     <div className="footer">
-      <img src={footerLogo} />
+      <div className="footerLogo">
+        <img src={footerLogo} />
+      </div>
+      <div className="footer-text">
+        <div className="our-company">
+          <h5>Our Company</h5>
+          <ul>
+            <li>About Us</li>
+            <li>Contact Us</li>
+            <li>The Team</li>
+          </ul>
+        </div>
+        <div className="social-networks">
+          <h5>Social Networks</h5>
+          <ul>
+            <li>Dribbble</li>
+            <li>Instagram</li>
+            <li>Behance</li>
+            <li>Twitter</li>
+          </ul>
+        </div>
+        <div className="policy">
+          <h5>Policy</h5>
+          <ul>
+            <li>Privacy Policy</li>
+            <li>Terms & Conditions</li>
+          </ul>
+        </div>
+      </div>
+      <div className="poweredBy">
+        <img src={poweredBy} />
+      </div>
     </div>
     </div>
    </div>
