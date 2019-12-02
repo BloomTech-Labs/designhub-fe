@@ -2,12 +2,13 @@
 @import './mixins';
 
 .carousel-container{
-  background: $light-grey;
-  border: 1px solid $grey;
+  // background: $light-grey;
+  // border: 1px solid $grey;
   width: 60%;
   margin: 5% auto;
 
   button{
     color: grey;
+    border: $light-grey;
   }
 }

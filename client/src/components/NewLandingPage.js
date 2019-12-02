@@ -4,6 +4,7 @@ import {Element, animateScroll as scroll} from 'react-scroll';
 
 import LandingPageNav from './LandingPageNav';
 import arrow from '../ASSETS/arrow.svg';
+import footerLogo from '../ASSETS/landing-footer-logo.svg';
 import background from '../ASSETS/landing.svg';
 import '../SASS/NewLandingPage.scss';
 import TestimonialCarousel from './TestimonialCarousel';
@@ -113,6 +114,9 @@ const NewLandingPage = () =>{
       src={arrow} 
       onClick={scrollToTop}
     />
+    <div className="footer">
+      <img src={footerLogo} />
+    </div>
     </div>
    </div>
     </>
