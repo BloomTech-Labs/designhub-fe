@@ -298,6 +298,18 @@
         font-size: 13px;
       }
 
+      .invite{
+        border-radius: 100%;
+        background-color: $light-black;
+        width:50px;
+        display:flex;
+        align-items:center;
+        justify-content: center;
+        height:50px;
+        margin: 2% 0%;
+        cursor: pointer;
+      }
+
       .required.alert input {
         margin-bottom: 0;
       }
