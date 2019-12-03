@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -37,7 +37,8 @@ const ProjectForm = ({
   deletePhoto,
   deleteProject,
   projectInvites,
-  inviteUser
+  inviteUser  
+    
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,10 +65,10 @@ const ProjectForm = ({
     projectPhotos: null,
     inviteList: [],
     email: '',
-  });
-
+  });  
+ 
   const { name, description, figma, invision } = state.project;
-
+  
   const handleChanges = e => {
     setError('');
     setState({
@@ -255,7 +256,7 @@ const ProjectForm = ({
   const handleInvites = async e => {
     e.preventDefault();
     try {
-      await getUserByEmail(state.email);
+      await getUserByEmail(state.email);     
       setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });
       console.log(inviteUser);
     } catch (error) {
@@ -296,12 +297,12 @@ const ProjectForm = ({
         <div className="project-form-wrapper">
           {isLoading && <Loading />}
           <div className={state.inviteModal ? 'modal--expand' : 'modal--close'}>
-            {/* <span
-              className="modal--expand__background-overlay"
-              onClick={closeInviteModal}
-            > */}
+             <span
+              className="modal--expand__background-overlay"> 
             {state.inviteModal && (
               <div className="invite-modal">
+                <div className = "close-icon-div" onClick={closeInviteModal}> <div className = "close-icon"> x </div> </div>
+                
                 <form onSubmit={handleInvites}>
                   <label htmlFor='invite-input' className='label'>Invite People</label>
                   <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
@@ -310,14 +311,24 @@ const ProjectForm = ({
                 <div id='collab-field' className='collab-view'>
                   {//map over project invites
                   }
-                  Collab PlaceHolder
+                  
+                </div>
+                <div className = "invite-modal-bottom-div"> {/*button and share link div */}
+
+                  <div className = "share-icon-div"> <div className = "share-icon"> 🤝 </div> </div>
+
+                  <div className = "share-link-div"> 
+                    <label htmlFor="share-input" className='label'>share link</label>
+                    <input type="text" id = "share-input"/> 
                   </div>
-                <button>
-                  Add Members
-                  </button>
+
+                  <div className = "add-members-btn-div"> <button className = "submit-button"> Add Members </button> </div>
+                  
+                </div>
+                
               </div>
             )}
-            {/* </span> */}
+             </span> 
           </div>
         </div>
         <section className="ProjectForm__body">
@@ -427,12 +438,7 @@ const ProjectForm = ({
                 placeholder="Select privacy settings"
                 id="privacyLink"
                 onChange={handlePrivacySetting}
-              >
-                {/*THERE IS A private BOOLEAN FIELD IN THE USER_PROJECTS TABLE: 1 is true or private and 0 is false or public.
-               IT DEFAULTS TO FALSE (0) or PUBLIC*/}
-                {/*TO SELECT ALL PUBLIC PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE NOT PRIVATE*/}
-                {/*TO SELECT ALL PRIVATE PROJECTS IN POSTGRES: SELECT * FROM USER_PROJECTS WHERE PRIVATE = "YES"
-                OR SELECT * FROM USER_PROJECTS WHERE PRIVATE */}
+              >                
                 <option value="public">Public</option>
                 <option value="private">Private</option>
               </select>
