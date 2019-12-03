@@ -22,7 +22,7 @@ const NewLandingPage = () =>{
   return(
     <>
     <div className="landing-background">
-      <img src={background} className="background" alt="Landing page background image" />
+      {/* <img src={background} className="background" alt="Landing page background image" /> */}
     <div className="page-container">
     <LandingPageNav />
     <Element name="home">

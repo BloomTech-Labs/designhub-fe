@@ -3,16 +3,19 @@
 
 .background {
   position: absolute;
-  // height: 100%;
   width: 100vw;
 }
 
 .page-container {
-  // height: 100%;
-  position: relative;
+  background-image: url('../ASSETS/landing.svg');
+  background-size: cover;
+  height: 100%;
+
+
   .top {
     display: flex;
     margin: 0 0 900px 180px;
+
     .top-left {
       width: 36%;
       color: #6d6d72;
@@ -24,7 +27,6 @@
       h1 {
         font-size: 76px;
         font-weight: bolder;
-       
         letter-spacing: 0.09em;
         span {
           color: white;
@@ -136,17 +138,19 @@ height: 49px;
 }
 
 .footer{
+  position: relative;
   box-sizing: border-box;
   background-color: #351553;
-  position: relative;
-  // bottom: 0;
-  margin: 10% auto -10%;
+  margin: auto;
+  margin-bottom: -20%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  
   .footerLogo{
     padding: 5% 0 0 5%;
   }
+  
   .footer-text{
     align-self: flex-end;
     display: flex;
@@ -156,11 +160,13 @@ height: 49px;
     border-left: .5px solid $white;
     padding: 8% 5%;
     color: $white;
+    
     h5{
       font-size: 1rem;
       font-weight: bold;
       padding-bottom: 20%;
     }
+    
     li{
       font-size: 1rem;
       line-height: 2;
