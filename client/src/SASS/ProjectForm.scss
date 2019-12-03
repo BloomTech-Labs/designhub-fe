@@ -456,6 +456,17 @@
       margin: 0;
       width: 100%;
 
+      div.colab-input-wrapper {
+        max-width:100%;
+        height:35px !important;
+        font-size: 12px;
+        margin-bottom: 20px;
+        border: 1px solid $field-stroke;
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
+      }
+
       input {
         font-size: 12px;
         margin-bottom: 20px;

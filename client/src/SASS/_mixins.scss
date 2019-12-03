@@ -146,6 +146,9 @@
   div.share-icon {
     @include onboard-form__div;
   }
+  div.colab-input-wrapper {
+    @include onboard-form__div;
+  }
 
   div.required {
     display: flex;

@@ -315,10 +315,13 @@ const ProjectForm = ({
             {state.inviteModal && (
               <div className="invite-modal">
                 <div className = "close-icon-div" onClick={closeInviteModal}> <div className = "close-icon"> x </div> </div>
-                {state.inviteList.map((invite)=><p key={invite.id}>{invite.firstName}</p>)}
+                
                 <form onSubmit={handleInvites}>
                   <label htmlFor='invite-input' className='label'>Invite People</label>
-                  <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
+                  <div className="colab-input-wrapper">
+                    {state.inviteList.map((invite)=><p key={invite.id}>{invite.firstName}</p>)}
+                    <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
+                  </div>
                 </form>
                 <label htmlFor="collab-field" className='label'>Project Collaborators</label>
                 <div id='collab-field' className='collab-view'>
