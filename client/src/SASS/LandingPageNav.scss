@@ -9,6 +9,7 @@
         margin: 55px 0 300px 50px;;
     }
     .nav-items {
+        cursor: default;
         width: 40%;
         margin-top: 40px;
         font-size: 20px;
@@ -16,7 +17,13 @@
         justify-content: space-evenly;
         a{
              color: black;
+
+             &:hover{
+                 color: $blue;
+                 font-weight: bold;
+             }
         }
+
     }
 }
 
