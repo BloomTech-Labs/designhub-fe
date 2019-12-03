@@ -22,7 +22,7 @@ const NewLandingPage = () =>{
   return(
     <>
     <div className="landing-background">
-      <img src={background} className="background" alt="Landing page background image" />
+      {/* <img src={background} className="background" alt="Landing page background image" /> */}
     <div className="page-container">
     <LandingPageNav />
     <Element name="home">
@@ -137,10 +137,11 @@ const NewLandingPage = () =>{
       <h4>See what actual users are saying about DesignHub</h4>
       <TestimonialCarousel />
     </div> 
-    <img
+    <img className='arrow'
       src={arrow} 
       onClick={scrollToTop}
     />
+    <Element className="contact">
     <div className="footer">
       <div className="footerLogo">
         <img src={footerLogo} />
@@ -175,6 +176,7 @@ const NewLandingPage = () =>{
         <img src={poweredBy} />
       </div>
     </div>
+    </Element>
     </div>
    </div>
     </>
