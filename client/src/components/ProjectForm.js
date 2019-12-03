@@ -10,7 +10,8 @@ import {
   createHeatmap,
   updateProject,
   deletePhoto,
-  deleteProject
+  deleteProject,
+  createProjectInvite
 } from '../store/actions';
 
 
@@ -35,8 +36,8 @@ const ProjectForm = ({
   updateProject,
   deletePhoto,
   deleteProject,
-  projectInvites
-
+  projectInvites,
+  createProjectInvite
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -272,6 +273,18 @@ const ProjectForm = ({
     })
   }
 
+  const sendInvites = () => {
+    state.inviteList.forEach(user => {
+      const invite = { projectId: project.id, email: user.email };
+      console.log(`${user.firstName}'s invite `, invite);
+      createProjectInvite(invite);
+    })
+    setState({
+      ...state,
+      inviteList: []
+    })
+  }
+
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
@@ -338,7 +351,7 @@ const ProjectForm = ({
                       <input type="text" id="share-input" />
                     </div>
 
-                    <div className="add-members-btn-div"> <button className="submit-button" onClick={}> Add Members </button> </div>
+                    <div className="add-members-btn-div"> <button className="submit-button" onClick={sendInvites}> Add Members </button> </div>
 
                   </div>
 
@@ -526,7 +539,8 @@ export default withRouter(
       createHeatmap,
       updateProject,
       deletePhoto,
-      deleteProject
+      deleteProject,
+      createProjectInvite
     }
   )(ProjectForm)
 );
