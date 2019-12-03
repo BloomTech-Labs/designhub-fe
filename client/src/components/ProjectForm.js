@@ -257,19 +257,28 @@ const ProjectForm = ({
   const handleInvites = e => {
     e.preventDefault();
        
-      getUserByEmail(state.email)
-      .then( () => {
-        setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });         
+      // getUserByEmail(state.email)
+      // .then( () => {
+      //   setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });         
 
-      }) 
-      .then( () => {
-        console.log("invite user", inviteUser);          
-
-      })           
+      // })
+      
+      
+        axiosWithAuth()
+          .get(`/api/v1/users/mail/${state.email}`)    
+          .then(res => {
+            setState({ ...state, inviteList: [...state.inviteList, res.data[0]], email: '' });
+            console.log("response", res.data);
+            console.log("email", state.email);
+          })
+          .catch(err => {
+            console.log('err', err)
+          });           
   }
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
+        {console.log(state.inviteList)}
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
@@ -306,7 +315,7 @@ const ProjectForm = ({
             {state.inviteModal && (
               <div className="invite-modal">
                 <div className = "close-icon-div" onClick={closeInviteModal}> <div className = "close-icon"> x </div> </div>
-                
+                {state.inviteList.map((invite)=><p key={invite.id}>{invite.firstName}</p>)}
                 <form onSubmit={handleInvites}>
                   <label htmlFor='invite-input' className='label'>Invite People</label>
                   <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
