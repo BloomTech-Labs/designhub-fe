@@ -37,7 +37,8 @@ const ProjectForm = ({
   deletePhoto,
   deleteProject,
   projectInvites,
-  inviteUser  
+  inviteUser,
+  getUserByEmail  
     
 }) => {
   const [files, setFiles] = useState([]);
@@ -253,15 +254,18 @@ const ProjectForm = ({
     overflow: 'hidden'
   };
 
-  const handleInvites = async e => {
+  const handleInvites = e => {
     e.preventDefault();
-    try {
-      await getUserByEmail(state.email);     
-      setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });
-      console.log(inviteUser);
-    } catch (error) {
-      console.log('GET user by email error ', error)
-    }
+       
+      getUserByEmail(state.email)
+      .then( () => {
+        setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });         
+
+      }) 
+      .then( () => {
+        console.log("invite user", inviteUser);          
+
+      })           
   }
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :

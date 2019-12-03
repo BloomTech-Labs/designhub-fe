@@ -247,9 +247,11 @@ export const getAllUsers = () => dispatch => {
 export const getUserByEmail = (email) => dispatch => {
   dispatch({ type: GET_USER_BY_EMAIL_START });
   return axiosWithAuth()
-    .get(`/api/v1/users/mail/${email}`)
+    .get(`/api/v1/users/mail/${email}`)    
     .then(res => {
-      dispatch({ type: GET_USER_BY_EMAIL_SUCCESS, payload: res.data });
+      console.log("response", res.data);
+      console.log("email", email);
+      dispatch({ type: GET_USER_BY_EMAIL_SUCCESS, payload: res.data[0] });
     })
     .catch(err => {
       dispatch({ type: GET_USER_BY_EMAIL_FAILURE, error: err });
