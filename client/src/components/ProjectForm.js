@@ -41,7 +41,9 @@ const ProjectForm = ({
   projectInvites,
   createProjectInvite,
   getInvitesByProjectId,
-  getSingleUser
+  getSingleUser,
+  singleUser,
+  invite
   }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -257,6 +259,35 @@ const ProjectForm = ({
     overflow: 'hidden'
   };
 
+  // Get all project invites on init
+  useEffect(() => {
+    getInvitesByProjectId(project.id);
+  }, [invite])
+
+  // Get users for each invite present
+  const getProjectUsers = () => {
+
+    // Reset the list
+    setInviteUsers([]);
+
+    // For each invite, get user data
+    projectInvites.forEach(invite => {
+
+      //if no user id is associated display a static user
+      getSingleUser(invite.userId);
+
+    })      
+
+  }
+
+  useEffect (getProjectUsers, [projectInvites]);
+
+  // Each time we load a user, add them to the list
+  useEffect(() => {
+    if(singleUser.email)
+      setInviteUsers([...inviteUsers, singleUser]);
+  }, [singleUser])
+
   const handleInvites = e => {
     e.preventDefault();
     axiosWithAuth()
@@ -277,57 +308,19 @@ const ProjectForm = ({
   }
 
   const sendInvites = () => {
-    state.inviteList.forEach(user => {
+    state.inviteList.forEach(async user => {
       const invite = { projectId: project.id, email: user.email };
-      createProjectInvite(invite);
+      await createProjectInvite(invite);
     })
     setState({
       ...state,
       inviteList: []
     })
 
-    getInvitesByProjectId(project.id);
-    getProjectUsers();
+    // getInvitesByProjectId(project.id);
+    // getProjectUsers();
 
   }
-
-  const getProjectUsers = () => {
-
-    projectInvites.forEach( invite => {
-
-      //if no user id is associated display a static user
-      getSingleUser(invite.userId)
-      .then( user => {
-        console.log("user", user);
-        setInviteUsers([...inviteUsers, user])
-
-      })   
-
-    })      
-
-  }
-
-  useEffect ( () => {
-
-    getInvitesByProjectId(project.id)   
-    .finally( (res) => {
-      console.log("res", res);
-      console.log("project invites", projectInvites);
-      getProjectUsers()
-    })  
-
-    // axiosWithAuth()
-    // .get(`/api/v1/projectInvites/${project.id}`)
-    // .then(res => {
-    //   console.log("res in action", res);
-    //   setState({...state, project: ...state.project,  })
-    // })
-    // .catch(err => {
-      
-    // })
-
-    
-  }, []);
   
 
   return (
@@ -581,7 +574,9 @@ const ProjectForm = ({
 
 const mapStateToProps = state => {
   return {
-    projectInvites: state.projects.projectInvites
+    projectInvites: state.projects.projectInvites,
+    singleUser: state.users.singleUser,
+    invite: state.invites.invite
   }
 }
 
