@@ -127,7 +127,7 @@
   input {
     @include onboard-form__input;
   }
-  select{
+  select {
     @include onboard-form__select;
   }
   textarea {
@@ -309,4 +309,36 @@
 
 @function themed($key) {
   @return map-get($theme-map, $key);
+}
+
+//media queries
+@mixin phone {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin small-tablet {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin big-tablet {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin small-desktop {
+  @media (max-width: 1536px) {
+    @content;
+  }
+}
+@mixin big-desktop {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+@mixin large-desktop {
+  @media (min-width: 1921px) {
+    @content;
+  }
 }

@@ -7,20 +7,21 @@
 }
 
 .page-container {
+  font-size: 62.5%;
   position: relative;
   .top {
     display: flex;
-    margin: 0 0 900px 180px;
+    margin: 0 0 50% 10%;
     .top-left {
       width: 36%;
       color: #6d6d72;
-      margin-top: 100px;
+      margin-top: 5%;
       p {
-        font-size: 30px;
-        margin-bottom: 20px;
+        font-size: 3em;
+        margin-bottom: 2%;
       }
       h1 {
-        font-size: 76px;
+        font-size: 7.6em;
         font-weight: bolder;
        
         letter-spacing: 0.09em;
@@ -30,55 +31,57 @@
         }
       }
       h4 {
-        font-size: 22px;
+        font-size: 2.2em;
       }
     
     }
     .top-right {
-      margin: -350px 0 0 -200px;
+      margin: -20% 0 0 -13%;
     }
   }
 }
 
 
 .buttons {
-  width: 95%;
+  width: 75%;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  .signup-btn {
+  justify-content: space-evenly;
+  margin-bottom: 2%;
+  button:hover {
     background-color: $blue;
     color: $white;
+  }
+  .signup-btn {
+    background-color: $white;
+    color: $blue;
     border: 1px solid #3f1ccc;
     border-radius: 3px;
-    width: 213px;
-height: 49px;
-// left: 149px;
-// top: 581px;
+    width: 41%;
+    height: 49px;
   }
   .login-btn {
     background-color: $white;
     color: $blue;
     border: 1px solid #3f1ccc;
     border-radius: 3px;
-    width: 213px;
+    width: 41%;
     height: 49px;
   }
 }
 
 .how-it-works {
-  margin: 0 50px 708px 180px;
+  margin: 0 5% 38% 18%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   .how-it-works-heading {
     text-align: center;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 4%;
     
     h2 {
       font-weight: 500;
-      font-size: 46px;
+      font-size: 4.6em;
       letter-spacing: 0.11em;
       color: #212229;
     }
@@ -93,26 +96,29 @@ height: 49px;
 
 .inspiration {
     display: flex;
-    margin: 0 50px 500px 220px;
+    margin: 0 3% 20% 12%;
     justify-content: space-between;
     
     .inspiration-text {
-      margin: 150px 120px 0 0 ;
+      margin: 8% 10% 0 0 ;
       width: 35%;
       h5 {
         font-weight: 500;
-        font-size: 44px;
+        font-size: 4.4em;
         line-height: 138%;
         letter-spacing: 0.11em;
         color: #000000;
-        margin-bottom: 30px;
+        margin-bottom: 5%;
+      }
+      p {
+        font-size: 2em;
       }
       
     }
 }
 
 .features {
-  margin: 0 50px 708px 180px;
+  margin: 0 8% 40% 12%;
   display: flex;
   flex-wrap: wrap;
   .features-heading {
@@ -126,3 +132,51 @@ height: 49px;
  
 }
 
+.footer{
+  box-sizing: border-box;
+  background-color: #351553;
+  position: relative;
+  margin: 10% auto -10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .footerLogo{
+    padding: 5% 0 0 5%;
+  }
+  .footer-text{
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-evenly;
+    width: 40%;
+    // border: 2px solid green;
+    border-left: .5px solid $white;
+    padding: 8% 5%;
+    color: $white;
+    h5{
+      font-size: 1rem;
+      font-weight: bold;
+      padding-bottom: 20%;
+    }
+    li{
+      font-size: 1rem;
+      line-height: 2;
+      line-height: 2.5;
+    }
+  }
+
+  .poweredBy{
+    padding: 0 0 5% 5%;
+  }
+}
+
+
+
+//   @include small-desktop {    
+//     .how-it-works {
+//       margin-bottom:25%;
+//     }
+//     .inspiration {
+      
+//     }
+    
+//  }
