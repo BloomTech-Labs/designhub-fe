@@ -11,7 +11,9 @@ import {
   updateProject,
   deletePhoto,
   deleteProject,
-  createProjectInvite
+  createProjectInvite,
+  getInvitesByProjectId,
+  getSingleUser
 } from '../store/actions';
 
 
@@ -37,13 +39,16 @@ const ProjectForm = ({
   deletePhoto,
   deleteProject,
   projectInvites,
-  createProjectInvite
-}) => {
+  createProjectInvite,
+  getInvitesByProjectId,
+  getSingleUser
+  }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [error, setError] = useState('');
   const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
+  const [inviteUsers, setInviteUsers] = useState([]);
 
   const [state, setState] = useState({
     project: {
@@ -280,12 +285,55 @@ const ProjectForm = ({
       ...state,
       inviteList: []
     })
+
+    getInvitesByProjectId(project.id);
+    getProjectUsers();
+
   }
+
+  const getProjectUsers = () => {
+
+    projectInvites.forEach( invite => {
+
+      //if no user id is associated display a static user
+      getSingleUser(invite.userId)
+      .then( user => {
+        console.log("user", user);
+        setInviteUsers([...inviteUsers, user])
+
+      })   
+
+    })      
+
+  }
+
+  useEffect ( () => {
+
+    getInvitesByProjectId(project.id)   
+    .finally( (res) => {
+      console.log("res", res);
+      console.log("project invites", projectInvites);
+      getProjectUsers()
+    })  
+
+    // axiosWithAuth()
+    // .get(`/api/v1/projectInvites/${project.id}`)
+    // .then(res => {
+    //   console.log("res in action", res);
+    //   setState({...state, project: ...state.project,  })
+    // })
+    // .catch(err => {
+      
+    // })
+
+    
+  }, []);
+  
 
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
-        {isLoading && <Loading />}
+        {isLoading && <Loading />} {console.log(inviteUsers)}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
             className="modal--expand__background-overlay"
@@ -335,6 +383,11 @@ const ProjectForm = ({
                   <label htmlFor="collab-field" className='label'>Project Collaborators</label>
                   <div id='collab-field' className='collab-view'>
                     {//map over project invites
+                     inviteUsers.map( (user) => {
+                       console.log("user", user);
+                       return <p>{user.firstName}</p>
+                     })
+                      
                     }
 
                   </div>
@@ -526,9 +579,15 @@ const ProjectForm = ({
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    projectInvites: state.projects.projectInvites
+  }
+}
+
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     {
       addProject,
       addPhoto,
@@ -536,7 +595,9 @@ export default withRouter(
       updateProject,
       deletePhoto,
       deleteProject,
-      createProjectInvite
+      createProjectInvite,
+      getInvitesByProjectId,
+      getSingleUser
     }
   )(ProjectForm)
 );

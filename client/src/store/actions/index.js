@@ -187,6 +187,7 @@ export const getInvitesByProjectId = (id) => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/projectInvites/${id}`)
     .then(res => {
+      console.log("res in action", res);
       dispatch({ type: GET_INVITES_BY_PROJECTID_SUCCESS, payload: res.data })
     })
     .catch(err => {
