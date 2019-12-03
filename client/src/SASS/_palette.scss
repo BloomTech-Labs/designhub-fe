@@ -72,6 +72,7 @@ $heatmap-1: #adaeff;
 
 //breakpoints
 $breakpoints: (
+  'small': (min-width: 500px),
   'medium': (min-width: 800px),
   'large': (min-width: 1000px),
   'huge': (min-width: 1200px),
