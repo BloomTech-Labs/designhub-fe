@@ -89,7 +89,6 @@
 
   .footer{
     box-sizing: border-box;
-    border: 2px solid pink;
     background-color: #351553;
     position: relative;
     margin: 10% auto -10%;
@@ -106,7 +105,6 @@
       display: flex;
       justify-content: space-evenly;
       width: 40%;
-      // border: 2px solid green;
       border-left: .5px solid $white;
       padding: 8% 5%;
       color: $white;
@@ -118,7 +116,7 @@
       }
       li{
         font-size: 1rem;
-        line-height: 2;
+        line-height: 2.5;
       }
     }
 
