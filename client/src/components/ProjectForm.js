@@ -10,8 +10,7 @@ import {
   createHeatmap,
   updateProject,
   deletePhoto,
-  deleteProject,
-  getUserByEmail
+  deleteProject
 } from '../store/actions';
 
 
@@ -36,10 +35,8 @@ const ProjectForm = ({
   updateProject,
   deletePhoto,
   deleteProject,
-  projectInvites,
-  inviteUser,
-  getUserByEmail  
-    
+  projectInvites
+
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,10 +63,10 @@ const ProjectForm = ({
     projectPhotos: null,
     inviteList: [],
     email: '',
-  });  
- 
+  });
+
   const { name, description, figma, invision } = state.project;
-  
+
   const handleChanges = e => {
     setError('');
     setState({
@@ -256,25 +253,25 @@ const ProjectForm = ({
 
   const handleInvites = e => {
     e.preventDefault();
-       
-      // getUserByEmail(state.email)
-      // .then( () => {
-      //   setState({ ...state, inviteList: [...state.inviteList, inviteUser], email: '' });         
-
-      // })
-      
-      
-        axiosWithAuth()
-          .get(`/api/v1/users/mail/${state.email}`)    
-          .then(res => {
-            setState({ ...state, inviteList: [...state.inviteList, res.data[0]], email: '' });
-            console.log("response", res.data);
-            console.log("email", state.email);
-          })
-          .catch(err => {
-            console.log('err', err)
-          });           
+    axiosWithAuth()
+      .get(`/api/v1/users/mail/${state.email}`)
+      .then(res => {
+        setState({ ...state, inviteList: [...state.inviteList, res.data[0]], email: '' });
+        console.log("response", res.data);
+        console.log("email", state.email);
+      })
+      .catch(err => {
+        console.log('err', err)
+      });
   }
+
+  const removeInviteFromList = (id) => {
+    setState({
+      ...state,
+      inviteList: state.inviteList.filter(user => user.id !== id)
+    })
+  }
+
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
@@ -310,41 +307,44 @@ const ProjectForm = ({
         <div className="project-form-wrapper">
           {isLoading && <Loading />}
           <div className={state.inviteModal ? 'modal--expand' : 'modal--close'}>
-             <span
-              className="modal--expand__background-overlay"> 
-            {state.inviteModal && (
-              <div className="invite-modal">
-                <div className = "close-icon-div" onClick={closeInviteModal}> <div className = "close-icon"> x </div> </div>
-                
-                <form onSubmit={handleInvites}>
-                  <label htmlFor='invite-input' className='label'>Invite People</label>
-                  <div className="colab-input-wrapper">
-                    {state.inviteList.map((invite)=><p key={invite.id}>{invite.firstName}</p>)}
-                    <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
+            <span
+              className="modal--expand__background-overlay">
+              {state.inviteModal && (
+                <div className="invite-modal">
+                  <div className="close-icon-div" onClick={closeInviteModal}> <div className="close-icon"> x </div> </div>
+                  <form onSubmit={handleInvites}>
+                    <label htmlFor='invite-input' className='label'>Invite People</label>
+                    <div className="colab-input-wrapper">
+                      {state.inviteList.map((user) =>
+                        <div className='invite-chip' key={user.id}>
+                          {user.firstName}
+                          <div className='remove-chip' onClick={() => removeInviteFromList(user.id)}>X</div>
+                        </div>)}
+                      <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
+                    </div>
+                  </form>
+                  <label htmlFor="collab-field" className='label'>Project Collaborators</label>
+                  <div id='collab-field' className='collab-view'>
+                    {//map over project invites
+                    }
+
                   </div>
-                </form>
-                <label htmlFor="collab-field" className='label'>Project Collaborators</label>
-                <div id='collab-field' className='collab-view'>
-                  {//map over project invites
-                  }
-                  
-                </div>
-                <div className = "invite-modal-bottom-div"> {/*button and share link div */}
+                  <div className="invite-modal-bottom-div"> {/*button and share link div */}
 
-                  <div className = "share-icon-div"> <div className = "share-icon"> 🤝 </div> </div>
+                    <div className="share-icon-div"> <div className="share-icon"> 🤝 </div> </div>
 
-                  <div className = "share-link-div"> 
-                    <label htmlFor="share-input" className='label'>share link</label>
-                    <input type="text" id = "share-input"/> 
+                    <div className="share-link-div">
+                      <label htmlFor="share-input" className='label'>share link</label>
+                      <input type="text" id="share-input" />
+                    </div>
+
+                    <div className="add-members-btn-div"> <button className="submit-button" onClick={}> Add Members </button> </div>
+
                   </div>
 
-                  <div className = "add-members-btn-div"> <button className = "submit-button"> Add Members </button> </div>
-                  
                 </div>
-                
-              </div>
-            )}
-             </span> 
+              )}
+            </span>
           </div>
         </div>
         <section className="ProjectForm__body">
@@ -454,7 +454,7 @@ const ProjectForm = ({
                 placeholder="Select privacy settings"
                 id="privacyLink"
                 onChange={handlePrivacySetting}
-              >                
+              >
                 <option value="public">Public</option>
                 <option value="private">Private</option>
               </select>
@@ -517,23 +517,16 @@ const ProjectForm = ({
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    inviteUser: state.users.singleUser,
-  }
-}
-
 export default withRouter(
   connect(
-    mapStateToProps,
+    null,
     {
       addProject,
       addPhoto,
       createHeatmap,
       updateProject,
       deletePhoto,
-      deleteProject,
-      getUserByEmail
+      deleteProject
     }
   )(ProjectForm)
 );
