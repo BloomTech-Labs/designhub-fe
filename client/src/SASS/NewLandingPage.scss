@@ -1,13 +1,127 @@
 @import './palette';
 @import './mixins';
 
-
-
 .background {
   position: absolute;
-      width:100%;
+  width: 100%;
 }
-.page-container{
+
+.page-container {
   position: relative;
-  font-size: 5rem;
+  .top {
+    display: flex;
+    margin: 0 0 900px 180px;
+    .top-left {
+      width: 36%;
+      color: #6d6d72;
+      margin-top: 100px;
+      p {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: 76px;
+        font-weight: bolder;
+       
+        letter-spacing: 0.09em;
+        span {
+          color: white;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+      }
+      h4 {
+        font-size: 22px;
+      }
+    
+    }
+    .top-right {
+      margin: -350px 0 0 -200px;
+    }
+  }
+}
+
+
+.buttons {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  .signup-btn {
+    background-color: $blue;
+    color: $white;
+    border: 1px solid #3f1ccc;
+    border-radius: 3px;
+    width: 213px;
+height: 49px;
+// left: 149px;
+// top: 581px;
+  }
+  .login-btn {
+    background-color: $white;
+    color: $blue;
+    border: 1px solid #3f1ccc;
+    border-radius: 3px;
+    width: 213px;
+    height: 49px;
+  }
+}
+
+.how-it-works {
+  margin: 0 50px 708px 180px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .how-it-works-heading {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+    
+    h2 {
+      font-weight: 500;
+      font-size: 46px;
+      letter-spacing: 0.11em;
+      color: #212229;
+    }
+    
+  }
+  .step {
+    width: 20%;
+    background-color: $blue;
+  }
+}
+
+
+.inspiration {
+    display: flex;
+    margin: 0 50px 500px 220px;
+    justify-content: space-between;
+    
+    .inspiration-text {
+      margin: 150px 120px 0 0 ;
+      width: 35%;
+      h5 {
+        font-weight: 500;
+        font-size: 44px;
+        line-height: 138%;
+        letter-spacing: 0.11em;
+        color: #000000;
+        margin-bottom: 30px;
+      }
+      
+    }
+}
+
+.features {
+  margin: 0 50px 708px 180px;
+  display: flex;
+  flex-wrap: wrap;
+  .features-heading {
+    width: 100%;
+    text-align: center;
+  }
+  .feature-box {
+    margin: 20px 140px;
+    width: 15%;
+  }
+ 
 }
