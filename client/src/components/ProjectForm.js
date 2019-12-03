@@ -258,8 +258,6 @@ const ProjectForm = ({
       .get(`/api/v1/users/mail/${state.email}`)
       .then(res => {
         setState({ ...state, inviteList: [...state.inviteList, res.data[0]], email: '' });
-        console.log("response", res.data);
-        console.log("email", state.email);
       })
       .catch(err => {
         console.log('err', err)
@@ -276,7 +274,6 @@ const ProjectForm = ({
   const sendInvites = () => {
     state.inviteList.forEach(user => {
       const invite = { projectId: project.id, email: user.email };
-      console.log(`${user.firstName}'s invite `, invite);
       createProjectInvite(invite);
     })
     setState({
@@ -288,7 +285,6 @@ const ProjectForm = ({
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
-        {console.log(state.inviteList)}
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
