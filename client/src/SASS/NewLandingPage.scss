@@ -1,127 +1,127 @@
 @import './palette';
 @import './mixins';
 
-
-
 .background {
   position: absolute;
-      width:100%;
-      z-index: -1;
+  width: 100%;
 }
 
-.page-container{
+.page-container {
   position: relative;
-  font-size: 2rem;
-
-  h1 {
-    font-weight: 900;
-    font-size: 90px;
-    color: $field-stroke;
-    line-height: 112px;
-    letter-spacing: 0.11em;
-    @media screen and (max-width: 1300px) {
-      font-size: 65px;
-      line-height: 80px;
-    }
-    @media screen and (max-width: 1024px) {
-      font-size: 55px;
-      line-height: 70px;
-    }
-    @media screen and (max-width: 700px) {
-      font-size: 40px;
-      line-height: 50px;
-    }
-    em {
-      color: hsla(360, 100%, 100%, 0);
-      -webkit-text-fill-color: hsla(
-        360,
-        100%,
-        100%,
-        0
-      ); /* Will override color (regardless of order) */
-      -webkit-text-stroke-width: 2px;
-      -webkit-text-stroke-color: $field-stroke;
-      @media screen and (max-width: 700px) {
-        -webkit-text-stroke-width: 1px;
-      }
-    }
-  }
-
-  p {
-    font-weight: 900;
-    font-size: 24px;
-    color: $field-stroke;
-    line-height: 28px;
-    letter-spacing: 0.11em;
-    @media screen and (max-width: 1300px) {
-      font-size: 20px;
-      line-height: 22px;
-    }
-    @media screen and (max-width: 1024px) {
-      font-size: 18px;
-      line-height: 20px;
-    }
-    @media screen and (max-width: 700px) {
-      font-size: 16px;
-      line-height: 18px;
-    }
-  }
-
-  .auth0-redirect-btn {
-    @include auth0-redirect-btn;
-    margin-top: 3.5vh;
-    background: $btn-gradient;
-    color: $white;
-    &:hover {
-      background: $white;
-      color: $btn-gradient;
-    }
-    @media screen and (max-width: 1024px) {
-      width: auto;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    @media screen and (max-width: 700px) {
-      margin-top: 40px;
-      padding: 20px;
-    }
-  }
-
-  .footer{
-    box-sizing: border-box;
-    background-color: #351553;
-    position: relative;
-    margin: 10% auto -10%;
-    width: 100%;
+  .top {
     display: flex;
-    flex-direction: column;
-
-    .footerLogo{
-      padding: 5% 0 0 5%;
-    }
-
-    .footer-text{
-      align-self: flex-end;
-      display: flex;
-      justify-content: space-evenly;
-      width: 40%;
-      border-left: .5px solid $white;
-      padding: 8% 5%;
-      color: $white;
-
-      h5{
-        font-size: 1rem;
-        font-weight: bold;
-        padding-bottom: 20%;
+    margin: 0 0 900px 180px;
+    .top-left {
+      width: 36%;
+      color: #6d6d72;
+      margin-top: 100px;
+      p {
+        font-size: 30px;
+        margin-bottom: 20px;
       }
-      li{
-        font-size: 1rem;
-        line-height: 2.5;
+      h1 {
+        font-size: 76px;
+        font-weight: bolder;
+       
+        letter-spacing: 0.09em;
+        span {
+          color: white;
+          text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
       }
+      h4 {
+        font-size: 22px;
+      }
+    
     }
-
-    .poweredBy{
-      padding: 0 0 5% 5%;
+    .top-right {
+      margin: -350px 0 0 -200px;
     }
   }
+}
+
+
+.buttons {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  .signup-btn {
+    background-color: $blue;
+    color: $white;
+    border: 1px solid #3f1ccc;
+    border-radius: 3px;
+    width: 213px;
+height: 49px;
+// left: 149px;
+// top: 581px;
+  }
+  .login-btn {
+    background-color: $white;
+    color: $blue;
+    border: 1px solid #3f1ccc;
+    border-radius: 3px;
+    width: 213px;
+    height: 49px;
+  }
+}
+
+.how-it-works {
+  margin: 0 50px 708px 180px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .how-it-works-heading {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 40px;
+    
+    h2 {
+      font-weight: 500;
+      font-size: 46px;
+      letter-spacing: 0.11em;
+      color: #212229;
+    }
+    
+  }
+  .step {
+    width: 20%;
+    background-color: $blue;
+  }
+}
+
+
+.inspiration {
+    display: flex;
+    margin: 0 50px 500px 220px;
+    justify-content: space-between;
+    
+    .inspiration-text {
+      margin: 150px 120px 0 0 ;
+      width: 35%;
+      h5 {
+        font-weight: 500;
+        font-size: 44px;
+        line-height: 138%;
+        letter-spacing: 0.11em;
+        color: #000000;
+        margin-bottom: 30px;
+      }
+      
+    }
+}
+
+.features {
+  margin: 0 50px 708px 180px;
+  display: flex;
+  flex-wrap: wrap;
+  .features-heading {
+    width: 100%;
+    text-align: center;
+  }
+  .feature-box {
+    margin: 20px 140px;
+    width: 15%;
+  }
+ 
 }

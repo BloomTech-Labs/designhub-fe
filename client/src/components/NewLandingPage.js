@@ -7,6 +7,8 @@ import arrow from '../ASSETS/arrow.svg';
 import footerLogo from '../ASSETS/landing-footer-logo.svg';
 import poweredBy from '../ASSETS/powered-by.svg';
 import background from '../ASSETS/landing.svg';
+import explorepagetemp from '../ASSETS/tempexplore.svg'
+import macscreenshot from '../ASSETS/macscreenshot.png';
 import '../SASS/NewLandingPage.scss';
 import TestimonialCarousel from './TestimonialCarousel';
 
@@ -24,56 +26,80 @@ const NewLandingPage = () =>{
     <div className="page-container">
     <LandingPageNav />
     <Element name="home">
+    <section className="top">
     <div className="top-left">
       <p>WELCOME TO</p>
       <h1>
-        DESIGN<em>HUB</em>
+        DESIGN<span>HUB</span>
       </h1>
+      <div className="buttons">
       <button
+        className="auth0-redirect-btn signup-btn"
+        onClick={() => loginWithRedirect({})}
+      >
+        Sign Up
+      </button>
+      <button
+        className="auth0-redirect-btn login-btn"
+        onClick={() => loginWithRedirect({})}
+      >
+       Log In
+      </button>
+      </div>
+
+      {/* <button
         className="auth0-redirect-btn"
         onClick={() => loginWithRedirect({})}
       >
         Create an account or Sign in
-      </button>
-      <p classname='tagline'>
-        Super-charge your design workflow now and start collaborating like
+      </button> */}
+    
+      <h4>
+        Super-charge your design workflow now <br/> and start collaborating like
         a beast
-      </p>
+      </h4>
     </div>
     <div className="top-right">
-      <p>this will be the mac image</p>
+      <img src = {macscreenshot} className="background" alt= "mac screen"/>
     </div>
+    </section>
     </Element>
     <Element name="about">
     <div className="how-it-works">
-      <div className="step1">
+      <div className="how-it-works-heading">
+        <h2>HOW IT WORKS</h2>
+        </div>
+      <div className="step">
         <p>this will be a screenshot of login</p>
         <h5>Step 1</h5>
         <p>Login or create a new account to view your profile</p>
       </div>
-      <div className="step2">
+      <div className="step">
         <p>this will be a screenshot of new project creation tab</p>
         <h5>Step 2</h5>
         <p>Click on the add button to create a new project</p>
       </div>
-      <div className="step3">
+      <div className="step">
         <p>this will be a screenshot of new project creation form</p>
         <h5>Step 3</h5>
         <p>Add your files and get collaborating!</p>
       </div>
     </div>
     <div className="inspiration">
-      <p>this is a screenshot of the explore page</p>
+      <div className="inspiration-screenshot">
+      <img src={explorepagetemp} className="explore-pic" alt="Explore page screen shot image" />
+      </div>
       <div className="inspiration-text">
-        <h5>Find inspiration from fellow designers</h5>
+        <h5>Find inspiration from your fellow designers</h5>
         <p>Not sure where to start? Check out projects by other designers on the Explore page for inspiration!</p>
       </div>
     </div>
     </Element>
-    <Element name="features">
-    <div className="features">
+    <Element className="features">
+    <div className="features-heading">
       <h3>DesignHub is built for designers by designers</h3>
       <h4>Features</h4>
+      </div>
       <div className="feature-box">
         <p>this will be a screenshot/icon</p>
         <h5>Messaging</h5>
@@ -104,14 +130,14 @@ const NewLandingPage = () =>{
         <h5>Feedback</h5>
         <p>Give and receive feedback on projects easily including using sticky comments to comment directly on a specific element of the design</p>
       </div>
-    </div>
+    
     </Element>
-    <div className="testimonials">
+    {/* <div className="testimonials">
       <h3>But don't take our word for it...</h3>
       <h4>See what actual users are saying about DesignHub</h4>
       <TestimonialCarousel />
-    </div>
-    <img
+    </div> */}
+    {/* <img
       src={arrow} 
       onClick={scrollToTop}
     />
