@@ -122,7 +122,7 @@ const ProjectComments = ({
                   className="user-links"
                 >
                   <p className="username">
-                    {activeUser.id === c.userId ? 'You' : c.username}
+                    {activeUser.id === c.userId ? `${c.username}` : c.username}
                   </p>
                 </Link>
                 <p>{c.text}</p>
