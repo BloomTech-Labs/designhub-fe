@@ -132,12 +132,12 @@ const NewLandingPage = () =>{
       </div>
     
     </Element>
-    {/* <div className="testimonials">
+    <div className="testimonials">
       <h3>But don't take our word for it...</h3>
       <h4>See what actual users are saying about DesignHub</h4>
       <TestimonialCarousel />
-    </div> */}
-    {/* <img
+    </div> 
+    <img
       src={arrow} 
       onClick={scrollToTop}
     />

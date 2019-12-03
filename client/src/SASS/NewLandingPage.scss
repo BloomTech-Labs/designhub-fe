@@ -125,3 +125,40 @@ height: 49px;
   }
  
 }
+
+.footer{
+  box-sizing: border-box;
+  background-color: #351553;
+  position: relative;
+  margin: 10% auto -10%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .footerLogo{
+    padding: 5% 0 0 5%;
+  }
+  .footer-text{
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-evenly;
+    width: 40%;
+    // border: 2px solid green;
+    border-left: .5px solid $white;
+    padding: 8% 5%;
+    color: $white;
+    h5{
+      font-size: 1rem;
+      font-weight: bold;
+      padding-bottom: 20%;
+    }
+    li{
+      font-size: 1rem;
+      line-height: 2;
+      line-height: 2.5;
+    }
+  }
+
+  .poweredBy{
+    padding: 0 0 5% 5%;
+  }
+}
