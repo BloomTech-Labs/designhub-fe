@@ -176,7 +176,8 @@ export const projectsReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: null
+        error: null,
+        projectInvites: []
       };
     case GET_INVITES_BY_PROJECTID_SUCCESS:
       return {

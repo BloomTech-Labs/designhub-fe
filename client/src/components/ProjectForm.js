@@ -13,7 +13,7 @@ import {
   deleteProject,
   createProjectInvite,
   getInvitesByProjectId,
-  getSingleUser
+  getUsersFromInvites
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
@@ -42,8 +42,10 @@ const ProjectForm = ({
   createProjectInvite,
   getInvitesByProjectId,
   getSingleUser,
-  singleUser,
-  invite
+  invite,
+  getUsersFromInvites,
+  usersFromInvites,
+  loadingUsers
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -52,7 +54,6 @@ const ProjectForm = ({
   const [privacy, setPrivacy] = useState(
     isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   );
-  const [inviteUsers, setInviteUsers] = useState([]);
 
   const [state, setState] = useState({
     project: {
@@ -265,28 +266,22 @@ const ProjectForm = ({
 
   // Get all project invites on init --projectInvites
   useEffect(() => {
-    if (isEditing && project.id) getInvitesByProjectId(project.id);
+    if (isEditing && project.id) {
+      console.log(projectInvites);
+      getInvitesByProjectId(project.id);
+    } 
   }, [invite]);
 
   // Get users for each invite present
   const getProjectUsers = () => {
     // Reset the list
-    setInviteUsers([]);
-    console.log(projectInvites);
-    // For each invite, get user data
-    projectInvites.forEach(async invite => {
-      //if no user id is associated display a static user
-      await getSingleUser(invite.userId);
-    });
+    const users = projectInvites.map(invite => invite.userId);
+    console.log(users);
+
+    getUsersFromInvites(users);
   };
 
   useEffect(getProjectUsers, [projectInvites]);
-
-  // Each time we load a user, add them to the list
-  useEffect(() => {
-    if (singleUser.email && !inviteUsers.includes(singleUser))
-      setInviteUsers([...inviteUsers, singleUser]);
-  }, [singleUser]);
 
   //when enter is selected after entering an email address
   const handleInvites = e => {
@@ -397,9 +392,11 @@ const ProjectForm = ({
                 </label>
                 <div id="collab-field" className="collab-view">
                   {//map over project invites
-                  inviteUsers.map(user => {
+                  loadingUsers ? < Loading /> :
+                  usersFromInvites.map(user => {
+                    console.log('users from invites', usersFromInvites);
                     console.log('invite user', user);
-                    return <ProjectInvite {...user} />;
+                    return <ProjectInvite key={user.id} {...user} />;
                   })}
                 </div>
                 <div className="invite-modal-bottom-div">
@@ -608,8 +605,9 @@ const ProjectForm = ({
 const mapStateToProps = state => {
   return {
     projectInvites: state.projects.projectInvites,
-    singleUser: state.users.singleUser,
-    invite: state.invites.invite
+    invite: state.invites.invite,
+    usersFromInvites: state.invites.usersFromInvites,
+    loadingUsers: state.invites.loadingUsers
   };
 };
 
@@ -625,7 +623,7 @@ export default withRouter(
       deleteProject,
       createProjectInvite,
       getInvitesByProjectId,
-      getSingleUser
+      getUsersFromInvites
     }
   )(ProjectForm)
 );

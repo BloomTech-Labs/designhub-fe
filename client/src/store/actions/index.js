@@ -154,6 +154,9 @@ export const UPDATE_INVITE_FAILURE = "UPDATE_INVITE_FAILURE";
 export const DELETE_INVITE_START = "DELETE_INVITE_START";
 export const DELETE_INVITE_SUCCESS = "DELETE_INVITE_SUCCESS";
 export const DELETE_INVITE_FAILURE = "DELETE_INVITE_FAILURE";
+export const GET_USERS_FROM_INVITES_START = 'GET_USERS_FROM_INVITES_START';
+export const GET_USERS_FROM_INVITES_SUCCESS = 'GET_USERS_FROM_INVITES_SUCCESS';
+export const GET_USERS_FROM_INVITES_FAILURE = 'GET_USERS_FROM_INVITES_FAILURE';
 
 
 //############# ACTIONS #############
@@ -272,6 +275,33 @@ export const getSingleUser = (id, theirId) => dispatch => {
     });
 };
 
+export const getUsersFromInvites = (ids) => dispatch => {
+  dispatch({type: GET_USERS_FROM_INVITES_START});
+  ids.forEach((id, index) => {
+    axiosWithAuth()
+      .get(`/api/v1/users/${id}`)
+      .then(res => {
+        console.log(res);
+        const lastOne = index === ids.length - 1;
+        if(lastOne) {
+          console.log('last one!');
+        }
+        dispatch({
+          type: GET_USERS_FROM_INVITES_SUCCESS,
+          payload: {
+            user: res.data[0],
+            lastOne
+          }
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.'});
+        return err;
+      })
+  })
+}
+
 export const updateUser = (id, changes) => dispatch => {
   dispatch({ type: UPDATE_USER_START });
   return axiosWithAuth()
@@ -322,7 +352,7 @@ export const getSingleProject = id => dispatch => {
     })
     .catch(err => {
       //assigns the error status code (401 or 404) returned from the server to payload
-      dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response.status });
+      dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response ? err.response.status : "An error occured retrieving that project" });
       console.log("action error", err.response.status);
     });
 };
