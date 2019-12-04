@@ -22,6 +22,7 @@ import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
 import CharacterCount from './CharacterCount';
+import ProjectInvite from './ProjectInvite';
 
 import '../SASS/ProjectForm.scss';
 
@@ -317,9 +318,6 @@ const ProjectForm = ({
       inviteList: []
     })
 
-    // getInvitesByProjectId(project.id);
-    // getProjectUsers();
-
   }
   
 
@@ -378,7 +376,7 @@ const ProjectForm = ({
                     {//map over project invites
                      inviteUsers.map( (user) => {
                        console.log("user", user);
-                       return <p>{user.firstName}</p>
+                       return <ProjectInvite {...user} />
                      })
                       
                     }

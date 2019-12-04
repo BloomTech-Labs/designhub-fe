@@ -1,0 +1,36 @@
+.project-invite {
+  display: flex;
+  justify-content: space-between;
+
+  height: 72px;
+
+  .left {
+    display: flex;
+    .avatar {
+      height: 64px;
+      width: 64px;
+      padding: 8px;
+
+      img {
+        height: 80%;
+        width: 80%;
+        border-radius: 50%;
+      }
+    }
+
+    .info {
+      margin-left: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+
+      .status {
+        margin-top: 4px;
+        color: gray;
+      }
+    }
+  }
+  .actions {
+  }
+}
