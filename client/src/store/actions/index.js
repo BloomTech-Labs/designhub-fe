@@ -299,6 +299,9 @@ export const getAllProjects = () => dispatch => {
 
 export const addProject = project => dispatch => {
   dispatch({ type: ADD_PROJECT_START });
+  console.log(project);
+  // Temporary fix
+  delete project.projectInvites;
   return axiosWithAuth()
     .post('/api/v1/projects', project)
     .then(res => {

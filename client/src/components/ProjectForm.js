@@ -110,11 +110,13 @@ const ProjectForm = ({
       setError('Project title is required');
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
-    } else if (!state.project.mainImg) {
+    }
+    else if (files.length === 0) {
       setIsLoading(false);
       setError('Please upload at least one image');
       return;
-    } else {
+    } 
+    else {
       isEditing
         ? editProject(state.project, project.id)
         : createProject(state.project);
@@ -270,11 +272,11 @@ const ProjectForm = ({
   const getProjectUsers = () => {
     // Reset the list
     setInviteUsers([]);
-
+    console.log(projectInvites);
     // For each invite, get user data
-    projectInvites.forEach(invite => {
+    projectInvites.forEach(async invite => {
       //if no user id is associated display a static user
-      getSingleUser(invite.userId);
+      await getSingleUser(invite.userId);
     });
   };
 
@@ -282,7 +284,8 @@ const ProjectForm = ({
 
   // Each time we load a user, add them to the list
   useEffect(() => {
-    if (singleUser.email) setInviteUsers([...inviteUsers, singleUser]);
+    if (singleUser.email && !inviteUsers.includes(singleUser))
+      setInviteUsers([...inviteUsers, singleUser]);
   }, [singleUser]);
 
   //when enter is selected after entering an email address
@@ -325,7 +328,6 @@ const ProjectForm = ({
   ) : (
     <div className="project-form-wrapper">
       {isLoading && <Loading />}{' '}
-      {console.log('invited users array', inviteUsers)}
       <div className={state.modal ? 'modal--expand' : 'modal--close'}>
         <span
           className="modal--expand__background-overlay"
