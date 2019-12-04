@@ -108,7 +108,7 @@ const NewLandingPage = () =>{
     </Element>
     <Element className="features">
     <div className="features-heading">
-      <h3>DesignHub is built for designers by designers</h3>
+      <h3>DesignHub is built for designers<br></br>by designers</h3>
       </div>
       <div className="feature-box">
         <div className = "icons">
@@ -156,7 +156,7 @@ const NewLandingPage = () =>{
     </Element>
     <div className="testimonials">
       <h3>But don't take our word for it...</h3>
-      <h4>See what actual users are saying about DesignHub</h4>
+      <h4>This is what actual users have to say about DesignHub</h4>
       <TestimonialCarousel />
     </div> 
     <img className='arrow'

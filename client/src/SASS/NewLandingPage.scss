@@ -131,9 +131,10 @@
   flex-wrap: wrap;
   .features-heading {
     font-weight: bolder;
-    font-size: 2.6em;
+    font-size: 4.4em;
     width: 100%;
     text-align: center;
+    line-height: 138%;
   }
   .feature-box {
     margin: 2% 6%;
@@ -148,6 +149,24 @@
       font-size: 1.3em;
       
     }
+  }
+}
+
+.testimonials{
+  margin-bottom: 10%;
+  margin-top: -10%;
+  h3{
+    font-weight: bolder;
+    font-size: 4.4em;
+    width: 100%;
+    text-align: center;
+    line-height: 138%;
+  }
+
+  h4{
+    font-size: 2em;
+    text-align: center;
+    margin: 2% auto;
   }
 }
 

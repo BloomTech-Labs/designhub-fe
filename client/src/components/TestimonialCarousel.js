@@ -24,7 +24,7 @@ function TestimonialCarousel() {
       } else {
         setIndex(prev => prev + 1);
       }
-    }, 5000);
+    }, 9000);
     return () => clearInterval(timer);
   }, [index]);
 
