@@ -14,17 +14,17 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
     <div className="project-invite">
       <div className="left">
         <div className="avatar">
-          <img src={avatar || null} alt={firstName + ' ' + lastName || email} />
+          <img src={avatar ? avatar : null} alt={firstName ? firstName + ' ' + lastName : email} />
         </div>
         <div className="info">
-          <p>{firstName + ' ' + lastName || email}</p>
+          <p>{firstName ? firstName + ' ' + lastName : email}</p>
           <p className='status'>Pending...</p>
         </div>
       </div>
       <div className="actions">
         {/* Any necessary buttons will go here */}
         <div className="close-collab-icon-div" >
-          <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> x </div>
+          <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> X </div>
         </div>
 
       </div>
