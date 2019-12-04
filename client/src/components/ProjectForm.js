@@ -274,8 +274,7 @@ const ProjectForm = ({
   // Get users for each invite present
   const getProjectUsers = () => {
     // Reset the list
-    const users = projectInvites.map(invite => invite.userId);
-    getUsersFromInvites(users);
+    getUsersFromInvites(projectInvites);
   };
 
   useEffect(getProjectUsers, [projectInvites]);
@@ -286,11 +285,20 @@ const ProjectForm = ({
     axiosWithAuth()
       .get(`/api/v1/users/mail/${state.email}`)
       .then(res => {
-        setState({
-          ...state,
-          inviteList: [...state.inviteList, res.data[0]],
-          email: ''
-        });
+        if (!res.data || res.data[0] === undefined) {
+          setState({
+            ...state,
+            inviteList: [...state.inviteList, { email: state.email }],
+            email: ''
+          });
+        }
+        else {
+          setState({
+            ...state,
+            inviteList: [...state.inviteList, res.data[0]],
+            email: ''
+          });
+        }
       })
       .catch(err => {
         console.log('err', err);
@@ -307,6 +315,7 @@ const ProjectForm = ({
   const sendInvites = () => {
     state.inviteList.forEach(async user => {
       const invite = { projectId: project.id, email: user.email };
+      console.log(invite);
       await createProjectInvite(invite);
     });
     setState({
@@ -363,8 +372,8 @@ const ProjectForm = ({
                   </label>
                     <div className="colab-input-wrapper">
                       {state.inviteList.map(user => (
-                        <div className="invite-chip" key={user.id}>
-                          {user.firstName}
+                        <div className="invite-chip" key={user.email}>
+                          {user.firstName || user.email}
                           <div
                             className="remove-chip"
                             onClick={() => removeInviteFromList(user.id)}
@@ -391,8 +400,8 @@ const ProjectForm = ({
                     {//map over project invites
                       loadingUsers || isDeleting ? < Loading /> :
                         usersFromInvites.map(user => {
-                          const projectInvite = projectInvites.find(invite => invite.userId === user.id);
-                          return <ProjectInvite key={user.id} {...user} invite={projectInvite} />;
+                          const projectInvite = projectInvites.find(invite => invite.email === user.email);
+                          return <ProjectInvite key={user.email} {...user} invite={projectInvite} />;
                         })}
 
                   </div>

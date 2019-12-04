@@ -41,9 +41,9 @@ export const invitesReducer = (state = initialState, action) => {
       };
     case GET_USERS_FROM_INVITES_SUCCESS:
       const loadingUsers = action.payload.lastOne ? false : state.loadingUsers;
-
+      console.log(action.payload);
       const nondupe = state.usersFromInvites.every(user => {
-        return user.id !== action.payload.user.id;
+        return user.email !== action.payload.user.email;
       })
 
       if (!nondupe || !action.payload.user) {
@@ -147,7 +147,7 @@ export const invitesReducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
-        usersFromInvites: state.usersFromInvites.filter(user => user.id !== action.payload)
+        usersFromInvites: state.usersFromInvites.filter(user => user.email !== action.payload)
       };
     case DELETE_INVITE_FAILURE:
       return {

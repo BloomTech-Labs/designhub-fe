@@ -162,13 +162,17 @@ export const GET_USERS_FROM_INVITES_FAILURE = 'GET_USERS_FROM_INVITES_FAILURE';
 //############# ACTIONS #############
 //project invites
 export const createProjectInvite = invite => dispatch => {
+  console.log('FIRING FUNC');
   dispatch({ type: CREATE_PROJECT_INVITE_START })
   return axiosWithAuth()
     .post('api/v1/projectInvites/create', invite)
     .then(res => {
+      console.log('SUCCESS');
       dispatch({ type: CREATE_PROJECT_INVITE_SUCCESS, payload: res.data })
     })
     .catch(err => {
+      console.log('ERROR');
+      console.log('response', err.response, 'message', err.message);
       dispatch({ type: CREATE_PROJECT_INVITE_FAILURE, payload: err.message })
     })
 }
@@ -190,7 +194,6 @@ export const getInvitesByProjectId = (id) => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/projectInvites/${id}`)
     .then(res => {
-      console.log("res in action", res);
       dispatch({ type: GET_INVITES_BY_PROJECTID_SUCCESS, payload: res.data })
     })
     .catch(err => {
@@ -224,10 +227,11 @@ export const updateInvite = (id, changes) => dispatch => {
 
 export const deleteInvite = (invite) => dispatch => {
   dispatch({ type: DELETE_INVITE_START })
+  console.log(invite);
   return axiosWithAuth()
     .delete(`/api/v1/projectInvites/${invite.id}`)
     .then(res => {
-      dispatch({ type: DELETE_INVITE_SUCCESS, payload: invite.userId })
+      dispatch({ type: DELETE_INVITE_SUCCESS, payload: invite.email })
     })
     .catch(err => {
       dispatch({ type: DELETE_INVITE_FAILURE, payload: err.message })
@@ -275,33 +279,35 @@ export const getSingleUser = (id, theirId) => dispatch => {
     });
 };
 
-export const getUsersFromInvites = (ids) => dispatch => {
+export const getUsersFromInvites = (invites) => dispatch => {
   dispatch({ type: GET_USERS_FROM_INVITES_START });
-  if (ids.length === 0) {
+  if (invites.length === 0) {
     dispatch({ type: GET_USERS_FROM_INVITES_SUCCESS, payload: { lastOne: true } });
   }
-  ids.forEach((id, index) => {
-    axiosWithAuth()
-      .get(`/api/v1/users/${id}`)
-      .then(res => {
-        console.log(res);
-        const lastOne = index === ids.length - 1;
-        if (lastOne) {
-          console.log('last one!');
-        }
-        dispatch({
-          type: GET_USERS_FROM_INVITES_SUCCESS,
-          payload: {
-            user: res.data[0],
-            lastOne
-          }
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch({ type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.' });
-        return err;
-      })
+  invites.forEach((invite, index) => {
+    const lastOne = index === invites.length - 1;
+    if (!invite.userId) {
+      dispatch({ type: GET_USERS_FROM_INVITES_SUCCESS, payload: { user: { email: invite.email }, lastOne } });
+    }
+    else {
+      axiosWithAuth()
+        .get(`/api/v1/users/mail/${invite.email}`)
+        .then(res => {
+          dispatch({
+            type: GET_USERS_FROM_INVITES_SUCCESS,
+            payload: {
+              user: res.data[0],
+              lastOne
+            }
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch({ type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.' });
+          return err;
+        })
+    }
+
   })
 }
 

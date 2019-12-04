@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { deleteInvite } from '../store/actions'
 
 
-const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite }) => {
+const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, email }) => {
   const handleInviteDelete = (invite) => {
     deleteInvite(invite);
   }
@@ -14,10 +14,10 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite }) =>
     <div className="project-invite">
       <div className="left">
         <div className="avatar">
-          <img src={avatar} alt={firstName + ' ' + lastName} />
+          <img src={avatar || null} alt={firstName + ' ' + lastName || email} />
         </div>
         <div className="info">
-          <p>{firstName + ' ' + lastName}</p>
+          <p>{firstName + ' ' + lastName || email}</p>
           <p className='status'>Pending...</p>
         </div>
       </div>
