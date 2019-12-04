@@ -70,7 +70,7 @@ const ProjectForm = ({
     deletingImage: null,
     inviteModal: false,
     projectPhotos: null,
-    inviteList: [],
+    inviteList: [], //users invited to a project
     email: '',
   });
 
@@ -260,7 +260,7 @@ const ProjectForm = ({
     overflow: 'hidden'
   };
 
-  // Get all project invites on init
+  // Get all project invites on init --projectInvites
   useEffect(() => {
     getInvitesByProjectId(project.id);
   }, [invite])
@@ -289,6 +289,7 @@ const ProjectForm = ({
       setInviteUsers([...inviteUsers, singleUser]);
   }, [singleUser])
 
+  //when enter is selected after entering an email address
   const handleInvites = e => {
     e.preventDefault();
     axiosWithAuth()
@@ -306,7 +307,7 @@ const ProjectForm = ({
       ...state,
       inviteList: state.inviteList.filter(user => user.id !== id)
     })
-  }
+  } 
 
   const sendInvites = () => {
     state.inviteList.forEach(async user => {
@@ -317,14 +318,12 @@ const ProjectForm = ({
       ...state,
       inviteList: []
     })
-
-  }
-  
+  }  
 
   return (
     isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
       <div className="project-form-wrapper">
-        {isLoading && <Loading />} {console.log(inviteUsers)}
+        {isLoading && <Loading />} {console.log("invited users array", inviteUsers)}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
             className="modal--expand__background-overlay"
@@ -375,7 +374,7 @@ const ProjectForm = ({
                   <div id='collab-field' className='collab-view'>
                     {//map over project invites
                      inviteUsers.map( (user) => {
-                       console.log("user", user);
+                       console.log("invite user", user);
                        return <ProjectInvite {...user} />
                      })
                       

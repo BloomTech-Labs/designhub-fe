@@ -1,15 +1,32 @@
-.project-invite {
-  display: flex;
-  justify-content: space-between;
+@import './mixins';
+@import './palette';
 
-  height: 72px;
+div.project-invite {      
+  @include onboard-form;
+  @include themify($themes) {
+    background-color: themed('bg');
+  }  
+
+  &:hover,
+  &:focus {
+    outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    border: 2px solid $alert;
+  }
+
+  position: relative;
+  display: flex;  
+  justify-content: center; 
+
+  height: 65px;  
 
   .left {
     display: flex;
     .avatar {
-      height: 64px;
-      width: 64px;
-      padding: 8px;
+      height: 60px;
+      width: 60px;
+      padding-top: 5px;
 
       img {
         height: 80%;
@@ -31,6 +48,27 @@
       }
     }
   }
-  .actions {
+  .actions {       
+
+    .close-collab-icon-div{      
+      display:flex;
+      align-items:flex-start;
+      justify-content: flex-end;          
+      position:absolute;
+      top:5px;
+      right:5px;
+      height:15px;
+      width: 15px;
+      
+      .close-collab-icon {                  
+        width: 100%;               
+        display:flex;
+        align-items:flex-start;
+        justify-content: flex-end;        
+        margin: 2% 2%;
+        cursor: pointer;        
+        
+      }
+    }   
   }
 }

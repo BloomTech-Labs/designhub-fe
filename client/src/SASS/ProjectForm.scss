@@ -88,11 +88,10 @@
       }
       margin: 0;
       width: 100%;
+      overflow: auto;
 
-    position: relative;
-    //border: 1px solid white;
-    display: flex;
-    //max-width: 489px;
+    position: relative;    
+    display: flex;    
     width: 500px;
     flex-direction: column;
     border-radius: 10px;
@@ -148,25 +147,44 @@
 
       div.colab-input-wrapper {
         display: flex;
+        flex-grow: 3;
+        flex-wrap: wrap;
         justify-content: flex-start;
-        align-items: flex-start;
+        align-items: space-around;
         padding: 0px;
         max-width:100%;
         height:36px;
+        height: auto;
         font-size: 12px;
         margin-bottom: 20px;
         border: 1px solid $field-stroke;
+        //overflow: auto;
         @include themify($themes) {
           background-color: themed('bg2');
-        }     
+        }  
+        
+        div.invite-chip{
+          display: flex;          
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          align-items: center;
+          background-color: $white;
+          border-radius: 5px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-right: 10px;
+          height: 90%;
+          color: $black;
+          width: auto;          
 
-        .input-chip{
-            background:white;
-            
+          .remove-chip{
+            margin-left: 10px;            
+          }
         }
-
+        
         input {
-          width:100%;
+          flex-grow: 3;
+          //width:100%;
           height: 35px;
           font-size: 12px;
           margin-top: 0px;
@@ -176,7 +194,6 @@
             background-color: themed('bg2');
           }
         }
-
     }
 
     }//end form
@@ -192,7 +209,7 @@
     .collab-view {
       font-size: 12px;
       margin-bottom: 20px;
-      height: 100px;
+      height: 240px;
       border: 1px solid $field-stroke;
       overflow: auto;
       @include themify($themes) {
@@ -211,14 +228,14 @@
         width: 8%;            
         
         div.share-icon {                  
-          width: 75%;
+          width: 80%;
           border-radius: 100%;
           border: 1px solid $field-stroke;
           //background-color: $light-black;        
           display:flex;
           align-items:center;
           justify-content: center;
-          height:28px;
+          height:32px;
           margin: 2% 0%;
           cursor: pointer; 
           @include themify($themes) {
@@ -240,18 +257,17 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;        
-        width: 55%;
-       
+        width: 55%;       
 
         .label {
           margin-bottom: 0;
-          font-size: 10px;
+          font-size: 12px;
           line-height: 10px;
         }
 
         input {
           font-size: 12px;
-          padding: 3px;
+          padding: 7px;
           //margin-bottom: 20px;
           border: 1px solid $field-stroke;
           @include themify($themes) {
@@ -273,7 +289,7 @@
           font-size: 10px;
           padding: 0 0;
           width: 80%;
-          height: 35%;
+          height: 40%;
           //margin-top: 16px;
         }
       }

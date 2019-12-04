@@ -13,7 +13,13 @@ const ProjectInvite = ({ avatar, firstName, lastName }) => {
           <p className='status'>Pending...</p>
         </div>
       </div>
-      <div className="actions">{/* Any necessary buttons will go here */}</div>
+      <div className="actions">
+        {/* Any necessary buttons will go here */}
+        <div className="close-collab-icon-div" > 
+          <div className="close-collab-icon"> x </div> 
+        </div>
+        
+      </div>
     </div>
   );
 };

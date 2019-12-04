@@ -141,7 +141,7 @@
 
   div.close-icon {
     @include onboard-form__div;
-  }
+  }  
 
   div.share-icon {
     @include onboard-form__div;
@@ -151,11 +151,19 @@
     @include onboard-form__div;
   }
 
+  div.invite-chip {
+    @include onboard-form__div;
+  }
+
+  div.project-invite {
+    @include onboard-form__div;    
+  }
+
   div.required {
     display: flex;
     flex-direction: column;
   }
-
+ 
   div.required.alert {
     &:after {
       margin: 0.4rem;
