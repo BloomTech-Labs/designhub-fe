@@ -16,7 +16,6 @@ import {
   getSingleUser
 } from '../store/actions';
 
-
 import { MultiImageUpload } from './MultiImageUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
@@ -45,12 +44,14 @@ const ProjectForm = ({
   getSingleUser,
   singleUser,
   invite
-  }) => {
+}) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [error, setError] = useState('');
-  const [privacy, setPrivacy] = useState(isEditing ? project.privateProjects ? "private" : "public" : 'public');
+  const [privacy, setPrivacy] = useState(
+    isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
+  );
   const [inviteUsers, setInviteUsers] = useState([]);
 
   const [state, setState] = useState({
@@ -71,7 +72,7 @@ const ProjectForm = ({
     inviteModal: false,
     projectPhotos: null,
     inviteList: [], //users invited to a project
-    email: '',
+    email: ''
   });
 
   const { name, description, figma, invision } = state.project;
@@ -97,8 +98,8 @@ const ProjectForm = ({
         ...state.project,
         privateProjects: isPrivate
       }
-    })
-  }
+    });
+  };
 
   const handleSubmit = async e => {
     setIsLoading(true);
@@ -245,14 +246,14 @@ const ProjectForm = ({
   const closeInviteModal = () => {
     setState({
       ...state,
-      inviteModal: false,
-    })
-  }
+      inviteModal: false
+    });
+  };
 
   const handleInviteChanges = e => {
     setError('');
-    setState({ ...state, [e.target.name]: e.target.value })
-  }
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
 
   const thumbInner = {
     display: 'flex',
@@ -262,32 +263,27 @@ const ProjectForm = ({
 
   // Get all project invites on init --projectInvites
   useEffect(() => {
-    getInvitesByProjectId(project.id);
-  }, [invite])
+    if (isEditing && project.id) getInvitesByProjectId(project.id);
+  }, [invite]);
 
   // Get users for each invite present
   const getProjectUsers = () => {
-
     // Reset the list
     setInviteUsers([]);
 
     // For each invite, get user data
     projectInvites.forEach(invite => {
-
       //if no user id is associated display a static user
       getSingleUser(invite.userId);
+    });
+  };
 
-    })      
-
-  }
-
-  useEffect (getProjectUsers, [projectInvites]);
+  useEffect(getProjectUsers, [projectInvites]);
 
   // Each time we load a user, add them to the list
   useEffect(() => {
-    if(singleUser.email)
-      setInviteUsers([...inviteUsers, singleUser]);
-  }, [singleUser])
+    if (singleUser.email) setInviteUsers([...inviteUsers, singleUser]);
+  }, [singleUser]);
 
   //when enter is selected after entering an email address
   const handleInvites = e => {
@@ -295,229 +291,269 @@ const ProjectForm = ({
     axiosWithAuth()
       .get(`/api/v1/users/mail/${state.email}`)
       .then(res => {
-        setState({ ...state, inviteList: [...state.inviteList, res.data[0]], email: '' });
+        setState({
+          ...state,
+          inviteList: [...state.inviteList, res.data[0]],
+          email: ''
+        });
       })
       .catch(err => {
-        console.log('err', err)
+        console.log('err', err);
       });
-  }
+  };
 
-  const removeInviteFromList = (id) => {
+  const removeInviteFromList = id => {
     setState({
       ...state,
       inviteList: state.inviteList.filter(user => user.id !== id)
-    })
-  } 
+    });
+  };
 
   const sendInvites = () => {
     state.inviteList.forEach(async user => {
       const invite = { projectId: project.id, email: user.email };
       await createProjectInvite(invite);
-    })
+    });
     setState({
       ...state,
       inviteList: []
-    })
-  }  
+    });
+  };
 
-  return (
-    isEditing && user.id !== project.userId ? <Redirect to={`/project/${project.id}`} /> :
-      <div className="project-form-wrapper">
-        {isLoading && <Loading />} {console.log("invited users array", inviteUsers)}
-        <div className={state.modal ? 'modal--expand' : 'modal--close'}>
-          <span
-            className="modal--expand__background-overlay"
-            onClick={closeModal}
-          >
-            {state.modal && (
-              <div className="delete-project-modal">
-                <p>Are you sure you want to delete that?</p>
-                <div className="delete-modal-button-container">
-                  <button onClick={closeModal}>Cancel</button>
-                  <button
-                    className="delete-button"
-                    onClick={() => {
-                      if (state.deletingImage) {
-                        handleDeletePhoto(state.deletingImage);
-                      } else {
-                        handleDeleteProject(project.id);
-                      }
-                    }}
-                  >
-                    Delete
+  return isEditing && user.id !== project.userId ? (
+    <Redirect to={`/project/${project.id}`} />
+  ) : (
+    <div className="project-form-wrapper">
+      {isLoading && <Loading />}{' '}
+      {console.log('invited users array', inviteUsers)}
+      <div className={state.modal ? 'modal--expand' : 'modal--close'}>
+        <span
+          className="modal--expand__background-overlay"
+          onClick={closeModal}
+        >
+          {state.modal && (
+            <div className="delete-project-modal">
+              <p>Are you sure you want to delete that?</p>
+              <div className="delete-modal-button-container">
+                <button onClick={closeModal}>Cancel</button>
+                <button
+                  className="delete-button"
+                  onClick={() => {
+                    if (state.deletingImage) {
+                      handleDeletePhoto(state.deletingImage);
+                    } else {
+                      handleDeleteProject(project.id);
+                    }
+                  }}
+                >
+                  Delete
                 </button>
+              </div>
+            </div>
+          )}
+        </span>
+      </div>
+      <div className="project-form-wrapper">
+        {isLoading && <Loading />}
+        <div className={state.inviteModal ? 'modal--expand' : 'modal--close'}>
+          <span className="modal--expand__background-overlay">
+            {state.inviteModal && (
+              <div className="invite-modal">
+                <div className="close-icon-div" onClick={closeInviteModal}>
+                  {' '}
+                  <div className="close-icon"> x </div>{' '}
+                </div>
+                <form onSubmit={handleInvites}>
+                  <label htmlFor="invite-input" className="label">
+                    Invite People
+                  </label>
+                  <div className="colab-input-wrapper">
+                    {state.inviteList.map(user => (
+                      <div className="invite-chip" key={user.id}>
+                        {user.firstName}
+                        <div
+                          className="remove-chip"
+                          onClick={() => removeInviteFromList(user.id)}
+                        >
+                          X
+                        </div>
+                      </div>
+                    ))}
+                    <input
+                      type="email"
+                      className="invite-field"
+                      id="invite-input"
+                      onChange={handleInviteChanges}
+                      name="email"
+                      value={state.email}
+                    />
+                  </div>
+                </form>
+
+                <label htmlFor="collab-field" className="label">
+                  Project Collaborators
+                </label>
+                <div id="collab-field" className="collab-view">
+                  {//map over project invites
+                  inviteUsers.map(user => {
+                    console.log('invite user', user);
+                    return <ProjectInvite {...user} />;
+                  })}
+                </div>
+                <div className="invite-modal-bottom-div">
+                  {' '}
+                  {/*button and share link div */}
+                  <div className="share-icon-div">
+                    {' '}
+                    <div className="share-icon"> 🤝 </div>{' '}
+                  </div>
+                  <div className="share-link-div">
+                    <label htmlFor="share-input" className="label">
+                      share link
+                    </label>
+                    <input type="text" id="share-input" />
+                  </div>
+                  <div className="add-members-btn-div">
+                    {' '}
+                    <button className="submit-button" onClick={sendInvites}>
+                      {' '}
+                      Add Members{' '}
+                    </button>{' '}
+                  </div>
                 </div>
               </div>
             )}
           </span>
         </div>
-        <div className="project-form-wrapper">
-          {isLoading && <Loading />}
-          <div className={state.inviteModal ? 'modal--expand' : 'modal--close'}>
-            <span
-              className="modal--expand__background-overlay">
-              {state.inviteModal && (
-                <div className="invite-modal">
-                  <div className="close-icon-div" onClick={closeInviteModal}> <div className="close-icon"> x </div> </div>
-                  <form onSubmit={handleInvites}>
-                    <label htmlFor='invite-input' className='label'>Invite People</label>
-                    <div className="colab-input-wrapper">
-                      {state.inviteList.map((user) =>
-                        <div className='invite-chip' key={user.id}>
-                          {user.firstName}
-                          <div className='remove-chip' onClick={() => removeInviteFromList(user.id)}>X</div>
-                        </div>)}
-                      <input type="email" className="invite-field" id="invite-input" onChange={handleInviteChanges} name="email" value={state.email} />
-                    </div>
-                  </form>
-                  <label htmlFor="collab-field" className='label'>Project Collaborators</label>
-                  <div id='collab-field' className='collab-view'>
-                    {//map over project invites
-                     inviteUsers.map( (user) => {
-                       console.log("invite user", user);
-                       return <ProjectInvite {...user} />
-                     })
-                      
-                    }
-
-                  </div>
-                  <div className="invite-modal-bottom-div"> {/*button and share link div */}
-
-                    <div className="share-icon-div"> <div className="share-icon"> 🤝 </div> </div>
-
-                    <div className="share-link-div">
-                      <label htmlFor="share-input" className='label'>share link</label>
-                      <input type="text" id="share-input" />
-                    </div>
-
-                    <div className="add-members-btn-div"> <button className="submit-button" onClick={sendInvites}> Add Members </button> </div>
-
-                  </div>
-
-                </div>
-              )}
-            </span>
-          </div>
-        </div>
-        <section className="ProjectForm__body">
-          <div className="left-container">
-            <header className="ProjectForm__header">
-              <h2 className="page-header">
-                {isEditing ? 'Edit project' : 'Create a project'}
-              </h2>
-            </header>
-            <MultiImageUpload filesArray={{ files, setFiles }} />
-            {isEditing && (
-              <div>
-                <div className="thumbnail-container ">
-                  {projectPhotos.map((photo, index) => (
-                    <div key={index}>
-                      <img
-                        alt=""
-                        src={remove}
-                        className="remove"
-                        onClick={e => {
-                          setState({
-                            ...state,
-                            deletingImage: photo.id,
-                            modal: true
-                          });
-                        }}
-                      />
-                      <div className="thumb" key={index}>
-                        <div style={thumbInner}>
-                          <img
-                            alt="project thumbnail"
-                            src={photo.url}
-                            className="thumbnail"
-                          />
-                        </div>
+      </div>
+      <section className="ProjectForm__body">
+        <div className="left-container">
+          <header className="ProjectForm__header">
+            <h2 className="page-header">
+              {isEditing ? 'Edit project' : 'Create a project'}
+            </h2>
+          </header>
+          <MultiImageUpload filesArray={{ files, setFiles }} />
+          {isEditing && (
+            <div>
+              <div className="thumbnail-container ">
+                {projectPhotos.map((photo, index) => (
+                  <div key={index}>
+                    <img
+                      alt=""
+                      src={remove}
+                      className="remove"
+                      onClick={e => {
+                        setState({
+                          ...state,
+                          deletingImage: photo.id,
+                          modal: true
+                        });
+                      }}
+                    />
+                    <div className="thumb" key={index}>
+                      <div style={thumbInner}>
+                        <img
+                          alt="project thumbnail"
+                          src={photo.url}
+                          className="thumbnail"
+                        />
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
-            )}
-          </div>
-          <div className="right-container">
-            <form
-              encType="multipart/form-data"
-              className="project-form-container"
-            >
-              <div className='required'>
-                <label htmlFor="name" className="label project-label">
-                  Project title *
+            </div>
+          )}
+        </div>
+        <div className="right-container">
+          <form
+            encType="multipart/form-data"
+            className="project-form-container"
+          >
+            <div className="required">
+              <label htmlFor="name" className="label project-label">
+                Project title *
               </label>
-                <input
-                  required
-                  autoFocus={true}
-                  type="text"
-                  value={name}
-                  name="name"
-                  id="name"
-                  placeholder="Enter project title here"
-                  onChange={handleChanges}
-                  ref={setTitleRef}
-                />
-              </div>
-              <label htmlFor="description" className="label">
-                Project description
-            </label>
-              <textarea
-                id="description"
-                name="description"
-                value={description}
-                type="text"
-                placeholder="Enter description here"
-                onChange={handleChanges}
-                className="description"
-                maxLength="240"
-              />
-              <CharacterCount string={description} limit={240} />
-              <label htmlFor="figmaLink" className="label">
-                Figma
-            </label>
               <input
+                required
+                autoFocus={true}
                 type="text"
-                name="figma"
-                value={figma}
-                placeholder="Enter link here (optional)"
-                id="figmaLink"
+                value={name}
+                name="name"
+                id="name"
+                placeholder="Enter project title here"
                 onChange={handleChanges}
+                ref={setTitleRef}
               />
-              <label htmlFor="invisionLink" className="label">
-                Prototype
+            </div>
+            <label htmlFor="description" className="label">
+              Project description
             </label>
-              <input
-                type="text"
-                name="invision"
-                value={invision}
-                placeholder="Enter link here (optional)"
-                id="invisionLink"
-                onChange={handleChanges}
-              />
-              <label htmlFor="privacyLink" className="label">
-                Privacy
-            </label> {/*PROTOTYPE LABEL AND TEXT FIELD*/}
-              <select
-                type="select"
-                name="privacy"
-                value={privacy}
-                placeholder="Select privacy settings"
-                id="privacyLink"
-                onChange={handlePrivacySetting}
-              >
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-              </select>
-              <label htmlFor="inviteLink" className='label'>
-                Collaborators
+            <textarea
+              id="description"
+              name="description"
+              value={description}
+              type="text"
+              placeholder="Enter description here"
+              onChange={handleChanges}
+              className="description"
+              maxLength="240"
+            />
+            <CharacterCount string={description} limit={240} />
+            <label htmlFor="figmaLink" className="label">
+              Figma
             </label>
-              <div id="inviteLink" className="invite" onClick={() => setState({ ...state, inviteModal: true })}>
-                <div>+</div>
-              </div>
-              <p className="required-help">* Required</p>
-              {/* <label htmlFor="teamMembers" className="label">
+            <input
+              type="text"
+              name="figma"
+              value={figma}
+              placeholder="Enter link here (optional)"
+              id="figmaLink"
+              onChange={handleChanges}
+            />
+            <label htmlFor="invisionLink" className="label">
+              Prototype
+            </label>
+            <input
+              type="text"
+              name="invision"
+              value={invision}
+              placeholder="Enter link here (optional)"
+              id="invisionLink"
+              onChange={handleChanges}
+            />
+            <label htmlFor="privacyLink" className="label">
+              Privacy
+            </label>{' '}
+            {/*PROTOTYPE LABEL AND TEXT FIELD*/}
+            <select
+              type="select"
+              name="privacy"
+              value={privacy}
+              placeholder="Select privacy settings"
+              id="privacyLink"
+              onChange={handlePrivacySetting}
+            >
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+            {isEditing && (
+              <>
+                <label htmlFor="inviteLink" className="label">
+                  Collaborators
+                </label>
+                <div
+                  id="inviteLink"
+                  className="invite"
+                  onClick={() => setState({ ...state, inviteModal: true })}
+                >
+                  <div>+</div>
+                </div>
+              </>
+            )}
+            <p className="required-help">* Required</p>
+            {/* <label htmlFor="teamMembers" className="label">
               Add team members
             </label>
             <input
@@ -525,47 +561,45 @@ const ProjectForm = ({
               placeholder="Enter team member usernames separated by a comma (optional)"
               id="teamMembers"
             /> */}
-              <div className="submit-cancel-container">
-                <button
-                  type="button"
-                  className="cancel-btn"
-                  onClick={() => {
-                    history.goBack();
-                  }}
-                  disabled={isLoading}
-                >
-                  Cancel
+            <div className="submit-cancel-container">
+              <button
+                type="button"
+                className="cancel-btn"
+                onClick={() => {
+                  history.goBack();
+                }}
+                disabled={isLoading}
+              >
+                Cancel
               </button>
-                <button
-                  className="submit-button"
-                  type="submit"
-                  onClick={handleSubmit}
-                  disabled={isLoading}
-                >
-                  {isEditing ? 'Save Changes' : 'Publish'}
-                </button>
+              <button
+                className="submit-button"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isLoading}
+              >
+                {isEditing ? 'Save Changes' : 'Publish'}
+              </button>
+            </div>
+            <div className="error">{error}</div>
+            {isEditing && (
+              <div
+                className="delete-project-button"
+                onClick={() =>
+                  setState({
+                    ...state,
+                    modal: true
+                  })
+                }
+              >
+                <DeleteIcon />
+                <p>Delete project</p>
               </div>
-              <div className='error'>
-                {error}
-              </div>
-              {isEditing && (
-                <div
-                  className="delete-project-button"
-                  onClick={() =>
-                    setState({
-                      ...state,
-                      modal: true
-                    })
-                  }
-                >
-                  <DeleteIcon />
-                  <p>Delete project</p>
-                </div>
-              )}
-            </form>
-          </div>
-        </section>
-      </div>
+            )}
+          </form>
+        </div>
+      </section>
+    </div>
   );
 };
 
@@ -574,8 +608,8 @@ const mapStateToProps = state => {
     projectInvites: state.projects.projectInvites,
     singleUser: state.users.singleUser,
     invite: state.invites.invite
-  }
-}
+  };
+};
 
 export default withRouter(
   connect(
@@ -593,5 +627,3 @@ export default withRouter(
     }
   )(ProjectForm)
 );
-
-
