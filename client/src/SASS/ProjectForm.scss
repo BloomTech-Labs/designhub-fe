@@ -34,6 +34,8 @@
         margin-top: 5%;
         margin-bottom: 5%;
         width: 100%;
+
+        
       }
     }
   }
@@ -487,6 +489,8 @@
     overflow-y: scroll;
     margin-top: 2rem;
 
+
+
     form {
       @include onboard-form;
       @include themify($themes) {
@@ -560,6 +564,22 @@
       }
     }
 
+    .collab-pics {
+
+    display: flex;
+
+    .avatar {      
+      height: 60px;
+      width: 60px;
+      padding-top: 5px;
+
+      img {
+        height: 80%;
+        width: 80%;
+        border-radius: 50%;
+      }
+    }
+  }
     .required-help {
       color: $dark-grey;
     }

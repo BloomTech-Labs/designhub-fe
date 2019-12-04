@@ -552,12 +552,20 @@ const ProjectForm = ({
                   <label htmlFor="inviteLink" className="label">
                     Collaborators
                 </label>
+
+                <div className = "collab-pics">
+                {usersFromInvites.map(user => {
+                  return <div className="avatar">
+                  <img src={user.avatar ? user.avatar : null} alt={user.firstName ? user.firstName + ' ' + user.lastName : user.email} />
+                </div>
+                })}
                   <div
                     id="inviteLink"
                     className="invite"
                     onClick={() => setState({ ...state, inviteModal: true })}
                   >
                     <div>+</div>
+                  </div>
                   </div>
                 </>
               )}
