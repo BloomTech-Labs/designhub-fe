@@ -26,7 +26,8 @@ const initialState = {
   error: null,
   usersFromInvites: [],
   loadingUsers: false,
-  loadUsersError: ''
+  loadUsersError: '',
+  isDeleting: false,
 };
 
 export const invitesReducer = (state = initialState, action) => {
@@ -45,7 +46,7 @@ export const invitesReducer = (state = initialState, action) => {
         return user.id !== action.payload.user.id;
       })
 
-      if (!nondupe) {
+      if (!nondupe || !action.payload.user) {
         return {
           ...state,
           loadingUsers
@@ -140,17 +141,18 @@ export const invitesReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        isLoading: true
+        isDeleting: true
       };
     case DELETE_INVITE_SUCCESS:
       return {
         ...state,
-        isLoading: false
+        isDeleting: false,
+        usersFromInvites: state.usersFromInvites.filter(user => user.id !== action.payload)
       };
     case DELETE_INVITE_FAILURE:
       return {
         ...state,
-        isLoading: false,
+        isDeleting: false,
         error: action.payload
       };
     default:

@@ -1,7 +1,15 @@
 import React from 'react';
 import '../SASS/ProjectInvite.scss';
+import { connect } from 'react-redux'
 
-const ProjectInvite = ({ avatar, firstName, lastName }) => {
+import { deleteInvite } from '../store/actions'
+
+
+const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite }) => {
+  const handleInviteDelete = (invite) => {
+    deleteInvite(invite);
+  }
+
   return (
     <div className="project-invite">
       <div className="left">
@@ -15,13 +23,13 @@ const ProjectInvite = ({ avatar, firstName, lastName }) => {
       </div>
       <div className="actions">
         {/* Any necessary buttons will go here */}
-        <div className="close-collab-icon-div" > 
-          <div className="close-collab-icon"> x </div> 
+        <div className="close-collab-icon-div" >
+          <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> x </div>
         </div>
-        
+
       </div>
     </div>
   );
 };
 
-export default ProjectInvite;
+export default connect(null, { deleteInvite })(ProjectInvite);

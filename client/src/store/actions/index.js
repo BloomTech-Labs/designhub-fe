@@ -222,12 +222,12 @@ export const updateInvite = (id, changes) => dispatch => {
     })
 }
 
-export const deleteInvite = (id) => dispatch => {
+export const deleteInvite = (invite) => dispatch => {
   dispatch({ type: DELETE_INVITE_START })
   return axiosWithAuth()
-    .delete(`/api/v1/projectInvites/${id}`)
+    .delete(`/api/v1/projectInvites/${invite.id}`)
     .then(res => {
-      dispatch({ type: DELETE_INVITE_SUCCESS, payload: res.data })
+      dispatch({ type: DELETE_INVITE_SUCCESS, payload: invite.userId })
     })
     .catch(err => {
       dispatch({ type: DELETE_INVITE_FAILURE, payload: err.message })
@@ -251,7 +251,7 @@ export const getAllUsers = () => dispatch => {
 export const getUserByEmail = (email) => dispatch => {
   dispatch({ type: GET_USER_BY_EMAIL_START });
   return axiosWithAuth()
-    .get(`/api/v1/users/mail/${email}`)    
+    .get(`/api/v1/users/mail/${email}`)
     .then(res => {
       console.log("response", res.data);
       console.log("email", email);
@@ -276,14 +276,17 @@ export const getSingleUser = (id, theirId) => dispatch => {
 };
 
 export const getUsersFromInvites = (ids) => dispatch => {
-  dispatch({type: GET_USERS_FROM_INVITES_START});
+  dispatch({ type: GET_USERS_FROM_INVITES_START });
+  if (ids.length === 0) {
+    dispatch({ type: GET_USERS_FROM_INVITES_SUCCESS, payload: { lastOne: true } });
+  }
   ids.forEach((id, index) => {
     axiosWithAuth()
       .get(`/api/v1/users/${id}`)
       .then(res => {
         console.log(res);
         const lastOne = index === ids.length - 1;
-        if(lastOne) {
+        if (lastOne) {
           console.log('last one!');
         }
         dispatch({
@@ -296,7 +299,7 @@ export const getUsersFromInvites = (ids) => dispatch => {
       })
       .catch(err => {
         console.log(err);
-        dispatch({type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.'});
+        dispatch({ type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.' });
         return err;
       })
   })
