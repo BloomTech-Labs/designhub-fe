@@ -88,11 +88,16 @@
       letter-spacing: 0.11em;
       color: #212229;
     }
-    
   }
+   h5 {
+    font-size: 3em;
+   }
+   p {
+    font-size: 1.3em;
+   }
   .step {
     width: 20%;
-    background-color: $blue;
+    
   }
 }
 
@@ -125,12 +130,24 @@
   display: flex;
   flex-wrap: wrap;
   .features-heading {
+    font-weight: bolder;
+    font-size: 2.6em;
     width: 100%;
     text-align: center;
   }
   .feature-box {
     margin: 2% 6%;
-    width: 15%;
+    width: 20%;
+    h5 {
+      font-size: 1.6em;
+      margin: 5% 0 5% 0;
+      font-weight: bolder;
+      color: #5557FE;
+    }
+    p{
+      font-size: 1.3em;
+      
+    }
   }
 }
 
@@ -184,6 +201,11 @@
   }
 }
 
+.icons {
+  padding: 5%;
+  display: inline-block; 
+    background-color: #E7E7E7;
+}
 
 
   @include small-desktop {    
