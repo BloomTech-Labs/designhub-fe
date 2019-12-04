@@ -54,7 +54,7 @@ const ProjectForm = ({
   const [privacy, setPrivacy] = useState(
     isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   );
-
+  const [shareLink, setShareLink] = useState(String(window.location).slice(0, String(window.location).length-4))
   const [state, setState] = useState({
     project: {
       userId: user.id,
@@ -410,13 +410,17 @@ const ProjectForm = ({
                     {/*button and share link div */}
                     <div className="share-icon-div">
 
-                      <div className="share-icon"> 🤝 </div>
+                    <div className="share-icon" onClick={()=>{
+                    const link = document.getElementById("share-input")
+                    link.select();
+                    link.setSelectionRange(0, 99999);
+                    document.execCommand('copy')}}> 🤝 </div>
                     </div>
                     <div className="share-link-div">
                       <label htmlFor="share-input" className="label">
                         share link
                     </label>
-                      <input type="text" id="share-input" />
+                      <input type="text" id="share-input" value={shareLink} />
                     </div>
                     <div className="add-members-btn-div">
 
