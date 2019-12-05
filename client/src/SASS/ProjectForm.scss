@@ -34,8 +34,6 @@
         margin-top: 5%;
         margin-bottom: 5%;
         width: 100%;
-
-        
       }
     }
   }
@@ -66,7 +64,7 @@
           background: $white;
           color: $alert;
         }
-      }      
+      }
 
       button {
         @include secondary-btn;
@@ -85,15 +83,15 @@
   /****************************INVITE MODAL************************/
   .invite-modal {
     @include onboard-form;
-      @include themify($themes) {
-        background-color: themed('bg');
-      }
-      margin: 0;
-      width: 100%;
-      overflow: auto;
+    @include themify($themes) {
+      background-color: themed('bg');
+    }
+    margin: 0;
+    width: 100%;
+    overflow: auto;
 
-    position: relative;    
-    display: flex;    
+    position: relative;
+    display: flex;
     width: 500px;
     flex-direction: column;
     border-radius: 10px;
@@ -103,38 +101,35 @@
       background-color: themed('bg2');
     }
 
-    .close-icon-div{
-      
-      display:flex;
-      align-items:center;
-      justify-content: center;       
-      width: 8%;        
-      position:absolute;
-      top:10px;
-      right:0px;
-      
+    .close-icon-div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8%;
+      position: absolute;
+      top: 10px;
+      right: 0px;
+
       div.close-icon {
         height: 35px;
         width: 35px;
         border-radius: 50%;
         border: 1px solid $field-stroke;
-        //background-color: $light-black;        
-        display:flex;
-        align-items:center;
+        //background-color: $light-black;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        
+
         margin: 3% 3%;
         font-family: 'Helvetica';
         font-size: 14px;
-        
 
-        cursor: pointer; 
+        cursor: pointer;
         @include themify($themes) {
           background-color: themed('bg2');
         }
-        
       }
-    }   
+    }
 
     form {
       @include onboard-form;
@@ -159,8 +154,8 @@
         justify-content: flex-start;
         align-items: space-around;
         padding: 0px;
-        max-width:100%;
-        height:36px;
+        max-width: 100%;
+        height: 36px;
         height: auto;
         font-size: 12px;
         margin-bottom: 20px;
@@ -168,10 +163,10 @@
         //overflow: auto;
         @include themify($themes) {
           background-color: themed('bg2');
-        }  
-        
-        div.invite-chip{
-          display: flex;          
+        }
+
+        div.invite-chip {
+          display: flex;
           flex-wrap: nowrap;
           justify-content: space-between;
           align-items: center;
@@ -182,13 +177,13 @@
           margin-right: 10px;
           height: 90%;
           color: $black;
-          width: auto;          
+          width: auto;
 
-          .remove-chip{
-            margin-left: 10px;            
+          .remove-chip {
+            margin-left: 10px;
           }
         }
-        
+
         input {
           flex-grow: 3;
           //width:100%;
@@ -201,9 +196,8 @@
             background-color: themed('bg2');
           }
         }
-    }
-
-    }//end form
+      }
+    } //end form
 
     label {
       text-align: left;
@@ -227,32 +221,31 @@
     .invite-modal-bottom-div {
       display: flex;
       flex-wrap: nowrap;
-      justify-content: space-around;      
+      justify-content: space-around;
 
-      .share-icon-div{
+      .share-icon-div {
         display: flex;
-        align-items: flex-end;   
-        width: 8%;            
-        
-        div.share-icon {                  
+        align-items: flex-end;
+        width: 8%;
+
+        div.share-icon {
           width: 80%;
           border-radius: 100%;
           border: 1px solid $field-stroke;
-          //background-color: $light-black;        
-          display:flex;
-          align-items:center;
+          //background-color: $light-black;
+          display: flex;
+          align-items: center;
           justify-content: center;
-          height:32px;
+          height: 32px;
           margin: 2% 0%;
-          cursor: pointer; 
+          cursor: pointer;
           @include themify($themes) {
             background-color: themed('bg2');
           }
-          
         }
       }
 
-      .share-link-div{
+      .share-link-div {
         @include onboard-form;
         @include themify($themes) {
           background-color: themed('bg');
@@ -263,8 +256,8 @@
 
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;        
-        width: 55%;       
+        justify-content: flex-end;
+        width: 55%;
 
         .label {
           margin-bottom: 0;
@@ -280,8 +273,7 @@
           @include themify($themes) {
             background-color: themed('bg2');
           }
-        }        
-
+        }
       }
 
       .add-members-btn-div {
@@ -289,7 +281,6 @@
         align-items: flex-end;
         justify-content: flex-end;
         width: 30%;
-        
 
         .submit-button {
           @include primary-btn;
@@ -300,11 +291,8 @@
           //margin-top: 16px;
         }
       }
-     
-    }//end invite-modal-bottom-div
-
-    
-  }//end invite-modal
+    } //end invite-modal-bottom-div
+  } //end invite-modal
 
   .left-container {
     width: 100%;
@@ -494,8 +482,6 @@
     overflow-y: scroll;
     margin-top: 2rem;
 
-
-
     form {
       @include onboard-form;
       @include themify($themes) {
@@ -503,7 +489,7 @@
       }
       margin: 0;
       width: 100%;
-      
+
       input {
         font-size: 12px;
         margin-bottom: 20px;
@@ -521,30 +507,30 @@
           background-color: themed('bg2');
         }
       }
-      
+
       option {
         font-size: 13px;
       }
 
-      div.invite{
+      div.invite {
         border-radius: 50%;
         //background-color: $light-black;
         border: 1px solid $field-stroke;
-        width:50px;
-        display:flex;
-        align-items:center;
+        width: 50px;
+        display: flex;
+        align-items: center;
         justify-content: center;
-        height:50px;
+        height: 50px;
         margin: 2% 3px;
-        cursor: pointer;   
+        cursor: pointer;
 
         @include themify($themes) {
           background-color: themed('bg2');
-        }     
+        }
 
         transition: background-color 0.2s;
       }
-      
+
       div.invite:hover {
         outline: none;
 
@@ -583,26 +569,58 @@
     }
 
     .collab-pics {
-
-    display: flex;
-    align-content: center;
-
-    .avatar {      
-
       display: flex;
-      height: 50px;
-      width: 50px;
-      align-items: center;
-      justify-content: center;
-      margin: 2% 3px;
+      align-content: center;
+      flex-flow: row wrap;
 
-      img {
-        height: 100%;
-        width: 100%;
-        border-radius: 50%;
+      .avatar {
+        display: flex;
+        height: 50px;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        margin: 2% 3px;
+
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 50%;
+        }
+
+        .name {
+          color: rgba(0, 0, 0, 0);
+          background-color: rgba(0, 0, 0, 0);
+
+          user-select: none;
+
+          font-family: 'Helvetica';
+
+          padding: 5px;
+          font-size: 14px;
+          text-align: center;
+
+          width: auto;
+          position: absolute;
+
+          border-radius: 3px;
+
+          box-shadow: 0 0 0px 0 none;
+
+          transform: translateY(45px);
+
+          transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+        }
+      }
+
+      .avatar:hover {
+        .name {
+          color: white;
+
+          background-color: black;
+          box-shadow: 0 0 1px 0 gray;
+        }
       }
     }
-  }
     .required-help {
       color: $dark-grey;
     }

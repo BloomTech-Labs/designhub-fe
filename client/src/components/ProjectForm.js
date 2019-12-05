@@ -3,7 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
-import anonymous from "../ASSETS/anonymous.jpg";
+import anonymous from '../ASSETS/anonymous.jpg';
 
 import {
   addProject,
@@ -115,7 +115,7 @@ const ProjectForm = ({
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    
+
     if (files.length > 0 || (projectPhotos && projectPhotos.length > 0)) {
       isEditing
         ? editProject(state.project, project.id)
@@ -399,7 +399,6 @@ const ProjectForm = ({
                   Project Collaborators
                 </label>
                 <div id="collab-field" className="collab-view">
-                  
                   {//map over project invites
                   loadingUsers || isDeleting ? (
                     <Loading />
@@ -408,14 +407,13 @@ const ProjectForm = ({
                       const [projectInvite] = projectInvites.filter(
                         invite => invite.email === user.email
                       );
-                      return projectInvite ?    
-                       (
+                      return projectInvite ? (
                         <ProjectInvite
                           key={user.email}
                           {...user}
                           invite={projectInvite}
                         />
-                      ) : null
+                      ) : null;
                     })
                   )}
                 </div>
@@ -430,7 +428,7 @@ const ProjectForm = ({
                         link.setSelectionRange(0, 99999);
                         document.execCommand('copy');
                       }}
-                    > 
+                    >
                       🤝
                     </div>
                   </div>
@@ -581,6 +579,11 @@ const ProjectForm = ({
                               : user.email
                           }
                         />
+                        <span className="name">
+                          {user.firstName
+                            ? user.firstName + ' ' + user.lastName
+                            : user.email}
+                        </span>
                       </div>
                     );
                   })}
