@@ -72,6 +72,29 @@ const Notifications = props => {
           <p>&nbsp;{moment(item.created_at).fromNow()} </p>
         </div>
       );
+    } else if (item.type === 'collab') {
+      return (
+        <div key={item.id} className="commented_notification">
+          <div className="commented_left">
+            {item.unread === true ? <h2 className="unread">.</h2> : null}
+            <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
+            <p className="commented">
+              {item.activeUsername} invited you to their project {item.projectName}
+              <span> </span>
+              <mark className="from_now">
+                {moment(item.created_at).fromNow()}&nbsp;
+              </mark>
+            </p>
+          </div>
+          <Link to={`/project/${item.projectId}`}>
+            <img
+              src={item.mainImgUrl}
+              className="thumbnail_preview"
+              alt="thumbnail"
+            />
+          </Link>
+        </div>
+      );
     }
   };
 
