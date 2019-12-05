@@ -368,6 +368,8 @@ export const getSingleProject = id => dispatch => {
 
 export const updateProject = (id, changes) => dispatch => {
   dispatch({ type: UPDATE_PROJECT_START });
+  // Deleting this property as it causes a 400 response
+  delete changes.projectInvites;
   return axiosWithAuth()
     .put(`/api/v1/projects/${id}`, changes)
     .then(res => {
