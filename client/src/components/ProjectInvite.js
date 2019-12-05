@@ -3,15 +3,25 @@ import '../SASS/ProjectInvite.scss';
 import { connect } from 'react-redux'
 import anonymous from "../ASSETS/anonymous.jpg";
 
-import { deleteInvite } from '../store/actions'
+import { deleteInvite, updateInvite } from '../store/actions'
 
 
-const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, email }) => {
+const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, email, updateInvite }) => {
   const handleInviteDelete = (invite) => {
     deleteInvite(invite);
   }
 
+const handleInviteEdit = (e)=>{
+  console.log('changing invite')
+  if (e.target.value === "view"){
+   updateInvite(invite.id, {write: false})
+  } else {
+   updateInvite(invite.id, {write: true})
+  }
+}
+
   return (
+    
     <div className="project-invite">
       <div className="left">
         <div className="avatar">
@@ -24,6 +34,12 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
       </div>
       <div className="actions">
         {/* Any necessary buttons will go here */}
+        <div className="invite-edit-div">
+          <select className="invite-edit-drop" onChange={handleInviteEdit} value={invite.write ? "edit" : "view"}>
+            <option value="view">View</option>
+            <option value="edit">Edit</option>
+          </select>
+        </div>
         <div className="close-collab-icon-div" >
           <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> X </div>
         </div>
@@ -33,4 +49,4 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
   );
 };
 
-export default connect(null, { deleteInvite })(ProjectInvite);
+export default connect(null, { deleteInvite, updateInvite })(ProjectInvite);

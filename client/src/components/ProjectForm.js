@@ -399,21 +399,23 @@ const ProjectForm = ({
                   Project Collaborators
                 </label>
                 <div id="collab-field" className="collab-view">
+                  
                   {//map over project invites
                   loadingUsers || isDeleting ? (
                     <Loading />
                   ) : (
                     usersFromInvites.map(user => {
-                      const projectInvite = projectInvites.find(
+                      const [projectInvite] = projectInvites.filter(
                         invite => invite.email === user.email
                       );
-                      return (
+                      return projectInvite ?    
+                       (
                         <ProjectInvite
                           key={user.email}
                           {...user}
                           invite={projectInvite}
                         />
-                      );
+                      ) : null
                     })
                   )}
                 </div>
@@ -428,9 +430,8 @@ const ProjectForm = ({
                         link.setSelectionRange(0, 99999);
                         document.execCommand('copy');
                       }}
-                    >
-                      {' '}
-                      🤝{' '}
+                    > 
+                      🤝
                     </div>
                   </div>
                   <div className="share-link-div">
@@ -571,7 +572,7 @@ const ProjectForm = ({
                 <div className="collab-pics">
                   {usersFromInvites.map(user => {
                     return (
-                      <div className="avatar">
+                      <div className="avatar" key={user.email}>
                         <img
                           src={user.avatar ? user.avatar : anonymous}
                           alt={
