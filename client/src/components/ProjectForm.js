@@ -573,7 +573,7 @@ const ProjectForm = ({
                     return (
                       <div className="avatar">
                         <img
-                          src={user.avatar ? user.avatar : null}
+                          src={user.avatar ? user.avatar : anonymous}
                           alt={
                             user.firstName
                               ? user.firstName + ' ' + user.lastName
