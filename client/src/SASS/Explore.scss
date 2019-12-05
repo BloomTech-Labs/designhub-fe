@@ -7,7 +7,6 @@
   width: 100%;
   margin-bottom: 5rem;
   margin: 0rem 1rem 1rem 2rem;
-  border: 2px solid yellow;
   @include themify($themes) {
     color: themed('text');
   }
@@ -17,7 +16,6 @@
     border-bottom: 1px solid $field-bg;
     width: 100%;
     margin-bottom: 1rem;
-    border: 2px solid pink;
     @include themify($themes) {
       border-bottom: 1px solid #662a2b31;
     }
@@ -65,7 +63,6 @@
     align-content: flex-start;
     flex-wrap: wrap;
     width: 100%;
-    border: 2px solid green;
 
     // @media (max-width: 1200px) {
     //   grid-template-columns: 1fr 1fr;
