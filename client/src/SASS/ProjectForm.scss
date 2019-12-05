@@ -113,16 +113,21 @@
       top:10px;
       right:0px;
       
-      div.close-icon {                  
-        width: 80%;
-        border-radius: 100%;
+      div.close-icon {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
         border: 1px solid $field-stroke;
         //background-color: $light-black;        
         display:flex;
         align-items:center;
         justify-content: center;
-        height:30px;
-        margin: 2% 0%;
+        
+        margin: 3% 3%;
+        font-family: 'Helvetica';
+        font-size: 14px;
+        
+
         cursor: pointer; 
         @include themify($themes) {
           background-color: themed('bg2');
@@ -522,7 +527,7 @@
       }
 
       div.invite{
-        border-radius: 100%;
+        border-radius: 50%;
         //background-color: $light-black;
         border: 1px solid $field-stroke;
         width:50px;
@@ -530,12 +535,25 @@
         align-items:center;
         justify-content: center;
         height:50px;
-        margin: 2% 0%;
+        margin: 2% 3px;
         cursor: pointer;   
+
         @include themify($themes) {
           background-color: themed('bg2');
         }     
-      }      
+
+        transition: background-color 0.2s;
+      }
+      
+      div.invite:hover {
+        outline: none;
+
+        background-color: gray;
+
+        @include themify($themes) {
+          background-color: themed('white');
+        }
+      }
 
       .required.alert input {
         margin-bottom: 0;
@@ -567,15 +585,20 @@
     .collab-pics {
 
     display: flex;
+    align-content: center;
 
     .avatar {      
-      height: 60px;
-      width: 60px;
-      padding-top: 5px;
+
+      display: flex;
+      height: 50px;
+      width: 50px;
+      align-items: center;
+      justify-content: center;
+      margin: 2% 3px;
 
       img {
-        height: 80%;
-        width: 80%;
+        height: 100%;
+        width: 100%;
         border-radius: 50%;
       }
     }

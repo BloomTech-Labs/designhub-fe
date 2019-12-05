@@ -363,8 +363,7 @@ const ProjectForm = ({
               {state.inviteModal && (
                 <div className="invite-modal">
                   <div className="close-icon-div" onClick={closeInviteModal}>
-
-                    <div className="close-icon"> x </div>
+                    <div className="close-icon">X</div>
                   </div>
                   <form onSubmit={handleInvites}>
                     <label htmlFor="invite-input" className="label">
