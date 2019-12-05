@@ -3,6 +3,7 @@ import { withRouter, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { axiosWithAuth } from '../utilities/axiosWithAuth.js';
+import anonymous from "../ASSETS/anonymous.jpg";
 
 import {
   addProject,
@@ -551,22 +552,27 @@ const ProjectForm = ({
                 <>
                   <label htmlFor="inviteLink" className="label">
                     Collaborators
-                </label>
+                  </label> 
 
-                <div className = "collab-pics">
-                {usersFromInvites.map(user => {
-                  return <div className="avatar">
-                  <img src={user.avatar ? user.avatar : null} alt={user.firstName ? user.firstName + ' ' + user.lastName : user.email} />
-                </div>
-                })}
-                  <div
-                    id="inviteLink"
-                    className="invite"
-                    onClick={() => setState({ ...state, inviteModal: true })}
-                  >
-                    <div>+</div>
+                  <div className = "collab-pics">
+
+                    <div
+                      id="inviteLink"
+                      className="invite"
+                      onClick={() => setState({ ...state, inviteModal: true })}
+                    >
+                      <div>+</div>
+                    </div>
+                    
+                    {usersFromInvites.map(user => {
+                      return <div className="avatar">
+                                  <img src={user.avatar ? user.avatar : anonymous} alt={user.firstName ? user.firstName + ' ' + user.lastName : user.email} />
+                              </div>
+                      
+                    })}
+
                   </div>
-                  </div>
+
                 </>
               )}
               <p className="required-help">* Required</p>

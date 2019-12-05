@@ -521,21 +521,42 @@
         font-size: 13px;
       }
 
-      div.invite{
-        border-radius: 100%;
-        //background-color: $light-black;
-        border: 1px solid $field-stroke;
-        width:50px;
-        display:flex;
-        align-items:center;
-        justify-content: center;
-        height:50px;
-        margin: 2% 0%;
-        cursor: pointer;   
-        @include themify($themes) {
-          background-color: themed('bg2');
-        }     
-      }      
+      .collab-pics {
+        display: flex;         
+        align-items: center;
+        margin-bottom: 10px;
+
+
+        div.invite{
+          border-radius: 100%;           
+          border: 1px solid $field-stroke;
+          width:50px;
+          display:flex;
+          align-items:center;
+          justify-content: center;
+          height:50px;
+          margin: 2% 0%;
+          margin-right: 2%;
+          margin-top: 0;
+          padding: 0px;
+          cursor: pointer;   
+          @include themify($themes) {
+            background-color: themed('bg2');
+          }     
+        }    
+  
+        .avatar {      
+          height: 60px;
+          width: 60px;
+          padding: 0px;          
+  
+          img {
+            height: 80%;
+            width: 80%;
+            border-radius: 50%;
+          }
+        }
+      }       
 
       .required.alert input {
         margin-bottom: 0;
@@ -564,22 +585,7 @@
       }
     }
 
-    .collab-pics {
-
-    display: flex;
-
-    .avatar {      
-      height: 60px;
-      width: 60px;
-      padding-top: 5px;
-
-      img {
-        height: 80%;
-        width: 80%;
-        border-radius: 50%;
-      }
-    }
-  }
+    
     .required-help {
       color: $dark-grey;
     }

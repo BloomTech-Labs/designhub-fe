@@ -4,8 +4,13 @@
 div.project-invite {      
   @include onboard-form;
   @include themify($themes) {
-    background-color: themed('bg');
+    background-color: themed('bg');    
   }  
+
+  display: flex;
+  flex-direction: row;  
+  max-width: 800px;  
+  padding: 0px;    
 
   &:hover,
   &:focus {
@@ -14,19 +19,20 @@ div.project-invite {
   &:not(:focus):invalid {
     border: 2px solid $alert;
   }
-
-  position: relative;
-  display: flex;  
-  justify-content: center; 
-
+        
+  justify-content: flex-start; 
+  align-content: flex-start;  
   height: 65px;  
 
   .left {
     display: flex;
-    .avatar {
-      height: 60px;
-      width: 60px;
-      padding-top: 5px;
+    width: 50%; 
+    height: 100%; 
+    
+    .avatar {      
+      height: 54px;
+      width: 54px;
+      padding: 0px;
 
       img {
         height: 80%;
@@ -35,7 +41,7 @@ div.project-invite {
       }
     }
 
-    .info {
+    .info {      
       margin-left: 1.5rem;
       display: flex;
       flex-direction: column;
@@ -47,16 +53,21 @@ div.project-invite {
         color: gray;
       }
     }
-  }
-  .actions {       
+
+  }//end left 
+
+  .actions {     
+    display: flex;  
+    width: 50%;   
+    position: relative;
 
     .close-collab-icon-div{      
       display:flex;
       align-items:flex-start;
       justify-content: flex-end;          
       position:absolute;
-      top:5px;
-      right:5px;
+      top:0px;
+      right:0px;
       height:15px;
       width: 15px;
       
@@ -64,11 +75,13 @@ div.project-invite {
         width: 100%;               
         display:flex;
         align-items:flex-start;
-        justify-content: flex-end;        
-        margin: 2% 2%;
+        justify-content: flex-end;         
         cursor: pointer;        
         
-      }
-    }   
-  }
-}
+      }//end close-collab-icon
+
+    }//end close-collab-icon-div
+
+  }//end actions
+
+}//end project-invite
