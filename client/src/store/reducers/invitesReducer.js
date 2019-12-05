@@ -16,7 +16,10 @@ import {
   UPDATE_INVITE_FAILURE,
   DELETE_INVITE_START,
   DELETE_INVITE_SUCCESS,
-  DELETE_INVITE_FAILURE
+  DELETE_INVITE_FAILURE,
+  GET_INVITE_START,
+  GET_INVITE_SUCCESS,
+  GET_INVITE_FAILURE
 } from '../actions/index';
 
 const initialState = {
@@ -78,6 +81,24 @@ export const invitesReducer = (state = initialState, action) => {
         userInvites: action.payload
       };
     case GET_INVITES_BY_USER_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case GET_INVITE_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_INVITE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        invite: action.payload
+      };
+    case GET_INVITE_FAILURE:
       return {
         ...state,
         isLoading: false,

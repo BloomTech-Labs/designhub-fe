@@ -318,7 +318,6 @@ const ProjectForm = ({
   const sendInvites = () => {
     state.inviteList.forEach(async user => {
       const invite = { projectId: project.id, email: user.email };
-      console.log(invite);
       await createProjectInvite(invite);
     });
     setState({
@@ -331,7 +330,6 @@ const ProjectForm = ({
     <Redirect to={`/project/${project.id}`} />
   ) : (
       <div className="project-form-wrapper">
-        {console.log(state)}
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
