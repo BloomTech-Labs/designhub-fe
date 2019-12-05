@@ -4,14 +4,13 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import moment from 'moment';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
-import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
 
 import '../../SASS/Explore.scss';
 
 const ExploreTabs = ({ recent, popular, following }) => {
 
-  if (recent && popular && following) {    
+  if (recent && popular && following) {
 
     return (
       <div className="explore-tabs-container">
@@ -30,7 +29,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
             </TabList>
             {/* // ======== Popular Tab ======== // */}
             <TabPanel className="tabs-container">
-             
+
               <div className="explore-projects-array">
                 {popular.map(project => (
                   <div className="project-content" key={project.id}>
@@ -40,8 +39,8 @@ const ExploreTabs = ({ recent, popular, following }) => {
                           {project.name.length > 35 ? (
                             <h1>{project.name.slice(0, 35)}...</h1>
                           ) : (
-                            <h1>{project.name}</h1>
-                          )}
+                              <h1>{project.name}</h1>
+                            )}
                           <h1 className="created">
                             {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
@@ -60,8 +59,8 @@ const ExploreTabs = ({ recent, popular, following }) => {
             </TabPanel>
 
             {/* // ======== Recents Tab ======== // */}
-            <TabPanel className="tabs-container">          
-              
+            <TabPanel className="tabs-container">
+
               <div className="explore-projects-array">
                 {recent.map(project => (
                   <div className="project-content" key={project.id}>
@@ -71,8 +70,8 @@ const ExploreTabs = ({ recent, popular, following }) => {
                           {project.name.length > 35 ? (
                             <h1>{project.name.slice(0, 35)}...</h1>
                           ) : (
-                            <h1>{project.name}</h1>
-                          )}
+                              <h1>{project.name}</h1>
+                            )}
                           <h1 className="created">
                             {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
@@ -91,8 +90,8 @@ const ExploreTabs = ({ recent, popular, following }) => {
             </TabPanel>
 
             {/* // ======== Following Tab ======== // */}
-            <TabPanel className="tabs-container">              
-              
+            <TabPanel className="tabs-container">
+
               <div className="explore-projects-array">
                 {following.map(project => (
                   <div className="project-content" key={project.projectId}>
@@ -100,11 +99,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
                       <>
                         <div className="project-info">
                           {project.projectName &&
-                          project.projectName.length > 35 ? (
-                            <h1>{project.projectName.slice(0, 35)}...</h1>
-                          ) : (
-                            <h1>{project.projectName}</h1>
-                          )}
+                            project.projectName.length > 35 ? (
+                              <h1>{project.projectName.slice(0, 35)}...</h1>
+                            ) : (
+                              <h1>{project.projectName}</h1>
+                            )}
                           <h1 className="created">
                             {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
@@ -132,7 +131,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
 
   }//end if
   else {
-    return <Loading />;    
+    return <Loading />;
   }
 
 };
