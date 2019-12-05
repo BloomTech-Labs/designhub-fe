@@ -267,12 +267,13 @@ const ProjectForm = ({
     overflow: 'hidden'
   };
 
-  // Get all project invites on init --projectInvites
-  useEffect(() => {
+  const getInvites = () => {
     if (isEditing && project.id) {
       getInvitesByProjectId(project.id);
     }
-  }, [invite, getInvitesByProjectId, isEditing, project.id]);
+  }
+
+  useEffect(getInvites, [invite])
 
   // Get users for each invite present
   const getProjectUsers = () => {
