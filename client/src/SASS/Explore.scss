@@ -7,6 +7,7 @@
   width: 100%;
   margin-bottom: 5rem;
   margin: 0rem 1rem 1rem 2rem;
+  border: 2px solid yellow;
   @include themify($themes) {
     color: themed('text');
   }
@@ -16,6 +17,7 @@
     border-bottom: 1px solid $field-bg;
     width: 100%;
     margin-bottom: 1rem;
+    border: 2px solid pink;
     @include themify($themes) {
       border-bottom: 1px solid #662a2b31;
     }
@@ -36,29 +38,34 @@
     }
   }
 
-  .header-popular-projects {
-    margin-top: 1rem;
-    display: grid;
-    justify-content: flex-start;
-    grid-template-columns: 63% 33.5%;
-    grid-gap: 2%;
+  // .header-popular-projects {
+  //   margin-top: 1rem;
+  //   display: flex;
+  //   justify-content: flex-end;
+  //   // grid-template-columns: 20% 33.5%;
+  //   // grid-gap: 2%;
 
-    .large-project-thumbnail {
-      width: 100%;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 5px;
-      border: 8px solid $field-bg;
-    }
-  }
+  //   .large-project-thumbnail {
+  //     width: 100%;
+  //     height: 350px;
+  //     object-fit: cover;
+  //     border-radius: 5px;
+  //     border: 8px solid $field-bg;
+  //   }
+  // }
 
   .explore-projects-array {
     margin-top: 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
-    grid-gap: 2rem;
-    justify-items: left;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));    // grid-template-rows: 25rem 25rem 25rem;
+    // grid-gap: 2rem;
+    // justify-items: left;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;
     width: 100%;
+    border: 2px solid green;
 
     // @media (max-width: 1200px) {
     //   grid-template-columns: 1fr 1fr;
@@ -68,13 +75,14 @@
     //   grid-template-columns: 1fr;
     // }
 
-    .small-project-thumbnail {
-      object-fit: cover;
-      border-radius: 5px;
-      border: 8px solid $field-bg;
-    }
+    // .small-project-thumbnail {
+    //   object-fit: cover;
+    //   border-radius: 5px;
+    //   border: 8px solid $field-bg;
+    // }
 
     .project-content {
+      margin: 0% 3% 3% 0%;
       width: 22rem;
       height: 15rem;
       position: relative;
