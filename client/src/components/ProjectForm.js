@@ -328,7 +328,21 @@ const ProjectForm = ({
     });
   };
 
-  return isEditing && user.id !== project.userId ? (
+
+  const editAccess = () => {
+    const userInvite = acceptedInvites.find(invite => invite.email === user.email);
+    console.log('accepted invites', acceptedInvites);
+    if (user.id === project.userId || (userInvite && userInvite.write === true)) {
+      //authorized
+      return false
+    }
+    else {
+      //not authorized
+      return true
+    }
+  }
+
+  return isEditing && editAccess() ? (
     <Redirect to={`/project/${project.id}`} />
   ) : (
       <div className="project-form-wrapper">
