@@ -29,7 +29,7 @@ const handleInviteEdit = (e)=>{
         </div>
         <div className="info">
           <p>{firstName ? firstName + ' ' + lastName : email}</p>
-          <p className='status'>Pending...</p>
+          <p className='status'>{invite.pending ? "Pending..." : "Accepted"}</p>
         </div>
       </div>
       <div className="actions">
