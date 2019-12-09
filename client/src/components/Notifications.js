@@ -4,13 +4,12 @@ import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import { connect } from 'react-redux'
 import moment from 'moment';
 
-import { deleteInvite, acceptInvite, getInviteById } from '../store/actions';
+import { deleteInvite, acceptInvite, getInviteById, getInvitesByUser } from '../store/actions';
 
 import '../SASS/Notifications.scss';
 
 const Notifications = props => {
   const [state, setState] = useState([]);
-  const [invites, setInvites] = useState([])
   const { id } = props.activeUser;
 
   useEffect(() => {
@@ -33,6 +32,7 @@ const Notifications = props => {
       };
 
       getNotifications(id);
+      props.getInvitesByUser();
     } catch (err) {
       console.error(err);
     }
@@ -89,8 +89,11 @@ const Notifications = props => {
       );
     } else if (item.type === 'collab') {
       const [id, email] = item.message ? item.message.split(' ') : [null, null];
-      const invite = invites.length === 0 ? null : invites.find(invite => invite.id === id);
-      console.log(invite, invites);
+      console.log('notif id', id);
+      const invite = props.userInvites.length === 0 ? null : props.userInvites.find(invite => invite.id === Number(id));
+      console.log('userInvites', props.userInvites);
+      console.log('notification', item);
+      console.log('invite', invite);
       return (
         <div key={item.id} className="commented_notification">
           <div className="commented_left">
@@ -124,24 +127,14 @@ const Notifications = props => {
     }
   };
 
-  const getInviteData = async (i) => {
-    if (i.type === 'collab') {
-      const [id] = i.message ? i.message.split(' ') : [null, null];
-      setInvites([...invites, await props.getInviteById(id)]);
-    }
-  }
-
-
   const renderUnread = array => {
     return array.map(i => {
-      getInviteData(i);
       return renderBasedOnType(i);
     });
   };
 
   const renderRead = array => {
     return array.map(i => {
-      getInviteData(i);
       return renderBasedOnType(i);
     });
   };
@@ -153,4 +146,10 @@ const Notifications = props => {
   );
 };
 
-export default connect(null, { acceptInvite, deleteInvite, getInviteById })(Notifications);
+const mapStateToProps = state => {
+  return {
+    userInvites: state.invites.userInvites
+  }
+}
+
+export default connect(mapStateToProps, { acceptInvite, deleteInvite, getInviteById, getInvitesByUser })(Notifications);
