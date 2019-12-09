@@ -11,7 +11,7 @@ import '../SASS/Notifications.scss';
 const Notifications = props => {
   const [state, setState] = useState([]);
   const { id } = props.activeUser;
-  const {invite, usersFromInvites} = props;
+  const {invite, usersFromInvites, getInvitesByUser} = props;
  
 
   useEffect(() => {
@@ -34,11 +34,11 @@ const Notifications = props => {
       };
 
       getNotifications(id);
-      props.getInvitesByUser();
+      getInvitesByUser();
     } catch (err) {
       console.error(err);
     }
-  }, [id, invite, usersFromInvites]);
+  }, [id, invite, usersFromInvites, getInvitesByUser]);
 
 
   const handleInvites = (accept, invite) => {
@@ -92,7 +92,7 @@ const Notifications = props => {
         </div>
       );
     } else if (item.type === 'collab') {
-      const [id, email] = item.message ? item.message.split(' ') : [null, null];
+      const [id] = item.message ? item.message.split(' ') : [null, null];
       console.log('notif id', id);
       const invite = props.userInvites.length === 0 ? null : props.userInvites.find(invite => invite.id === Number(id));
       console.log('userInvites', props.userInvites);
