@@ -33,9 +33,10 @@ const initialState = {
   allProjects: [],
   singleProject: null,
   usersProjects: [],
-  usersRecentProjects: [],  
+  usersRecentProjects: [],
   isLoading: false,
-  projectInvites: []
+  projectInvites: [],
+  acceptedInvites: [],
 };
 
 export const projectsReducer = (state = initialState, action) => {
@@ -177,13 +178,15 @@ export const projectsReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: null,
-        projectInvites: []
+        projectInvites: [],
+        acceptedInvites: []
       };
     case GET_INVITES_BY_PROJECTID_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        projectInvites:action.payload
+        projectInvites: action.payload,
+        acceptedInvites: action.payload.filter(invite => !invite.pending)
       };
     case GET_INVITES_BY_PROJECTID_FAILURE:
       return {

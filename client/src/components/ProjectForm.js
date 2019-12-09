@@ -46,7 +46,8 @@ const ProjectForm = ({
   getUsersFromInvites,
   usersFromInvites,
   loadingUsers,
-  isDeleting
+  isDeleting,
+  acceptedInvites
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +56,6 @@ const ProjectForm = ({
   const [privacy, setPrivacy] = useState(
     isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   );
-  //const [acceptedInvites, setAcceptedInvites] = useState([]);
 
   const shareLink = String(window.location).slice(0, String(window.location).length - 4)
 
@@ -68,8 +68,7 @@ const ProjectForm = ({
       invision: isEditing ? project.invision : '',
       privateProjects: isEditing ? project.privateProjects : false,
       mainImg: isEditing ? project.mainImg : '',
-      projectInvites: projectInvites,
-      acceptedInvites: []
+      projectInvites: projectInvites
     },
     success: false,
     url: '',
@@ -272,7 +271,7 @@ const ProjectForm = ({
   const getInvites = () => {
     if (isEditing && project.id) {
       getInvitesByProjectId(project.id);
-     
+
     }
   }
 
@@ -282,12 +281,6 @@ const ProjectForm = ({
   const getProjectUsers = () => {
     // Reset the list
     getUsersFromInvites(projectInvites);
-    console.log('project Invites ', projectInvites);
-    const accepted = projectInvites.filter(invite => !invite.pending)
-    console.log("accepted", accepted)
-    setState({...state, project: {...state.project, acceptedInvites: accepted}});
-    console.log('accepted Invites:', projectInvites.filter(invite => invite.pending === false));
-    console.log('accepted invites2', state.project.acceptedInvites);
   };
 
   useEffect(getProjectUsers, [projectInvites]);
@@ -577,22 +570,25 @@ const ProjectForm = ({
 
                   <div className="collab-pics">
                     {usersFromInvites.map(user => {
+                      const invite = acceptedInvites.find(invite => invite.email === user.email);
                       return (
-                        <div className="avatar" key={user.email}>
-                          <img
-                            src={user.avatar ? user.avatar : anonymous}
-                            alt={
-                              user.firstName
+                        !invite ? null : (
+                          <div className="avatar" key={user.email}>
+                            <img
+                              src={user.avatar ? user.avatar : anonymous}
+                              alt={
+                                user.firstName
+                                  ? user.firstName + ' ' + user.lastName
+                                  : user.email
+                              }
+                            />
+                            <span className="name">
+                              {user.firstName
                                 ? user.firstName + ' ' + user.lastName
-                                : user.email
-                            }
-                          />
-                          <span className="name">
-                            {user.firstName
-                              ? user.firstName + ' ' + user.lastName
-                              : user.email}
-                          </span>
-                        </div>
+                                : user.email}
+                            </span>
+                          </div>
+                        )
                       );
                     })}
                     <div
@@ -659,6 +655,7 @@ const ProjectForm = ({
 const mapStateToProps = state => {
   return {
     projectInvites: state.projects.projectInvites,
+    acceptedInvites: state.projects.acceptedInvites,
     invite: state.invites.invite,
     usersFromInvites: state.invites.usersFromInvites,
     loadingUsers: state.invites.loadingUsers,
