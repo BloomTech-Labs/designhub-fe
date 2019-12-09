@@ -11,6 +11,8 @@ import '../SASS/Notifications.scss';
 const Notifications = props => {
   const [state, setState] = useState([]);
   const { id } = props.activeUser;
+  const {invite, usersFromInvites} = props;
+ 
 
   useEffect(() => {
     try {
@@ -36,15 +38,17 @@ const Notifications = props => {
     } catch (err) {
       console.error(err);
     }
-  }, [id]);
+  }, [id, invite, usersFromInvites]);
 
 
-  const handleInvites = (accept, id, email) => {
+  const handleInvites = (accept, invite) => {
     if (accept) {
-      props.acceptInvite(id);
+      props.acceptInvite(invite.id);
+      
     }
     else {
-      props.deleteInvite(id, email);
+      props.deleteInvite(invite);
+     
     }
   }
 
@@ -110,8 +114,8 @@ const Notifications = props => {
           <div className='actions'>
             {!invite ? null : !invite.pending ? <p>Invite Accepted</p> : (
               <>
-                <button onClick={() => handleInvites(true, id, email)}>Accept</button>
-                <button onClick={() => handleInvites(false, id, email)} >Reject</button>
+                <button onClick={() => handleInvites(true, invite)}>Accept</button>
+                <button onClick={() => handleInvites(false, invite)} >Reject</button>
               </>
             )}
           </div>
@@ -148,7 +152,10 @@ const Notifications = props => {
 
 const mapStateToProps = state => {
   return {
-    userInvites: state.invites.userInvites
+    userInvites: state.invites.userInvites,
+    usersFromInvites: state.invites.usersFromInvites,
+    invite: state.invites.invite
+    
   }
 }
 
