@@ -191,7 +191,7 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             name="email"
             type="text"
             value={email}
-            onChange={handleChange}
+            disabled={true}
             placeholder="i.e. eriklambert@designhubx.com"
             ref={setEmailRef}
           />
