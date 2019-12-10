@@ -2,6 +2,7 @@
 @import './mixins';
 
 .landing-nav {
+    z-index: +1;
     font-size: 20px;
     .nav-content{
         width: 100%;

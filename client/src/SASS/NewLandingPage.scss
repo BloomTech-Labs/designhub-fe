@@ -9,6 +9,7 @@
 .page-container {
   background-image: url('../ASSETS/landing.svg');
   background-size: cover;
+  z-index: -10;
   height: 100%;
   font-size: 62.5%;
   
@@ -40,6 +41,13 @@
     }
     .top-right {
       margin: -20% 0 0 -13%;
+
+      img{
+        width: 58%;
+        margin-left: 11.3%;
+        margin-top: 1%;
+        // z-index: -1;
+      }
     }
   }
 }

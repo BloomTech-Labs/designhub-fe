@@ -13,7 +13,7 @@ import collaborateicon from '../ASSETS/collaborate-icon.svg';
 import allinoneicon from '../ASSETS/allinone-icon.svg';
 import feedbackicon from '../ASSETS/feedback-icon.svg';
 import explorepagetemp from '../ASSETS/tempexplore.svg'
-import macscreenshot from '../ASSETS/macscreenshot.png';
+import macscreenshot from '../ASSETS/macscreenshot1.png';
 import '../SASS/NewLandingPage.scss';
 import TestimonialCarousel from './TestimonialCarousel';
 
