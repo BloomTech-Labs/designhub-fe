@@ -46,7 +46,6 @@ export const invitesReducer = (state = initialState, action) => {
       };
     case GET_USERS_FROM_INVITES_SUCCESS:
       const loadingUsers = action.payload.lastOne ? false : state.loadingUsers;
-      console.log(action.payload);
       const nondupe = state.usersFromInvites.every(user => {
         return user.email !== action.payload.user.email;
       })
@@ -80,8 +79,8 @@ export const invitesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        userInvites: action.payload        
-      };      
+        userInvites: action.payload
+      };
     case GET_INVITES_BY_USER_FAILURE:
       return {
         ...state,

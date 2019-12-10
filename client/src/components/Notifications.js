@@ -11,8 +11,8 @@ import '../SASS/Notifications.scss';
 const Notifications = props => {
   const [state, setState] = useState([]);
   const { id } = props.activeUser;
-  const {invite, usersFromInvites, getInvitesByUser} = props;
- 
+  const { invite, usersFromInvites, getInvitesByUser } = props;
+
 
   useEffect(() => {
     try {
@@ -44,11 +44,11 @@ const Notifications = props => {
   const handleInvites = (accept, invite) => {
     if (accept) {
       props.acceptInvite(invite.id);
-      
+
     }
     else {
       props.deleteInvite(invite);
-     
+
     }
   }
 
@@ -93,11 +93,7 @@ const Notifications = props => {
       );
     } else if (item.type === 'collab') {
       const [id] = item.message ? item.message.split(' ') : [null, null];
-      console.log('notif id', id);
       const invite = props.userInvites.length === 0 ? null : props.userInvites.find(invite => invite.id === Number(id));
-      console.log('userInvites', props.userInvites);
-      console.log('notification', item);
-      console.log('invite', invite);
       return (
         <div key={item.id} className="commented_notification">
           <div className="commented_left">
@@ -155,7 +151,7 @@ const mapStateToProps = state => {
     userInvites: state.invites.userInvites,
     usersFromInvites: state.invites.usersFromInvites,
     invite: state.invites.invite
-    
+
   }
 }
 

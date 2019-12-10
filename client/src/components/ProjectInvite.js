@@ -11,17 +11,16 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
     deleteInvite(invite);
   }
 
-const handleInviteEdit = (e)=>{
-  console.log('changing invite')
-  if (e.target.value === "view"){
-   updateInvite(invite.id, {write: false})
-  } else {
-   updateInvite(invite.id, {write: true})
+  const handleInviteEdit = (e) => {
+    if (e.target.value === "view") {
+      updateInvite(invite.id, { write: false })
+    } else {
+      updateInvite(invite.id, { write: true })
+    }
   }
-}
 
   return (
-    
+
     <div className="project-invite">
       <div className="left">
         <div className="avatar">
