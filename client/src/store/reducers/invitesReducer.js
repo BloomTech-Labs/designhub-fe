@@ -33,6 +33,8 @@ const initialState = {
   isDeleting: false,
 };
 
+
+
 export const invitesReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USERS_FROM_INVITES_START:
@@ -78,8 +80,8 @@ export const invitesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        userInvites: action.payload
-      };
+        userInvites: action.payload        
+      };      
     case GET_INVITES_BY_USER_FAILURE:
       return {
         ...state,

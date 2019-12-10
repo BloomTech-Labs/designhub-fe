@@ -195,6 +195,7 @@ export const getInvitesByUser = () => dispatch => {
     .get('/api/v1/projectInvites')
     .then(res => {
       dispatch({ type: GET_INVITES_BY_USER_SUCCESS, payload: res.data })
+      console.log("res.data", res.data);
     })
     .catch(err => {
       dispatch({ type: GET_INVITES_BY_USER_FAILURE, payload: err.message })
@@ -370,6 +371,7 @@ export const getSingleProject = id => dispatch => {
     .get(`/api/v1/projects/${id}`)
     .then(res => {
       dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data[0] });
+      console.log("res.data single project", res.data)
     })
     .catch(err => {
       //assigns the error status code (401 or 404) returned from the server to payload

@@ -21,7 +21,9 @@ import {
   deleteFollow,
   addFollow,
   followNotification,
-  getRecentProjectsByUser
+  getRecentProjectsByUser,
+  getInvitesByUser, //collab
+  getSingleProject //collab
 } from '../../store/actions';
 
 // ========== STYLES ========== //
@@ -30,18 +32,27 @@ import '../../SASS/UserProfile.scss';
 class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      acceptedCollabInvites:[], //accepted collab invites
+      acceptedCollabProjects:[]//accepted collab projects
+      
+    };
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
 
   componentDidMount() {
-    this.fetch();
+    this.fetch();    
   }
 
   fetch() {
-    this.props
-      .getSingleUser(this.props.match.params.id, this.props.activeUser.id)
+      this.props.getInvitesByUser() //collab
+      .then(() => {  
+        this.getAcceptedCollabInvites()
+       })        
+      .then(() => {
+        this.props.getSingleUser(this.props.match.params.id, this.props.activeUser.id)
+       })
       .then(() => {
         this.props.getFollowingCount(this.props.match.params.id);
       })
@@ -50,7 +61,7 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         this.props.getProjectsByUser(this.props.match.params.id);
-      })
+      })      
       .then(() => {
         this.props.getRecentProjectsByUser(this.props.match.params.id);
       })
@@ -73,7 +84,7 @@ class UserProfile_LI extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.fetch();
+      this.fetch();      
     }
   }
 
@@ -148,7 +159,37 @@ class UserProfile_LI extends Component {
       .catch(err => console.log(err));
   };
 
-  render() {
+  //get accepted collaboration invites
+  getAcceptedCollabInvites = async () => {
+    const invites = this.props.userInvites.filter(invite => invite.pending === false);      
+
+    this.setState({
+      acceptedCollabInvites: invites,
+      acceptedCollabProjects: []
+    })    
+
+
+    console.log('accepted collab invites in LI', this.state.acceptedCollabInvites); 
+    
+
+    const projects = this.state.acceptedCollabInvites.map( invite => {     
+      this.props.getSingleProject(invite.projectId)
+      .then(() => {
+        console.log("projectX", this.props.singleProject);
+        let project = this.props.singleProject
+
+        this.setState({
+          acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]         
+        })
+      })      
+     
+    });    
+
+    console.log('accepted collab projects in LI', this.state.acceptedCollabProjects); 
+  }  
+
+  render() {   
+    console.log('accepted collab projects in LI render', this.state.acceptedCollabProjects);  
     window.scroll(0, 0);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
@@ -197,6 +238,31 @@ class UserProfile_LI extends Component {
                     : this.props.projects.length}
                 </p>
               </div>
+
+               {/*NUMBER OF COLLABORATION PROJECTS*/}    
+               {(this.props.activeUser.id === this.props.userData.id)  && (
+                <div className="count-flex">
+                <h6>Collaborations </h6>                               
+                <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
+
+                {console.log("acceptedCollabInvites in conditional", this.state.acceptedCollabInvites)}
+                {console.log("user id", this.props.activeUser.id)}
+                
+              </div>
+
+               )}
+
+               
+                {/*<di
+                  v className="count-flex">
+                <h6>Collaborations </h6>                               
+                <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
+
+                {console.log("acceptedCollabInvites in conditional", this.state.acceptedCollabInvites)}
+                {console.log("user id", this.props.activeUser.id)}
+                
+               </div>  */}           
+                            
               <div className="count-flex">
                 <h6>Followers</h6>
                 <p>{this.props.followers ? this.props.followers : 0}</p>
@@ -278,6 +344,11 @@ class UserProfile_LI extends Component {
           activeUser={this.props.activeUser}
           params={this.props.match.params}
           isProjectsLoading = {this.props.isProjectsLoading}
+          acceptedCollabInvites = {this.state.acceptedCollabInvites} //accepted collab invites  
+          getSingleProject = {this.props.getSingleProject}   //collab
+          singleProject = {this.props.singleProject} //collab     
+          acceptedCollabProjects = {this.state.acceptedCollabProjects} 
+          userData = {this.props.userData}
         />
       </div>
     );
@@ -296,7 +367,10 @@ const mapStateToProps = state => {
     starred: state.stars.starredProjects,
     isFollowed: state.followers.isFollowed,
     isUsersLoading: state.users.isLoading,
-    isProjectsLoading: state.projects.isLoading
+    isProjectsLoading: state.projects.isLoading,
+    userInvites: state.invites.userInvites, //collab - all project invites by user id
+    singleProject: state.projects.singleProject
+    
   };
 };
 
@@ -314,6 +388,8 @@ export default connect(
     deleteFollow,
     addFollow,
     followNotification,
-    getRecentProjectsByUser
+    getRecentProjectsByUser,
+    getInvitesByUser, //collab - gets all projects by user id
+    getSingleProject //collab - gets a project by project id
   }
 )(UserProfile_LI);
