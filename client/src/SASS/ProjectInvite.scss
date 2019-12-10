@@ -10,7 +10,9 @@ div.project-invite {
   display: flex;
   flex-direction: row;  
   max-width: 800px;  
-  padding: 0px;    
+  padding: 0px;
+  width:100%;
+  margin:0;    
 
   &:hover,
   &:focus {
@@ -60,17 +62,28 @@ div.project-invite {
     display: flex;  
     width: 50%;   
     position: relative;
+    display:flex;
+    justify-content:space-between;
+
+    .invite-edit-div{
+      background:$dark-grey;
+      border-radius:5px;
+      padding: 0% 3%;
+
+      .invite-edit-drop{
+        appearance: none;
+        background: url('../ASSETS/options-icon.png') 99% / 25% no-repeat $dark-grey;
+        padding:10px 25px;
+      }
+    }
 
     .close-collab-icon-div{      
       display:flex;
-      align-items:flex-start;
-      justify-content: flex-end;          
-      position:absolute;
-      top:0px;
-      right:0px;
-      height:15px;
-      width: 15px;
-      
+      align-items:center;      
+      background:#6d6d72;
+      border-radius: 5px;
+      padding: 0% 13%;
+
       .close-collab-icon {                  
         width: 100%;               
         display:flex;

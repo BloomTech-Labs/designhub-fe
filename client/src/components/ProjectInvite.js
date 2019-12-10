@@ -40,7 +40,7 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
           </select>
         </div>
         <div className="close-collab-icon-div" >
-          <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> X </div>
+          <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> Remove </div>
         </div>
 
       </div>
