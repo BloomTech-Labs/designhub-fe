@@ -278,6 +278,7 @@ const ProjectForm = ({
   }
 
   const handleEditAccess = () => {
+    !isEditing ? setKickback(false) :
     axiosWithAuth()
       .get(`/api/v1/projectInvites/${project.id}`)
       .then(res => {
