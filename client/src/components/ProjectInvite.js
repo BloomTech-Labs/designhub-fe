@@ -35,8 +35,8 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
         {/* Any necessary buttons will go here */}
         <div className="invite-edit-div">
           <select className="invite-edit-drop" onChange={handleInviteEdit} value={invite.write ? "edit" : "view"}>
-            <option value="view">View</option>
-            <option value="edit">Edit</option>
+            <option value="view">Can View</option>
+            <option value="edit">Can Edit</option>
           </select>
         </div>
         <div className="close-collab-icon-div" >

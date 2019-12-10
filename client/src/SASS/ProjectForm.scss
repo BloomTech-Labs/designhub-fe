@@ -94,7 +94,7 @@
     display: flex;
     width: 500px;
     flex-direction: column;
-    border-radius: 10px;
+    border-radius: 7px;
     background-color: $black;
     padding: 40px;
     @include themify($themes) {
@@ -171,7 +171,7 @@
           justify-content: space-between;
           align-items: center;
           background-color: $white;
-          border-radius: 5px;
+          border-radius: 3px;
           margin-top: 2px;
           margin-bottom: 2px;
           margin-right: 10px;
