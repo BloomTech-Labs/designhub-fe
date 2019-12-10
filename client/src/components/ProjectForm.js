@@ -467,7 +467,7 @@ const ProjectForm = ({
                       <label htmlFor="share-input" className="label">
                         share link
                     </label>
-                      <input type="text" id="share-input" value={shareLink} />
+                      <input type="text" id="share-input" value={shareLink} readOnly />
                     </div>
                     <div className="add-members-btn-div">
                       <button className="submit-button" onClick={sendInvites}>

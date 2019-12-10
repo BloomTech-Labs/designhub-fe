@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import moment from 'moment';
 
-import { deleteInvite, acceptInvite, getInviteById, getInvitesByUser } from '../store/actions';
+import {
+  deleteInvite,
+  acceptInvite,
+  getInviteById,
+  getInvitesByUser
+} from '../store/actions';
 
 import '../SASS/Notifications.scss';
 
 const Notifications = props => {
   const [state, setState] = useState([]);
   const { id } = props.activeUser;
-  const {invite, usersFromInvites, getInvitesByUser} = props;
- 
+  const { invite, getInvitesByUser } = props;
 
   useEffect(() => {
     try {
@@ -38,20 +42,15 @@ const Notifications = props => {
     } catch (err) {
       console.error(err);
     }
-  }, [id, invite, usersFromInvites, getInvitesByUser]);
-
+  }, [id, invite, getInvitesByUser]);
 
   const handleInvites = (accept, invite) => {
     if (accept) {
       props.acceptInvite(invite.id);
-      
-    }
-    else {
+    } else {
       props.deleteInvite(invite);
-     
     }
-  }
-
+  };
 
   const renderBasedOnType = item => {
     if (item.type === 'comment') {
@@ -94,7 +93,10 @@ const Notifications = props => {
     } else if (item.type === 'collab') {
       const [id] = item.message ? item.message.split(' ') : [null, null];
       console.log('notif id', id);
-      const invite = props.userInvites.length === 0 ? null : props.userInvites.find(invite => invite.id === Number(id));
+      const invite =
+        props.userInvites.length === 0
+          ? null
+          : props.userInvites.find(invite => invite.id === Number(id));
       console.log('userInvites', props.userInvites);
       console.log('notification', item);
       console.log('invite', invite);
@@ -104,18 +106,25 @@ const Notifications = props => {
             {item.unread === true ? <h2 className="unread">.</h2> : null}
             <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
             <p className="commented">
-              {item.activeUsername} invited you to their project {item.projectName}
+              {item.activeUsername} invited you to their project{' '}
+              {item.projectName}
               <span> </span>
               <mark className="from_now">
                 {moment(item.created_at).fromNow()}&nbsp;
               </mark>
             </p>
           </div>
-          <div className='actions'>
-            {!invite ? null : !invite.pending ? <p>Invite Accepted</p> : (
+          <div className="actions">
+            {!invite ? null : !invite.pending ? (
+              <p>Invite Accepted</p>
+            ) : (
               <>
-                <button onClick={() => handleInvites(true, invite)}>Accept</button>
-                <button onClick={() => handleInvites(false, invite)} >Reject</button>
+                <button onClick={() => handleInvites(true, invite)}>
+                  Accept
+                </button>
+                <button onClick={() => handleInvites(false, invite)}>
+                  Reject
+                </button>
               </>
             )}
           </div>
@@ -153,10 +162,11 @@ const Notifications = props => {
 const mapStateToProps = state => {
   return {
     userInvites: state.invites.userInvites,
-    usersFromInvites: state.invites.usersFromInvites,
     invite: state.invites.invite
-    
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, { acceptInvite, deleteInvite, getInviteById, getInvitesByUser })(Notifications);
+export default connect(
+  mapStateToProps,
+  { acceptInvite, deleteInvite, getInviteById, getInvitesByUser }
+)(Notifications);
