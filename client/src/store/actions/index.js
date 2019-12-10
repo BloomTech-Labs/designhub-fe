@@ -195,7 +195,6 @@ export const getInvitesByUser = () => dispatch => {
     .get('/api/v1/projectInvites')
     .then(res => {
       dispatch({ type: GET_INVITES_BY_USER_SUCCESS, payload: res.data })
-      console.log("res.data", res.data);
     })
     .catch(err => {
       dispatch({ type: GET_INVITES_BY_USER_FAILURE, payload: err.message })
@@ -240,7 +239,6 @@ export const updateInvite = (id, changes) => dispatch => {
 
 export const deleteInvite = (invite) => dispatch => {
   dispatch({ type: DELETE_INVITE_START })
-  console.log(invite);
   return axiosWithAuth()
     .delete(`/api/v1/projectInvites/${invite.id}`)
     .then(res => {
@@ -270,8 +268,6 @@ export const getUserByEmail = (email) => dispatch => {
   return axiosWithAuth()
     .get(`/api/v1/users/mail/${email}`)
     .then(res => {
-      console.log("response", res.data);
-      console.log("email", email);
       dispatch({ type: GET_USER_BY_EMAIL_SUCCESS, payload: res.data[0] });
     })
     .catch(err => {
@@ -315,7 +311,6 @@ export const getUsersFromInvites = (invites) => dispatch => {
           });
         })
         .catch(err => {
-          console.log(err);
           dispatch({ type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.' });
           return err;
         })
@@ -351,7 +346,6 @@ export const getAllProjects = () => dispatch => {
 
 export const addProject = project => dispatch => {
   dispatch({ type: ADD_PROJECT_START });
-  console.log(project);
   // Temporary fix
   delete project.projectInvites;
   return axiosWithAuth()
@@ -371,12 +365,10 @@ export const getSingleProject = id => dispatch => {
     .get(`/api/v1/projects/${id}`)
     .then(res => {
       dispatch({ type: GET_SINGLE_PROJECT_SUCCESS, payload: res.data[0] });
-      console.log("res.data single project", res.data)
     })
     .catch(err => {
       //assigns the error status code (401 or 404) returned from the server to payload
       dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response ? err.response.status : "An error occured retrieving that project" });
-      console.log("action error", err.response.status);
     });
 };
 

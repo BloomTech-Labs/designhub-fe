@@ -33,26 +33,25 @@ class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      acceptedCollabInvites:[], //accepted collab invites
-      acceptedCollabProjects:[]//accepted collab projects
-      
+      acceptedCollabInvites: [], //accepted collab invites
+      acceptedCollabProjects: []//accepted collab projects
     };
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
 
   componentDidMount() {
-    this.fetch();    
+    this.fetch();
   }
 
   fetch() {
-      this.props.getInvitesByUser() //collab
-      .then(() => {  
+    this.props.getInvitesByUser() //collab
+      .then(() => {
         this.getAcceptedCollabInvites()
-       })        
+      })
       .then(() => {
         this.props.getSingleUser(this.props.match.params.id, this.props.activeUser.id)
-       })
+      })
       .then(() => {
         this.props.getFollowingCount(this.props.match.params.id);
       })
@@ -61,7 +60,7 @@ class UserProfile_LI extends Component {
       })
       .then(() => {
         this.props.getProjectsByUser(this.props.match.params.id);
-      })      
+      })
       .then(() => {
         this.props.getRecentProjectsByUser(this.props.match.params.id);
       })
@@ -84,7 +83,7 @@ class UserProfile_LI extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
-      this.fetch();      
+      this.fetch();
     }
   }
 
@@ -161,35 +160,26 @@ class UserProfile_LI extends Component {
 
   //get accepted collaboration invites
   getAcceptedCollabInvites = async () => {
-    const invites = this.props.userInvites.filter(invite => invite.pending === false);      
+    const invites = this.props.userInvites.filter(invite => invite.pending === false);
 
     this.setState({
       acceptedCollabInvites: invites,
       acceptedCollabProjects: []
-    })    
+    })
 
+    this.state.acceptedCollabInvites.map(invite => {
+      return this.props.getSingleProject(invite.projectId)
+        .then(() =>
+          this.setState({
+            acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]
+          })
+        )
 
-    console.log('accepted collab invites in LI', this.state.acceptedCollabInvites); 
-    
+    });
 
-    const projects = this.state.acceptedCollabInvites.map( invite => {     
-      this.props.getSingleProject(invite.projectId)
-      .then(() => {
-        console.log("projectX", this.props.singleProject);
-        let project = this.props.singleProject
+  }
 
-        this.setState({
-          acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]         
-        })
-      })      
-     
-    });    
-
-    console.log('accepted collab projects in LI', this.state.acceptedCollabProjects); 
-  }  
-
-  render() {   
-    console.log('accepted collab projects in LI render', this.state.acceptedCollabProjects);  
+  render() {
     window.scroll(0, 0);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
@@ -239,30 +229,15 @@ class UserProfile_LI extends Component {
                 </p>
               </div>
 
-               {/*NUMBER OF COLLABORATION PROJECTS*/}    
-               {(this.props.activeUser.id === this.props.userData.id)  && (
+              {/*NUMBER OF COLLABORATION PROJECTS*/}
+              {(this.props.activeUser.id === this.props.userData.id) && (
                 <div className="count-flex">
-                <h6>Collaborations </h6>                               
-                <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
+                  <h6>Collaborations </h6>
+                  <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
+                </div>
 
-                {console.log("acceptedCollabInvites in conditional", this.state.acceptedCollabInvites)}
-                {console.log("user id", this.props.activeUser.id)}
-                
-              </div>
+              )}
 
-               )}
-
-               
-                {/*<di
-                  v className="count-flex">
-                <h6>Collaborations </h6>                               
-                <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
-
-                {console.log("acceptedCollabInvites in conditional", this.state.acceptedCollabInvites)}
-                {console.log("user id", this.props.activeUser.id)}
-                
-               </div>  */}           
-                            
               <div className="count-flex">
                 <h6>Followers</h6>
                 <p>{this.props.followers ? this.props.followers : 0}</p>
@@ -292,41 +267,41 @@ class UserProfile_LI extends Component {
               </div>
               <div>
                 {this.props.activeUser.id ===
-                Number(this.props.match.params.id) ? (
-                  <Link to="/settings">
-                    <button className="edit-profile-btn">Edit Profile</button>
-                  </Link>
-                ) : (
-                  <>
-                    {this.props.isFollowed ? (
-                      <button
-                        className="edit-profile-btn"
-                        onClick={() =>
-                          this.unfollowUser(
-                            this.props.activeUser.id,
-                            parseInt(this.props.match.params.id)
-                          )
-                        }
-                      >
-                        Unfollow
+                  Number(this.props.match.params.id) ? (
+                    <Link to="/settings">
+                      <button className="edit-profile-btn">Edit Profile</button>
+                    </Link>
+                  ) : (
+                    <>
+                      {this.props.isFollowed ? (
+                        <button
+                          className="edit-profile-btn"
+                          onClick={() =>
+                            this.unfollowUser(
+                              this.props.activeUser.id,
+                              parseInt(this.props.match.params.id)
+                            )
+                          }
+                        >
+                          Unfollow
                       </button>
-                    ) : (
-                      <button
-                        className="follow-btn"
-                        onClick={() =>
-                          this.followUser(
-                            this.props.activeUser.id,
-                            parseInt(this.props.match.params.id),
-                            this.props.activeUser,
-                            this.props.match.params
-                          )
-                        }
-                      >
-                        Follow
+                      ) : (
+                          <button
+                            className="follow-btn"
+                            onClick={() =>
+                              this.followUser(
+                                this.props.activeUser.id,
+                                parseInt(this.props.match.params.id),
+                                this.props.activeUser,
+                                this.props.match.params
+                              )
+                            }
+                          >
+                            Follow
                       </button>
-                    )}
-                  </>
-                )}
+                        )}
+                    </>
+                  )}
               </div>
             </div>
           </div>
@@ -343,12 +318,12 @@ class UserProfile_LI extends Component {
           unfollowUser={this.unfollowUser}
           activeUser={this.props.activeUser}
           params={this.props.match.params}
-          isProjectsLoading = {this.props.isProjectsLoading}
-          acceptedCollabInvites = {this.state.acceptedCollabInvites} //accepted collab invites  
-          getSingleProject = {this.props.getSingleProject}   //collab
-          singleProject = {this.props.singleProject} //collab     
-          acceptedCollabProjects = {this.state.acceptedCollabProjects} 
-          userData = {this.props.userData}
+          isProjectsLoading={this.props.isProjectsLoading}
+          acceptedCollabInvites={this.state.acceptedCollabInvites} //accepted collab invites  
+          getSingleProject={this.props.getSingleProject}   //collab
+          singleProject={this.props.singleProject} //collab     
+          acceptedCollabProjects={this.state.acceptedCollabProjects}
+          userData={this.props.userData}
         />
       </div>
     );
@@ -370,7 +345,7 @@ const mapStateToProps = state => {
     isProjectsLoading: state.projects.isLoading,
     userInvites: state.invites.userInvites, //collab - all project invites by user id
     singleProject: state.projects.singleProject
-    
+
   };
 };
 

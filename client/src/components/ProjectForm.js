@@ -57,6 +57,9 @@ const ProjectForm = ({
     isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   );
 
+  const [editAccess, setEditAccess] = useState(true);
+  const [kickback, setKickback] = useState(true);
+
   const shareLink = String(window.location).slice(0, String(window.location).length - 4)
 
   const [state, setState] = useState({
@@ -271,16 +274,43 @@ const ProjectForm = ({
   const getInvites = () => {
     if (isEditing && project.id) {
       getInvitesByProjectId(project.id);
-
     }
   }
 
+  const handleEditAccess = () => {
+    axiosWithAuth()
+      .get(`/api/v1/projectInvites/${project.id}`)
+      .then(res => {
+        const aInvites = res.data.filter(invite => !invite.pending);
+        const userInvite = aInvites.find(invite => invite.email === user.email);
+        console.log('aInvites', aInvites);
+        console.log('userinvite', userInvite);
+        if (user.id === project.userId || (userInvite && userInvite.write === true)) {
+          //authorized
+          setEditAccess(true);
+          setKickback(false);
+        }
+        else {
+          //not authorized
+          setEditAccess(false);
+          setKickback(false);
+        }
+      })
+      .catch(err => {
+        console.log('handleEditAccess error')
+      })
+  }
+
   useEffect(getInvites, [invite])
+
+
+  useEffect(handleEditAccess, []);
 
   // Get users for each invite present
   const getProjectUsers = () => {
     // Reset the list
     getUsersFromInvites(projectInvites);
+    handleEditAccess();
   };
 
   useEffect(getProjectUsers, [projectInvites]);
@@ -329,20 +359,7 @@ const ProjectForm = ({
   };
 
 
-  const editAccess = () => {
-    const userInvite = acceptedInvites.find(invite => invite.email === user.email);
-    console.log('accepted invites', acceptedInvites);
-    if (user.id === project.userId || (userInvite && userInvite.write === true)) {
-      //authorized
-      return false
-    }
-    else {
-      //not authorized
-      return true
-    }
-  }
-
-  return isEditing && editAccess() ? (
+  return kickback ? <Loading /> : isEditing && !editAccess ? (
     <Redirect to={`/project/${project.id}`} />
   ) : (
       <div className="project-form-wrapper">
