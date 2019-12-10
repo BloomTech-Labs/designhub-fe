@@ -211,7 +211,6 @@
       font-size: 12px;
       margin-bottom: 20px;
       height: 240px;
-      border: 1px solid $field-stroke;
       overflow: auto;
       @include themify($themes) {
         background-color: themed('bg2');

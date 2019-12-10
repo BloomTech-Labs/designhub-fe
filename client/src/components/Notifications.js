@@ -17,7 +17,6 @@ const Notifications = props => {
   const [state, setState] = useState([]);
   const { id } = props.activeUser;
   const { invite, getInvitesByUser } = props;
-
   useEffect(() => {
     try {
       const turnToRead = async data => {
@@ -92,14 +91,7 @@ const Notifications = props => {
       );
     } else if (item.type === 'collab') {
       const [id] = item.message ? item.message.split(' ') : [null, null];
-      console.log('notif id', id);
-      const invite =
-        props.userInvites.length === 0
-          ? null
-          : props.userInvites.find(invite => invite.id === Number(id));
-      console.log('userInvites', props.userInvites);
-      console.log('notification', item);
-      console.log('invite', invite);
+      const invite = props.userInvites.length === 0 ? null : props.userInvites.find(invite => invite.id === Number(id));
       return (
         <div key={item.id} className="commented_notification">
           <div className="commented_left">
