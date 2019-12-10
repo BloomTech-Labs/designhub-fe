@@ -283,8 +283,6 @@ const ProjectForm = ({
       .then(res => {
         const aInvites = res.data.filter(invite => !invite.pending);
         const userInvite = aInvites.find(invite => invite.email === user.email);
-        console.log('aInvites', aInvites);
-        console.log('userinvite', userInvite);
         if (user.id === project.userId || (userInvite && userInvite.write === true)) {
           //authorized
           setEditAccess(true);
@@ -622,13 +620,15 @@ const ProjectForm = ({
                         )
                       );
                     })}
-                    <div
-                      id="inviteLink"
-                      className="invite"
-                      onClick={() => setState({ ...state, inviteModal: true })}
-                    >
-                      <div>+</div>
-                    </div>
+                    {user.id !== project.userId ? null :
+                      <div
+                        id="inviteLink"
+                        className="invite"
+                        onClick={() => setState({ ...state, inviteModal: true })}
+                      >
+                        <div>+</div>
+                      </div>
+                    }
                   </div>
                 </>
               )}
