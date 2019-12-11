@@ -8,9 +8,9 @@ function Error404Projects(props){
 
         
         <div className="empty-state">
-            <h1 className="no-projects-title">
+            <h2 className="no-projects-title">
                 Whoops!
-            </h1>
+            </h2>
             <img src={empty} alt="empty" className="empty-icon" />
             <h1 className="no-projects">
                 Looks like there's nothing here.
