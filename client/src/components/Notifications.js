@@ -101,6 +101,7 @@ const Notifications = props => {
               {item.activeUsername} invited you to their project{' '}
               {item.projectName}
               <span> </span>
+             
               <mark className="from_now">
                 {moment(item.created_at).fromNow()}&nbsp;
               </mark>
@@ -108,14 +109,14 @@ const Notifications = props => {
           </div>
           <div className="actions">
             {!invite ? null : !invite.pending ? (
-              <p>Invite Accepted</p>
+              <p></p>
             ) : (
               <>
-                <button onClick={() => handleInvites(true, invite)}>
+                <button className = "notifications-accept-btn" onClick={() => handleInvites(true, invite)}>
                   Accept
                 </button>
-                <button onClick={() => handleInvites(false, invite)}>
-                  Reject
+                <button className = "notifications-reject-btn" onClick={() => handleInvites(false, invite)}>
+                  Decline
                 </button>
               </>
             )}
@@ -153,7 +154,7 @@ const Notifications = props => {
 
 const mapStateToProps = state => {
   return {
-    userInvites: state.invites.userInvites,
+    userInvites: state.invites.userInvites, //invites by user id
     invite: state.invites.invite
   };
 };
