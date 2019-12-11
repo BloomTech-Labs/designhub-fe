@@ -583,7 +583,7 @@ const ProjectForm = ({
                 Privacy
             </label>
               {/*PROTOTYPE LABEL AND TEXT FIELD*/}
-              {user.id !== project.userId ? null :
+              {isEditing || (project && user.id !== project.userId) ? null :
                 <select
                   type="select"
                   name="privacy"
