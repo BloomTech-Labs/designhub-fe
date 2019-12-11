@@ -34,8 +34,13 @@ class UserProfile_LI extends Component {
     super(props);
     this.state = {
       acceptedCollabInvites: [], //accepted collab invites
-      acceptedCollabProjects: []//accepted collab projects
+      acceptedCollabProjects: [],//accepted collab projects
+      currentTab: 0              // Current selected tab in sub-navigation
     };
+  }
+
+  setCurrentTab(tabIndex) {
+    this.setState({currentTab: tabIndex});
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
@@ -220,7 +225,7 @@ class UserProfile_LI extends Component {
           </div>
           <div className="user-data-container">
             <div className="user-data">
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(1)}>
                 <h6>Projects</h6>
                 <p>
                   {this.props.projects === null
@@ -231,22 +236,22 @@ class UserProfile_LI extends Component {
 
               {/*NUMBER OF COLLABORATION PROJECTS*/}
               {(this.props.activeUser.id === this.props.userData.id) && (
-                <div className="count-flex">
+                <div className="count-flex" onClick={() => this.setCurrentTab(1)}>
                   <h6>Collaborations </h6>
                   <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
                 </div>
 
               )}
 
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(2)}>
                 <h6>Followers</h6>
                 <p>{this.props.followers ? this.props.followers : 0}</p>
               </div>
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(3)}>
                 <h6>Following</h6>
                 <p>{this.props.following ? this.props.following : 0}</p>
               </div>
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(4)}>
                 <h6>Starred</h6>
                 <p>
                   {this.props.starred === null ? 0 : this.props.starred.length}
@@ -307,6 +312,8 @@ class UserProfile_LI extends Component {
           </div>
         </div>
         <UserProfileTabs
+          currentTab={this.state.currentTab}
+          setCurrentTab={this.setCurrentTab.bind(this)}
           projects={this.props.projects}
           recentProjects={this.props.recentProjects}
           followers={this.props.followersTab}

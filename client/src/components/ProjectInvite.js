@@ -39,8 +39,8 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
             <option value="edit">Can Edit</option>
           </select>
         </div>
-        <div className="close-collab-icon-div" >
-          <div className="close-collab-icon" onClick={() => handleInviteDelete(invite)}> Remove </div>
+        <div className="close-collab-icon-div" onClick={() => handleInviteDelete(invite)}>
+          <div className="close-collab-icon" > Remove </div>
         </div>
 
       </div>
