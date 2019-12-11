@@ -363,7 +363,6 @@ const ProjectForm = ({
     <Redirect to={`/project/${project.id}`} />
   ) : (
       <div className="project-form-wrapper">
-        {console.log('project', project)}
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
