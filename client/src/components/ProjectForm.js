@@ -195,6 +195,7 @@ const ProjectForm = ({
   };
 
   const editProject = (changes, id) => {
+    console.log('edit changes', changes);
     const updateMainImg = (changes, id) => {
       updateProject(id, changes)
         .then(res => {
@@ -279,25 +280,25 @@ const ProjectForm = ({
 
   const handleEditAccess = () => {
     !isEditing ? setKickback(false) :
-    axiosWithAuth()
-      .get(`/api/v1/projectInvites/${project.id}`)
-      .then(res => {
-        const aInvites = res.data.filter(invite => !invite.pending);
-        const userInvite = aInvites.find(invite => invite.email === user.email);
-        if (user.id === project.userId || (userInvite && userInvite.write === true)) {
-          //authorized
-          setEditAccess(true);
-          setKickback(false);
-        }
-        else {
-          //not authorized
-          setEditAccess(false);
-          setKickback(false);
-        }
-      })
-      .catch(err => {
-        console.log('handleEditAccess error')
-      })
+      axiosWithAuth()
+        .get(`/api/v1/projectInvites/${project.id}`)
+        .then(res => {
+          const aInvites = res.data.filter(invite => !invite.pending);
+          const userInvite = aInvites.find(invite => invite.email === user.email);
+          if (user.id === project.userId || (userInvite && userInvite.write === true)) {
+            //authorized
+            setEditAccess(true);
+            setKickback(false);
+          }
+          else {
+            //not authorized
+            setEditAccess(false);
+            setKickback(false);
+          }
+        })
+        .catch(err => {
+          console.log('handleEditAccess error')
+        })
   }
 
   useEffect(getInvites, [invite])
@@ -362,6 +363,7 @@ const ProjectForm = ({
     <Redirect to={`/project/${project.id}`} />
   ) : (
       <div className="project-form-wrapper">
+        {console.log('project', project)}
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
@@ -581,17 +583,19 @@ const ProjectForm = ({
                 Privacy
             </label>
               {/*PROTOTYPE LABEL AND TEXT FIELD*/}
-              <select
-                type="select"
-                name="privacy"
-                value={privacy}
-                placeholder="Select privacy settings"
-                id="privacyLink"
-                onChange={handlePrivacySetting}
-              >
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-              </select>
+              {isEditing || (project && user.id !== project.userId) ? null :
+                <select
+                  type="select"
+                  name="privacy"
+                  value={privacy}
+                  placeholder="Select privacy settings"
+                  id="privacyLink"
+                  onChange={handlePrivacySetting}
+                >
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+                </select>
+              }
               {isEditing && (
                 <>
                   <label htmlFor="inviteLink" className="label">
@@ -663,7 +667,7 @@ const ProjectForm = ({
                 </button>
               </div>
               <div className="error">{error}</div>
-              {isEditing && (
+              {isEditing && user.id === project.userId && (
                 <div
                   className="delete-project-button"
                   onClick={() =>
