@@ -195,6 +195,7 @@ const ProjectForm = ({
   };
 
   const editProject = (changes, id) => {
+    console.log('edit changes', changes);
     const updateMainImg = (changes, id) => {
       updateProject(id, changes)
         .then(res => {
@@ -362,6 +363,7 @@ const ProjectForm = ({
     <Redirect to={`/project/${project.id}`} />
   ) : (
       <div className="project-form-wrapper">
+        {console.log('project', project)}
         {isLoading && <Loading />}
         <div className={state.modal ? 'modal--expand' : 'modal--close'}>
           <span
@@ -581,17 +583,19 @@ const ProjectForm = ({
                 Privacy
             </label>
               {/*PROTOTYPE LABEL AND TEXT FIELD*/}
-              <select
-                type="select"
-                name="privacy"
-                value={privacy}
-                placeholder="Select privacy settings"
-                id="privacyLink"
-                onChange={handlePrivacySetting}
-              >
-                <option value="public">Public</option>
-                <option value="private">Private</option>
-              </select>
+              {user.id !== project.userId ? null :
+                <select
+                  type="select"
+                  name="privacy"
+                  value={privacy}
+                  placeholder="Select privacy settings"
+                  id="privacyLink"
+                  onChange={handlePrivacySetting}
+                >
+                  <option value="public">Public</option>
+                  <option value="private">Private</option>
+                </select>
+              }
               {isEditing && (
                 <>
                   <label htmlFor="inviteLink" className="label">
