@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import moment from 'moment';
@@ -10,6 +10,7 @@ import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
 
 class UserProfile_Tabs extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,7 +32,7 @@ class UserProfile_Tabs extends Component {
       return (
         <div className="profile-tabs-container">
           <div>
-            <Tabs>
+            <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
