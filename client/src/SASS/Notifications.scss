@@ -5,6 +5,21 @@
   width: 97%;
   color: white;
 
+  .empty {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20%;
+
+    .empty-icon{
+      opacity: 0.04;
+
+      @include themify($themes) {
+        filter: themed('filter');
+      }
+    }
+  }
+
   .commented_notification {
     display: flex;
     justify-content: space-between;
