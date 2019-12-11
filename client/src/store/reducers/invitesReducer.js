@@ -169,6 +169,7 @@ export const invitesReducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: false,
+        invite: {},
         usersFromInvites: state.usersFromInvites.filter(user => user.email !== action.payload)
       };
     case DELETE_INVITE_FAILURE:
