@@ -10,6 +10,9 @@ export const GET_SINGLE_USER_FAILURE = 'GET_SINGLE_USER_FAILURE';
 export const UPDATE_USER_START = 'UPDATE_USER_START';
 export const UPDATE_USER_SUCCESS = 'UPDATE_USER_SUCCESS';
 export const UPDATE_USER_FAILURE = 'UPDATE_USER_FAILURE';
+export const GET_USER_BY_EMAIL_START = 'GET_USER_BY_EMAIL_START';
+export const GET_USER_BY_EMAIL_SUCCESS = 'GET_USER_BY_EMAIL_SUCCESS';
+export const GET_USER_BY_EMAIL_FAILURE = 'GET_USER_BY_EMAIL_FAILURE';
 
 // Projects
 export const GET_ALL_PROJECTS_START = 'GET_ALL_PROJECTS_START';
@@ -132,7 +135,120 @@ export const DELETE_HEATMAP_START = 'DELETE_HEATMAP_START';
 export const DELETE_HEATMAP_SUCCESS = 'DELETE_HEATMAP_SUCCESS';
 export const DELETE_HEATMAP_FAILURE = 'DELETE_HEATMAP_FAILURE';
 
+//project invites
+export const GET_INVITES_BY_USER_START = "GET_INVITES_BY_USER_START";
+export const GET_INVITES_BY_USER_SUCCESS = "GET_INVITES_BY_USER_SUCCESS";
+export const GET_INVITES_BY_USER_FAILURE = "GET_INVITES_BY_USER_FAILURE";
+export const GET_INVITE_START = "GET_INVITE_START";
+export const GET_INVITE_SUCCESS = "GET_INVITE_SUCCESS";
+export const GET_INVITE_FAILURE = "GET_INVITE_FAILURE";
+export const GET_INVITES_BY_PROJECTID_START = "GET_INVITES_BY_PROJECTID_START";
+export const GET_INVITES_BY_PROJECTID_SUCCESS = "GET_INVITES_BY_PROJECTID_SUCCESS";
+export const GET_INVITES_BY_PROJECTID_FAILURE = "GET_INVITES_BY_PROJECTID_FAILURE";
+export const CREATE_PROJECT_INVITE_START = "CREATE_PROJECT_INVITE_START";
+export const CREATE_PROJECT_INVITE_SUCCESS = "CREATE_PROJECT_INVITE_SUCCESS";
+export const CREATE_PROJECT_INVITE_FAILURE = "CREATE_PROJECT_INVITE_FAILURE";
+export const ACCEPT_INVITE_START = "ACCEPT_INVITE_START";
+export const ACCEPT_INVITE_SUCCESS = "ACCEPT_INVITE_SUCCESS";
+export const ACCEPT_INVITE_FAILURE = "ACCEPT_INVITE_FAILURE";
+export const UPDATE_INVITE_START = "UPDATE_INVITE_START";
+export const UPDATE_INVITE_SUCCESS = "UPDATE_INVITE_SUCCESS";
+export const UPDATE_INVITE_FAILURE = "UPDATE_INVITE_FAILURE";
+export const DELETE_INVITE_START = "DELETE_INVITE_START";
+export const DELETE_INVITE_SUCCESS = "DELETE_INVITE_SUCCESS";
+export const DELETE_INVITE_FAILURE = "DELETE_INVITE_FAILURE";
+export const GET_USERS_FROM_INVITES_START = 'GET_USERS_FROM_INVITES_START';
+export const GET_USERS_FROM_INVITES_SUCCESS = 'GET_USERS_FROM_INVITES_SUCCESS';
+export const GET_USERS_FROM_INVITES_FAILURE = 'GET_USERS_FROM_INVITES_FAILURE';
+
+
 //############# ACTIONS #############
+//project invites
+
+export const getInviteById = (id) => dispatch => {
+  dispatch({ type: GET_INVITE_START })
+  return axiosWithAuth()
+    .get(`api/v1/projectInvites/invite/${id}`)
+    .then(res => {
+      dispatch({ type: GET_INVITE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_INVITE_FAILURE, payload: err.message })
+    })
+}
+
+export const createProjectInvite = invite => dispatch => {
+  dispatch({ type: CREATE_PROJECT_INVITE_START })
+  return axiosWithAuth()
+    .post('api/v1/projectInvites/create', invite)
+    .then(res => {
+      dispatch({ type: CREATE_PROJECT_INVITE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: CREATE_PROJECT_INVITE_FAILURE, payload: err.message })
+    })
+}
+
+export const getInvitesByUser = () => dispatch => {
+  dispatch({ type: GET_INVITES_BY_USER_START })
+  return axiosWithAuth()
+    .get('/api/v1/projectInvites')
+    .then(res => {
+      dispatch({ type: GET_INVITES_BY_USER_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_INVITES_BY_USER_FAILURE, payload: err.message })
+    })
+}
+
+export const getInvitesByProjectId = (id) => dispatch => {
+  dispatch({ type: GET_INVITES_BY_PROJECTID_START })
+  return axiosWithAuth()
+    .get(`/api/v1/projectInvites/${id}`)
+    .then(res => {
+      dispatch({ type: GET_INVITES_BY_PROJECTID_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_INVITES_BY_PROJECTID_FAILURE, payload: err.message })
+    })
+}
+
+export const acceptInvite = (id) => dispatch => {
+  dispatch({ type: ACCEPT_INVITE_START })
+  return axiosWithAuth()
+    .put(`/api/v1/projectInvites/accept/${id}`)
+    .then(res => {
+      dispatch({ type: ACCEPT_INVITE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: ACCEPT_INVITE_FAILURE, payload: err.message })
+    })
+}
+
+export const updateInvite = (id, changes) => dispatch => {
+  dispatch({ type: UPDATE_INVITE_START })
+  return axiosWithAuth()
+    .put(`/api/v1/projectInvites/${id}`, changes)
+    .then(res => {
+      dispatch({ type: UPDATE_INVITE_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_INVITE_FAILURE, payload: err.message })
+    })
+}
+
+export const deleteInvite = (invite) => dispatch => {
+  dispatch({ type: DELETE_INVITE_START })
+  return axiosWithAuth()
+    .delete(`/api/v1/projectInvites/${invite.id}`)
+    .then(res => {
+      dispatch({ type: DELETE_INVITE_SUCCESS, payload: invite.email })
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_INVITE_FAILURE, payload: err.message })
+    })
+}
+
 // Users Actions
 export const getAllUsers = () => dispatch => {
   dispatch({ type: GET_ALL_USERS_START });
@@ -146,6 +262,20 @@ export const getAllUsers = () => dispatch => {
     });
 };
 
+// Users Actions
+export const getUserByEmail = (email) => dispatch => {
+  dispatch({ type: GET_USER_BY_EMAIL_START });
+  return axiosWithAuth()
+    .get(`/api/v1/users/mail/${email}`)
+    .then(res => {
+      dispatch({ type: GET_USER_BY_EMAIL_SUCCESS, payload: res.data[0] });
+    })
+    .catch(err => {
+      dispatch({ type: GET_USER_BY_EMAIL_FAILURE, error: err });
+    });
+};
+
+
 export const getSingleUser = (id, theirId) => dispatch => {
   dispatch({ type: GET_SINGLE_USER_START });
   return axiosWithAuth()
@@ -157,6 +287,37 @@ export const getSingleUser = (id, theirId) => dispatch => {
       dispatch({ type: GET_SINGLE_USER_FAILURE, error: err });
     });
 };
+
+export const getUsersFromInvites = (invites) => dispatch => {
+  dispatch({ type: GET_USERS_FROM_INVITES_START });
+  if (invites.length === 0) {
+    dispatch({ type: GET_USERS_FROM_INVITES_SUCCESS, payload: { lastOne: true } });
+  }
+  invites.forEach((invite, index) => {
+    const lastOne = index === invites.length - 1;
+    if (!invite.userId) {
+      dispatch({ type: GET_USERS_FROM_INVITES_SUCCESS, payload: { user: { email: invite.email }, lastOne } });
+    }
+    else {
+      axiosWithAuth()
+        .get(`/api/v1/users/mail/${invite.email}`)
+        .then(res => {
+          dispatch({
+            type: GET_USERS_FROM_INVITES_SUCCESS,
+            payload: {
+              user: res.data[0],
+              lastOne
+            }
+          });
+        })
+        .catch(err => {
+          dispatch({ type: GET_USERS_FROM_INVITES_FAILURE, payload: 'Failed to retrieve collaborators.' });
+          return err;
+        })
+    }
+
+  })
+}
 
 export const updateUser = (id, changes) => dispatch => {
   dispatch({ type: UPDATE_USER_START });
@@ -185,6 +346,8 @@ export const getAllProjects = () => dispatch => {
 
 export const addProject = project => dispatch => {
   dispatch({ type: ADD_PROJECT_START });
+  // Temporary fix
+  delete project.projectInvites;
   return axiosWithAuth()
     .post('/api/v1/projects', project)
     .then(res => {
@@ -205,13 +368,14 @@ export const getSingleProject = id => dispatch => {
     })
     .catch(err => {
       //assigns the error status code (401 or 404) returned from the server to payload
-      dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response.status });
-      console.log("action error", err.response.status);
+      dispatch({ type: GET_SINGLE_PROJECT_FAILURE, payload: err.response ? err.response.status : "An error occured retrieving that project" });
     });
 };
 
 export const updateProject = (id, changes) => dispatch => {
   dispatch({ type: UPDATE_PROJECT_START });
+  // Deleting this property as it causes a 400 response
+  delete changes.projectInvites;
   return axiosWithAuth()
     .put(`/api/v1/projects/${id}`, changes)
     .then(res => {

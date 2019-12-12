@@ -43,10 +43,48 @@
       letter-spacing: 0.11em;
       padding-right: 2%;
     }
+
     .project-header-username a {
       color: #5557fe;
       text-decoration: none;
     }
+
+    .collab-count{
+      .collab-members{
+        color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0);
+
+        user-select: none;
+
+        font-family: 'Helvetica';
+
+        padding: 5px;
+        font-size: 14px;
+        text-align: center;
+
+        width: auto;
+        position: absolute;
+
+        border-radius: 3px;
+
+        box-shadow: 0 0 0px 0 none;
+
+        transform: translate(-95px,30px);
+
+        transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+      }
+    }
+
+    .collab-count:hover{
+      .collab-members{
+          color: white;
+
+          background-color: black;
+          box-shadow: 0 0 1px 0 gray;
+        
+      }
+    }
+
   }
   .project-header-right {
     width: 40%;
