@@ -496,13 +496,13 @@ const ProjectForm = ({
           </span>
         </div>
       </div>
-      <section className="ProjectForm__body">
-        <div className="left-container">
-          <header className="ProjectForm__header">
+      <header className="ProjectForm__header">
             <h2 className="page-header">
               {isEditing ? 'Edit project' : 'Create a project'}
             </h2>
           </header>
+      <section className="ProjectForm__body">
+        <div className="left-container">
           <MultiImageUpload filesArray={{ files, setFiles }} />
           {isEditing && (
             <div>
