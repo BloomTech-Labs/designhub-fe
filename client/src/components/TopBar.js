@@ -14,11 +14,16 @@ import '../SASS/TopBar.scss';
 const TopBar = ({ history, activeUser, searchData, getSearch }) => {
   const { logout } = useAuth0();
 
-  const [light, setLight] = useState(false);
+  const startLight = localStorage.getItem('theme') === 'light';
+
+  const [light, setLight] = useState(startLight);
   const [show, setShow] = useState(false);
   const target = useRef();
 
   useEffect(() => {
+    if(startLight) {
+      toggleLightMode();
+    }
     document.addEventListener('mousedown', handleClick);
     return () => {
       document.removeEventListener('mousedown', handleClick);
@@ -34,9 +39,18 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
 
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
-    document.documentElement.classList.toggle('theme-light');
+    toggleLightMode();
+    if(light) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
     setLight(!light);
   };
+
+  const toggleLightMode = () => {
+    document.documentElement.classList.toggle('theme-light');
+  }
 
   const [open, mobileNav] = useState(true);
   const toggleNav = () => {
