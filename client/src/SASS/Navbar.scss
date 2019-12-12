@@ -5,8 +5,13 @@ nav {
   display: flex;
   width: 100%;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 0 8px -4px gray;
+  box-shadow: 0 0 8px -4px black;
+
   border-radius: 10px;
+
+  @include themify($themes) {
+    box-shadow: 0 0 8px -4px themed('shadow');
+  }
 
   .icon-links {
     display: flex;

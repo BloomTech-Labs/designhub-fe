@@ -149,10 +149,10 @@ class UserProfile_LI extends Component {
   };
 
   render() {
-    window.scroll(0, 0);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
     }
+    window.scroll(0, 0);
     return (
       <div className="user-profile-container">
         <div className="user-header">
