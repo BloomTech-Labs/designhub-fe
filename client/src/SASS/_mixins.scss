@@ -134,11 +134,36 @@
     @include onboard-form__textarea;
   }
 
+  div.invite {
+    @include onboard-form__div;
+
+  }
+
+  div.close-icon {
+    @include onboard-form__div;
+  }  
+
+  div.share-icon {
+    @include onboard-form__div;
+  }
+  
+  div.colab-input-wrapper {
+    @include onboard-form__div;
+  }
+
+  div.invite-chip {
+    @include onboard-form__div;
+  }
+
+  div.project-invite {
+    @include onboard-form__div;    
+  }
+
   div.required {
     display: flex;
     flex-direction: column;
   }
-
+ 
   div.required.alert {
     &:after {
       margin: 0.4rem;
@@ -245,6 +270,33 @@
   &:focus,
   &:hover {
     outline: auto 4px -webkit-focus-ring-color;
+  }
+}
+
+@mixin onboard-form__div {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11rem;
+  margin-top: 0.4rem;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+  }
+  &:hover,
+  &:focus {
+    outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    border: 2px solid $alert;
   }
 }
 

@@ -80,6 +80,220 @@
     }
   }
 
+  /****************************INVITE MODAL************************/
+  .invite-modal {
+    @include onboard-form;
+    @include themify($themes) {
+      background-color: themed('bg');
+    }
+    margin: 0;
+    width: 100%;
+    overflow: auto;
+
+    position: relative;
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    border-radius: 7px;
+    background-color: $black;
+    padding: 40px;
+    @include themify($themes) {
+      background-color: themed('bg2');
+    }
+
+    .close-icon-div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8%;
+      position: absolute;
+      top: 10px;
+      right: 0px;
+
+      div.close-icon {
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        border: 1px solid $field-stroke;
+        //background-color: $light-black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 3% 3%;
+        font-family: 'Helvetica';
+        font-size: 14px;
+
+        cursor: pointer;
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
+      }
+    }
+
+    form {
+      @include onboard-form;
+      @include themify($themes) {
+        background-color: themed('bg');
+      }
+      margin: 0;
+      width: 100%;
+
+      label {
+        user-select: none;
+        text-align: left;
+        margin-top: 10px;
+        margin-bottom: 5px;
+        font-size: 15px;
+        line-height: 21px;
+      }
+
+      div.colab-input-wrapper {
+        display: flex;
+        flex-grow: 3;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: space-around;
+        padding: 0px;
+        max-width: 100%;
+        height: 36px;
+        height: auto;
+        font-size: 12px;
+        margin-bottom: 20px;
+        border: 1px solid $field-stroke;
+        //overflow: auto;
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
+
+        div.invite-chip {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-between;
+          align-items: center;
+          background-color: $white;
+          border-radius: 3px;
+          margin-top: 2px;
+          margin-bottom: 2px;
+          margin-right: 10px;
+          height: 90%;
+          color: $black;
+          width: auto;
+
+          .remove-chip {
+            margin-left: 10px;
+          }
+        }
+
+        input {
+          flex-grow: 3;
+          //width:100%;
+          height: 35px;
+          font-size: 12px;
+          margin-top: 0px;
+          //margin-bottom: 20px;
+          border: 1px solid $field-stroke;
+          @include themify($themes) {
+            background-color: themed('bg2');
+          }
+        }
+      }
+    } //end form
+
+    label {
+      text-align: left;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      font-size: 15px;
+      line-height: 21px;
+    }
+
+    .collab-view {
+      font-size: 12px;
+      margin-bottom: 20px;
+      height: 240px;
+      overflow: auto;
+      @include themify($themes) {
+        background-color: themed('bg2');
+      }
+    }
+
+    .invite-modal-bottom-div {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+
+      .share-icon-div {
+        display: flex;
+        align-items: flex-end;
+        width: 8%;
+
+        div.share-icon {
+          width: 80%;
+          border-radius: 100%;
+          border: 1px solid $field-stroke;
+          //background-color: $light-black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 32px;
+          margin: 2% 0%;
+          cursor: pointer;
+          @include themify($themes) {
+            background-color: themed('bg2');
+          }
+        }
+      }
+
+      .share-link-div {
+        @include onboard-form;
+        @include themify($themes) {
+          background-color: themed('bg');
+        }
+
+        margin: 0;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 55%;
+
+        .label {
+          margin-bottom: 0;
+          font-size: 12px;
+          line-height: 10px;
+        }
+
+        input {
+          font-size: 12px;
+          padding: 7px;
+          //margin-bottom: 20px;
+          border: 1px solid $field-stroke;
+          @include themify($themes) {
+            background-color: themed('bg2');
+          }
+        }
+      }
+
+      .add-members-btn-div {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        width: 30%;
+
+        .submit-button {
+          @include primary-btn;
+          font-size: 10px;
+          padding: 0 0;
+          width: 80%;
+          height: 40%;
+          //margin-top: 16px;
+        }
+      }
+    } //end invite-modal-bottom-div
+  } //end invite-modal
+
   .left-container {
     width: 100%;
     // max-width: 100%;
@@ -297,9 +511,38 @@
           background-color: themed('bg2');
         }
       }
-      
+
       option {
         font-size: 13px;
+      }
+
+      div.invite {
+        border-radius: 50%;
+        //background-color: $light-black;
+        border: 1px solid $field-stroke;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        margin: 2% 3px;
+        cursor: pointer;
+
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
+
+        transition: background-color 0.2s;
+      }
+
+      div.invite:hover {
+        outline: none;
+
+        background-color: gray;
+
+        @include themify($themes) {
+          background-color: themed('white');
+        }
       }
 
       .required.alert input {
@@ -329,7 +572,61 @@
       }
     }
 
+    .collab-pics {
+      display: flex;
+      align-content: center;
+      flex-flow: row wrap;
+
+      .avatar {
+        display: flex;
+        height: 50px;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        margin: 2% 3px;
+
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 50%;
+        }
+
+        .name {
+          color: rgba(0, 0, 0, 0);
+          background-color: rgba(0, 0, 0, 0);
+
+          user-select: none;
+
+          font-family: 'Helvetica';
+
+          padding: 5px;
+          font-size: 14px;
+          text-align: center;
+
+          width: auto;
+          position: absolute;
+
+          border-radius: 3px;
+
+          box-shadow: 0 0 0px 0 none;
+
+          transform: translateY(45px);
+
+          transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+        }
+      }
+
+      .avatar:hover {
+        .name {
+          color: white;
+
+          background-color: black;
+          box-shadow: 0 0 1px 0 gray;
+        }
+      }
+    }
     .required-help {
+      margin-top: 16px;
       color: $dark-grey;
     }
 
@@ -357,12 +654,12 @@
 
     .submit-button {
       @include primary-btn;
-      margin-top: 16px;
+      margin-top: 8px;
     }
 
     .cancel-btn {
       @include secondary-btn;
-      margin-top: 16px;
+      margin-top: 8px;
       margin-right: 16px;
     }
   }
@@ -371,7 +668,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: 0rem;
     opacity: 0.6;
     width: max-content;
 

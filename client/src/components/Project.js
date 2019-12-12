@@ -21,7 +21,9 @@ import {
   getProjectComments,
   starProject,
   getStarStatus,
-  unstarProject
+  unstarProject,
+  getInvitesByProjectId,
+  getUsersFromInvites
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -30,9 +32,18 @@ class Projects extends Component {
   constructor(props) {
     super(props);
     this.projectId = this.props.match.params.id;
+    this.state = {
+      editAccess: false,
+
+    }
   }
 
   componentDidMount() {
+    this.props.getInvitesByProjectId(this.projectId)
+      .then(() => {
+        this.handleEditAccess();
+        this.props.getUsersFromInvites(this.props.projectInvites);
+      });
     this.props.getStarStatus(
       this.props.activeUser.id,
       this.props.match.params.id
@@ -41,21 +52,21 @@ class Projects extends Component {
       .getSingleProject(this.projectId) //gets a single project from the database
       .then(() => {
         //if there is an error skip the rest of this if/else block
-        if(this.props.singleProjectError !== null){ 
+        if (this.props.singleProjectError !== null) {
           console.log("single project error", this.props.singleProjectError);
           return;
         }
         else {//if there are no errors, get the project, photos, and comments
           this.props.getSingleProject(this.projectId)
-          .then(() => {
-            this.props.getProjectPhotos(this.projectId);
-          })
-          .then(() => {
-            this.props.getProjectComments(this.props.match.params.id);
-          });
+            .then(() => {
+              this.props.getProjectPhotos(this.projectId);
+            })
+            .then(() => {
+              this.props.getProjectComments(this.props.match.params.id);
+            });
 
         }
-      })     
+      })
   }
 
   starProject = () => {
@@ -82,6 +93,16 @@ class Projects extends Component {
       );
     });
   };
+
+  handleEditAccess = () => {
+    const userInvite = this.props.acceptedInvites.find(invite => invite.email === this.props.activeUser.email);
+    if (!userInvite || userInvite.write === false) {
+      this.setState({ editAccess: false });
+    }
+    else {
+      this.setState({ editAccess: true });
+    }
+  }
 
   render() {
     const activeUser = this.props.activeUser;
@@ -110,6 +131,19 @@ class Projects extends Component {
                 </span>
                 <span>
                   {thisProject.privateProjects === true ? "Private" : "Public"}
+                </span>
+                <span className='collab-count'>
+                  {this.props.acceptedInvites.length} {this.props.acceptedInvites.length === 1 ? 'Collaborator' : 'Collaborators'}
+                  {this.props.acceptedInvites.length === 0 ? null :
+                    <span className='collab-members'>
+                      {this.props.acceptedInvites.map(invite => {
+                        const user = this.props.usersFromInvites.find(user => user.id === invite.userId);
+                        return (
+                          <p>{!user ? null : user.firstName ? user.firstName + ' ' + user.lastName : user.email} </p>
+                        )
+                      })}
+                    </span>
+                  }
                 </span>
               </p>
             </div>
@@ -183,7 +217,7 @@ class Projects extends Component {
                 >
                   <StarIcon isStarred={this.props.isStarred} />
                 </div>
-                {this.props.activeUser.id === this.props.project.userId && (
+                {(this.props.activeUser.id === this.props.project.userId || this.state.editAccess) && (
                   <div
                     className="edit project-header-button"
                     onClick={() => {
@@ -211,18 +245,18 @@ class Projects extends Component {
           </div>
         </div>
       );
-    } else if(this.props.singleProjectError === 404){    
+    } else if (this.props.singleProjectError === 404) {
 
       return <Error404Projects />; //if the project was not found
 
-    } else if(this.props.singleProjectError === 401){     
+    } else if (this.props.singleProjectError === 401) {
 
       return <Error401Projects />; //if the user is unauthorized to view the project
     }
     else {
 
       return <Loading />; //if it wasn't a 401 or 404 error, display the spinner
-      
+
     }
   }
 }
@@ -233,7 +267,10 @@ const mapStateToProps = state => {
     singleProjectError: state.projects.error, //assign 401 or 404 to singleProjectsError
     projectPhotos: state.photos.projectPhotos,
     projectComments: state.comments.projectComments,
-    isStarred: state.stars.isStarred
+    isStarred: state.stars.isStarred,
+    acceptedInvites: state.projects.acceptedInvites,
+    usersFromInvites: state.invites.usersFromInvites,
+    projectInvites: state.projects.projectInvites
   };
 };
 
@@ -245,6 +282,8 @@ export default connect(
     getProjectComments,
     starProject,
     getStarStatus,
-    unstarProject
+    unstarProject,
+    getInvitesByProjectId,
+    getUsersFromInvites
   }
 )(Projects);
