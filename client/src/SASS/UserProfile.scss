@@ -201,22 +201,22 @@
 
       li {
         letter-spacing: 0.11em;
-        font-size: 1rem;
-        //border: 1px solid blue;
-        margin-bottom: 0px;
+        font-size: .75rem;
+        // border: 1px solid blue;
+
       }
       .links { /*tab*/
         height: 40px;
-        width: 20%;
+        width: 13%;
         background: $black;
         border-radius: 10px 10px 0 0;
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
-        padding: 24px 26px 0 26px;
-        padding-bottom: 25px;        
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 128% 100%, 0% 100%);
+        padding: 15px 26px 0px 15px;       
         box-sizing: border-box;
         @include themify($themes) {
           background: themed('bg2');
         }
+
         h2 {
           font-weight: 400;
           margin: 0;
@@ -229,6 +229,10 @@
       .active-link {
         color: $white;
       }
+
+      #react-tabs-22 {
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 92% 100%, 0% 100%);        
+        }
 
       .links:hover {
         color: $white;

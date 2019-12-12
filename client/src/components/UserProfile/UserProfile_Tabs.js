@@ -49,7 +49,7 @@ class UserProfile_Tabs extends Component {
                 <Tab className="links" selectedClassName="active-link">
                   Following
                 </Tab>
-                <Tab className="links" selectedClassName="active-link">
+                <Tab className="links" id="starred" selectedClassName="active-link">
                   Starred
                 </Tab>
               </TabList>
