@@ -272,11 +272,14 @@
     .tab-content {
       background: $black;
       padding: 16px;
-      border-radius: 0 10px 10px 10px;
+      border-radius: 0 0px 10px 10px;
       @include themify($themes) {
         background: themed('bg2');
       }
-      margin-top: 0px;
+      position: relative;
+      top: -30px;
+      padding-top: 30px;
+      padding-left: 26px;
 
     }
 
