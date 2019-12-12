@@ -5,18 +5,24 @@ import { Link } from 'react-router-dom';
 import defaultImg from '../ASSETS/default_thumbnail.svg';
 
 const ProjectThumbnail = ({ project, user }) => {
-    return (
+    return !project || !user ? null : (
         <div className="project-content">
             <Link to={`/project/${project.id}`}>
                 <div className="project-info">
-                    {project.name.length > 35 ? (
-                        <h1>{project.name.slice(0, 35)}...</h1>
-                    ) : (
-                            <h1>{project.name}</h1>
-                        )}
-                    <h1 className="created">
-                        {moment(project.created_at).format('MMM DD, YYYY')}
-                    </h1>
+                    <div className='project-flex'>
+                        <img className='avatar' src={user.avatar} alt={user.firstName} />
+                        <h1 className='project-username'>{user.username}</h1>
+                        <div>
+                            {project.name.length > 35 ? (
+                                <h1>{project.name.slice(0, 35)}...</h1>
+                            ) : (
+                                    <h1>{project.name}</h1>
+                                )}
+                            <h1 className="created">
+                                {moment(project.created_at).format('MMM DD, YYYY')}
+                            </h1>
+                        </div>
+                    </div>
                 </div>
                 <img
                     src={project.mainImg ? project.mainImg : defaultImg}
