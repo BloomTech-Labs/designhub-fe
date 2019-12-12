@@ -13,8 +13,18 @@
     background: $black;
     border-radius: 10px;
     margin: 15px 0;
-    padding: 10px;
-    //border: 1px solid red;
+    padding: 10px;    
+
+    @media (max-width: 800px) {              
+      width: 100%;    
+      
+    }
+
+    @media (max-width: 500px) {              
+      width: 100%;
+      
+    }
+    
 
     h2 {
       margin-right: 10px;
@@ -60,9 +70,18 @@
     .actions {
       display: flex;      
       justify-content: flex-end;
-      width: 30%;     
-      //border: 1px solid blue;
-      margin-right: 25px;
+      width: 30%;           
+      margin-right: 25px;      
+
+      @media (max-width: 800px) {              
+        width: 100%;    
+        
+      }
+
+      @media (max-width: 500px) {              
+        width: 100%;
+        
+      }
 
       .notifications-accept-btn {                      
           width: 32%;
@@ -75,7 +94,17 @@
           padding: 0 0;
           border-radius: 3px;   
           font-size: 15px;   
-          font-weight: 300;     
+          font-weight: 300;  
+          
+          @media (max-width: 800px) {              
+            width: 100%;    
+            
+          }
+    
+          @media (max-width: 500px) {              
+            width: 100%;
+            
+          }
 
       }
 
@@ -93,7 +122,17 @@
           color: $red;         
           background-color: $black;    
           font-size: 15px;   
-          font-weight: 300;         
+          font-weight: 300;  
+          
+          @media (max-width: 800px) {              
+            width: 100%;    
+            
+          }
+    
+          @media (max-width: 500px) {              
+            width: 100%;
+            
+          }
 
       }
 

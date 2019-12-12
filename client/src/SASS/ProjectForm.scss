@@ -140,6 +140,7 @@
       width: 100%;
 
       label {
+        user-select: none;
         text-align: left;
         margin-top: 10px;
         margin-bottom: 5px;
@@ -621,6 +622,7 @@
       }
     }
     .required-help {
+      margin-top: 16px;
       color: $dark-grey;
     }
 
@@ -648,12 +650,12 @@
 
     .submit-button {
       @include primary-btn;
-      margin-top: 16px;
+      margin-top: 8px;
     }
 
     .cancel-btn {
       @include secondary-btn;
-      margin-top: 16px;
+      margin-top: 8px;
       margin-right: 16px;
     }
   }
@@ -662,7 +664,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 1.5rem;
+    margin-top: 0rem;
     opacity: 0.6;
     width: max-content;
 
