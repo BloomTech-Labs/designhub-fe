@@ -31,7 +31,7 @@ class UserProfile_Tabs extends Component {
 
       return (
         <div className="profile-tabs-container">
-          <div>
+          <div className = "new-tabs-div">
             <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
@@ -39,6 +39,9 @@ class UserProfile_Tabs extends Component {
                 </Tab>
                 <Tab className="links" selectedClassName="active-link">
                   Projects
+                </Tab>
+                <Tab className="links" selectedClassName="active-link">
+                  Collaborations
                 </Tab>
                 <Tab className="links" selectedClassName="active-link">
                   Followers
@@ -52,10 +55,11 @@ class UserProfile_Tabs extends Component {
               </TabList>
 
               <TabPanel className="tabs-container">
-                <div className="tabs-header">
-                  <h2>Recent Projects</h2> {/*RECENT PROJECTS*/}
-                </div>
+                {/*<div className="tabs-header">
+                  <h2>Recent Projects</h2> 
+                </div>*/}
                 <div className="tab-content">
+                <h2>Recent Projects</h2>
                   {projects.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -100,10 +104,11 @@ class UserProfile_Tabs extends Component {
 
                 <Heatmap />
               </TabPanel>
+
               <TabPanel className="tabs-container">
-                <div className="tabs-header">
+                {/*<div className="tabs-header">
                   <h2>Projects</h2>
-                </div>
+                </div>*/}
                 <div className="tab-content">
                   {projects.length === 0 && (
                     <div className="empty-state">
@@ -142,56 +147,62 @@ class UserProfile_Tabs extends Component {
                     ))}
                   </div>
                 </div>
-                  <br/>
-                {(this.props.activeUser.id === this.props.userData.id) && (
+                  
+              </TabPanel>
 
-                  <>
-                    <div className="tabs-header">
+              
+
+              <TabPanel>
+
+                 {/*<div className="tabs-header">
                       <h2>Collaborations</h2>
-                    </div>
-                    <div className="tab-content">
-                      {acceptedProjects.length === 0 && (
+                  </div>*/}
+
+                <div className="tab-content">
+              
+                {(this.props.activeUser.id === this.props.userData.id) && (acceptedProjects.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
                             You are not collaborating on any projects.
                         </h1>
                         </div>
-                      )}
-                      <div className="projects-array">
+                )}
+                                       
+                <div className="projects-array">
 
-                        {acceptedProjects.map(project => (
+                  {acceptedProjects.map(project => (
 
-                          <div className="project-content" key={project.id}>
-                            <Link to={`/project/${project.id}`}>
-                              <>
-                                <div className="project-info">
-                                  {project.name.length > 35 ? (
-                                    <h1>{project.name.slice(0, 35)}...</h1>
-                                  ) : (
-                                      <h1>{project.name}</h1>
-                                    )}
-                                  <h1 className="created">
-                                    {moment(project.created_at).format(
-                                      'MMM DD, YYYY'
-                                    )}
-                                  </h1>
-                                </div>
-                                <img
-                                  src={project.mainImg ? project.mainImg : defaultImg}
-                                  className="project-thumbnail"
-                                  alt="test"
-                                  key={project.id}
-                                />
-                              </>
-                            </Link>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="project-content" key={project.id}>
+                      <Link to={`/project/${project.id}`}>                        
+                      <>
+                            <div className="project-info">
+                              {project.name.length > 35 ? (
+                                <h1>{project.name.slice(0, 35)}...</h1>
+                              ) : (
+                                  <h1>{project.name}</h1>
+                                )}
+                              <h1 className="created">
+                                {moment(project.created_at).format(
+                                  'MMM DD, YYYY'
+                                )}
+                              </h1>
+                            </div>
+                            <img
+                              src={project.mainImg ? project.mainImg : defaultImg}
+                              className="project-thumbnail"
+                              alt="test"
+                              key={project.id}
+                            />
+                      </>
+                        
+                      </Link>
                     </div>
-                  </>
+                  ))}
+                </div>
+              </div>               
 
-                  )}
+
               </TabPanel>
 
               <TabPanel className="tabs-container">
@@ -338,9 +349,9 @@ class UserProfile_Tabs extends Component {
                 </div>
               </TabPanel>
               <TabPanel className="tabs-container">
-                <div className="tabs-header">
+                {/*<div className="tabs-header">
                   <h2>Starred</h2>
-                </div>
+                </div>*/}
                 <div className="tab-content">
                   {starred.length === 0 && (
                     <div className="empty-state">

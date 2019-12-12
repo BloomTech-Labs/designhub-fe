@@ -186,27 +186,44 @@
       color: themed('text');
     }
 
-    .nav-links {
+    .new-tabs-div {
       display: flex;
-      width: 34%;
+      flex-direction: column;
+      height: auto;
+      //border: 1px solid red;
+    }
+
+    .nav-links { /*tab list*/
+      display: flex;
+      width: 100%;
+      margin-bottom: 0px;
+      //border: 1px solid red;
+
       li {
         letter-spacing: 0.11em;
         font-size: 1rem;
+        //border: 1px solid blue;
+        margin-bottom: 0px;
       }
-      .links {
-        color: $dark-grey;
-        text-decoration: none;
-        list-style-type: none;
-        margin: 0;
-        cursor: pointer;
-        transition: 0.1s ease-in-out;
-        font-weight: 400;
-        position: relative;
-        z-index: 100;
-        padding: 0px 20px 0px 0px;
+      .links { /*tab*/
+        height: 40px;
+        width: 20%;
+        background: $black;
+        border-radius: 10px 10px 0 0;
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
+        padding: 24px 26px 0 26px;
+        padding-bottom: 25px;        
+        box-sizing: border-box;
         @include themify($themes) {
-          color: themed('link');
+          background: themed('bg2');
         }
+        h2 {
+          font-weight: 400;
+          margin: 0;
+          letter-spacing: 0.11em;
+        }
+        //border: 1px solid green;
+        margin-bottom: 0px;
       }
 
       .active-link {
@@ -220,20 +237,25 @@
         }
       }
     }
+    margin-bottom: 0px;
   }
 
   .tabs-container {
     width: 100%;
     margin: 4vh 0;
     margin: 29px 0;
+    //margin-top: 0px;
+    
     .tabs-header {
-      height: 40px;
+      
+      /*height: 40px;
       width: 18rem;
       background: $black;
       border-radius: 10px 10px 0 0;
       clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
       padding: 24px 26px 0 26px;
-      box-sizing: border-box;
+      box-sizing: border-box;*/
+      //margin-top: 0px;
       @include themify($themes) {
         background: themed('bg2');
       }
@@ -241,7 +263,11 @@
         font-weight: 400;
         margin: 0;
         letter-spacing: 0.11em;
+        margin-top: 0px;
       }
+
+      margin-top: 0px;
+      border:1px solid red;
     }
     .tab-content {
       background: $black;
@@ -250,12 +276,15 @@
       @include themify($themes) {
         background: themed('bg2');
       }
+      margin-top: 0px;
+
     }
 
     .empty-state {
       width: 100%;
       margin: 0 auto;
       text-align: center;
+      margin-top: 0px;
 
       .empty-icon {
         opacity: 0.03;
@@ -267,6 +296,7 @@
         margin-bottom: 20px;
         user-select: none;
         opacity: 0.6;
+        margin-top: 0px;
       }
     }
 
@@ -498,12 +528,13 @@
     .profile-tabs-container {
       .nav-links {
         width: auto;
-
         justify-content: space-between;
-
+        
         .links {
           padding: 0;
         }
+
+       
       }
 
       .projects-array {
@@ -512,6 +543,7 @@
         .project-content {
           height: 25vh;
         }
+        
       }
     }
   }
