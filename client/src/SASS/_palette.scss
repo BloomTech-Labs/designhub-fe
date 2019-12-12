@@ -52,7 +52,8 @@ $themes: (
     form-field: $lightmode-form-field,
     form-label: $lightmode-form-label,
     upload-grey: $lightmode-grey,
-    filter: $inverted
+    filter: $inverted,
+    active-link: $black
   ),
   dark: (
     bg: $bg,
@@ -61,7 +62,8 @@ $themes: (
     text: $text,
     header: $header,
     form-field: $form-field,
-    form-label: $form-label
+    form-label: $form-label,
+    active-link: $white
   )
 );
 
