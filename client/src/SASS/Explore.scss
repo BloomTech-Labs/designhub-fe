@@ -156,10 +156,17 @@
         font-weight: 500;
         cursor: pointer;
         width: 5.5rem;
-        padding: .5rem;
-        border-radius: 2.5px;
+        padding: 10px;
+        border-radius: 4px;
         text-align: center;
 
+        transition: background-color 0.2s, color 0.2s;
+      }
+
+      .links:hover {
+
+        background-color: $dark-grey;
+        color: white;
       }
 
       .active-link {
@@ -169,6 +176,12 @@
           color: $white;
           font-weight: bold;
         }
+      }
+
+      .active-link:hover {
+        background-color: $blue;
+
+        
       }
     }
   }

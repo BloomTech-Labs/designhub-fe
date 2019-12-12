@@ -153,7 +153,7 @@
       padding: 20px;
       transition: all 0.1s ease-in-out;
       @include themify($themes) {
-        background: themed('upload-grey');
+        background: themed('bg');
         border: 5px solid themed('bg2');
         color: themed('link');
       }
@@ -161,8 +161,9 @@
       &:hover {
         background: #33343b;
         @include themify($themes) {
-          background: themed('bg');
+          background: white;
           border: 5px solid themed('bg2');
+          box-shadow: 0 0 10px -5px gray;
           color: themed('text');
         }
         svg {
