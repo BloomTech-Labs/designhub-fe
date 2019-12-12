@@ -22,27 +22,16 @@ class Explore extends Component {
 
   fetch() {
     const myId = this.state.myId;
-    function getRecent() {
-      return axiosWithAuth().get(`/api/v1/explore/${myId}`);
-    }
-    function getPopular() {
-      return axiosWithAuth().get(`/api/v1/explore/${myId}`);
-    }
-    function getFollowing() {
-      return axiosWithAuth().get(`/api/v1/explore/${myId}`);
-    }
 
     return axios
-      .all([getRecent(), getPopular(), getFollowing()])
-      .then(
-        axios.spread((a, b, c) => {
-          this.setState({
-            recent: a.data.recent,
-            popular: b.data.popular,
-            following: c.data.following
-          });
+      .get(`/api/v1/explore/${myId}`)
+      .then(res => {
+        this.setState({
+          recent: res.data.recent,
+          popular: res.data.popular,
+          following: res.data.following
         })
-      )
+      })
       .catch(err => err);
   }
 
