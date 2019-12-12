@@ -12,21 +12,21 @@ exports[`<ProjectForm /> should match the previous snapshot of the component tes
       onClick={[Function]}
     />
   </div>
-  <header
-    className="ProjectForm__header"
-  >
-    <h2
-      className="page-header"
-    >
-      Create a project
-    </h2>
-  </header>
   <section
     className="ProjectForm__body"
   >
     <div
       className="left-container"
     >
+      <header
+        className="ProjectForm__header"
+      >
+        <h2
+          className="page-header"
+        >
+          Create a project
+        </h2>
+      </header>
       <section
         className="image-dropzone-container"
       >
@@ -92,7 +92,7 @@ exports[`<ProjectForm /> should match the previous snapshot of the component tes
             <p
               className="drop-text"
             >
-              drag and drop images or click here
+              Drag and drop images or click here to upload your design files!
             </p>
           </div>
         </div>
@@ -115,7 +115,7 @@ exports[`<ProjectForm /> should match the previous snapshot of the component tes
             className="label project-label"
             htmlFor="name"
           >
-            Project title
+            Project title *
           </label>
           <input
             autoFocus={true}
@@ -137,23 +137,33 @@ exports[`<ProjectForm /> should match the previous snapshot of the component tes
         <textarea
           className="description"
           id="description"
+          maxLength="240"
           name="description"
           onChange={[Function]}
-          placeholder="Enter project description here"
+          placeholder="Enter description here"
           type="text"
           value=""
         />
+        <div>
+          <p
+            className="charLength"
+          >
+            0
+            /
+            240
+          </p>
+        </div>
         <label
           className="label"
           htmlFor="figmaLink"
         >
-          Figma link
+          Figma
         </label>
         <input
           id="figmaLink"
           name="figma"
           onChange={[Function]}
-          placeholder="Enter Figma link here"
+          placeholder="Enter link here (optional)"
           type="text"
           value=""
         />
@@ -161,38 +171,50 @@ exports[`<ProjectForm /> should match the previous snapshot of the component tes
           className="label"
           htmlFor="invisionLink"
         >
-          InVision link
+          Prototype
         </label>
         <input
           id="invisionLink"
           name="invision"
           onChange={[Function]}
-          placeholder="Enter InVision link here"
+          placeholder="Enter link here (optional)"
           type="text"
           value=""
         />
         <label
           className="label"
-          htmlFor="teamMembers"
+          htmlFor="privacyLink"
         >
-          Add team members
+          Privacy
         </label>
-        <input
-          id="teamMembers"
-          placeholder="Enter team member usernames separated by a comma"
-          type="text"
-        />
+         
+        <select
+          id="privacy"
+          name="privacy"
+          onChange={[Function]}
+          placeholder="Select privacy settings"
+          type="select"
+          value="public"
+        >
+          <option
+            value="public"
+          >
+            Public
+          </option>
+          <option
+            value="private"
+          >
+            Private
+          </option>
+        </select>
+        <p
+          className="required-help"
+        >
+          * Required
+        </p>
         <div
           className="submit-cancel-container"
         >
-          <button
-            className="submit-button"
-            disabled={false}
-            onClick={[Function]}
-            type="submit"
-          >
-            Publish
-          </button>
           <button
             className="cancel-btn"
             disabled={false}
@@ -200,6 +222,14 @@ exports[`<ProjectForm /> should match the previous snapshot of the component tes
             type="button"
           >
             Cancel
+          </button>
+          <button
+            className="submit-button"
+            disabled={false}
+            onClick={[Function]}
+            type="submit"
+          >
+            Publish
           </button>
         </div>
       </form>

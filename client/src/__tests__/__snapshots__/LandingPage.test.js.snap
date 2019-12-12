@@ -58,7 +58,7 @@ exports[`<LandingPage /> should match the previous snapshot of the component tes
       <img
         alt="logo"
         className="logo"
-        src="SampleLogo.svg"
+        src="logo.svg"
       />
       <h1>
         Super-charge your design workflow now and start collaborating like a beast
