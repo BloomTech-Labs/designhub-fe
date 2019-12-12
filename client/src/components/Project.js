@@ -48,6 +48,7 @@ class Projects extends Component {
       this.props.activeUser.id,
       this.props.match.params.id
     );
+
     this.props
       .getSingleProject(this.projectId) //gets a single project from the database
       .then(() => {
@@ -107,7 +108,14 @@ class Projects extends Component {
   render() {
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
-    if (thisProject && activeUser && this.props.projectPhotos) {
+    if (this.props.singleProjectError === 404) {
+
+      return <Error404Projects />; //if the project was not found
+
+    } else if (this.props.singleProjectError === 401) {
+
+      return <Error401Projects />; //if the user is unauthorized to view the project
+    } else if (thisProject && activeUser && this.props.projectPhotos) {
       return (
         <div className="projects-container">
           <div className="project-header">
@@ -245,13 +253,6 @@ class Projects extends Component {
           </div>
         </div>
       );
-    } else if (this.props.singleProjectError === 404) {
-
-      return <Error404Projects />; //if the project was not found
-
-    } else if (this.props.singleProjectError === 401) {
-
-      return <Error401Projects />; //if the user is unauthorized to view the project
     }
     else {
 
