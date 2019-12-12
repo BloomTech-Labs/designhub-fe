@@ -1,16 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import moment from 'moment';
 
-import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import Loading from '../Loading';
+import ProjectThumbnail from '../ProjectThumbnail';
 
 import '../../SASS/Explore.scss';
 
-const ExploreTabs = ({ recent, popular, following }) => {
+const ExploreTabs = ({ recent, popular, following, users }) => {
 
-  if (recent && popular && following) {
+  if (recent && popular && following && users.length > 0) {
 
     return (
       <div className="explore-tabs-container">
@@ -31,30 +29,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
             <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
-                {popular.map(project => (
-                  <div className="project-content" key={project.id}>
-                    <Link to={`/project/${project.id}`}>
-                      <>
-                        <div className="project-info">
-                          {project.name.length > 35 ? (
-                            <h1>{project.name.slice(0, 35)}...</h1>
-                          ) : (
-                              <h1>{project.name}</h1>
-                            )}
-                          <h1 className="created">
-                            {moment(project.created_at).format('MMM DD, YYYY')}
-                          </h1>
-                        </div>
-                        <img
-                          src={project.mainImg ? project.mainImg : defaultImg}
-                          className="project-thumbnail"
-                          alt="test"
-                          key={project.id}
-                        />
-                      </>
-                    </Link>
-                  </div>
-                ))}
+                {popular.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
               </div>
             </TabPanel>
 
@@ -62,30 +41,10 @@ const ExploreTabs = ({ recent, popular, following }) => {
             <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
-                {recent.map(project => (
-                  <div className="project-content" key={project.id}>
-                    <Link to={`/project/${project.id}`}>
-                      <>
-                        <div className="project-info">
-                          {project.name.length > 35 ? (
-                            <h1>{project.name.slice(0, 35)}...</h1>
-                          ) : (
-                              <h1>{project.name}</h1>
-                            )}
-                          <h1 className="created">
-                            {moment(project.created_at).format('MMM DD, YYYY')}
-                          </h1>
-                        </div>
-                        <img
-                          src={project.mainImg ? project.mainImg : defaultImg}
-                          className="project-thumbnail"
-                          alt="test"
-                          key={project.id}
-                        />
-                      </>
-                    </Link>
-                  </div>
-                ))}
+                {recent.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                })}
               </div>
             </TabPanel>
 
@@ -93,35 +52,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
             <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
-                {following.map(project => (
-                  <div className="project-content" key={project.projectId}>
-                    <Link to={`/project/${project.projectId}`}>
-                      <>
-                        <div className="project-info">
-                          {project.projectName &&
-                            project.projectName.length > 35 ? (
-                              <h1>{project.projectName.slice(0, 35)}...</h1>
-                            ) : (
-                              <h1>{project.projectName}</h1>
-                            )}
-                          <h1 className="created">
-                            {moment(project.created_at).format('MMM DD, YYYY')}
-                          </h1>
-                        </div>
-                        <img
-                          src={
-                            project.projectImage
-                              ? project.projectImage
-                              : defaultImg
-                          }
-                          className="project-thumbnail"
-                          alt="test"
-                          key={project.projectId}
-                        />
-                      </>
-                    </Link>
-                  </div>
-                ))}
+                {following.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
               </div>
             </TabPanel>
           </Tabs>
