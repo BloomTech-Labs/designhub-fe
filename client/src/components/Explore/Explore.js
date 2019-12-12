@@ -41,7 +41,7 @@ class Explore extends Component {
         <header>
           <h1>Explore</h1>
           <p>
-            Discover projects from our talented community Designers
+            Discover projects from our talented community of Designers
           </p>
         </header>
         <ExploreTabs recent={this.state.recent} popular={this.state.popular} following={this.state.following} />
