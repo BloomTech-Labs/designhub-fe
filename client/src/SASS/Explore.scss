@@ -85,7 +85,7 @@
       object-fit: cover;
 
       @include themify($themes) {
-        border: 8px solid themed('bg');
+        border: 8px solid #e7e7e7;
       }
 
       .project-info {
@@ -160,13 +160,11 @@
         border-radius: 4px;
         text-align: center;
 
-        transition: background-color 0.2s, color 0.2s;
+        transition: color 0.2s;
       }
 
       .links:hover {
-
-        background-color: $dark-grey;
-        color: white;
+        color: $shadow-grey;
       }
 
       .active-link {

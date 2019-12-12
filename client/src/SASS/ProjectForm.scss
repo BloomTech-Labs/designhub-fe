@@ -280,7 +280,7 @@
       input {
         font-size: 12px;
         margin-bottom: 20px;
-        border: 1px solid $field-stroke;
+        border: 1px solid $shadow-grey;
         @include themify($themes) {
           background-color: themed('bg2');
         }
@@ -293,7 +293,7 @@
       select {
         font-size: 12px;
         margin-bottom: 20px;
-        border: 1px solid $field-stroke;
+        border: 1px solid $shadow-grey;
         @include themify($themes) {
           background-color: themed('bg2');
         }
@@ -312,7 +312,7 @@
         margin-bottom: 10px;
         resize: vertical;
         height: 80px;
-        border: 1px solid $field-stroke;
+        border: 1px solid $shadow-grey;
         @include themify($themes) {
           background-color: themed('bg2');
         }

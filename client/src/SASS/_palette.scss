@@ -5,6 +5,7 @@ $almost-black: #212229;
 $light-black: #2a2b31;
 $light-grey: #f4f4f4;
 $grey: #d8d8d8;
+$shadow-grey: #a7a7ac;
 $dark-grey: #6d6d72;
 $field-stroke: #3a3a3d;
 $field-bg: #2a2b31;
@@ -53,7 +54,7 @@ $themes: (
     form-label: $lightmode-form-label,
     filter: $inverted,
     active-link: $black,
-    shadow: $dark-grey
+    shadow: $shadow-grey
   ),
   dark: (
     bg: $bg,

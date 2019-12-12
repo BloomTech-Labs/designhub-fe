@@ -36,9 +36,6 @@ class Explore extends Component {
   }
 
   render() {
-    const recent = this.state.recent;
-    const popular = this.state.popular;
-    const following = this.state.following;
     return (
       <div className="explore-container">
         <header>
@@ -47,7 +44,7 @@ class Explore extends Component {
             Discover projects from our talented community Designers
           </p>
         </header>
-        <ExploreTabs recent={recent} popular={popular} following={following} />
+        <ExploreTabs recent={this.state.recent} popular={this.state.popular} following={this.state.following} />
       </div>
     );
   }
