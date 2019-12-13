@@ -35,12 +35,14 @@ class UserProfile_LI extends Component {
     this.state = {
       acceptedCollabInvites: [], //accepted collab invites
       acceptedCollabProjects: [],//accepted collab projects
-      currentTab: 0              // Current selected tab in sub-navigation
+      currentTab: 0,              // Current selected tab in sub-navigation
+      usersId: [],
+      users: []
     };
   }
 
   setCurrentTab(tabIndex) {
-    this.setState({currentTab: tabIndex});
+    this.setState({ currentTab: tabIndex });
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
@@ -83,13 +85,22 @@ class UserProfile_LI extends Component {
           this.props.activeUser.id,
           this.props.match.params.id
         );
-      });
+      })
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.fetch();
     }
+
+    // .then(() => { trying to get users at the end of the updates
+    //     const ids = [];
+    //     this.state.acceptedCollabProjects.map(projects => {
+    //       const id = ids.find(id => id === projects.userId);
+    //       return !id ? ids.push(id) : null;
+    //     })
+    //     console.log(ids);
+    //   })
   }
 
   followUser = (yourId, theirId, activeUser, params) => {
@@ -164,9 +175,8 @@ class UserProfile_LI extends Component {
   };
 
   //get accepted collaboration invites
-  getAcceptedCollabInvites = async () => {
+  getAcceptedCollabInvites = () => {
     const invites = this.props.userInvites.filter(invite => invite.pending === false);
-
     this.setState({
       acceptedCollabInvites: invites,
       acceptedCollabProjects: []
@@ -179,7 +189,6 @@ class UserProfile_LI extends Component {
             acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]
           })
         )
-
     });
 
   }
