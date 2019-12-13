@@ -199,19 +199,22 @@
       margin-bottom: 0px;
       //border: 1px solid red;
 
-      li {
+      /*li {
         letter-spacing: 0.11em;
-        font-size: .75rem;
-        // border: 1px solid blue;
+        font-size: .75rem;       
 
-      }
+      }*/
       .links { /*tab*/
+        font-size: 1rem;
+        font-weight: 400;
         height: 40px;
         width: 13%;
-        background: $black;
+        //background: $black;
+        background: #2f303a;
         border-radius: 10px 10px 0 0;
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 128% 100%, 0% 100%);
-        padding: 15px 26px 0px 15px;       
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 105% 100%, 0% 100%);
+        padding: 15px 26px 0px 15px;   
+        padding-left: 35px;    
         box-sizing: border-box;
         @include themify($themes) {
           background: themed('bg2');
@@ -222,44 +225,48 @@
           margin: 0;
           letter-spacing: 0.11em;
         }
-        //border: 1px solid green;
+        
         margin-bottom: 0px;
-      }
+      }//end links
+     
 
       .active-link {
-        color: $white;
-      }
-
-      #react-tabs-22 {
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 92% 100%, 0% 100%);        
+        //color: $white;
+        //background: #2f303a;
+        background: $black;
+        @include themify($themes) {
+          color: themed('bg2');
         }
+      }     
 
       .links:hover {
         color: $white;
+        background: $black;
         @include themify($themes) {
           color: themed('text');
         }
+        cursor: pointer;        
       }
-    }
-    margin-bottom: 0px;
+
+     li:last-child {
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);               
+      }
+
+    }//end nav-links
+
+    
   }
 
   .tabs-container {
     width: 100%;
     margin: 4vh 0;
     margin: 29px 0;
-    //margin-top: 0px;
+    background: $black;
+    position: relative;
+    //top: -30px;    
     
-    .tabs-header {
-      
-      /*height: 40px;
-      width: 18rem;
-      background: $black;
-      border-radius: 10px 10px 0 0;
-      clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
-      padding: 24px 26px 0 26px;
-      box-sizing: border-box;*/
-      //margin-top: 0px;
+    .tabs-header {     
+    
       @include themify($themes) {
         background: themed('bg2');
       }
@@ -268,10 +275,11 @@
         margin: 0;
         letter-spacing: 0.11em;
         margin-top: 0px;
+        margin-left: 10px;
       }
 
       margin-top: 0px;
-      border:1px solid red;
+      
     }
     .tab-content {
       background: $black;
@@ -287,11 +295,14 @@
 
     }
 
-    .empty-state {
+    .empty-state {      
+      position: relative;
+      top: -30px;
       width: 100%;
       margin: 0 auto;
       text-align: center;
       margin-top: 0px;
+      background: $black;
 
       .empty-icon {
         opacity: 0.03;
@@ -386,7 +397,9 @@
     }
 
     .follow-container {
-      background: $black;
+      border: 1px solid red;      
+      //background: $black;
+      background: #2f303a;
       padding: 20px;
       border-radius: 10px;
       display: flex;
@@ -401,6 +414,8 @@
           color: $almost-black;
         }
       }
+
+      
       .follow-btn {
         @include follow-btn;
         margin: 0;

@@ -49,7 +49,7 @@ class UserProfile_Tabs extends Component {
                 <Tab className="links" selectedClassName="active-link">
                   Following
                 </Tab>
-                <Tab className="links" id="starred" selectedClassName="active-link">
+                <Tab className="links" id = "starred" selectedClassName="active-link">
                   Starred
                 </Tab>
               </TabList>
@@ -59,7 +59,9 @@ class UserProfile_Tabs extends Component {
                   <h2>Recent Projects</h2> 
                 </div>*/}
                 <div className="tab-content">
-                <h2>Recent Projects</h2>
+                <div className="tabs-header">
+                  <h2>Recent Projects</h2> 
+                </div>
                   {projects.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -149,17 +151,15 @@ class UserProfile_Tabs extends Component {
                 </div>
                   
               </TabPanel>
-
               
 
-              <TabPanel>
+             {/*ADDING COLLABORATORS */}
+             <TabPanel className="tabs-container">
+                {/*<div className="tabs-header">
+                  <h2>Collaborations</h2>
+                </div>*/}
+                <div className="tab-content">                 
 
-                 {/*<div className="tabs-header">
-                      <h2>Collaborations</h2>
-                  </div>*/}
-
-                <div className="tab-content">
-              
                 {(this.props.activeUser.id === this.props.userData.id) && (acceptedProjects.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
@@ -168,20 +168,20 @@ class UserProfile_Tabs extends Component {
                         </h1>
                         </div>
                 )}
-                                       
-                <div className="projects-array">
 
-                  {acceptedProjects.map(project => (
-
-                    <div className="project-content" key={project.id}>
-                      <Link to={`/project/${project.id}`}>                        
-                      <>
+                  <div className="projects-array">
+                    
+                    {acceptedProjects.map(project => (
+                     
+                      <div className="project-content" key={project.id}>
+                        <Link to={`/project/${project.id}`}>
+                          <>
                             <div className="project-info">
                               {project.name.length > 35 ? (
                                 <h1>{project.name.slice(0, 35)}...</h1>
                               ) : (
-                                  <h1>{project.name}</h1>
-                                )}
+                                <h1>{project.name}</h1>
+                              )}
                               <h1 className="created">
                                 {moment(project.created_at).format(
                                   'MMM DD, YYYY'
@@ -194,16 +194,14 @@ class UserProfile_Tabs extends Component {
                               alt="test"
                               key={project.id}
                             />
-                      </>
-                        
-                      </Link>
-                    </div>
-                  ))}
+                          </>
+                        </Link>
+                      </div>
+                      ))} 
+                    </div> 
                 </div>
-              </div>               
-
-
               </TabPanel>
+
 
               <TabPanel className="tabs-container">
                 <div className="follower-following-container">
