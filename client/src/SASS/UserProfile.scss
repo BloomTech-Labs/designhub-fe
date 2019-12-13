@@ -237,6 +237,7 @@
         @include themify($themes) {
           color: themed('bg2');
         }
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
       }     
 
       .links:hover {
@@ -245,6 +246,7 @@
         @include themify($themes) {
           color: themed('text');
         }
+        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);            
         cursor: pointer;        
       }
 
@@ -396,16 +398,22 @@
       }
     }
 
-    .follow-container {
-      border: 1px solid red;      
-      //background: $black;
+    .follower-following-container {      
+      padding-top: 40px;
+      background: $black;      
+      position: relative;
+      top: -30px;
+    }
+
+    .follow-container {     
       background: #2f303a;
       padding: 20px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       margin-bottom: 4vh;
-      width: 97.5%;
+      margin-left: 20px;
+      width: 94%;
       justify-content: space-between;
       @include themify($themes) {
         background: themed('bg2');
