@@ -8,6 +8,8 @@ import UserProfileTabs from './UserProfile_Tabs.js';
 import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
 import Loading from '../Loading.js';
+import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
+
 
 import {
   getSingleUser,
@@ -29,6 +31,8 @@ import {
 // ========== STYLES ========== //
 import '../../SASS/UserProfile.scss';
 
+const holder = [];
+
 class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +44,8 @@ class UserProfile_LI extends Component {
       users: []
     };
   }
+
+
 
   setCurrentTab(tabIndex) {
     this.setState({ currentTab: tabIndex });
@@ -93,14 +99,20 @@ class UserProfile_LI extends Component {
       this.fetch();
     }
 
-    // .then(() => { trying to get users at the end of the updates
-    //     const ids = [];
-    //     this.state.acceptedCollabProjects.map(projects => {
-    //       const id = ids.find(id => id === projects.userId);
-    //       return !id ? ids.push(id) : null;
-    //     })
-    //     console.log(ids);
-    //   })
+    if (this.state.usersId.length > 0 && this.state.users.length === 0) {
+      const users = []
+      this.state.usersId.map((id, index) => {
+        return axiosWithAuth()
+          .get(`/api/v1/users/${id}`)
+          .then(res => {
+            users.push(res.data[0]);
+            if (index + 1 === this.state.usersId.length) {
+              this.setState({ users: [...users, this.props.activeUser] });
+              console.log('users', this.state.users)
+            }
+          })
+      })
+    }
   }
 
   followUser = (yourId, theirId, activeUser, params) => {
@@ -182,14 +194,29 @@ class UserProfile_LI extends Component {
       acceptedCollabProjects: []
     })
 
-    this.state.acceptedCollabInvites.map(invite => {
+    this.state.acceptedCollabInvites.map((invite, index) => {
       return this.props.getSingleProject(invite.projectId)
         .then(() =>
           this.setState({
             acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]
-          })
-        )
+          }))
+        .then(() => {
+          const proj = holder.find(id => this.props.singleProject.userId === id);
+          return proj ? null : holder.push(this.props.singleProject.userId);
+        })
+        .then(() => {
+          if (this.state.acceptedCollabInvites.length - 1 === index) {
+            this.setState({
+              usersId: holder
+            })
+            console.log('collab proj', this.state.acceptedCollabProjects)
+            console.log('collab proj userIds', this.state.usersId)
+          }
+        })
     });
+
+
+
 
   }
 
@@ -340,6 +367,7 @@ class UserProfile_LI extends Component {
           singleProject={this.props.singleProject} //collab     
           acceptedCollabProjects={this.state.acceptedCollabProjects}
           userData={this.props.userData}
+          collabUsers={this.state.users}
         />
       </div>
     );
