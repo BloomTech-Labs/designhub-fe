@@ -108,7 +108,6 @@ class UserProfile_LI extends Component {
             users.push(res.data[0]);
             if (index + 1 === this.state.usersId.length) {
               this.setState({ users: [...users, this.props.activeUser] });
-              console.log('users', this.state.users)
             }
           })
       })
@@ -209,8 +208,6 @@ class UserProfile_LI extends Component {
             this.setState({
               usersId: holder
             })
-            console.log('collab proj', this.state.acceptedCollabProjects)
-            console.log('collab proj userIds', this.state.usersId)
           }
         })
     });
