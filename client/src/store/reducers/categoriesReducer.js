@@ -33,7 +33,7 @@ import {
     assignedCategories: [],
     addedCategory: {},
     userCategories: [],
-    cagegory: [],
+    category: [],
     projectCategories: [], //categories added to a project
     projectsByCategory: [],
     isLoading: false,    
@@ -188,10 +188,6 @@ import {
             isLoading: false,
             error: action.payload
         };
-
-
-
-
 
       default:
         return state;

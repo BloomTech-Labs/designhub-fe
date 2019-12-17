@@ -134,6 +134,10 @@
     @include onboard-form__textarea;
   }
 
+  div.category-div {
+    @include onboard-form__textarea;
+  }
+
   div.invite {
     @include onboard-form__div;
 

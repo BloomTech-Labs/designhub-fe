@@ -571,6 +571,30 @@ const ProjectForm = ({
               maxLength="240"
             />
             <CharacterCount string={description} limit={240} />
+
+                {/*PROJECT CATEGORIES */}
+                <label htmlFor="privacyLink" className="label">
+                  Categories
+                </label>           
+                <select
+                  type="select"
+                  name="categories"
+                  //value={category}
+                  placeholder="Category (ex: Art, Animation)"
+                  id="categoryLink"
+                  //onChange={handleCategorySetting}
+                  className = "category-select"
+                >
+                  <option value="animation">Animation</option>
+                  <option value="branding">Branding</option>
+                  <option value="illustration">Illustration</option>
+                  <option value="mobile">Mobile</option>
+                  <option value="typography">Typography</option>
+                  <option value="web design">Web Design</option>
+                  <option value="product design">Product Design</option>
+                </select>       
+                  
+
             <label htmlFor="figmaLink" className="label">
               Figma
             </label>
