@@ -12,12 +12,30 @@ class Explore extends Component {
       recent: [],
       popular: [],
       following: [],
-      myId: this.props.activeUser.id
+      myId: this.props.activeUser.id,
+      userIds: [],
+      users: []
     };
   }
 
   componentDidMount() {
     this.fetch();
+  }
+
+  componentDidUpdate() {
+    if (this.state.userIds.length > 0 && this.state.users.length === 0) {
+      const users = []
+      this.state.userIds.map((id, index) => {
+        return axiosWithAuth()
+          .get(`/api/v1/users/${id}`)
+          .then(res => {
+            users.push(res.data[0]);
+            if (index + 1 === this.state.userIds.length) {
+              this.setState({ users: users });
+            }
+          })
+      })
+    }
   }
 
   fetch() {
@@ -32,7 +50,7 @@ class Explore extends Component {
       return axiosWithAuth().get(`/api/v1/explore/${myId}`);
     }
 
-    return axios
+    axios
       .all([getRecent(), getPopular(), getFollowing()])
       .then(
         axios.spread((a, b, c) => {
@@ -43,6 +61,17 @@ class Explore extends Component {
           });
         })
       )
+      .then(() => {
+        const allProjects = [...this.state.recent, ...this.state.popular, ...this.state.following];
+        const userIds = [];
+        allProjects.map(project => {
+          const store = userIds.find(id => id === project.userId);
+          return !store ? userIds.push(project.userId) : null
+        })
+        this.setState({
+          userIds: userIds
+        })
+      })
       .catch(err => err);
   }
 
@@ -50,6 +79,7 @@ class Explore extends Component {
     const recent = this.state.recent;
     const popular = this.state.popular;
     const following = this.state.following;
+    const users = this.state.users;
     return (
       <div className="explore-container">
         <header>
@@ -58,7 +88,7 @@ class Explore extends Component {
             Discover projects from our talented community Designers
           </p>
         </header>
-        <ExploreTabs recent={recent} popular={popular} following={following} />
+        <ExploreTabs recent={recent} popular={popular} following={following} users={users} />
       </div>
     );
   }
