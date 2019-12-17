@@ -31,7 +31,7 @@
     padding: 10px;    
 
     @include themify($themes) {
-      background: $grey;
+      background: $white;
       color: black;
     }
 
