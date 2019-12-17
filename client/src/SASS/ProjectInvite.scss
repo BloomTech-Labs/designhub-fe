@@ -83,11 +83,22 @@ div.project-invite {
         margin-top: 0;
         cursor: pointer;
         outline: none;
+      }
 
-        .invite-option {
-          font-size: 18px;
-          background-color: $bg2;
-          color: $dark-grey;
+      option {
+        width: 150px;
+        background-color: $field-bg;
+        color: $dark-grey;
+        font-weight: bold;
+        border-radius: 3px;
+        border: none;
+        appearance: none;
+
+        &:hover{
+          appearance: none;
+          border: none;
+          background-color: $dark-grey;
+          color: $field-bg;
         }
       }
 
