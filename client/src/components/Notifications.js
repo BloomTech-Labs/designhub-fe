@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
+import { connect } from 'react-redux';
 import moment from 'moment';
+
+import {
+  deleteInvite,
+  acceptInvite,
+  getInviteById,
+  getInvitesByUser
+} from '../store/actions';
 
 import '../SASS/Notifications.scss';
 
 const Notifications = props => {
   const [state, setState] = useState([]);
   const { id } = props.activeUser;
-
+  const { invite, getInvitesByUser } = props;
   useEffect(() => {
     try {
       const turnToRead = async data => {
@@ -29,10 +37,19 @@ const Notifications = props => {
       };
 
       getNotifications(id);
+      getInvitesByUser();
     } catch (err) {
       console.error(err);
     }
-  }, [id]);
+  }, [id, invite, getInvitesByUser]);
+
+  const handleInvites = (accept, invite) => {
+    if (accept) {
+      props.acceptInvite(invite.id);
+    } else {
+      props.deleteInvite(invite);
+    }
+  };
 
   const renderBasedOnType = item => {
     if (item.type === 'comment') {
@@ -72,15 +89,60 @@ const Notifications = props => {
           <p>&nbsp;{moment(item.created_at).fromNow()} </p>
         </div>
       );
+    } else if (item.type === 'collab') {
+      const [id] = item.message ? item.message.split(' ') : [null, null];
+      const invite = props.userInvites.length === 0 ? null : props.userInvites.find(invite => invite.id === Number(id));
+      return (
+        <div key={item.id} className="commented_notification">
+          <div className="commented_left">
+            {item.unread === true ? <h2 className="unread">.</h2> : null}
+            <img src={item.activeUserAvatar} className="avatar" alt="avatar" />
+            <p className="commented">
+              {item.activeUsername} invited you to their project{' '}
+              {item.projectName}
+              <span> </span>
+             
+              <mark className="from_now">
+                {moment(item.created_at).fromNow()}&nbsp;
+              </mark>
+            </p>
+          </div>
+          <div className="actions">
+            {!invite ? null : !invite.pending ? (
+              <p></p>
+            ) : (
+              <>
+                <button className = "notifications-accept-btn" onClick={() => handleInvites(true, invite)}>
+                  Accept
+                </button>
+                <button className = "notifications-reject-btn" onClick={() => handleInvites(false, invite)}>
+                  Decline
+                </button>
+              </>
+            )}
+          </div>
+          <Link to={`/project/${item.projectId}`}>
+            <img
+              src={item.mainImgUrl}
+              className="thumbnail_preview"
+              alt="thumbnail"
+            />
+          </Link>
+        </div>
+      );
     }
   };
 
   const renderUnread = array => {
-    return array.map(i => renderBasedOnType(i));
+    return array.map(i => {
+      return renderBasedOnType(i);
+    });
   };
 
   const renderRead = array => {
-    return array.map(i => renderBasedOnType(i));
+    return array.map(i => {
+      return renderBasedOnType(i);
+    });
   };
   return (
     <div className="notification-container">
@@ -90,4 +152,14 @@ const Notifications = props => {
   );
 };
 
-export default Notifications;
+const mapStateToProps = state => {
+  return {
+    userInvites: state.invites.userInvites, //invites by user id
+    invite: state.invites.invite
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { acceptInvite, deleteInvite, getInviteById, getInvitesByUser }
+)(Notifications);

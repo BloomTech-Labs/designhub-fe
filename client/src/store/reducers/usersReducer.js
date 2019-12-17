@@ -7,7 +7,10 @@ import {
   GET_SINGLE_USER_FAILURE,
   UPDATE_USER_START,
   UPDATE_USER_SUCCESS,
-  UPDATE_USER_FAILURE
+  UPDATE_USER_FAILURE,
+  GET_USER_BY_EMAIL_START,
+  GET_USER_BY_EMAIL_SUCCESS,
+  GET_USER_BY_EMAIL_FAILURE
 } from '../actions';
 
 import {
@@ -105,6 +108,25 @@ export const usersReducer = (state = initialState, action) => {
         singleUser: action.payload
       };
     case GET_SINGLE_USER_FAILURE:
+      return {
+        ...state,
+        error: action.error,
+        isLoading: false
+      };
+    case GET_USER_BY_EMAIL_START:
+      return {
+        ...state,
+        error: null,
+        isLoading: true
+      };
+    case GET_USER_BY_EMAIL_SUCCESS:
+      return {
+        ...state,
+        error: null,
+        isLoading: false,
+        singleUser: action.payload
+      };
+    case GET_USER_BY_EMAIL_FAILURE:
       return {
         ...state,
         error: action.error,

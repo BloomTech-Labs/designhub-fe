@@ -10,9 +10,13 @@ import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
 
 class UserProfile_Tabs extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      acceptedCollabProjects: [] //accepted collab projects
+    };
+
   }//end constructor
 
   render() {
@@ -21,14 +25,14 @@ class UserProfile_Tabs extends Component {
     const followers = this.props.followers;
     const following = this.props.following;
     const starred = this.props.starred;
+    const acceptedProjects = this.props.acceptedCollabProjects;
 
-    
-    if (!this.props.isProjectsLoading) {        
-      
+    if (!this.props.isProjectsLoading) {
+
       return (
         <div className="profile-tabs-container">
           <div>
-            <Tabs>
+            <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
@@ -70,8 +74,8 @@ class UserProfile_Tabs extends Component {
                                 {project.name.length > 35 ? (
                                   <h1>{project.name.slice(0, 35)}...</h1>
                                 ) : (
-                                  <h1>{project.name}</h1>
-                                )}
+                                    <h1>{project.name}</h1>
+                                  )}
                                 <h1 className="created">
                                   {moment(project.created_at).format(
                                     'MMM DD, YYYY'
@@ -93,7 +97,7 @@ class UserProfile_Tabs extends Component {
                   </div>
                 </div>
 
-                
+
                 <Heatmap />
               </TabPanel>
               <TabPanel className="tabs-container">
@@ -118,8 +122,8 @@ class UserProfile_Tabs extends Component {
                               {project.name.length > 35 ? (
                                 <h1>{project.name.slice(0, 35)}...</h1>
                               ) : (
-                                <h1>{project.name}</h1>
-                              )}
+                                  <h1>{project.name}</h1>
+                                )}
                               <h1 className="created">
                                 {moment(project.created_at).format(
                                   'MMM DD, YYYY'
@@ -138,16 +142,67 @@ class UserProfile_Tabs extends Component {
                     ))}
                   </div>
                 </div>
+                  <br/>
+                {(this.props.activeUser.id === this.props.userData.id) && (
+
+                  <>
+                    <div className="tabs-header">
+                      <h2>Collaborations</h2>
+                    </div>
+                    <div className="tab-content">
+                      {acceptedProjects.length === 0 && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            You are not collaborating on any projects.
+                        </h1>
+                        </div>
+                      )}
+                      <div className="projects-array">
+
+                        {acceptedProjects.map(project => (
+
+                          <div className="project-content" key={project.id}>
+                            <Link to={`/project/${project.id}`}>
+                              <>
+                                <div className="project-info">
+                                  {project.name.length > 35 ? (
+                                    <h1>{project.name.slice(0, 35)}...</h1>
+                                  ) : (
+                                      <h1>{project.name}</h1>
+                                    )}
+                                  <h1 className="created">
+                                    {moment(project.created_at).format(
+                                      'MMM DD, YYYY'
+                                    )}
+                                  </h1>
+                                </div>
+                                <img
+                                  src={project.mainImg ? project.mainImg : defaultImg}
+                                  className="project-thumbnail"
+                                  alt="test"
+                                  key={project.id}
+                                />
+                              </>
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
+
+                  )}
               </TabPanel>
+
               <TabPanel className="tabs-container">
                 <div className="follower-following-container">
                   {followers.length === 0 && (
                     <div className="empty-state">
-                    <img src={empty} alt="empty" className="empty-icon" />
-                    <h1 className="no-projects">
-                      This user does not have any followers.
+                      <img src={empty} alt="empty" className="empty-icon" />
+                      <h1 className="no-projects">
+                        This user does not have any followers.
                     </h1>
-                  </div>
+                    </div>
                   )}
                   {followers.map(follower => {
                     let alsoFollowing = false;
@@ -183,42 +238,42 @@ class UserProfile_Tabs extends Component {
                                 follower.bio.length > 100
                                   ? follower.bio.slice(0, 100) + '...'
                                   : follower.bio
-                              }`}</p>
+                                }`}</p>
                             </div>
                           </Link>
                         </div>
                         {this.props.activeUser.id ===
-                        Number(this.props.params.id) ? (
-                          !alsoFollowing ? (
-                            <button
-                              onClick={() =>
-                                this.props.followUser(
-                                  this.props.activeUser.id,
-                                  follower.userId,
-                                  this.props.activeUser,
-                                  this.props.params
-                                )
-                              }
-                              className="follow-btn"
-                            >
-                              Follow
+                          Number(this.props.params.id) ? (
+                            !alsoFollowing ? (
+                              <button
+                                onClick={() =>
+                                  this.props.followUser(
+                                    this.props.activeUser.id,
+                                    follower.userId,
+                                    this.props.activeUser,
+                                    this.props.params
+                                  )
+                                }
+                                className="follow-btn"
+                              >
+                                Follow
                             </button>
+                            ) : (
+                                <button
+                                  onClick={() =>
+                                    this.props.unfollowUser(
+                                      this.props.activeUser.id,
+                                      follower.userId
+                                    )
+                                  }
+                                  className="edit-profile-btn"
+                                >
+                                  Unfollow
+                            </button>
+                              )
                           ) : (
-                            <button
-                              onClick={() =>
-                                this.props.unfollowUser(
-                                  this.props.activeUser.id,
-                                  follower.userId
-                                )
-                              }
-                              className="edit-profile-btn"
-                            >
-                              Unfollow
-                            </button>
-                          )
-                        ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                       </div>
                     );
                   })}
@@ -228,11 +283,11 @@ class UserProfile_Tabs extends Component {
                 <div className="follower-following-container">
                   {following.length === 0 && (
                     <div className="empty-state">
-                    <img src={empty} alt="empty" className="empty-icon" />
-                    <h1 className="no-projects">
-                      This user does not follow anyone.
+                      <img src={empty} alt="empty" className="empty-icon" />
+                      <h1 className="no-projects">
+                        This user does not follow anyone.
                     </h1>
-                  </div>
+                    </div>
                   )}
                   {following.map(follower => (
                     <div className="follow-container" key={follower.id}>
@@ -258,26 +313,26 @@ class UserProfile_Tabs extends Component {
                               follower.bio.length > 100
                                 ? follower.bio.slice(0, 100) + '...'
                                 : follower.bio
-                            }`}
+                              }`}
                           </p>
                         </div>
                       </div>
                       {this.props.activeUser.id ===
-                      Number(this.props.params.id) ? (
-                        <button
-                          onClick={() =>
-                            this.props.unfollowUser(
-                              this.props.activeUser.id,
-                              follower.userId
-                            )
-                          }
-                          className="edit-profile-btn"
-                        >
-                          Unfollow
+                        Number(this.props.params.id) ? (
+                          <button
+                            onClick={() =>
+                              this.props.unfollowUser(
+                                this.props.activeUser.id,
+                                follower.userId
+                              )
+                            }
+                            className="edit-profile-btn"
+                          >
+                            Unfollow
                         </button>
-                      ) : (
-                        ''
-                      )}
+                        ) : (
+                          ''
+                        )}
                     </div>
                   ))}
                 </div>
@@ -302,8 +357,8 @@ class UserProfile_Tabs extends Component {
                               {project.name.length > 35 ? (
                                 <h1>{project.name.slice(0, 35)}...</h1>
                               ) : (
-                                <h1>{project.name}</h1>
-                              )}
+                                  <h1>{project.name}</h1>
+                                )}
                               <h1 className="created">
                                 {moment(project.created_at).format(
                                   'MMM DD, YYYY'
@@ -329,7 +384,7 @@ class UserProfile_Tabs extends Component {
         </div>
       );
     }//end if
-    else{
+    else {
       return <Loading />; //diplay spinner while content is being fetched 
     }
 

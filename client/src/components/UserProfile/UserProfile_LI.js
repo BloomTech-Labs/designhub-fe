@@ -21,7 +21,9 @@ import {
   deleteFollow,
   addFollow,
   followNotification,
-  getRecentProjectsByUser
+  getRecentProjectsByUser,
+  getInvitesByUser, //collab
+  getSingleProject //collab
 } from '../../store/actions';
 
 // ========== STYLES ========== //
@@ -30,7 +32,15 @@ import '../../SASS/UserProfile.scss';
 class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      acceptedCollabInvites: [], //accepted collab invites
+      acceptedCollabProjects: [],//accepted collab projects
+      currentTab: 0              // Current selected tab in sub-navigation
+    };
+  }
+
+  setCurrentTab(tabIndex) {
+    this.setState({currentTab: tabIndex});
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
@@ -40,8 +50,13 @@ class UserProfile_LI extends Component {
   }
 
   fetch() {
-    this.props
-      .getSingleUser(this.props.match.params.id, this.props.activeUser.id)
+    this.props.getInvitesByUser() //collab
+      .then(() => {
+        this.getAcceptedCollabInvites()
+      })
+      .then(() => {
+        this.props.getSingleUser(this.props.match.params.id, this.props.activeUser.id)
+      })
       .then(() => {
         this.props.getFollowingCount(this.props.match.params.id);
       })
@@ -148,6 +163,27 @@ class UserProfile_LI extends Component {
       .catch(err => console.log(err));
   };
 
+  //get accepted collaboration invites
+  getAcceptedCollabInvites = async () => {
+    const invites = this.props.userInvites.filter(invite => invite.pending === false);
+
+    this.setState({
+      acceptedCollabInvites: invites,
+      acceptedCollabProjects: []
+    })
+
+    this.state.acceptedCollabInvites.map(invite => {
+      return this.props.getSingleProject(invite.projectId)
+        .then(() =>
+          this.setState({
+            acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]
+          })
+        )
+
+    });
+
+  }
+
   render() {
     window.scroll(0, 0);
     if (this.props.isUsersLoading && this.props.userData === null) {
@@ -189,7 +225,7 @@ class UserProfile_LI extends Component {
           </div>
           <div className="user-data-container">
             <div className="user-data">
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(1)}>
                 <h6>Projects</h6>
                 <p>
                   {this.props.projects === null
@@ -197,15 +233,25 @@ class UserProfile_LI extends Component {
                     : this.props.projects.length}
                 </p>
               </div>
-              <div className="count-flex">
+
+              {/*NUMBER OF COLLABORATION PROJECTS*/}
+              {(this.props.activeUser.id === this.props.userData.id) && (
+                <div className="count-flex" onClick={() => this.setCurrentTab(1)}>
+                  <h6>Collaborations </h6>
+                  <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
+                </div>
+
+              )}
+
+              <div className="count-flex" onClick={() => this.setCurrentTab(2)}>
                 <h6>Followers</h6>
                 <p>{this.props.followers ? this.props.followers : 0}</p>
               </div>
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(3)}>
                 <h6>Following</h6>
                 <p>{this.props.following ? this.props.following : 0}</p>
               </div>
-              <div className="count-flex">
+              <div className="count-flex" onClick={() => this.setCurrentTab(4)}>
                 <h6>Starred</h6>
                 <p>
                   {this.props.starred === null ? 0 : this.props.starred.length}
@@ -226,46 +272,48 @@ class UserProfile_LI extends Component {
               </div>
               <div>
                 {this.props.activeUser.id ===
-                Number(this.props.match.params.id) ? (
-                  <Link to="/settings">
-                    <button className="edit-profile-btn">Edit Profile</button>
-                  </Link>
-                ) : (
-                  <>
-                    {this.props.isFollowed ? (
-                      <button
-                        className="edit-profile-btn"
-                        onClick={() =>
-                          this.unfollowUser(
-                            this.props.activeUser.id,
-                            parseInt(this.props.match.params.id)
-                          )
-                        }
-                      >
-                        Unfollow
+                  Number(this.props.match.params.id) ? (
+                    <Link to="/settings">
+                      <button className="edit-profile-btn">Edit Profile</button>
+                    </Link>
+                  ) : (
+                    <>
+                      {this.props.isFollowed ? (
+                        <button
+                          className="edit-profile-btn"
+                          onClick={() =>
+                            this.unfollowUser(
+                              this.props.activeUser.id,
+                              parseInt(this.props.match.params.id)
+                            )
+                          }
+                        >
+                          Unfollow
                       </button>
-                    ) : (
-                      <button
-                        className="follow-btn"
-                        onClick={() =>
-                          this.followUser(
-                            this.props.activeUser.id,
-                            parseInt(this.props.match.params.id),
-                            this.props.activeUser,
-                            this.props.match.params
-                          )
-                        }
-                      >
-                        Follow
+                      ) : (
+                          <button
+                            className="follow-btn"
+                            onClick={() =>
+                              this.followUser(
+                                this.props.activeUser.id,
+                                parseInt(this.props.match.params.id),
+                                this.props.activeUser,
+                                this.props.match.params
+                              )
+                            }
+                          >
+                            Follow
                       </button>
-                    )}
-                  </>
-                )}
+                        )}
+                    </>
+                  )}
               </div>
             </div>
           </div>
         </div>
         <UserProfileTabs
+          currentTab={this.state.currentTab}
+          setCurrentTab={this.setCurrentTab.bind(this)}
           projects={this.props.projects}
           recentProjects={this.props.recentProjects}
           followers={this.props.followersTab}
@@ -277,7 +325,12 @@ class UserProfile_LI extends Component {
           unfollowUser={this.unfollowUser}
           activeUser={this.props.activeUser}
           params={this.props.match.params}
-          isProjectsLoading = {this.props.isProjectsLoading}
+          isProjectsLoading={this.props.isProjectsLoading}
+          acceptedCollabInvites={this.state.acceptedCollabInvites} //accepted collab invites  
+          getSingleProject={this.props.getSingleProject}   //collab
+          singleProject={this.props.singleProject} //collab     
+          acceptedCollabProjects={this.state.acceptedCollabProjects}
+          userData={this.props.userData}
         />
       </div>
     );
@@ -296,7 +349,10 @@ const mapStateToProps = state => {
     starred: state.stars.starredProjects,
     isFollowed: state.followers.isFollowed,
     isUsersLoading: state.users.isLoading,
-    isProjectsLoading: state.projects.isLoading
+    isProjectsLoading: state.projects.isLoading,
+    userInvites: state.invites.userInvites, //collab - all project invites by user id
+    singleProject: state.projects.singleProject
+
   };
 };
 
@@ -314,6 +370,8 @@ export default connect(
     deleteFollow,
     addFollow,
     followNotification,
-    getRecentProjectsByUser
+    getRecentProjectsByUser,
+    getInvitesByUser, //collab - gets all projects by user id
+    getSingleProject //collab - gets a project by project id
   }
 )(UserProfile_LI);
