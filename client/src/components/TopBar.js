@@ -20,7 +20,7 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
   const [show, setShow] = useState(false);
   const target = useRef();
 
-  useEffect(() => {
+  const init = () => {
     if(startLight) {
       toggleLightMode();
     }
@@ -28,7 +28,9 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  }, []);
+  }
+
+  useEffect(init, []);
 
   const handleClick = e => {
     if (!target.current.contains(e.target)) {

@@ -211,7 +211,7 @@
   }
   &:hover,
   &:focus {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
     border: 2px solid $alert;
@@ -238,7 +238,7 @@
   }
   &:hover,
   &:focus {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
     border: 2px solid $alert;
@@ -267,7 +267,7 @@
   }
   &:focus,
   &:hover {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
 }
 
@@ -291,7 +291,7 @@
   }
   &:hover,
   &:focus {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
     border: 2px solid $alert;

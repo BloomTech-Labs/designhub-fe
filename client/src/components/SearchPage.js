@@ -64,7 +64,7 @@ class SearchPage extends Component {
               <TabPanel className='results-container'>
                 {noProjects && (
                   <div className="empty">
-                    <img className="empty-icon" src={empty} />
+                    <img alt='empty' className="empty-icon" src={empty} />
                     <p>No projects found!</p>
                   </div>
                 )}
@@ -75,7 +75,7 @@ class SearchPage extends Component {
               <TabPanel className='results-container'>
                 {noUsers && (
                   <div className="empty">
-                    <img className="empty-icon" src={empty} />
+                    <img alt='empty' className="empty-icon" src={empty} />
                     <p>No users found!</p>
                   </div>
                 )}

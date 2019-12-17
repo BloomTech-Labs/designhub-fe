@@ -150,7 +150,7 @@ const Notifications = props => {
     <div className="notification-container">
       {(state.unReadNotifications === undefined || state.unReadNotifications.length > 0) || (state.readNotifications === undefined || state.readNotifications.length > 0) ? null : 
                       <div className="empty">
-                        <img className="empty-icon" src={empty} />
+                        <img alt='empty' className="empty-icon" src={empty} />
                         <p>No notifications found!</p>
                       </div>}
       {state.unReadNotifications && renderUnread(state.unReadNotifications)}

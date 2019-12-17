@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import axios from 'axios';
 
 import '../../SASS/Explore.scss';
 import ExploreTabs from './ExploreTabs.js';
@@ -23,7 +22,7 @@ class Explore extends Component {
   fetch() {
     const myId = this.state.myId;
 
-    return axios
+    return axiosWithAuth()
       .get(`/api/v1/explore/${myId}`)
       .then(res => {
         this.setState({
