@@ -271,9 +271,8 @@
     }
 
     .projects-array {
-      display: grid;
-      grid-template-columns: 22% 22% 22% 22%;
-      grid-column-gap: 3%;
+      display:flex;
+      flex-wrap: wrap;
       width: 100%;
     }
 

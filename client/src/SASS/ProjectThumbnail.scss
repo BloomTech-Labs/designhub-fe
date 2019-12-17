@@ -3,7 +3,7 @@
 
 
 .project-content {
-        width: 22rem;
+        width: 20rem;
         height: 15rem;
         position: relative;
         transition: all 0.2s ease-in-out;
@@ -11,6 +11,7 @@
         border-radius: 5px;
         overflow: hidden;
         object-fit: cover;
+        margin: 0.5% 0.5%;
   
         @include themify($themes) {
           border: 8px solid themed('bg');
