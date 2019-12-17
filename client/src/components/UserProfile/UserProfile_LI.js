@@ -205,10 +205,12 @@ class UserProfile_LI extends Component {
               <h2 className="username">{this.props.userData.username}</h2>
               <p className="bio">{this.props.userData.bio}</p>
               <div className="user-info-location-website">
+              {this.props.userData.location ?
                 <div className="location-website-flex">
-                  {this.props.userData.location ? <Location /> : null}
+                  <Location />
                   <p className="location">{this.props.userData.location}</p>
                 </div>
+                 : null}
                 <div className="location-website-flex">
                   <a
                     href={this.props.userData.website}
