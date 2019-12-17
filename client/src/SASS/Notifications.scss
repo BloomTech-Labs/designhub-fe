@@ -30,6 +30,11 @@
     margin: 15px 0;
     padding: 10px;    
 
+    @include themify($themes) {
+      background: $grey;
+      color: black;
+    }
+
     @media (max-width: 800px) {              
       width: 100%;    
       
