@@ -23,9 +23,5 @@ describe('<App />', () => {
       );
       expect(wrapper.find('.Loading-container')).toExist();
     });
-    it('should render Loader successfuly', () => {
-      expect(wrapper.find('.loading-text')).toExist();
-      expect(wrapper.find('.loading-text')).toHaveClassName('loading-text');
-    });
   });
 });
