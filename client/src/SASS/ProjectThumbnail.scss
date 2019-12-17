@@ -48,7 +48,7 @@
     text-decoration: none;
     background: $blue;
     overflow: hidden;
-    height: 48px;
+    height: 50px;
     display: none;
     pointer-events: none;
 
@@ -71,15 +71,6 @@
     height: 100%;
     transition: 0.1s ease-in-out;
     cursor: pointer;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    height: 0px;
-  }
-  to {
-    height: 40px;
   }
 }
 
