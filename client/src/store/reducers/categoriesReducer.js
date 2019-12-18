@@ -180,7 +180,7 @@ import {
         return {
             ...state,
             isLoading: false,
-            projectsByCategory: action.payload
+            projectsByCategory: action.payload            
         };
        case GET_PROJECTS_BY_CATEGORYID_FAILURE:
         return {

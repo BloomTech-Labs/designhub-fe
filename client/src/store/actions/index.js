@@ -292,6 +292,7 @@ export const getProjectsByCategoryId = (id) => dispatch => {
     .get(`/api/v1/categories/projects/category/${id}`)
     .then(res => {
       dispatch({ type: GET_PROJECTS_BY_CATEGORYID_SUCCESS, payload: res.data });
+      console.log("projs by category in action creator", res.data);
     })
     .catch(err => {
       dispatch({ type: GET_PROJECTS_BY_CATEGORYID_FAILURE, error: err });

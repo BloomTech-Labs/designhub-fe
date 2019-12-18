@@ -346,7 +346,7 @@ const ProjectForm = ({
     getAllCategoryNames();
   };
 
-  //populates categoryNames drop down with names
+  //populates categoryName drop down with names
   useEffect(getNames, [categoryNames]);
 
   useEffect(getInvites, [invite]);
@@ -635,9 +635,6 @@ const ProjectForm = ({
 
                   {categoryNames.map( (category, index) => {
                     return <option key = {category.id} value = {category.id}> 
-                              {console.log("category id", category.id)}
-                              {console.log("index", index)}
-                              
                               {category.category} 
                            </option>
                   })}
