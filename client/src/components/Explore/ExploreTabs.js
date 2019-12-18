@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import moment from 'moment';
 
+import LazyLoad from 'react-lazyload';
+
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import Loading from '../Loading';
 
@@ -45,12 +47,14 @@ const ExploreTabs = ({ recent, popular, following }) => {
                             {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
                         </div>
+                        <LazyLoad>
                         <img
                           src={project.mainImg ? project.mainImg : defaultImg}
                           className="project-thumbnail"
                           alt="test"
                           key={project.id}
                         />
+                        </LazyLoad>
                       </>
                     </Link>
                   </div>
@@ -76,12 +80,14 @@ const ExploreTabs = ({ recent, popular, following }) => {
                             {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
                         </div>
+                        <LazyLoad>
                         <img
                           src={project.mainImg ? project.mainImg : defaultImg}
                           className="project-thumbnail"
                           alt="test"
                           key={project.id}
                         />
+                        </LazyLoad>
                       </>
                     </Link>
                   </div>
@@ -108,6 +114,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
                             {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
                         </div>
+                        <LazyLoad>
                         <img
                           src={
                             project.projectImage
@@ -118,6 +125,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
                           alt="test"
                           key={project.projectId}
                         />
+                        </LazyLoad>
                       </>
                     </Link>
                   </div>

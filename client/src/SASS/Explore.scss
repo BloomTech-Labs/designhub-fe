@@ -114,8 +114,9 @@
 
       .project-thumbnail {
         object-fit: cover;
-        width: 100%;
-        height: 100%;
+        width: 22rem;
+        height: 15rem;
+        will-change: transform;
         transition: 0.1s ease-in-out;
         cursor: pointer;
       }
@@ -123,6 +124,7 @@
     .project-content:hover {
       border: 8px solid $blue;
       text-align: left;
+      will-change: transform;
     }
   }
 
@@ -130,6 +132,8 @@
     .project-info {
       display: inline;
       animation: slideUp 0.25s ease-in-out;
+      will-change: transform;
+      z-index: 1;
     }
   }
 
