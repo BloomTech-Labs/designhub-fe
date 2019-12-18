@@ -203,7 +203,7 @@ export const GET_PROJECTS_BY_CATEGORYID_FAILURE = "GET_PROJECTS_BY_CATEGORYID_FA
 export const getAllCategoryNames = () => dispatch => {
   dispatch({ type: GET_ALL_CATEGORY_NAMES_START });
   return axiosWithAuth()
-    .get('/api/v1/projectCategories/all')
+    .get('/api/v1/categories/all')
     .then(res => {
       dispatch({ type: GET_ALL_CATEGORY_NAMES_SUCCESS, payload: res.data });
     })
@@ -215,7 +215,7 @@ export const getAllCategoryNames = () => dispatch => {
 export const getAssignedCategories = () => dispatch => {
   dispatch({ type: GET_ASSIGNED_CATEGORIES_START });
   return axiosWithAuth()
-    .get('/api/v1/projectCategories/projects/all')
+    .get('/api/v1/categories/projects/all')
     .then(res => {
       dispatch({ type: GET_ASSIGNED_CATEGORIES_SUCCESS, payload: res.data });
     })
@@ -228,7 +228,7 @@ export const addCategoryToProject = (category) => dispatch => {
 
   dispatch({ type: ADD_CATEGORY_TO_PROJECT_START });
   return axiosWithAuth()
-    .post('/api/v1/projectCategories/add')
+    .post('/api/v1/categories/add', category)
     .then(res => {
       dispatch({ type: ADD_CATEGORY_TO_PROJECT_SUCCESS, payload: res.data });
     })
@@ -241,7 +241,7 @@ export const addCategoryToProject = (category) => dispatch => {
 export const getCategoriesByUserId = (id) => dispatch => {
   dispatch({ type: GET_CATEGORIES_BY_USERID_START });
   return axiosWithAuth()
-    .get(`/api/v1/projectCategories/user/${id}`)
+    .get(`/api/v1/categories/user/${id}`)
     .then(res => {
       dispatch({ type: GET_CATEGORIES_BY_USERID_SUCCESS, payload: res.data });
     })
@@ -253,7 +253,7 @@ export const getCategoriesByUserId = (id) => dispatch => {
 export const getCategoryByCategoryId = (id) => dispatch => {
   dispatch({ type: GET_CATEGORY_BY_CATEGORYID_START });
   return axiosWithAuth()
-    .get(`/api/v1/projectCategories/${id}`)
+    .get(`/api/v1/categories/${id}`)
     .then(res => {
       dispatch({ type: GET_CATEGORY_BY_CATEGORYID_SUCCESS, payload: res.data });
     })
@@ -265,7 +265,7 @@ export const getCategoryByCategoryId = (id) => dispatch => {
 export const getCategoriesByProjectId = (id) => dispatch => {
   dispatch({ type: GET_CATEGORIES_BY_PROJECTID_START });
   return axiosWithAuth()
-    .get(`/api/v1/projectCategories/projects/${id}`)
+    .get(`/api/v1/categories/projects/${id}`)
     .then(res => {
       dispatch({ type: GET_CATEGORIES_BY_PROJECTID_SUCCESS, payload: res.data });
     })
@@ -277,7 +277,7 @@ export const getCategoriesByProjectId = (id) => dispatch => {
 export const deleteCategoryFromProject = (id) => dispatch => {
   dispatch({ type: DELETE_CATEGORY_FROM_PROJECT_START })
   return axiosWithAuth()
-    .delete(`api/v1/projectCategories/project/${id}`)
+    .delete(`api/v1/categories/project/${id}`)
     .then(res => {
       dispatch({ type: DELETE_CATEGORY_FROM_PROJECT_SUCCESS, payload: res.data })
     })
@@ -289,7 +289,7 @@ export const deleteCategoryFromProject = (id) => dispatch => {
 export const getProjectsByCategoryId = (id) => dispatch => {
   dispatch({ type: GET_PROJECTS_BY_CATEGORYID_START });
   return axiosWithAuth()
-    .get(`/api/v1/projectCategories/projects/category/${id}`)
+    .get(`/api/v1/categories/projects/category/${id}`)
     .then(res => {
       dispatch({ type: GET_PROJECTS_BY_CATEGORYID_SUCCESS, payload: res.data });
     })
