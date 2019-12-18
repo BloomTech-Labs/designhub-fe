@@ -14,10 +14,13 @@ import {
   deleteProject,
   createProjectInvite,
   getInvitesByProjectId,
-  getUsersFromInvites
+  getUsersFromInvites,
+  addResearch,
+  deleteResearch
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
+import { MultiResearchUpload } from './MultiResearchUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
@@ -47,9 +50,12 @@ const ProjectForm = ({
   usersFromInvites,
   loadingUsers,
   isDeleting,
-  acceptedInvites
+  acceptedInvites,
+  addResearch,
+  deleteResearch
 }) => {
   const [files, setFiles] = useState([]);
+  const [researchFile, setResearchFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [error, setError] = useState('');
@@ -134,6 +140,33 @@ const ProjectForm = ({
     }
   };
 
+  const handleResearchUpload = async (file, projectId, projectTitle) => {
+    if (researchFile.length > 0) {
+      let requestPromises = researchFile.map(async file => {
+        try {
+          const { data: { key, url } } = await axiosWithAuth().post(`api/v1/research/signed`, { id: projectId });
+          await axios.put(url, file, {
+            headers: {
+              'Content-Type': 'application/pdf'
+            }
+          });
+          await addResearch({
+            projectId: projectId,
+            url: key
+          });
+          const researchUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
+          return researchUrl;
+        } catch (err) {
+          console.error('ProjectForm.js handleSubmit() ERROR', err);
+        }
+      });
+      return await Promise.all(requestPromises).then(res => {
+        console.log(res)
+        return res[0];
+      });
+    }
+  }
+
   const handleImageUpload = async (file, projectId, projectTitle) => {
     if (files.length > 0) {
       let requestPromises = files.map(async file => {
@@ -162,9 +195,6 @@ const ProjectForm = ({
             imageId: data.id
           });
           const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
-          console.log('key', key);
-          console.log('url', url);
-          console.log('imageurl', imageUrl)
           return imageUrl;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
@@ -187,6 +217,7 @@ const ProjectForm = ({
         id,
         data.data[0].name
       );
+      await handleResearchUpload(researchFile, id, data.data[0].name);
       const newProject = {
         ...project,
         mainImg: uploadedImage
@@ -373,6 +404,7 @@ const ProjectForm = ({
     <Redirect to={`/project/${project.id}`} />
   ) : (
         <div className="project-form-wrapper">
+          {console.log('research file', researchFile)}
           {isLoading && <Loading />}
           <div className={state.modal ? 'modal--expand' : 'modal--close'}>
             <span
@@ -505,7 +537,7 @@ const ProjectForm = ({
                   {isEditing ? 'Edit project' : 'Create a project'}
                 </h2>
               </header>
-              <MultiImageUpload filesArray={{ files, setFiles }} />
+              <MultiImageUpload files={files} setFiles={setFiles} />
               {isEditing && (
                 <div>
                   <div className="thumbnail-container ">
@@ -537,6 +569,7 @@ const ProjectForm = ({
                   </div>
                 </div>
               )}
+              <MultiResearchUpload files={researchFile} setFiles={setResearchFile} />
             </div>
             <div className="right-container">
               <form
@@ -720,7 +753,9 @@ export default withRouter(
       deleteProject,
       createProjectInvite,
       getInvitesByProjectId,
-      getUsersFromInvites
+      getUsersFromInvites,
+      addResearch,
+      deleteResearch
     }
   )(ProjectForm)
 );
