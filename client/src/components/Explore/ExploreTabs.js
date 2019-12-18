@@ -6,7 +6,7 @@ import ProjectThumbnail from '../ProjectThumbnail';
 
 import '../../SASS/Explore.scss';
 
-const ExploreTabs = ({ recent, popular, following, users }) => {
+const ExploreTabs = ({ recent, popular, following }) => {
 
   
 
@@ -32,8 +32,7 @@ const ExploreTabs = ({ recent, popular, following, users }) => {
 
               <div className="explore-projects-array">
                 {popular.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                  return <ProjectThumbnail project={project} key={project.id} />
                 }
                 )}
               </div>
@@ -44,8 +43,7 @@ const ExploreTabs = ({ recent, popular, following, users }) => {
 
               <div className="explore-projects-array">
                 {recent.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                  return <ProjectThumbnail project={project} key={project.id} />
                 })}
               </div>
             </TabPanel>
@@ -55,8 +53,7 @@ const ExploreTabs = ({ recent, popular, following, users }) => {
 
               <div className="explore-projects-array">
                 {following.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                  return <ProjectThumbnail project={project} key={project.id} />
                 }
                 )}
               </div>

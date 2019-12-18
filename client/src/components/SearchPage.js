@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { Link } from 'react-router-dom';
-import defaultImg from '../ASSETS/default_thumbnail.svg';
 
 import empty from './Icons/empty_project.svg';
 
 import SearchUserCard from './SearchUserCard';
+
+import ProjectThumbnail from './ProjectThumbnail';
 
 import '../SASS/SearchPage.scss';
 import '../SASS/UserProfile.scss';
@@ -18,24 +18,8 @@ class SearchPage extends Component {
   };
 
   displayProjects = () => {
-    return this.props.searchData.projects.map((project, index) => {
-      return (
-        <div className="project-content" key={index}>
-          <Link to={`/project/${project.id}`}>
-            <>
-              <div className="project-info">
-                <h1>{project.name}</h1>
-              </div>
-              <img
-                src={project.mainImg ? project.mainImg : defaultImg}
-                className="project-thumbnail"
-                alt="test"
-                key={project.id}
-              />
-            </>
-          </Link>
-        </div>
-      );
+    return this.props.searchData.projects.map(project => {
+      return <ProjectThumbnail project={project} />;
     });
   };
 
