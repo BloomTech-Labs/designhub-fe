@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import moment from 'moment';
 
-import LazyLoad from 'react-lazyload';
-
-import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import Loading from '../Loading';
+import ProjectThumbnail from '../ProjectThumbnail';
 
 import '../../SASS/Explore.scss';
 
@@ -34,30 +30,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
 
               <div className="explore-projects-array">
                 {popular.map(project => (
-                  <div className="project-content" key={project.id}>
-                    <Link to={`/project/${project.id}`}>
-                      <>
-                        <div className="project-info">
-                          {project.name.length > 35 ? (
-                            <h1>{project.name.slice(0, 35)}...</h1>
-                          ) : (
-                              <h1>{project.name}</h1>
-                            )}
-                          <h1 className="created">
-                            {moment(project.created_at).format('MMM DD, YYYY')}
-                          </h1>
-                        </div>
-                        <LazyLoad>
-                        <img
-                          src={project.mainImg ? project.mainImg : defaultImg}
-                          className="project-thumbnail"
-                          alt="test"
-                          key={project.id}
-                        />
-                        </LazyLoad>
-                      </>
-                    </Link>
-                  </div>
+                  <ProjectThumbnail key={project.id} project={project} />
                 ))}
               </div>
             </TabPanel>
@@ -67,30 +40,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
 
               <div className="explore-projects-array">
                 {recent.map(project => (
-                  <div className="project-content" key={project.id}>
-                    <Link to={`/project/${project.id}`}>
-                      <>
-                        <div className="project-info">
-                          {project.name.length > 35 ? (
-                            <h1>{project.name.slice(0, 35)}...</h1>
-                          ) : (
-                              <h1>{project.name}</h1>
-                            )}
-                          <h1 className="created">
-                            {moment(project.created_at).format('MMM DD, YYYY')}
-                          </h1>
-                        </div>
-                        <LazyLoad>
-                        <img
-                          src={project.mainImg ? project.mainImg : defaultImg}
-                          className="project-thumbnail"
-                          alt="test"
-                          key={project.id}
-                        />
-                        </LazyLoad>
-                      </>
-                    </Link>
-                  </div>
+                  <ProjectThumbnail key={project.id} project={project} />
                 ))}
               </div>
             </TabPanel>
@@ -100,35 +50,7 @@ const ExploreTabs = ({ recent, popular, following }) => {
 
               <div className="explore-projects-array">
                 {following.map(project => (
-                  <div className="project-content" key={project.projectId}>
-                    <Link to={`/project/${project.projectId}`}>
-                      <>
-                        <div className="project-info">
-                          {project.projectName &&
-                            project.projectName.length > 35 ? (
-                              <h1>{project.projectName.slice(0, 35)}...</h1>
-                            ) : (
-                              <h1>{project.projectName}</h1>
-                            )}
-                          <h1 className="created">
-                            {moment(project.created_at).format('MMM DD, YYYY')}
-                          </h1>
-                        </div>
-                        <LazyLoad>
-                        <img
-                          src={
-                            project.projectImage
-                              ? project.projectImage
-                              : defaultImg
-                          }
-                          className="project-thumbnail"
-                          alt="test"
-                          key={project.projectId}
-                        />
-                        </LazyLoad>
-                      </>
-                    </Link>
-                  </div>
+                  <ProjectThumbnail key={project.id} project={project} />
                 ))}
               </div>
             </TabPanel>
