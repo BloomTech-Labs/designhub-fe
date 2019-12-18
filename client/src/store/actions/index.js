@@ -194,6 +194,10 @@ export const GET_PROJECTS_BY_CATEGORYID_START = "GET_PROJECTS_BY_CATEGORYID_STAR
 export const GET_PROJECTS_BY_CATEGORYID_SUCCESS = "GET_PROJECTS_BY_CATEGORYID_SUCCESS";
 export const GET_PROJECTS_BY_CATEGORYID_FAILURE = "GET_PROJECTS_BY_CATEGORYID_FAILURE";
 
+export const UPDATE_PROJECT_CATEGORY_START = "UPDATE_PROJECT_CATEGORY_START";
+export const UPDATE_PROJECT_CATEGORY_SUCCESS = "UPDATE_PROJECT_CATEGORY_SUCCESS";
+export const UPDATE_PROJECT_CATEGORY_FAILURE = "UPDATE_PROJECT_CATEGORY_FAILURE";
+
 
 
 //############# ACTIONS #############
@@ -283,6 +287,19 @@ export const deleteCategoryFromProject = (id) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: DELETE_CATEGORY_FROM_PROJECT_FAILURE, payload: err.message })
+    })
+}
+
+//update a project's assigned category by project_category id
+export const updateProjectCategory = (id, changes) => dispatch => {
+  dispatch({ type: UPDATE_PROJECT_CATEGORY_START })
+  return axiosWithAuth()
+    .put(`api/v1/categories/project/${id}`, changes)
+    .then(res => {
+      dispatch({ type: UPDATE_PROJECT_CATEGORY_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_PROJECT_CATEGORY_FAILURE, payload: err.message })
     })
 }
 

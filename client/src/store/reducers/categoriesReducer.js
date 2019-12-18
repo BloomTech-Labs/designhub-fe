@@ -23,7 +23,10 @@ import {
     DELETE_CATEGORY_FROM_PROJECT_FAILURE,
     GET_PROJECTS_BY_CATEGORYID_START,
     GET_PROJECTS_BY_CATEGORYID_SUCCESS,
-    GET_PROJECTS_BY_CATEGORYID_FAILURE
+    GET_PROJECTS_BY_CATEGORYID_FAILURE,
+    UPDATE_PROJECT_CATEGORY_START,
+    UPDATE_PROJECT_CATEGORY_SUCCESS,
+    UPDATE_PROJECT_CATEGORY_FAILURE
 
   } from '../actions/index';
    
@@ -32,6 +35,7 @@ import {
     categoryNames: [],
     assignedCategories: [],
     addedCategory: {},
+    updatedProjectCategory: [],
     userCategories: [],
     category: [],
     projectCategories: [], //categories added to a project
@@ -187,6 +191,24 @@ import {
             ...state,
             isLoading: false,
             error: action.payload
+        };
+        case UPDATE_PROJECT_CATEGORY_START:
+        return {
+          ...state,
+          error: null,
+          isLoading: true
+        };
+      case UPDATE_PROJECT_CATEGORY_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          updatedProjectCategory: action.payload
+        };
+      case UPDATE_PROJECT_CATEGORY_FAILURE:
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload
         };
 
       default:
