@@ -25,7 +25,8 @@ class Explore extends Component {
   componentDidUpdate() {
     if (this.state.userIds.length > 0 && this.state.users.length === 0) {
       const users = []
-      this.state.userIds.map((id, index) => {
+      this.state.userIds.forEach((id, index) => {
+        if(!id) return;
         return axiosWithAuth()
           .get(`/api/v1/users/${id}`)
           .then(res => {

@@ -33,7 +33,7 @@ class UserProfile_Tabs extends Component {
       return (
         <div className="profile-tabs-container">
           <div>
-            <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
+            <Tabs selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
