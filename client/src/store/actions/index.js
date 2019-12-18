@@ -232,7 +232,7 @@ export const addCategoryToProject = (category) => dispatch => {
 
   dispatch({ type: ADD_CATEGORY_TO_PROJECT_START });
   return axiosWithAuth()
-    .post('/api/v1/categories/add', category)
+    .post('/api/v1/categories/project/add', category)
     .then(res => {
       dispatch({ type: ADD_CATEGORY_TO_PROJECT_SUCCESS, payload: res.data });
     })
@@ -272,6 +272,7 @@ export const getCategoriesByProjectId = (id) => dispatch => {
     .get(`/api/v1/categories/projects/${id}`)
     .then(res => {
       dispatch({ type: GET_CATEGORIES_BY_PROJECTID_SUCCESS, payload: res.data });
+      console.log("categories by project id in actions", res.data);
     })
     .catch(err => {
       dispatch({ type: GET_CATEGORIES_BY_PROJECTID_FAILURE, error: err });

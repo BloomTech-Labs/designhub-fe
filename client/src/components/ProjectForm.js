@@ -16,7 +16,9 @@ import {
   getInvitesByProjectId,
   getUsersFromInvites,
   getAllCategoryNames,
-  addCategoryToProject
+  addCategoryToProject,
+  getCategoriesByProjectId,
+  updateProjectCategory
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
@@ -53,7 +55,11 @@ const ProjectForm = ({
   getAllCategoryNames,
   categoryNames,
   addCategoryToProject,
-  addedCategory
+  addedCategory,
+  getCategoriesByProjectId,
+  projectCategories, //categories added to a project
+  updateProjectCategory
+
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -224,17 +230,36 @@ const ProjectForm = ({
 
   const editProject = (changes, id) => {
     console.log('edit changes', changes);
+    let project_category = {};
     const updateMainImg = (changes, id) => {
       updateProject(id, changes)
-
-      //edit category
-      .then(() => {
-        const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
-        addCategoryToProject(category);
-      })
+     
         .then(res => {
           history.push(`/project/${id}`);
         })
+         //edit category
+      .then(() => {
+        //getCategoriesByProjectId(id);
+        axiosWithAuth()
+        .get(`/api/v1/categories/projects/${id}`)
+        .then(res => {
+          console.log("res.data", res.data);
+          project_category = res.data.find( project_category => {
+            return project_category.projectId === id;
+        })
+
+        console.log("project categories in project form", project_category);
+       
+       const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
+       updateProjectCategory(project_category.projectCategoryId, category);
+      
+      })
+      .catch(err => {
+        console.log("get categories by id error", err);
+      });    
+
+       
+     })
         .catch();
     };
 
@@ -343,9 +368,10 @@ const ProjectForm = ({
   };
 
   const getNames = () => {
-    getAllCategoryNames();
+    getAllCategoryNames();    
   };
 
+  
   //populates categoryName drop down with names
   useEffect(getNames, [categoryNames]);
 
@@ -632,7 +658,7 @@ const ProjectForm = ({
                   onChange={categoryHandler}
                   className = "category-select"
                 >
-
+                  <option value ="" disabled selected hidden>Please Choose a Category</option>
                   {categoryNames.map( (category, index) => {
                     return <option key = {category.id} value = {category.id}> 
                               {category.category} 
@@ -775,7 +801,10 @@ const mapStateToProps = state => {
     loadingUsers: state.invites.loadingUsers,
     isDeleting: state.invites.isDeleting,
     categoryNames: state.categories.categoryNames,
-    addedCategory: state.categories.addedCategory
+    addedCategory: state.categories.addedCategory,
+    projectCategories: state.categories.projectCategories, //categories added to a project
+    updatedProjectCategory: state.categories.updatedProjectCategory
+
   };
 };
 
@@ -793,7 +822,9 @@ export default withRouter(
       getInvitesByProjectId,
       getUsersFromInvites,
       getAllCategoryNames,
-      addCategoryToProject
+      addCategoryToProject,
+      getCategoriesByProjectId,
+      updateProjectCategory
     }
   )(ProjectForm)
 );
