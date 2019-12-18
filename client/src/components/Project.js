@@ -22,7 +22,8 @@ import {
   starProject,
   getStarStatus,
   unstarProject,
-  getInvitesByProjectId
+  getInvitesByProjectId,
+  getUsersFromInvites
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -33,12 +34,16 @@ class Projects extends Component {
     this.projectId = this.props.match.params.id;
     this.state = {
       editAccess: false,
+
     }
   }
 
   componentDidMount() {
     this.props.getInvitesByProjectId(this.projectId)
-      .then(() => this.handleEditAccess());
+      .then(() => {
+        this.handleEditAccess();
+        this.props.getUsersFromInvites(this.props.projectInvites);
+      });
     this.props.getStarStatus(
       this.props.activeUser.id,
       this.props.match.params.id
@@ -126,6 +131,19 @@ class Projects extends Component {
                 </span>
                 <span>
                   {thisProject.privateProjects === true ? "Private" : "Public"}
+                </span>
+                <span className='collab-count'>
+                  {this.props.acceptedInvites.length} {this.props.acceptedInvites.length === 1 ? 'Collaborator' : 'Collaborators'}
+                  {this.props.acceptedInvites.length === 0 ? null :
+                    <span className='collab-members'>
+                      {this.props.acceptedInvites.map(invite => {
+                        const user = this.props.usersFromInvites.find(user => user.id === invite.userId);
+                        return (
+                          <p>{!user ? null : user.firstName ? user.firstName + ' ' + user.lastName : user.email} </p>
+                        )
+                      })}
+                    </span>
+                  }
                 </span>
               </p>
             </div>
@@ -250,7 +268,9 @@ const mapStateToProps = state => {
     projectPhotos: state.photos.projectPhotos,
     projectComments: state.comments.projectComments,
     isStarred: state.stars.isStarred,
-    acceptedInvites: state.projects.acceptedInvites
+    acceptedInvites: state.projects.acceptedInvites,
+    usersFromInvites: state.invites.usersFromInvites,
+    projectInvites: state.projects.projectInvites
   };
 };
 
@@ -263,6 +283,7 @@ export default connect(
     starProject,
     getStarStatus,
     unstarProject,
-    getInvitesByProjectId
+    getInvitesByProjectId,
+    getUsersFromInvites
   }
 )(Projects);
