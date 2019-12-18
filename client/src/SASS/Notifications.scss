@@ -5,6 +5,21 @@
   width: 97%;
   color: white;
 
+  .empty {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20%;
+
+    .empty-icon{
+      opacity: 0.04;
+
+      @include themify($themes) {
+        filter: themed('filter');
+      }
+    }
+  }
+
   .commented_notification {
     display: flex;
     justify-content: space-between;
@@ -13,7 +28,23 @@
     background: $black;
     border-radius: 10px;
     margin: 15px 0;
-    padding: 10px;
+    padding: 10px;    
+
+    @include themify($themes) {
+      background: $white;
+      color: black;
+    }
+
+    @media (max-width: 800px) {              
+      width: 100%;    
+      
+    }
+
+    @media (max-width: 500px) {              
+      width: 100%;
+      
+    }
+    
 
     h2 {
       margin-right: 10px;
@@ -22,7 +53,8 @@
     .commented_left {
       display: flex;
       align-items: center;
-      width: 80%;
+      width: 70%;
+      //border: 1px solid green;
 
       .unread {
         font-size: 4rem;
@@ -33,27 +65,104 @@
       }
 
       .commented {
+        display: flex;
+        flex-direction: column;
         margin-left: 20px;
         line-height: 20px;
         font-weight: 500;
+        
 
         .comment_text {
           font-weight: 400;
           background: none;
           color: white;
+         
         }
 
         .from_now {
           color: $dark-grey;
           background: none;
+          margin-top: 10px;
         }
       }
     }
+
+    .actions {
+      display: flex;      
+      justify-content: flex-end;
+      width: 30%;           
+      margin-right: 25px;      
+
+      @media (max-width: 800px) {              
+        width: 100%;    
+        
+      }
+
+      @media (max-width: 500px) {              
+        width: 100%;
+        
+      }
+
+      .notifications-accept-btn {                      
+          width: 32%;
+          height: 48px;          
+          margin-right: 5px;
+          @include edit-profile-btn;
+          margin-top: 0px;
+          background: $almost-black;
+          text-align: center;
+          padding: 0 0;
+          border-radius: 3px;   
+          font-size: 15px;   
+          font-weight: 300;  
+          
+          @media (max-width: 800px) {              
+            width: 100%;    
+            
+          }
+    
+          @media (max-width: 500px) {              
+            width: 100%;
+            
+          }
+
+      }
+
+      .notifications-reject-btn {                   
+          width: 32%;
+          height: 48px;          
+          margin-right: 5px;
+          @include edit-profile-btn;
+          margin-top: 0px;
+          //background: $almost-black;
+          text-align: center;
+          padding: 0 0;
+          border-radius: 3px;
+          border: 1px solid red;
+          color: $red;         
+          background-color: $black;    
+          font-size: 15px;   
+          font-weight: 300;  
+          
+          @media (max-width: 800px) {              
+            width: 100%;    
+            
+          }
+    
+          @media (max-width: 500px) {              
+            width: 100%;
+            
+          }
+
+      }
+
+    }
     .avatar {
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 65px;
+      height: 65px;
       min-width: 50px;
+      margin-left: 10px;
     }
     .thumbnail_preview {
       width: 12rem;
@@ -71,6 +180,7 @@
     border-radius: 10px;
     margin: 15px 0;
     padding: 15px 10px 15px 20px;
+    
 
     .avatar {
       border-radius: 500px;

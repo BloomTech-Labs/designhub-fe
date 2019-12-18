@@ -3,6 +3,8 @@
 @import './SASS/mixins';
 @import './SASS/Navbar.scss';
 @import './SASS/UserProfile.scss';
+@import './SASS/Error404Projects.scss';
+@import './SASS/Error401Projects.scss';
 
 // * {
 // 	box-sizing:border-box;
@@ -61,4 +63,8 @@ div.isLoading {
   em {
     -webkit-text-stroke-width: 1px;
   }
+}
+
+.inverted {
+  filter: invert(100%);
 }

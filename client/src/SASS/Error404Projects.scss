@@ -1,6 +1,52 @@
 @import './palette';
 @import './mixins';
 
-.error-div {
-    border: 1px solid red;
+.empty-state {
+    
+    width: 100%;
+    margin: auto;
+    text-align: center;
+
+    .no-projects-title {
+        margin-top: 25px;
+        margin-bottom: 0;        
+        width: 100%;       
+        font-size: 32px;        
+        text-align: center;
+        color: $dark-grey;
+        margin-bottom: 20px;
+        user-select: none;
+        opacity: 0.6;     
+        
+        @media (max-width: 800px) {              
+              font-size: 7vw;    
+              
+        }
+
+        @media (max-width: 500px) {              
+          font-size: 10vw;    
+          
+        }
+
+    }
+
+    .empty-icon {
+      opacity: 0.04;
+      
+      @include themify($themes) {
+        filter: themed('filter');
+      }
+    }
+
+    .no-projects {
+      width: 100%;      
+      text-align: center;
+      color: $dark-grey;
+      margin-bottom: 20px;
+      user-select: none;
+      opacity: 0.6;
+    }
 }
+
+
+

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import axios from 'axios';
 
 import '../../SASS/Explore.scss';
 import ExploreTabs from './ExploreTabs.js';
@@ -35,18 +34,15 @@ class Explore extends Component {
   }
 
   render() {
-    const recent = this.state.recent;
-    const popular = this.state.popular;
-    const following = this.state.following;
     return (
       <div className="explore-container">
         <header>
           <h1>Explore</h1>
           <p>
-            Discover projects from our talented community Designers
+            Discover projects from our talented community of Designers
           </p>
         </header>
-        <ExploreTabs recent={recent} popular={popular} following={following} />
+        <ExploreTabs recent={this.state.recent} popular={this.state.popular} following={this.state.following} />
       </div>
     );
   }

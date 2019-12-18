@@ -132,6 +132,7 @@ const Step1 = ({
                 name="email"
                 type="text"
                 value={email}
+                disabled
                 onChange={onChange}
                 placeholder="i.e. eriklambert@designhubx.com"
                 ref={setEmailRef}

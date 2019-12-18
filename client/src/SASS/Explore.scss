@@ -16,6 +16,9 @@
     border-bottom: 1px solid $field-bg;
     width: 100%;
     margin-bottom: 1rem;
+    @include themify($themes) {
+      border-bottom: 1px solid #662a2b31;
+    }
 
     h1 {
       // text-transform: uppercase;
@@ -82,7 +85,7 @@
       object-fit: cover;
 
       @include themify($themes) {
-        border: 8px solid themed('bg');
+        border: 8px solid #e7e7e7;
       }
 
       .project-info {
@@ -153,19 +156,29 @@
         font-weight: 500;
         cursor: pointer;
         width: 5.5rem;
-        padding: .5rem;
-        border-radius: 2.5px;
+        padding: 10px;
+        border-radius: 4px;
         text-align: center;
 
+        transition: color 0.2s;
+      }
+
+      .links:hover {
+        color: $shadow-grey;
       }
 
       .active-link {
         color: white;
         background-color: $blue;
         @include themify($themes) {
-          color: $black;
+          color: $white;
           font-weight: bold;
         }
+      }
+
+      .active-link:hover {
+        background-color: $blue;
+        color: $white;
       }
     }
   }
