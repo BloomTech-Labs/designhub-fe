@@ -28,13 +28,12 @@ import {
 
 import '../SASS/Project.scss';
 
-class Projects extends Component {
+class Project extends Component {
   constructor(props) {
     super(props);
     this.projectId = this.props.match.params.id;
     this.state = {
       editAccess: false,
-
     }
   }
 
@@ -97,6 +96,7 @@ class Projects extends Component {
 
   handleEditAccess = () => {
     const userInvite = this.props.acceptedInvites.find(invite => invite.email === this.props.activeUser.email);
+    console.log(userInvite);
     if (!userInvite || userInvite.write === false) {
       this.setState({ editAccess: false });
     }
@@ -122,7 +122,7 @@ class Projects extends Component {
             <div className="project-details">
               <h2>{thisProject.name}</h2>
               <h3>{thisProject.description}</h3>
-              <p>
+              <div className='subtitle'>
                 <span>
                   Created by{' '}
                   <span className="project-header-username">
@@ -147,13 +147,13 @@ class Projects extends Component {
                       {this.props.acceptedInvites.map(invite => {
                         const user = this.props.usersFromInvites.find(user => user.id === invite.userId);
                         return (
-                          <p>{!user ? null : user.firstName ? user.firstName + ' ' + user.lastName : user.email} </p>
+                          <p key={invite.id}>{!user ? null : user.firstName ? user.firstName + ' ' + user.lastName : user.email} </p>
                         )
                       })}
                     </span>
                   }
                 </span>
-              </p>
+              </div>
             </div>
             <div className="project-header-right">
               <div className="project-header-team">
@@ -287,4 +287,4 @@ export default connect(
     getInvitesByProjectId,
     getUsersFromInvites
   }
-)(Projects);
+)(Project);

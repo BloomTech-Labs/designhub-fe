@@ -6,7 +6,9 @@ import ProjectThumbnail from '../ProjectThumbnail';
 
 import '../../SASS/Explore.scss';
 
-const ExploreTabs = ({ recent, popular, following }) => {
+const ExploreTabs = ({ recent, popular, following, users }) => {
+
+  
 
   if (recent && popular && following) {
 
@@ -29,9 +31,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
             <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
-                {popular.map(project => (
-                  <ProjectThumbnail key={project.id} project={project} />
-                ))}
+                {popular.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
               </div>
             </TabPanel>
 
@@ -39,9 +43,10 @@ const ExploreTabs = ({ recent, popular, following }) => {
             <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
-                {recent.map(project => (
-                  <ProjectThumbnail key={project.id} project={project} />
-                ))}
+                {recent.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                })}
               </div>
             </TabPanel>
 
@@ -49,9 +54,11 @@ const ExploreTabs = ({ recent, popular, following }) => {
             <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
-                {following.map(project => (
-                  <ProjectThumbnail key={project.id} project={project} />
-                ))}
+                {following.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
               </div>
             </TabPanel>
           </Tabs>
