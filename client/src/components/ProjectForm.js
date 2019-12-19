@@ -692,7 +692,7 @@ const ProjectForm = ({
                 
                 {console.log("projectCategories in project form", projectCategories)}
 
-                {projectCategories ? 
+                {projectCategories !== undefined ? 
                   <option value ="" disabled selected hidden>{projectCategories[0].category}</option>
                 :
                 <option value ="" disabled selected hidden>Please Choose a Category</option>}     
