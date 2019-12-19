@@ -17,7 +17,7 @@ import {
   getUsersFromInvites,
   getAllCategoryNames,
   addCategoryToProject,
-  getCategoriesByProjectId,
+  //getCategoriesByProjectId,
   updateProjectCategory
 } from '../store/actions';
 
@@ -56,7 +56,7 @@ const ProjectForm = ({
   categoryNames,
   addCategoryToProject,
   addedCategory,
-  getCategoriesByProjectId,
+  //getCategoriesByProjectId,
   projectCategories, //categories added to a project
   updateProjectCategory
 
@@ -71,6 +71,9 @@ const ProjectForm = ({
 
   const [editAccess, setEditAccess] = useState(true);
   const [kickback, setKickback] = useState(true);
+  
+  let found = "";
+  const [foundProjectCategory, setFoundProjectCategory] = useState({});
 
   const shareLink = String(window.location).slice(
     0,
@@ -96,7 +99,8 @@ const ProjectForm = ({
     projectPhotos: null,
     inviteList: [], //users invited to a project
     email: '',
-    categoryId: null
+    categoryId: null,
+    foundProjectCategory
   });
 
   const { name, description, figma, invision } = state.project;
@@ -243,10 +247,11 @@ const ProjectForm = ({
         axiosWithAuth()
         .get(`/api/v1/categories/projects/${id}`)
         .then(res => {
-          console.log("res.data", res.data);
+          console.log("res.data", res.data);        
+
           project_category = res.data.find( project_category => {
             return project_category.projectId === id;
-        })
+          })         
 
         console.log("project categories in project form", project_category);
        
@@ -371,9 +376,34 @@ const ProjectForm = ({
     getAllCategoryNames();    
   };
 
+  const getCategories = () => {
+    //getCategoriesByProjectId(project.id);  
+    //let found = {};  
+
+    axiosWithAuth()
+        .get(`/api/v1/categories/projects/${project.id}`)
+        .then(res => {
+          console.log("res.data", res.data);   
+
+        {found = (res.data.find( project_category => {
+          return project_category.projectId === project.id;
+        }))}       
+       
+        setFoundProjectCategory({...foundProjectCategory, found})
+        console.log("found project category in getCategories", foundProjectCategory);
+      })
+  }
   
   //populates categoryName drop down with names
   useEffect(getNames, [categoryNames]);
+ 
+  /*useEffect ( () => {
+
+    if(isEditing){
+      getCategories();
+    }
+    
+  }, []);*/
 
   useEffect(getInvites, [invite]);
 
@@ -444,7 +474,7 @@ const ProjectForm = ({
     <Loading />
   ) : isEditing && !editAccess ? (
     <Redirect to={`/project/${project.id}`} />
-  ) : (
+  ) : (        
         <div className="project-form-wrapper">
           {isLoading && <Loading />}
           <div className={state.modal ? 'modal--expand' : 'modal--close'}>
@@ -582,6 +612,7 @@ const ProjectForm = ({
               {isEditing && (
                 <div>
                   <div className="thumbnail-container ">
+                  
                     {projectPhotos.map((photo, index) => (
                       <div key={index}>
                         <img
@@ -657,16 +688,22 @@ const ProjectForm = ({
                   placeholder="Category (ex: Art, Animation)"                  
                   onChange={categoryHandler}
                   className = "category-select"
-                >
-                  <option value ="" disabled selected hidden>Please Choose a Category</option>
-                  {categoryNames.map( (category, index) => {
-                    return <option key = {category.id} value = {category.id}> 
-                              {category.category} 
-                           </option>
-                  })}
-                  
-                </select>    
+                >                            
                 
+                {console.log("projectCategories in project form", projectCategories)}
+
+                {projectCategories ? 
+                  <option value ="" disabled selected hidden>{projectCategories[0].category}</option>
+                :
+                <option value ="" disabled selected hidden>Please Choose a Category</option>}     
+                
+                {categoryNames.map( (category, index) => {
+                  return <option key = {category.id} value = {category.id}> 
+                            {category.category} 
+                          </option>
+                })}
+                  
+              </select>                    
 
             <label htmlFor="figmaLink" className="label">
               Figma
@@ -802,7 +839,7 @@ const mapStateToProps = state => {
     isDeleting: state.invites.isDeleting,
     categoryNames: state.categories.categoryNames,
     addedCategory: state.categories.addedCategory,
-    projectCategories: state.categories.projectCategories, //categories added to a project
+    //projectCategories: state.categories.projectCategories, //categories added to a project
     updatedProjectCategory: state.categories.updatedProjectCategory
 
   };
@@ -823,7 +860,7 @@ export default withRouter(
       getUsersFromInvites,
       getAllCategoryNames,
       addCategoryToProject,
-      getCategoriesByProjectId,
+      //getCategoriesByProjectId,
       updateProjectCategory
     }
   )(ProjectForm)
