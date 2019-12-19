@@ -54,7 +54,7 @@ const ExploreTabs = ({
 
               {/*<div className = "explore-nav-div">*/}
 
-              <Tab className="links" selectedClassName="active-link">
+              {/* <Tab className="links" selectedClassName="active-link">
                 Popular
               </Tab>
               <Tab className="links" selectedClassName="active-link">
@@ -62,7 +62,7 @@ const ExploreTabs = ({
               </Tab>
               <Tab className="links" selectedClassName="active-link">
                 Following
-              </Tab>
+              </Tab> */}
 
               {/*CHIPS*/}
               {categoryNames.map( (category, index) => {

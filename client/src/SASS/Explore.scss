@@ -82,20 +82,81 @@
       // border-bottom: 1px solid $field-bg;
 
       .links {
-        margin: 2rem 1.5rem 1.5rem 0;
+        margin: 2rem 0.5rem 0.5rem 0;
         color: $dark-grey;
         font-weight: 500;
         cursor: pointer;
-        width: 5.5rem;
+        width: 118px;
+        height:70px;
         padding: .5rem;
         border-radius: 2.5px;
         text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+      }
 
+      .links:hover {
+        -webkit-filter: grayscale(100%); 
+        filter: grayscale(100%); 
+      }
+
+      #react-tabs-0{
+        background-image: url('../ASSETS/dh_illustration.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-2{
+        background-image: url('../ASSETS/dh_webDesign.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-4{
+        background-image: url('../ASSETS/dh_graphicDesign.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-6{
+        background-image: url('../ASSETS/dh_uxDesign.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-8{
+        background-image: url('../ASSETS/dh_uiDesign.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-10{
+        background-image: url('../ASSETS/dh_motionDesign.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-12{
+        background-image: url('../ASSETS/dh_animation.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      #react-tabs-14{
+        background-image: url('../ASSETS/dh_productDesign.jpeg');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
       }
 
       .active-link {
-        color: white;
-        background-color: $blue;
+        // color: white;
+        color:yellow;
+        border:1px solid blue;
+        // background-color: $blue;
+        -webkit-filter: blur(5px); 
+        filter: blur(5px); 
         @include themify($themes) {
           color: $black;
           font-weight: bold;
