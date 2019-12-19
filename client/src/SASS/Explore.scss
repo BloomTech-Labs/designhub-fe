@@ -16,6 +16,9 @@
     border-bottom: 1px solid $field-bg;
     width: 100%;
     margin-bottom: 1rem;
+    @include themify($themes) {
+      border-bottom: 1px solid #662a2b31;
+    }
 
     h1 {
       // text-transform: uppercase;
@@ -65,6 +68,82 @@
     //   grid-template-columns: 1fr;
     // }
 
+    .small-project-thumbnail {
+      object-fit: cover;
+      border-radius: 5px;
+      border: 8px solid $field-bg;
+    }
+
+    .project-content {
+      width: 22rem;
+      height: 15rem;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      border: 8px solid $field-bg;
+      border-radius: 5px;
+      overflow: hidden;
+      object-fit: cover;
+
+      @include themify($themes) {
+        border: 8px solid #e7e7e7;
+      }
+
+      .project-info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: $white;
+        text-decoration: none;
+        background: $blue;
+        overflow: hidden;
+        height: 50px;
+        display: none;
+        pointer-events: none;
+
+        h1 {
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .created {
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.507);
+        }
+      }
+
+      .project-thumbnail {
+        object-fit: cover;
+        width: 22rem;
+        height: 15rem;
+        will-change: transform;
+        transition: 0.1s ease-in-out;
+        cursor: pointer;
+      }
+    }
+    .project-content:hover {
+      border: 8px solid $blue;
+      text-align: left;
+      will-change: transform;
+    }
+  }
+
+  .project-content:hover {
+    .project-info {
+      display: inline;
+      animation: slideUp 0.25s ease-in-out;
+      will-change: transform;
+      z-index: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      height: 0px;
+    }
+    to {
+      height: 50px;
+    }
   }
 
   .explore-tabs-container {
@@ -81,19 +160,29 @@
         font-weight: 500;
         cursor: pointer;
         width: 5.5rem;
-        padding: .5rem;
-        border-radius: 2.5px;
+        padding: 10px;
+        border-radius: 4px;
         text-align: center;
 
+        transition: color 0.2s;
+      }
+
+      .links:hover {
+        color: $shadow-grey;
       }
 
       .active-link {
         color: white;
         background-color: $blue;
         @include themify($themes) {
-          color: $black;
+          color: $white;
           font-weight: bold;
         }
+      }
+
+      .active-link:hover {
+        background-color: $blue;
+        color: $white;
       }
     }
   }

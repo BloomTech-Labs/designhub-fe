@@ -8,7 +8,6 @@ import UserProfileTabs from './UserProfile_Tabs.js';
 import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
 import Loading from '../Loading.js';
-import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 
 
 import {
@@ -40,12 +39,8 @@ class UserProfile_LI extends Component {
       acceptedCollabInvites: [], //accepted collab invites
       acceptedCollabProjects: [],//accepted collab projects
       currentTab: 0,              // Current selected tab in sub-navigation
-      usersId: [],
-      users: []
     };
   }
-
-
 
   setCurrentTab(tabIndex) {
     this.setState({ currentTab: tabIndex });
@@ -97,20 +92,6 @@ class UserProfile_LI extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.id !== prevProps.match.params.id) {
       this.fetch();
-    }
-
-    if (this.state.usersId.length > 0 && this.state.users.length === 0) {
-      const users = []
-      this.state.usersId.map((id, index) => {
-        return axiosWithAuth()
-          .get(`/api/v1/users/${id}`)
-          .then(res => {
-            users.push(res.data[0]);
-            if (index + 1 === this.state.usersId.length) {
-              this.setState({ users: [...users, this.props.activeUser] });
-            }
-          })
-      })
     }
   }
 
@@ -218,10 +199,10 @@ class UserProfile_LI extends Component {
   }
 
   render() {
-    window.scroll(0, 0);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
     }
+    window.scroll(0, 0);
     return (
       <div className="user-profile-container">
         <div className="user-header">
@@ -238,10 +219,12 @@ class UserProfile_LI extends Component {
               <h2 className="username">{this.props.userData.username}</h2>
               <p className="bio">{this.props.userData.bio}</p>
               <div className="user-info-location-website">
+              {this.props.userData.location ?
                 <div className="location-website-flex">
-                  {this.props.userData.location ? <Location /> : null}
+                  <Location />
                   <p className="location">{this.props.userData.location}</p>
                 </div>
+                 : null}
                 <div className="location-website-flex">
                   <a
                     href={this.props.userData.website}

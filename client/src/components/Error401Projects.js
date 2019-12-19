@@ -10,7 +10,7 @@ function Error401Projects(props){
             <h1 className="no-projects-title">
                 Whoops!
             </h1>
-            <img src={empty} alt="empty" className="empty-icon" />
+            <img src={empty} alt="empty" className={`empty-icon`} />
             <h1 className="no-projects">
                 You are not authorized to view this project.
             </h1>
