@@ -64,3 +64,7 @@ div.isLoading {
     -webkit-text-stroke-width: 1px;
   }
 }
+
+.inverted {
+  filter: invert(100%);
+}

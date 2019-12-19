@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import empty from './Icons/empty_project.svg';
+
 
 import {
   deleteInvite,
@@ -146,6 +148,11 @@ const Notifications = props => {
   };
   return (
     <div className="notification-container">
+      {(state.unReadNotifications === undefined || state.unReadNotifications.length > 0) || (state.readNotifications === undefined || state.readNotifications.length > 0) ? null : 
+                      <div className="empty">
+                        <img alt='empty' className="empty-icon" src={empty} />
+                        <p>No notifications found!</p>
+                      </div>}
       {state.unReadNotifications && renderUnread(state.unReadNotifications)}
       {state.readNotifications && renderRead(state.readNotifications)}
     </div>

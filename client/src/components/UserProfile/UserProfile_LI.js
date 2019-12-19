@@ -9,6 +9,7 @@ import Location from '../Icons/Location.js';
 import WebsiteLink from '../Icons/Link.js';
 import Loading from '../Loading.js';
 
+
 import {
   getSingleUser,
   getFollowingCount,
@@ -29,18 +30,20 @@ import {
 // ========== STYLES ========== //
 import '../../SASS/UserProfile.scss';
 
+const holder = [];
+
 class UserProfile_LI extends Component {
   constructor(props) {
     super(props);
     this.state = {
       acceptedCollabInvites: [], //accepted collab invites
       acceptedCollabProjects: [],//accepted collab projects
-      currentTab: 0              // Current selected tab in sub-navigation
+      currentTab: 0,              // Current selected tab in sub-navigation
     };
   }
 
   setCurrentTab(tabIndex) {
-    this.setState({currentTab: tabIndex});
+    this.setState({ currentTab: tabIndex });
   }
 
   // API CALL FUNCTIONS TO RECEIVE USER'S PROFILE DATA
@@ -83,7 +86,7 @@ class UserProfile_LI extends Component {
           this.props.activeUser.id,
           this.props.match.params.id
         );
-      });
+      })
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -164,31 +167,42 @@ class UserProfile_LI extends Component {
   };
 
   //get accepted collaboration invites
-  getAcceptedCollabInvites = async () => {
+  getAcceptedCollabInvites = () => {
     const invites = this.props.userInvites.filter(invite => invite.pending === false);
-
     this.setState({
       acceptedCollabInvites: invites,
       acceptedCollabProjects: []
     })
 
-    this.state.acceptedCollabInvites.map(invite => {
+    this.state.acceptedCollabInvites.map((invite, index) => {
       return this.props.getSingleProject(invite.projectId)
         .then(() =>
           this.setState({
             acceptedCollabProjects: [...this.state.acceptedCollabProjects, this.props.singleProject]
-          })
-        )
-
+          }))
+        .then(() => {
+          const proj = holder.find(id => this.props.singleProject.userId === id);
+          return proj ? null : holder.push(this.props.singleProject.userId);
+        })
+        .then(() => {
+          if (this.state.acceptedCollabInvites.length - 1 === index) {
+            this.setState({
+              usersId: holder
+            })
+          }
+        })
     });
+
+
+
 
   }
 
   render() {
-    window.scroll(0, 0);
     if (this.props.isUsersLoading && this.props.userData === null) {
       return <Loading />;
     }
+    window.scroll(0, 0);
     return (
       <div className="user-profile-container">
         <div className="user-header">
@@ -205,10 +219,12 @@ class UserProfile_LI extends Component {
               <h2 className="username">{this.props.userData.username}</h2>
               <p className="bio">{this.props.userData.bio}</p>
               <div className="user-info-location-website">
+              {this.props.userData.location ?
                 <div className="location-website-flex">
-                  {this.props.userData.location ? <Location /> : null}
+                  <Location />
                   <p className="location">{this.props.userData.location}</p>
                 </div>
+                 : null}
                 <div className="location-website-flex">
                   <a
                     href={this.props.userData.website}
@@ -331,6 +347,7 @@ class UserProfile_LI extends Component {
           singleProject={this.props.singleProject} //collab     
           acceptedCollabProjects={this.state.acceptedCollabProjects}
           userData={this.props.userData}
+          collabUsers={this.state.users}
         />
       </div>
     );

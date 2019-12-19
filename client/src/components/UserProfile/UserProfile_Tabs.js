@@ -6,6 +6,7 @@ import moment from 'moment';
 import Heatmap from './Heatmap.js';
 // Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
+import ProjectThumbnail from '../ProjectThumbnail';
 import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
 
@@ -32,7 +33,7 @@ class UserProfile_Tabs extends Component {
       return (
         <div className="profile-tabs-container">
           <div>
-            <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
+            <Tabs selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
@@ -66,34 +67,9 @@ class UserProfile_Tabs extends Component {
                   )}
                   <div className="projects-array">
                     {recentProjects !== null &&
-                      recentProjects.map(project => (
-                        <div className="project-content" key={project.id}>
-                          <Link to={`/project/${project.id}`}>
-                            <>
-                              <div className="project-info">
-                                {project.name.length > 35 ? (
-                                  <h1>{project.name.slice(0, 35)}...</h1>
-                                ) : (
-                                    <h1>{project.name}</h1>
-                                  )}
-                                <h1 className="created">
-                                  {moment(project.created_at).format(
-                                    'MMM DD, YYYY'
-                                  )}
-                                </h1>
-                              </div>
-                              <img
-                                src={
-                                  project.mainImg ? project.mainImg : defaultImg
-                                }
-                                className="project-thumbnail"
-                                alt="test"
-                                key={project.id}
-                              />
-                            </>
-                          </Link>
-                        </div>
-                      ))}
+                      recentProjects.map(project => {
+                        return <ProjectThumbnail project={project} key={project.id} />
+                      })}
                   </div>
                 </div>
 
@@ -114,35 +90,12 @@ class UserProfile_Tabs extends Component {
                     </div>
                   )}
                   <div className="projects-array">
-                    {projects.map(project => (
-                      <div className="project-content" key={project.id}>
-                        <Link to={`/project/${project.id}`}>
-                          <>
-                            <div className="project-info">
-                              {project.name.length > 35 ? (
-                                <h1>{project.name.slice(0, 35)}...</h1>
-                              ) : (
-                                  <h1>{project.name}</h1>
-                                )}
-                              <h1 className="created">
-                                {moment(project.created_at).format(
-                                  'MMM DD, YYYY'
-                                )}
-                              </h1>
-                            </div>
-                            <img
-                              src={project.mainImg ? project.mainImg : defaultImg}
-                              className="project-thumbnail"
-                              alt="test"
-                              key={project.id}
-                            />
-                          </>
-                        </Link>
-                      </div>
-                    ))}
+                    {projects.map(project => {
+                      return <ProjectThumbnail project={project} key={project.id} />
+                    })}
                   </div>
                 </div>
-                  <br/>
+                <br />
                 {(this.props.activeUser.id === this.props.userData.id) && (
 
                   <>
@@ -160,38 +113,14 @@ class UserProfile_Tabs extends Component {
                       )}
                       <div className="projects-array">
 
-                        {acceptedProjects.map(project => (
-
-                          <div className="project-content" key={project.id}>
-                            <Link to={`/project/${project.id}`}>
-                              <>
-                                <div className="project-info">
-                                  {project.name.length > 35 ? (
-                                    <h1>{project.name.slice(0, 35)}...</h1>
-                                  ) : (
-                                      <h1>{project.name}</h1>
-                                    )}
-                                  <h1 className="created">
-                                    {moment(project.created_at).format(
-                                      'MMM DD, YYYY'
-                                    )}
-                                  </h1>
-                                </div>
-                                <img
-                                  src={project.mainImg ? project.mainImg : defaultImg}
-                                  className="project-thumbnail"
-                                  alt="test"
-                                  key={project.id}
-                                />
-                              </>
-                            </Link>
-                          </div>
-                        ))}
+                        {acceptedProjects.map(project => {
+                          return <ProjectThumbnail project={project} key={project.id} />
+                        })}
                       </div>
                     </div>
                   </>
 
-                  )}
+                )}
               </TabPanel>
 
               <TabPanel className="tabs-container">
