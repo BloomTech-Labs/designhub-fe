@@ -16,11 +16,12 @@ import {
   getInvitesByProjectId,
   getUsersFromInvites,
   addResearch,
-  deleteResearch
+  deleteResearch,
+  getProjectResearch
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
-import { MultiResearchUpload } from './MultiResearchUpload.js';
+import { ResearchUpload } from './ResearchUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
@@ -52,7 +53,8 @@ const ProjectForm = ({
   isDeleting,
   acceptedInvites,
   addResearch,
-  deleteResearch
+  deleteResearch,
+  getProjectResearch
 }) => {
   const [files, setFiles] = useState([]);
   const [researchFile, setResearchFile] = useState([]);
@@ -161,7 +163,6 @@ const ProjectForm = ({
         }
       });
       return await Promise.all(requestPromises).then(res => {
-        console.log(res)
         return res[0];
       });
     }
@@ -262,6 +263,7 @@ const ProjectForm = ({
         }
       })
       .catch(err => console.log(err));
+    handleResearchUpload(researchFile, id);
   };
 
   const handleDeleteProject = async id => {
@@ -281,6 +283,14 @@ const ProjectForm = ({
       })
       .catch(err => console.log(err));
   };
+
+  const handleDeleteResearch = id => {
+    deleteResearch(id)
+      .then(res => {
+        getProjectResearch(project.id);
+      })
+      .catch(err => console.log(err))
+  }
 
   const closeModal = () => {
     setState({
@@ -569,7 +579,7 @@ const ProjectForm = ({
                   </div>
                 </div>
               )}
-              <MultiResearchUpload files={researchFile} setFiles={setResearchFile} />
+              <ResearchUpload files={researchFile} setFiles={setResearchFile} />
             </div>
             <div className="right-container">
               <form
@@ -754,6 +764,7 @@ export default withRouter(
       createProjectInvite,
       getInvitesByProjectId,
       getUsersFromInvites,
+      getProjectResearch,
       addResearch,
       deleteResearch
     }

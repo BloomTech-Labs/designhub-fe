@@ -12,7 +12,7 @@ const thumbInner = {
     overflow: 'hidden'
 };
 
-export function MultiResearchUpload(props) {
+export function ResearchUpload(props) {
     const { files, setFiles } = props;
     const {
         isDragActive,
@@ -23,7 +23,6 @@ export function MultiResearchUpload(props) {
         accept: 'application/pdf',
         onDrop: acceptedFiles => {
             setFiles([
-                ...files,
                 ...acceptedFiles.map(file =>
                     Object.assign(file, {
                         preview: URL.createObjectURL(file)
@@ -48,7 +47,7 @@ export function MultiResearchUpload(props) {
                 />
                 <div className="thumb" key={index}>
                     <div style={thumbInner}>
-                        <p>PDF</p>
+                        <p>{file.name}</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +62,7 @@ export function MultiResearchUpload(props) {
                     isDragReject ? ' rejected' : ''
                     }`}
             >
-                <input {...getInputProps()} multiple={true} />
+                <input {...getInputProps()} multiple={false} />
                 <div className="drop-text-container">
                     {!isDragActive && (
                         <>
