@@ -49,13 +49,37 @@
     }
   }
 
-  .explore-projects-array {
+  .empty-state {   
+    display: flex;
+    flex-direction: column;
+    align-content: center;       
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 0px;      
+
+    .empty-icon {
+      opacity: 0.03;
+    }
+    .no-projects {        
+      width: 100%;
+      text-align: center;
+      color: $dark-grey;
+      margin-bottom: 20px;
+      user-select: none;
+      opacity: 0.6;
+      margin-top: 0px;
+    }
+  }
+
+  .explore-projects-array {    
     margin-top: 1rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
     grid-gap: 2rem;
     justify-items: left;
     width: 100%;
+    
 
     // @media (max-width: 1200px) {
     //   grid-template-columns: 1fr 1fr;
@@ -63,15 +87,20 @@
 
     // @media (max-width: 400px) {
     //   grid-template-columns: 1fr;
-    // }
+    // }       
+
+    
 
   }
 
-  .explore-tabs-container {
+  .explore-tabs-container {   
+   
+
     .explore-nav-links {
       width: 100%;
       text-align: left;
       display: flex;
+      justify-content: space-between;
       //flex-wrap: wrap;
 
       .explore-nav-div {
@@ -83,7 +112,8 @@
 
       .links {
         margin: 2rem 0.5rem 0.5rem 0;
-        color: $dark-grey;
+        //color: $dark-grey;
+        color: $white;
         font-weight: 500;
         cursor: pointer;
         width: 118px;
@@ -101,53 +131,173 @@
         filter: grayscale(100%); 
       }
 
-      #react-tabs-0{
-        background-image: url('../ASSETS/dh_illustration.jpeg');
+      .tabs-0 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_illustration2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-2{
-        background-image: url('../ASSETS/dh_webDesign.jpeg');
+      .tabs-1 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_webDesign2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-4{
-        background-image: url('../ASSETS/dh_graphicDesign.jpeg');
+      .tabs-2 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_graphicDesign2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-6{
-        background-image: url('../ASSETS/dh_uxDesign.jpeg');
+      .tabs-3 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_uxDesign2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-8{
-        background-image: url('../ASSETS/dh_uiDesign.jpeg');
+      .tabs-4 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_uiDesign2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-10{
-        background-image: url('../ASSETS/dh_motionDesign.jpeg');
+      .tabs-5 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_motionDesign2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-12{
-        background-image: url('../ASSETS/dh_animation.jpeg');
+      .tabs-6 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+
+        background-image: url('../ASSETS/dh_animation2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
-      #react-tabs-14{
-        background-image: url('../ASSETS/dh_productDesign.jpeg');
+      .tabs-7 {
+        margin: 2rem 0.5rem 0.5rem 0;
+        //color: $dark-grey;
+        color: $white;
+        font-weight: 500;
+        cursor: pointer;
+        width: 118px;
+        height:70px;
+        padding: .5rem;
+        border-radius: 2.5px;
+        text-align: center;
+        transition: filter .5s ease-in-out;
+        -webkit-filter: grayscale(0%); 
+        filter: grayscale(0%); 
+        
+        background-image: url('../ASSETS/dh_productDesign2.jpeg');
         background-position: top;
         background-repeat: no-repeat;
         background-size: cover;
+        opacity: 0.6;
       }
 
       .active-link {
@@ -155,8 +305,8 @@
         color:yellow;
         border:1px solid blue;
         // background-color: $blue;
-        -webkit-filter: blur(5px); 
-        filter: blur(5px); 
+        //-webkit-filter: blur(5px); 
+        //filter: blur(5px); 
         @include themify($themes) {
           color: $black;
           font-weight: bold;

@@ -144,7 +144,7 @@ class Projects extends Component {
                       })}
                     </span>
                   }
-                </span>
+                </span>                
               </p>
             </div>
             <div className="project-header-right">

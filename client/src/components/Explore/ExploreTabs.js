@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
+import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
 import ProjectThumbnail from '../ProjectThumbnail';
 
@@ -48,26 +48,15 @@ const ExploreTabs = ({
       <div className="explore-tabs-container">
         <div>
           <Tabs>
-
             
             <TabList className = "explore-nav-links">
 
               {/*<div className = "explore-nav-div">*/}
-
-              {/* <Tab className="links" selectedClassName="active-link">
-                Popular
-              </Tab>
-              <Tab className="links" selectedClassName="active-link">
-                Recents
-              </Tab>
-              <Tab className="links" selectedClassName="active-link">
-                Following
-              </Tab> */}
-
+             
               {/*CHIPS*/}
               {categoryNames.map( (category, index) => {
-                    return <Tab className = "links" selectedClassName="active-link" onClick = {() => categoryHandler(category.id)}> 
-                              {category.category} 
+                    return <Tab /*className = "links"*/ key = {index} className = {`tabs-${index}`} selectedClassName="active-link" onClick = {() => categoryHandler(category.id)}> 
+                              {category.category}
                            </Tab>
               })}              
              
@@ -91,7 +80,7 @@ const ExploreTabs = ({
             </TabList>*/}
 
             {/* // ======== Popular Tab ======== // */}
-            <TabPanel className="tabs-container">
+            {/*<TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
                 {popular.map(project => {
@@ -100,10 +89,10 @@ const ExploreTabs = ({
                 }
                 )}
               </div>
-              </TabPanel>
+              </TabPanel>*/}
 
             {/* // ======== Recents Tab ======== // */}
-            <TabPanel className="tabs-container">
+            {/*<TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
                 {recent.map(project => {
@@ -111,10 +100,10 @@ const ExploreTabs = ({
                   return <ProjectThumbnail project={project} user={user} key={project.id} />
                 })}
               </div>
-              </TabPanel>
+              </TabPanel>*/}
 
             {/* // ======== Following Tab ======== // */}
-            <TabPanel className="tabs-container">
+            {/*<TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
                 {following.map(project => {
@@ -123,71 +112,21 @@ const ExploreTabs = ({
                 }
                 )}
               </div>
-              </TabPanel>
+              </TabPanel>*/}
 
-
-            {/* // ======== Animation Tab ======== // */}
-            <TabPanel className="tabs-container">
-
-              <div className="explore-projects-array">              
-                              
-
-                {projectsByCategory.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
-                }
-                )}
-              </div>
-            </TabPanel>
-
-            {/* // ======== Branding Tab ======== // */}
-            <TabPanel className="tabs-container">
-
-              <div className="explore-projects-array">              
-                              
-
-                {projectsByCategory.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
-                }
-                )}
-              </div>
-            </TabPanel>
-
-            
             {/* // ======== Illustration Tab ======== // */}
             <TabPanel className="tabs-container">
 
-              <div className="explore-projects-array">              
-                              
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
 
-                {projectsByCategory.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
-                }
-                )}
-              </div>
-            </TabPanel>
-
-            {/* // ======== Mobile Tab ======== // */}
-            <TabPanel className="tabs-container">
-
-              <div className="explore-projects-array">              
-                              
-
-                {projectsByCategory.map(project => {
-                  const user = users.find(user => user.id === project.userId);
-                  return <ProjectThumbnail project={project} user={user} key={project.id} />
-                }
-                )}
-              </div>
-            </TabPanel>
-
-            {/* // ======== Typography Tab ======== // */}
-            <TabPanel className="tabs-container">
-
-              <div className="explore-projects-array">              
-                              
+              <div className="explore-projects-array">                               
 
                 {projectsByCategory.map(project => {
                   const user = users.find(user => user.id === project.userId);
@@ -200,6 +139,61 @@ const ExploreTabs = ({
             {/* // ======== Web Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+              <div className="explore-projects-array"> 
+                                      
+                {projectsByCategory.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
+              </div>
+            </TabPanel>
+
+            
+            {/* // ======== Graphic Design Tab ======== // */}
+            <TabPanel className="tabs-container">
+
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+              <div className="explore-projects-array">                           
+                              
+
+                {projectsByCategory.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
+              </div>
+            </TabPanel>
+
+            {/* // ======== UX Design Tab ======== // */}
+            <TabPanel className="tabs-container">
+
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
               <div className="explore-projects-array">              
                               
 
@@ -211,11 +205,85 @@ const ExploreTabs = ({
               </div>
             </TabPanel>
 
+            {/* // ======== UI Design Tab ======== // */}
+            <TabPanel className="tabs-container">
+
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+              <div className="explore-projects-array">                            
+
+                {projectsByCategory.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
+              </div>
+            </TabPanel>
+
+            {/* // ======== Motion Design Tab ======== // */}
+            <TabPanel className="tabs-container">
+
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+              <div className="explore-projects-array">                        
+
+                {projectsByCategory.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
+              </div>
+            </TabPanel>
+
+             {/* // ======== Animation Tab ======== // */}
+             <TabPanel className="tabs-container">
+
+             {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+            <div className="explore-projects-array">                             
+
+              {projectsByCategory.map(project => {
+                const user = users.find(user => user.id === project.userId);
+                return <ProjectThumbnail project={project} user={user} key={project.id} />
+              }
+              )}
+            </div>
+            </TabPanel>
+
             {/* // ======== Product Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-              <div className="explore-projects-array">              
-                              
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+              <div className="explore-projects-array">                               
 
                 {projectsByCategory.map(project => {
                   const user = users.find(user => user.id === project.userId);
