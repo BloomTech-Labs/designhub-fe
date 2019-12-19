@@ -65,8 +65,8 @@ const ExploreTabs = ({
 
             </TabList>
 
-            {/*<TabList className="explore-nav-links">*/}
-            {/*<div className = "explore-nav-div">
+            {/* <TabList className="explore-nav-links">
+            <div className = "explore-nav-div">
               <Tab className="links" selectedClassName="active-link">
                 Popular
               </Tab>
@@ -77,10 +77,10 @@ const ExploreTabs = ({
                 Following
               </Tab>
             </div>
-            </TabList>*/}
+            </TabList> */}
 
             {/* // ======== Popular Tab ======== // */}
-            {/*<TabPanel className="tabs-container">
+            {/* <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
                 {popular.map(project => {
@@ -89,10 +89,10 @@ const ExploreTabs = ({
                 }
                 )}
               </div>
-              </TabPanel>*/}
+              </TabPanel> */}
 
             {/* // ======== Recents Tab ======== // */}
-            {/*<TabPanel className="tabs-container">
+            {/* <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
                 {recent.map(project => {
@@ -100,10 +100,10 @@ const ExploreTabs = ({
                   return <ProjectThumbnail project={project} user={user} key={project.id} />
                 })}
               </div>
-              </TabPanel>*/}
+              </TabPanel> */}
 
             {/* // ======== Following Tab ======== // */}
-            {/*<TabPanel className="tabs-container">
+            {/* <TabPanel className="tabs-container">
 
               <div className="explore-projects-array">
                 {following.map(project => {
@@ -112,7 +112,7 @@ const ExploreTabs = ({
                 }
                 )}
               </div>
-              </TabPanel>*/}
+              </TabPanel> */}
 
             {/* // ======== Illustration Tab ======== // */}
             <TabPanel className="tabs-container">
