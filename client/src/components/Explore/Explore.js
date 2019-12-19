@@ -11,7 +11,7 @@ class Explore extends Component {
     this.state = {
       recent: [],
       popular: [],
-      following: [],
+      following: [],     
       myId: this.props.activeUser.id,
       userIds: [],
       users: []
@@ -48,16 +48,16 @@ class Explore extends Component {
     }
     function getFollowing() {
       return axiosWithAuth().get(`/api/v1/explore/${myId}`);
-    }
+    }    
 
     axios
       .all([getRecent(), getPopular(), getFollowing()])
       .then(
-        axios.spread((a, b, c) => {
+        axios.spread((a, b, c, d) => {
           this.setState({
             recent: a.data.recent,
             popular: b.data.popular,
-            following: c.data.following
+            following: c.data.following            
           });
         })
       )
@@ -78,7 +78,7 @@ class Explore extends Component {
   render() {
     const recent = this.state.recent;
     const popular = this.state.popular;
-    const following = this.state.following;
+    const following = this.state.following;    
     const users = this.state.users;
     return (
       <div className="explore-container">
@@ -88,7 +88,7 @@ class Explore extends Component {
             Discover projects from our talented community Designers
           </p>
         </header>
-        <ExploreTabs recent={recent} popular={popular} following={following} users={users} />
+        <ExploreTabs recent={recent} popular={popular} following={following} users={users}/>
       </div>
     );
   }
