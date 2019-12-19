@@ -56,7 +56,7 @@ const ExploreTabs = ({
               {/*CHIPS*/}
               {categoryNames.map( (category, index) => {
                     return <Tab /*className = "links"*/ key = {index} className = {`tabs-${index}`} selectedClassName="active-link" onClick = {() => categoryHandler(category.id)}> 
-                              {category.category}
+                              <p className="linkText">{category.category.toUpperCase()}</p>
                            </Tab>
               })}              
              
