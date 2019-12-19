@@ -23,7 +23,8 @@ import {
   getStarStatus,
   unstarProject,
   getInvitesByProjectId,
-  getUsersFromInvites
+  getUsersFromInvites,
+  getProjectResearch
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -64,6 +65,7 @@ class Projects extends Component {
             .then(() => {
               this.props.getProjectComments(this.props.match.params.id);
             });
+          this.props.getProjectResearch(this.projectId)
 
         }
       })
@@ -284,6 +286,7 @@ export default connect(
     getStarStatus,
     unstarProject,
     getInvitesByProjectId,
-    getUsersFromInvites
+    getUsersFromInvites,
+    getProjectResearch
   }
 )(Projects);

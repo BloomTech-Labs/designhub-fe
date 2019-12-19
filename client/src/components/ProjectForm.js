@@ -16,8 +16,7 @@ import {
   getInvitesByProjectId,
   getUsersFromInvites,
   addResearch,
-  deleteResearch,
-  getProjectResearch
+  deleteResearch
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
@@ -54,6 +53,7 @@ const ProjectForm = ({
   acceptedInvites,
   addResearch,
   deleteResearch,
+  projectResearch,
   getProjectResearch
 }) => {
   const [files, setFiles] = useState([]);
@@ -88,6 +88,7 @@ const ProjectForm = ({
     url: '',
     modal: false,
     deletingImage: null,
+    deletingResearch: null,
     inviteModal: false,
     projectPhotos: null,
     inviteList: [], //users invited to a project
@@ -287,6 +288,7 @@ const ProjectForm = ({
   const handleDeleteResearch = id => {
     deleteResearch(id)
       .then(res => {
+        closeModal();
         getProjectResearch(project.id);
       })
       .catch(err => console.log(err))
@@ -296,7 +298,8 @@ const ProjectForm = ({
     setState({
       ...state,
       modal: false,
-      deletingImage: null
+      deletingImage: null,
+      deletingResearch: null,
     });
   };
 
@@ -415,6 +418,7 @@ const ProjectForm = ({
   ) : (
         <div className="project-form-wrapper">
           {console.log('research file', researchFile)}
+          {console.log('project research', projectResearch)}
           {isLoading && <Loading />}
           <div className={state.modal ? 'modal--expand' : 'modal--close'}>
             <span
@@ -431,7 +435,10 @@ const ProjectForm = ({
                       onClick={() => {
                         if (state.deletingImage) {
                           handleDeletePhoto(state.deletingImage);
-                        } else {
+                        } else if (state.deletingResearch) {
+                          handleDeleteResearch(state.deletingResearch)
+                        }
+                        else {
                           handleDeleteProject(project.id);
                         }
                       }}
@@ -580,6 +587,37 @@ const ProjectForm = ({
                 </div>
               )}
               <ResearchUpload files={researchFile} setFiles={setResearchFile} />
+              {isEditing && (
+                <div>
+                  <div className="thumbnail-container ">
+                    {projectResearch.map((research, index) => (
+                      <div key={index}>
+                        <img
+                          alt=""
+                          src={remove}
+                          className="remove"
+                          onClick={e => {
+                            setState({
+                              ...state,
+                              deletingResearch: research.id,
+                              modal: true
+                            });
+                          }}
+                        />
+                        <div className="thumb" key={index}>
+                          <div style={thumbInner}>
+                            <img
+                              alt="project thumbnail"
+                              src={research.url}
+                              className="thumbnail"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
             <div className="right-container">
               <form
@@ -764,7 +802,6 @@ export default withRouter(
       createProjectInvite,
       getInvitesByProjectId,
       getUsersFromInvites,
-      getProjectResearch,
       addResearch,
       deleteResearch
     }

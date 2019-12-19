@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getProjectPhotos, getSingleProject } from '../store/actions';
+import { getProjectPhotos, getSingleProject, getProjectResearch } from '../store/actions';
 
 import ProjectForm from './ProjectForm';
 import Loading from './Loading.js';
@@ -10,6 +10,7 @@ class EditProject extends Component {
     const { id } = this.props.match.params;
     this.props.getSingleProject(id);
     this.props.getProjectPhotos(id);
+    this.props.getProjectResearch(id);
   }
 
   render() {
@@ -21,6 +22,8 @@ class EditProject extends Component {
           project={this.props.project}
           projectPhotos={this.props.projectPhotos}
           getProjectPhotos={this.props.getProjectPhotos}
+          projectResearch={this.props.projectResearch}
+          getProjectResearch={this.props.getProjectResearch}
         />
       );
     } else {
@@ -32,11 +35,12 @@ class EditProject extends Component {
 const mapStateToProps = state => {
   return {
     project: state.projects.singleProject,
-    projectPhotos: state.photos.projectPhotos
+    projectPhotos: state.photos.projectPhotos,
+    projectResearch: state.research.projectResearch
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getProjectPhotos, getSingleProject }
+  { getProjectPhotos, getSingleProject, getProjectResearch }
 )(EditProject);
