@@ -253,7 +253,7 @@ const ProjectForm = ({
             return project_category.projectId === id;
           })         
 
-        console.log("project categories in project form", project_category);
+        console.log("project categories in edit project() in project form", project_category);
        
        const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
        updateProjectCategory(project_category.projectCategoryId, category);
@@ -690,12 +690,15 @@ const ProjectForm = ({
                   className = "category-select"
                 >                            
                 
-                {console.log("projectCategories in project form", projectCategories)}
+                {/*{console.log("projectCategories in project form render", projectCategories)}*/}
+                
 
-                {projectCategories !== undefined ? 
-                  <option value ="" disabled selected hidden>{projectCategories[0].category}</option>
+                {/*{(projectCategories[0] === undefined || projectCategories === undefined ) ? 
+                <option value ="" disabled selected hidden>Please Choose a Category</option>                  
                 :
-                <option value ="" disabled selected hidden>Please Choose a Category</option>}     
+                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>}*/}
+
+                <option value ="" disabled selected hidden>Please Choose a Category</option>                      
                 
                 {categoryNames.map( (category, index) => {
                   return <option key = {category.id} value = {category.id}> 
