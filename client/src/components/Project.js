@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { PDFReader } from 'reactjs-pdf-reader';
 
 import avatar1 from '../ASSETS/avatar.jpg';
 import avatar2 from '../ASSETS/avatar_2.jpg';
@@ -35,7 +36,8 @@ class Projects extends Component {
     this.projectId = this.props.match.params.id;
     this.state = {
       editAccess: false,
-
+      numPages: null,
+      pdfPage: 1
     }
   }
 
@@ -66,9 +68,24 @@ class Projects extends Component {
               this.props.getProjectComments(this.props.match.params.id);
             });
           this.props.getProjectResearch(this.projectId)
-
         }
       })
+  }
+
+  onDocumentComplete = (totalPage) => {
+    this.setState({ numPages: totalPage });
+  }
+
+  handleChangePage = (direction) => {
+    if (direction && this.state.pdfPage !== this.state.numPages) {
+      console.log('going up')
+      this.setState({ pdfPage: this.state.pdfPage + 1 })
+    }
+    else if (!direction && this.state.pdfPage !== 1) {
+      console.log('going down')
+      this.setState({ pdfPage: this.state.pdfPage - 1 })
+    }
+    console.log('action over')
   }
 
   starProject = () => {
@@ -237,7 +254,6 @@ class Projects extends Component {
 
           <div className="project-body">
             {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
-
             <ImageViewer
               activeUser={activeUser}
               comments={this.props.projectComments}
@@ -245,7 +261,19 @@ class Projects extends Component {
               thumbnails={this.props.projectPhotos}
             />
           </div>
-        </div>
+          {this.props.projectResearch.length === 0 ? null :
+            (
+              <div>
+                {console.log(this.state)}
+                <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
+                <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
+                <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                <button onClick={() => this.handleChangePage(true)}>Next</button>
+                <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+              </div>
+            )
+          }
+        </div >
       );
     } else if (this.props.singleProjectError === 404) {
 
@@ -272,7 +300,8 @@ const mapStateToProps = state => {
     isStarred: state.stars.isStarred,
     acceptedInvites: state.projects.acceptedInvites,
     usersFromInvites: state.invites.usersFromInvites,
-    projectInvites: state.projects.projectInvites
+    projectInvites: state.projects.projectInvites,
+    projectResearch: state.research.projectResearch
   };
 };
 
