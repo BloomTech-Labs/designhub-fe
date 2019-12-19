@@ -68,20 +68,20 @@ export function ResearchUpload(props) {
                         <>
                             <UploadCloud />
                             <p className="drop-text">
-                                Drag and drop pdfs or click here to upload your user research!
+                                Drag and drop a PDF file or click here to upload your user research!
               </p>
                         </>
                     )}
                     {isDragActive && !isDragReject && (
                         <>
                             <UploadCloud color="#5557fe" />
-                            <p className="drop-text">drop your pdfs here</p>
+                            <p className="drop-text">Drop your PDF here</p>
                         </>
                     )}
                     {isDragReject && (
                         <div className="error">
                             <UploadCloud color="#e64c4d" />
-                            <p className="drop-text">Pdf files only please</p>
+                            <p className="drop-text">PDF files only</p>
                         </div>
                     )}
                 </div>

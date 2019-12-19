@@ -24,6 +24,7 @@ import { ResearchUpload } from './ResearchUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
+import pdfIcon from '../ASSETS/pdf-icon.png'
 import CharacterCount from './CharacterCount';
 import ProjectInvite from './ProjectInvite';
 
@@ -264,7 +265,16 @@ const ProjectForm = ({
         }
       })
       .catch(err => console.log(err));
-    handleResearchUpload(researchFile, id);
+    if (projectResearch.length > 0) {
+      projectResearch.forEach(research => {
+        handleDeleteResearch(research.id);
+      })
+      handleResearchUpload(researchFile, id);
+    }
+    else {
+      handleResearchUpload(researchFile, id);
+    }
+
   };
 
   const handleDeleteProject = async id => {
@@ -417,8 +427,6 @@ const ProjectForm = ({
     <Redirect to={`/project/${project.id}`} />
   ) : (
         <div className="project-form-wrapper">
-          {console.log('research file', researchFile)}
-          {console.log('project research', projectResearch)}
           {isLoading && <Loading />}
           <div className={state.modal ? 'modal--expand' : 'modal--close'}>
             <span
@@ -606,11 +614,13 @@ const ProjectForm = ({
                         />
                         <div className="thumb" key={index}>
                           <div style={thumbInner}>
-                            <img
-                              alt="project thumbnail"
-                              src={research.url}
-                              className="thumbnail"
-                            />
+                            <a href={research.url} target='blank'>
+                              <img
+                                alt="project thumbnail"
+                                src={pdfIcon}
+                                className="thumbnail"
+                              />
+                            </a>
                           </div>
                         </div>
                       </div>
