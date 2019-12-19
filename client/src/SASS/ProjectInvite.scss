@@ -64,25 +64,47 @@ div.project-invite {
     position: relative;
     display:flex;
     justify-content:space-between;
+    align-items: center;
 
     .invite-edit-div{
-      // background:$dark-grey;
-      border-radius:3px;
+      background:$dark-grey;
       width: 48%;
-      cursor: pointer;
+      height: 100%;
+      border-radius: 3px;
+      // cursor: pointer;
       
 
       .invite-edit-drop{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         appearance: none;
         background: url('../ASSETS/options-icon.png') 100% / 19% no-repeat $dark-grey;
-        
-        transition: background 0.2s, color 0.2s;
+        border-radius: 3px;
+        // transition: background 0.2s, color 0.2s;
         width: 100%;
         height: 100%;
-        padding-left: 20%;
         margin-top: 0;
         cursor: pointer;
         outline: none;
+      }
+
+      .dropdown-menu{
+        margin-top: 20%;
+      }
+
+      .simple-value{
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      input{
+        display: none;
+      }
+
+      .react-selectize-toggle-button{
+        display: none;
       }
 
       option {
@@ -90,13 +112,9 @@ div.project-invite {
         background-color: $field-bg;
         color: $dark-grey;
         font-weight: bold;
-        border-radius: 3px;
-        border: none;
-        appearance: none;
+        outline-color: none;
 
         &:hover{
-          appearance: none;
-          border: none;
           background-color: $dark-grey;
           color: $field-bg;
         }
@@ -106,13 +124,10 @@ div.project-invite {
         background: url('../ASSETS/options-icon.png') 100% / 19% no-repeat $grey;
         color: black;
       }
-
-      .invite-edit-drop:hover {
-        outline: none;
-      }
     }
 
-    .close-collab-icon-div{      
+    .close-collab-icon-div{
+      height: 100%;      
       display:flex;
       align-items:center;      
       background:#6d6d72;

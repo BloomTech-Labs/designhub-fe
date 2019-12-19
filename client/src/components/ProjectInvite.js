@@ -2,6 +2,7 @@ import React from 'react';
 import '../SASS/ProjectInvite.scss';
 import { connect } from 'react-redux'
 import anonymous from "../ASSETS/anonymous.jpg";
+import {ReactSelectize, SimpleSelect} from 'react-selectize';
 
 import { deleteInvite, updateInvite } from '../store/actions'
 
@@ -34,10 +35,10 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
       <div className="actions">
         {/* Any necessary buttons will go here */}
         <div className="invite-edit-div">
-          <select className="invite-edit-drop" onChange={handleInviteEdit} value={invite.write ? "edit" : "view"}>
+          <SimpleSelect className="invite-edit-drop" onChange={handleInviteEdit} placeholder={invite.write ? "Can Edit" : "Can View"}>
             <option value="view">Can View</option>
             <option value="edit">Can Edit</option>
-          </select>
+          </SimpleSelect>
         </div>
         <div className="close-collab-icon-div" onClick={() => handleInviteDelete(invite)}>
           <div className="close-collab-icon" > Remove </div>
