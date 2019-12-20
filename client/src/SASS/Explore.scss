@@ -97,16 +97,13 @@
       width: 100%;
       text-align: left;
       display: flex;
-      justify-content: space-between;
-      //flex-wrap: wrap;
+      justify-content: space-between;      
 
       .explore-nav-div {
         display: flex;       
 
-      }
+      }     
       
-      // border-bottom: 1px solid $field-bg;
-
       .links {
         margin: 2rem 0.5rem 0.5rem 0;
         //color: $dark-grey;
@@ -156,11 +153,11 @@
         opacity: 0.6;
       }
       .tabs-0:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_illustrations3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_illustrations3.jpg') 
       }
       .tabs-0.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_illustrations3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_illustrations3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -192,11 +189,11 @@
         opacity: 0.6;
       }
       .tabs-1:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_webDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_webDesign3.jpg') 
       }
       .tabs-1.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_webDesign3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_webDesign3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -228,11 +225,11 @@
         opacity: 0.6;
       }
       .tabs-2:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg') 
       }
       .tabs-2.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -264,11 +261,11 @@
         opacity: 0.6;
       }
       .tabs-3:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg') 
       }
       .tabs-3.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -300,11 +297,11 @@
         opacity: 0.6;
       }
       .tabs-4:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg') 
       }
       .tabs-4.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -336,11 +333,11 @@
         opacity: 0.6;
       }
       .tabs-5:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_motionDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_motionDesign3.jpg') 
       }
       .tabs-5.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_motionDesign3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_motionDesign3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -372,11 +369,11 @@
         opacity: 0.6;
       }
       .tabs-6:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_animation3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_animation3.jpg') 
       }
       .tabs-6.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_animation3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_animation3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -408,11 +405,11 @@
         opacity: 0.6;
       }
       .tabs-7:hover {
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_productDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_productDesign3.jpg') 
       }
       .tabs-7.active-link {
         color: white;
-        background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_productDesign3.jpg');
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_productDesign3.jpg');
         @include themify($themes) {
           color: $black;
           font-weight: bold;
@@ -445,11 +442,11 @@
       opacity: 0.6;
     }
     .tabs-8:hover {
-      background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_all.jpeg') 
+      background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_all.jpeg') 
     }
     .tabs-8.active-link {
       color: white;
-      background-image: linear-gradient( rgba(32, 100, 177, 0.75), rgba(32, 100, 177, 0.75) ), url('../ASSETS/dh_all.jpeg');
+      background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_all.jpeg');
       @include themify($themes) {
         color: $black;
         font-weight: bold;

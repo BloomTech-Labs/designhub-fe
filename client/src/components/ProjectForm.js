@@ -235,41 +235,48 @@ const ProjectForm = ({
   const editProject = (changes, id) => {
     console.log('edit changes', changes);
     let project_category = {};
-    const updateMainImg = (changes, id) => {
-      updateProject(id, changes)
-     
-        .then(res => {
-          history.push(`/project/${id}`);
-        })
-         //edit category
-      .then(() => {
-        //getCategoriesByProjectId(id);
-        axiosWithAuth()
-        .get(`/api/v1/categories/projects/${id}`)
-        .then(res => {
-          console.log("res.data", res.data);        
+    const updateMainImg = (changes, id) => {     
+      //edit category 
+      axiosWithAuth()
+      .get(`/api/v1/categories/projects/${id}`)
+      .then(res => {
+        //if a category is assigned to the project and a new category was selected
+        //find the project category and update it
+        if(res.data.length && state.categoryId){
 
           project_category = res.data.find( project_category => {
-            return project_category.projectId === id;
-          })         
+          return project_category.projectId === id;
+          })            
+          const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
+          updateProjectCategory(project_category.projectCategoryId, category);
 
-        console.log("project categories in edit project() in project form", project_category);
-       
-       const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
-       updateProjectCategory(project_category.projectCategoryId, category);
-      
+        }
+        //if there is no prior category record and a category is selected during edit
+        //add the category
+        else if(res.data.length === undefined && state.categoryId){
+          //add category
+          const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
+          addCategoryToProject(category);
+
+        } //end else if
+      })//end .then    
+    
+      //update the project
+      .then (() => {
+        updateProject(id, changes)     
+        .then(res => {
+          history.push(`/project/${id}`);
       })
       .catch(err => {
         console.log("get categories by id error", err);
-      });    
+      });  
 
-       
-     })
-        .catch();
-    };
+    })//end updateMainImg
+    .catch();
+  };
 
 
-    handleImageUpload(files, id)
+  handleImageUpload(files, id)
       .then(res => {
         if (res) {
           const newChanges = { ...changes, mainImg: res };
