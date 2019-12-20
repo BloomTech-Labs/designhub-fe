@@ -15,7 +15,7 @@ import ImageViewer from './ImageViewer/ImageViewer.js';
 import Loading from './Loading';
 import Error401Projects from './Error401Projects';
 import Error404Projects from './Error404Projects';
-import pdfIcon from '../ASSETS/pdf-icon.png'
+import caseStudyIcon from '../ASSETS/case-study.png'
 
 import {
   getSingleProject,
@@ -179,15 +179,15 @@ class Projects extends Component {
                 <div className="project-header-button">
                   {this.props.projectResearch[0] ? (
                     <img
-                      src={pdfIcon}
-                      alt="pdf"
+                      src={caseStudyIcon}
+                      alt="case study"
                       className='pdf-button'
                       onClick={() => this.setState({ showPDF: !this.state.showPDF, pdfLoading: true })}
                     />
                   ) : (
                       <img
-                        src={pdfIcon}
-                        alt="pdf"
+                        src={caseStudyIcon}
+                        alt="case study"
                         className='pdf-button-disabled'
                       />
                     )}
