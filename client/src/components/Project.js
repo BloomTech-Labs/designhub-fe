@@ -23,7 +23,8 @@ import {
   getStarStatus,
   unstarProject,
   getInvitesByProjectId,
-  getUsersFromInvites
+  getUsersFromInvites,
+  getCategoriesByProjectId
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -63,10 +64,15 @@ class Projects extends Component {
             })
             .then(() => {
               this.props.getProjectComments(this.props.match.params.id);
-            });
+            })
+            .then(() => {
+              this.props.getCategoriesByProjectId(this.projectId)
+            })
 
         }
       })
+    
+    
   }
 
   starProject = () => {
@@ -144,7 +150,11 @@ class Projects extends Component {
                       })}
                     </span>
                   }
-                </span>                
+                </span> 
+                {/*project category*/}
+                <span> 
+                  {!this.props.projectCategories[0] ? null: this.props.projectCategories[0].category}                  
+                </span>               
               </p>
             </div>
             <div className="project-header-right">
@@ -270,7 +280,8 @@ const mapStateToProps = state => {
     isStarred: state.stars.isStarred,
     acceptedInvites: state.projects.acceptedInvites,
     usersFromInvites: state.invites.usersFromInvites,
-    projectInvites: state.projects.projectInvites
+    projectInvites: state.projects.projectInvites,
+    projectCategories: state.categories.projectCategories
   };
 };
 
@@ -284,6 +295,7 @@ export default connect(
     getStarStatus,
     unstarProject,
     getInvitesByProjectId,
-    getUsersFromInvites
+    getUsersFromInvites,
+    getCategoriesByProjectId
   }
 )(Projects);

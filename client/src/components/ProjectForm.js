@@ -696,9 +696,9 @@ const ProjectForm = ({
                 {/*{(projectCategories[0] === undefined || projectCategories === undefined ) ? 
                 <option value ="" disabled selected hidden>Please Choose a Category</option>                  
                 :
-                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>}*/}
+                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>}*/}                                
 
-                <option value ="" disabled selected hidden>Please Choose a Category</option>                      
+                <option value ="" disabled selected hidden>Please Choose a Category</option>                                                   
                 
                 {categoryNames.map( (category, index) => {
                   return <option key = {category.id} value = {category.id}> 

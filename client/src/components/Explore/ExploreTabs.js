@@ -21,10 +21,12 @@ const ExploreTabs = ({
   recent, 
   popular, 
   following, 
-  users  
+  users,
+  allProjects
 }) => {
 
   const [categoryId, setCategoryId] = useState(0);  
+  let currentTab = 0;
 
   const getNames = () => {
     getAllCategoryNames();
@@ -39,24 +41,26 @@ const ExploreTabs = ({
     setCategoryId(id); 
     getProjectsByCategoryId(id);    
 
-    console.log("event id in explore tabs", id);   
+    console.log("event id in explore tabs", id);       
         
-  }   
-
-  if (recent && popular && following && users.length > 0) {
+  }    
+  
+  if (recent && popular && following && allProjects && users.length > 0) {
     return (
       <div className="explore-tabs-container">       
 
         <div>
-          <Tabs>
+          <Tabs defaultIndex={0} >           
             
             <TabList className = "explore-nav-links">
 
-              {/*<div className = "explore-nav-div">*/}              
+              {/*<div className = "explore-nav-div">*/} 
+
+              <Tab key = {0} className = "tabs-8">All</Tab>             
              
               {/*CHIPS*/}
               {categoryNames.map( (category, index) => {
-                    return <Tab /*className = "links"*/ key = {index} className = {`tabs-${index}`} selectedClassName="active-link" onClick = {() => categoryHandler(category.id)}> 
+                    return <Tab key = {category.id} className = {`tabs-${index}`} selectedClassName="active-link" onClick = {() => categoryHandler(category.id)}> 
                               <p className="linkText">{category.category.toUpperCase()}</p>
                            </Tab>
               })}              
@@ -65,11 +69,11 @@ const ExploreTabs = ({
 
 
             </TabList>
-
-            {/* // ======== Illustration Tab ======== // */}
+            
+            {/* // ======== All Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(popular.length === 0) && (
+            {(allProjects.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -80,7 +84,30 @@ const ExploreTabs = ({
 
               <div className="explore-projects-array">                               
 
-                {popular.map(project => {
+                {allProjects.map(project => {
+                  const user = users.find(user => user.id === project.userId);
+                  return <ProjectThumbnail project={project} user={user} key={project.id} />
+                }
+                )}
+              </div>
+            </TabPanel>
+            
+
+            {/* // ======== Illustration Tab ======== // */}
+            <TabPanel className="tabs-container">
+
+            {(projectsByCategory.length === 0) && (
+                        <div className="empty-state">
+                          <img src={empty} alt="empty" className="empty-icon" />
+                          <h1 className="no-projects">
+                            There are no projects in this category.
+                        </h1>
+                        </div>
+            )}         
+
+              <div className="explore-projects-array">                               
+
+                {projectsByCategory.map(project => {
                   const user = users.find(user => user.id === project.userId);
                   return <ProjectThumbnail project={project} user={user} key={project.id} />
                 }

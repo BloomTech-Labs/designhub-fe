@@ -12,6 +12,7 @@ class Explore extends Component {
       recent: [],
       popular: [],
       following: [],     
+      allProjects: [],
       myId: this.props.activeUser.id,
       userIds: [],
       users: []
@@ -20,6 +21,7 @@ class Explore extends Component {
 
   componentDidMount() {
     this.fetch();
+    console.log("all projects in explore", this.state.allProjects);
   }
 
   componentDidUpdate() {
@@ -49,16 +51,23 @@ class Explore extends Component {
     function getFollowing() {
       return axiosWithAuth().get(`/api/v1/explore/${myId}`);
     }    
+    function getAll() {      
+      return axiosWithAuth().get('/api/v1/projects/');
+    }
 
     axios
-      .all([getRecent(), getPopular(), getFollowing()])
+      .all([getRecent(), getPopular(), getFollowing(), getAll()])
       .then(
         axios.spread((a, b, c, d) => {
           this.setState({
             recent: a.data.recent,
             popular: b.data.popular,
-            following: c.data.following            
-          });
+            following: c.data.following,  
+            allProjects: d.data          
+          })
+
+          console.log("all projects in explore", this.state.allProjects);
+          
         })
       )
       .then(() => {
@@ -78,7 +87,8 @@ class Explore extends Component {
   render() {
     const recent = this.state.recent;
     const popular = this.state.popular;
-    const following = this.state.following;    
+    const following = this.state.following;  
+    const allProjects = this.state.allProjects;  
     const users = this.state.users;
     return (
       <div className="explore-container">
@@ -88,7 +98,7 @@ class Explore extends Component {
             Discover projects from our talented community Designers
           </p>
         </header>
-        <ExploreTabs recent={recent} popular={popular} following={following} users={users}/>
+        <ExploreTabs recent={recent} popular={popular} following={following} users={users} allProjects = {allProjects}/>
       </div>
     );
   }
