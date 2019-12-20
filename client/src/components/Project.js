@@ -15,6 +15,7 @@ import ImageViewer from './ImageViewer/ImageViewer.js';
 import Loading from './Loading';
 import Error401Projects from './Error401Projects';
 import Error404Projects from './Error404Projects';
+import pdfIcon from '../ASSETS/pdf-icon.png'
 
 import {
   getSingleProject,
@@ -37,7 +38,8 @@ class Projects extends Component {
     this.state = {
       editAccess: false,
       numPages: null,
-      pdfPage: 1
+      pdfPage: 1,
+      showPDF: false
     }
   }
 
@@ -78,14 +80,11 @@ class Projects extends Component {
 
   handleChangePage = (direction) => {
     if (direction && this.state.pdfPage !== this.state.numPages) {
-      console.log('going up')
       this.setState({ pdfPage: this.state.pdfPage + 1 })
     }
     else if (!direction && this.state.pdfPage !== 1) {
-      console.log('going down')
       this.setState({ pdfPage: this.state.pdfPage - 1 })
     }
-    console.log('action over')
   }
 
   starProject = () => {
@@ -174,6 +173,22 @@ class Projects extends Component {
               </div>
               <div className="project-header-links">
                 <div className="project-header-button">
+                  {this.props.projectResearch[0] ? (
+                    <img
+                      src={pdfIcon}
+                      alt="pdf"
+                      className='pdf-button'
+                      onClick={() => this.setState({ showPDF: !this.state.showPDF })}
+                    />
+                  ) : (
+                      <img
+                        src={pdfIcon}
+                        alt="pdf"
+                        className='pdf-button-disabled'
+                      />
+                    )}
+                </div>
+                <div className="project-header-button">
                   {thisProject.figma ? (
                     <a href={thisProject.figma}>
                       <img
@@ -251,25 +266,34 @@ class Projects extends Component {
               </div>
             </div>
           </div>
-
-          <div className="project-body">
-            {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
-            <ImageViewer
-              activeUser={activeUser}
-              comments={this.props.projectComments}
-              thisProject={thisProject}
-              thumbnails={this.props.projectPhotos}
-            />
-          </div>
-          {this.props.projectResearch.length === 0 ? null :
-            (
-              <div>
-                {console.log(this.state)}
-                <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
+          {this.state.showPDF && this.props.projectResearch.length > 0 ? (
+            <div className='pdf-view'>
+              <div className='pdf-nav-buttons'>
                 <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
                 <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
                 <button onClick={() => this.handleChangePage(true)}>Next</button>
                 <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+              </div>
+              <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
+              <div className='pdf-nav-buttons'>
+                <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
+                <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
+                <button onClick={() => this.handleChangePage(true)}>Next</button>
+                <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+              </div>
+            </div>
+          ) :
+            (
+              <div className="project-body">
+                {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
+                <ImageViewer
+                  activeUser={activeUser}
+                  comments={this.props.projectComments}
+                  thisProject={thisProject}
+                  thumbnails={this.props.projectPhotos}
+                />
               </div>
             )
           }
@@ -284,7 +308,6 @@ class Projects extends Component {
       return <Error401Projects />; //if the user is unauthorized to view the project
     }
     else {
-
       return <Loading />; //if it wasn't a 401 or 404 error, display the spinner
 
     }

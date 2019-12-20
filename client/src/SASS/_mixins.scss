@@ -124,6 +124,12 @@
   label {
     @include onboard-form__label;
   }
+
+  .custom-case-study{
+    @include onboard-form__input;
+
+  }
+
   input {
     @include onboard-form__input;
   }

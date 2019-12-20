@@ -20,11 +20,9 @@ import {
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
-import { ResearchUpload } from './ResearchUpload.js';
 import Loading from './Loading';
 import DeleteIcon from './Icons/DeleteIcon.js';
 import remove from '../ASSETS/remove.svg';
-import pdfIcon from '../ASSETS/pdf-icon.png'
 import CharacterCount from './CharacterCount';
 import ProjectInvite from './ProjectInvite';
 
@@ -125,7 +123,6 @@ const ProjectForm = ({
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
-
     if (state.project.name.length === 0) {
       setIsLoading(false);
       setError('Project title is required');
@@ -167,6 +164,13 @@ const ProjectForm = ({
       return await Promise.all(requestPromises).then(res => {
         return res[0];
       });
+    }
+  }
+
+  const handleResearchInput = (e) => {
+    console.log(e.target.files)
+    if (e.target.files.length > 0) {
+      setResearchFile([e.target.files[0]])
     }
   }
 
@@ -220,7 +224,9 @@ const ProjectForm = ({
         id,
         data.data[0].name
       );
-      await handleResearchUpload(researchFile, id, data.data[0].name);
+      if (researchFile.length > 0) {
+        await handleResearchUpload(researchFile, id, data.data[0].name);
+      }
       const newProject = {
         ...project,
         mainImg: uploadedImage
@@ -265,14 +271,16 @@ const ProjectForm = ({
         }
       })
       .catch(err => console.log(err));
-    if (projectResearch.length > 0) {
-      projectResearch.forEach(research => {
-        handleDeleteResearch(research.id);
-      })
-      handleResearchUpload(researchFile, id);
-    }
-    else {
-      handleResearchUpload(researchFile, id);
+    if (researchFile.length > 0) {
+      if (projectResearch.length > 0) {
+        projectResearch.forEach(research => {
+          handleDeleteResearch(research.id);
+        })
+        handleResearchUpload(researchFile, id);
+      }
+      else {
+        handleResearchUpload(researchFile, id);
+      }
     }
 
   };
@@ -594,40 +602,6 @@ const ProjectForm = ({
                   </div>
                 </div>
               )}
-              <ResearchUpload files={researchFile} setFiles={setResearchFile} />
-              {isEditing && (
-                <div>
-                  <div className="thumbnail-container ">
-                    {projectResearch.map((research, index) => (
-                      <div key={index}>
-                        <img
-                          alt=""
-                          src={remove}
-                          className="remove"
-                          onClick={e => {
-                            setState({
-                              ...state,
-                              deletingResearch: research.id,
-                              modal: true
-                            });
-                          }}
-                        />
-                        <div className="thumb" key={index}>
-                          <div style={thumbInner}>
-                            <a href={research.url} target='blank'>
-                              <img
-                                alt="project thumbnail"
-                                src={pdfIcon}
-                                className="thumbnail"
-                              />
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
             <div className="right-container">
               <form
@@ -677,7 +651,7 @@ const ProjectForm = ({
                 />
                 <label htmlFor="invisionLink" className="label">
                   Prototype
-            </label>
+                </label>
                 <input
                   type="text"
                   name="invision"
@@ -686,6 +660,26 @@ const ProjectForm = ({
                   id="invisionLink"
                   onChange={handleChanges}
                 />
+                <p className='label'>Case Study</p>
+                <div className='case-study-div'>
+                  <div className='case-study-input-container'>
+                    <label htmlFor='case-study' className='custom-case-study'>{researchFile.length > 0 || projectResearch.length > 0 ? 'Case Study Uploaded' : 'Upload Case Study'}</label>
+                    <input className='case-study-input' type='file' accept='application/pdf' id='case-study' onChange={handleResearchInput} />
+                  </div>
+                  {isEditing && projectResearch.length > 0 && (
+                    <div className='case-study-delete'>
+                      <button onClick={(e) => {
+                        e.preventDefault()
+                        setState({
+                          ...state,
+                          deletingResearch: projectResearch[0].id,
+                          modal: true
+                        });
+                      }}>Delete Case Study</button>
+                    </div>
+
+                  )}
+                </div>
                 {/*PROTOTYPE LABEL AND TEXT FIELD*/}
                 {project && user.id !== project.userId ? null : (
                   <>

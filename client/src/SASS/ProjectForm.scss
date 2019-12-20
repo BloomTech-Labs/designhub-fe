@@ -566,6 +566,49 @@
         font-size: 15px;
         line-height: 21px;
       }
+      .case-study-div{
+        display:flex;
+        justify-content:space-between;
+        align-items: center;
+        .case-study-input-container{
+          width:70%;
+          .custom-case-study{
+            border: 1px solid $field-stroke;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            width:100%;
+            font-size:12px;
+            text-align:left;
+            @include themify($themes) {
+              background-color: themed('bg2');
+            }
+          }
+  
+          .case-study-input{
+            display:none;
+          }
+        }
+
+        .case-study-delete{
+          width:30%;
+          text-align:right;
+          button{
+            margin: 0% .5%;
+            color:white;
+            background:#5557fe;
+            border: none;
+            height:36px;
+            border-radius:5%;
+            cursor:pointer;
+            &:hover {
+              background: $btn-primary-hover;
+            }
+          }
+        }
+        
+      }
+      
 
       .project-label {
         margin-top: 0px;
