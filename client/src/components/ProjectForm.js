@@ -660,15 +660,15 @@ const ProjectForm = ({
                   id="invisionLink"
                   onChange={handleChanges}
                 />
-                {project && (user.id === project.userId) ? (
+                {(project && (user.id === project.userId)) || !project ? (
                   <>
-                    <p className='label'>Case Study</p>
+                    <p className='label p-case-study'>Case Study</p>
                     <div className='case-study-div'>
                       <div className='case-study-input-container'>
-                        <label htmlFor='case-study' className='custom-case-study'>{researchFile.length > 0 || (project && projectResearch.length > 0) ? 'Case Study Uploaded' : 'Upload Case Study'}</label>
+                        <label htmlFor='case-study' className={researchFile.length > 0 || (project && projectResearch.length > 0) ? 'custom-case-study' : 'custom-case-study case-study-grey'}>{researchFile.length > 0 || (project && projectResearch.length > 0) ? 'Case Study Uploaded' : 'Upload Case Study'}</label>
                         <input className='case-study-input' type='file' accept='application/pdf' id='case-study' onChange={handleResearchInput} />
                       </div>
-                      {isEditing && projectResearch.length > 0 && (
+                      {isEditing && projectResearch.length > 0 ? (
                         <div className='case-study-delete'>
                           <button onClick={(e) => {
                             e.preventDefault()
@@ -679,7 +679,9 @@ const ProjectForm = ({
                             });
                           }}>Delete Case Study</button>
                         </div>
-                      )}
+                      ) : <div className='case-study-delete disabled'>
+                          <button disabled>Delete Case Study</button>
+                        </div>}
                     </div>
                   </>
                 ) : null}

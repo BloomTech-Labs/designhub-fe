@@ -560,6 +560,10 @@
         }
       }
 
+      .p-case-study{
+        margin-bottom:5px;
+      }
+
       label {
         margin-top: 10px;
         margin-bottom: 5px;
@@ -584,7 +588,10 @@
               background-color: themed('bg2');
             }
           }
-  
+          .case-study-grey{
+            color:#6d6d72;
+          }
+
           .case-study-input{
             display:none;
           }
@@ -592,19 +599,46 @@
 
         .case-study-delete{
           width:30%;
-          text-align:right;
+          text-align:center;
           button{
-            margin: 0% .5%;
-            color:white;
-            background:#5557fe;
-            border: none;
-            height:36px;
-            border-radius:5%;
-            cursor:pointer;
-            &:hover {
-              background: $btn-primary-hover;
-            }
+            // margin: 0% .5%;
+            // color:white;
+            // background:#5557fe;
+            // border: none;
+            // height:36px;
+            // border-radius:5%;
+            // cursor:pointer;
+            // &:hover {
+            //   background: $btn-primary-hover;
+            // }
+
+            height: 32px;         
+            margin-top: 0px;
+            //background: $almost-black;
+            text-align: center;
+            padding: 0 0;
+            border-radius: 3px;
+            color: $red;          
+            font-size: 12px;   
+            font-weight: 300; 
+             background: none;
+             border:none;
+             cursor:pointer;
+             &:hover{
+               text-decoration: underline;
+             }
           }
+        }
+
+        .disabled {
+          filter: grayscale(100%);
+          button{
+            cursor: auto;
+            &:hover{
+             text-decoration: none ;
+           }
+          }
+           
         }
         
       }

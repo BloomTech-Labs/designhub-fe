@@ -39,7 +39,8 @@ class Projects extends Component {
       editAccess: false,
       numPages: null,
       pdfPage: 1,
-      showPDF: false
+      showPDF: false,
+      pdfLoading: false
     }
   }
 
@@ -49,6 +50,7 @@ class Projects extends Component {
         this.handleEditAccess();
         this.props.getUsersFromInvites(this.props.projectInvites);
       });
+    this.props.getProjectResearch(this.projectId)
     this.props.getStarStatus(
       this.props.activeUser.id,
       this.props.match.params.id
@@ -69,13 +71,14 @@ class Projects extends Component {
             .then(() => {
               this.props.getProjectComments(this.props.match.params.id);
             });
-          this.props.getProjectResearch(this.projectId)
         }
       })
   }
 
   onDocumentComplete = (totalPage) => {
-    this.setState({ numPages: totalPage });
+    console.log('done loading')
+    this.setState({ numPages: totalPage, pdfLoading: false });
+
   }
 
   handleChangePage = (direction) => {
@@ -126,6 +129,7 @@ class Projects extends Component {
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
     if (thisProject && activeUser && this.props.projectPhotos) {
+      { console.log('show pdf', this.state.showPDF) }
       return (
         <div className="projects-container">
           <div className="project-header">
@@ -178,7 +182,7 @@ class Projects extends Component {
                       src={pdfIcon}
                       alt="pdf"
                       className='pdf-button'
-                      onClick={() => this.setState({ showPDF: !this.state.showPDF })}
+                      onClick={() => this.setState({ showPDF: !this.state.showPDF, pdfLoading: true })}
                     />
                   ) : (
                       <img
@@ -268,6 +272,7 @@ class Projects extends Component {
           </div>
           {this.state.showPDF && this.props.projectResearch.length > 0 ? (
             <div className='pdf-view'>
+              {console.log('pdf view')}
               <div className='pdf-nav-buttons'>
                 <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
                 <button onClick={() => this.handleChangePage(false)}>Previous</button>
@@ -276,6 +281,7 @@ class Projects extends Component {
                 <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
               </div>
               <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
+              {this.state.pdfLoading ? <Loading /> : null}
               <div className='pdf-nav-buttons'>
                 <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
                 <button onClick={() => this.handleChangePage(false)}>Previous</button>
@@ -287,6 +293,8 @@ class Projects extends Component {
           ) :
             (
               <div className="project-body">
+                {console.log('project view')}
+
                 {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
                 <ImageViewer
                   activeUser={activeUser}

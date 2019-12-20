@@ -47,7 +47,7 @@ class ImageViewer extends Component {
 
   render() {
     const { activeImg, modal } = this.state;
-
+    console.log('image viewer state', this.state)
     if (activeImg === null) {
       return <Loading />;
     } else {
@@ -85,15 +85,15 @@ class ImageViewer extends Component {
                       className="main-image"
                     />
                   ) : (
-                    <img
-                      src={
-                        activeImg ? activeImg.url : this.props.thumbnails[0].url
-                      }
-                      alt="main project"
-                      onClick={() => this.setState({ modal: true })}
-                      className="main-image"
-                    />
-                  )}
+                      <img
+                        src={
+                          activeImg ? activeImg.url : this.props.thumbnails[0].url
+                        }
+                        alt="main project"
+                        onClick={() => this.setState({ modal: true })}
+                        className="main-image"
+                      />
+                    )}
                 </section>
                 <section className="ImageViewer__thumbnails">
                   {this.props.thumbnails.map(t => (
