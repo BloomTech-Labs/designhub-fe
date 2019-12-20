@@ -64,9 +64,7 @@ class Explore extends Component {
             popular: b.data.popular,
             following: c.data.following,  
             allProjects: d.data          
-          })
-
-          console.log("all projects in explore", this.state.allProjects);
+          })         
           
         })
       )

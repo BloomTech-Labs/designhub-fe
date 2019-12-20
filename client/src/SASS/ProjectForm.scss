@@ -40,8 +40,7 @@
 
   @include modal;
 
-  .delete-project-modal {
-    // border: 1px solid white;
+  .delete-project-modal {    
     display: flex;
     max-width: 489px;
     flex-direction: column;
@@ -52,8 +51,7 @@
       background-color: themed('bg2');
     }
 
-    .delete-modal-button-container {
-      // border: 1px solid red;
+    .delete-modal-button-container {      
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
@@ -114,8 +112,7 @@
         height: 35px;
         width: 35px;
         border-radius: 50%;
-        border: 1px solid $field-stroke;
-        //background-color: $light-black;
+        border: 1px solid $field-stroke;        
         display: flex;
         align-items: center;
         justify-content: center;
@@ -160,8 +157,7 @@
         height: auto;
         font-size: 12px;
         margin-bottom: 20px;
-        border: 1px solid $field-stroke;
-        //overflow: auto;
+        border: 1px solid $field-stroke;        
         @include themify($themes) {
           background-color: themed('bg2');
         }
@@ -186,12 +182,10 @@
         }
 
         input {
-          flex-grow: 3;
-          //width:100%;
+          flex-grow: 3;         
           height: 35px;
           font-size: 12px;
-          margin-top: 0px;
-          //margin-bottom: 20px;
+          margin-top: 0px;          
           border: 1px solid $field-stroke;
           @include themify($themes) {
             background-color: themed('bg2');
@@ -231,8 +225,7 @@
         div.share-icon {
           width: 80%;
           border-radius: 100%;
-          border: 1px solid $field-stroke;
-          //background-color: $light-black;
+          border: 1px solid $field-stroke;          
           display: flex;
           align-items: center;
           justify-content: center;
@@ -267,8 +260,7 @@
 
         input {
           font-size: 12px;
-          padding: 7px;
-          //margin-bottom: 20px;
+          padding: 7px;         
           border: 1px solid $field-stroke;
           @include themify($themes) {
             background-color: themed('bg2');
@@ -287,8 +279,7 @@
           font-size: 10px;
           padding: 0 0;
           width: 80%;
-          height: 40%;
-          //margin-top: 16px;
+          height: 40%;          
         }
       }
     } //end invite-modal-bottom-div
@@ -517,8 +508,7 @@
       }
 
       div.invite {
-        border-radius: 50%;
-        //background-color: $light-black;
+        border-radius: 50%;        
         border: 1px solid $field-stroke;
         width: 50px;
         display: flex;

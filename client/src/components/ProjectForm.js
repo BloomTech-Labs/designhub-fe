@@ -276,7 +276,7 @@ const ProjectForm = ({
   };
 
 
-  handleImageUpload(files, id)
+    handleImageUpload(files, id)
       .then(res => {
         if (res) {
           const newChanges = { ...changes, mainImg: res };
@@ -403,15 +403,7 @@ const ProjectForm = ({
   
   //populates categoryName drop down with names
   useEffect(getNames, [categoryNames]);
- 
-  /*useEffect ( () => {
-
-    if(isEditing){
-      getCategories();
-    }
-    
-  }, []);*/
-
+  
   useEffect(getInvites, [invite]);
 
   useEffect(handleEditAccess, []);
@@ -695,16 +687,8 @@ const ProjectForm = ({
                   placeholder="Category (ex: Art, Animation)"                  
                   onChange={categoryHandler}
                   className = "category-select"
-                >                            
-                
-                {/*{console.log("projectCategories in project form render", projectCategories)}*/}
-                
-
-                {/*{(projectCategories[0] === undefined || projectCategories === undefined ) ? 
-                <option value ="" disabled selected hidden>Please Choose a Category</option>                  
-                :
-                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>}*/}                                
-
+                >   
+                              
                 <option value ="" disabled selected hidden>Please Choose a Category</option>                                                   
                 
                 {categoryNames.map( (category, index) => {

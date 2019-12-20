@@ -10,15 +10,13 @@
   @include themify($themes) {
     color: themed('text');
   }
-
-
+  
   header {
     border-bottom: 1px solid $field-bg;
     width: 100%;
     margin-bottom: 1rem;
 
-    h1 {
-      // text-transform: uppercase;
+    h1 {      
       font-size: 2rem;
       font-weight: 200;
       margin: 1rem 0;
@@ -79,16 +77,6 @@
     grid-gap: 2rem;
     justify-items: center;
     width: 100%;
-    
-
-    // @media (max-width: 1200px) {
-    //   grid-template-columns: 1fr 1fr;
-    // }
-
-    // @media (max-width: 400px) {
-    //   grid-template-columns: 1fr;
-    // }       
-
   }
 
   .explore-tabs-container {      
@@ -105,8 +93,7 @@
       }     
       
       .links {
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -131,10 +118,8 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        // color: $dark-grey;
-        color: $white;
-        //color:black;
+        margin: 2rem 0.5rem 0.5rem 0;       
+        color: $white;        
         font-weight: 500;
         cursor: pointer;
         width: 118px;
@@ -168,8 +153,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -204,8 +188,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -217,7 +200,6 @@
         transition: filter .5s ease-in-out;
         -webkit-filter: grayscale(0%); 
         filter: grayscale(0%); 
-
         background-image: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg');
         background-position: top;
         background-repeat: no-repeat;
@@ -240,8 +222,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -276,8 +257,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -312,8 +292,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -348,8 +327,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -384,8 +362,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;
-        //color: $dark-grey;
+        margin: 2rem 0.5rem 0.5rem 0;        
         color: $white;
         font-weight: 500;
         cursor: pointer;
@@ -421,8 +398,7 @@
       display:flex;
       justify-content:center;
       align-items:center;
-      margin: 2rem 0.5rem 0.5rem 0;
-      //color: $dark-grey;
+      margin: 2rem 0.5rem 0.5rem 0;      
       color: $white;
       font-weight: 500;
       cursor: pointer;
@@ -433,8 +409,7 @@
       text-align: center;
       transition: filter .5s ease-in-out;
       -webkit-filter: grayscale(0%); 
-      filter: grayscale(0%); 
-      
+      filter: grayscale(0%);       
       background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('../ASSETS/dh_all.jpeg');
       background-position: top;
       background-repeat: no-repeat;
