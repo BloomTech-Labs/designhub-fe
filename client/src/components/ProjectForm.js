@@ -660,26 +660,29 @@ const ProjectForm = ({
                   id="invisionLink"
                   onChange={handleChanges}
                 />
-                <p className='label'>Case Study</p>
-                <div className='case-study-div'>
-                  <div className='case-study-input-container'>
-                    <label htmlFor='case-study' className='custom-case-study'>{researchFile.length > 0 || projectResearch.length > 0 ? 'Case Study Uploaded' : 'Upload Case Study'}</label>
-                    <input className='case-study-input' type='file' accept='application/pdf' id='case-study' onChange={handleResearchInput} />
-                  </div>
-                  {isEditing && projectResearch.length > 0 && (
-                    <div className='case-study-delete'>
-                      <button onClick={(e) => {
-                        e.preventDefault()
-                        setState({
-                          ...state,
-                          deletingResearch: projectResearch[0].id,
-                          modal: true
-                        });
-                      }}>Delete Case Study</button>
+                {project && (user.id === project.userId) ? (
+                  <>
+                    <p className='label'>Case Study</p>
+                    <div className='case-study-div'>
+                      <div className='case-study-input-container'>
+                        <label htmlFor='case-study' className='custom-case-study'>{researchFile.length > 0 || (project && projectResearch.length > 0) ? 'Case Study Uploaded' : 'Upload Case Study'}</label>
+                        <input className='case-study-input' type='file' accept='application/pdf' id='case-study' onChange={handleResearchInput} />
+                      </div>
+                      {isEditing && projectResearch.length > 0 && (
+                        <div className='case-study-delete'>
+                          <button onClick={(e) => {
+                            e.preventDefault()
+                            setState({
+                              ...state,
+                              deletingResearch: projectResearch[0].id,
+                              modal: true
+                            });
+                          }}>Delete Case Study</button>
+                        </div>
+                      )}
                     </div>
-
-                  )}
-                </div>
+                  </>
+                ) : null}
                 {/*PROTOTYPE LABEL AND TEXT FIELD*/}
                 {project && user.id !== project.userId ? null : (
                   <>
