@@ -131,26 +131,26 @@
       width: 8%;
       position: absolute;
       top: 10px;
-      right: 0px;
+      right: 40px;
 
       div.close-icon {
-        height: 35px;
-        width: 35px;
-        border-radius: 50%;
-        border: 1px solid $field-stroke;
-        //background-color: $light-black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        // height: 35px;
+        // width: 35px;
+        // border-radius: 50%;
+        // border: 1px solid $field-stroke;
+        background-color: $black;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
 
         margin: 3% 3%;
         font-family: 'Helvetica';
-        font-size: 14px;
+        font-size: 12px;
 
         cursor: pointer;
-        @include themify($themes) {
-          background-color: themed('bg2');
-        }
+        // @include themify($themes) {
+        //   background-color: themed('bg2');
+        // }
       }
     }
 
@@ -284,7 +284,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        width: 55%;
+        width: 70%;
 
         .label {
           margin-bottom: 0;
@@ -315,7 +315,7 @@
           @include primary-btn;
           font-size: 10px;
           padding: 0 0;
-          width: 80%;
+          width: 90%;
           height: 40%;
           //margin-top: 16px;
         }
