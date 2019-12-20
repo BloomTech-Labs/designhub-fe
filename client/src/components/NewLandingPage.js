@@ -6,9 +6,14 @@ import LandingPageNav from './LandingPageNav';
 import arrow from '../ASSETS/arrow.svg';
 import footerLogo from '../ASSETS/landing-footer-logo.svg';
 import poweredBy from '../ASSETS/powered-by.svg';
-import background from '../ASSETS/landing.svg';
+import messagingicon from '../ASSETS/messaging-icon.svg';
+import heatmapicon from '../ASSETS/heatmap-icon.svg';
+import casestudiesicon from '../ASSETS/casestudies-icon.svg';
+import collaborateicon from '../ASSETS/collaborate-icon.svg';
+import allinoneicon from '../ASSETS/allinone-icon.svg';
+import feedbackicon from '../ASSETS/feedback-icon.svg';
 import explorepagetemp from '../ASSETS/tempexplore.svg'
-import macscreenshot from '../ASSETS/macscreenshot.png';
+import macscreenshot from '../ASSETS/macscreenshot1.png';
 import '../SASS/NewLandingPage.scss';
 import TestimonialCarousel from './TestimonialCarousel';
 
@@ -70,17 +75,23 @@ const NewLandingPage = () =>{
         <h2>HOW IT WORKS</h2>
         </div>
       <div className="step">
-        <p>this will be a screenshot of login</p>
+        <div className= "icons">
+      <img src = {allinoneicon} className="icons collaborate-icon" alt= "colaboration icon"/>
+        </div>
         <h5>Step 1</h5>
         <p>Login or create a new account to view your profile</p>
       </div>
       <div className="step">
-        <p>this will be a screenshot of new project creation tab</p>
+        <div className= "icons">
+      <img src = {allinoneicon} className="icons allinone-icon" alt= "all in one icon"/>
+        </div>
         <h5>Step 2</h5>
         <p>Click on the add button to create a new project</p>
       </div>
       <div className="step">
-        <p>this will be a screenshot of new project creation form</p>
+        <div className= "icons">
+      <img src = {messagingicon} className="icons messaging-icon" alt= "messaging icon"/>
+        </div>
         <h5>Step 3</h5>
         <p>Add your files and get collaborating!</p>
       </div>
@@ -97,36 +108,47 @@ const NewLandingPage = () =>{
     </Element>
     <Element className="features">
     <div className="features-heading">
-      <h3>DesignHub is built for designers by designers</h3>
-      <h4>Features</h4>
+      <h3>DesignHub is built for designers<br></br>by designers</h3>
       </div>
       <div className="feature-box">
-        <p>this will be a screenshot/icon</p>
+        <div className = "icons">
+        <img src = {messagingicon} className="messaging-icon" alt= "messaging icon"/>
+        </div>
         <h5>Messaging</h5>
         <p>Easily reach out to other designers through the messaging feature</p>
       </div>
       <div className="feature-box">
-        <p>this will be a screenshot/icon</p>
+        <div className = "icons">
+        <img src = {heatmapicon} className="heatmap-icon" alt= "heatmap icon"/>
+        </div>
         <h5>Heatmap</h5>
         <p>Track your contributions, and have a visual representation to share</p>
       </div>
       <div className="feature-box">
-        <p>this will be a screenshot/icon</p>
+        <div className = "icons">
+        <img src = {casestudiesicon} className="casestudies-icon" alt= "case studies icon"/>
+        </div>
         <h5>Case Studies</h5>
         <p>Keep track of your case studies in a single location</p>
       </div>
       <div className="feature-box">
-        <p>this will be a screenshot/icon</p>
+        <div className = "icons">
+      <img src = {allinoneicon} className="collaborate-icon" alt= "colaboration icon"/>
+      </div>
         <h5>Collaborate</h5>
         <p>Work with other designers to collaborate on projects</p>
       </div>
       <div className="feature-box">
-        <p>this will be a screenshot/icon</p>
+        <div className = "icons">
+        <img src = {allinoneicon} className="allinone-icon" alt= "all in one icon"/>
+        </div>
         <h5>All in One</h5>
         <p>House your case studies, deliverables, assets, links, and design files all in one place</p>
       </div>
       <div className="feature-box">
-        <p>this will be a screenshot/icon</p>
+        <div className = "icons">
+        <img src = {feedbackicon} className="feedback-icon" alt= "feedback icon"/>
+        </div>
         <h5>Feedback</h5>
         <p>Give and receive feedback on projects easily including using sticky comments to comment directly on a specific element of the design</p>
       </div>
@@ -134,7 +156,7 @@ const NewLandingPage = () =>{
     </Element>
     <div className="testimonials">
       <h3>But don't take our word for it...</h3>
-      <h4>See what actual users are saying about DesignHub</h4>
+      <h4>This is what actual users have to say about DesignHub</h4>
       <TestimonialCarousel />
     </div> 
     <img className='arrow'

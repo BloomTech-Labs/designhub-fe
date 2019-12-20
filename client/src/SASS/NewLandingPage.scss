@@ -9,6 +9,7 @@
 .page-container {
   background-image: url('../ASSETS/landing.svg');
   background-size: cover;
+  z-index: -10;
   height: 100%;
   font-size: 62.5%;
   
@@ -40,6 +41,13 @@
     }
     .top-right {
       margin: -20% 0 0 -13%;
+
+      img{
+        width: 58%;
+        margin-left: 11.3%;
+        margin-top: 1%;
+        // z-index: -1;
+      }
     }
   }
 }
@@ -88,11 +96,16 @@
       letter-spacing: 0.11em;
       color: #212229;
     }
-    
   }
+   h5 {
+    font-size: 3em;
+   }
+   p {
+    font-size: 1.3em;
+   }
   .step {
     width: 20%;
-    background-color: $blue;
+    
   }
 }
 
@@ -125,12 +138,44 @@
   display: flex;
   flex-wrap: wrap;
   .features-heading {
+    font-weight: bolder;
+    font-size: 4.4em;
     width: 100%;
     text-align: center;
+    line-height: 138%;
+    margin-bottom: 2%;
   }
   .feature-box {
     margin: 2% 6%;
-    width: 15%;
+    width: 20%;
+    h5 {
+      font-size: 1.6em;
+      margin: 5% 0 5% 0;
+      font-weight: bolder;
+      color: #5557FE;
+    }
+    p{
+      font-size: 1.3em;
+      
+    }
+  }
+}
+
+.testimonials{
+  margin-bottom: 10%;
+  margin-top: -10%;
+  h3{
+    font-weight: bolder;
+    font-size: 4.4em;
+    width: 100%;
+    text-align: center;
+    line-height: 138%;
+  }
+
+  h4{
+    font-size: 2em;
+    text-align: center;
+    margin: 2% auto;
   }
 }
 
@@ -184,6 +229,11 @@
   }
 }
 
+.icons {
+  padding: 5%;
+  display: inline-block; 
+    background-color: #E7E7E7;
+}
 
 
   @include small-desktop {    
