@@ -31,7 +31,7 @@ import {
 
 import '../SASS/Project.scss';
 
-class Projects extends Component {
+class Project extends Component {
   constructor(props) {
     super(props);
     this.projectId = this.props.match.params.id;
@@ -115,6 +115,7 @@ class Projects extends Component {
 
   handleEditAccess = () => {
     const userInvite = this.props.acceptedInvites.find(invite => invite.email === this.props.activeUser.email);
+    console.log(userInvite);
     if (!userInvite || userInvite.write === false) {
       this.setState({ editAccess: false });
     }
@@ -126,14 +127,21 @@ class Projects extends Component {
   render() {
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
-    if (thisProject && activeUser && this.props.projectPhotos) {
+    if (this.props.singleProjectError === 404) {
+
+      return <Error404Projects />; //if the project was not found
+
+    } else if (this.props.singleProjectError === 401) {
+
+      return <Error401Projects />; //if the user is unauthorized to view the project
+    } else if (thisProject && activeUser && this.props.projectPhotos) {
       return (
         <div className="projects-container">
           <div className="project-header">
             <div className="project-details">
               <h2>{thisProject.name}</h2>
               <h3>{thisProject.description}</h3>
-              <p>
+              <div className='subtitle'>
                 <span>
                   Created by{' '}
                   <span className="project-header-username">
@@ -158,13 +166,13 @@ class Projects extends Component {
                       {this.props.acceptedInvites.map(invite => {
                         const user = this.props.usersFromInvites.find(user => user.id === invite.userId);
                         return (
-                          <p>{!user ? null : user.firstName ? user.firstName + ' ' + user.lastName : user.email} </p>
+                          <p key={invite.id}>{!user ? null : user.firstName ? user.firstName + ' ' + user.lastName : user.email} </p>
                         )
                       })}
                     </span>
                   }
                 </span>
-              </p>
+              </div>
             </div>
             <div className="project-header-right">
               <div className="project-header-team">
@@ -303,13 +311,6 @@ class Projects extends Component {
           }
         </div >
       );
-    } else if (this.props.singleProjectError === 404) {
-
-      return <Error404Projects />; //if the project was not found
-
-    } else if (this.props.singleProjectError === 401) {
-
-      return <Error401Projects />; //if the user is unauthorized to view the project
     }
     else {
       return <Loading />; //if it wasn't a 401 or 404 error, display the spinner
@@ -345,4 +346,4 @@ export default connect(
     getUsersFromInvites,
     getProjectResearch
   }
-)(Projects);
+)(Project);

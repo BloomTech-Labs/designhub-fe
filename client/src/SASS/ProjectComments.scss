@@ -63,6 +63,9 @@
       .user-links {
         text-decoration: none;
         color: white;
+        @include themify($themes) {
+          color: black;
+        }
       }
 
       .ProjectComment__body__avatar {

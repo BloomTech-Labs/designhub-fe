@@ -33,7 +33,7 @@ class UserProfile_Tabs extends Component {
       return (
         <div className="profile-tabs-container">
           <div>
-            <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
+            <Tabs selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
@@ -68,8 +68,7 @@ class UserProfile_Tabs extends Component {
                   <div className="projects-array">
                     {recentProjects !== null &&
                       recentProjects.map(project => {
-                        const user = this.props.collabUsers.find(user => user.id === project.userId);
-                        return <ProjectThumbnail project={project} user={user} key={project.id} />
+                        return <ProjectThumbnail project={project} key={project.id} />
                       })}
                   </div>
                 </div>
@@ -92,8 +91,7 @@ class UserProfile_Tabs extends Component {
                   )}
                   <div className="projects-array">
                     {projects.map(project => {
-                      const user = this.props.collabUsers.find(user => user.id === project.userId);
-                      return <ProjectThumbnail project={project} user={user} key={project.id} />
+                      return <ProjectThumbnail project={project} key={project.id} />
                     })}
                   </div>
                 </div>
@@ -116,8 +114,7 @@ class UserProfile_Tabs extends Component {
                       <div className="projects-array">
 
                         {acceptedProjects.map(project => {
-                          const user = this.props.collabUsers.find(user => user.id === project.userId);
-                          return <ProjectThumbnail project={project} user={user} key={project.id} />
+                          return <ProjectThumbnail project={project} key={project.id} />
                         })}
                       </div>
                     </div>

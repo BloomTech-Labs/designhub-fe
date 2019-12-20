@@ -161,10 +161,6 @@
     @include onboard-form__div;
   }
 
-  div.project-invite {
-    @include onboard-form__div;    
-  }
-
   div.required {
     display: flex;
     flex-direction: column;
@@ -202,7 +198,7 @@
 
 @mixin onboard-form__input {
   background-color: $field-bg;
-  border: none;
+  border: 1px solid $field-stroke;
   border-radius: 5px;
   box-sizing: border-box;
   color: $white;
@@ -217,10 +213,11 @@
   @include themify($themes) {
     color: themed('text');
     background-color: themed('form-field');
+    border: 1px solid $shadow-grey;
   }
   &:hover,
   &:focus {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
     border: 2px solid $alert;
@@ -247,7 +244,7 @@
   }
   &:hover,
   &:focus {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
     border: 2px solid $alert;
@@ -256,7 +253,7 @@
 
 @mixin onboard-form__textarea {
   background-color: $field-bg;
-  border: none;
+  border: 1px solid $field-stroke;
   border-radius: 5px;
   color: $white;
   font-weight: 400;
@@ -272,10 +269,11 @@
   @include themify($themes) {
     color: themed('text');
     background-color: themed('form-field');
+    border: 1px solid $shadow-grey;
   }
   &:focus,
   &:hover {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
 }
 
@@ -299,7 +297,7 @@
   }
   &:hover,
   &:focus {
-    outline: auto 4px -webkit-focus-ring-color;
+    // outline: auto 4px -webkit-focus-ring-color;
   }
   &:not(:focus):invalid {
     border: 2px solid $alert;
