@@ -168,7 +168,6 @@ const ProjectForm = ({
   }
 
   const handleResearchInput = (e) => {
-    console.log(e.target.files)
     if (e.target.files.length > 0) {
       setResearchFile([e.target.files[0]])
     }
@@ -240,7 +239,6 @@ const ProjectForm = ({
   };
 
   const editProject = (changes, id) => {
-    console.log('edit changes', changes);
     const updateMainImg = (changes, id) => {
       updateProject(id, changes)
         .then(res => {

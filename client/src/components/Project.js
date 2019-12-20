@@ -50,13 +50,12 @@ class Projects extends Component {
         this.handleEditAccess();
         this.props.getUsersFromInvites(this.props.projectInvites);
       });
-    this.props.getProjectResearch(this.projectId)
+    this.props.getProjectResearch(this.projectId);
     this.props.getStarStatus(
       this.props.activeUser.id,
       this.props.match.params.id
     );
-    this.props
-      .getSingleProject(this.projectId) //gets a single project from the database
+    this.props.getSingleProject(this.projectId) //gets a single project from the database
       .then(() => {
         //if there is an error skip the rest of this if/else block
         if (this.props.singleProjectError !== null) {
@@ -76,7 +75,6 @@ class Projects extends Component {
   }
 
   onDocumentComplete = (totalPage) => {
-    console.log('done loading')
     this.setState({ numPages: totalPage, pdfLoading: false });
 
   }
@@ -129,7 +127,6 @@ class Projects extends Component {
     const activeUser = this.props.activeUser;
     const thisProject = this.props.project;
     if (thisProject && activeUser && this.props.projectPhotos) {
-      { console.log('show pdf', this.state.showPDF) }
       return (
         <div className="projects-container">
           <div className="project-header">
@@ -272,7 +269,6 @@ class Projects extends Component {
           </div>
           {this.state.showPDF && this.props.projectResearch.length > 0 ? (
             <div className='pdf-view'>
-              {console.log('pdf view')}
               <div className='pdf-nav-buttons'>
                 <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
                 <button onClick={() => this.handleChangePage(false)}>Previous</button>
