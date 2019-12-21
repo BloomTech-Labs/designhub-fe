@@ -56,7 +56,7 @@ const ProjectForm = ({
   categoryNames,
   addCategoryToProject,
   addedCategory,
-  //getCategoriesByProjectId,
+  getCategoriesByProjectId,
   projectCategories, //categories added to a project
   updateProjectCategory
 
@@ -402,7 +402,7 @@ const ProjectForm = ({
   }
   
   //populates categoryName drop down with names
-  useEffect(getNames, [categoryNames]);
+  useEffect(getNames, [categoryNames]);  
   
   useEffect(getInvites, [invite]);
 
@@ -687,9 +687,14 @@ const ProjectForm = ({
                   placeholder="Category (ex: Art, Animation)"                  
                   onChange={categoryHandler}
                   className = "category-select"
-                >   
-                              
-                <option value ="" disabled selected hidden>Please Choose a Category</option>                                                   
+                >  
+
+                {/*if editing a project and a category was previously selected for the project
+                   display that category as the default selection. if not, dispay the defaut option */}
+                {isEditing && projectCategories[0] ? 
+                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>
+                :
+                <option value ="" disabled selected hidden>Please Select a Category</option>}                                                
                 
                 {categoryNames.map( (category, index) => {
                   return <option key = {category.id} value = {category.id}> 
