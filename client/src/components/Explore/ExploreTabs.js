@@ -22,7 +22,8 @@ const ExploreTabs = ({
   popular, 
   following, 
   users,
-  allProjects
+  allProjects,
+  isLoading
 }) => {
 
   const [categoryId, setCategoryId] = useState(0);  
@@ -45,7 +46,7 @@ const ExploreTabs = ({
         
   }    
   
-  if (recent && popular && following && allProjects && users.length > 0) {
+  if (allProjects && users.length > 0) {
     return (
       <div className="explore-tabs-container">       
 
@@ -96,14 +97,18 @@ const ExploreTabs = ({
             {/* // ======== Illustration Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
                             There are no projects in this category.
                         </h1>
                         </div>
-            )}         
+            )}              
 
               <div className="explore-projects-array">                               
 
@@ -118,7 +123,11 @@ const ExploreTabs = ({
             {/* // ======== Web Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -141,7 +150,11 @@ const ExploreTabs = ({
             {/* // ======== Graphic Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -164,7 +177,11 @@ const ExploreTabs = ({
             {/* // ======== UX Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -187,7 +204,11 @@ const ExploreTabs = ({
             {/* // ======== UI Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -209,7 +230,11 @@ const ExploreTabs = ({
             {/* // ======== Motion Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -231,7 +256,11 @@ const ExploreTabs = ({
              {/* // ======== Animation Tab ======== // */}
              <TabPanel className="tabs-container">
 
-             {(projectsByCategory.length === 0) && (
+             {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+             )}   
+
+             {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -253,7 +282,11 @@ const ExploreTabs = ({
             {/* // ======== Product Design Tab ======== // */}
             <TabPanel className="tabs-container">
 
-            {(projectsByCategory.length === 0) && (
+            {isLoading && (projectsByCategory.length === 0) && (
+                        <Loading />
+            )}   
+
+            {!isLoading && (projectsByCategory.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
@@ -288,7 +321,8 @@ const ExploreTabs = ({
 const mapStateToProps = state => {
   return {
     projectsByCategory: state.categories.projectsByCategory,
-    categoryNames: state.categories.categoryNames
+    categoryNames: state.categories.categoryNames,
+    isLoading: state.categories.isLoading
   };
 };
 
