@@ -115,21 +115,7 @@
         font-size:13px;
       }
       .tabs-0 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;       
-        color: $white;        
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
 
         background-image: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('../ASSETS/dh_illustrations3.jpg');
         background-position: top;
@@ -150,21 +136,7 @@
       }
 
       .tabs-1 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
 
         background-image: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('../ASSETS/dh_webDesign3.jpg');
         background-position: top;
@@ -185,21 +157,8 @@
       }
 
       .tabs-2 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
+
         background-image: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg');
         background-position: top;
         background-repeat: no-repeat;
@@ -219,21 +178,7 @@
       }
 
       .tabs-3 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
 
         background-image: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg');
         background-position: top;
@@ -254,21 +199,7 @@
       }
 
       .tabs-4 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
 
         background-image: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg');
         background-position: top;
@@ -289,21 +220,7 @@
       }
 
       .tabs-5 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
 
         background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../ASSETS/dh_motionDesign3.jpg');
         background-position: top;
@@ -324,21 +241,7 @@
       }
 
       .tabs-6 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
+        @include explore-category-tabs;
 
         background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../ASSETS/dh_animation3.jpg');
         background-position: top;
@@ -359,22 +262,8 @@
       }
 
       .tabs-7 {
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin: 2rem 0.5rem 0.5rem 0;        
-        color: $white;
-        font-weight: 500;
-        cursor: pointer;
-        width: 118px;
-        height:70px;
-        padding: .5rem;
-        border-radius: 2.5px;
-        text-align: center;
-        transition: filter .5s ease-in-out;
-        -webkit-filter: grayscale(0%); 
-        filter: grayscale(0%); 
-        
+        @include explore-category-tabs;
+
         background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('../ASSETS/dh_productDesign3.jpg');
         background-position: top;
         background-repeat: no-repeat;
@@ -395,21 +284,8 @@
     }
 
     .tabs-8 {
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      margin: 2rem 0.5rem 0.5rem 0;      
-      color: $white;
-      font-weight: 500;
-      cursor: pointer;
-      width: 118px;
-      height:70px;
-      padding: .5rem;
-      border-radius: 2.5px;
-      text-align: center;
-      transition: filter .5s ease-in-out;
-      -webkit-filter: grayscale(0%); 
-      filter: grayscale(0%);       
+      @include explore-category-tabs;
+      
       background-image: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url('../ASSETS/dh_all.jpeg');
       background-position: top;
       background-repeat: no-repeat;
