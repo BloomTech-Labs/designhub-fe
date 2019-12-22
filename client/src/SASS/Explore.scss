@@ -122,9 +122,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-0:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_illustrations3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_illustrations3.jpg');
+        top: -8px;
       }
       .tabs-0.active-link {
         color: white;
@@ -143,9 +145,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-1:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_webDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_webDesign3.jpg');
+        top: -8px;
       }
       .tabs-1.active-link {
         color: white;
@@ -164,9 +168,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-2:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_graphicDesign3.jpg');
+        top: -8px;
       }
       .tabs-2.active-link {
         color: white;
@@ -185,9 +191,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-3:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uxDesign3.jpg');
+        top: -8px;
       }
       .tabs-3.active-link {
         color: white;
@@ -206,9 +214,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-4:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_uiDesign3.jpg');
+        top: -8px;
       }
       .tabs-4.active-link {
         color: white;
@@ -227,9 +237,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-5:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_motionDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_motionDesign3.jpg');
+        top: -8px;
       }
       .tabs-5.active-link {
         color: white;
@@ -248,9 +260,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-6:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_animation3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_animation3.jpg');
+        top: -8px;
       }
       .tabs-6.active-link {
         color: white;
@@ -269,9 +283,11 @@
         background-repeat: no-repeat;
         background-size: cover;
         opacity: 0.6;
+        position: relative;
       }
       .tabs-7:hover {
-        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_productDesign3.jpg') 
+        background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_productDesign3.jpg');
+        top: -8px;
       }
       .tabs-7.active-link {
         color: white;
@@ -291,9 +307,11 @@
       background-repeat: no-repeat;
       background-size: cover;
       opacity: 0.6;
+      position: relative;
     }
     .tabs-8:hover {
-      background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_all.jpeg') 
+      background-image: linear-gradient( rgba(105, 73, 223, 0.75), rgba(105, 73, 223, 0.75) ), url('../ASSETS/dh_all.jpeg');
+      top: -8px;
     }
     .tabs-8.active-link {
       color: white;
