@@ -76,11 +76,91 @@
   .explore-projects-array {    
     margin-top: 1rem;
     display: grid;
-
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
-    grid-gap: 2rem;
-    justify-items: center;
+    grid-template-columns: 22% 22% 22% 22%;
+    grid-column-gap: 3%;
     width: 100%;
+
+    @media (max-width: 1300px){
+      grid-template-columns: 29% 29% 29%;
+    }
+
+    .project-content {
+      width: 100%;
+      height: 14vw;
+      // height: 11.5rem;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      border: 8px solid $field-bg;
+      border-radius: 5px;
+      overflow: hidden;
+      margin: 10px 10px 10px 10px;
+      object-fit: cover;
+
+      @media (max-width: 1300px){
+        height: 18vw;
+      } 
+
+      @include themify($themes) {
+        border: 8px solid #e7e7e7;
+      }
+
+      .project-info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        color: $white;
+        text-decoration: none;
+        background: $blue;
+        overflow: hidden;
+        height: 50px;
+        display: none;
+        pointer-events: none;
+
+        h1 {
+          margin-top: 10px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .created {
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.507);
+        }
+      }
+
+      .project-thumbnail {
+        object-fit: cover;
+        width: 22rem;
+        height: 15rem;
+        will-change: transform;
+        transition: 0.1s ease-in-out;
+        cursor: pointer;
+      }
+    }
+    .project-content:hover {
+      border: 8px solid $blue;
+      text-align: left;
+      will-change: transform;
+    }
+  }
+
+  .project-content:hover {
+    .project-info {
+      display: inline;
+      animation: slideUp 0.25s ease-in-out;
+      will-change: transform;
+      z-index: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      height: 0px;
+    }
+    to {
+      height: 50px;
+    }
+  
 
   }
 
@@ -90,11 +170,12 @@
       width: 100%;
       text-align: left;
       display: flex;
-      justify-content: space-between;      
+      justify-content: space-between;   
+      
+      
 
       .explore-nav-div {
         display: flex;       
-
       }     
       
       .links {
