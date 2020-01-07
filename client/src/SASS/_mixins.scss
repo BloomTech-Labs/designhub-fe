@@ -1,5 +1,23 @@
 @import './palette';
 
+@mixin explore-category-tabs {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 2rem 0.5rem 0.5rem 0;       
+  color: $white;        
+  font-weight: 500;
+  cursor: pointer;
+  width: 118px;
+  height:70px;
+  padding: .5rem;
+  border-radius: 2.5px;
+  text-align: center;
+  transition: filter .5s ease-in-out;
+  -webkit-filter: grayscale(0%); 
+  filter: grayscale(0%); 
+}
+
 @mixin designhub-letters {
   font-weight: 900;
   font-size: 96px;
@@ -133,10 +151,14 @@
   input {
     @include onboard-form__input;
   }
-  select{
+  select {
     @include onboard-form__select;
   }
   textarea {
+    @include onboard-form__textarea;
+  }
+
+  div.category-div {
     @include onboard-form__textarea;
   }
 
@@ -365,4 +387,36 @@
 
 @function themed($key) {
   @return map-get($theme-map, $key);
+}
+
+//media queries
+@mixin phone {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin small-tablet {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin big-tablet {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin small-desktop {
+  @media (max-width: 1536px) {
+    @content;
+  }
+}
+@mixin big-desktop {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+@mixin large-desktop {
+  @media (min-width: 1921px) {
+    @content;
+  }
 }

@@ -26,7 +26,8 @@ import {
   unstarProject,
   getInvitesByProjectId,
   getUsersFromInvites,
-  getProjectResearch
+  getProjectResearch,
+  getCategoriesByProjectId
 } from '../store/actions';
 
 import '../SASS/Project.scss';
@@ -69,9 +70,14 @@ class Project extends Component {
             })
             .then(() => {
               this.props.getProjectComments(this.props.match.params.id);
-            });
+            })
+            .then(() => {
+              this.props.getCategoriesByProjectId(this.projectId)
+            })
         }
       })
+    
+    
   }
 
   onDocumentComplete = (totalPage) => {
@@ -171,8 +177,13 @@ class Project extends Component {
                       })}
                     </span>
                   }
-                </span>
-              </div>
+                </span> 
+                {/*project category*/}
+                <span> 
+                  {!this.props.projectCategories[0] ? null: this.props.projectCategories[0].category}                  
+                </span>               
+              </p>
+
             </div>
             <div className="project-header-right">
               <div className="project-header-team">
@@ -329,7 +340,8 @@ const mapStateToProps = state => {
     acceptedInvites: state.projects.acceptedInvites,
     usersFromInvites: state.invites.usersFromInvites,
     projectInvites: state.projects.projectInvites,
-    projectResearch: state.research.projectResearch
+    projectResearch: state.research.projectResearch,
+    projectCategories: state.categories.projectCategories
   };
 };
 
@@ -344,6 +356,7 @@ export default connect(
     unstarProject,
     getInvitesByProjectId,
     getUsersFromInvites,
-    getProjectResearch
+    getProjectResearch,
+    getCategoriesByProjectId
   }
 )(Project);

@@ -13,6 +13,7 @@ import SearchPage from './components/SearchPage';
 import Notifications from './components/Notifications';
 import EditProject from './components/EditProject';
 import Explore from './components/Explore/Explore';
+import NewLandingPage from './components/NewLandingPage';
 
 import './SASS/DesignHub.scss';
 
@@ -46,6 +47,13 @@ class DesignHub extends Component {
   render() {
     return (
       <div className="DesignHub">
+        <Route
+          exact
+          path="/newlandingpage"
+          render={() =>(
+            <NewLandingPage />
+          )}
+        />
         <Route
           path='/'
           render={props => (

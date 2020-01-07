@@ -161,6 +161,44 @@ export const GET_USERS_FROM_INVITES_START = 'GET_USERS_FROM_INVITES_START';
 export const GET_USERS_FROM_INVITES_SUCCESS = 'GET_USERS_FROM_INVITES_SUCCESS';
 export const GET_USERS_FROM_INVITES_FAILURE = 'GET_USERS_FROM_INVITES_FAILURE';
 
+//project categories
+export const GET_ALL_CATEGORY_NAMES_START = "GET_ALL_CATEGORY_NAMES_START";
+export const GET_ALL_CATEGORY_NAMES_SUCCESS = "GET_ALL_CATEGORY_NAMES_SUCCESS";
+export const GET_ALL_CATEGORY_NAMES_FAILURE = "GET_ALL_CATEGORY_NAMES_FAILURE";
+
+export const GET_ASSIGNED_CATEGORIES_START = "GET_ASSIGNED_PROJECT_CATEGORIES_START";
+export const GET_ASSIGNED_CATEGORIES_SUCCESS = "GET_ASSIGNED_PROJECT_CATEGORIES_SUCCESS";
+export const GET_ASSIGNED_CATEGORIES_FAILURE = "GET_ASSIGNED_PROJECT_CATEGORIES_FAILURE";
+
+export const ADD_CATEGORY_TO_PROJECT_START = "ADD_CATEGORY_TO_PROJECT_START";
+export const ADD_CATEGORY_TO_PROJECT_SUCCESS = "ADD_CATEGORY_TO_PROJECT_SUCCESS";
+export const ADD_CATEGORY_TO_PROJECT_FAILURE = "ADD_CATEGORY_TO_PROJECT_FAILURE";
+
+export const GET_CATEGORIES_BY_USERID_START = "GET_CATEGORIES_BY_USERID_START";
+export const GET_CATEGORIES_BY_USERID_SUCCESS = "GET_CATEGORIES_BY_USERID_SUCCESS";
+export const GET_CATEGORIES_BY_USERID_FAILURE = "GET_CATEGORIES_BY_USERID_FAILURE";
+
+export const GET_CATEGORY_BY_CATEGORYID_START = " GET_CATEGORY_BY_CATEGORYID_START";
+export const  GET_CATEGORY_BY_CATEGORYID_SUCCESS = " GET_CATEGORY_BY_CATEGORYID_SUCCESS";
+export const  GET_CATEGORY_BY_CATEGORYID_FAILURE = " GET_CATEGORY_BY_CATEGORYID_FAILURE";
+
+export const GET_CATEGORIES_BY_PROJECTID_START = "GET_CATEGORIES_BY_PROJECTID_START";
+export const GET_CATEGORIES_BY_PROJECTID_SUCCESS = "GET_CATEGORIES_BY_PROJECTID_SUCCESS";
+export const GET_CATEGORIES_BY_PROJECTID_FAILURE = "GET_CATEGORIES_BY_PROJECTID_FAILURE";
+
+export const DELETE_CATEGORY_FROM_PROJECT_START = "DELETE_CATEGORY_FROM_PROJECT_START";
+export const DELETE_CATEGORY_FROM_PROJECT_SUCCESS = "DELETE_CATEGORY_FROM_PROJECT_SUCCESS";
+export const DELETE_CATEGORY_FROM_PROJECT_FAILURE = "DELETE_CATEGORY_FROM_PROJECT_FAILURE";
+
+export const GET_PROJECTS_BY_CATEGORYID_START = "GET_PROJECTS_BY_CATEGORYID_START";
+export const GET_PROJECTS_BY_CATEGORYID_SUCCESS = "GET_PROJECTS_BY_CATEGORYID_SUCCESS";
+export const GET_PROJECTS_BY_CATEGORYID_FAILURE = "GET_PROJECTS_BY_CATEGORYID_FAILURE";
+
+export const UPDATE_PROJECT_CATEGORY_START = "UPDATE_PROJECT_CATEGORY_START";
+export const UPDATE_PROJECT_CATEGORY_SUCCESS = "UPDATE_PROJECT_CATEGORY_SUCCESS";
+export const UPDATE_PROJECT_CATEGORY_FAILURE = "UPDATE_PROJECT_CATEGORY_FAILURE";
+
+
 
 //User Research - Case Studies
 export const GET_PROJECT_RESEARCH_START = 'GET_PROJECT_RESEARCH_START';
@@ -177,8 +215,124 @@ export const DELETE_PROJECT_RESEARCH_SUCCESS = 'DELETE_PROJECT_RESEARCH_SUCCESS'
 export const DELETE_PROJECT_RESEARCH_FAILURE = 'DELETE_PROJECT_RESEARCH_FAILURE';
 
 //############# ACTIONS #############
-//project invites
 
+//project categories
+
+export const getAllCategoryNames = () => dispatch => {
+  dispatch({ type: GET_ALL_CATEGORY_NAMES_START });
+  return axiosWithAuth()
+    .get('/api/v1/categories/all')
+    .then(res => {
+      dispatch({ type: GET_ALL_CATEGORY_NAMES_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_ALL_CATEGORY_NAMES_FAILURE, error: err });
+    });
+};
+
+export const getAssignedCategories = () => dispatch => {
+  dispatch({ type: GET_ASSIGNED_CATEGORIES_START });
+  return axiosWithAuth()
+    .get('/api/v1/categories/projects/all')
+    .then(res => {
+      dispatch({ type: GET_ASSIGNED_CATEGORIES_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_ASSIGNED_CATEGORIES_FAILURE, error: err });
+    });
+}
+
+export const addCategoryToProject = (category) => dispatch => {
+
+  dispatch({ type: ADD_CATEGORY_TO_PROJECT_START });
+  return axiosWithAuth()
+    .post('/api/v1/categories/project/add', category)
+    .then(res => {
+      dispatch({ type: ADD_CATEGORY_TO_PROJECT_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_CATEGORY_TO_PROJECT_FAILURE, error: err });
+    });
+
+}
+
+export const getCategoriesByUserId = (id) => dispatch => {
+  dispatch({ type: GET_CATEGORIES_BY_USERID_START });
+  return axiosWithAuth()
+    .get(`/api/v1/categories/user/${id}`)
+    .then(res => {
+      dispatch({ type: GET_CATEGORIES_BY_USERID_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_CATEGORIES_BY_USERID_FAILURE, error: err });
+    });
+}
+
+export const getCategoryByCategoryId = (id) => dispatch => {
+  dispatch({ type: GET_CATEGORY_BY_CATEGORYID_START });
+  return axiosWithAuth()
+    .get(`/api/v1/categories/${id}`)
+    .then(res => {
+      dispatch({ type: GET_CATEGORY_BY_CATEGORYID_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: GET_CATEGORY_BY_CATEGORYID_FAILURE, error: err });
+    });
+}
+
+export const getCategoriesByProjectId = (id) => dispatch => {
+  dispatch({ type: GET_CATEGORIES_BY_PROJECTID_START });
+  return axiosWithAuth()
+    .get(`/api/v1/categories/projects/${id}`)
+    .then(res => {
+      dispatch({ type: GET_CATEGORIES_BY_PROJECTID_SUCCESS, payload: res.data });
+      console.log("categories by project id in actions", res.data);
+    })
+    .catch(err => {
+      dispatch({ type: GET_CATEGORIES_BY_PROJECTID_FAILURE, error: err });
+    });
+}
+
+export const deleteCategoryFromProject = (id) => dispatch => {
+  dispatch({ type: DELETE_CATEGORY_FROM_PROJECT_START })
+  return axiosWithAuth()
+    .delete(`api/v1/categories/project/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_CATEGORY_FROM_PROJECT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_CATEGORY_FROM_PROJECT_FAILURE, payload: err.message })
+    })
+}
+
+//update a project's assigned category by project_category id
+export const updateProjectCategory = (id, changes) => dispatch => {
+  dispatch({ type: UPDATE_PROJECT_CATEGORY_START })
+  return axiosWithAuth()
+    .put(`api/v1/categories/project/${id}`, changes)
+    .then(res => {
+      dispatch({ type: UPDATE_PROJECT_CATEGORY_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: UPDATE_PROJECT_CATEGORY_FAILURE, payload: err.message })
+    })
+}
+
+export const getProjectsByCategoryId = (id) => dispatch => {
+  dispatch({ type: GET_PROJECTS_BY_CATEGORYID_START });
+  return axiosWithAuth()
+    .get(`/api/v1/categories/projects/category/${id}`)
+    .then(res => {
+      dispatch({ type: GET_PROJECTS_BY_CATEGORYID_SUCCESS, payload: res.data });
+      console.log("projs by category in action creator", res.data);
+    })
+    .catch(err => {
+      dispatch({ type: GET_PROJECTS_BY_CATEGORYID_FAILURE, error: err });
+    });
+}
+
+
+//project invites
 export const getInviteById = (id) => dispatch => {
   dispatch({ type: GET_INVITE_START })
   return axiosWithAuth()
