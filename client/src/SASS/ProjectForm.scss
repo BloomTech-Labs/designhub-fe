@@ -63,8 +63,7 @@
 
   @include modal;
 
-  .delete-project-modal {
-    // border: 1px solid white;
+  .delete-project-modal {    
     display: flex;
     max-width: 489px;
     flex-direction: column;
@@ -75,8 +74,7 @@
       background-color: themed('bg2');
     }
 
-    .delete-modal-button-container {
-      // border: 1px solid red;
+    .delete-modal-button-container {      
       display: flex;
       flex-flow: row nowrap;
       justify-content: space-between;
@@ -134,14 +132,14 @@
       right: 40px;
 
       div.close-icon {
-        // height: 35px;
-        // width: 35px;
-        // border-radius: 50%;
-        // border: 1px solid $field-stroke;
-        background-color: $black;
-        // display: flex;
-        // align-items: center;
-        // justify-content: center;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        border: 1px solid $field-stroke;        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
 
         margin: 3% 3%;
         font-family: 'Helvetica';
@@ -185,8 +183,7 @@
         height: auto;
         font-size: 12px;
         margin-bottom: 20px;
-        border: 1px solid $field-stroke;
-        //overflow: auto;
+        border: 1px solid $field-stroke;        
         @include themify($themes) {
           background-color: themed('bg2');
         }
@@ -211,12 +208,10 @@
         }
 
         input {
-          flex-grow: 3;
-          //width:100%;
+          flex-grow: 3;         
           height: 35px;
           font-size: 12px;
-          margin-top: 0px;
-          //margin-bottom: 20px;
+          margin-top: 0px;          
           border: 1px solid $field-stroke;
           
           @include themify($themes) {
@@ -258,8 +253,7 @@
         div.share-icon {
           width: 80%;
           border-radius: 100%;
-          border: 1px solid $field-stroke;
-          //background-color: $light-black;
+          border: 1px solid $field-stroke;          
           display: flex;
           align-items: center;
           justify-content: center;
@@ -294,9 +288,7 @@
 
         input {
           font-size: 12px;
-          padding: 7px;
-          //margin-bottom: 20px;
-          
+          padding: 7px;         
           border: 1px solid $field-stroke;
           @include themify($themes) {
             border: 1px solid $shadow-grey;
@@ -315,9 +307,8 @@
           @include primary-btn;
           font-size: 10px;
           padding: 0 0;
-          width: 90%;
-          height: 40%;
-          //margin-top: 16px;
+          width: 80%;
+          height: 40%;          
         }
       }
     } //end invite-modal-bottom-div
@@ -549,8 +540,7 @@
       }
 
       div.invite {
-        border-radius: 50%;
-        //background-color: $light-black;
+        border-radius: 50%;        
         border: 1px solid $field-stroke;
         width: 50px;
         display: flex;
@@ -592,7 +582,7 @@
           background-color: themed('bg2');
         }
       }
-
+     
       label {
         margin-top: 10px;
         margin-bottom: 5px;
@@ -603,6 +593,7 @@
       .project-label {
         margin-top: 0px;
       }
+      
     }
 
     .collab-pics {

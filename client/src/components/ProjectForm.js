@@ -14,7 +14,11 @@ import {
   deleteProject,
   createProjectInvite,
   getInvitesByProjectId,
-  getUsersFromInvites
+  getUsersFromInvites,
+  getAllCategoryNames,
+  addCategoryToProject,
+  //getCategoriesByProjectId,
+  updateProjectCategory
 } from '../store/actions';
 
 import { MultiImageUpload } from './MultiImageUpload.js';
@@ -47,7 +51,15 @@ const ProjectForm = ({
   usersFromInvites,
   loadingUsers,
   isDeleting,
-  acceptedInvites
+  acceptedInvites,
+  getAllCategoryNames,
+  categoryNames,
+  addCategoryToProject,
+  addedCategory,
+  getCategoriesByProjectId,
+  projectCategories, //categories added to a project
+  updateProjectCategory
+
 }) => {
   const [files, setFiles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -59,6 +71,9 @@ const ProjectForm = ({
 
   const [editAccess, setEditAccess] = useState(true);
   const [kickback, setKickback] = useState(true);
+  
+  let found = "";
+  const [foundProjectCategory, setFoundProjectCategory] = useState({});
 
   const shareLink = String(window.location).slice(
     0,
@@ -83,7 +98,9 @@ const ProjectForm = ({
     inviteModal: false,
     projectPhotos: null,
     inviteList: [], //users invited to a project
-    email: ''
+    email: '',
+    categoryId: null,
+    foundProjectCategory
   });
 
   const { name, description, figma, invision } = state.project;
@@ -112,6 +129,7 @@ const ProjectForm = ({
     });
   };
 
+  //create project
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
@@ -131,7 +149,9 @@ const ProjectForm = ({
       setIsLoading(false);
       setError('Please upload at least one image');
       return;
-    }
+    }     
+
+
   };
 
   const handleImageUpload = async (file, projectId, projectTitle) => {
@@ -187,27 +207,75 @@ const ProjectForm = ({
         id,
         data.data[0].name
       );
+      
+      //add category
+      const category = {projectId: data.id, userId: project.userId, categoryId: state.categoryId};
+      await addCategoryToProject(category);
+      
+      console.log("project id", data.id);
+      console.log("user id", project.userId);
+      console.log("category id", state.categoryId);
+
+      console.log("added category", addedCategory);
+     
       const newProject = {
         ...project,
         mainImg: uploadedImage
       };
       await updateProject(id, newProject);
-      await history.push(`/project/${id}`);
+      await history.push(`/project/${id}`);      
       return uploadedImage;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
+
+    ;
   };
 
   const editProject = (changes, id) => {
     console.log('edit changes', changes);
-    const updateMainImg = (changes, id) => {
-      updateProject(id, changes)
+    let project_category = {};
+    const updateMainImg = (changes, id) => {     
+      //edit category 
+      axiosWithAuth()
+      .get(`/api/v1/categories/projects/${id}`)
+      .then(res => {
+        //if a category is assigned to the project and a new category was selected
+        //find the project category and update it
+        if(res.data.length && state.categoryId){
+
+          project_category = res.data.find( project_category => {
+          return project_category.projectId === id;
+          })            
+          const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
+          updateProjectCategory(project_category.projectCategoryId, category);
+
+        }
+        //if there is no prior category record and a category is selected during edit
+        //add the category
+        else if(res.data.length === undefined && state.categoryId){
+          //add category
+          const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
+          addCategoryToProject(category);
+
+        } //end else if
+      })//end .then    
+    
+      //update the project
+      .then (() => {
+        updateProject(id, changes)     
         .then(res => {
           history.push(`/project/${id}`);
-        })
-        .catch();
-    };
+      })
+      .catch(err => {
+        console.log("get categories by id error", err);
+      });  
+
+    })//end updateMainImg
+    .catch();
+  };
+
+
     handleImageUpload(files, id)
       .then(res => {
         if (res) {
@@ -311,6 +379,31 @@ const ProjectForm = ({
         });
   };
 
+  const getNames = () => {
+    getAllCategoryNames();    
+  };
+
+  const getCategories = () => {
+    //getCategoriesByProjectId(project.id);  
+    //let found = {};  
+
+    axiosWithAuth()
+        .get(`/api/v1/categories/projects/${project.id}`)
+        .then(res => {
+          console.log("res.data", res.data);   
+
+        {found = (res.data.find( project_category => {
+          return project_category.projectId === project.id;
+        }))}       
+       
+        setFoundProjectCategory({...foundProjectCategory, found})
+        console.log("found project category in getCategories", foundProjectCategory);
+      })
+  }
+  
+  //populates categoryName drop down with names
+  useEffect(getNames, [categoryNames]);  
+  
   useEffect(getInvites, [invite]);
 
   useEffect(handleEditAccess, []);
@@ -367,11 +460,20 @@ const ProjectForm = ({
     });
   };
 
+  //each time a category is selected in the categories drop down list
+  const categoryHandler = (event) => {
+    event.preventDefault();
+    state.categoryId = event.target.value;      
+
+    console.log("event.target.value", event.target.value);   
+        
+  }   
+
   return kickback ? (
     <Loading />
   ) : isEditing && !editAccess ? (
     <Redirect to={`/project/${project.id}`} />
-  ) : (
+  ) : (        
         <div className="project-form-wrapper">
           {isLoading && <Loading />}
           <div className={state.modal ? 'modal--expand' : 'modal--close'}>
@@ -509,6 +611,7 @@ const ProjectForm = ({
               {isEditing && (
                 <div>
                   <div className="thumbnail-container ">
+                  
                     {projectPhotos.map((photo, index) => (
                       <div key={index}>
                         <img
@@ -562,19 +665,47 @@ const ProjectForm = ({
                 <label htmlFor="description" className="label">
                   Project description
             </label>
-                <textarea
-                  id="description"
-                  name="description"
-                  value={description}
-                  type="text"
-                  placeholder="Enter description here"
-                  onChange={handleChanges}
-                  className="description"
-                  maxLength="240"
-                />
-                <CharacterCount string={description} limit={240} />
-                <label htmlFor="figmaLink" className="label">
-                  Figma
+            <textarea
+              id="description"
+              name="description"
+              value={description}
+              type="text"
+              placeholder="Enter description here"
+              onChange={handleChanges}
+              className="description"
+              maxLength="240"
+            />
+            <CharacterCount string={description} limit={240} />
+
+                {/*PROJECT CATEGORIES */}
+                <label htmlFor="privacyLink" className="label">
+                  Categories
+                </label>           
+                <select
+                  type="select"
+                  name="categories"                  
+                  placeholder="Category (ex: Art, Animation)"                  
+                  onChange={categoryHandler}
+                  className = "category-select"
+                >  
+
+                {/*if editing a project and a category was previously selected for the project
+                   display that category as the default selection. if not, dispay the defaut option */}
+                {isEditing && projectCategories[0] ? 
+                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>
+                :
+                <option value ="" disabled selected hidden>Please Select a Category</option>}                                                
+                
+                {categoryNames.map( (category, index) => {
+                  return <option key = {category.id} value = {category.id}> 
+                            {category.category} 
+                          </option>
+                })}
+                  
+              </select>                    
+
+            <label htmlFor="figmaLink" className="label">
+              Figma
             </label>
                 <input
                   type="text"
@@ -704,7 +835,12 @@ const mapStateToProps = state => {
     invite: state.invites.invite,
     usersFromInvites: state.invites.usersFromInvites,
     loadingUsers: state.invites.loadingUsers,
-    isDeleting: state.invites.isDeleting
+    isDeleting: state.invites.isDeleting,
+    categoryNames: state.categories.categoryNames,
+    addedCategory: state.categories.addedCategory,
+    //projectCategories: state.categories.projectCategories, //categories added to a project
+    updatedProjectCategory: state.categories.updatedProjectCategory
+
   };
 };
 
@@ -720,7 +856,11 @@ export default withRouter(
       deleteProject,
       createProjectInvite,
       getInvitesByProjectId,
-      getUsersFromInvites
+      getUsersFromInvites,
+      getAllCategoryNames,
+      addCategoryToProject,
+      //getCategoriesByProjectId,
+      updateProjectCategory
     }
   )(ProjectForm)
 );

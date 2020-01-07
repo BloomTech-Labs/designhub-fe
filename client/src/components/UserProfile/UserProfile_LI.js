@@ -192,10 +192,6 @@ class UserProfile_LI extends Component {
           }
         })
     });
-
-
-
-
   }
 
   render() {
@@ -252,22 +248,22 @@ class UserProfile_LI extends Component {
 
               {/*NUMBER OF COLLABORATION PROJECTS*/}
               {(this.props.activeUser.id === this.props.userData.id) && (
-                <div className="count-flex" onClick={() => this.setCurrentTab(1)}>
+                <div className="count-flex" onClick={() => this.setCurrentTab(2)}>
                   <h6>Collaborations </h6>
                   <p>{this.state.acceptedCollabInvites ? this.state.acceptedCollabInvites.length : 0}</p>
                 </div>
 
               )}
 
-              <div className="count-flex" onClick={() => this.setCurrentTab(2)}>
+              <div className="count-flex" onClick={() => this.setCurrentTab(3)}>
                 <h6>Followers</h6>
                 <p>{this.props.followers ? this.props.followers : 0}</p>
               </div>
-              <div className="count-flex" onClick={() => this.setCurrentTab(3)}>
+              <div className="count-flex" onClick={() => this.setCurrentTab(4)}>
                 <h6>Following</h6>
                 <p>{this.props.following ? this.props.following : 0}</p>
               </div>
-              <div className="count-flex" onClick={() => this.setCurrentTab(4)}>
+              <div className="count-flex" onClick={() => this.setCurrentTab(5)}>
                 <h6>Starred</h6>
                 <p>
                   {this.props.starred === null ? 0 : this.props.starred.length}

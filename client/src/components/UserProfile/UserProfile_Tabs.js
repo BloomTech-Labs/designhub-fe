@@ -6,7 +6,6 @@ import moment from 'moment';
 import Heatmap from './Heatmap.js';
 // Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
-import ProjectThumbnail from '../ProjectThumbnail';
 import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
 
@@ -32,8 +31,8 @@ class UserProfile_Tabs extends Component {
 
       return (
         <div className="profile-tabs-container">
-          <div>
-            <Tabs selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
+          <div className = "new-tabs-div">
+            <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
@@ -42,21 +41,27 @@ class UserProfile_Tabs extends Component {
                   Projects
                 </Tab>
                 <Tab className="links" selectedClassName="active-link">
+                  Collaborations
+                </Tab>
+                <Tab className="links" selectedClassName="active-link">
                   Followers
                 </Tab>
                 <Tab className="links" selectedClassName="active-link">
                   Following
                 </Tab>
-                <Tab className="links" selectedClassName="active-link">
+                <Tab className="links" id = "starred" selectedClassName="active-link">
                   Starred
                 </Tab>
               </TabList>
 
               <TabPanel className="tabs-container">
-                <div className="tabs-header">
-                  <h2>Recent Projects</h2> {/*RECENT PROJECTS*/}
-                </div>
+                {/*<div className="tabs-header">
+                  <h2>Recent Projects</h2> 
+                </div>*/}
                 <div className="tab-content">
+                <div className="tabs-header">
+                  <h2>Recent Projects</h2> 
+                </div>
                   {projects.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -76,10 +81,11 @@ class UserProfile_Tabs extends Component {
 
                 <Heatmap />
               </TabPanel>
+
               <TabPanel className="tabs-container">
-                <div className="tabs-header">
+                {/*<div className="tabs-header">
                   <h2>Projects</h2>
-                </div>
+                </div>*/}
                 <div className="tab-content">
                   {projects.length === 0 && (
                     <div className="empty-state">
@@ -95,33 +101,34 @@ class UserProfile_Tabs extends Component {
                     })}
                   </div>
                 </div>
-                <br />
-                {(this.props.activeUser.id === this.props.userData.id) && (
+                  
+              </TabPanel>
+              
 
-                  <>
-                    <div className="tabs-header">
-                      <h2>Collaborations</h2>
-                    </div>
-                    <div className="tab-content">
-                      {acceptedProjects.length === 0 && (
+             {/*ADDING COLLABORATORS */}
+             <TabPanel className="tabs-container">
+                {/*<div className="tabs-header">
+                  <h2>Collaborations</h2>
+                </div>*/}
+                <div className="tab-content">                 
+
+                {(this.props.activeUser.id === this.props.userData.id) && (acceptedProjects.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />
                           <h1 className="no-projects">
                             You are not collaborating on any projects.
                         </h1>
                         </div>
-                      )}
-                      <div className="projects-array">
-
+                )}
                         {acceptedProjects.map(project => {
                           return <ProjectThumbnail project={project} key={project.id} />
                         })}
                       </div>
-                    </div>
-                  </>
-
-                )}
+                      ))} 
+                    </div> 
+                </div>
               </TabPanel>
+
 
               <TabPanel className="tabs-container">
                 <div className="follower-following-container">
@@ -267,9 +274,9 @@ class UserProfile_Tabs extends Component {
                 </div>
               </TabPanel>
               <TabPanel className="tabs-container">
-                <div className="tabs-header">
+                {/*<div className="tabs-header">
                   <h2>Starred</h2>
-                </div>
+                </div>*/}
                 <div className="tab-content">
                   {starred.length === 0 && (
                     <div className="empty-state">
