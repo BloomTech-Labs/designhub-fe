@@ -54,15 +54,13 @@ class UserProfile_Tabs extends Component {
                   Starred
                 </Tab>
               </TabList>
+              
 
               <TabPanel className="tabs-container">
-                {/*<div className="tabs-header">
+                <div className="tabs-header">
                   <h2>Recent Projects</h2> 
-                </div>*/}
-                <div className="tab-content">
-                  <div className="tabs-header">
-                    <h2>Recent Projects</h2>
-                  </div>
+                </div>
+                <div className="tab-content">                  
                   {projects.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -84,9 +82,9 @@ class UserProfile_Tabs extends Component {
               </TabPanel>
 
               <TabPanel className="tabs-container">
-                {/*<div className="tabs-header">
+                <div className="tabs-header">
                   <h2>Projects</h2>
-                </div>*/}
+                </div>
                 <div className="tab-content">
                   {projects.length === 0 && (
                     <div className="empty-state">
@@ -108,9 +106,9 @@ class UserProfile_Tabs extends Component {
 
               {/*ADDING COLLABORATORS */}
               <TabPanel className="tabs-container">
-                {/*<div className="tabs-header">
+                <div className="tabs-header">
                   <h2>Collaborations</h2>
-                </div>*/}
+                </div>
                 <div className="tab-content">
 
                   {(this.props.activeUser.id === this.props.userData.id) && (acceptedProjects.length === 0) && (
@@ -129,7 +127,11 @@ class UserProfile_Tabs extends Component {
 
 
               <TabPanel className="tabs-container">
-                <div className="follower-following-container">
+                <div className="tabs-header">
+                  <h2>Followers</h2> 
+                </div>
+
+                <div className="tab-content">
                   {followers.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -214,7 +216,11 @@ class UserProfile_Tabs extends Component {
                 </div>
               </TabPanel>
               <TabPanel className="tabs-container">
-                <div className="follower-following-container">
+                <div className="tabs-header">
+                  <h2>Following</h2> 
+                </div>
+
+                <div className="tab-content">
                   {following.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -272,9 +278,9 @@ class UserProfile_Tabs extends Component {
                 </div>
               </TabPanel>
               <TabPanel className="tabs-container">
-                {/*<div className="tabs-header">
+                <div className="tabs-header">
                   <h2>Starred</h2>
-                </div>*/}
+                </div>
                 <div className="tab-content">
                   {starred.length === 0 && (
                     <div className="empty-state">
