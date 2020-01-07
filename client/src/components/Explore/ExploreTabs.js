@@ -74,6 +74,7 @@ const ExploreTabs = ({
             {/* // ======== All Tab ======== // */}
             <TabPanel className="tabs-container">
 
+
             {(allProjects.length === 0) && (
                         <div className="empty-state">
                           <img src={empty} alt="empty" className="empty-icon" />

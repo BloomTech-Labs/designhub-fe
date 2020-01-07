@@ -5,11 +5,18 @@ nav {
   display: flex;
   width: 100%;
   transition: all 0.2s ease-in-out;
+  // box-shadow: 0 0 8px -4px black;
+
+  border-radius: 10px;
+
+  // @include themify($themes) {
+  //   box-shadow: 0 0 8px -4px themed('shadow');
+  // }
 
   .icon-links {
     display: flex;
     width: 4.5rem;
-    height: 25em;
+    height: 45vh;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
@@ -19,6 +26,7 @@ nav {
     border: 1px solid $almost-black;
     @include themify($themes) {
       background: themed('bg2');
+      border: 1px solid #662a2b23;
     }
 
     .navlinks {
@@ -85,6 +93,8 @@ nav {
 
     @include themify($themes) {
       background: themed('bg2');
+      border-top: 1px solid #662a2b23;
+      border-bottom: 1px solid #662a2b23;
     }
 
     .links {
@@ -102,7 +112,7 @@ nav {
     .active-links {
       color: $white;
       @include themify($themes) {
-        color: themed('text');
+        color: themed('active-link');
       }
     }
   }
@@ -110,12 +120,12 @@ nav {
   .icon-links:hover ~ .text-links {
     transition: all 0.2s ease-in-out;
     width: 10rem;
-    border-right: 1px solid $almost-black;
+    border-right: 1px solid #662a2b31;
   }
 
   .text-links:hover {
     width: 10rem;
-    border-right: 1px solid $almost-black;
+    border-right: 1px solid #662a2b31;
   }
 
   .links:hover {

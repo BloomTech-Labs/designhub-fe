@@ -7,6 +7,7 @@ import { deleteInvite, updateInvite } from '../store/actions'
 
 
 const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, email, updateInvite }) => {
+
   const handleInviteDelete = (invite) => {
     deleteInvite(invite);
   }
@@ -34,9 +35,9 @@ const ProjectInvite = ({ avatar, firstName, lastName, invite, deleteInvite, emai
       <div className="actions">
         {/* Any necessary buttons will go here */}
         <div className="invite-edit-div">
-          <select className="invite-edit-drop" onChange={handleInviteEdit} value={invite.write ? "edit" : "view"}>
-            <option value="view">Can View</option>
-            <option value="edit">Can Edit</option>
+          <select className="selectpicker show-tick" onChange={handleInviteEdit} value={invite.write ? "edit" : "view"}>
+            <option className="special" value="view">Can View</option>
+            <option className="special" value="edit">Can Edit</option>
           </select>
         </div>
         <div className="close-collab-icon-div" onClick={() => handleInviteDelete(invite)}>

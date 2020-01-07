@@ -20,9 +20,16 @@ Team Lead|Web Developer|Web Developer|Web Developer|Web Developer|UX Designer|UX
 [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/cjbt)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/javontaymcelroy)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/cacheup)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/mansleen)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ian84be)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/) |
 [<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/cjtantay/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/javontay-mcelroy-663b81bb/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/michael-vansleen/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ian-belknap/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/lantbas/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/zeke-kooyer-b30016aa/) |
 
+Team Lead|Web Developer|Web Developer|Web Developer|Web Developer|Web Developer|Web Developer|UX Designer|
+:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+[Samantha Egge](https://github.com/SamanthaEgge)|[Ahmad Guenoun](https://github.com/amguenoun)|[Roger McConkie Jr.](https://github.com/rogermcconkiejr)|[Tisha Holder](https://github.com/TishaHolder)|[Mohammad Tourjoman](https://github.com/mtourj)|[Shannon Reed](https://github.com/shanreed)|[Jenn Soderborg](https://github.com/jsoderborg7)|[Peter Noel](https://github.com/) |
+[<img src="https://avatars0.githubusercontent.com/u/49916365?s=460&v=4" width = "200" />](https://github.com/SamanthaEgge)|[<img src="https://avatars2.githubusercontent.com/u/45905506?s=460&v=4" width = "200" />](https://github.com/amguenoun)|[<img src="https://avatars1.githubusercontent.com/u/41711405?s=460&v=4" width = "200" />](https://github.com/rogermcconkiejr)|[<img src="https://avatars3.githubusercontent.com/u/50963507?s=460&v=4" width = "200" />](https://github.com/TishaHolder)|[<img src="https://avatars0.githubusercontent.com/u/8114139?s=460&v=4" width = "200" />](https://github.com/mtourj)|[<img src="https://avatars2.githubusercontent.com/u/44705472?s=460&v=4" width = "200" />](https://github.com/shanreed) | [<img src="https://avatars3.githubusercontent.com/u/52469600?s=460&v=4" width = "200" />](https://github.com/jsoderborg7) | [<img src="https://media.licdn.com/dms/image/C4E03AQFbK4vR_04iOg/profile-displayphoto-shrink_800_800/0?e=1573689600&v=beta&t=97iobcc6eDA_mVCCU-xLVv7LLxgA2atDN0mieGIYXXg" width = "200" />](https://github.com/) |
+[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/SamanthaEgge)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/amguenoun)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/rogermcconkiejr)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/TishaHolder)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/mtourj)|[<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/shanreed) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/jsoderborg7) | [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/) |
+[<img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/samantha-egge/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/roger-mcconkie-jr/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/tishaholder/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/mohammad-tourjoman-6b811259/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/shannonreedtechset5/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/jsoderborg7/) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/peter-noel-263903116/) |
+
 ## Project Overview
 
-- [Trello Board](https://trello.com/b/xGm2ZKkT/design-hub-16)
+- [Trello Board](https://trello.com/b/snkabWC1/design-hub)
 
 - [Product Vision Document](https://www.notion.so/DesignHub-1eea155e6c6945babb35a52b5ebba865)
 
@@ -36,15 +43,21 @@ Team Lead|Web Developer|Web Developer|Web Developer|Web Developer|UX Designer|UX
 	- Users can add comments to a project
 	- Users can view activity on a heatmap
 
-- v 1.1 (`current`)
+- v 1.1 
 	- Users can discover relevant projects on the explore page
 	- Users can search for other users, projects and teams
 	- Users can receive email notification about interactions and feedback
 
-- v 1.2
-	- Users can create design teams
+- v 2.0
 	- Users can create private projects
-	- Users can invite team-members to access projects
+
+- v 2.1
+	- Users can collaborate on projects
+	- Users can invite collaborators to different access levels within a project
+	- Users receive email notification when invited to join a project
+
+- v 2.2 (current)
+	- Users can assign tags/categories to projects
 
 ## Tech Stack
 

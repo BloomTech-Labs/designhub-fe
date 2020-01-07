@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import axios from 'axios';
 
 import '../../SASS/Explore.scss';
 import ExploreTabs from './ExploreTabs.js';
@@ -22,22 +21,6 @@ class Explore extends Component {
   componentDidMount() {
     this.fetch();
     console.log("all projects in explore", this.state.allProjects);
-  }
-
-  componentDidUpdate() {
-    if (this.state.userIds.length > 0 && this.state.users.length === 0) {
-      const users = []
-      this.state.userIds.map((id, index) => {
-        return axiosWithAuth()
-          .get(`/api/v1/users/${id}`)
-          .then(res => {
-            users.push(res.data[0]);
-            if (index + 1 === this.state.userIds.length) {
-              this.setState({ users: users });
-            }
-          })
-      })
-    }
   }
 
   fetch() {
@@ -79,7 +62,8 @@ class Explore extends Component {
           userIds: userIds
         })
       })
-      .catch(err => err);
+    })
+    .catch(err => err);
   }
 
   render() {
@@ -93,7 +77,7 @@ class Explore extends Component {
         <header>
           <h1>Explore</h1>
           <p>
-            Discover projects from our talented community Designers
+            Discover projects from our talented community of Designers
           </p>
         </header>
         <ExploreTabs recent={recent} popular={popular} following={following} users={users} allProjects = {allProjects}/>

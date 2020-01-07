@@ -37,7 +37,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
-    margin-left: 12px;
+    margin-left: 1.9%;
     svg {
       stroke: $text;
       @include themify($themes) {

@@ -5,6 +5,7 @@ import { useAuth0 } from './auth-wrapper.js';
 
 import DesignHub from './DesignHub.js';
 import LandingPage from './components/LandingPage.js';
+// import NewLandingPage from './components/NewLandingPage';
 import OnboardingForm from './components/OnboardingForm/OnboardingForm.js';
 import Loading from './components/Loading.js';
 

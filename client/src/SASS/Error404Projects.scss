@@ -4,14 +4,14 @@
 .empty-state {
     
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
     text-align: center;
 
     .no-projects-title {
         margin-top: 25px;
         margin-bottom: 0;        
         width: 100%;       
-        font-size: 5vw;        
+        font-size: 32px;        
         text-align: center;
         color: $dark-grey;
         margin-bottom: 20px;
@@ -31,7 +31,11 @@
     }
 
     .empty-icon {
-      opacity: 0.03;      
+      opacity: 0.04;
+      
+      @include themify($themes) {
+        filter: themed('filter');
+      }
     }
 
     .no-projects {

@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
 import defaultImg from '../ASSETS/default_thumbnail.svg';
 
+import {axiosWithAuth} from '../utilities/axiosWithAuth';
+
 import '../SASS/ProjectThumbnail.scss';
 
-const ProjectThumbnail = ({ project, user }) => {
-    return !project || !user ? null : (
+const ProjectThumbnail = ({ project }) => {
+    
+    // Set initial state to avoid undefined errors
+    const [user, setUser] = useState({
+        avatar: null,
+        firstName: null,
+        username: null
+    });
+
+    useEffect(() => {
+        if(!project || !project.userId) return;
+
+        axiosWithAuth()
+        .get(`/api/v1/users/${project.userId}`)
+        .then(res => {
+          setUser(res.data[0]);
+        })
+        .catch(err => {
+            console.error('Failed to load user with id', project.userId);
+        })
+    }, [setUser, project])
+
+    return !project ? null : (
         <div className="project-content">
             <Link to={`/project/${project.id}`}>
                 <div className="project-info">

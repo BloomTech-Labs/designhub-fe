@@ -4,8 +4,8 @@
 .user-profile-container {
   color: $white;
   width: 100%;
-  position: relative;
-  position: relative;
+  // position: relative;
+  // position: relative;
 
   @include themify($themes) {
     color: themed('text');
@@ -307,7 +307,11 @@
       background: $black;
 
       .empty-icon {
-        opacity: 0.03;
+        opacity: 0.08;
+
+        @include themify($themes) {
+          filter: themed('filter');
+        }
       }
       .no-projects {
         width: 100%;

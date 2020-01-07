@@ -13,6 +13,7 @@ import SearchPage from './components/SearchPage';
 import Notifications from './components/Notifications';
 import EditProject from './components/EditProject';
 import Explore from './components/Explore/Explore';
+import NewLandingPage from './components/NewLandingPage';
 
 import './SASS/DesignHub.scss';
 
@@ -21,7 +22,8 @@ class DesignHub extends Component {
     super(props);
     this.state = {
       activeUser: this.props.user,
-      search: []
+      search: [],
+      searchTerm: ''
     };
   }
   componentDidMount() {
@@ -38,13 +40,20 @@ class DesignHub extends Component {
     } = await axios.post(`${process.env.REACT_APP_BASE_URL}api/v1/search`, {
       searchText: text
     });
-    this.setState({ search: { projects, users } });
+    this.setState({ search: { projects, users }, searchTerm: text });
     history.push('/search');
   };
 
   render() {
     return (
       <div className="DesignHub">
+        <Route
+          exact
+          path="/newlandingpage"
+          render={() =>(
+            <NewLandingPage />
+          )}
+        />
         <Route
           path='/'
           render={props => (
@@ -112,6 +121,7 @@ class DesignHub extends Component {
                 render={props => (
                   <SearchPage
                     {...props}
+                    searchTerm={this.state.searchTerm}
                     activeUser={this.props.user}
                     searchData={this.state.search}
                     getSearch={this.getSearch}

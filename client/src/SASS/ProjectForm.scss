@@ -5,22 +5,40 @@
   color: $white;
   width: 100%;
 
+  margin-right: 16px;
+
   @include themify($themes) {
     color: themed('text');
   }
 
   .ProjectForm__header {
+    user-select: none;
     h2 {
+      margin-top: 16px;
+      color: $white;
       font-weight: 500;
       font-size: 20px;
       line-height: 28px;
+
+      transition: all 0.2s ease-in-out;
+
+      @include themify($themes) {
+        color: $field-stroke;
+      }
     }
   }
 
   .ProjectForm__body {
     display: flex;
-    margin: 16px 0;
+    margin-top: 16px;
     width: 100%;
+    padding: 16px;
+
+    border-radius: 10px;
+
+    background-color: $black;
+
+
 
     @media (max-width: 1024px) {
       align-items: center;
@@ -34,7 +52,12 @@
         margin-top: 5%;
         margin-bottom: 5%;
         width: 100%;
+        
       }
+    }
+
+    @include themify($themes) {
+      background-color: white;
     }
   }
 
@@ -106,7 +129,7 @@
       width: 8%;
       position: absolute;
       top: 10px;
-      right: 0px;
+      right: 40px;
 
       div.close-icon {
         height: 35px;
@@ -117,21 +140,24 @@
         align-items: center;
         justify-content: center;
 
+
         margin: 3% 3%;
         font-family: 'Helvetica';
-        font-size: 14px;
+        font-size: 12px;
 
         cursor: pointer;
-        @include themify($themes) {
-          background-color: themed('bg2');
-        }
+        // @include themify($themes) {
+        //   background-color: themed('bg2');
+        // }
       }
     }
 
     form {
       @include onboard-form;
+      
+
       @include themify($themes) {
-        background-color: themed('bg');
+        background-color: white;
       }
       margin: 0;
       width: 100%;
@@ -187,7 +213,9 @@
           font-size: 12px;
           margin-top: 0px;          
           border: 1px solid $field-stroke;
+          
           @include themify($themes) {
+            border: 1px solid $shadow-grey;
             background-color: themed('bg2');
           }
         }
@@ -241,7 +269,7 @@
       .share-link-div {
         @include onboard-form;
         @include themify($themes) {
-          background-color: themed('bg');
+          background-color: white;
         }
 
         margin: 0;
@@ -250,7 +278,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        width: 55%;
+        width: 70%;
 
         .label {
           margin-bottom: 0;
@@ -263,6 +291,7 @@
           padding: 7px;         
           border: 1px solid $field-stroke;
           @include themify($themes) {
+            border: 1px solid $shadow-grey;
             background-color: themed('bg2');
           }
         }
@@ -315,6 +344,7 @@
       letter-spacing: 0.11em;
       margin-bottom: 14px;
     }
+    
     .upload-container.active {
       border: 8px solid $blue;
       @include themify($themes) {
@@ -352,13 +382,13 @@
       border-radius: 10px;
       cursor: pointer;
       display: flex;
-      height: 9rem;
+      height: 12rem;
       justify-content: center;
       outline: none;
       padding: 20px;
       transition: all 0.1s ease-in-out;
       @include themify($themes) {
-        background: themed('upload-grey');
+        background: themed('bg');
         border: 5px solid themed('bg2');
         color: themed('link');
       }
@@ -366,8 +396,9 @@
       &:hover {
         background: #33343b;
         @include themify($themes) {
-          background: themed('bg');
+          background: white;
           border: 5px solid themed('bg2');
+          box-shadow: 0 0 10px -5px gray;
           color: themed('text');
         }
         svg {
@@ -475,8 +506,10 @@
 
     form {
       @include onboard-form;
+      background-color: $black;
+
       @include themify($themes) {
-        background-color: themed('bg');
+        background-color: white;
       }
       margin: 0;
       width: 100%;
@@ -485,13 +518,11 @@
         font-size: 12px;
         margin-bottom: 20px;
         border: 1px solid $field-stroke;
+        
         @include themify($themes) {
+          border: 1px solid $shadow-grey;
           background-color: themed('bg2');
         }
-      }
-
-      .name-input{
-        margin-bottom:10px;
       }
 
       select {
@@ -499,6 +530,7 @@
         margin-bottom: 20px;
         border: 1px solid $field-stroke;
         @include themify($themes) {
+          border: 1px solid $shadow-grey;
           background-color: themed('bg2');
         }
       }
@@ -546,6 +578,7 @@
         height: 80px;
         border: 1px solid $field-stroke;
         @include themify($themes) {
+          border: 1px solid $shadow-grey;
           background-color: themed('bg2');
         }
       }
