@@ -4,8 +4,8 @@
 .user-profile-container {
   color: $white;
   width: 100%;
-  // position: relative;
-  // position: relative;
+  position: relative;
+  position: relative;
 
   @include themify($themes) {
     color: themed('text');
@@ -136,7 +136,6 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          cursor: pointer;
 
           h6,
           p {
@@ -186,89 +185,58 @@
       color: themed('text');
     }
 
-    .new-tabs-div {
-      display: flex;
-      flex-direction: column;
-      height: auto;
-      //border: 1px solid red;
-    }
-
-    .nav-links { /*tab list*/
+    .nav-links{  /*tab list */
       display: flex;
       width: 100%;
       margin-bottom: 0px;
-      //border: 1px solid red;
-
-      /*li {
+      /*border: 1px solid red;*/
+      li {
         letter-spacing: 0.11em;
-        font-size: .75rem;       
-
-      }*/
-      .links { /*tab*/
         font-size: 1rem;
+        //border: 1px solid red;
+      }
+      .links {
+        color: $dark-grey;
+        text-decoration: none;
+        list-style-type: none;
+        margin: 0;
+        cursor: pointer;
+        transition: 0.1s ease-in-out;
         font-weight: 400;
-        height: 40px;
-        width: 13%;
-        //background: $black;
-        background: #2f303a;
-        border-radius: 10px 10px 0 0;
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 105% 100%, 0% 100%);
-        padding: 15px 26px 0px 15px;   
-        padding-left: 35px;    
-        box-sizing: border-box;
+        position: relative;
+        z-index: 100;
+        padding: 0px 20px 0px 0px;
         @include themify($themes) {
-          background: themed('bg2');
+          color: themed('link');
         }
-
-        h2 {
-          font-weight: 400;
-          margin: 0;
-          letter-spacing: 0.11em;
-        }
-        
-        margin-bottom: 0px;
-      }//end links
-     
+      }
 
       .active-link {
-        //color: $white;
-        //background: #2f303a;
-        background: $black;
-        @include themify($themes) {
-          color: themed('bg2');
-        }
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
-      }     
+        color: $white;
+      }
 
       .links:hover {
         color: $white;
-        background: $black;
         @include themify($themes) {
           color: themed('text');
         }
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);            
-        cursor: pointer;        
       }
-
-     li:last-child {
-        clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);               
-      }
-
-    }//end nav-links
-
-    
+    }
   }
 
   .tabs-container {
     width: 100%;
     margin: 4vh 0;
     margin: 29px 0;
-    background: $black;
-    position: relative;
-    //top: -30px;    
-    
-    .tabs-header {     
-    
+    //margin-top: 0px;
+    .tabs-header {
+      height: 40px;
+      width: 18rem;
+      background: $black;
+      border-radius: 10px 10px 0 0;
+      clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
+      padding: 24px 26px 0 26px;
+      box-sizing: border-box;
       @include themify($themes) {
         background: themed('bg2');
       }
@@ -276,42 +244,24 @@
         font-weight: 400;
         margin: 0;
         letter-spacing: 0.11em;
-        margin-top: 0px;
-        margin-left: 10px;
       }
-
-      margin-top: 0px;
-      
     }
     .tab-content {
       background: $black;
       padding: 16px;
-      border-radius: 0 0px 10px 10px;
+      border-radius: 0 10px 10px 10px;
       @include themify($themes) {
         background: themed('bg2');
       }
-      position: relative;
-      top: -30px;
-      padding-top: 30px;
-      padding-left: 26px;
-
     }
 
-    .empty-state {      
-      position: relative;
-      top: -30px;
+    .empty-state {
       width: 100%;
       margin: 0 auto;
       text-align: center;
-      margin-top: 0px;
-      background: $black;
 
       .empty-icon {
-        opacity: 0.08;
-
-        @include themify($themes) {
-          filter: themed('filter');
-        }
+        opacity: 0.03;
       }
       .no-projects {
         width: 100%;
@@ -320,7 +270,6 @@
         margin-bottom: 20px;
         user-select: none;
         opacity: 0.6;
-        margin-top: 0px;
       }
     }
 
@@ -330,24 +279,86 @@
       grid-column-gap: 3%;
       width: 100%;
 
-    }
-    
-    .follower-following-container {      
-      padding-top: 40px;
-      background: $black;      
-      position: relative;
-      top: -30px;
+      .project-content {
+        width: 100%;
+        height: 14vw;
+        // height: 11.5rem;
+        position: relative;
+        transition: all 0.2s ease-in-out;
+        border: 8px solid $field-bg;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 10px 10px 10px 10px;
+        object-fit: cover;
+
+        @include themify($themes) {
+          border: 8px solid themed('bg');
+        }
+
+        .project-info {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          color: $white;
+          text-decoration: none;
+          background: $blue;
+          overflow: hidden;
+          height: 50px;
+          display: none;
+          pointer-events: none;
+
+          h1 {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .created {
+            margin: 0;
+            margin-top: 5px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.507);
+          }
+        }
+
+        .project-thumbnail {
+          object-fit: cover;
+          width: 103%;
+          height: 100%;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+        }
+      }
+      .project-content:hover {
+        border: 8px solid $blue;
+        text-align: left;
+      }
     }
 
-    .follow-container {     
-      background: #2f303a;
+    .project-content:hover {
+      .project-info {
+        display: inline;
+        animation: slideUp 0.25s ease-in-out;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        height: 0px;
+      }
+      to {
+        height: 50px;
+      }
+    }
+
+    .follow-container {
+      background: $black;
       padding: 20px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       margin-bottom: 4vh;
-      margin-left: 20px;
-      width: 94%;
+      width: 97.5%;
       justify-content: space-between;
       @include themify($themes) {
         background: themed('bg2');
@@ -356,8 +367,6 @@
           color: $almost-black;
         }
       }
-
-      
       .follow-btn {
         @include follow-btn;
         margin: 0;
@@ -492,13 +501,12 @@
     .profile-tabs-container {
       .nav-links {
         width: auto;
+
         justify-content: space-between;
-        
+
         .links {
           padding: 0;
         }
-
-       
       }
 
       .projects-array {
@@ -507,7 +515,6 @@
         .project-content {
           height: 25vh;
         }
-        
       }
     }
   }
@@ -586,3 +593,5 @@
     }
   }
 }
+
+
