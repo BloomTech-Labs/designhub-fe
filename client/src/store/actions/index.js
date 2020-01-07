@@ -200,6 +200,20 @@ export const UPDATE_PROJECT_CATEGORY_FAILURE = "UPDATE_PROJECT_CATEGORY_FAILURE"
 
 
 
+//User Research - Case Studies
+export const GET_PROJECT_RESEARCH_START = 'GET_PROJECT_RESEARCH_START';
+export const GET_PROJECT_RESEARCH_SUCCESS = 'GET_PROJECT_RESEARCH_SUCCESS';
+export const GET_PROJECT_RESEARCH_FAILURE = 'GET_PROJECT_RESEARCH_FAILURE';
+export const GET_SINGLE_RESEARCH_START = 'GET_SINGLE_RESEARCH_START';
+export const GET_SINGLE_RESEARCH_SUCCESS = 'GET_SINGLE_RESEARCH_SUCCESS';
+export const GET_SINGLE_RESEARCH_FAILURE = 'GET_SINGLE_RESEARCH_FAILURE';
+export const ADD_PROJECT_RESEARCH_START = 'ADD_PROJECT_RESEARCH_START';
+export const ADD_PROJECT_RESEARCH_SUCCESS = 'ADD_PROJECT_RESEARCH_SUCCESS';
+export const ADD_PROJECT_RESEARCH_FAILURE = 'ADD_PROJECT_RESEARCH_FAILURE';
+export const DELETE_PROJECT_RESEARCH_START = 'DELETE_PROJECT_RESEARCH_START';
+export const DELETE_PROJECT_RESEARCH_SUCCESS = 'DELETE_PROJECT_RESEARCH_SUCCESS';
+export const DELETE_PROJECT_RESEARCH_FAILURE = 'DELETE_PROJECT_RESEARCH_FAILURE';
+
 //############# ACTIONS #############
 
 //project categories
@@ -980,3 +994,52 @@ export const getStarStatus = (userId, projectId) => dispatch => {
       dispatch({ type: GET_STAR_STATUS_FAILURE, payload: err.message });
     });
 };
+
+//User Research 
+export const getSingleResearch = (id) => dispatch => {
+  dispatch({ type: GET_SINGLE_RESEARCH_START })
+  return axiosWithAuth()
+    .get(`api/v1/research/${id}`)
+    .then(res => {
+      dispatch({ type: GET_SINGLE_RESEARCH_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_SINGLE_RESEARCH_FAILURE, payload: err.message })
+    })
+}
+
+export const getProjectResearch = (id) => dispatch => {
+  dispatch({ type: GET_PROJECT_RESEARCH_START })
+  return axiosWithAuth()
+    .get(`api/v1/research/project/${id}`)
+    .then(res => {
+      dispatch({ type: GET_PROJECT_RESEARCH_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: GET_PROJECT_RESEARCH_FAILURE, payload: err.message })
+    })
+}
+
+export const addResearch = (research) => dispatch => {
+  dispatch({ type: ADD_PROJECT_RESEARCH_START })
+  return axiosWithAuth()
+    .post(`api/v1/research`, research)
+    .then(res => {
+      dispatch({ type: ADD_PROJECT_RESEARCH_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: ADD_PROJECT_RESEARCH_FAILURE, payload: err.message })
+    })
+}
+
+export const deleteResearch = (id) => dispatch => {
+  dispatch({ type: DELETE_PROJECT_RESEARCH_START })
+  return axiosWithAuth()
+    .delete(`api/v1/research/${id}`)
+    .then(res => {
+      dispatch({ type: DELETE_PROJECT_RESEARCH_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_PROJECT_RESEARCH_FAILURE, payload: err.message })
+    })
+}

@@ -16,6 +16,30 @@
     margin: 0 auto;
     margin-top: 0rem;
   }
+
+  .pdf-view{
+    margin: 2% 0%;
+    .pdf-nav-buttons{
+      margin:3% 0%;
+      display:flex;
+      justify-content: center;
+      align-items:center;
+      button{
+        margin: 0% .5%;
+        color:white;
+        background:#5557fe;
+        border: none;
+        padding: 0.5% 2%;
+        border-radius:5%;
+        cursor:pointer;
+        &:hover {
+          background: $btn-primary-hover;
+        }
+      }
+    }
+
+  }
+
   .project-details {
     width: 70%;
     display: flex;
@@ -108,6 +132,17 @@
       display: flex;
       flex-flow: row nowrap;
       justify-content: flex-end;
+
+      .pdf-button{
+        height:42px;
+        padding-bottom:6%;
+      }
+
+      .pdf-button-disabled{
+        height:42px;
+        padding-bottom:6%;
+        filter: grayscale(100%)
+      }
 
       .edit {
         color: #5557fe;

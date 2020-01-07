@@ -30,6 +30,9 @@ class ImageViewer extends Component {
         activeImg: this.props.thumbnails[0]
       });
     }
+    else if (this.props.thumbnails && this.state.activeImg === null) {
+      this.setState({ ...this.state, comments: this.props.comments, activeImg: this.props.thumbnails[0] })
+    }
   }
 
   changeImg = imgObj => {
@@ -47,7 +50,6 @@ class ImageViewer extends Component {
 
   render() {
     const { activeImg, modal } = this.state;
-
     if (activeImg === null) {
       return <Loading />;
     } else {
@@ -85,15 +87,15 @@ class ImageViewer extends Component {
                       className="main-image"
                     />
                   ) : (
-                    <img
-                      src={
-                        activeImg ? activeImg.url : this.props.thumbnails[0].url
-                      }
-                      alt="main project"
-                      onClick={() => this.setState({ modal: true })}
-                      className="main-image"
-                    />
-                  )}
+                      <img
+                        src={
+                          activeImg ? activeImg.url : this.props.thumbnails[0].url
+                        }
+                        alt="main project"
+                        onClick={() => this.setState({ modal: true })}
+                        className="main-image"
+                      />
+                    )}
                 </section>
                 <section className="ImageViewer__thumbnails">
                   {this.props.thumbnails.map(t => (

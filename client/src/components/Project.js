@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { PDFReader } from 'reactjs-pdf-reader';
 
 import avatar1 from '../ASSETS/avatar.jpg';
 import avatar2 from '../ASSETS/avatar_2.jpg';
@@ -14,6 +15,7 @@ import ImageViewer from './ImageViewer/ImageViewer.js';
 import Loading from './Loading';
 import Error401Projects from './Error401Projects';
 import Error404Projects from './Error404Projects';
+import caseStudyIcon from '../ASSETS/case-study.png'
 
 import {
   getSingleProject,
@@ -24,6 +26,7 @@ import {
   unstarProject,
   getInvitesByProjectId,
   getUsersFromInvites,
+  getProjectResearch,
   getCategoriesByProjectId
 } from '../store/actions';
 
@@ -35,6 +38,10 @@ class Project extends Component {
     this.projectId = this.props.match.params.id;
     this.state = {
       editAccess: false,
+      numPages: null,
+      pdfPage: 1,
+      showPDF: false,
+      pdfLoading: false
     }
   }
 
@@ -44,13 +51,12 @@ class Project extends Component {
         this.handleEditAccess();
         this.props.getUsersFromInvites(this.props.projectInvites);
       });
+    this.props.getProjectResearch(this.projectId);
     this.props.getStarStatus(
       this.props.activeUser.id,
       this.props.match.params.id
     );
-
-    this.props
-      .getSingleProject(this.projectId) //gets a single project from the database
+    this.props.getSingleProject(this.projectId) //gets a single project from the database
       .then(() => {
         //if there is an error skip the rest of this if/else block
         if (this.props.singleProjectError !== null) {
@@ -68,11 +74,24 @@ class Project extends Component {
             .then(() => {
               this.props.getCategoriesByProjectId(this.projectId)
             })
-
         }
       })
     
     
+  }
+
+  onDocumentComplete = (totalPage) => {
+    this.setState({ numPages: totalPage, pdfLoading: false });
+
+  }
+
+  handleChangePage = (direction) => {
+    if (direction && this.state.pdfPage !== this.state.numPages) {
+      this.setState({ pdfPage: this.state.pdfPage + 1 })
+    }
+    else if (!direction && this.state.pdfPage !== 1) {
+      this.setState({ pdfPage: this.state.pdfPage - 1 })
+    }
   }
 
   starProject = () => {
@@ -174,6 +193,22 @@ class Project extends Component {
               </div>
               <div className="project-header-links">
                 <div className="project-header-button">
+                  {this.props.projectResearch[0] ? (
+                    <img
+                      src={caseStudyIcon}
+                      alt="case study"
+                      className='pdf-button'
+                      onClick={() => this.setState({ showPDF: !this.state.showPDF, pdfLoading: true })}
+                    />
+                  ) : (
+                      <img
+                        src={caseStudyIcon}
+                        alt="case study"
+                        className='pdf-button-disabled'
+                      />
+                    )}
+                </div>
+                <div className="project-header-button">
                   {thisProject.figma ? (
                     <a href={thisProject.figma}>
                       <img
@@ -251,22 +286,44 @@ class Project extends Component {
               </div>
             </div>
           </div>
+          {this.state.showPDF && this.props.projectResearch.length > 0 ? (
+            <div className='pdf-view'>
+              <div className='pdf-nav-buttons'>
+                <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
+                <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
+                <button onClick={() => this.handleChangePage(true)}>Next</button>
+                <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+              </div>
+              <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
+              {this.state.pdfLoading ? <Loading /> : null}
+              <div className='pdf-nav-buttons'>
+                <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
+                <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
+                <button onClick={() => this.handleChangePage(true)}>Next</button>
+                <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+              </div>
+            </div>
+          ) :
+            (
+              <div className="project-body">
+                {console.log('project view')}
 
-          <div className="project-body">
-            {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
-
-            <ImageViewer
-              activeUser={activeUser}
-              comments={this.props.projectComments}
-              thisProject={thisProject}
-              thumbnails={this.props.projectPhotos}
-            />
-          </div>
-        </div>
+                {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
+                <ImageViewer
+                  activeUser={activeUser}
+                  comments={this.props.projectComments}
+                  thisProject={thisProject}
+                  thumbnails={this.props.projectPhotos}
+                />
+              </div>
+            )
+          }
+        </div >
       );
     }
     else {
-
       return <Loading />; //if it wasn't a 401 or 404 error, display the spinner
 
     }
@@ -283,6 +340,7 @@ const mapStateToProps = state => {
     acceptedInvites: state.projects.acceptedInvites,
     usersFromInvites: state.invites.usersFromInvites,
     projectInvites: state.projects.projectInvites,
+    projectResearch: state.research.projectResearch,
     projectCategories: state.categories.projectCategories
   };
 };
@@ -298,6 +356,7 @@ export default connect(
     unstarProject,
     getInvitesByProjectId,
     getUsersFromInvites,
+    getProjectResearch,
     getCategoriesByProjectId
   }
 )(Project);

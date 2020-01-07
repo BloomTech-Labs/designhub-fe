@@ -582,13 +582,78 @@
           background-color: themed('bg2');
         }
       }
-     
+
+      .p-case-study{
+        margin-bottom:5px;
+      }
       label {
         margin-top: 10px;
         margin-bottom: 5px;
         font-size: 15px;
         line-height: 21px;
       }
+      .case-study-div{
+        display:flex;
+        justify-content:space-between;
+        align-items: center;
+        .case-study-input-container{
+          width:70%;
+          .custom-case-study{
+            border: 1px solid $field-stroke;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            width:100%;
+            font-size:12px;
+            text-align:left;
+            @include themify($themes) {
+              background-color: themed('bg2');
+            }
+          }
+          .case-study-grey{
+            color:#6d6d72;
+          }
+
+          .case-study-input{
+            display:none;
+          }
+        }
+
+        .case-study-delete{
+          width:30%;
+          text-align:center;
+          button{
+            height: 32px;         
+            margin-top: 0px;
+            //background: $almost-black;
+            text-align: center;
+            padding: 0 0;
+            border-radius: 3px;
+            color: $red;          
+            font-size: 12px;   
+            font-weight: 300; 
+             background: none;
+             border:none;
+             cursor:pointer;
+             &:hover{
+               text-decoration: underline;
+             }
+          }
+        }
+
+        .disabled {
+          filter: grayscale(100%);
+          button{
+            cursor: auto;
+            &:hover{
+             text-decoration: none ;
+           }
+          }
+           
+        }
+        
+      }
+      
 
       .project-label {
         margin-top: 0px;

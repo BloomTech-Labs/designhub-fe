@@ -15,9 +15,10 @@ import {
   createProjectInvite,
   getInvitesByProjectId,
   getUsersFromInvites,
+  addResearch,
+  deleteResearch,
   getAllCategoryNames,
   addCategoryToProject,
-  //getCategoriesByProjectId,
   updateProjectCategory
 } from '../store/actions';
 
@@ -52,6 +53,10 @@ const ProjectForm = ({
   loadingUsers,
   isDeleting,
   acceptedInvites,
+  addResearch,
+  deleteResearch,
+  projectResearch,
+  getProjectResearch,
   getAllCategoryNames,
   categoryNames,
   addCategoryToProject,
@@ -59,9 +64,9 @@ const ProjectForm = ({
   getCategoriesByProjectId,
   projectCategories, //categories added to a project
   updateProjectCategory
-
 }) => {
   const [files, setFiles] = useState([]);
+  const [researchFile, setResearchFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [error, setError] = useState('');
@@ -95,6 +100,7 @@ const ProjectForm = ({
     url: '',
     modal: false,
     deletingImage: null,
+    deletingResearch: null,
     inviteModal: false,
     projectPhotos: null,
     inviteList: [], //users invited to a project
@@ -133,7 +139,6 @@ const ProjectForm = ({
   const handleSubmit = async e => {
     setIsLoading(true);
     e.preventDefault();
-
     if (state.project.name.length === 0) {
       setIsLoading(false);
       setError('Project title is required');
@@ -153,6 +158,38 @@ const ProjectForm = ({
 
 
   };
+
+  const handleResearchUpload = async (file, projectId, projectTitle) => {
+    if (researchFile.length > 0) {
+      let requestPromises = researchFile.map(async file => {
+        try {
+          const { data: { key, url } } = await axiosWithAuth().post(`api/v1/research/signed`, { id: projectId });
+          await axios.put(url, file, {
+            headers: {
+              'Content-Type': 'application/pdf'
+            }
+          });
+          await addResearch({
+            projectId: projectId,
+            url: key
+          });
+          const researchUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
+          return researchUrl;
+        } catch (err) {
+          console.error('ProjectForm.js handleSubmit() ERROR', err);
+        }
+      });
+      return await Promise.all(requestPromises).then(res => {
+        return res[0];
+      });
+    }
+  }
+
+  const handleResearchInput = (e) => {
+    if (e.target.files.length > 0) {
+      setResearchFile([e.target.files[0]])
+    }
+  }
 
   const handleImageUpload = async (file, projectId, projectTitle) => {
     if (files.length > 0) {
@@ -182,9 +219,6 @@ const ProjectForm = ({
             imageId: data.id
           });
           const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
-          console.log('key', key);
-          console.log('url', url);
-          console.log('imageurl', imageUrl)
           return imageUrl;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
@@ -207,17 +241,14 @@ const ProjectForm = ({
         id,
         data.data[0].name
       );
+      if (researchFile.length > 0) {
+        await handleResearchUpload(researchFile, id, data.data[0].name);
+      }
       
       //add category
       const category = {projectId: data.id, userId: project.userId, categoryId: state.categoryId};
       await addCategoryToProject(category);
       
-      console.log("project id", data.id);
-      console.log("user id", project.userId);
-      console.log("category id", state.categoryId);
-
-      console.log("added category", addedCategory);
-     
       const newProject = {
         ...project,
         mainImg: uploadedImage
@@ -233,7 +264,6 @@ const ProjectForm = ({
   };
 
   const editProject = (changes, id) => {
-    console.log('edit changes', changes);
     let project_category = {};
     const updateMainImg = (changes, id) => {     
       //edit category 
@@ -299,6 +329,18 @@ const ProjectForm = ({
         }
       })
       .catch(err => console.log(err));
+    if (researchFile.length > 0) {
+      if (projectResearch.length > 0) {
+        projectResearch.forEach(research => {
+          handleDeleteResearch(research.id);
+        })
+        handleResearchUpload(researchFile, id);
+      }
+      else {
+        handleResearchUpload(researchFile, id);
+      }
+    }
+
   };
 
   const handleDeleteProject = async id => {
@@ -319,11 +361,21 @@ const ProjectForm = ({
       .catch(err => console.log(err));
   };
 
+  const handleDeleteResearch = id => {
+    deleteResearch(id)
+      .then(res => {
+        closeModal();
+        getProjectResearch(project.id);
+      })
+      .catch(err => console.log(err))
+  }
+
   const closeModal = () => {
     setState({
       ...state,
       modal: false,
-      deletingImage: null
+      deletingImage: null,
+      deletingResearch: null,
     });
   };
 
@@ -491,7 +543,10 @@ const ProjectForm = ({
                       onClick={() => {
                         if (state.deletingImage) {
                           handleDeletePhoto(state.deletingImage);
-                        } else {
+                        } else if (state.deletingResearch) {
+                          handleDeleteResearch(state.deletingResearch)
+                        }
+                        else {
                           handleDeleteProject(project.id);
                         }
                       }}
@@ -607,7 +662,7 @@ const ProjectForm = ({
                   {isEditing ? 'Edit project' : 'Create a project'}
                 </h2>
               </header>
-              <MultiImageUpload filesArray={{ files, setFiles }} />
+              <MultiImageUpload files={files} setFiles={setFiles} />
               {isEditing && (
                 <div>
                   <div className="thumbnail-container ">
@@ -717,7 +772,7 @@ const ProjectForm = ({
                 />
                 <label htmlFor="invisionLink" className="label">
                   Prototype
-            </label>
+                </label>
                 <input
                   type="text"
                   name="invision"
@@ -726,6 +781,31 @@ const ProjectForm = ({
                   id="invisionLink"
                   onChange={handleChanges}
                 />
+                {(project && (user.id === project.userId)) || !project ? (
+                  <>
+                    <p className='label p-case-study'>Case Study</p>
+                    <div className='case-study-div'>
+                      <div className='case-study-input-container'>
+                        <label htmlFor='case-study' className={researchFile.length > 0 || (project && projectResearch.length > 0) ? 'custom-case-study' : 'custom-case-study case-study-grey'}>{researchFile.length > 0 || (project && projectResearch.length > 0) ? 'Case Study Uploaded' : 'Upload Case Study'}</label>
+                        <input className='case-study-input' type='file' accept='application/pdf' id='case-study' onChange={handleResearchInput} />
+                      </div>
+                      {isEditing && projectResearch.length > 0 ? (
+                        <div className='case-study-delete'>
+                          <button onClick={(e) => {
+                            e.preventDefault()
+                            setState({
+                              ...state,
+                              deletingResearch: projectResearch[0].id,
+                              modal: true
+                            });
+                          }}>Delete Case Study</button>
+                        </div>
+                      ) : <div className='case-study-delete disabled'>
+                          <button disabled>Delete Case Study</button>
+                        </div>}
+                    </div>
+                  </>
+                ) : null}
                 {/*PROTOTYPE LABEL AND TEXT FIELD*/}
                 {project && user.id !== project.userId ? null : (
                   <>
@@ -857,6 +937,8 @@ export default withRouter(
       createProjectInvite,
       getInvitesByProjectId,
       getUsersFromInvites,
+      addResearch,
+      deleteResearch,
       getAllCategoryNames,
       addCategoryToProject,
       //getCategoriesByProjectId,

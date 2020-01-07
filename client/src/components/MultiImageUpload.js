@@ -13,7 +13,7 @@ const thumbInner = {
 };
 
 export function MultiImageUpload(props) {
-  const { files, setFiles } = props.filesArray;
+  const { files, setFiles } = props;
   const {
     isDragActive,
     isDragReject,
@@ -65,7 +65,7 @@ export function MultiImageUpload(props) {
         {...getRootProps({ className: 'dropzone' })}
         className={`upload-container${isDragActive ? ' active' : ''}${
           isDragReject ? ' rejected' : ''
-        }`}
+          }`}
       >
         <input {...getInputProps()} multiple={true} />
         <div className="drop-text-container">

@@ -7,6 +7,7 @@ import { followersReducer } from './followersReducer';
 import { commentsReducer } from './commentsReducer';
 import { starsReducer } from './starsReducer';
 import { invitesReducer } from './invitesReducer';
+import { researchReducer } from './researchReducer';
 import { categoriesReducer } from './categoriesReducer';
 
 const rootReducer = combineReducers({
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   comments: commentsReducer,
   stars: starsReducer,
   invites: invitesReducer,
+  research: researchReducer,
   categories: categoriesReducer
 });
 
