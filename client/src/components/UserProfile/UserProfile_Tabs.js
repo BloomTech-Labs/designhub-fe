@@ -8,6 +8,7 @@ import Heatmap from './Heatmap.js';
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import empty from '../Icons/empty_project.svg';
 import Loading from '../Loading';
+import ProjectThumbnail from '../ProjectThumbnail';
 
 class UserProfile_Tabs extends Component {
 
@@ -124,7 +125,6 @@ class UserProfile_Tabs extends Component {
                     return <ProjectThumbnail project={project} key={project.id} />
                   })}
                 </div>
-                ))}
               </TabPanel>
 
 

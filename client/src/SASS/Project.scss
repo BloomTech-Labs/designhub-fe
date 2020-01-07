@@ -15,6 +15,13 @@
     align-items: center;
     margin: 0 auto;
     margin-top: 0rem;
+
+    .project-header-alignment{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+    }
   }
 
   .pdf-view{

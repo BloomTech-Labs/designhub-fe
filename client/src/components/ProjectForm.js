@@ -76,7 +76,7 @@ const ProjectForm = ({
 
   const [editAccess, setEditAccess] = useState(true);
   const [kickback, setKickback] = useState(true);
-  
+
   let found = "";
   const [foundProjectCategory, setFoundProjectCategory] = useState({});
 
@@ -154,7 +154,7 @@ const ProjectForm = ({
       setIsLoading(false);
       setError('Please upload at least one image');
       return;
-    }     
+    }
 
 
   };
@@ -244,17 +244,17 @@ const ProjectForm = ({
       if (researchFile.length > 0) {
         await handleResearchUpload(researchFile, id, data.data[0].name);
       }
-      
+
       //add category
-      const category = {projectId: data.id, userId: project.userId, categoryId: state.categoryId};
+      const category = { projectId: data.id, userId: project.userId, categoryId: state.categoryId };
       await addCategoryToProject(category);
-      
+
       const newProject = {
         ...project,
         mainImg: uploadedImage
       };
       await updateProject(id, newProject);
-      await history.push(`/project/${id}`);      
+      await history.push(`/project/${id}`);
       return uploadedImage;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
@@ -265,45 +265,45 @@ const ProjectForm = ({
 
   const editProject = (changes, id) => {
     let project_category = {};
-    const updateMainImg = (changes, id) => {     
+    const updateMainImg = (changes, id) => {
       //edit category 
       axiosWithAuth()
-      .get(`/api/v1/categories/projects/${id}`)
-      .then(res => {
-        //if a category is assigned to the project and a new category was selected
-        //find the project category and update it
-        if(res.data.length && state.categoryId){
-
-          project_category = res.data.find( project_category => {
-          return project_category.projectId === id;
-          })            
-          const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
-          updateProjectCategory(project_category.projectCategoryId, category);
-
-        }
-        //if there is no prior category record and a category is selected during edit
-        //add the category
-        else if(res.data.length === undefined && state.categoryId){
-          //add category
-          const category = {projectId: id, userId: project.userId, categoryId: state.categoryId};
-          addCategoryToProject(category);
-
-        } //end else if
-      })//end .then    
-    
-      //update the project
-      .then (() => {
-        updateProject(id, changes)     
+        .get(`/api/v1/categories/projects/${id}`)
         .then(res => {
-          history.push(`/project/${id}`);
-      })
-      .catch(err => {
-        console.log("get categories by id error", err);
-      });  
+          //if a category is assigned to the project and a new category was selected
+          //find the project category and update it
+          if (res.data.length && state.categoryId) {
 
-    })//end updateMainImg
-    .catch();
-  };
+            project_category = res.data.find(project_category => {
+              return project_category.projectId === id;
+            })
+            const category = { projectId: id, userId: project.userId, categoryId: state.categoryId };
+            updateProjectCategory(project_category.projectCategoryId, category);
+
+          }
+          //if there is no prior category record and a category is selected during edit
+          //add the category
+          else if (res.data.length === undefined && state.categoryId) {
+            //add category
+            const category = { projectId: id, userId: project.userId, categoryId: state.categoryId };
+            addCategoryToProject(category);
+
+          } //end else if
+        })//end .then    
+
+        //update the project
+        .then(() => {
+          updateProject(id, changes)
+            .then(res => {
+              history.push(`/project/${id}`);
+            })
+            .catch(err => {
+              console.log("get categories by id error", err);
+            });
+
+        })//end updateMainImg
+        .catch();
+    };
 
 
     handleImageUpload(files, id)
@@ -432,7 +432,7 @@ const ProjectForm = ({
   };
 
   const getNames = () => {
-    getAllCategoryNames();    
+    getAllCategoryNames();
   };
 
   const getCategories = () => {
@@ -440,22 +440,22 @@ const ProjectForm = ({
     //let found = {};  
 
     axiosWithAuth()
-        .get(`/api/v1/categories/projects/${project.id}`)
-        .then(res => {
-          console.log("res.data", res.data);   
+      .get(`/api/v1/categories/projects/${project.id}`)
+      .then(res => {
+        console.log("res.data", res.data);
 
-        {found = (res.data.find( project_category => {
+        found = (res.data.find(project_category => {
           return project_category.projectId === project.id;
-        }))}       
-       
-        setFoundProjectCategory({...foundProjectCategory, found})
+        }))
+
+        setFoundProjectCategory({ ...foundProjectCategory, found })
         console.log("found project category in getCategories", foundProjectCategory);
       })
   }
-  
+
   //populates categoryName drop down with names
-  useEffect(getNames, [categoryNames]);  
-  
+  useEffect(getNames, [categoryNames]);
+
   useEffect(getInvites, [invite]);
 
   useEffect(handleEditAccess, []);
@@ -515,17 +515,17 @@ const ProjectForm = ({
   //each time a category is selected in the categories drop down list
   const categoryHandler = (event) => {
     event.preventDefault();
-    state.categoryId = event.target.value;      
+    state.categoryId = event.target.value;
 
-    console.log("event.target.value", event.target.value);   
-        
-  }   
+    console.log("event.target.value", event.target.value);
+
+  }
 
   return kickback ? (
     <Loading />
   ) : isEditing && !editAccess ? (
     <Redirect to={`/project/${project.id}`} />
-  ) : (        
+  ) : (
         <div className="project-form-wrapper">
           {isLoading && <Loading />}
           <div className={state.modal ? 'modal--expand' : 'modal--close'}>
@@ -666,7 +666,7 @@ const ProjectForm = ({
               {isEditing && (
                 <div>
                   <div className="thumbnail-container ">
-                  
+
                     {projectPhotos.map((photo, index) => (
                       <div key={index}>
                         <img
@@ -720,47 +720,47 @@ const ProjectForm = ({
                 <label htmlFor="description" className="label">
                   Project description
             </label>
-            <textarea
-              id="description"
-              name="description"
-              value={description}
-              type="text"
-              placeholder="Enter description here"
-              onChange={handleChanges}
-              className="description"
-              maxLength="240"
-            />
-            <CharacterCount string={description} limit={240} />
+                <textarea
+                  id="description"
+                  name="description"
+                  value={description}
+                  type="text"
+                  placeholder="Enter description here"
+                  onChange={handleChanges}
+                  className="description"
+                  maxLength="240"
+                />
+                <CharacterCount string={description} limit={240} />
 
                 {/*PROJECT CATEGORIES */}
                 <label htmlFor="privacyLink" className="label">
                   Categories
-                </label>           
+                </label>
                 <select
                   type="select"
-                  name="categories"                  
-                  placeholder="Category (ex: Art, Animation)"                  
+                  name="categories"
+                  placeholder="Category (ex: Art, Animation)"
                   onChange={categoryHandler}
-                  className = "category-select"
-                >  
+                  className="category-select"
+                >
 
-                {/*if editing a project and a category was previously selected for the project
+                  {/*if editing a project and a category was previously selected for the project
                    display that category as the default selection. if not, dispay the defaut option */}
-                {isEditing && projectCategories[0] ? 
-                <option value ="" disabled selected hidden>{projectCategories[0].category}</option>
-                :
-                <option value ="" disabled selected hidden>Please Select a Category</option>}                                                
-                
-                {categoryNames.map( (category, index) => {
-                  return <option key = {category.id} value = {category.id}> 
-                            {category.category} 
-                          </option>
-                })}
-                  
-              </select>                    
+                  {isEditing && projectCategories[0] ?
+                    <option value="" disabled selected hidden>{projectCategories[0].category}</option>
+                    :
+                    <option value="" disabled selected hidden>Please Select a Category</option>}
 
-            <label htmlFor="figmaLink" className="label">
-              Figma
+                  {categoryNames.map((category, index) => {
+                    return <option key={category.id} value={category.id}>
+                      {category.category}
+                    </option>
+                  })}
+
+                </select>
+
+                <label htmlFor="figmaLink" className="label">
+                  Figma
             </label>
                 <input
                   type="text"
