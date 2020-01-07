@@ -76,8 +76,8 @@ class Project extends Component {
             })
         }
       })
-    
-    
+
+
   }
 
   onDocumentComplete = (totalPage) => {
@@ -177,150 +177,150 @@ class Project extends Component {
                       })}
                     </span>
                   }
-                </span> 
+                </span>
                 {/*project category*/}
-                <span> 
-                  {!this.props.projectCategories[0] ? null: this.props.projectCategories[0].category}                  
-                </span>               
-              </p>
+                <span>
+                  {!this.props.projectCategories[0] ? null : this.props.projectCategories[0].category}
+                </span>
 
-            </div>
-            <div className="project-header-right">
-              <div className="project-header-team">
-                <img src={avatar1} alt="user avatar" />
-                <img src={avatar2} alt="user avatar" />
-                <img src={avatar3} alt="user avatar" />
               </div>
-              <div className="project-header-links">
-                <div className="project-header-button">
-                  {this.props.projectResearch[0] ? (
-                    <img
-                      src={caseStudyIcon}
-                      alt="case study"
-                      className='pdf-button'
-                      onClick={() => this.setState({ showPDF: !this.state.showPDF, pdfLoading: true })}
-                    />
-                  ) : (
+              <div className="project-header-right">
+                <div className="project-header-team">
+                  <img src={avatar1} alt="user avatar" />
+                  <img src={avatar2} alt="user avatar" />
+                  <img src={avatar3} alt="user avatar" />
+                </div>
+                <div className="project-header-links">
+                  <div className="project-header-button">
+                    {this.props.projectResearch[0] ? (
                       <img
                         src={caseStudyIcon}
                         alt="case study"
-                        className='pdf-button-disabled'
+                        className='pdf-button'
+                        onClick={() => this.setState({ showPDF: !this.state.showPDF, pdfLoading: true })}
                       />
-                    )}
-                </div>
-                <div className="project-header-button">
-                  {thisProject.figma ? (
-                    <a href={thisProject.figma}>
-                      <img
-                        src={figmaIcon}
-                        className={
-                          thisProject.figma === null || thisProject.figma === ''
-                            ? 'link-disabled'
-                            : 'link-enabled'
-                        }
-                        alt="figma"
-                      />
-                    </a>
-                  ) : (
-                      <img
-                        src={figmaIcon}
-                        className={
-                          thisProject.figma === null || thisProject.figma === ''
-                            ? 'link-disabled'
-                            : 'link-enabled'
-                        }
-                        alt="figma"
-                      />
-                    )}
-                </div>
-                <div className="project-header-button">
-                  {thisProject.invision ? (
-                    <a href={thisProject.invision}>
-                      <img
-                        src={invisionIcon}
-                        className={
-                          thisProject.invision === '' ||
-                            thisProject.invision === null
-                            ? 'link-disabled'
-                            : 'link-enabled'
-                        }
-                        alt="invision"
-                      />
-                    </a>
-                  ) : (
-                      <img
-                        src={invisionIcon}
-                        className={
-                          thisProject.invision === '' ||
-                            thisProject.invision === null
-                            ? 'link-disabled'
-                            : 'link-enabled'
-                        }
-                        alt="invision"
-                      />
-                    )}
-                </div>
-                <div className="download project-header-button">
-                  <DownloadIcon />
-                </div>
-                <div
-                  onClick={
-                    this.props.isStarred ? this.unstarProject : this.starProject
-                  }
-                  className="star project-header-button"
-                >
-                  <StarIcon isStarred={this.props.isStarred} />
-                </div>
-                {(this.props.activeUser.id === this.props.project.userId || this.state.editAccess) && (
-                  <div
-                    className="edit project-header-button"
-                    onClick={() => {
-                      this.props.history.push(
-                        `/project/${this.projectId}/edit`
-                      );
-                    }}
-                  >
-                    Edit
+                    ) : (
+                        <img
+                          src={caseStudyIcon}
+                          alt="case study"
+                          className='pdf-button-disabled'
+                        />
+                      )}
                   </div>
-                )}
+                  <div className="project-header-button">
+                    {thisProject.figma ? (
+                      <a href={thisProject.figma}>
+                        <img
+                          src={figmaIcon}
+                          className={
+                            thisProject.figma === null || thisProject.figma === ''
+                              ? 'link-disabled'
+                              : 'link-enabled'
+                          }
+                          alt="figma"
+                        />
+                      </a>
+                    ) : (
+                        <img
+                          src={figmaIcon}
+                          className={
+                            thisProject.figma === null || thisProject.figma === ''
+                              ? 'link-disabled'
+                              : 'link-enabled'
+                          }
+                          alt="figma"
+                        />
+                      )}
+                  </div>
+                  <div className="project-header-button">
+                    {thisProject.invision ? (
+                      <a href={thisProject.invision}>
+                        <img
+                          src={invisionIcon}
+                          className={
+                            thisProject.invision === '' ||
+                              thisProject.invision === null
+                              ? 'link-disabled'
+                              : 'link-enabled'
+                          }
+                          alt="invision"
+                        />
+                      </a>
+                    ) : (
+                        <img
+                          src={invisionIcon}
+                          className={
+                            thisProject.invision === '' ||
+                              thisProject.invision === null
+                              ? 'link-disabled'
+                              : 'link-enabled'
+                          }
+                          alt="invision"
+                        />
+                      )}
+                  </div>
+                  <div className="download project-header-button">
+                    <DownloadIcon />
+                  </div>
+                  <div
+                    onClick={
+                      this.props.isStarred ? this.unstarProject : this.starProject
+                    }
+                    className="star project-header-button"
+                  >
+                    <StarIcon isStarred={this.props.isStarred} />
+                  </div>
+                  {(this.props.activeUser.id === this.props.project.userId || this.state.editAccess) && (
+                    <div
+                      className="edit project-header-button"
+                      onClick={() => {
+                        this.props.history.push(
+                          `/project/${this.projectId}/edit`
+                        );
+                      }}
+                    >
+                      Edit
+                  </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          {this.state.showPDF && this.props.projectResearch.length > 0 ? (
-            <div className='pdf-view'>
-              <div className='pdf-nav-buttons'>
-                <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
-                <button onClick={() => this.handleChangePage(false)}>Previous</button>
-                <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
-                <button onClick={() => this.handleChangePage(true)}>Next</button>
-                <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+            {this.state.showPDF && this.props.projectResearch.length > 0 ? (
+              <div className='pdf-view'>
+                <div className='pdf-nav-buttons'>
+                  <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
+                  <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                  <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
+                  <button onClick={() => this.handleChangePage(true)}>Next</button>
+                  <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+                </div>
+                <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
+                {this.state.pdfLoading ? <Loading /> : null}
+                <div className='pdf-nav-buttons'>
+                  <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
+                  <button onClick={() => this.handleChangePage(false)}>Previous</button>
+                  <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
+                  <button onClick={() => this.handleChangePage(true)}>Next</button>
+                  <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
+                </div>
               </div>
-              <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
-              {this.state.pdfLoading ? <Loading /> : null}
-              <div className='pdf-nav-buttons'>
-                <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
-                <button onClick={() => this.handleChangePage(false)}>Previous</button>
-                <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
-                <button onClick={() => this.handleChangePage(true)}>Next</button>
-                <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
-              </div>
-            </div>
-          ) :
-            (
-              <div className="project-body">
-                {console.log('project view')}
+            ) :
+              (
+                <div className="project-body">
+                  {console.log('project view')}
 
-                {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
-                <ImageViewer
-                  activeUser={activeUser}
-                  comments={this.props.projectComments}
-                  thisProject={thisProject}
-                  thumbnails={this.props.projectPhotos}
-                />
-              </div>
-            )
-          }
-        </div >
+                  {/* THIS IS THE IMAGE CAROUSEL, it manages the StickyComments and ProjectComments */}
+                  <ImageViewer
+                    activeUser={activeUser}
+                    comments={this.props.projectComments}
+                    thisProject={thisProject}
+                    thumbnails={this.props.projectPhotos}
+                  />
+                </div>
+              )
+            }
+          </div >
+        </div>
       );
     }
     else {

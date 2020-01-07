@@ -31,7 +31,7 @@ class UserProfile_Tabs extends Component {
 
       return (
         <div className="profile-tabs-container">
-          <div className = "new-tabs-div">
+          <div className="new-tabs-div">
             <Tabs defaultIndex={0} selectedIndex={this.props.currentTab} onSelect={this.props.setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
@@ -49,7 +49,7 @@ class UserProfile_Tabs extends Component {
                 <Tab className="links" selectedClassName="active-link">
                   Following
                 </Tab>
-                <Tab className="links" id = "starred" selectedClassName="active-link">
+                <Tab className="links" id="starred" selectedClassName="active-link">
                   Starred
                 </Tab>
               </TabList>
@@ -59,9 +59,9 @@ class UserProfile_Tabs extends Component {
                   <h2>Recent Projects</h2> 
                 </div>*/}
                 <div className="tab-content">
-                <div className="tabs-header">
-                  <h2>Recent Projects</h2> 
-                </div>
+                  <div className="tabs-header">
+                    <h2>Recent Projects</h2>
+                  </div>
                   {projects.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
@@ -101,32 +101,30 @@ class UserProfile_Tabs extends Component {
                     })}
                   </div>
                 </div>
-                  
-              </TabPanel>
-              
 
-             {/*ADDING COLLABORATORS */}
-             <TabPanel className="tabs-container">
+              </TabPanel>
+
+
+              {/*ADDING COLLABORATORS */}
+              <TabPanel className="tabs-container">
                 {/*<div className="tabs-header">
                   <h2>Collaborations</h2>
                 </div>*/}
-                <div className="tab-content">                 
+                <div className="tab-content">
 
-                {(this.props.activeUser.id === this.props.userData.id) && (acceptedProjects.length === 0) && (
-                        <div className="empty-state">
-                          <img src={empty} alt="empty" className="empty-icon" />
-                          <h1 className="no-projects">
-                            You are not collaborating on any projects.
+                  {(this.props.activeUser.id === this.props.userData.id) && (acceptedProjects.length === 0) && (
+                    <div className="empty-state">
+                      <img src={empty} alt="empty" className="empty-icon" />
+                      <h1 className="no-projects">
+                        You are not collaborating on any projects.
                         </h1>
-                        </div>
-                )}
-                        {acceptedProjects.map(project => {
-                          return <ProjectThumbnail project={project} key={project.id} />
-                        })}
-                      </div>
-                      ))} 
-                    </div> 
+                    </div>
+                  )}
+                  {acceptedProjects.map(project => {
+                    return <ProjectThumbnail project={project} key={project.id} />
+                  })}
                 </div>
+                ))}
               </TabPanel>
 
 
@@ -316,8 +314,8 @@ class UserProfile_Tabs extends Component {
                 </div>
               </TabPanel>
             </Tabs>
-          </div>
-        </div>
+          </div >
+        </div >
       );
     }//end if
     else {

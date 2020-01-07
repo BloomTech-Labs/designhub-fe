@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-
+import axios from 'axios';
 import '../../SASS/Explore.scss';
 import ExploreTabs from './ExploreTabs.js';
 
@@ -10,7 +10,7 @@ class Explore extends Component {
     this.state = {
       recent: [],
       popular: [],
-      following: [],     
+      following: [],
       allProjects: [],
       myId: this.props.activeUser.id,
       userIds: [],
@@ -33,8 +33,8 @@ class Explore extends Component {
     }
     function getFollowing() {
       return axiosWithAuth().get(`/api/v1/explore/${myId}`);
-    }    
-    function getAll() {      
+    }
+    function getAll() {
       return axiosWithAuth().get('/api/v1/projects/');
     }
 
@@ -45,10 +45,10 @@ class Explore extends Component {
           this.setState({
             recent: a.data.recent,
             popular: b.data.popular,
-            following: c.data.following,  
-            allProjects: d.data          
-          })         
-          
+            following: c.data.following,
+            allProjects: d.data
+          })
+
         })
       )
       .then(() => {
@@ -62,15 +62,14 @@ class Explore extends Component {
           userIds: userIds
         })
       })
-    })
-    .catch(err => err);
+      .catch(err => err);
   }
 
   render() {
     const recent = this.state.recent;
     const popular = this.state.popular;
-    const following = this.state.following;  
-    const allProjects = this.state.allProjects;  
+    const following = this.state.following;
+    const allProjects = this.state.allProjects;
     const users = this.state.users;
     return (
       <div className="explore-container">
@@ -80,7 +79,7 @@ class Explore extends Component {
             Discover projects from our talented community of Designers
           </p>
         </header>
-        <ExploreTabs recent={recent} popular={popular} following={following} users={users} allProjects = {allProjects}/>
+        <ExploreTabs recent={recent} popular={popular} following={following} users={users} allProjects={allProjects} />
       </div>
     );
   }

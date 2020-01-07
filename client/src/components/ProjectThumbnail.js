@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 import defaultImg from '../ASSETS/default_thumbnail.svg';
 
-import {axiosWithAuth} from '../utilities/axiosWithAuth';
+import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
 import '../SASS/ProjectThumbnail.scss';
 
 const ProjectThumbnail = ({ project }) => {
-    
+
     // Set initial state to avoid undefined errors
     const [user, setUser] = useState({
         avatar: null,
@@ -18,16 +18,16 @@ const ProjectThumbnail = ({ project }) => {
     });
 
     useEffect(() => {
-        if(!project || !project.userId) return;
+        if (!project || !project.userId) return;
 
         axiosWithAuth()
-        .get(`/api/v1/users/${project.userId}`)
-        .then(res => {
-          setUser(res.data[0]);
-        })
-        .catch(err => {
-            console.error('Failed to load user with id', project.userId);
-        })
+            .get(`/api/v1/users/${project.userId}`)
+            .then(res => {
+                setUser(res.data[0]);
+            })
+            .catch(err => {
+                console.error('Failed to load user with id', project.userId);
+            })
     }, [setUser, project])
 
     return !project ? null : (
