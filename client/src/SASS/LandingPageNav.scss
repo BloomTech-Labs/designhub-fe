@@ -1,0 +1,30 @@
+@import './palette';
+@import './mixins';
+
+.landing-nav {
+    z-index: +1;
+    font-size: 20px;
+    .nav-content{
+        width: 100%;
+        display: flex;
+        margin: 55px 0 300px 50px;;
+    }
+    .nav-items {
+        cursor: default;
+        width: 40%;
+        margin-top: 40px;
+        font-size: 20px;
+        display: flex;
+        justify-content: space-evenly;
+        a{
+            color: black;
+
+             &:hover{
+                 color: $blue;
+                 font-weight: bold;
+             }
+        }
+
+    }
+}
+

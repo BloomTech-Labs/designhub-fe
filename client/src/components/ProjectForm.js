@@ -408,7 +408,7 @@ const ProjectForm = ({
                 {state.inviteModal && (
                   <div className="invite-modal">
                     <div className="close-icon-div" onClick={closeInviteModal}>
-                      <div className="close-icon">X</div>
+                      <div className="close-icon">Close</div>
                     </div>
                     <form onSubmit={handleInvites}>
                       <label htmlFor="invite-input" className="label">
@@ -461,7 +461,7 @@ const ProjectForm = ({
                     </div>
                     <div className="invite-modal-bottom-div">
                       {/*button and share link div */}
-                      <div className="share-icon-div">
+                      {/* <div className="share-icon-div">
                         <div
                           className="share-icon"
                           onClick={() => {
@@ -475,7 +475,7 @@ const ProjectForm = ({
                             🤝
                       </span>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="share-link-div">
                         <label htmlFor="share-input" className="label">
                           share link
