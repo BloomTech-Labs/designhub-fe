@@ -119,9 +119,11 @@ class UserProfile_Tabs extends Component {
                         </h1>
                     </div>
                   )}
+                  <div className="projects-array">
                   {acceptedProjects.map(project => {
                     return <ProjectThumbnail project={project} key={project.id} />
                   })}
+                  </div>
                 </div>
               </TabPanel>
 

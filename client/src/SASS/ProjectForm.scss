@@ -130,15 +130,17 @@
       position: absolute;
       top: 10px;
       right: 40px;
+      background: none;
 
       div.close-icon {
         height: 35px;
         width: 35px;
-        border-radius: 50%;
-        border: 1px solid $field-stroke;        
+        //border-radius: 50%;
+        //border: 1px solid $field-stroke;        
         display: flex;
         align-items: center;
         justify-content: center;
+        background: none;
 
 
         margin: 3% 3%;
