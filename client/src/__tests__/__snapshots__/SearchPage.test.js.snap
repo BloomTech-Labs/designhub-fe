@@ -6,9 +6,7 @@ exports[`<SearchPage /> should match the previous snapshot of the component test
 >
   <p>
     results for 
-    <span>
-      searchterm
-    </span>
+    <span />
   </p>
   <div
     className="search-tabs-container"
@@ -32,7 +30,7 @@ exports[`<SearchPage /> should match the previous snapshot of the component test
           role="tab"
           tabIndex="0"
         >
-          Users
+          Projects
         </li>
         <li
           aria-controls="react-tabs-3"
@@ -43,7 +41,7 @@ exports[`<SearchPage /> should match the previous snapshot of the component test
           role="tab"
           tabIndex={null}
         >
-          Projects
+          Users
         </li>
       </ul>
       <div
@@ -51,13 +49,29 @@ exports[`<SearchPage /> should match the previous snapshot of the component test
       >
         <div
           aria-labelledby="react-tabs-0"
-          className="react-tabs__tab-panel react-tabs__tab-panel--selected"
+          className="results-container react-tabs__tab-panel--selected"
           id="react-tabs-1"
           role="tabpanel"
-        />
+        >
+          <div
+            className="empty"
+          >
+            <img
+              alt="empty"
+              className="empty-icon"
+              src="empty_project.svg"
+            />
+            <p>
+              No projects found!
+            </p>
+          </div>
+          <div
+            className="projects-array"
+          />
+        </div>
         <div
           aria-labelledby="react-tabs-2"
-          className="react-tabs__tab-panel"
+          className="results-container"
           id="react-tabs-3"
           role="tabpanel"
         />

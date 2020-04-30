@@ -7,7 +7,7 @@ exports[`<SearchBar /> should match the previous snapshot of the component tests
   <input
     className="search-bar-input"
     onChange={[Function]}
-    placeholder="search projects, users, teams..."
+    placeholder="search projects and users..."
     type="search"
     value=""
   />
