@@ -17,9 +17,9 @@ const SearchBar = ({ getSearch, history }) => {
     >
       <input
         className="search-bar-input"
-        type="search"
         onChange={handleChange('search')}
         placeholder="search projects and users..."
+        type="search"
         value={data.search}
       />
     </form>
