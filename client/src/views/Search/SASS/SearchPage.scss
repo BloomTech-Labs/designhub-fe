@@ -1,0 +1,187 @@
+@import '../../../common/SASS/palette';
+@import '../../../common/SASS/mixins';
+
+.search-container {
+  width: 100%;
+  color: $white;
+  margin-top: 15px;
+  @include themify($themes) {
+    color: themed('text');
+  }
+  p {
+    letter-spacing: 0.11em;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: normal;
+    span {
+      font-weight: bold;
+    }
+  }
+  .search-tabs-container {
+    background: $black;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    @include themify($themes) {
+      background: themed('bg2');
+    }
+
+    a {
+      text-decoration: none;
+      color: $white;
+      @include themify($themes) {
+        background: themed('bg2');
+        color: themed('link');
+      }
+    }
+
+    .tabs-container {
+      min-height: 70vh;
+      height: 100%;
+      padding: 20px 30px;
+      overflow-x: scroll;
+      
+      .results-container {
+        height: 100%!important;
+      }
+
+      .empty {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        .empty-icon {
+          user-select: none;
+          opacity: 0.08;
+
+          @include themify($themes) {
+            filter: themed('filter');
+          }
+        }
+
+        p {
+          color: $dark-grey;
+        }
+      }
+
+      .projects-array {
+        display: grid;
+        grid-template-columns: 22% 22% 22% 22%;
+        grid-column-gap: 3%;
+        width: 100%;
+
+        .project-content {
+          width: 100%;
+          height: 14vw;
+          // height: 11.5rem;
+          position: relative;
+          transition: all 0.2s ease-in-out;
+          border: 8px solid $field-bg;
+          border-radius: 5px;
+          overflow: hidden;
+          margin: 10px 10px 10px 10px;
+          object-fit: cover;
+
+          @include themify($themes) {
+            border: 8px solid themed('bg');
+          }
+
+          .project-info {
+            position: absolute;
+            bottom: 0;
+            width: 103%;
+            color: $white;
+            text-decoration: none;
+            background: $blue;
+            overflow: hidden;
+            height: 50px;
+            display: none;
+            pointer-events: none;
+
+            h1 {
+              padding: 20px;
+            }
+          }
+
+          .project-thumbnail {
+            object-fit: cover;
+            width: 103%;
+            height: 100%;
+            transition: 0.1s ease-in-out;
+            cursor: pointer;
+          }
+        }
+        .project-content:hover {
+          border: 8px solid $blue;
+        }
+      }
+
+      .project-content:hover {
+        .project-info {
+          display: inline;
+          animation: slideUp 0.25s ease-in-out;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          height: 0px;
+        }
+        to {
+          height: 50px;
+        }
+      }
+    }
+    .nav-links {
+      display: flex;
+      flex-flow: row nowrap;
+      padding: 22px 36px;
+      border-bottom: 1px solid $almost-black;
+      .links {
+        margin-right: 50px;
+        letter-spacing: 0.11em;
+        color: $dark-grey;
+        cursor: pointer;
+      }
+      .active-link {
+        color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
+      }
+    }
+  }
+}
+
+.search-user-card-container {
+  display: flex;
+  flex-flow: row nowrap;
+  box-sizing: border-box;
+  width: 300px;
+  letter-spacing: 0.11em;
+  height: 82px;
+  align-items: center;
+  margin-bottom: 40px;
+  .user-card-avatar {
+    img {
+      width: 82px;
+      height: 82px;
+      border-radius: 100%;
+      border: 3px solid $blue;
+      margin-right: 20px;
+      object-fit: cover;
+    }
+  }
+  .user-card-info {
+    h3 {
+      font-size: 18px;
+      line-height: 21px;
+    }
+    p {
+      font-size: 12px;
+      line-height: 14px;
+    }
+  }
+}
