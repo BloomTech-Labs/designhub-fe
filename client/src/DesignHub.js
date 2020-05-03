@@ -2,20 +2,20 @@ import React, { Component } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import axios from 'axios';
 
-import TopBar from './components/TopBar';
-import Navbar from './components/Navbar';
-import Project from './components/Project';
-import PrivateRoute from './components/PrivateRoute';
-import UserProfileLI from './components/UserProfile/UserProfile_LI';
-import Settings from './components/Settings.js';
-import AddProject from './components/AddProject';
-import SearchPage from './components/SearchPage';
-import Notifications from './components/Notifications';
-import EditProject from './components/EditProject';
-import Explore from './components/Explore/Explore';
-import NewLandingPage from './components/NewLandingPage';
+import TopBar from './common/Nav/TopBar';
+import Navbar from './common/Nav/Navbar';
+import Project from './views/Projects/Project';
+import PrivateRoute from './common/Auth/PrivateRoute';
+import UserProfileLI from './views/UserProfile/UserProfile_LI';
+import Settings from './views/Settings/Settings.js';
+import AddProject from './views/Projects/AddProject';
+import SearchPage from './views/Search/SearchPage';
+import Notifications from './views/Notifications/Notifications';
+import EditProject from './views/Projects/EditProject';
+import Explore from './views/Explore/Explore';
+import NewLandingPage from './views/LandingPage/NewLandingPage';
 
-import './SASS/DesignHub.scss';
+import './common/DesignHub.scss';
 
 class DesignHub extends Component {
   constructor(props) {
