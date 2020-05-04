@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchUserCard /> should match the previous snapshot of the component tests that the component has not changed and matched the previous snapshot 1`] = `
+<div
+  className="search-user-card-container"
+>
+  <a
+    href="/profile/1/undefined"
+    onClick={[Function]}
+  >
+    <div
+      className="user-card-avatar"
+    >
+       
+      <img
+        alt="avatar"
+      />
+    </div>
+  </a>
+  <a
+    href="/profile/1/undefined"
+    onClick={[Function]}
+  >
+    <div
+      className="user-card-info"
+    >
+      <h3>
+        undefined undefined
+      </h3>
+      <p>
+        @
+      </p>
+    </div>
+  </a>
+</div>
+`;

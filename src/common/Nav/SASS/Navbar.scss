@@ -1,0 +1,140 @@
+@import '../../SASS/palette';
+@import '../../SASS/mixins';
+
+nav {
+  display: flex;
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+  // box-shadow: 0 0 8px -4px black;
+
+  border-radius: 10px;
+
+  // @include themify($themes) {
+  //   box-shadow: 0 0 8px -4px themed('shadow');
+  // }
+
+  .icon-links {
+    display: flex;
+    width: 4.5rem;
+    height: 45vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: $black;
+    border-radius: 10px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid $almost-black;
+    @include themify($themes) {
+      background: themed('bg2');
+      border: 1px solid #662a2b23;
+    }
+
+    .navlinks {
+      .notification-indicator {
+        position: absolute;
+        margin-top: -8px;
+        color: $blue;
+        font-size: 28px;
+        display: block;
+        margin-left: 5px;
+        text-decoration: none;
+      }
+      .links {
+        text-decoration: none;
+      }
+
+      .active-links {
+        svg {
+          fill: none;
+          stroke: $white;
+          @include themify($themes) {
+            stroke: themed('link');
+          }
+        }
+      }
+
+      .ProfileIcon {
+        svg {
+          width: 1.2em;
+          height: 1.2em;
+        }
+      }
+
+      svg {
+        width: 1.2em;
+        height: 1.2em;
+        fill: none;
+        stroke: $dark-grey;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          stroke: $white;
+          @include themify($themes) {
+            stroke: themed('text');
+          }
+        }
+      }
+    }
+  }
+
+  .text-links {
+    display: flex;
+    width: 0rem;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-around;
+    background: $black;
+    border-radius: 0 10px 10px 0;
+    overflow: hidden;
+    margin-left: -10px;
+    transition: all 0.2s ease-in-out;
+    border-top: 1px solid $almost-black;
+    border-bottom: 1px solid $almost-black;
+
+    @include themify($themes) {
+      background: themed('bg2');
+      border-top: 1px solid #662a2b23;
+      border-bottom: 1px solid #662a2b23;
+    }
+
+    .links {
+      text-decoration: none;
+      width: max-content;
+      color: $dark-grey;
+      margin-left: 20px;
+      transition: all 0.2s ease-in-out;
+      @include themify($themes) {
+        background: themed('bg2');
+        color: themed('link');
+      }
+    }
+
+    .active-links {
+      color: $white;
+      @include themify($themes) {
+        color: themed('active-link');
+      }
+    }
+  }
+
+  .icon-links:hover ~ .text-links {
+    transition: all 0.2s ease-in-out;
+    width: 10rem;
+    border-right: 1px solid #662a2b31;
+  }
+
+  .text-links:hover {
+    width: 10rem;
+    border-right: 1px solid #662a2b31;
+  }
+
+  .links:hover {
+    color: white;
+  }
+}
+
+@media (max-width: 1024px) {
+  nav {
+    display: none;
+  }
+}

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBar /> should match the previous snapshot of the component tests that the component has not changed and matched the previous snapshot 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    className="search-bar-input"
+    onChange={[Function]}
+    placeholder="search projects and users..."
+    type="search"
+    value=""
+  />
+</form>
+`;

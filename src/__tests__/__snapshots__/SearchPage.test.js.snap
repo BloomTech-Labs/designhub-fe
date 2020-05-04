@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchPage /> should match the previous snapshot of the component tests that the component has not changed and matched the previous snapshot 1`] = `
+<div
+  className="search-container"
+>
+  <p>
+    results for 
+    <span />
+  </p>
+  <div
+    className="search-tabs-container"
+  >
+    <div
+      className="react-tabs"
+      data-tabs={true}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+    >
+      <ul
+        className="nav-links"
+        role="tablist"
+      >
+        <li
+          aria-controls="react-tabs-1"
+          aria-disabled="false"
+          aria-selected="true"
+          className="links active-link"
+          id="react-tabs-0"
+          role="tab"
+          tabIndex="0"
+        >
+          Projects
+        </li>
+        <li
+          aria-controls="react-tabs-3"
+          aria-disabled="false"
+          aria-selected="false"
+          className="links"
+          id="react-tabs-2"
+          role="tab"
+          tabIndex={null}
+        >
+          Users
+        </li>
+      </ul>
+      <div
+        className="tabs-container"
+      >
+        <div
+          aria-labelledby="react-tabs-0"
+          className="results-container react-tabs__tab-panel--selected"
+          id="react-tabs-1"
+          role="tabpanel"
+        >
+          <div
+            className="empty"
+          >
+            <img
+              alt="empty"
+              className="empty-icon"
+              src="empty_project.svg"
+            />
+            <p>
+              No projects found!
+            </p>
+          </div>
+          <div
+            className="projects-array"
+          />
+        </div>
+        <div
+          aria-labelledby="react-tabs-2"
+          className="results-container"
+          id="react-tabs-3"
+          role="tabpanel"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
