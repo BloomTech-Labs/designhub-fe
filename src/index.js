@@ -21,7 +21,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-const onRedirectCallback = (appState) => {
+const onRedirectCallback = appState => {
   window.history.replaceState(
     {},
     document.title,
