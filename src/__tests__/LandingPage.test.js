@@ -1,7 +1,7 @@
 import React from 'react'
 import LandingPage from '../components/LandingPage'
 
-import { useAuth0 } from '../auth-wrapper'
+import { useAuth0 } from '../utilities/auth-wrapper'
 
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
