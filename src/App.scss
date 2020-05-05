@@ -1,10 +1,10 @@
-@import './SASS/reset.scss';
-@import './SASS/palette';
-@import './SASS/mixins';
-@import './SASS/Navbar.scss';
-@import './SASS/UserProfile.scss';
-@import './SASS/Error404Projects.scss';
-@import './SASS/Error401Projects.scss';
+@import './common/SASS/reset.scss';
+@import './common/SASS/palette';
+@import './common/SASS/mixins';
+@import './common/nav/SASS/Navbar.scss';
+@import './views/UserProfile/SASS/UserProfile.scss';
+@import './views/Projects/SASS/Error404Projects.scss';
+@import './views/Projects/SASS/Error401Projects.scss';
 
 // * {
 // 	box-sizing:border-box;
