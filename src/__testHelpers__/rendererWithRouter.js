@@ -7,7 +7,7 @@ import renderer from 'react-test-renderer';
 import thunk from 'redux-thunk';
 
 import rootReducer from '../store/reducers';
-jest.mock('../auth-wrapper');
+jest.mock('../utilities/auth-wrapper');
 
 const store = createStore(
   rootReducer,

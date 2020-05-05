@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAuth0} from '../../auth-wrapper';
+import {useAuth0} from '../../utilities/auth-wrapper';
 import {Element, animateScroll as scroll} from 'react-scroll';
 
 import LandingPageNav from './LandingPageNav';

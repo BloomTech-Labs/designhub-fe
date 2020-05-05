@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, NavLink as Link } from 'react-router-dom';
-import { useAuth0 } from '../../auth-wrapper.js';
+import { useAuth0 } from '../../utilities/auth-wrapper.js';
 
 import './SASS/Settings.scss';
 import Account from './Account.js';

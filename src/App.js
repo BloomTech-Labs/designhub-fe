@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useAuth0 } from './auth-wrapper.js';
+import { useAuth0 } from './utilities/auth-wrapper.js';
 
 import DesignHub from './DesignHub.js';
 import LandingPage from './views/LandingPage/LandingPage.js';
