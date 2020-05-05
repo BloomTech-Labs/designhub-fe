@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useAuth0 } from '../../auth-wrapper.js';
+import { useAuth0 } from '../../utilities/auth-wrapper.js';
 import Tooltip from 'react-power-tooltip';
 
 import SampleLogo from '../Icons/SampleLogo.js';

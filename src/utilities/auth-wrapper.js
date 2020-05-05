@@ -1,6 +1,6 @@
 // src/react-auth0-wrapper.js
 import React, { useState, useEffect, useContext } from 'react';
-import { axiosWithAuth } from './utilities/axiosWithAuth.js';
+import { axiosWithAuth } from './axiosWithAuth.js';
 import createAuth0Client from '@auth0/auth0-spa-js';
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
@@ -57,7 +57,7 @@ export const Auth0Provider = ({
 
         setUser({
           ...user,
-          id: userFromResponse.id
+          id: userFromResponse.id,
         });
       }
 
@@ -102,7 +102,7 @@ export const Auth0Provider = ({
         loginWithRedirect: (...p) => auth0Client.loginWithRedirect(...p),
         getTokenSilently: (...p) => auth0Client.getTokenSilently(...p),
         getTokenWithPopup: (...p) => auth0Client.getTokenWithPopup(...p),
-        logout: (...p) => auth0Client.logout(...p)
+        logout: (...p) => auth0Client.logout(...p),
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import React from 'react'
 import App from '../App'
 
-import { useAuth0 } from '../auth-wrapper'
+import { useAuth0 } from '../utilities/auth-wrapper'
 
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 

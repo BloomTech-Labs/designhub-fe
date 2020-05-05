@@ -5,7 +5,7 @@ import axios from 'axios';
 import TopBar from './common/Nav/TopBar';
 import Navbar from './common/Nav/Navbar';
 import Project from './views/Projects/Project';
-import PrivateRoute from './common/Auth/PrivateRoute';
+import PrivateRoute from './utilities/PrivateRoute';
 import UserProfileLI from './views/UserProfile/UserProfile_LI';
 import Settings from './views/Settings/Settings.js';
 import AddProject from './views/Projects/AddProject';

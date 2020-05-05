@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-import { useAuth0 } from '../../auth-wrapper.js';
+import { useAuth0 } from '../../utilities/auth-wrapper.js';
 import { connect } from 'react-redux';
 
 import Loading from '../../common/Loading.js';

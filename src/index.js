@@ -9,8 +9,8 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducers';
 
-import { Auth0Provider } from './auth-wrapper.js';
-import config from './auth_config.js';
+import { Auth0Provider } from './utilities/auth-wrapper.js';
+import config from './utilities/auth_config.js';
 import * as Sentry from '@sentry/browser';
 
 Sentry.init({ dsn: `${process.env.REACT_APP_SENTRY_DSN}` });
@@ -21,7 +21,7 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-const onRedirectCallback = appState => {
+const onRedirectCallback = (appState) => {
   window.history.replaceState(
     {},
     document.title,
