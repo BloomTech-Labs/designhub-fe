@@ -14,7 +14,7 @@
     "eslint-plugin-prettier": "^3.1.3",
     "eslint-plugin-react": "^7.19.0",
     "mdbreact": "^4.22.1",
-    "moment": "^2.24.0",
+    "moment": "^2.25.3",
     "node-sass": "^4.12.0",
     "react": "^16.9.0",
     "react-apexcharts": "^1.3.3",
@@ -49,7 +49,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "preinstall": "npx npm-force-resolutions"
+    "res": "npx npm-force-resolutions"
   },
   "eslintConfig": {
     "extends": "react-app"
