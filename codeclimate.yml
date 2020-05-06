@@ -13,6 +13,8 @@ checks:
 exclude_patterns:
   - "__snapshots__/"
   - "__tests__/"
+  - "tests/"
+  - "snapshots/"
   - "spec/"
   - "**/*.spec.js"
   - "**/*.spec.jsx"
