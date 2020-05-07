@@ -299,13 +299,13 @@ class Project extends Component {
               </div>
               <PDFReader url={this.props.projectResearch[0].url} onDocumentComplete={this.onDocumentComplete} page={this.state.pdfPage} />
               {this.state.pdfLoading ? <Loading /> : null}
-              <div className='pdf-nav-buttons'>
+              {/* <div className='pdf-nav-buttons'>
                 <button onClick={() => this.setState({ pdfPage: 1 })}>First</button>
                 <button onClick={() => this.handleChangePage(false)}>Previous</button>
                 <p>Page {this.state.pdfPage} of {this.state.numPages}</p>
                 <button onClick={() => this.handleChangePage(true)}>Next</button>
                 <button onClick={() => this.setState({ pdfPage: this.state.numPages })}>Last</button>
-              </div>
+              </div> */}
             </div>
           ) :
             (
