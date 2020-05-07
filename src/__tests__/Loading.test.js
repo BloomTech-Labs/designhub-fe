@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Loading from '../components/Loading';
+import Loading from '../common/Loading';
 
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
 describe('<App />', () => {
   describe('should match the previous snapshot of the component', () => {
