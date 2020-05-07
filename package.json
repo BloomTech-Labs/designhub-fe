@@ -49,7 +49,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "res": "npx npm-force-resolutions"
+    "res": "npx npm-force-resolutions",
+    "local-coverage": "yarn run test -- --coverage --watchAll=false || true",
+    "coverage": "CI=true npm run test -- --coverage --watchAll=false || true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -75,5 +77,18 @@
     "prettier": "^2.0.5",
     "react-test-renderer": "^16.9.0"
   },
-  "jest": {}
+  "jest": {
+  "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/database/**",
+      "!**/__tests__/**",
+      "!**/__testHelpers__/**",
+      "!**/tests/**",
+      "!**/spec/**",
+      "!**/*.spec.{js,jsx}",
+      "!**/coverage/**"
+    ]
+  }
 }
