@@ -1,6 +1,5 @@
 import React from 'react';
 import Notifications from '../views/Notifications/Notifications';
-
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
 describe('<Notifications />', () => {

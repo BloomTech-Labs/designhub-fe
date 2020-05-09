@@ -1,6 +1,5 @@
 import React from 'react';
 import Heatmap from '../views/UserProfile/Heatmap';
-
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
 describe('<Heatmap />', () => {

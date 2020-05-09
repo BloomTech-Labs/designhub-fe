@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchUserCard from '../views/Search/SearchUserCard';
-
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
 describe('<SearchUserCard />', () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchPage from '../views/Search/SearchPage';
-
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
 describe('<SearchPage />', () => {

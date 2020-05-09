@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchBar from '../views/Search/SearchBar';
-
 import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
 describe('<SearchBar />', () => {
