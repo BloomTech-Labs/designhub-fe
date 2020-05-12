@@ -1,9 +1,8 @@
-import React from 'react'
-import LandingPage from '../components/LandingPage'
+import React from 'react';
+import LandingPage from '../views/LandingPage/LandingPage';
+import { useAuth0 } from '../utilities/auth-wrapper';
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
-import { useAuth0 } from '../utilities/auth-wrapper'
-
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
 const user = {
   email: 'johndoe@me.com',

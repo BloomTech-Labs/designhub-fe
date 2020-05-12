@@ -1,7 +1,7 @@
-import React from 'react'
-import SearchBar from '../components/SearchBar'
+import React from 'react';
+import SearchBar from '../views/Search/SearchBar';
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
 describe('<SearchBar />', () => {
 

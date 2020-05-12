@@ -1,7 +1,7 @@
-import React from 'react'
-import NavBar from '../components/Navbar.js'
+import React from 'react';
+import NavBar from '../common/Nav/Navbar.js';
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
 describe('<NavBar />', () => {
 

@@ -1,7 +1,7 @@
-import React from 'react'
-import ProjectForm from '../components/ProjectForm'
+import React from 'react';
+import ProjectForm from '../views/Projects/ProjectForm';
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
 describe('<ProjectForm />', () => {
 

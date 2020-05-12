@@ -1,7 +1,7 @@
-import React from 'react'
-import Heatmap from '../components/UserProfile/Heatmap'
+import React from 'react';
+import Heatmap from '../views/UserProfile/Heatmap';
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
 describe('<Heatmap />', () => {
 

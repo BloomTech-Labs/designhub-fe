@@ -1,7 +1,7 @@
-import React from 'react'
-import SearchUserCard from '../components/SearchUserCard'
+import React from 'react';
+import SearchUserCard from '../views/Search/SearchUserCard';
+import rendererWithRouter from '../__testHelpers__/rendererWithRouter';
 
-import rendererWithRouter from '../__testHelpers__/rendererWithRouter'
 
 describe('<SearchUserCard />', () => {
 
