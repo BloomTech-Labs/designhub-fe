@@ -5,15 +5,30 @@ language: node_js
 node_js:
   - node
 
+env:
+  global:
+  # Code Climate Reporter gotten from code climate
+    - CC_TEST_REPORTER_ID=1c8b69b0b7dbcc2c8088b8797ea08f1ba25c9554c88ed60dc036d67de0ad9c61
+
 cache:
   directories:
     - node_modules
 
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
 script:
-  - cd client
   - npm install
   - npm test -u
   - npm run build
+  
+after_script:  
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+after_success:
+  - npm run coverage
 
 notification:
   - email: false
