@@ -38,6 +38,7 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.3.0",
     "styled-components": "^4.4.0",
     "uuid": "^3.3.3"
   },
@@ -50,8 +51,10 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "res": "npx npm-force-resolutions",
-    "local-coverage": "yarn run test -- --coverage --watchAll=false || true",
-    "coverage": "CI=true npm run test -- --coverage --watchAll=false || true"
+    "serve": "serve -s build",
+    "build-serve": "react-scripts build && serve -s build",
+    "local-coverage": "yarn run test --coverage --watchAll=false || true",
+    "coverage": "CI=true yarn test --coverage --watchAll=false || true"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -78,8 +81,8 @@
     "react-test-renderer": "^16.9.0"
   },
   "jest": {
-  "collectCoverageFrom": [
-      "**/*.{js,jsx}",
+    "collectCoverageFrom": [
+      "**/*.js",
       "!**/node_modules/**",
       "!**/vendor/**",
       "!**/database/**",
