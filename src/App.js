@@ -37,17 +37,12 @@ function App({ history, currentUser, isOnboarding, isLoggedIn, initUser }) {
   );
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     currentUser: state.users.currentUser,
     isOnboarding: state.users.onboarding,
-    isLoggedIn: state.users.loggedIn
+    isLoggedIn: state.users.loggedIn,
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { initUser }
-  )(App)
-);
+export default withRouter(connect(mapStateToProps, { initUser })(App));
