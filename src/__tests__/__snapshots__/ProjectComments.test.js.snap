@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectComments /> should match the previous snapshot of the component tests that the component has not changed and matched the previous snapshot 1`] = `
+<div
+  className="project-comments"
+>
+  <header
+    className="comments-header"
+  >
+    Comments
+  </header>
+  <section
+    className="comments-body"
+  >
+    <div />
+  </section>
+  <section
+    className="comments-form"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <div
+        className="form-wrapper"
+      >
+        <input
+          onChange={[Function]}
+          placeholder="Leave a comment..."
+          type="text"
+          value=""
+        />
+        <button>
+          <svg
+            fill="none"
+            height="19"
+            viewBox="0 0 19 19"
+            width="19"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.4168 1.5835L8.7085 10.2918"
+              stroke="white"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M17.4168 1.5835L11.8752 17.4168L8.7085 10.2918L1.5835 7.12516L17.4168 1.5835Z"
+              stroke="white"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </form>
+  </section>
+</div>
+`;
