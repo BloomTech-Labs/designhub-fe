@@ -10,7 +10,7 @@ const user = {
   sub: 'google-oauth2|2147627834623744883746',
 }
 
-jest.mock('../auth-wrapper');
+jest.mock('../utilities/auth-wrapper');
 describe('<App />', () => {
   beforeEach(() => {
     useAuth0.mockReturnValue({
