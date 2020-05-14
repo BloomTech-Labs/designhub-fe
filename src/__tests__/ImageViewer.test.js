@@ -17,11 +17,4 @@ describe('<ImageViewer />', () => {
     });
   });
 
-  describe('<ImageViewer/>', () => {
-    const wrapper = shallow(<ImageViewer/>);
-
-    it('should render div element successfuly', () => {
-    expect(wrapper.find(ImageViewer).render().find('.ImageViewer')).to.have.lengthOf(1);
-    });
-  });
 });
