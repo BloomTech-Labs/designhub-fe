@@ -53,6 +53,9 @@
     "res": "npx npm-force-resolutions",
     "serve": "serve -s build",
     "build-serve": "react-scripts build && serve -s build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md)\"",
     "local-coverage": "yarn run test --coverage --watchAll=false || true",
     "coverage": "CI=true yarn test --coverage --watchAll=false || true"
   },
