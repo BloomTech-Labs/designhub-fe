@@ -6,13 +6,14 @@ import { connect } from 'react-redux';
 import { StickyComment } from './StickyComment';
 import { TempComment } from './TempComment';
 import ModalXIcon from '../../common/Icons/ModalXIcon.js';
+import postCommentNotification from './postCommentNotification';
 import CommentBubbleIcon from '../../common/Icons/CommentBubbleIcon.js';
 import './SASS/StickyComment.scss';
 
 import {
   addPhotoComment,
   getPhotoComments,
-  getProjectComments
+  getProjectComments,
 } from '../../store/actions';
 const uuidv1 = require('uuid/v1');
 
@@ -23,7 +24,7 @@ class ImageWithComments extends Component {
       activeImg: this.props.activeImg,
       comments: [],
       hidden: false,
-      tempComments: []
+      tempComments: [],
     };
     //location of the dom node, this is definitely a better way to do this using refs
     this.element = null;
@@ -37,7 +38,7 @@ class ImageWithComments extends Component {
     //activeComments are EXISTING COMMENTS related to the current image
     let activeComments = this.props.photoComments;
     // tempComments are the sticky comment submit form
-    let activeTemp = tempComments.filter(c => c.imageId === id);
+    let activeTemp = tempComments.filter((c) => c.imageId === id);
     return (
       <>
         <div className="StickyComments__TopBar">
@@ -59,12 +60,12 @@ class ImageWithComments extends Component {
           <img
             alt={url}
             className="ImageWithComments__full-img"
-            onClick={e => this.handleClick(e, id)}
+            onClick={(e) => this.handleClick(e, id)}
             src={url}
           />
 
           {activeTemp[0] &&
-            activeTemp.map(c => (
+            activeTemp.map((c) => (
               <TempComment
                 c={c}
                 key={c.id}
@@ -74,7 +75,7 @@ class ImageWithComments extends Component {
               />
             ))}
           {activeComments[0] &&
-            activeComments.map(s => (
+            activeComments.map((s) => (
               <StickyComment
                 {...s}
                 hidden={this.state.hidden}
@@ -94,7 +95,7 @@ class ImageWithComments extends Component {
     this.props.getPhotoComments(this.props.activeImg.id);
     this.setState({
       ...this.state,
-      comments: projectComments
+      comments: projectComments,
     });
   }
 
@@ -109,11 +110,11 @@ class ImageWithComments extends Component {
       // left&top are coordinates used to render the sticky comment dot, they are in relation to the dom element (this.element)
       left: `${x}px`,
       top: `${y}px`,
-      text: ''
+      text: '',
     };
     this.setState({
       ...this.state,
-      tempComments: [newComment]
+      tempComments: [newComment],
     });
   };
 
@@ -126,30 +127,6 @@ class ImageWithComments extends Component {
     x = this.leftOffset;
     y = this.topOffset;
     this.makeComment(id, x, y);
-  };
-
-  postCommentNotification = async (
-    username,
-    commentText,
-    projectId,
-    invitedUserId,
-    activeUserId,
-    mainImgUrl,
-    commentsId,
-    activeUserAvatar,
-    type
-  ) => {
-    axiosWithAuth().post('api/v1/invite/comments', {
-      activeUsername: username,
-      commentText: commentText,
-      projectId: projectId,
-      invitedUserId: invitedUserId,
-      activeUserId: activeUserId,
-      mainImgUrl: mainImgUrl,
-      commentsId: commentsId,
-      activeUserAvatar: activeUserAvatar,
-      type: type
-    });
   };
 
   handleSubmit = async (e, c) => {
@@ -170,7 +147,7 @@ class ImageWithComments extends Component {
       this.setState({
         ...this.state,
         tempComments: [],
-        comments: updateComments
+        comments: updateComments,
       });
 
       if (this.props.activeUser.id !== this.props.thisProject.userId) {
@@ -200,13 +177,14 @@ class ImageWithComments extends Component {
   };
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    photoComments: state.comments.photoComments
+    photoComments: state.comments.photoComments,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { addPhotoComment, getPhotoComments, getProjectComments }
-)(ImageWithComments);
+export default connect(mapStateToProps, {
+  addPhotoComment,
+  getPhotoComments,
+  getProjectComments,
+})(ImageWithComments);

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import SendIcon from '../../common/Icons/SendIcon';
 
 import { addProjectComment } from '../../store/actions';
-
+import postCommentNotification from './postCommentNotification';
 import './SASS/ProjectComments.scss';
 
 const ProjectComments = ({
@@ -14,7 +14,7 @@ const ProjectComments = ({
   comments,
   modal,
   thisProject,
-  addProjectComment
+  addProjectComment,
 }) => {
   //custom hook to get window height/width
   const { width } = useWindowDimensions();
@@ -30,34 +30,8 @@ const ProjectComments = ({
   //local state for form input
   const [newComment, setNewComment] = useState('');
 
-  //function for sending comment notifications
-
-  const postCommentNotification = async (
-    username,
-    commentText,
-    projectId,
-    invitedUserId,
-    activeUserId,
-    mainImgUrl,
-    commentsId,
-    activeUserAvatar,
-    type
-  ) => {
-    axiosWithAuth().post('api/v1/invite/comments', {
-      activeUsername: username,
-      commentText: commentText,
-      projectId: projectId,
-      invitedUserId: invitedUserId,
-      activeUserId: activeUserId,
-      mainImgUrl: mainImgUrl,
-      commentsId: commentsId,
-      activeUserAvatar: activeUserAvatar,
-      type: type
-    });
-  };
-
   //click submit
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newComment) return; //dont submit blank comments
 
@@ -65,7 +39,7 @@ const ProjectComments = ({
       userId: activeUser.id,
       username: activeUser.username,
       projectId: thisProject.id,
-      text: newComment
+      text: newComment,
     };
 
     try {
@@ -98,7 +72,7 @@ const ProjectComments = ({
       <header className="comments-header">Comments</header>
       <section className="comments-body">
         {comments &&
-          comments.map(c => (
+          comments.map((c) => (
             <div
               key={c.id}
               className={
@@ -130,7 +104,7 @@ const ProjectComments = ({
             </div>
           ))}
         {/* this ref grabs the bottom of the comments display and scrolls it into view, automatically disabled at the column-view breakpoint */}
-        <div ref={el => setCommentAnchor(el)}></div>
+        <div ref={(el) => setCommentAnchor(el)}></div>
         {commentAnchor && !modal && scrollToBottom()}
       </section>
 
@@ -140,7 +114,7 @@ const ProjectComments = ({
             <input
               type="text"
               value={newComment}
-              onChange={e => setNewComment(e.target.value)}
+              onChange={(e) => setNewComment(e.target.value)}
               placeholder="Leave a comment..."
             />
             <button>
@@ -153,13 +127,10 @@ const ProjectComments = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    comments: state.comments.projectComments
+    comments: state.comments.projectComments,
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { addProjectComment }
-)(ProjectComments);
+export default connect(mapStateToProps, { addProjectComment })(ProjectComments);
