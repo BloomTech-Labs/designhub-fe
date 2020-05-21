@@ -1,20 +1,16 @@
-import React, {Component} from 'react';
-import {Link, animateScroll as scroll} from 'react-scroll';
-
+import React, { Component } from 'react';
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 import logo from '../../ASSETS/logo.svg';
 import './SASS/LandingPageNav.scss';
-export default class LandingPageNav extends Component{
-
+export default class LandingPageNav extends Component {
   render() {
-    return(
+    return (
       <nav className="landing-nav">
-        
         <div className="nav-content">
-        <img src={logo} className="logo" alt="Logo"/>
+          <img src={logo} className="logo" alt="Logo" />
           <ul className="nav-items">
-          <li className="nav-item">
-          
+            <li className="nav-item">
               <Link
                 to="home"
                 spy={true}
