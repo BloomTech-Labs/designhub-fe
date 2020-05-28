@@ -1,6 +1,6 @@
 //needs testing against data
 
-import gql from 'graphql-tags';
+import gql from 'graphql-tag';
 
 const following = gql`
   query Followers($id: ID!) {

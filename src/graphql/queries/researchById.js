@@ -1,6 +1,6 @@
 //needs testing against data
 
-import gql from 'graphql-tags';
+import gql from 'graphql-tag';
 
 const researchById = gql`
   query User_research($id: ID!) {

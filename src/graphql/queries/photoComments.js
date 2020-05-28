@@ -1,6 +1,6 @@
 //needs testing against data
 
-import gql from 'graphql-tags';
+import gql from 'graphql-tag';
 
 const photoComments = gql`
   query Comments($id: ID!) {

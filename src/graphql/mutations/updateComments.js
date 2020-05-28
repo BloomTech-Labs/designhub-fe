@@ -1,4 +1,4 @@
-import gql from 'graphql-tags';
+import gql from 'graphql-tag';
 
 const updateComments = gql`
   mutation Comments($data: CommentsInput!) {

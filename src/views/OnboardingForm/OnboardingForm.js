@@ -3,17 +3,19 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
 import { useAuth0 } from '../../utilities/auth-wrapper.js';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 
 import Loading from '../../common/Loading.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
 
-import { updateUser } from '../../store/actions/usersActions';
-
+//import { updateUser } from '../../store/actions/usersActions';
+import updateUser from '../../graphql/mutations/updateUser';
+import { useMutation } from 'react-apollo';
 import './SASS/OnboardingForm.scss';
 
-const OnboardingForm = ({ history, updateUser, isLoading }) => {
+const OnboardingForm = ({ history, isLoading }) => {
+  const [updateNewUser] = useMutation(updateUser);
   const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
   const { user, logout } = useAuth0();
@@ -39,7 +41,7 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     lastName: user.family_name || '',
     location: '',
     username: user.nickname || '',
-    website: ''
+    website: '',
   });
 
   // alert state for required form inputs
@@ -47,18 +49,18 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     username: false,
     firstName: false,
     lastName: false,
-    email: false
+    email: false,
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setAlert({
       ...alert,
-      [e.target.name]: false
+      [e.target.name]: false,
     });
     setFormUser({ ...formUser, [e.target.name]: e.target.value });
   };
 
-  const handleNextButton = async e => {
+  const handleNextButton = async (e) => {
     e.preventDefault();
     const { username, firstName, lastName, email } = formUser;
     const newAlert = {};
@@ -79,12 +81,12 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     const v = Object.values(newAlert);
     if (v.includes(true) || v.includes('taken')) {
       setAlert({ ...alert, ...newAlert });
-    } else setFormStep(n => ++n);
+    } else setFormStep((n) => ++n);
   };
 
-  const handlePrevButton = async e => {
+  const handlePrevButton = async (e) => {
     e.preventDefault();
-    setFormStep(n => --n);
+    setFormStep((n) => --n);
   };
 
   const handleSubmit = async (e, id, changes) => {
@@ -99,7 +101,7 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
       }
       //TODO ADD AUth0ID prop to changes object BEFORE SENDING
       changes = { ...changes, avatar: newAvatar, auth0Id: user.sub };
-      updateUser(id, changes).then(res => {
+      updateNewUser(id, changes).then((res) => {
         if (res && !isLoading) {
           history.push(`/profile/${id}/${changes.username}`);
         }
@@ -109,21 +111,21 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     }
   };
 
-  const handleImageUpload = async file => {
+  const handleImageUpload = async (file) => {
     try {
       const {
-        data: { key, url }
+        data: { key, url },
       } = await axiosWithAuth().post(`api/v1/photo/projects/signed`, {
-        id: user.sub
+        id: user.sub,
       });
 
       await axios.put(url, file[0], {
         headers: {
-          'Content-Type': 'image/*'
-        }
+          'Content-Type': 'image/*',
+        },
       });
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
 
       return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
     } catch (err) {
@@ -136,7 +138,7 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     return (
       <>
         <div className="OnboardingForm">
-          <form onSubmit={e => handleSubmit(e, formUser.id, formUser)}>
+          <form onSubmit={(e) => handleSubmit(e, formUser.id, formUser)}>
             <section className="stepComponents">
               {stepComponents.map((Step, i) => {
                 if (i + 1 === formStep) {
@@ -165,15 +167,11 @@ const OnboardingForm = ({ history, updateUser, isLoading }) => {
     );
 };
 
-const mapStateToProps = state => {
-  return {
-    isLoading: state.users.isLoading
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     isLoading: state.users.isLoading,
+//   };
+// };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { updateUser }
-  )(OnboardingForm)
-);
+export default OnboardingForm;
+

@@ -1,4 +1,4 @@
-import gql from 'graphql-tags';
+import gql from 'graphql-tag';
 
 const projectPhotos = gql`
   query Project_photos($projectId: Int!) {
