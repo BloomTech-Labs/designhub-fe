@@ -1,4 +1,4 @@
-import gql from 'gaphql-tags';
+import gql from 'gaphql-tag';
 
 const addProject = gql`
   mutation Projects($data: ProjectInput!) {
