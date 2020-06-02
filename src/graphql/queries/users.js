@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 const users = gql`
-	 {
+	 query Users{
 		users {
 		auth0Id
 		username
@@ -16,5 +16,5 @@ const users = gql`
 		created_at
 	}
 };
-`
-export default users
+`;
+export default users;
