@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Notifications /> should match the previous snapshot of the component tests that the component has not changed and matched the previous snapshot 1`] = `
-<div
-  className="notification-container"
-/>
-`;

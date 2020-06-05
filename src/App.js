@@ -1,48 +1,26 @@
-import React, { useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { useAuth0 } from './utilities/auth-wrapper.js';
-
-import DesignHub from './DesignHub.js';
-import LandingPage from './views/LandingPage/LandingPage.js';
-// import NewLandingPage from './components/NewLandingPage';
-import OnboardingForm from './views/OnboardingForm/OnboardingForm.js';
-import Loading from './common/Loading.js';
-
-import { initUser } from './store/actions/usersActions.js';
+import React from 'react';
 
 import './App.scss';
 
-function App({ history, currentUser, isOnboarding, isLoggedIn, initUser }) {
-  const { isAuthenticated, user, loading } = useAuth0();
+import { Route } from 'react-router-dom';
+import PrivateRoute from './common/PrivateRoute';
 
-  useEffect(() => {
-    if (typeof user === 'object') initUser(user);
-  }, [user, history, initUser]);
+import Explore from './views/Explore';
+import Dashboard from './views/Dashboard';
+import Profile from './views/Profile';
+import Onboarding from './views/Onboarding';
+import Project from './views/Project';
+import Settings from './views/Settings';
 
+export default function App() {
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <>
-          {!isAuthenticated && <LandingPage />}
-          <div className="App">
-            {isOnboarding && <OnboardingForm />}
-            {!isOnboarding && isLoggedIn && <DesignHub user={currentUser} />}
-          </div>
-        </>
-      )}
-    </>
+    <div className="app-wrapper">
+      <Route exact path="/" component={Explore} />
+      <Route path="/onboarding" component={Onboarding} />
+      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/profile/:username" component={Profile} />
+      <Route path="/project/:id" component={Project} />
+      <PrivateRoute path="/settings" component={Settings} />
+    </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.users.currentUser,
-    isOnboarding: state.users.onboarding,
-    isLoggedIn: state.users.loggedIn,
-  };
-};
-
-export default withRouter(connect(mapStateToProps, { initUser })(App));

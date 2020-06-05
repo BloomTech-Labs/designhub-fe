@@ -1,0 +1,18 @@
+.layout-wrapper {
+  padding: 0;
+
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0 20px;
+    width: 100%;
+    background: #222;
+    color: #fafafa;
+    height: 40px;
+
+    h3 {
+      margin: 0;
+    }
+  }
+}

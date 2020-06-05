@@ -1,70 +1,13 @@
-@import './common/SASS/reset.scss';
-@import './common/SASS/palette';
-@import './common/SASS/mixins';
-@import './common/Nav/SASS/Navbar.scss';
-@import './views/UserProfile/SASS/UserProfile.scss';
-@import './views/Projects/SASS/Error404Projects.scss';
-@import './views/Projects/SASS/Error401Projects.scss';
-
-// * {
-// 	box-sizing:border-box;
-// }
-
-body {
-  background: $almost-black;
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  @include themify($themes) {
-    color: themed('text');
-    background-color: themed('bg');
-  }
+* {
+  box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-button {
-  font-family: 'Roboto', sans-serif;
-}
-
-main {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin-left: 80px;
-}
-
-div.isLoading {
-  @include designhub-letters;
-  align-items: center;
-  background: $btn-gradient;
-  border-radius: 10px;
-  color: $white;
-  display: flex;
-  justify-content: center;
-  height: 50%;
-  width: 50%;
-
+.app-wrapper {
+  max-width: 100vw;
+  min-height: 100vh;
+  background: #999;
   position: absolute;
-  top: 25%;
-  left: 25%;
-
-  font-weight: 900;
-  font-size: 36px;
-  line-height: 40px;
-  text-align: center;
-  letter-spacing: 0.11em;
-  em {
-    -webkit-text-stroke-width: 1px;
-  }
-}
-
-.inverted {
-  filter: invert(100%);
+  top: 0;
+  left: 0;
+  right: 0;
 }
