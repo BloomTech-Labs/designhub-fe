@@ -2,10 +2,10 @@ import React from 'react';
 import Layout from '../../common/Layout';
 import './styles.scss';
 
-export default function Explore() {
+export default function CreateProject() {
   return (
     <Layout>
-      <h1>Explore Page!</h1>
+      <h1>Create Project!</h1>
     </Layout>
   );
 }
