@@ -19,23 +19,21 @@ import avatar3 from '../../ASSETS/avatar_3.jpg';
 // import StarIcon from '../../ASSETS/Icons/StarIcon';
 // import caseStudyIcon from '../../ASSETS/case-study.png';
 
+import ProjectHeader from './ProjectHeader';
+
 export default function Projects() {
   const { id } = useParams();
   return (
     <Layout>
+    <ProjectHeader />
       <div className="project-container">
-        <div className="project-header">
-          <div className="project-header-alignment">
-           <ProjectDetails />
-           <ProjectButtonLinks />
-          </div>
+        <ProjectDetails />
+        {/*Show:*/}
+        <ProjectPdf />
+        {/*or show:*/}
+        <div className="project-body">
+        <ImageViewer />
         </div>
-{/*Show:*/}
-    <ProjectPdf />
-{/*or show:*/}
-<div className="project-body">
-    *<ImageViewer />
-      </div>
       </div>
     </Layout>
   );

@@ -2,15 +2,7 @@
 //   box-sizing: border-box;
 // }
 
-// .app-wrapper {
-//   max-width: 100vw;
-//   min-height: 100vh;
-//   background: #999;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-// }
+
 
 @import './common/SASS/reset.scss';
 @import './common/SASS/palette';
@@ -106,3 +98,17 @@ div.isLoading {
 .inverted {
   filter: invert(100%);
 }
+
+.app-wrapper {
+  transition: all 0.2s ease-in-out;
+
+  .workspace {
+      transition: all 0.2s ease-in-out;
+      width: auto;
+      margin-top: 4.4rem;
+      margin-left: 0;
+      min-height: 80vh;
+    }
+    
+}
+

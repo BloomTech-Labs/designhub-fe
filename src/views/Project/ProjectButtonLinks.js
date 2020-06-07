@@ -46,7 +46,7 @@ export default function ProjectButtonLinks(props) {
                 */}
         <img
           src={figmaIcon}
-          className="link-enabled"
+          className="link-disabled"
           //  thisProject.figma === null || thisProject.figma === ''
           // ? 'link-disabled'
           // : 'link-enabled'
