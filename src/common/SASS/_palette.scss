@@ -1,0 +1,78 @@
+// UX PALETTE
+$red: #ff0000;
+$white: #ffffff;
+$black: #15161a;
+$almost-black: #212229;
+$light-black: #2a2b31;
+$light-grey: #f4f4f4;
+$grey: #d8d8d8;
+$shadow-grey: #a7a7ac;
+$dark-grey: #6d6d72;
+$field-stroke: #3a3a3d;
+$field-bg: #2a2b31;
+$blue: #5557fe;
+$purple: #9555fe;
+$btn-gradient: linear-gradient(99.98deg, #5557fe -2.36%, #9555fe 103.67%);
+$btn-primary: linear-gradient(99.98deg, #5557fe -2.36%, #9555fe 103.67%);
+$btn-primary-hover: linear-gradient(99.98deg, #797bff -2.36%, #ac79ff 103.67%);
+$btn-grey-hover: #4e4e51;
+$alert: #e64c4d;
+$modal-bg: rgba(0, 0, 0, 0.897);
+$inverted: invert(100%);
+
+//LIGHT MODE
+$lightmode-bg: $light-grey;
+$lightmode-bg2: $white;
+$lightmode-link: $dark-grey;
+$lightmode-text: $black;
+$lightmode-header: $light-black;
+$lightmode-form-field: $white;
+$lightmode-form-label: $almost-black;
+$lightmode-grey: $grey;
+
+//DARK MODE (default)
+$bg: $almost-black;
+$bg2: $black;
+$link: $dark-grey;
+$text: $white;
+$header: $white;
+$form-field: $light-black;
+$form-label: $white;
+
+//MAP FOR themify() FUNCTION
+// this code comes from Dmitry Borody
+// https://medium.com/@dmitriy.borodiy/easy-color-theming-with-scss-bc38fd5734d1
+// the $themes map populates the @themify function inside mixins.scss
+// theme switching happens inside TopBar.js, the toggle switch adds 'theme-light' to the classList of the root <html> element
+$themes: (
+  light: (
+    bg: $lightmode-bg,
+    bg2: $lightmode-bg2,
+    link: $lightmode-link,
+    text: $lightmode-text,
+    header: $lightmode-header,
+    form-field: $lightmode-form-field,
+    form-label: $lightmode-form-label,
+    filter: $inverted,
+    active-link: $black,
+    shadow: $shadow-grey
+  ),
+  dark: (
+    bg: $bg,
+    bg2: $bg2,
+    link: $link,
+    text: $text,
+    header: $header,
+    form-field: $form-field,
+    form-label: $form-label,
+    active-link: $white,
+    shadow: $black
+  )
+);
+
+// HEATMAP GRADIENT
+$heatmap-5: #3f1ccc;
+$heatmap-4: #5557fe;
+$heatmap-3: #7072ff;
+$heatmap-2: #8d8fff;
+$heatmap-1: #adaeff;

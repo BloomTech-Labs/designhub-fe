@@ -1,0 +1,423 @@
+@import './palette';
+
+@mixin explore-category-tabs {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 2rem 0.5rem 0.5rem 0;       
+  color: $white;        
+  font-weight: 500;
+  cursor: pointer;
+  width: 118px;
+  height:70px;
+  padding: .5rem;
+  border-radius: 2.5px;
+  text-align: center;
+  transition: filter .5s ease-in-out;
+  -webkit-filter: grayscale(0%); 
+  filter: grayscale(0%); 
+}
+
+@mixin designhub-letters {
+  font-weight: 900;
+  font-size: 96px;
+  line-height: 112px;
+  letter-spacing: 0.11em;
+
+  em {
+    color: hsla(360, 100%, 100%, 0);
+    -webkit-text-fill-color: hsla(
+      360,
+      100%,
+      100%,
+      0
+    ); /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: $white;
+  }
+}
+
+@mixin check {
+  border: 1px solid red;
+}
+
+@mixin btn {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 0;
+  color: $white;
+  cursor: pointer;
+  outline: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: 0.11rem;
+  line-height: 14px;
+  text-align: center;
+}
+
+@mixin primary-btn {
+  @include btn;
+  background: $btn-primary;
+  width: 188px;
+  &:hover {
+    background: $btn-primary-hover;
+  }
+}
+
+@mixin secondary-btn {
+  @include btn;
+  background: $dark-grey;
+  width: 188px;
+  &:hover {
+    background: $btn-grey-hover;
+  }
+}
+
+@mixin auth0-redirect-btn {
+  @include btn;
+  background: none;
+  border: 1px solid $blue;
+  color: $blue;
+  font-size: 14px;
+  letter-spacing: 0.11em;
+  margin-top: 10px;
+  width: 350px;
+  &:hover {
+    color: $blue;
+    border: 1px solid $blue;
+    background: #5558fe0f;
+  }
+}
+
+@mixin follow-btn {
+  @include btn;
+  background: $btn-gradient;
+  padding: 10px 60px;
+  margin-top: 3vh;
+  transition: 0.1s ease-in-out;
+  &:hover {
+    background: $btn-primary-hover;
+    @include themify($themes) {
+      color: themed('bg2');
+    }
+  }
+}
+
+@mixin edit-profile-btn {
+  @include btn;
+  margin-top: 3vh;
+  background: $almost-black;
+  transition: 0.1s ease-in-out;
+  padding: 10px 60px;
+  @include themify($themes) {
+    background: themed('bg');
+    color: themed('text');
+  }
+  &:hover {
+    background: #2f303a;
+    @include themify($themes) {
+      color: themed('bg2');
+    }
+  }
+}
+
+@mixin submit-btn {
+  @include auth0-redirect-btn;
+  margin-top: 20px;
+}
+
+@mixin onboard-form {
+  display: flex;
+  flex-direction: column;
+  margin: 2% 5%;
+  max-width: 800px;
+  width: 90%;
+
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('bg2');
+  }
+
+  label {
+    @include onboard-form__label;
+  }
+
+  .custom-case-study{
+    @include onboard-form__input;
+
+  }
+
+  input {
+    @include onboard-form__input;
+  }
+  select {
+    @include onboard-form__select;
+  }
+  textarea {
+    @include onboard-form__textarea;
+  }
+
+  div.category-div {
+    @include onboard-form__textarea;
+  }
+
+  div.invite {
+    @include onboard-form__div;
+
+  }
+
+  div.close-icon {
+    @include onboard-form__div;
+  }  
+
+  div.share-icon {
+    @include onboard-form__div;
+  }
+  
+  div.colab-input-wrapper {
+    @include onboard-form__div;
+  }
+
+  div.invite-chip {
+    @include onboard-form__div;
+  }
+
+  div.required {
+    display: flex;
+    flex-direction: column;
+  }
+ 
+  div.required.alert {
+    &:after {
+      margin: 0.4rem;
+      content: 'This field is required';
+      color: $alert;
+    }
+
+    &.taken input {
+      outline: 2px solid $alert;
+    }
+
+    &.taken:after {
+      content: 'This username is already taken';
+    }
+  }
+}
+
+@mixin onboard-form__label {
+  color: $white;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.11rem;
+  margin-top: 30px;
+  @include themify($themes) {
+    color: themed('form-label');
+  }
+}
+
+@mixin onboard-form__input {
+  background-color: $field-bg;
+  border: 1px solid $field-stroke;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11rem;
+  margin-top: 0.4rem;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+    border: 1px solid $shadow-grey;
+  }
+  &:hover,
+  &:focus {
+    // outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    border: 2px solid $alert;
+  }
+}
+
+@mixin onboard-form__select {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11rem;
+  margin-top: 0.4rem;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+  }
+  &:hover,
+  &:focus {
+    // outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    border: 2px solid $alert;
+  }
+}
+
+@mixin onboard-form__textarea {
+  background-color: $field-bg;
+  border: 1px solid $field-stroke;
+  border-radius: 5px;
+  color: $white;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.11rem;
+  margin-top: 0.4rem;
+  padding: 10px;
+  resize: none;
+  height: auto;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+    border: 1px solid $shadow-grey;
+  }
+  &:focus,
+  &:hover {
+    // outline: auto 4px -webkit-focus-ring-color;
+  }
+}
+
+@mixin onboard-form__div {
+  background-color: $field-bg;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: $white;
+  font-weight: normal;
+  font-size: 0.8rem;
+  letter-spacing: 0.11rem;
+  margin-top: 0.4rem;
+  padding: 10px;
+  outline: none;
+  font-family: inherit; // need this to override textarea defaults
+  font-size: inherit; // need this to override textarea defaults
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('form-field');
+  }
+  &:hover,
+  &:focus {
+    // outline: auto 4px -webkit-focus-ring-color;
+  }
+  &:not(:focus):invalid {
+    border: 2px solid $alert;
+  }
+}
+
+@mixin modal {
+  div {
+    &.modal--close {
+      display: none;
+    }
+    &.modal--expand {
+      span.modal--expand__background-overlay {
+        animation: fadeIn 0.2s ease-in-out;
+        background: $modal-bg;
+        cursor: pointer;
+        content: '';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        text-align: center;
+        width: 100%;
+        z-index: 1234567;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// this code comes from Dmitry Borody
+// https://medium.com/@dmitriy.borodiy/easy-color-theming-with-scss-bc38fd5734d1
+// the themify function draws on the $themes map inside palette.scss
+// theme switching happens inside TopBar.js, the toggle switch adds 'theme-light' to the classList of the root <html> element
+@mixin themify($themes: $themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value
+          )
+        ) !global;
+      }
+
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+//media queries
+@mixin phone {
+  @media (max-width: 599px) {
+    @content;
+  }
+}
+@mixin small-tablet {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+@mixin big-tablet {
+  @media (min-width: 900px) {
+    @content;
+  }
+}
+@mixin small-desktop {
+  @media (max-width: 1536px) {
+    @content;
+  }
+}
+@mixin big-desktop {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+@mixin large-desktop {
+  @media (min-width: 1921px) {
+    @content;
+  }
+}
+

@@ -1,13 +1,108 @@
-* {
-  box-sizing: border-box;
+// * {
+//   box-sizing: border-box;
+// }
+
+// .app-wrapper {
+//   max-width: 100vw;
+//   min-height: 100vh;
+//   background: #999;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+// }
+
+@import './common/SASS/reset.scss';
+@import './common/SASS/palette';
+@import './common/SASS/mixins';
+//@import './common/Nav/SASS/Navbar.scss';
+//@import './views/UserProfile/SASS/UserProfile.scss';
+// @import './views/Projects/SASS/Error404Projects.scss';
+// @import './views/Projects/SASS/Error401Projects.scss';
+
+// * {
+// 	box-sizing:border-box;
+// }
+
+body {
+  background: $almost-black;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include themify($themes) {
+    color: themed('text');
+    background-color: themed('bg');
+  }
 }
 
-.app-wrapper {
-  max-width: 100vw;
-  min-height: 100vh;
-  background: #999;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button {
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  letter-spacing: 1.4px;
+}
+
+input {
+  letter-spacing: 1.4px;
+}
+
+input::placeholder {
+  letter-spacing: 1.4px;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+}
+
+div.isLoading {
+  @include designhub-letters;
+  align-items: center;
+  background: $btn-gradient;
+  border-radius: 10px;
+  color: $white;
+  display: flex;
+  justify-content: center;
+  height: 50%;
+  width: 50%;
+
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 25%;
+  left: 25%;
+
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 40px;
+  text-align: center;
+  letter-spacing: 0.11em;
+  em {
+    -webkit-text-stroke-width: 1px;
+  }
+}
+
+.inverted {
+  filter: invert(100%);
 }
