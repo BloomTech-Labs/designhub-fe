@@ -9,31 +9,23 @@ import ProjectPdf from './ProjectPdf';
 import ProjectButtonLinks from './ProjectButtonLinks';
 import ImageViewer from './ImageViewer/ImageViewer';
 
-//Images and Icons:
-import avatar1 from '../../ASSETS/avatar.jpg';
-import avatar2 from '../../ASSETS/avatar_2.jpg';
-import avatar3 from '../../ASSETS/avatar_3.jpg';
-// import figmaIcon from '../../ASSETS/figma-icon.png';
-// import invisionIcon from '../../ASSETS/invision-icon.png';
-// import DownloadIcon from '../../ASSETS/Icons/DownloadIcon';
-// import StarIcon from '../../ASSETS/Icons/StarIcon';
-// import caseStudyIcon from '../../ASSETS/case-study.png';
-
-import ProjectHeader from './ProjectHeader';
-
 export default function Projects() {
   const { id } = useParams();
   return (
     <Layout>
-    <ProjectHeader />
-      <div className="project-container">
-        <ProjectDetails />
-        {/*Show:*/}
-        <ProjectPdf />
-        {/*or show:*/}
-        <div className="project-body">
-        <ImageViewer />
+      <div className="projects-container">
+        <div className="project-header">
+          <div className="project-header-alignment">
+            <ProjectDetails />
+            <ProjectButtonLinks />
+          </div>
         </div>
+      </div>
+      {/*Show:*/}
+      {/*  <ProjectPdf />*/}
+      {/*or show:*/}
+      <div className="project-body">
+        <ImageViewer />
       </div>
     </Layout>
   );

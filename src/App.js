@@ -17,6 +17,7 @@ import Notifications from './views/Notifications';
 export default function App() {
   return (
     <div className="app-wrapper">
+    <main className="workspace">
       <Route exact path="/" component={Explore} />
       <Route path="/onboarding" component={Onboarding} />
       <Route path="/profile/:username" component={Profile} />
@@ -25,6 +26,7 @@ export default function App() {
       <PrivateRoute path="/notifications" component={Notifications} />
       <PrivateRoute path="/create-project" component={CreateProject} />
       <PrivateRoute path="/settings" component={Settings} />
+    </main>
     </div>
   );
 }

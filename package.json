@@ -101,5 +101,10 @@
       "!**/coverage/**",
       "!**//Icons/**"
     ]
-  }
+  },
+  "description": "A design platform",
+  "main": "index.js",
+  "repository": "https://github.com/Lambda-School-Labs/designhub-fe.git",
+  "author": "andrewbastian <andrew.bastian@gmail.com>",
+  "license": "MIT"
 }
