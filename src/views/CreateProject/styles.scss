@@ -1,0 +1,461 @@
+@import '../../common/SASS/palette';
+@import '../../common/SASS/mixins';
+
+.project-form-wrapper {
+  color: $white;
+  width: 100%;
+
+  margin-right: 16px;
+
+  @include themify($themes) {
+    color: themed('text');
+  }
+
+  .ProjectForm__header {
+    user-select: none;
+    h2 {
+      margin-top: 16px;
+      color: $white;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 28px;
+
+      transition: all 0.2s ease-in-out;
+
+      @include themify($themes) {
+        color: $field-stroke;
+      }
+    }
+  }
+
+  .ProjectForm__body {
+    display: flex;
+    margin-top: 16px;
+    width: 100%;
+    padding: 16px;
+
+    border-radius: 10px;
+
+    background-color: $black;
+
+
+
+    @media (max-width: 1024px) {
+      align-items: center;
+      flex-direction: column;
+
+      .left-container {
+        width: 100%;
+      }
+
+      .right-container {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        width: 100%;
+        
+      }
+    }
+
+    @include themify($themes) {
+      background-color: white;
+    }
+  }
+
+  @include modal;
+
+
+  .left-container {
+    width: 100%;
+    // max-width: 100%;
+    margin-right: 2%;
+
+    .delete-project-button {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 12px;
+      cursor: pointer;
+      color: $dark-grey;
+      letter-spacing: 0.11em;
+      p {
+        line-height: 24px;
+        vertical-align: middle;
+        display: inline;
+      }
+      svg {
+        vertical-align: middle;
+        margin-right: 6px;
+      }
+    }
+
+    .page-header {
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+      letter-spacing: 0.11em;
+      margin-bottom: 14px;
+    }
+    
+    .upload-container.active {
+      border: 8px solid $blue;
+      @include themify($themes) {
+        border: 8px solid $blue;
+        p {
+          color: $blue;
+        }
+      }
+      p {
+        color: $blue;
+      }
+    }
+
+    .upload-container.rejected {
+      border: 8px solid $alert;
+      @include themify($themes) {
+        border: 8px solid $alert;
+        p {
+          color: $alert;
+        }
+      }
+      p {
+        color: $alert;
+      }
+    }
+    .error {
+      color: $alert;
+      text-align: center;
+    }
+
+    .upload-container {
+      align-items: center;
+      border: 5px solid $black;
+      background: $almost-black;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      height: 12rem;
+      justify-content: center;
+      outline: none;
+      padding: 20px;
+      transition: all 0.1s ease-in-out;
+      @include themify($themes) {
+        background: themed('bg');
+        border: 5px solid themed('bg2');
+        color: themed('link');
+      }
+
+      &:hover {
+        background: #33343b;
+        @include themify($themes) {
+          background: white;
+          border: 5px solid themed('bg2');
+          box-shadow: 0 0 10px -5px gray;
+          color: themed('text');
+        }
+        svg {
+          @include themify($themes) {
+            stroke: themed('text');
+          }
+        }
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 21px;
+        text-align: center;
+        letter-spacing: 0.11em;
+        font-weight: 500;
+        color: $white;
+      }
+
+      svg {
+        stroke: $white;
+        width: 4rem;
+        height: 4rem;
+        opacity: 0.2;
+
+        @include themify($themes) {
+          stroke: themed('link');
+        }
+      }
+    }
+
+    .drop-text-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .upload-icon {
+        opacity: 0.2;
+        margin-bottom: 10px;
+      }
+
+      .drop-text {
+        margin-bottom: 10px;
+        font-size: 14px;
+        @include themify($themes) {
+          color: $dark-grey;
+        }
+
+        mark {
+          background: none;
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  .thumbnail-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+    grid-gap: 1rem;
+    justify-content: flex-start;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    .thumb {
+      margin: 0;
+      padding: 0;
+      width: max-content;
+
+      .thumbnail {
+        border: 5px solid $black;
+        border-radius: 10px;
+        box-sizing: border-box;
+        display: inline-block;
+        object-fit: cover;
+        object-position: center;
+        width: 7rem;
+        height: 6rem;
+        @include themify($themes) {
+          border: 5px solid themed('bg2');
+        }
+      }
+    }
+  }
+
+  .remove {
+    width: 20px;
+    position: absolute;
+    margin-top: -5px;
+    margin-left: 6rem;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    opacity: 0.8;
+  }
+
+  .remove:hover {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  .right-container {
+    width: 100%;
+    display: flex;
+    overflow-y: scroll;
+    margin-top: 2rem;
+
+    form {
+      @include onboard-form;
+      background-color: $black;
+
+      @include themify($themes) {
+        background-color: white;
+      }
+      margin: 0;
+      width: 100%;
+
+      input {
+        font-size: 12px;
+        margin-bottom: 20px;
+        border: 1px solid $field-stroke;
+        
+        @include themify($themes) {
+          border: 1px solid $shadow-grey;
+          background-color: themed('bg2');
+        }
+      }
+
+      select {
+        font-size: 12px;
+        margin-bottom: 20px;
+        border: 1px solid $field-stroke;
+        @include themify($themes) {
+          border: 1px solid $shadow-grey;
+          background-color: themed('bg2');
+        }
+      }
+
+      option {
+        font-size: 13px;
+      }
+
+      div.invite {
+        border-radius: 50%;        
+        border: 1px solid $field-stroke;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        margin: 2% 3px;
+        cursor: pointer;
+
+        @include themify($themes) {
+          background-color: themed('bg2');
+        }
+
+        transition: background-color 0.2s;
+      }
+
+      div.invite:hover {
+        outline: none;
+
+        background-color: gray;
+
+        @include themify($themes) {
+          background-color: themed('white');
+        }
+      }
+
+      .required.alert input {
+        margin-bottom: 0;
+      }
+
+      .description {
+        font-size: 12px;
+        margin-bottom: 10px;
+        resize: vertical;
+        height: 80px;
+        border: 1px solid $field-stroke;
+        @include themify($themes) {
+          border: 1px solid $shadow-grey;
+          background-color: themed('bg2');
+        }
+      }
+
+
+
+
+      
+
+      .project-label {
+        margin-top: 0px;
+      }
+      
+    }
+
+    .collab-pics {
+      display: flex;
+      align-content: center;
+      flex-flow: row wrap;
+
+      .avatar {
+        display: flex;
+        height: 50px;
+        width: 50px;
+        align-items: center;
+        justify-content: center;
+        margin: 2% 3px;
+
+        img {
+          height: 100%;
+          width: 100%;
+          border-radius: 50%;
+        }
+
+        .name {
+          color: rgba(0, 0, 0, 0);
+          background-color: rgba(0, 0, 0, 0);
+
+          user-select: none;
+
+          font-family: 'Helvetica';
+
+          padding: 5px;
+          font-size: 14px;
+          text-align: center;
+
+          width: auto;
+          position: absolute;
+
+          border-radius: 3px;
+
+          box-shadow: 0 0 0px 0 none;
+
+          transform: translateY(45px);
+
+          transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
+        }
+      }
+
+      .avatar:hover {
+        .name {
+          color: white;
+
+          background-color: black;
+          box-shadow: 0 0 1px 0 gray;
+        }
+      }
+    }
+    .required-help {
+      margin-top: 16px;
+      color: $dark-grey;
+    }
+
+    .error {
+      font-size: 17px;
+      text-align: right;
+      margin: 1.5rem 0;
+      color: $alert;
+      user-select: none;
+    }
+  }
+
+  .submit-cancel-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    width: 100%;
+    button {
+      &:disabled {
+        background: grey;
+        cursor: default;
+      }
+    }
+
+    .submit-button {
+      @include primary-btn;
+      margin-top: 8px;
+    }
+
+    .cancel-btn {
+      @include secondary-btn;
+      margin-top: 8px;
+      margin-right: 16px;
+    }
+  }
+
+  .delete-project-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0rem;
+    opacity: 0.6;
+    width: max-content;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    p {
+      margin-left: 10px;
+      color: $dark-grey;
+      cursor: pointer;
+    }
+
+    svg {
+      cursor: pointer;
+    }
+  }
+}
