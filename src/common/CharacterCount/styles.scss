@@ -1,0 +1,19 @@
+@import '../SASS/palette';
+@import '../SASS/mixins';
+
+
+.input-field .charLength {
+    margin-top: 0.2rem;
+    font-size:.8rem;
+    width: 100%;
+    text-align: right;
+    user-select: none;
+}
+
+.charLength {
+    margin-top: 0.5rem;
+    font-size:.8rem;
+    width: 100%;
+    text-align: right;
+    user-select: none;
+}

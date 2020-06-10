@@ -1,0 +1,86 @@
+@import '../../../common/SASS/palette';
+@import '../../../common/SASS/mixins';
+
+/****************************CASE STUDY************************/
+
+.p-case-study {
+  margin-bottom: 5px;
+}
+
+label {
+  font-size: 15px;
+  line-height: 21px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.case-study-div {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  .case-study-input-container {
+    width: 70%;
+
+    .custom-case-study {
+      @include themify($themes) {
+        background-color: themed('bg2');
+      }
+
+      border: 1px solid $field-stroke;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 12px;
+      padding: 6px 12px; 
+      text-align: left;
+      width: 100%;
+      
+
+
+    }
+
+    .case-study-grey {
+      color: #6d6d72;
+    }
+
+    .case-study-input {
+      display: none;
+    }
+  }
+
+  .case-study-delete {
+    text-align: center;
+    width: 30%;
+
+    button {
+      height: 32px;
+      margin-top: 0px;
+      //background: $almost-black;
+      text-align: center;
+      padding: 0 0;
+      border-radius: 3px;
+      color: $red;
+      font-size: 12px;
+      font-weight: 300;
+      background: none;
+      border: 0;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .disabled {
+    filter: grayscale(100%);
+
+    button {
+      cursor: auto;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
