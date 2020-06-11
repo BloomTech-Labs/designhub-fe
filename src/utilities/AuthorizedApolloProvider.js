@@ -13,7 +13,7 @@ const AuthorizedApolloProvider = ({ children }) => {
   const { getTokenSilently } = useAuth0();
 
   const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_GQL_API,
+    uri: process.env.REACT_APP_DOMAIN,
   });
 
   const authLink = setContext(async () => {

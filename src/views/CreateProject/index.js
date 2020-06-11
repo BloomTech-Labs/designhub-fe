@@ -8,13 +8,13 @@ import './styles.scss';
 export default function CreateProject() {
   return (
     <Layout>
-      <div className="project-form-wrapper">
+{/*      <div className="project-form-wrapper">
         <DeleteProjectModal />
         <div className="project-form-wrapper">
           <InviteModal />
         </div>
         <ProjectFormBody />
-      </div>
+      </div>*/}
     </Layout>
   );
 }

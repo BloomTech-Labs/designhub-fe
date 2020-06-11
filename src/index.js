@@ -29,7 +29,8 @@ const client = new ApolloClient({
 
 const ApolloApp = () => (
   <Router>
-    {/*<ApolloProvider client={client}>*/}
+    <ApolloProvider client={client}>
+    {/*<AuthorizedApolloProvider>*/}
     <Auth0Provider
       domain={config.domain}
       audience={config.audience}
@@ -37,11 +38,11 @@ const ApolloApp = () => (
       redirect_uri={window.location.origin}
       onRedirectCallback={onRedirectCallback}
     >
-      <AuthorizedApolloProvider>
+      </Auth0Provider>
         <App />
-      </AuthorizedApolloProvider>
-    </Auth0Provider>
-    {/*</ApolloProvider>*/}
+      {/*</AuthorizedApolloProvider>*/}
+    
+    </ApolloProvider>
   </Router>
 );
 render(<ApolloApp />, document.getElementById('root'));

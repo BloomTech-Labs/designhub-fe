@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
+import TopBar from '../../common/Nav/TopBar';
 import ProjectDetails from './ProjectDetails';
 import ProjectPdf from './ProjectPdf';
 import ProjectButtonLinks from './ProjectButtonLinks';
@@ -13,6 +14,7 @@ export default function Projects() {
   const { id } = useParams();
   return (
     <Layout>
+    <TopBar />
       <div className="projects-container">
         <div className="project-header">
           <div className="project-header-alignment">

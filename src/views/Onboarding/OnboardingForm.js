@@ -14,7 +14,7 @@ import './styles.scss';
 const OnboardingForm = ({ history, isLoading }) => {
   const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
-  const { user, logout } = useAuth0();
+  /*const { user, logout } = useAuth0();*/
 
   // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
@@ -74,6 +74,7 @@ const OnboardingForm = ({ history, isLoading }) => {
     if (email.trim().length === 0) newAlert.email = true;
     if (!newAlert.username) {
       try {
+        console.log(username);
       } catch (err) {
         console.error('OnboardingForm.js handleNextButton() ERROR', err);
       }
@@ -92,12 +93,15 @@ const OnboardingForm = ({ history, isLoading }) => {
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
     try {
+      console.log(id, changes)
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
-  const handleImageUpload = async (file) => {};
+  const handleImageUpload = async (file) => {
+    console.log(file)
+  };
 
   if (loading || isLoading) return <Loading />;
   else
@@ -120,7 +124,7 @@ const OnboardingForm = ({ history, isLoading }) => {
                       showPrev={showPrev}
                       handlePrevButton={handlePrevButton}
                       handleNextButton={handleNextButton}
-                      logout={logout}
+                      // logout={logout}
                       submitButton={submitButton}
                     />
                   );
