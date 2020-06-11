@@ -1,14 +1,13 @@
+// issue with user from Auth0 - not defined
+
 import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
-
 import { useAuth0 } from '../../utilities/auth-spa.js';
-
 
 import Loading from '../../common/Loading/index.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
-
 
 import './styles.scss';
 
@@ -38,7 +37,15 @@ const OnboardingForm = ({ history, isLoading }) => {
     lastName: user.family_name || '',
     location: '',
     username: user.nickname || '',
-    website: ''*/
+    website: '',*/
+    email: '',
+    bio: '',
+    firstName: '',
+    id: '',
+    lastName: '',
+    location: '',
+    username: '',
+    website: ''
   });
 
   // alert state for required form inputs
@@ -46,18 +53,18 @@ const OnboardingForm = ({ history, isLoading }) => {
     username: false,
     firstName: false,
     lastName: false,
-    email: false
+    email: false,
   });
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setAlert({
       ...alert,
-      [e.target.name]: false
+      [e.target.name]: false,
     });
     setFormUser({ ...formUser, [e.target.name]: e.target.value });
   };
 
-  const handleNextButton = async e => {
+  const handleNextButton = async (e) => {
     e.preventDefault();
     const { username, firstName, lastName, email } = formUser;
     const newAlert = {};
@@ -67,8 +74,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     if (email.trim().length === 0) newAlert.email = true;
     if (!newAlert.username) {
       try {
-
-
       } catch (err) {
         console.error('OnboardingForm.js handleNextButton() ERROR', err);
       }
@@ -76,33 +81,30 @@ const OnboardingForm = ({ history, isLoading }) => {
     const v = Object.values(newAlert);
     if (v.includes(true) || v.includes('taken')) {
       setAlert({ ...alert, ...newAlert });
-    } else setFormStep(n => ++n);
+    } else setFormStep((n) => ++n);
   };
 
-  const handlePrevButton = async e => {
+  const handlePrevButton = async (e) => {
     e.preventDefault();
-    setFormStep(n => --n);
+    setFormStep((n) => --n);
   };
 
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
     try {
-
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
-  const handleImageUpload = async file => {
-
-  };
+  const handleImageUpload = async (file) => {};
 
   if (loading || isLoading) return <Loading />;
   else
     return (
       <>
         <div className="OnboardingForm">
-          <form onSubmit={e => handleSubmit(e, formUser.id, formUser)}>
+          <form onSubmit={(e) => handleSubmit(e, formUser.id, formUser)}>
             <section className="stepComponents">
               {stepComponents.map((Step, i) => {
                 if (i + 1 === formStep) {
@@ -130,6 +132,5 @@ const OnboardingForm = ({ history, isLoading }) => {
       </>
     );
 };
-
 
 export default withRouter(OnboardingForm);

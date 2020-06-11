@@ -12,7 +12,8 @@ const Step1 = ({
   handleNextButton,
   handlePrevButton,
   logout,
-  submitButton
+  submitButton,
+  string
 }) => {
   const {
     bio,
@@ -132,7 +133,7 @@ const Step1 = ({
                 name="email"
                 type="text"
                 value={email}
-                disabled
+                //disabled
                 onChange={onChange}
                 placeholder="i.e. eriklambert@designhubx.com"
                 ref={setEmailRef}
