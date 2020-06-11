@@ -9,6 +9,7 @@ import * as Sentry from '@sentry/browser';
 import ApolloClient from 'apollo-boost';
 import { render } from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
+import AuthorizedApolloProvider from './utilities/AuthorizedApolloProvider';
 
 Sentry.init({ dsn: `${process.env.REACT_APP_SENTRY_DSN}` });
 
@@ -28,17 +29,19 @@ const client = new ApolloClient({
 
 const ApolloApp = () => (
   <Router>
-    <ApolloProvider client={client}>
-      <Auth0Provider
-        domain={config.domain}
-        audience={config.audience}
-        client_id={config.clientId}
-        redirect_uri={window.location.origin}
-        onRedirectCallback={onRedirectCallback}
-      >
+    {/*<ApolloProvider client={client}>*/}
+    <Auth0Provider
+      domain={config.domain}
+      audience={config.audience}
+      client_id={config.clientId}
+      redirect_uri={window.location.origin}
+      onRedirectCallback={onRedirectCallback}
+    >
+      <AuthorizedApolloProvider>
         <App />
-      </Auth0Provider>
-    </ApolloProvider>
+      </AuthorizedApolloProvider>
+    </Auth0Provider>
+    {/*</ApolloProvider>*/}
   </Router>
 );
 render(<ApolloApp />, document.getElementById('root'));
