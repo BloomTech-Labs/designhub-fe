@@ -1,10 +1,13 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
+
 import DottedLine from '../../ASSETS/Icons/DottedLine.js';
+
 import UploadCloud from '../../ASSETS/Icons/UploadCloud.js';
 import remove from '../../ASSETS/remove.svg';
 import welcome from '../../ASSETS/welcome.svg';
+
 
 const Step2 = ({
   formUser,
