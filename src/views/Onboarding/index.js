@@ -1,10 +1,23 @@
-import React from 'react';
-import './styles.scss';
+import React, { useState } from 'react';
 
-export default function Onboarding() {
-  return (
-    <div>
-      <h1>Onboarding!</h1>
-    </div>
-  );
+import { useAuth0 } from '../../utilities/auth-spa';
+
+import Loading from '../../common/Loading';
+import Step1 from './Step1.js';
+import Step2 from './Step2.js';
+
+import './styles.scss';
+export default function OnboardingForm() {
+	return (
+		<div>
+			<div className="onboarding-form">
+				<form>
+					<section className="step-components">
+						<Step1 />
+						<Step2 />
+					</section>
+				</form>
+			</div>
+		</div>
+	);
 }
