@@ -14,7 +14,7 @@ import './styles.scss';
 const OnboardingForm = ({ history, isLoading }) => {
   const [loading, setLoading] = useState(false);
   // user data from auth0 context wrapper
-  /*const { user, logout } = useAuth0();*/
+  const { user, logout } = useAuth0();
 
   // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
@@ -29,23 +29,23 @@ const OnboardingForm = ({ history, isLoading }) => {
 
   //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
-/*    avatar: user.picture || '',
+    avatar: user?.picture || '',
     bio: '',
-    email: user.email || '',
-    firstName: user.given_name || '',
-    id: user.id,
-    lastName: user.family_name || '',
+    email: user?.email || '',
+    firstName: user?.given_name || '',
+    id: user?.id,
+    lastName: user?.family_name || '',
     location: '',
-    username: user.nickname || '',
-    website: '',*/
-    email: '',
-    bio: '',
-    firstName: '',
-    id: '',
-    lastName: '',
-    location: '',
-    username: '',
-    website: ''
+    username: user?.nickname || '',
+    // website: '',
+    // email: '',
+    // bio: '',
+    // firstName: '',
+    // id: '',
+    // lastName: '',
+    // location: '',
+    // username: '',
+    // website: ''
   });
 
   // alert state for required form inputs
@@ -117,14 +117,14 @@ const OnboardingForm = ({ history, isLoading }) => {
                       key={i}
                       alert={alert}
                       files={files}
-                      /*picture={user.picture}*/
+                      picture={user?.picture}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
                       showPrev={showPrev}
                       handlePrevButton={handlePrevButton}
                       handleNextButton={handleNextButton}
-                      // logout={logout}
+                      logout={logout}
                       submitButton={submitButton}
                     />
                   );

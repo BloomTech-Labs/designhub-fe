@@ -9,6 +9,7 @@ import Explore from './views/Explore';
 import CreateProject from './views/CreateProject';
 import Profile from './views/Profile';
 import Onboarding from './views/Onboarding';
+import LandingPage from './common/LandingPage';
 import Project from './views/Project';
 import Settings from './views/Settings';
 import Search from './views/Search';
@@ -20,6 +21,7 @@ export default function App() {
       <div className="app-wrapper">
         <main className="workspace">
           <Route exact path="/" component={Explore} />
+          <Route path="/landing" component={LandingPage} />
           <Route path="/onboarding" component={Onboarding} />
           <Route path="/profile/:username" component={Profile} />
           <Route path="/project/:id" component={Project} />
