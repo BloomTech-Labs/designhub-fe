@@ -9,10 +9,10 @@ import logo from '../../ASSETS/logo.svg';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
 
-import './styles.scss';
+// import './styles.scss';
 import './SASS/LoginBar.scss';
 
-const TopBar = () => {
+const LoginBar = () => {
   const { loginWithRedirect } = useAuth0();
 
   const startLight = localStorage.getItem('theme') === 'light';
@@ -89,16 +89,9 @@ const TopBar = () => {
             ref={target}
             onClick={() => setShow(!show)}
           >
-            <section className="button-section">
-              <div className="button-container">
-                <button
-                  className="auth0-btn"
-                  onClick={() => loginWithRedirect({})}
-                >
-                  Create an account or Sign in
-                </button>
-              </div>
-            </section>
+            <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
+              Create an account or Sign in
+            </button>
 
             <div>
               <Tooltip
@@ -160,14 +153,9 @@ const TopBar = () => {
             {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
           </div>
 
-          <NavLink
-            to="/onboard"
-            className="links"
-            activeClassName="active-links"
-            onClick={toggleNav}
-          >
-            Onboard
-          </NavLink>
+          <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
+            Create an account or Sign in
+          </button>
         </div>
         <span className={showHideOverlayClassName} onClick={toggleNav} />
       </>
@@ -175,4 +163,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default LoginBar;
