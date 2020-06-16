@@ -4,10 +4,12 @@ import LoginBar from '../Nav/LoginBar';
 export default function Layout({ children }) {
   return (
     <div className="layout-wrapper">
-      <nav className="nav-wrapper">
+      <div className="nav-wrapper">
         <LoginBar />
-      </nav>
+      </div>
+      <div className="page-wrapper">
       {children}
+      </div>
     </div>
   );
 }

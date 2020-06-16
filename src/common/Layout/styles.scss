@@ -1,18 +1,14 @@
 .layout-wrapper {
-  padding: 0;
+  padding-bottom: 20px;
+  width: 100%;
+  display: flex;
+  padding-top: 2rm;
 
-  .nav-wrapper {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0 20px;
-    width: 100%;
-    background: #222;
-    color: #fafafa;
-    height: 40px;
+}
+.nav-wrapper {
+  padding-bottom: 20px;
+}
 
-    h3 {
-      margin: 0;
-    }
-  }
+.page-wrapper{
+  padding-top: 20px;
 }
