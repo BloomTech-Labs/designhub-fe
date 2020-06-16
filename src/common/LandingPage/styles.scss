@@ -1,0 +1,232 @@
+@import '../SASS/palette';
+@import '../SASS/mixins';
+
+.Login-container {
+  align-items: center;
+  background: url('../../ASSETS/loginpage-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: -40vh 0;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: bgAnimation 10s ease-in-out alternate-reverse infinite;
+  @media screen and (max-width: 700px) {
+    flex-flow: column-reverse nowrap;
+  }
+}
+
+@keyframes bgAnimation {
+  from {
+    background-position: -40vh 0;
+  }
+  to {
+    background-position: 0vh 0;
+  }
+}
+
+.left-side {
+  margin: 0 2rem 0 4rem;
+  max-width: 50%;
+  @media screen and (max-width: 1300px) {
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 1024px) {
+    margin: 0 1.5rem 0 1.8rem;
+  }
+  @media screen and (max-width: 700px) {
+    min-width: 85%;
+    margin: 50px auto;
+  }
+  h1 {
+    font-weight: 900;
+    font-size: 90px;
+    line-height: 112px;
+    letter-spacing: 0.11em;
+    @media screen and (max-width: 1300px) {
+      font-size: 65px;
+      line-height: 80px;
+    }
+    @media screen and (max-width: 1024px) {
+      font-size: 55px;
+      line-height: 70px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 40px;
+      line-height: 50px;
+    }
+    em {
+      color: hsla(360, 100%, 100%, 0);
+      -webkit-text-fill-color: hsla(
+        360,
+        100%,
+        100%,
+        0
+      ); /* Will override color (regardless of order) */
+      -webkit-text-stroke-width: 2px;
+      -webkit-text-stroke-color: $white;
+      @media screen and (max-width: 700px) {
+        -webkit-text-stroke-width: 1px;
+      }
+    }
+  }
+  p {
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.11em;
+    @media screen and (max-width: 1300px) {
+      font-size: 20px;
+      line-height: 22px;
+    }
+    @media screen and (max-width: 1024px) {
+      font-size: 18px;
+      line-height: 20px;
+    }
+    @media screen and (max-width: 700px) {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+
+  .paragraphs {
+    align-items: center;
+    display: grid;
+    grid-gap: 20px 0;
+    grid-template-columns: 40px 420px;
+    margin-top: 2vh;
+    @media screen and (max-width: 1024px) {
+      grid-template-columns: 40px 320px;
+    }
+    @media screen and (max-width: 700px) {
+      grid-template-columns: 50px 90%;
+    }
+    h2 {
+      font-size: 18px;
+      line-height: 21px;
+      letter-spacing: 0.11em;
+      @media screen and (max-width: 1300px) {
+        font-size: 16px;
+        line-height: 18px;
+      }
+      @media screen and (max-width: 1024px) {
+        font-size: 14px;
+        line-height: 16px;
+      }
+      @media screen and (max-width: 700px) {
+        font-size: 13px;
+        line-height: 16px;
+      }
+    }
+
+    p {
+      grid-column: 2;
+      font-weight: 900;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+    }
+
+    span {
+      grid-column: 1;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: 0.11em;
+
+      &.megaphone {
+        transform: rotate(-25deg) scale(-1, 1);
+        margin-right: 15px;
+      }
+    }
+  }
+}
+
+.right-side {
+  width: 50%;
+  background: $white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  @media screen and (max-width: 1024px) {
+    padding: 0 1rem;
+    width: auto;
+  }
+  .cta {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .logo {
+      padding-bottom: 1.2rem;
+      text-align: left;
+      width: 80px;
+    }
+
+    h1 {
+      background: none;
+      color: $black;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+      line-height: 30px;
+      text-decoration: none;
+      text-align: left;
+      width: 48%;
+      @media screen and (max-width: 1300px) {
+        font-size: 1.1rem;
+        line-height: 24px;
+      }
+      @media screen and (max-width: 1024px) {
+        width: 60%;
+        font-size: 1rem;
+        line-height: 24px;
+      }
+      @media screen and (max-width: 700px) {
+        text-align: center;
+        width: 90%;
+        font-size: 1rem;
+        line-height: 24px;
+      }
+    }
+
+    .join-head {
+      color: $black;
+      font-size: 1.2rem;
+      font-weight: 900;
+      margin-top: 2.3rem;
+      @media screen and (max-width: 1300px) {
+        font-size: 1rem;
+        line-height: 24px;
+      }
+      @media screen and (max-width: 700px) {
+        text-align: center;
+      }
+    }
+
+    .auth0-redirect-btn {
+      @include auth0-redirect-btn;
+      margin-top: 3.5vh;
+      &:hover {
+        background: $btn-gradient;
+        color: white;
+      }
+      @media screen and (max-width: 1024px) {
+        width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      @media screen and (max-width: 700px) {
+        margin-top: 40px;
+        padding: 20px;
+      }
+    }
+  }
+}

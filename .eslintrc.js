@@ -15,8 +15,7 @@ module.exports = {
 	},
 	plugins: [ 'react', 'prettier' ],
 	rules: {
-		'react/prop-types': 0,
-		endOfLine: 'auto'
+		'react/prop-types': 0
 	},
 	overrides: [
 		{

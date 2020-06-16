@@ -1,14 +1,15 @@
 import React from 'react';
 import './styles.scss';
-import CreateProject from '../../views/CreateProject/index';
+import LoginBar from '../Nav/LoginBar';
 export default function Layout({ children }) {
   return (
     <div className="layout-wrapper">
-      <nav className="nav-wrapper">
-        <CreateProject />
-        <h3>Layout</h3>
-      </nav>
+      <div className="nav-wrapper">
+        <LoginBar />
+      </div>
+      <div className="page-wrapper">
       {children}
+      </div>
     </div>
   );
 }

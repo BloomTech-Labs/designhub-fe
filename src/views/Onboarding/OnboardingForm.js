@@ -29,23 +29,23 @@ const OnboardingForm = ({ history, isLoading }) => {
 
   //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
-/*    avatar: user.picture || '',
+    avatar: user?.picture || '',
     bio: '',
-    email: user.email || '',
-    firstName: user.given_name || '',
-    id: user.id,
-    lastName: user.family_name || '',
+    email: user?.email || '',
+    firstName: user?.given_name || '',
+    id: user?.id,
+    lastName: user?.family_name || '',
     location: '',
-    username: user.nickname || '',
-    website: '',*/
-    email: '',
-    bio: '',
-    firstName: '',
-    id: '',
-    lastName: '',
-    location: '',
-    username: '',
-    website: ''
+    username: user?.nickname || '',
+    // website: '',
+    // email: '',
+    // bio: '',
+    // firstName: '',
+    // id: '',
+    // lastName: '',
+    // location: '',
+    // username: '',
+    // website: ''
   });
 
   // alert state for required form inputs
@@ -74,6 +74,7 @@ const OnboardingForm = ({ history, isLoading }) => {
     if (email.trim().length === 0) newAlert.email = true;
     if (!newAlert.username) {
       try {
+        console.log(username);
       } catch (err) {
         console.error('OnboardingForm.js handleNextButton() ERROR', err);
       }
@@ -92,12 +93,15 @@ const OnboardingForm = ({ history, isLoading }) => {
   const handleSubmit = async (e, id, changes) => {
     e.preventDefault();
     try {
+      console.log(id, changes)
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
-  const handleImageUpload = async (file) => {};
+  const handleImageUpload = async (file) => {
+    console.log(file)
+  };
 
   if (loading || isLoading) return <Loading />;
   else
@@ -113,7 +117,7 @@ const OnboardingForm = ({ history, isLoading }) => {
                       key={i}
                       alert={alert}
                       files={files}
-                      /*picture={user.picture}*/
+                      picture={user?.picture}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
