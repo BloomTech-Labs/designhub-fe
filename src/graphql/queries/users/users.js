@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
-const GET_USER_BY_ID_QUERY = gql`
-  query User($id: ID!) {
-    user(id: $id) {
+const GET_ALL_USERS_QUERY = gql`
+  query User {
+    users {
       id
       username
       email
@@ -50,4 +50,4 @@ const GET_USER_BY_ID_QUERY = gql`
     }
   }
 `;
-export default GET_USER_BY_ID_QUERY;
+export default GET_ALL_USERS_QUERY;
