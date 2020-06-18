@@ -1,3 +1,5 @@
+import gql from 'graphql-tag';
+
 const UPDATE_COMMENT_MUTATION = gql`
   mutation updateComments($data: UpdateCommentsInput!) {
     updateComments(data: $data) {

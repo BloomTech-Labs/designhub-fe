@@ -9,6 +9,8 @@ import Loading from '../../common/Loading/index.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
 
+import { useMutation } from '@apollo/react-hooks';
+
 import './styles.scss';
 
 const OnboardingForm = ({ history, isLoading }) => {
@@ -27,6 +29,8 @@ const OnboardingForm = ({ history, isLoading }) => {
   //avatar image handler
   const [files, setFiles] = useState([]);
 
+
+
   //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
     avatar: user?.picture || '',
@@ -37,15 +41,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     lastName: user?.family_name || '',
     location: '',
     username: user?.nickname || '',
-    // website: '',
-    // email: '',
-    // bio: '',
-    // firstName: '',
-    // id: '',
-    // lastName: '',
-    // location: '',
-    // username: '',
-    // website: ''
   });
 
   // alert state for required form inputs

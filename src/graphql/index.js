@@ -38,7 +38,7 @@ export { default as UPDATE_USER_MUTATION } from './mutations/users/updateUser';
 export { default as UPDATE_PROJECT_PHOTO_MUTATION } from './mutations/projects/updateProjectPhoto';
 // export { default as DELETE_HEATMAP_MUTATION } from './mutations/heatmap/deleteHeatmap';
 // export { default as DELETE_PHOTO_COMMENT_MUTATION } from './mutations/comments/deletePhotoComments';
-export { default as DELETE_PROJECT_PHOTO_MUTATION } from './mutations/projects/deleteProjectPhotos';
+export { default as DELETE_PROJECT_PHOTO_MUTATION } from './mutations/projects/deleteProjectPhoto';
 // export { default as DELETE_USER_RESEARCH_MUTATION } from './mutations/users/deleteUserResearch';
 // export { default as DELETE_STARED_MUTATION } from './mutations/users/deleteStarred';
 // export { default as DELETE_PROJECT_INVITE_MUTATION } from './mutations/invites/deleteProjectInvite';

@@ -1,3 +1,5 @@
+import gql from 'graphql-tag';
+
 const DELETE_COMMENTS_MUTATION = gql`
   mutation deleteComments {
     deleteComments(id: "3")
