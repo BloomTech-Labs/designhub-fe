@@ -9,100 +9,51 @@ import invisionIcon from '../../ASSETS/invision-icon.png';
 import DownloadIcon from '../../ASSETS/Icons/DownloadIcon';
 import StarIcon from '../../ASSETS/Icons/StarIcon';
 import caseStudyIcon from '../../ASSETS/case-study.png';
+import avatar1 from '../../ASSETS/avatar.jpg';
+import avatar2 from '../../ASSETS/avatar_2.jpg';
+import avatar3 from '../../ASSETS/avatar_3.jpg';
 
 export default function ProjectButtonLinks(props) {
   const { id } = useParams();
   return (
-    <div className="project-header-links">
-      <div className="project-header-button">
-        {/*{props.projectResearch[0]? (
-          <img src-{caseStudyIcon} alt="case study" classname="pdf-button"
-            onClick={() => }) 
-            />
-              ) : (
-          */}
-        <img
-          src={caseStudyIcon}
-          alt="case study"
-          className="pdf-button-disabled"
-        />
+    <div className="project-header-right">
+      <div className="project-header-team">
+        <img src={avatar1} alt="user avatar" />
+        <img src={avatar2} alt="user avatar" />
+        <img src={avatar3} alt="user avatar" />
       </div>
-      <div className="project-header-button">
-        {/*
-                    {thisProject.figma ? (
-                      <a href={thisProject.figma}>
-                        <img
-                          src={figmaIcon}
-                          className={
-                            thisProject.figma === null ||
-                            thisProject.figma === ''
-                              ? 'link-disabled'
-                              : 'link-enabled'
-                          }
-                          alt="figma"
-                        />
-                      </a>
-                    ) : (
-                */}
-        <img
-          src={figmaIcon}
-          className="link-disabled"
-          //  thisProject.figma === null || thisProject.figma === ''
-          // ? 'link-disabled'
-          // : 'link-enabled'
-          alt="figma"
-        />
-        {/*)}*/}
-      </div>
-      <div className="project-header-button">
-        {/*
-        // {thisProject.invision ? (
-        //   <a href={thisProject.invision}>
-        //     <img
-        //       src={invisionIcon}
-        //       className={
-        //         thisProject.invision === '' || thisProject.invision === null
-        //           ? 'link-disabled'
-        //           : 'link-enabled'
-        //       }
-        //       alt="invision"
-        //     />
-        //   </a>
-        // ) : ( 
-        */}
-        <img
-          src={invisionIcon}
-          className="link-disabled"
-          /*{
-              thisProject.invision === '' || thisProject.invision === null
-                ? 'link-disabled'
-                : 'link-enabled'
-            }*/
-          alt="invision"
-        />
-        {/*)}*/}
+      <div className="project-header-links">
+        <div className="project-header-button">
+          <img src={caseStudyIcon} alt="case study" className="pdf-button" />
+
+          <img
+            src={caseStudyIcon}
+            alt="case study"
+            className="pdf-button-disabled"
+          />
+        </div>
+        <div className="project-header-button">
+          <a>
+            <img src={figmaIcon} className="link-enabled" alt="figma" />
+          </a>
+
+          <img src={figmaIcon} className="link-enabled" alt="figma" />
+        </div>
+        <div className="project-header-button">
+          <a>
+            <img src={invisionIcon} className="link-disabled" alt="invision" />
+          </a>
+
+          <img src={invisionIcon} className="link-enabled" alt="invision" />
+        </div>
         <div className="download project-header-button">
           <DownloadIcon />
         </div>
-        {/*        <div
-          onClick={props.isStarred ? unstarProject : starProject}
-          className="star project-header-button"
-        >*/}
-        <StarIcon isStarred={props.isStarred} />
-        {/*</div>*/}
-        {/*
-        {(props.activeUser.id === props.project.userId ||
-          state.editAccess) && (
-        */}
-        <div
-          className="edit project-header-button"
-          /* onClick={() => {
-              props.history.push(`/project/${projectId}/edit`);
-            }}*/
-        >
-          Edit
+        <div className="star project-header-button">
+          <StarIcon />
         </div>
-        {/*)}*/}
+
+        <div className="edit project-header-button">Edit</div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import createAuth0Client from '@auth0/auth0-spa-js';
+import {} from '../index';
 
 // This file contains the necessary setup to use auth0 login
 // Read official documentation for a more thorough explanation
@@ -34,6 +35,7 @@ export const Auth0Provider = ({
       }
 
       const isAuthenticated = await auth0FromHook.isAuthenticated();
+
       setIsAuthenticated(isAuthenticated);
 
       if (isAuthenticated) {
