@@ -3,17 +3,22 @@ import { useAuth0 } from '../../utilities/auth-spa';
 import { Route } from 'react-router-dom';
 import LandingPage from '../LandingPage';
 import Loading from '../Loading';
+import Onboarding from '../../views/Onboarding/index';
 
 const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const { loading, user } = useAuth0();
+
+  const onBoarding = user?.username === null || user?.username === '';
 
   return (
     <Route
       {...rest}
       render={(routeProps) => {
-        // if use is logged in, send them to private route, else send them to the landing page to log in
-        return user ? (
+        // if user is logged in, send them to private route, else send them to the landing page to log in
+        return user ? !onBoarding (
           <RouteComponent {...routeProps} />
+        ) :  user && onBoarding ? (
+            <Onboarding {...routeProps} />
         ) : !loading && !user ? (
           <LandingPage />
         ) : (

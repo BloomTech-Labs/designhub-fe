@@ -13,11 +13,10 @@ const Step1 = ({
   handlePrevButton,
   logout,
   submitButton,
-  string
 }) => {
   const {
     bio,
-    email,
+    //email,
     firstName,
     lastName,
     location,
@@ -28,7 +27,7 @@ const Step1 = ({
   const [firstNameRef, setFirstNameRef] = useState(null);
   const [lastNameRef, setLastNameRef] = useState(null);
   const [usernameRef, setUsernameRef] = useState(null);
-  const [emailRef, setEmailRef] = useState(null);
+ // const [emailRef, setEmailRef] = useState(null);
 
   const focusRef = thisRef => {
     thisRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -41,7 +40,7 @@ const Step1 = ({
       : (userNameAlertClass = 'required alert input-field');
     focusRef(usernameRef);
   }
-  if (alert.email) focusRef(emailRef);
+ // if (alert.email) focusRef(emailRef);
   if (alert.lastName) focusRef(lastNameRef);
   if (alert.firstName) focusRef(firstNameRef);
 
@@ -117,7 +116,7 @@ const Step1 = ({
           </div>
 
           <div>
-            <div
+{/*            <div
               className={
                 alert.email
                   ? 'required alert input-field'
@@ -138,7 +137,7 @@ const Step1 = ({
                 placeholder="i.e. eriklambert@designhubx.com"
                 ref={setEmailRef}
               />
-            </div>
+            </div>*/}
           </div>
           <div className="input-field">
             <label className="bio" htmlFor="bio">

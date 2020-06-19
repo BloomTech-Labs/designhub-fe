@@ -18,7 +18,7 @@ const onRedirectCallback = (appState) => {
     document.title,
     appState && appState.targetUrl
       ? appState.targetUrl
-      : window.location.pathname
+      : '/onboarding'
   );
 };
 

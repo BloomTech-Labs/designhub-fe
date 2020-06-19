@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './App.scss';
 
@@ -22,10 +22,10 @@ export default function App() {
         <main className="workspace">
           <Route exact path="/" component={Explore} />
           <Route path="/landing" component={LandingPage} />
-          <Route path="/onboarding" component={Onboarding} />
           <Route path="/profile/:username" component={Profile} />
           <Route path="/project/:id" component={Project} />
           <Route path="/search" component={Search} />
+          <Route path="/onboarding" component={Onboarding} />
           <PrivateRoute path="/notifications" component={Notifications} />
           <PrivateRoute path="/create-project" component={CreateProject} />
           <PrivateRoute path="/settings" component={Settings} />

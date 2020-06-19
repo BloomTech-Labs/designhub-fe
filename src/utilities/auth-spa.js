@@ -48,13 +48,13 @@ export const Auth0Provider = ({
           id: user?.sub,
           email: user?.email,
           avatar: user?.picture,
-          username: user?.nickname,
+          // username: user?.nickname,
         });
         addUser({ variables: { data: {
           id: user?.sub,
           email: user?.email,
           avatar: user?.picture,
-          username: user?.nickname,
+          // username: user?.nickname,
         } } });
         console.log('NewUserData', {
           id: user?.sub,
@@ -64,9 +64,13 @@ export const Auth0Provider = ({
         });
       }
 
-
+      
       setLoading(false);
     };
+
+
+
+    
     initAuth0();
     // eslint-disable-next-line
   }, [addUser]);
