@@ -16,7 +16,3 @@ const ADD_USER_MUTATION = gql`
   }
 `;
 export default ADD_USER_MUTATION;
-
-import gql from 'graphql-tag';
-
-

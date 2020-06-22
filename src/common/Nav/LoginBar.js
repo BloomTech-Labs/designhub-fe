@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa.js';
 import Tooltip from 'react-power-tooltip';
 
@@ -8,12 +8,17 @@ import logo from '../../ASSETS/logo.svg';
 //import SearchBar from '../../views/Search/SearchBar.js';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
-
+import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
+import { useQuery } from '@apollo/react-hooks';
 // import './styles.scss';
 import './SASS/LoginBar.scss';
 
 const LoginBar = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, logout, user } = useAuth0();
+
+  const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
+    variables: { id: user?.sub },
+  });
 
   const startLight = localStorage.getItem('theme') === 'light';
 
@@ -68,97 +73,92 @@ const LoginBar = () => {
     ? 'mobile-overlay display-none'
     : 'mobile-overlay display-block';
 
+  // No username is added to DB when user is created.
+  if (data?.user?.username === null) return <Redirect to="/onboarding" />;
+
   return (
     <div className="top-bar-container">
-      <>
-        <div className="nav-content">
-          <div className="logo-container">
-            <Link to={`/explore`}>
-              <SampleLogo />
-            </Link>
-          </div>
-          <div className="search-bar-container">
-            {/* <div className="magnifying-glass-container">
-            <MagnifyingGlass />
-          </div> */}
-
-            {/*    <SearchBar searchData={searchData} getSearch={getSearch} />*/}
-          </div>
-          <div
-            className="top-bar-user-info"
-            ref={target}
-            onClick={() => setShow(!show)}
-          >
-            <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
-              Create an account or Sign in
-            </button>
-
-            <div>
-              <Tooltip
-                show={show}
-                arrowAlign="center"
-                backgroundColor={light ? undefined : '#212229'}
-                // hoverColor="#212229"
-                border="1px solid #ffffff"
-                position="bottom right"
-                moveRight="-100px"
-                lineSeparated
-              ></Tooltip>
-            </div>
-          </div>
-          <div className="dark-mode-switch" onClick={setLightMode}>
-            {light ? (
-              <img alt="sun-mode switch" src={sunMode} />
-            ) : (
-              <DarkModeSwitch />
-            )}
-          </div>
+      <div className="nav-content">
+        <div className="logo-container">
+          <Link to={`/explore`}>
+            <SampleLogo />
+          </Link>
         </div>
-        <div className="mobile-nav">
-          <div className="mobile-logo-container">
-            <img src={logo} className="mobile-logo" alt="logo" />
-          </div>
-          <svg
-            alt="menu"
-            className="mobile-menu"
-            onClick={toggleNav}
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M3.75 15H26.25"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M3.75 7.5H26.25"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M3.75 22.5H26.25"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <div className={showHideClassName}>
-          <div className="mobile-search">
-            {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
-          </div>
-
+        <div
+          className="top-bar-user-info"
+          ref={target}
+          onClick={() => setShow(!show)}
+        >
           <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
             Create an account or Sign in
           </button>
+          <button onClick={logout}> logout </button>
+
+          <div>
+            <Tooltip
+              show={show}
+              arrowAlign="center"
+              backgroundColor={light ? undefined : '#212229'}
+              // hoverColor="#212229"
+              border="1px solid #ffffff"
+              position="bottom right"
+              moveRight="-100px"
+              lineSeparated
+            ></Tooltip>
+          </div>
         </div>
-        <span className={showHideOverlayClassName} onClick={toggleNav} />
-      </>
+        <div className="dark-mode-switch" onClick={setLightMode}>
+          {light ? (
+            <img alt="sun-mode switch" src={sunMode} />
+          ) : (
+            <DarkModeSwitch />
+          )}
+        </div>
+      </div>
+      <div className="mobile-nav">
+        <div className="mobile-logo-container">
+          <img src={logo} className="mobile-logo" alt="logo" />
+        </div>
+        <svg
+          alt="menu"
+          className="mobile-menu"
+          onClick={toggleNav}
+          width="30"
+          height="30"
+          viewBox="0 0 30 30"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3.75 15H26.25"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M3.75 7.5H26.25"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M3.75 22.5H26.25"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      <div className={showHideClassName}>
+        <div className="mobile-search">
+          {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
+        </div>
+
+        <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
+          Create an account or Sign in
+        </button>
+      </div>
+      <span className={showHideOverlayClassName} onClick={toggleNav} />
     </div>
   );
 };
