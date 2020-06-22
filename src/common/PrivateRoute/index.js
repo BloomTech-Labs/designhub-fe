@@ -9,6 +9,9 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const { user, loading } = useAuth0();
 
 
+
+  return (
+
       <Route
         {...rest}
         render={(routeProps) => {
@@ -27,3 +30,21 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
 };
 
 export default PrivateRoute;
+
+    // <Switch>
+    //   <Route
+    //     {...rest}
+    //     render={(routeProps) => {
+    //       // if user is logged in, send them to private route, else send them to the landing page to log in
+    //       return data?.user && !onBoarding ? (
+    //         <RouteComponent {...routeProps} />
+    //       ) : !loading && !data?.user && !onBoarding ? (
+    //         <LandingPage />
+    //       ) : !loading && !data?.user && onBoarding ? (
+    //         <Redirect to='/onboarding' />
+    //       ) : (
+    //         <Loading />
+    //       );
+    //     }}
+    //   />
+    // </Switch>
