@@ -35,7 +35,7 @@ export default function App() {
           id: user?.sub,
           email: user?.email,
           avatar: user?.picture,
-          // username: user?.nickname,
+          // username: is not included in adding user to DB, the null username is used to send the new user to /onboarding from ./Loginbar
         },
       },
       refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],

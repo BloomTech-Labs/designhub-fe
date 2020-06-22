@@ -37,8 +37,7 @@ const LoginBar = () => {
   };
 
   useEffect(init, []);
-  
- 
+
   const handleClick = (e) => {
     if (!target.current.contains(e.target)) {
       setShow(false);
@@ -73,7 +72,10 @@ const LoginBar = () => {
   const showHideOverlayClassName = open
     ? 'mobile-overlay display-none'
     : 'mobile-overlay display-block';
- if (data?.user?.username === null) return <Redirect to="/onboarding" />;
+
+  // No username is added to DB when user is created.
+  if (data?.user?.username === null) return <Redirect to="/onboarding" />;
+
   return (
     <div className="top-bar-container">
       <div className="nav-content">
@@ -81,13 +83,6 @@ const LoginBar = () => {
           <Link to={`/explore`}>
             <SampleLogo />
           </Link>
-        </div>
-        <div className="search-bar-container">
-          {/* <div className="magnifying-glass-container">
-            <MagnifyingGlass />
-          </div> */}
-
-          {/*    <SearchBar searchData={searchData} getSearch={getSearch} />*/}
         </div>
         <div
           className="top-bar-user-info"
