@@ -15,7 +15,33 @@ import Settings from './views/Settings';
 import Search from './views/Search';
 import Notifications from './views/Notifications';
 
+import { ADD_USER_MUTATION, GET_USER_BY_ID_QUERY } from './graphql/index';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useAuth0 } from './utilities/auth-spa.js';
+
 export default function App() {
+  const { user } = useAuth0();
+
+  const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
+    variables: { id: user?.sub },
+  });
+  const [addUser] = useMutation(ADD_USER_MUTATION);
+  console.log('GET_USER_DATA', data);
+
+  useEffect(() => {
+    addUser({
+      variables: {
+        data: {
+          id: user?.sub,
+          email: user?.email,
+          avatar: user?.picture,
+          // username: user?.nickname,
+        },
+      },
+      refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
+    });
+    console.log('AUTHUSER', user);
+  }, [user, data]);
   return (
     <>
       <div className="app-wrapper">

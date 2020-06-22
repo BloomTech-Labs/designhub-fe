@@ -13,8 +13,8 @@ import avatar1 from '../../ASSETS/avatar.jpg';
 import avatar2 from '../../ASSETS/avatar_2.jpg';
 import avatar3 from '../../ASSETS/avatar_3.jpg';
 
-export default function ProjectButtonLinks(props) {
-  const { id } = useParams();
+export default function ProjectButtonLinks(/*props*/) {
+  //const { id } = useParams();
   return (
     <div className="project-header-right">
       <div className="project-header-team">

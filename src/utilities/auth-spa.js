@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import {} from '../index';
-import { GET_ALL_USERS_QUERY } from '../graphql/index';
-import { ADD_USER_MUTATION } from '../graphql/index';
-import { useMutation } from '@apollo/react-hooks';
-
 // This file contains the necessary setup to use auth0 login
 // Read official documentation for a more thorough explanation
 
@@ -19,11 +15,10 @@ export const Auth0Provider = ({
   ...initOptions
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState();
-  const [newUser, setNewUser] = useState();
+  const [user, setUser] = useState();
   const [auth0Client, setAuth0] = useState();
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
-  const [addUser] = useMutation(ADD_USER_MUTATION);
 
   useEffect(() => {
     const initAuth0 = async () => {
@@ -44,37 +39,16 @@ export const Auth0Provider = ({
 
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
-        setNewUser({
-          id: user?.sub,
-          email: user?.email,
-          avatar: user?.picture,
-          // username: user?.nickname,
-        });
-        addUser({ variables: { data: {
-          id: user?.sub,
-          email: user?.email,
-          avatar: user?.picture,
-          // username: user?.nickname,
-        } } });
-        console.log('NewUserData', {
-          id: user?.sub,
-          email: user?.email,
-          avatar: user?.picture,
-          username: user?.nickname,
-        });
+        console.log('SPA_USER', user);
+        setUser(user);
       }
 
-      
       setLoading(false);
     };
 
-
-
-    
     initAuth0();
     // eslint-disable-next-line
-  }, [addUser]);
-
+  }, []);
 
   const loginWithPopup = async (params = {}) => {
     setPopupOpen(true);
@@ -87,7 +61,7 @@ export const Auth0Provider = ({
       setPopupOpen(false);
     }
     const user = await auth0Client.getUser();
-    setNewUser(user);
+    setUser(user);
     setIsAuthenticated(true);
   };
 
@@ -97,13 +71,13 @@ export const Auth0Provider = ({
     const user = await auth0Client.getUser();
     setLoading(false);
     setIsAuthenticated(true);
-    setNewUser(user);
+    setUser(user);
   };
   return (
     <Auth0Context.Provider
       value={{
         isAuthenticated,
-        newUser,
+        user,
         loading,
         popupOpen,
         loginWithPopup,
