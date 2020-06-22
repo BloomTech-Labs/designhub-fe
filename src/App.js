@@ -26,7 +26,7 @@ export default function App() {
     variables: { id: user?.sub },
   });
   const [addUser] = useMutation(ADD_USER_MUTATION);
-  console.log('GET_USER_DATA', data);
+  //console.log('GET_USER_DATA', data);
 
   useEffect(() => {
     addUser({
@@ -40,7 +40,7 @@ export default function App() {
       },
       refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
     });
-    console.log('AUTHUSER', user);
+    //console.log('AUTHUSER', user);
   }, [user, data]);
   return (
     <>
