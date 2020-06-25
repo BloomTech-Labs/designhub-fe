@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
 
 import Loading from '../../common/Loading/index.js';
+import Explore from '../../views/Explore/index.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
 
@@ -58,6 +59,13 @@ const OnboardingForm = ({ history, isLoading }) => {
     lastName: false,
     // email: false,
   });
+
+//   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
+
+// useEffect(() => {
+//   if (redirect === true)
+//     history.push('/profile/:username')
+// },[redirect])
 
   const handleChange = (e, id) => {
     setAlert({
@@ -121,7 +129,7 @@ const OnboardingForm = ({ history, isLoading }) => {
         },
         refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
       });
-      history.push(`/`);
+      history.push(`/callback`);
       console.log('res submit:', data);
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
