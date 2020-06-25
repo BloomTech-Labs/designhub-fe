@@ -60,12 +60,12 @@ const OnboardingForm = ({ history, isLoading }) => {
     // email: false,
   });
 
-//   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
+  //   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
 
-// useEffect(() => {
-//   if (redirect === true)
-//     history.push('/profile/:username')
-// },[redirect])
+  // useEffect(() => {
+  //   if (redirect === true)
+  //     history.push('/profile/:username')
+  // },[redirect])
 
   const handleChange = (e, id) => {
     setAlert({
@@ -119,6 +119,7 @@ const OnboardingForm = ({ history, isLoading }) => {
           data: {
             id: user?.sub,
             avatar: newAvatar,
+            email: user?.email,
             username: formUser?.username,
             firstName: formUser?.firstName,
             lastName: formUser?.lastName,
