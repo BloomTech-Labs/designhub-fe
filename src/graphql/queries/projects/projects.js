@@ -23,7 +23,6 @@ const GET_ALL_PROJECTS_QUERY = gql`
       }
       comments {
         id
-        username
         userId
         projectId
         text

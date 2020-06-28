@@ -11,9 +11,20 @@ import sunMode from '../../ASSETS/sun-mode.svg';
 
 import './styles.scss';
 
-const TopBar = ({ history, activeUser, searchData, getSearch }) => {
-  const { logout } = useAuth0();
+import { useQuery } from '@apollo/react-hooks';
+import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
 
+const TopBar = ({ history, searchData, getSearch }) => {
+
+
+ 
+  const { logout, user } = useAuth0();
+
+    const { data:activeUser } = useQuery(GET_USER_BY_ID_QUERY, {
+    variables: { id: user?.sub },
+  });
+
+console.log('USERDATA-BAR',activeUser)
   const startLight = localStorage.getItem('theme') === 'light';
 
   const [light, setLight] = useState(startLight);
@@ -89,12 +100,12 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
             ref={target}
             onClick={() => setShow(!show)}
           >
-            <p className='top-bar-user-info'>activeUser.username</p>
+            <p className='top-bar-user-info'>{activeUser?.user?.username}</p>
 
             <div>
               <img
                 className="profile-pic-thumb"
-                src={activeUser.avatar}
+                src={activeUser?.user?.avatar}
                 alt="user avatar"
                 variant="danger"
               />
@@ -112,22 +123,22 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
                 <span
                   onClick={() =>
                     history.push(
-                      `/profile/${activeUser.id}/${activeUser.username}`
+                      `/profile/${activeUser?.user.username}`
                     )
                   }
-                  to={`/profile/${activeUser.id}/${activeUser.username}`}
+                  to={`/profile/${activeUser?.user.username}`}
                 >
                   My Profile
                 </span>
                 <span
                   onClick={() => history.push('/settings')}
-                  to={`/profile/${activeUser.id}/${activeUser.username}`}
+                  to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
                 >
                   Settings
                 </span>
                 <span
                   onClick={() => logout()}
-                  to={`/profile/${activeUser.id}/${activeUser.username}`}
+                  to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
                 >
                   Log Out
                 </span>
@@ -144,7 +155,7 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
         </div>
         <div className="mobile-nav">
           <div className="mobile-logo-container">
-            <Link to={`/profile/${activeUser.id}/${activeUser.username}`}>
+            <Link to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}>
               <img src={logo} className="mobile-logo" alt="logo" />
             </Link>
           </div>
@@ -183,7 +194,7 @@ const TopBar = ({ history, activeUser, searchData, getSearch }) => {
          {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
           </div>
           <NavLink
-            to={`/profile/${activeUser.id}/${activeUser.username}`}
+            to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
             className="links"
             activeClassName="active-links"
             onClick={toggleNav}

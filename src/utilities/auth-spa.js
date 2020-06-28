@@ -3,6 +3,7 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 import {} from '../index';
 // This file contains the necessary setup to use auth0 login
 // Read official documentation for a more thorough explanation
+// 
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
@@ -39,7 +40,7 @@ export const Auth0Provider = ({
 
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
-        console.log('SPA_USER', user);
+        //console.log('AUTH_SPA_USER', user);
         setUser(user);
       }
 

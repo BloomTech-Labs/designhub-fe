@@ -32,7 +32,6 @@ const GET_ALL_USERS_QUERY = gql`
         }
         comments {
           id
-          username
           userId
           projectId
           text

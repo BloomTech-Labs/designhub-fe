@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa.js';
 import Tooltip from 'react-power-tooltip';
 
@@ -15,6 +15,9 @@ import './SASS/LoginBar.scss';
 
 const LoginBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0();
+  const history = useHistory()
+  //const [pathname, setPathname] =useState(()=> history.locaiton.pathname);
+  //console.log('history', history)
 
   const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
@@ -38,11 +41,16 @@ const LoginBar = () => {
 
   useEffect(init, []);
 
+  // useEffect(() =>{
+  //   return history.listen(({pathname}) => setPathname(pathname))
+  // }, [history])
+
   const handleClick = (e) => {
     if (!target.current.contains(e.target)) {
       setShow(false);
     }
   };
+
 
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
@@ -54,6 +62,8 @@ const LoginBar = () => {
     }
     setLight(!light);
   };
+ 
+  // const redirect_uri = `${window.location.origin}/onboarding`
 
   const toggleLightMode = () => {
     document.documentElement.classList.toggle('theme-light');
@@ -74,8 +84,11 @@ const LoginBar = () => {
     : 'mobile-overlay display-block';
 
   // No username is added to DB when user is created.
-  if (data?.user?.username === null) return <Redirect to="/onboarding" />;
-
+ // if (data?.user?.username === null) return <Redirect to="/onboarding" />
+const login = () => {
+  loginWithRedirect({})
+  return window.location.reload()
+}
   return (
     <div className="top-bar-container">
       <div className="nav-content">
@@ -89,7 +102,7 @@ const LoginBar = () => {
           ref={target}
           onClick={() => setShow(!show)}
         >
-          <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
+          <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
           <button onClick={logout}> logout </button>
@@ -154,9 +167,10 @@ const LoginBar = () => {
           {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
         </div>
 
-        <button className="auth0-btn" onClick={() => loginWithRedirect({})}>
+        <button className="auth0-btn" onClick={login}>
           Create an account or Sign in
         </button>
+                  <button onClick={logout}> logout </button>
       </div>
       <span className={showHideOverlayClassName} onClick={toggleNav} />
     </div>

@@ -3,7 +3,11 @@ import Layout from '../../common/Layout';
 import ExploreTabs from '../Explore/ExploreTabs';
 import './styles.scss';
 
+
 export default function Explore() {
+
+
+  // console.log('GET ALL PROJECTS', allProjects);
   return (
     <Layout>
       <h1>Explore Page!</h1>
