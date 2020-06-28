@@ -4,9 +4,9 @@ import { TabPanel } from 'react-tabs';
 import empty from '../../ASSETS/Icons/empty_project.svg';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
-export default function AllTab(props) {
-    // console.log('GET ALL PROJECTS', props.projects);
-    // console.log('GET ALL USERS', props.users)
+export default function AllTab({projects, users}) {
+    console.log('GET ALL PROJECTS EXPLORE', projects);
+    console.log('GET ALL USERS EXPLORE', users)
   return (
     <TabPanel className="tabs-container">
       <div className="empty-state">
@@ -15,8 +15,8 @@ export default function AllTab(props) {
       </div>
 
       <div className="explore-projects-array">
-      {props.projects?.projects.map((project) => {
-          const user = props.users?.users.find((user) => user.id === project.userId);
+      {projects?.projects.map((project) => {
+          const user = users?.users.find((user) => user.id === project.userId);
           return (
             <ProjectThumbnail project={project} user={user} key={project.id} />
           );

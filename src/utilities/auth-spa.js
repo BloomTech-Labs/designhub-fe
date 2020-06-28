@@ -40,7 +40,7 @@ export const Auth0Provider = ({
 
       if (isAuthenticated) {
         const user = await auth0FromHook.getUser();
-        console.log('SPA_USER', user);
+        //console.log('AUTH_SPA_USER', user);
         setUser(user);
       }
 
