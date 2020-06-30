@@ -16,15 +16,14 @@ import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
 
 const TopBar = ({ history, searchData, getSearch }) => {
 
-
- 
   const { logout, user } = useAuth0();
 
     const { data:activeUser } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
 
-console.log('USERDATA-BAR',activeUser)
+// console.log('USERDATA-BAR',activeUser)
+
   const startLight = localStorage.getItem('theme') === 'light';
 
   const [light, setLight] = useState(startLight);

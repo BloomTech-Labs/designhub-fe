@@ -3,7 +3,6 @@ import Layout from '../../common/Layout';
 import ExploreTabs from '../Explore/ExploreTabs';
 import './styles.scss';
 
-
 export default function Explore() {
 
 
