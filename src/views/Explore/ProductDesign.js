@@ -3,7 +3,7 @@ import React from 'react';
 import empty from '../../ASSETS/Icons/empty_project.svg';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
-export default function ProductDesign() {
+export default function ProductDesign({ projects, users, ...rest }) {
   return (
     <>
       <div className="empty-state">
@@ -12,7 +12,14 @@ export default function ProductDesign() {
       </div>
 
       <div className="explore-projects-array">
-        <ProjectThumbnail />;
+        {projects?.projects.map((project) => {
+          const user = users?.users?.find(
+            (user) => users.id === projects.userId
+          );
+          return (
+            <ProjectThumbnail project={project} user={user} key={project.id} />
+          );
+        })}
       </div>
     </>
   );

@@ -5,8 +5,6 @@ import empty from '../../ASSETS/Icons/empty_project.svg';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
 export default function AllTab({projects, users, ...rest}) {
-//console.log('GET ALL PROJECTS EXPLORE', projects);
-    //console.log('GET ALL USERS EXPLORE', users?.users)
   return (
     <>
       <div className="empty-state">
@@ -17,7 +15,6 @@ export default function AllTab({projects, users, ...rest}) {
       <div className="explore-projects-array">
       {projects?.projects.map(project => {
           const user = users?.users?.find(user => users.id === projects.userId);
-          //console.log('ARRAY USERS', user)
           return (
             <ProjectThumbnail project={project} user={user} key={project.id} />
           );
