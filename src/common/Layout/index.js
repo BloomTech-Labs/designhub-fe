@@ -5,9 +5,7 @@ import TopBar from '../Nav/TopBar';
 import { useAuth0 } from '../../utilities/auth-spa';
 
 export default function Layout({ children }) {
-
-  const {user} =useAuth0()
-  console.log('LAYOUT USER INFO', user)
+  const { user } = useAuth0();
   return (
     <div className="layout-wrapper">
       <div className="nav-wrapper">{!user ? <LoginBar /> : <TopBar />}</div>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, TabList } from 'react-tabs';
+import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import AllTab from './AllTab';
 import Illustration from './Illustration';
@@ -25,25 +25,41 @@ export default function ExploreTabs() {
       <div>
         <Tabs defaultIndex={0}>
           <TabList className="explore-nav-links">
-            {/*<div className = "explore-nav-div">*/}
+            <div className="explore-nav-div">
+              <Tab key={0} className="tabs-8">
+                All
+              </Tab>
 
-            <Tab key={0} className="tabs-8">
-              All
-            </Tab>
-
-            {/*CHIPS*/}
-
-            {/*</div> */}
+              {/*CHIPS*/}
+            </div>
           </TabList>
-          <AllTab projects={allProjects} users={allUsers} />
-          <Illustration projects={allProjects} users={allUsers} />
-          <WebDesign projects={allProjects} users={allUsers} />
-          <GrapicDesign projects={allProjects} users={allUsers} />
-          <UXDesign projects={allProjects} users={allUsers} />
-          <UIDesign projects={allProjects} users={allUsers} />
-          <MotionDesign projects={allProjects} users={allUsers} />
-          <Animation projects={allProjects} />
-          <ProductDesign projects={allProjects} users={allUsers} />
+          <TabPanel className="tabs-container">
+            <AllTab projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <Illustration projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <WebDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <GrapicDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <UXDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <UIDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <MotionDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <Animation projects={allProjects} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <ProductDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
         </Tabs>
       </div>
     </div>
