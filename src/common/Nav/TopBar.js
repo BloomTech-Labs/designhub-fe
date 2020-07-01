@@ -88,11 +88,11 @@ const TopBar = ({ history, searchData, getSearch }) => {
             </Link>
           </div>
           <div className="search-bar-container">
-             <div className="magnifying-glass-container">
-            {/*<MagnifyingGlass />*/}
-          </div>
+{/*             <div className="magnifying-glass-container">
+            <MagnifyingGlass />
+          </div>*/}
 
-        <Search/>
+{/*        <Search/>*/}
           </div>
           <div
             className="top-bar-user-info"
