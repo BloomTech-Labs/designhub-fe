@@ -5,7 +5,7 @@ import Tooltip from 'react-power-tooltip';
 
 import SampleLogo from '../../ASSETS/Icons/SampleLogo.js';
 import logo from '../../ASSETS/logo.svg';
-//import SearchBar from '../../views/Search/SearchBar.js';
+import Search from '../../views/Search/index.js';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
 
@@ -22,7 +22,7 @@ const TopBar = ({ history, searchData, getSearch }) => {
     variables: { id: user?.sub },
   });
 
-// console.log('USERDATA-BAR',activeUser)
+ console.log('USERDATA-BAR',activeUser)
 
   const startLight = localStorage.getItem('theme') === 'light';
 
@@ -88,11 +88,11 @@ const TopBar = ({ history, searchData, getSearch }) => {
             </Link>
           </div>
           <div className="search-bar-container">
-            {/* <div className="magnifying-glass-container">
-            <MagnifyingGlass />
-          </div> */}
+             <div className="magnifying-glass-container">
+            {/*<MagnifyingGlass />*/}
+          </div>
 
-        {/*    <SearchBar searchData={searchData} getSearch={getSearch} />*/}
+        <Search/>
           </div>
           <div
             className="top-bar-user-info"

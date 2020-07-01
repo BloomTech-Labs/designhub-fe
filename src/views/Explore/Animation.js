@@ -3,7 +3,7 @@ import React from 'react';
 import empty from '../../ASSETS/Icons/empty_project.svg';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
-export default function Animation({ projects, users, ...rest }) {
+export default function Animation() {
   return (
     <>
       <div className="empty-state">
@@ -12,14 +12,7 @@ export default function Animation({ projects, users, ...rest }) {
       </div>
 
       <div className="explore-projects-array">
-        {projects?.projects.map((project) => {
-          const user = users?.users?.find(
-            (user) => users.id === projects.userId
-          );
-          return (
-            <ProjectThumbnail project={project} user={user} key={project.id} />
-          );
-        })}
+        <ProjectThumbnail />;
       </div>
     </>
   );

@@ -105,12 +105,14 @@ const login = () => {
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
+          
+
           <div>
             <Tooltip
               show={show}
               arrowAlign="center"
               backgroundColor={light ? undefined : '#212229'}
-              // hoverColor="#212229"
+             // hoverColor="#212229"
               border="1px solid #ffffff"
               position="bottom right"
               moveRight="-100px"
@@ -162,6 +164,7 @@ const login = () => {
       </div>
       <div className={showHideClassName}>
         <div className="mobile-search">
+          {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
         </div>
 
         <button className="auth0-btn" onClick={login}>
