@@ -57,7 +57,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     username: false,
     firstName: false,
     lastName: false,
-    // email: false,
   });
 
   //   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
@@ -82,7 +81,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     if (username.trim().length === 0) newAlert.username = true;
     if (firstName.trim().length === 0) newAlert.firstName = true;
     if (lastName.trim().length === 0) newAlert.lastName = true;
-    // if (email.trim().length === 0) newAlert.email = true;
     if (!newAlert.username) {
       try {
         console.log('check userId', data?.user);
@@ -118,7 +116,7 @@ const OnboardingForm = ({ history, isLoading }) => {
         variables: {
           data: {
             id: user?.sub,
-            avatar: newAvatar,
+            avatar: user?.picture,
             email: user?.email,
             username: formUser?.username,
             firstName: formUser?.firstName,
@@ -137,10 +135,27 @@ const OnboardingForm = ({ history, isLoading }) => {
     }
   };
 
-  const handleImageUpload = async (file) => {
-    console.log('obFile', file);
-  };
+  const handleImageUpload = async file => {
+    try {
+      const {
+        data: { key, url }
+      } = await updateUser({
+      variables: {
+        data: {
+          id: user?.sub,
+          avatar: user?.avatar,
+        }
+      }
+    })
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file.preview));
 
+      return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
+    } catch (err) {
+      console.error('OnboardingForm.js handleImageUpload() ERROR', err);
+    }
+  };
+  
   if (loadingPage || isLoading) return <Loading />;
   else
     return (
