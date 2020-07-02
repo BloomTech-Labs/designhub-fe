@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa.js';
 import Tooltip from 'react-power-tooltip';
-
+import { useHistory } from 'react-router';
 import SampleLogo from '../../ASSETS/Icons/SampleLogo.js';
 import logo from '../../ASSETS/logo.svg';
 import Search from '../../views/Search/index.js';
@@ -14,15 +14,13 @@ import './styles.scss';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
 
-const TopBar = ({ history, searchData, getSearch }) => {
-
+const TopBar = ({ searchData, getSearch }) => {
   const { logout, user } = useAuth0();
+  const history = useHistory();
 
-    const { data:activeUser } = useQuery(GET_USER_BY_ID_QUERY, {
+  const { data: activeUser } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
-
- console.log('USERDATA-BAR',activeUser)
 
   const startLight = localStorage.getItem('theme') === 'light';
 
@@ -31,28 +29,27 @@ const TopBar = ({ history, searchData, getSearch }) => {
   const target = useRef();
 
   const init = () => {
-    if(startLight) {
+    if (startLight) {
       toggleLightMode();
     }
     document.addEventListener('mousedown', handleClick);
     return () => {
       document.removeEventListener('mousedown', handleClick);
     };
-  }
+  };
 
   useEffect(init, []);
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (!target.current.contains(e.target)) {
       setShow(false);
     }
   };
 
-
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
     toggleLightMode();
-    if(light) {
+    if (light) {
       localStorage.setItem('theme', 'dark');
     } else {
       localStorage.setItem('theme', 'light');
@@ -62,7 +59,7 @@ const TopBar = ({ history, searchData, getSearch }) => {
 
   const toggleLightMode = () => {
     document.documentElement.classList.toggle('theme-light');
-  }
+  };
 
   const [open, mobileNav] = useState(true);
   const toggleNav = () => {
@@ -88,18 +85,18 @@ const TopBar = ({ history, searchData, getSearch }) => {
             </Link>
           </div>
           <div className="search-bar-container">
-{/*             <div className="magnifying-glass-container">
+            {/*             <div className="magnifying-glass-container">
             <MagnifyingGlass />
           </div>*/}
 
-{/*        <Search/>*/}
+            {/*        <Search/>*/}
           </div>
           <div
             className="top-bar-user-info"
             ref={target}
             onClick={() => setShow(!show)}
           >
-            <p className='top-bar-user-info'>{activeUser?.user?.username}</p>
+            <p className="top-bar-user-info">{activeUser?.user?.username}</p>
 
             <div>
               <img
@@ -112,7 +109,7 @@ const TopBar = ({ history, searchData, getSearch }) => {
               <Tooltip
                 show={show}
                 arrowAlign="center"
-                backgroundColor={light ? undefined : "#212229"}
+                backgroundColor={light ? undefined : '#212229'}
                 // hoverColor="#212229"
                 border="1px solid #ffffff"
                 position="bottom right"
@@ -121,24 +118,41 @@ const TopBar = ({ history, searchData, getSearch }) => {
               >
                 <span
                   onClick={() =>
-                    history.push(
-                      `/profile/${activeUser?.user.username}`
-                    )
+                    history.push(`/profile/${activeUser?.user.username}`)
                   }
                   to={`/profile/${activeUser?.user.username}`}
                 >
-                  My Profile
+                  Profile
                 </span>
+
+                <span
+                  onClick={() => history.push(`/create-project`)}
+                  to={`/create-project`}
+                >
+                  New Project
+                </span>
+
+                <span onClick={() => history.push('/')} to={`/`}>
+                  Explore
+                </span>
+
+                <span
+                  onClick={() =>
+                    history.push(`/notifications`)
+                  }
+                  to={`/notifications`}
+                >
+                  Notifications
+                </span>
+
                 <span
                   onClick={() => history.push('/settings')}
-                  to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
+                  to={`/settings`}
                 >
                   Settings
                 </span>
-                <span
-                  onClick={() => logout()}
-                  to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
-                >
+
+                <span onClick={() => logout()} to={`/`}>
                   Log Out
                 </span>
               </Tooltip>
@@ -154,7 +168,9 @@ const TopBar = ({ history, searchData, getSearch }) => {
         </div>
         <div className="mobile-nav">
           <div className="mobile-logo-container">
-            <Link to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}>
+            <Link
+              to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
+            >
               <img src={logo} className="mobile-logo" alt="logo" />
             </Link>
           </div>
@@ -190,7 +206,7 @@ const TopBar = ({ history, searchData, getSearch }) => {
         </div>
         <div className={showHideClassName}>
           <div className="mobile-search">
-         {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
+            {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
           </div>
           <NavLink
             to={`/profile/${activeUser?.user?.id}/${activeUser?.user?.username}`}
@@ -219,12 +235,12 @@ const TopBar = ({ history, searchData, getSearch }) => {
           </NavLink>
 
           <NavLink
-            to="/onboard"
+            to="/notificaitons"
             className="links"
             activeClassName="active-links"
             onClick={toggleNav}
           >
-            Onboard
+            Notifications
           </NavLink>
 
           <NavLink
@@ -235,6 +251,15 @@ const TopBar = ({ history, searchData, getSearch }) => {
           >
             Settings
           </NavLink>
+
+          <NavLink
+            to="/settings"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            <span onClick={() => logout()}>Logout</span>
+          </NavLink>
         </div>
         <span className={showHideOverlayClassName} onClick={toggleNav} />
       </>
@@ -243,7 +268,3 @@ const TopBar = ({ history, searchData, getSearch }) => {
 };
 
 export default TopBar;
-
-
-
-
