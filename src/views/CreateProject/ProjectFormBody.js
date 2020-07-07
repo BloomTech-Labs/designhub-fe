@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Editing from './Editing';
 import Privacy from './Privacy';
 import CaseStudy from './CaseStudy';
@@ -6,37 +6,72 @@ import CharacterCount from '../../common/CharacterCount/CharacterCount';
 import DeleteIcon from '../../ASSETS/Icons/DeleteIcon.js';
 import { MultiImageUpload } from './MultiImageUpload';
 
+
+import {addProject, addProjectPhoto, addHeatmap, updateProject, deleteProjectPhoto} from '../../graphql/index';
 import './styles.scss';
 
-const ProjectFromBody = () => {
+import remove from '../../ASSETS/remove.svg'
+
+
+const ProjectFromBody = ({ isEditing, project, user, projectPhotos, ...rest }) => {
+  
+
+  const [files, setFiles] = useState([]);
+  const [researchFile, setResearchFile] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [titleRef, setTitleRef] = useState(null);
+  const [error, setError] = useState('');
+  const [privacy, setPrivacy] = useState(
+    isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
+  );
+  
+    const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden',
+  };
+
+console.log("something")
+
+
   return (
+
     <section className="ProjectForm__body">
       <div className="left-container">
         <header className="ProjectForm__header">
           <h2 className="page-header"></h2>
         </header>
-       <MultiImageUpload files={files} setFiles={setFiles} />
-
+        <MultiImageUpload files={files} setFiles={setFiles} />
+        {isEditing && (
         <div>
           <div className="thumbnail-container ">
-            <div /*key={index}*/>
+{projectPhotos.map((photo, index) => (
+            <div key={index}>
               <img
                 alt=""
-                /*src={remove}*/
+                src={remove}
                 className="remove"
+                onClick={(e) => {
+                  console.log("setPhoto")
+                              
+          }}
               />
-              <div className="thumb" /*key={index}*/>
-                <div /*style={thumbInner}*/>
+
+
+              <div className="thumb" key={index}>
+                <div style={thumbInner}>
                   <img
                     alt="project thumbnail"
-                    /*src={photo.url}*/
+                    src={photo.url}
                     className="thumbnail"
                   />
                 </div>
               </div>
             </div>
+            ))}
           </div>
         </div>
+        )}
       </div>
       <div className="right-container">
         <form encType="multipart/form-data" className="project-form-container">
