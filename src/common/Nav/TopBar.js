@@ -217,7 +217,7 @@ const TopBar = ({ searchData, getSearch }) => {
             Profile
           </NavLink>
           <NavLink
-            to="/create"
+            to="/create-project"
             className="links"
             activeClassName="active-links"
             onClick={toggleNav}
