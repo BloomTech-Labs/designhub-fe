@@ -132,3 +132,4 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Backend Documentation
 
 See [https://github.com/Lambda-School-Labs/designhub-be](https://github.com/Lambda-School-Labs/designhub-be) for details on the backend of our project.
+

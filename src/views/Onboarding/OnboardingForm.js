@@ -1,20 +1,31 @@
-// issue with user from Auth0 - not defined
-
-import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
 
 import Loading from '../../common/Loading/index.js';
+import Explore from '../../views/Explore/index.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
+
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import {
+  UPDATE_USER_MUTATION,
+  GET_USER_BY_ID_QUERY,
+} from '../../graphql/index';
 
 import './styles.scss';
 
 const OnboardingForm = ({ history, isLoading }) => {
-  const [loading, setLoading] = useState(false);
-  // user data from auth0 context wrapper
-  const { user, logout } = useAuth0();
+  const [loadingPage, setLoadingPage] = useState(false);
+  // user data from auth0-spa
+  const { logout, user } = useAuth0();
+
+  const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
+    variables: { id: user?.sub },
+  });
+  const id = user?.sub;
+  console.log('AUTH-USER-OB', data?.user?.id);
 
   // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
@@ -27,36 +38,35 @@ const OnboardingForm = ({ history, isLoading }) => {
   //avatar image handler
   const [files, setFiles] = useState([]);
 
+  const [updateUser] = useMutation(UPDATE_USER_MUTATION);
+
   //local form state populated by auth0 user info
   const [formUser, setFormUser] = useState({
-    avatar: user?.picture || '',
+    avatar: data?.user?.avatar || '',
     bio: '',
-    email: user?.email || '',
-    firstName: user?.given_name || '',
-    id: user?.id,
-    lastName: user?.family_name || '',
+    firstName: data?.user?.lastName || '',
+    id: data?.user?.id,
+    lastName: data?.user?.firstName || '',
     location: '',
-    username: user?.nickname || '',
-    // website: '',
-    // email: '',
-    // bio: '',
-    // firstName: '',
-    // id: '',
-    // lastName: '',
-    // location: '',
-    // username: '',
-    // website: ''
+    username: data?.user?.username || '',
   });
 
+  console.log('ob-db-DATA', formUser);
   // alert state for required form inputs
   const [alert, setAlert] = useState({
     username: false,
     firstName: false,
     lastName: false,
-    email: false,
   });
 
-  const handleChange = (e) => {
+  //   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
+
+  // useEffect(() => {
+  //   if (redirect === true)
+  //     history.push('/profile/:username')
+  // },[redirect])
+
+  const handleChange = (e, id) => {
     setAlert({
       ...alert,
       [e.target.name]: false,
@@ -66,15 +76,15 @@ const OnboardingForm = ({ history, isLoading }) => {
 
   const handleNextButton = async (e) => {
     e.preventDefault();
-    const { username, firstName, lastName, email } = formUser;
+    const { username, firstName, lastName } = formUser;
     const newAlert = {};
     if (username.trim().length === 0) newAlert.username = true;
     if (firstName.trim().length === 0) newAlert.firstName = true;
     if (lastName.trim().length === 0) newAlert.lastName = true;
-    if (email.trim().length === 0) newAlert.email = true;
     if (!newAlert.username) {
       try {
-        console.log(username);
+        console.log('check userId', data?.user);
+        // if (res.data.length !== 0) newAlert.username = 'taken'
       } catch (err) {
         console.error('OnboardingForm.js handleNextButton() ERROR', err);
       }
@@ -90,25 +100,68 @@ const OnboardingForm = ({ history, isLoading }) => {
     setFormStep((n) => --n);
   };
 
-  const handleSubmit = async (e, id, changes) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log(id, changes)
+      setLoadingPage(true);
+      let newAvatar;
+      if (files.length === 0) {
+        newAvatar = data?.user?.avatar;
+      } else {
+        newAvatar = await handleImageUpload(files);
+      }
+
+      //changes = {...changes, avatar: newAvatar, auth0Id: user?.sub}
+      updateUser({
+        variables: {
+          data: {
+            id: user?.sub,
+            avatar: user?.picture,
+            email: user?.email,
+            username: formUser?.username,
+            firstName: formUser?.firstName,
+            lastName: formUser?.lastName,
+            bio: formUser?.bio,
+            location: formUser?.location,
+            website: formUser?.website,
+          },
+        },
+        refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
+      });
+      history.push(`/callback`);
+      console.log('res submit:', data);
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
-  const handleImageUpload = async (file) => {
-    console.log(file)
-  };
+  const handleImageUpload = async file => {
+    try {
+      const {
+        data: { key, url }
+      } = await updateUser({
+      variables: {
+        data: {
+          id: user?.sub,
+          avatar: user?.avatar,
+        }
+      }
+    })
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file.preview));
 
-  if (loading || isLoading) return <Loading />;
+      return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
+    } catch (err) {
+      console.error('OnboardingForm.js handleImageUpload() ERROR', err);
+    }
+  };
+  
+  if (loadingPage || isLoading) return <Loading />;
   else
     return (
       <>
         <div className="OnboardingForm">
-          <form onSubmit={(e) => handleSubmit(e, formUser.id, formUser)}>
+          <form onSubmit={(e) => handleSubmit(e, formUser?.id, formUser)}>
             <section className="stepComponents">
               {stepComponents.map((Step, i) => {
                 if (i + 1 === formStep) {
@@ -117,7 +170,7 @@ const OnboardingForm = ({ history, isLoading }) => {
                       key={i}
                       alert={alert}
                       files={files}
-                      picture={user?.picture}
+                      picture={data?.user?.picture}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}

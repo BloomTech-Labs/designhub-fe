@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Tab, Tabs, TabList } from 'react-tabs';
+import React from 'react';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import AllTab from './AllTab';
 import Illustration from './Illustration';
@@ -10,34 +10,58 @@ import UIDesign from './UIDesign';
 import MotionDesign from './MotionDesign';
 import Animation from './Animation';
 import ProductDesign from './ProductDesign';
+import { useQuery } from '@apollo/react-hooks';
+
+import {
+  GET_ALL_PROJECTS_QUERY,
+  GET_ALL_USERS_QUERY,
+} from '../../graphql/index';
 
 export default function ExploreTabs() {
-	return (
-		<div className="explore-tabs-container">
-			<div>
-				<Tabs defaultIndex={0}>
-					<TabList className="explore-nav-links">
-						{/*<div className = "explore-nav-div">*/}
+  const { data: allProjects } = useQuery(GET_ALL_PROJECTS_QUERY);
+  const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
+  return (
+    <div className="explore-tabs-container">
+      <div>
+        <Tabs defaultIndex={0}>
+          <TabList className="explore-nav-links">
+            <div className="explore-nav-div">
+              <Tab key={0} className="tabs-8">
+                All
+              </Tab>
 
-						<Tab key={0} className="tabs-8">
-							All
-						</Tab>
-
-						{/*CHIPS*/}
-
-						{/*</div> */}
-					</TabList>
-					<AllTab />
-					<Illustration />
-					<WebDesign />
-					<GrapicDesign />
-					<UXDesign />
-					<UIDesign />
-					<MotionDesign />
-					<Animation />
-					<ProductDesign />
-				</Tabs>
-			</div>
-		</div>
-	);
+              {/*CHIPS*/}
+            </div>
+          </TabList>
+          <TabPanel className="tabs-container">
+            <AllTab projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <Illustration projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <WebDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <GrapicDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <UXDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <UIDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <MotionDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <Animation projects={allProjects} />
+          </TabPanel>
+          <TabPanel className="tabs-container">
+            <ProductDesign projects={allProjects} users={allUsers} />
+          </TabPanel>
+        </Tabs>
+      </div>
+    </div>
+  );
 }

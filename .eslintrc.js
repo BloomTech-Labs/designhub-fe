@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
 	env: {
 		commonjs: true,
@@ -15,7 +16,8 @@ module.exports = {
 	},
 	plugins: [ 'react', 'prettier' ],
 	rules: {
-		'react/prop-types': 0
+		'react/prop-types': 0,
+		endOfLine: process.env.REACT_APP_END_OF_LINE
 	},
 	overrides: [
 		{
