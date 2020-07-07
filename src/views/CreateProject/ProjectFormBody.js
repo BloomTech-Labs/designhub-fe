@@ -15,7 +15,7 @@ const ProjectFromBody = () => {
         <header className="ProjectForm__header">
           <h2 className="page-header"></h2>
         </header>
-       <MultiImageUpload /*files={files} setFiles={setFiles} */ />
+       <MultiImageUpload files={files} setFiles={setFiles} />
 
         <div>
           <div className="thumbnail-container ">
