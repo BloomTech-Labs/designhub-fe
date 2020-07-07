@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Layout from '../../common/Layout';
+import ProfileTabs from './ProfileTabs';
 // import { useParams } from 'react-router-dom';
-// import './styles.scss';
+import './styles.scss';
 
-export default function Profile() {
+export default function Profile(props, users) {
   // const { username, avatar} = useParams();
+  const [currentTab, setCurrentTab] = useState({currentTab: tabIndex})
+  const followUser = null
+  const unfollowUser = null
+  const acceptedCollabInvites = null
+  const acceptedCollabProjects = null
   return (
     <Layout>
       <div className="user-profile-container">
@@ -75,6 +81,28 @@ export default function Profile() {
             </div>
           </div>
         </div>
+                <ProfileTabs
+          currentTab={currentTab}
+          setCurrentTab={setCurrentTab}
+          projects={props.projects}
+          recentProjects={props.recentProjects}
+          followers={props.followersTab}
+          following={props.followingTab}
+          starred={props.starred}
+          isFollowed={props.isFollowed}
+          getIsFollowed={props.getIsFollowed}
+          followUser={followUser}
+          unfollowUser={unfollowUser}
+          activeUser={props.activeUser}
+          params={props.match.params}
+          isProjectsLoading={props.isProjectsLoading}
+          acceptedCollabInvites={acceptedCollabInvites} //accepted collab invites  
+          getSingleProject={props.getSingleProject}   //collab
+          singleProject={props.singleProject} //collab     
+          acceptedCollabProjects={acceptedCollabProjects}
+          userData={props.userData}
+          collabUsers={users}
+        />
       </div>
     </Layout>
   );
