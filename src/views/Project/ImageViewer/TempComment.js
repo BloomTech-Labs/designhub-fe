@@ -3,7 +3,7 @@ import SendIcon from '../../../ASSETS/Icons/SendIcon.js';
 
 export class TempComment extends React.Component {
   state = {
-    comment: ''
+    comment: '',
   };
 
   render() {
@@ -16,7 +16,7 @@ export class TempComment extends React.Component {
           className="StickyComment__hover-space"
           style={{
             top: top,
-            left: left
+            left: left,
           }}
         >
           <section className="StickyComment__dot">
@@ -30,7 +30,7 @@ export class TempComment extends React.Component {
             display: 'flex',
             position: 'absolute',
             top: top,
-            left: left
+            left: left,
           }}
         >
           {/* this <hr> is part of the UX design that became problematic to implement, it is currently display:none */}
@@ -38,18 +38,18 @@ export class TempComment extends React.Component {
 
           <form
             className="StickyComment__form"
-            onSubmit={e => this.onSubmit(e, c)}
+            onSubmit={(e) => this.onSubmit(e, c)}
           >
             <textarea
               autoFocus={true}
               type="text"
               value={comment}
-              onKeyDown={e => this.handleKeyDown(e, c)}
+              onKeyDown={(e) => this.handleKeyDown(e, c)}
               onChange={this.handleChange}
             />
             <button
               className="StickyComments__submit-btn"
-              onClick={e => this.onSubmit(e, c)}
+              onClick={(e) => this.onSubmit(e, c)}
             >
               <SendIcon />
             </button>
@@ -59,7 +59,7 @@ export class TempComment extends React.Component {
     );
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ comment: e.target.value });
   };
 
@@ -80,7 +80,7 @@ export class TempComment extends React.Component {
     e.preventDefault();
     const newComment = {
       ...c,
-      text: this.state.comment
+      text: this.state.comment,
     };
     this.props.onSubmit(e, newComment);
   };

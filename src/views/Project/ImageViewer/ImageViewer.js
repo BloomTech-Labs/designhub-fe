@@ -4,11 +4,10 @@ import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../../ASSETS/default_thumbnail.svg';
 import Loading from '../../../common/Loading';
 
-
 const ImageViewer = (props) => {
-	const [activeImg, setActiveImg] = useState(null);
-const [comments, setComments] = useState([]);
-const [modal, setModal] = useState(false);
+  const [activeImg, setActiveImg] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [modal, setModal] = useState(false);
   // useEffect(
   //   (prevProps) => {
   //     if (props.thumbnail !== prevProps.thumbnail) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Editing from './Editing';
 import Privacy from './Privacy';
 import CaseStudy from './CaseStudy';
@@ -9,13 +9,26 @@ import { MultiImageUpload } from './MultiImageUpload';
 import './styles.scss';
 
 const ProjectFromBody = () => {
+  const [error, setError] = useState('');
+  const [state, setState] = useState();
+
+  const handleChanges = (e) => {
+    setError('');
+    setState({
+      ...state,
+      project: {
+        ...state.project,
+        [e.target.name]: e.target.value,
+      },
+    });
+  };
   return (
     <section className="ProjectForm__body">
       <div className="left-container">
         <header className="ProjectForm__header">
-          <h2 className="page-header"></h2>
+          <h2 className="page-header" />
         </header>
-       <MultiImageUpload /*files={files} setFiles={setFiles} */ />
+        <MultiImageUpload /*files={files} setFiles={setFiles} */ />
 
         <div>
           <div className="thumbnail-container ">
@@ -52,7 +65,7 @@ const ProjectFromBody = () => {
               name="name"
               id="name"
               placeholder="Enter project title here"
-              /*onChange={handleChanges}*/
+              onChange={handleChanges}
               /*ref={setTitleRef}*/
             />
           </div>
@@ -127,7 +140,7 @@ const ProjectFromBody = () => {
             <button type="button" className="cancel-btn">
               Cancel
             </button>
-            <button className="submit-button" type="submit"></button>
+            <button className="submit-button" type="submit" />
           </div>
           <div className="error">error</div>
 
