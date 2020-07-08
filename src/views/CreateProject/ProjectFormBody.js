@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Editing from './Editing';
 import Privacy from './Privacy';
 import CaseStudy from './CaseStudy';
@@ -6,15 +6,29 @@ import CharacterCount from '../../common/CharacterCount/CharacterCount';
 import DeleteIcon from '../../ASSETS/Icons/DeleteIcon.js';
 import { MultiImageUpload } from './MultiImageUpload';
 
+import { useAuth0 } from '../../utilities/auth-spa.js';
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import {
+  ADD_PROJECT_MUTATION,
+  ADD_PROJECT_PHOTO_MUTATION,
+  UPDATE_PROJECT_MUTATION,
+  UPDATE_PROJECT_PHOTO_MUTATION,
+} from '../../graphql/index';
 
-import {addProject, addProjectPhoto, addHeatmap, updateProject, deleteProjectPhoto} from '../../graphql/index';
+
 import './styles.scss';
 
-import remove from '../../ASSETS/remove.svg'
+import remove from '../../ASSETS/remove.svg';
 
+const ProjectFromBody = ({
+  isEditing,
+  project,
+  projectPhotos,
+  userData,
+  user
+}) => {
 
-const ProjectFromBody = ({ isEditing, project, user, projectPhotos, ...rest }) => {
-  
+ console.log('PROJECT USER', userData)
 
   const [files, setFiles] = useState([]);
   const [researchFile, setResearchFile] = useState([]);
@@ -24,18 +38,91 @@ const ProjectFromBody = ({ isEditing, project, user, projectPhotos, ...rest }) =
   const [privacy, setPrivacy] = useState(
     isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   );
+    const [newProject, setNewProject] = useState({
+    project: {
+      userId: user?.sub,
+      name: isEditing ? project?.name : '',
+      description: isEditing ? project?.description : '',
+      figma: isEditing ? project?.figma : '',
+      invision: isEditing ? project?.invision : '',
+      privateProjects: isEditing ? project?.privateProjects : false,
+      mainImg: isEditing ? project?.mainImg : '',
+      // projectInvites: projectInvites,
+    },
+    success: false,
+    url: '',
+    modal: false,
+    deletingImage: null,
+    deletingResearch: null,
+    inviteModal: false,
+    projectPhotos: null,
+    inviteList: [], //users invited to a project
+    email: '',
+    categoryId: null,
+    //foundProjectCategory,
+  });
   
-    const thumbInner = {
+  const { name, description, figma, invision} = newProject?.project;
+
+    const handleChanges = (e) => {
+    setError('');
+    setNewProject({
+      ...newProject,
+      project: {
+        ...newProject.project,
+        [e.target.name]: e.target.value,
+      },
+    });
+    console.log('NEW PROJECT CHANGE', newProject?.project)
+  };
+
+    const handlePrivacySetting = (e) => {
+    setPrivacy(e.target.value);
+    const isPrivate = e.target.value === 'private' ? true : false;
+
+    setNewProject({
+      ...newProject,
+      project: {
+        ...newProject.project,
+        privateProjects: isPrivate,
+      },
+    });
+  };
+
+  const [editProject] = useMutation(UPDATE_PROJECT_MUTATION)
+  const [createProject] = useMutation(ADD_PROJECT_MUTATION);
+
+
+  //create project
+  const handleSubmit = async (e) => {
+    setIsLoading(true);
+
+    e.preventDefault();
+    if (newProject.project.name.length === 0) {
+      setIsLoading(false);
+      setError('Project title is required');
+      titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    if (files.length > 0 || (projectPhotos && projectPhotos.length > 0)) {
+      isEditing
+        ? editProject(newProject.project, project.id)
+        : createProject(newProject.project);
+    } else {
+      setIsLoading(false);
+      setError('Please upload at least one image');
+      return;
+    }
+  };
+
+  const thumbInner = {
     display: 'flex',
     minWidth: 0,
     overflow: 'hidden',
   };
 
-console.log("something")
-
-
   return (
-
     <section className="ProjectForm__body">
       <div className="left-container">
         <header className="ProjectForm__header">
@@ -43,34 +130,32 @@ console.log("something")
         </header>
         <MultiImageUpload files={files} setFiles={setFiles} />
         {isEditing && (
-        <div>
-          <div className="thumbnail-container ">
-{projectPhotos.map((photo, index) => (
-            <div key={index}>
-              <img
-                alt=""
-                src={remove}
-                className="remove"
-                onClick={(e) => {
-                  console.log("setPhoto")
-                              
-          }}
-              />
-
-
-              <div className="thumb" key={index}>
-                <div style={thumbInner}>
+          <div>
+            <div className="thumbnail-container ">
+              {projectPhotos.map((photo, index) => (
+                <div key={index}>
                   <img
-                    alt="project thumbnail"
-                    src={photo.url}
-                    className="thumbnail"
+                    alt=""
+                    src={remove}
+                    className="remove"
+                    onClick={(e) => {
+                      console.log('setPhoto');
+                    }}
                   />
+
+                  <div className="thumb" key={index}>
+                    <div style={thumbInner}>
+                      <img
+                        alt="project thumbnail"
+                        src={photo.url}
+                        className="thumbnail"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-            ))}
           </div>
-        </div>
         )}
       </div>
       <div className="right-container">
@@ -83,12 +168,12 @@ console.log("something")
               required
               autoFocus={true}
               type="text"
-              /*value={name}*/
+              value={name}
               name="name"
               id="name"
               placeholder="Enter project title here"
-              /*onChange={handleChanges}*/
-              /*ref={setTitleRef}*/
+              onChange={handleChanges}
+              ref={setTitleRef}
             />
           </div>
           <label htmlFor="description" className="label">
@@ -97,14 +182,14 @@ console.log("something")
           <textarea
             id="description"
             name="description"
-            /*value={description}*/
+            value={description}
             type="text"
             placeholder="Enter description here"
-            /*onChange={handleChanges}*/
+            onChange={handleChanges}
             className="description"
             maxLength="240"
           />
-          <CharacterCount /*string={description}*/ limit={240} />
+          <CharacterCount string={description} limit={240} />
 
           {/*PROJECT CATEGORIES */}
           <label htmlFor="privacyLink" className="label">
@@ -138,10 +223,10 @@ console.log("something")
           <input
             type="text"
             name="figma"
-            /*value={figma}*/
+            value={figma}
             placeholder="Enter link here (optional)"
             id="figmaLink"
-            /*onChange={handleChanges}*/
+            onChange={handleChanges}
           />
           <label htmlFor="invisionLink" className="label">
             Prototype
@@ -149,10 +234,10 @@ console.log("something")
           <input
             type="text"
             name="invision"
-            /*value={invision}*/
+            value={invision}
             placeholder="Enter link here (optional)"
             id="invisionLink"
-            /*onChange={handleChanges}*/
+            onChange={handleChanges}
           />
 
           <CaseStudy />
