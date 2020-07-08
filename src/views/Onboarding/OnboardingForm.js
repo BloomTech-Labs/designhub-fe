@@ -17,15 +17,17 @@ import {
 import './styles.scss';
 
 const OnboardingForm = ({ history, isLoading }) => {
+  
   const [loadingPage, setLoadingPage] = useState(false);
+
   // user data from auth0-spa
   const { logout, user } = useAuth0();
 
   const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
+
   const id = user?.sub;
-  console.log('AUTH-USER-OB', data?.user?.id);
 
   // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
@@ -51,7 +53,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     username: data?.user?.username || '',
   });
 
-  console.log('ob-db-DATA', formUser);
   // alert state for required form inputs
   const [alert, setAlert] = useState({
     username: false,
@@ -59,12 +60,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     lastName: false,
   });
 
-  //   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
-
-  // useEffect(() => {
-  //   if (redirect === true)
-  //     history.push('/profile/:username')
-  // },[redirect])
 
   const handleChange = (e, id) => {
     setAlert({
