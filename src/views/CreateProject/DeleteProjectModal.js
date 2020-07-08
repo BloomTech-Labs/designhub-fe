@@ -8,7 +8,7 @@ import {
   GET_PROJECT_BY_ID_QUERY,
 } from '../../graphql/index';
 
-const DeleteProjectModal = ({ history, project, modal, deletingImage }) => {
+const DeleteProjectModal = ({ history, project, closeModal, deletingImage }) => {
   const { data: getProjectPhotos } = useQuery(GET_PROJECT_BY_ID_QUERY, {
     variables: { id: project?.id },
   });
@@ -32,12 +32,6 @@ const DeleteProjectModal = ({ history, project, modal, deletingImage }) => {
     } catch (err) {
       console.log('ProjectForm.js handleDeleteProject ERROR', err);
     }
-  };
-
-    const closeModal = () => {
-      modal: false,
-      deletingImage: null,
-      deletingResearch: null,
   };
 
   return (
