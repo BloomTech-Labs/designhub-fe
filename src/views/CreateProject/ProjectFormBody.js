@@ -67,44 +67,52 @@ const ProjectFromBody = ({
     //categoryId: null,
     //foundProjectCategory,
   });
-  
-  const { name, description, figma, invision} = newProject?.project;
 
-    const handleChanges = (e) => {
+  const { name, description, figma, invision } = newProjectData?.project;
+
+    const closeModal = () => {
+    setNewProjectData({
+      ...newProjectData,
+      modal: false,
+      deletingImage: null,
+      deletingResearch: null,
+    });
+  };
+
+  const handleChanges = (e) => {
     setError('');
-    setNewProject({
-      ...newProject,
+    setNewProjectData({
+      ...newProjectData,
       project: {
-        ...newProject.project,
+        ...newProjectData.project,
         [e.target.name]: e.target.value,
       },
     });
-    console.log('NEW PROJECT CHANGE', newProject?.project)
+    console.log('NEW PROJECT CHANGE', newProjectData?.project);
   };
 
-    const handlePrivacySetting = (e) => {
+  const handlePrivacySetting = (e) => {
     setPrivacy(e.target.value);
     const isPrivate = e.target.value === 'private' ? true : false;
 
-    setNewProject({
-      ...newProject,
+    setNewProjectData({
+      ...newProjectData,
       project: {
-        ...newProject.project,
+        ...newProjectData.project,
         privateProjects: isPrivate,
       },
     });
   };
 
-  const [editProject] = useMutation(UPDATE_PROJECT_MUTATION)
+  const [editProject] = useMutation(UPDATE_PROJECT_MUTATION);
   const [createProject] = useMutation(ADD_PROJECT_MUTATION);
-
 
   //create project
   const handleSubmit = async (e) => {
     setIsLoading(true);
 
     e.preventDefault();
-    if (newProject.project.name.length === 0) {
+    if (newProjectData.project.name.length === 0) {
       setIsLoading(false);
       setError('Project title is required');
       titleRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -113,8 +121,8 @@ const ProjectFromBody = ({
 
     if (files.length > 0 || (projectPhotos && projectPhotos.length > 0)) {
       isEditing
-        ? editProject(newProject.project, project.id)
-        : createProject(newProject.project);
+        ? editProject(newProjectData.project, project.id)
+        : createProject(newProjectData.project);
     } else {
       setIsLoading(false);
       setError('Please upload at least one image');
@@ -122,13 +130,22 @@ const ProjectFromBody = ({
     }
   };
 
-  const [projectCategories, setProjectCategories]= useState({
-    
-  })
+  const categoryNames = [
+    'Illustration',
+    'webDesign',
+    'graphicDesign',
+    'uxDesign',
+    'uiDesign',
+    'motionDesign',
+    'animation',
+    'productDesign',
+  ];
+
+
   //each time a category is selected in the categories drop down list
   const categoryHandler = (event) => {
     event.preventDefault();
-    newProject.project.category = event.target.value;
+    newProjectData.project.category = event.target.value;
 
     console.log('event.target.value', event.target.value);
   };
