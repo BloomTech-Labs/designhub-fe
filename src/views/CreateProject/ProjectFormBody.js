@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Editing from './Editing';
 import Privacy from './Privacy';
 import CaseStudy from './CaseStudy';
+import DeleteProjectModal from './DeleteProjectModal';
+import InviteModal from './InviteModal';
 import CharacterCount from '../../common/CharacterCount/CharacterCount';
 import DeleteIcon from '../../ASSETS/Icons/DeleteIcon.js';
 import { MultiImageUpload } from './MultiImageUpload';
@@ -13,6 +15,8 @@ import {
   ADD_PROJECT_PHOTO_MUTATION,
   UPDATE_PROJECT_MUTATION,
   UPDATE_PROJECT_PHOTO_MUTATION,
+  DELETE_PROJECT_PHOTO_MUTATION,
+  DELETE_PROJECT_MUTATION
 } from '../../graphql/index';
 
 
@@ -36,6 +40,7 @@ const ProjectFromBody = ({
   const [titleRef, setTitleRef] = useState(null);
   const [error, setError] = useState('');
   const [privacy, setPrivacy] = useState(
+
     isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   );
     const [newProject, setNewProject] = useState({
@@ -47,6 +52,7 @@ const ProjectFromBody = ({
       invision: isEditing ? project?.invision : '',
       privateProjects: isEditing ? project?.privateProjects : false,
       mainImg: isEditing ? project?.mainImg : '',
+      category: isEditing ? project?.category : '',
       // projectInvites: projectInvites,
     },
     success: false,
@@ -58,7 +64,7 @@ const ProjectFromBody = ({
     projectPhotos: null,
     inviteList: [], //users invited to a project
     email: '',
-    categoryId: null,
+    //categoryId: null,
     //foundProjectCategory,
   });
   
@@ -116,6 +122,17 @@ const ProjectFromBody = ({
     }
   };
 
+  const [projectCategories, setProjectCategories]= useState({
+    
+  })
+  //each time a category is selected in the categories drop down list
+  const categoryHandler = (event) => {
+    event.preventDefault();
+    newProject.project.category = event.target.value;
+
+    console.log('event.target.value', event.target.value);
+  };
+
   const thumbInner = {
     display: 'flex',
     minWidth: 0,
@@ -123,6 +140,11 @@ const ProjectFromBody = ({
   };
 
   return (
+    <>
+      <DeleteProjectModal modal={newProject.modal} deletingImage={newProject.deletingImage} deletingResearch={newProject.deletingResearch} />
+        <div className="project-form-wrapper">
+          <InviteModal />
+        </div>
     <section className="ProjectForm__body">
       <div className="left-container">
         <header className="ProjectForm__header">
@@ -139,7 +161,7 @@ const ProjectFromBody = ({
                     src={remove}
                     className="remove"
                     onClick={(e) => {
-                      console.log('setPhoto');
+                      
                     }}
                   />
 
@@ -191,31 +213,40 @@ const ProjectFromBody = ({
           />
           <CharacterCount string={description} limit={240} />
 
-          {/*PROJECT CATEGORIES */}
-          <label htmlFor="privacyLink" className="label">
-            Categories
-          </label>
-          <select
-            type="select"
-            name="categories"
-            placeholder="Category (ex: Art, Animation)"
-            /*onChange={categoryHandler}*/
-            className="category-select"
-          >
-            {/*if editing a project and a category was previously selected for the project
+            {/*PROJECT CATEGORIES */}
+            <label htmlFor="privacyLink" className="label">
+              Categories
+            </label>
+            <select
+              type="select"
+              name="categories"
+              placeholder="Category (ex: Art, Animation)"
+              onChange={categoryHandler}
+              className="category-select"
+            >
+              {/*if editing a project and a category was previously selected for the project
                    display that category as the default selection. if not, dispay the defaut option */}
-            {/*            <option value="" disabled selected hidden>
-              {projectCategories[0].category}
-            </option>*/}
-            {/*):(*/}
-            <option value="" disabled selected hidden>
-              Please Select a Category
-            </option>
-            <option /*key={category.id} value={category.id}*/>
-              category.category
-            </option>
-            );
-          </select>
+{/*              {isEditing && projectCategories[0] ? (
+                <option value="" disabled selected hidden>
+                  {projectCategories[0].category}
+                </option>
+              ) : (
+                <option value="" disabled selected hidden>
+                  Please Select a Category
+                </option>
+              )}
+*/}
+                <option value="" disabled selected hidden>
+                  Please Select a Category
+                </option>
+              {categoryNames.map((category, index) => {
+                return (
+                  <option key={category.id} value={category.id}>
+                    {category.category}
+                  </option>
+                );
+              })}
+            </select>
 
           <label htmlFor="figmaLink" className="label">
             Figma
@@ -258,6 +289,7 @@ const ProjectFromBody = ({
         </form>
       </div>
     </section>
+    </>
   );
 };
 

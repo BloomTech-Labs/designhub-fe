@@ -17,13 +17,11 @@ export default function CreateProject() {
   const { data: userData } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
+
+
   return (
     <Layout>
       <div className="project-form-wrapper">
-        <DeleteProjectModal />
-        <div className="project-form-wrapper">
-          <InviteModal />
-        </div>
         <ProjectFormBody userData={userData} user={user}/>
       </div>
     </Layout>
