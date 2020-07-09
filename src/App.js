@@ -37,7 +37,7 @@ export default function App() {
   const { data:userData, loading: gqlLoading } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
-  //console.log('GET_USER_DATA_GQL', userData);
+  console.log('GET_USER_DATA_GQL', userData);
 
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
 

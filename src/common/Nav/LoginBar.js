@@ -105,6 +105,9 @@ const login = () => {
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
+          <button className="auth0-btn" onClick={logout}>
+          Logout
+        </button>
           
 
           <div>
@@ -169,6 +172,9 @@ const login = () => {
 
         <button className="auth0-btn" onClick={login}>
           Create an account or Sign in
+        </button>
+        <button className="auth0-btn" onClick={logout}>
+          Logout
         </button>
       </div>
       <span className={showHideOverlayClassName} onClick={toggleNav} />
