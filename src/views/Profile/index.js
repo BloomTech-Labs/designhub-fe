@@ -6,7 +6,7 @@ import './styles.scss';
 
 export default function Profile(props, users) {
   // const { username, avatar} = useParams();
-  const [currentTab, setCurrentTab] = useState({currentTab: tabIndex})
+  const [currentTab, setCurrentTab] = useState(1)
   const followUser = null
   const unfollowUser = null
   const acceptedCollabInvites = null
@@ -84,7 +84,7 @@ export default function Profile(props, users) {
                 <ProfileTabs
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
-          projects={props.projects}
+          projects={props.allProjects}
           recentProjects={props.recentProjects}
           followers={props.followersTab}
           following={props.followingTab}

@@ -10,7 +10,7 @@ import empty from '../../ASSETS/Icons/empty_project.svg';
 import Loading from '../../ASSETS/loading';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
-const ProfileTabs = ({props, projects, acceptedProjects, followers, following, starred, ...rest}) => {
+const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, currentTab, setCurrentTab, projects, acceptedProjects, followers, following, starred, ...rest}) => {
 
 
     // state = {
@@ -18,19 +18,19 @@ const ProfileTabs = ({props, projects, acceptedProjects, followers, following, s
 
     
     
-    // const projects = this.props.projects;
+    // const projects = this.projects;
      const recentProjects = null;
-    // const followers = this.props.followers;
-    // const following = this.props.following;
-    // const starred = this.props.starred;
-    // const acceptedProjects = this.props.acceptedCollabProjects;
+    // const followers = this.followers;
+    // const following = this.following;
+    // const starred = this.starred;
+    // const acceptedProjects = this.acceptedCollabProjects;
 
-    // if (!this.props.isProjectsLoading) {
+    // if (!this.isProjectsLoading) {
 
       return (
         <div className="profile-tabs-container">
           <div className="new-tabs-div">
-            <Tabs defaultIndex={0} selectedIndex={props.currentTab} onSelect={props.setCurrentTab}>
+            <Tabs defaultIndex={0} selectedIndex={currentTab} onSelect={setCurrentTab}>
               <TabList className="nav-links">
                 <Tab className="links" selectedClassName="active-link">
                   Overview
@@ -108,7 +108,7 @@ const ProfileTabs = ({props, projects, acceptedProjects, followers, following, s
                 </div>
                 <div className="tab-content">
 
-                  {(props.activeUser.id === props.userData.id) && (acceptedProjects.length === 0) && (
+                  {(activeUser.id === userData.id) && (acceptedProjects.length === 0) && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">
@@ -177,16 +177,16 @@ const ProfileTabs = ({props, projects, acceptedProjects, followers, following, s
                             </div>
                           </Link>
                         </div>
-                        {props.activeUser.id ===
-                          Number(props.params.id) ? (
+                        {activeUser.id ===
+                          Number(params.id) ? (
                             !alsoFollowing ? (
                               <button
                                 onClick={() =>
-                                  props.followUser(
-                                    props.activeUser.id,
+                                  followUser(
+                                    activeUser.id,
                                     follower.userId,
-                                    props.activeUser,
-                                    props.params
+                                    activeUser,
+                                    params
                                   )
                                 }
                                 className="follow-btn"
@@ -196,8 +196,8 @@ const ProfileTabs = ({props, projects, acceptedProjects, followers, following, s
                             ) : (
                                 <button
                                   onClick={() =>
-                                    props.unfollowUser(
-                                      props.activeUser.id,
+                                    unfollowUser(
+                                      activeUser.id,
                                       follower.userId
                                     )
                                   }
@@ -256,12 +256,12 @@ const ProfileTabs = ({props, projects, acceptedProjects, followers, following, s
                           </p>
                         </div>
                       </div>
-                      {props.activeUser.id ===
-                        Number(props.params.id) ? (
+                      {activeUser.id ===
+                        Number(params.id) ? (
                           <button
                             onClick={() =>
-                              props.unfollowUser(
-                                props.activeUser.id,
+                              unfollowUser(
+                                activeUser.id,
                                 follower.userId
                               )
                             }
