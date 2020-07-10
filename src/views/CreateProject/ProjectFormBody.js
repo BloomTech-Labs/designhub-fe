@@ -6,6 +6,7 @@ import DeleteProjectModal from './DeleteProjectModal';
 import InviteModal from './InviteModal';
 import CharacterCount from '../../common/CharacterCount/CharacterCount';
 import DeleteIcon from '../../ASSETS/Icons/DeleteIcon.js';
+import ThumbnailContainer from './ThumbnailContainer';
 import { MultiImageUpload } from './MultiImageUpload';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
@@ -17,11 +18,12 @@ import {
   UPDATE_PROJECT_PHOTO_MUTATION,
   DELETE_PROJECT_PHOTO_MUTATION,
   DELETE_PROJECT_MUTATION,
+  GET_PROJECT_BY_ID_QUERY
 } from '../../graphql/index';
 
 import './styles.scss';
 
-import remove from '../../ASSETS/remove.svg';
+
 
 const ProjectFromBody = ({
   isEditing,
@@ -29,9 +31,10 @@ const ProjectFromBody = ({
   projectPhotos,
   userData,
   user,
+  history
 }) => {
 
-  console.log('PROJECT USER', userData);
+  //console.log('PROJECT USER', userData);
 
   const [files, setFiles] = useState([]);
   const [researchFile, setResearchFile] = useState([]);
@@ -86,7 +89,7 @@ const ProjectFromBody = ({
         [e.target.name]: e.target.value,
       },
     });
-    console.log('NEW PROJECT CHANGE', newProjectData?.project);
+    //console.log('NEW PROJECT CHANGE', newProjectData?.project);
   };
 
   const handlePrivacySetting = (e) => {
@@ -101,13 +104,11 @@ const ProjectFromBody = ({
       },
     });
   };
+  
 
-  const [editProject] = useMutation(UPDATE_PROJECT_MUTATION);
-  const [createProject] = useMutation(ADD_PROJECT_MUTATION);
-
-  //create project
   const handleSubmit = async (e) => {
     setIsLoading(true);
+
 
     e.preventDefault();
     if (newProjectData.project.name.length === 0) {
@@ -127,7 +128,7 @@ const ProjectFromBody = ({
       return;
     }
   };
-
+    /*CATEGORY*/
   const categoryNames = [
     'Illustration',
     'webDesign',
@@ -138,8 +139,6 @@ const ProjectFromBody = ({
     'animation',
     'productDesign',
   ];
-
-
   //each time a category is selected in the categories drop down list
   const categoryHandler = (event) => {
     event.preventDefault();
@@ -147,12 +146,96 @@ const ProjectFromBody = ({
 
     console.log('event.target.value', event.target.value);
   };
+    /*CREATE PROJECT*/
+  const [addProject] = useMutation(ADD_PROJECT_MUTATION);
+  const [updateProject] = useMutation(UPDATE_PROJECT_MUTATION);
+  const [addProjectPhoto] = useMutation(ADD_PROJECT_PHOTO_MUTATION)
 
-  const thumbInner = {
-    display: 'flex',
-    minWidth: 0,
-    overflow: 'hidden',
+  const handleResearchUpload = () => {
+    console.log('not finished')
+  }
+
+    const handleImageUpload = async (file) => {
+    if (files.length > 0) {
+      let requestPromises = files.map(async (file) => {
+        try {
+          ////NOT SURE ABOUT KEY
+          const key = file.length
+          console.log(file)
+
+          await addProjectPhoto({
+          variables: {
+              projectId: project.id || '',
+              url: '',
+              description: '',
+              title: ''
+            }
+          });
+
+          // await addHeatmap({
+          //   userId: state.project.userId,
+          //   contribution: `Posted one photo to ${projectTitle}`,
+          //   projectId: projectId,
+          //   imageId: data.id,
+          // });
+          const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
+          return imageUrl;
+          console.log('IMAGE URL', imageUrl)
+        } catch (err) {
+          console.error('ProjectForm.js handleSubmit() ERROR', err);
+        }
+      });
+      return await Promise.all(requestPromises).then((res) => {
+        return res[0];
+      });
+    }
   };
+
+  const createProject = async (project) => {
+    try {
+      const {
+        data: { id },
+        data,
+      } = await addProject({        
+        variables: {
+          data: {
+            id: project?.id,
+            userId: user?.sub,
+            private: newProjectData?.project?.privateProjects,
+            name: newProjectData?.project?.name,
+            description: newProjectData?.project?.description,
+            category: newProjectData?.project?.category,
+            figma: newProjectData?.project?.figma,
+            invision: newProjectData?.project?.invision,
+            mainImg: newProjectData?.project?.mainImg,
+          },
+        },
+        refetchQueries: [{ query: GET_PROJECT_BY_ID_QUERY }],
+        });
+      const uploadedImage = await handleImageUpload(
+        files,
+        id,
+        data.data[0].name
+      );
+      if (researchFile.length > 0) {
+        await handleResearchUpload(researchFile, id, data.data[0].name);
+      }
+
+      const newProject = {
+        ...project,
+        mainImg: uploadedImage,
+      };
+      await updateProject(id, newProject);
+      await history.push(`/project/${id}`);
+      return uploadedImage;
+    } catch (err) {
+      console.log('ProjectForm.js addProject ERROR', err);
+    }
+  };
+  /*EDIT PROJECT*/
+  const editProject = ()=> {
+    console.log('not finished')
+  }
 
   return (
     <>
@@ -172,28 +255,7 @@ const ProjectFromBody = ({
           <MultiImageUpload files={files} setFiles={setFiles} />
           {isEditing && (
             <div>
-              <div className="thumbnail-container ">
-                {projectPhotos.map((photo, index) => (
-                  <div key={index}>
-                    <img
-                      alt=""
-                      src={remove}
-                      className="remove"
-                      onClick={(e) => {}}
-                    />
-
-                    <div className="thumb" key={index}>
-                      <div style={thumbInner}>
-                        <img
-                          alt="project thumbnail"
-                          src={photo.url}
-                          className="thumbnail"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <ThumbnailContainer />
             </div>
           )}
         </div>
@@ -255,7 +317,7 @@ const ProjectFromBody = ({
                 <option value="" disabled selected hidden>
                   Please Select a Category
                 </option>
-              )}
+              {/*)}*/}
 
               <option value="" disabled selected hidden>
                 Please Select a Category
@@ -299,9 +361,10 @@ const ProjectFromBody = ({
               <button type="button" className="cancel-btn">
                 Cancel
               </button>
-              <button className="submit-button" type="submit"></button>
+              <button className="submit-button" type="submit" onClick={handleSubmit} disabled={isLoading}
+              >{isEditing ? 'Save Changes' : 'Publish'}</button>
             </div>
-            <div className="error">error</div>
+            <div className="error">{error}</div>
 
             <div className="delete-project-button">
               <DeleteIcon />
