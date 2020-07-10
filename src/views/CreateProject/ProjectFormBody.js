@@ -8,8 +8,9 @@ import CharacterCount from '../../common/CharacterCount/CharacterCount';
 import DeleteIcon from '../../ASSETS/Icons/DeleteIcon.js';
 import ThumbnailContainer from './ThumbnailContainer';
 import { MultiImageUpload } from './MultiImageUpload';
-
+import { storage } from '../../utilities/firebase';
 import { useAuth0 } from '../../utilities/auth-spa.js';
+import { useHistory } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import {
   ADD_PROJECT_MUTATION,
@@ -18,12 +19,10 @@ import {
   UPDATE_PROJECT_PHOTO_MUTATION,
   DELETE_PROJECT_PHOTO_MUTATION,
   DELETE_PROJECT_MUTATION,
-  GET_PROJECT_BY_ID_QUERY
+  GET_PROJECT_BY_ID_QUERY,
 } from '../../graphql/index';
 
 import './styles.scss';
-
-
 
 const ProjectFromBody = ({
   isEditing,
@@ -31,11 +30,10 @@ const ProjectFromBody = ({
   projectPhotos,
   userData,
   user,
-  history
+  //history,
 }) => {
-
   //console.log('PROJECT USER', userData);
-
+  const history = useHistory();
   const [files, setFiles] = useState([]);
   const [researchFile, setResearchFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +69,7 @@ const ProjectFromBody = ({
 
   const { name, description, figma, invision } = newProjectData?.project;
 
-    const closeModal = () => {
+  const closeModal = () => {
     setNewProjectData({
       ...newProjectData,
       modal: false,
@@ -104,11 +102,9 @@ const ProjectFromBody = ({
       },
     });
   };
-  
 
   const handleSubmit = async (e) => {
     setIsLoading(true);
-
 
     e.preventDefault();
     if (newProjectData.project.name.length === 0) {
@@ -121,14 +117,14 @@ const ProjectFromBody = ({
     if (files.length > 0 || (projectPhotos && projectPhotos.length > 0)) {
       isEditing
         ? editProject(newProjectData.project, project.id)
-        : createProject(newProjectData.project);
+        : createProject(newProjectData?.project);
     } else {
       setIsLoading(false);
       setError('Please upload at least one image');
       return;
     }
   };
-    /*CATEGORY*/
+  /*CATEGORY*/
   const categoryNames = [
     'Illustration',
     'webDesign',
@@ -146,31 +142,45 @@ const ProjectFromBody = ({
 
     console.log('event.target.value', event.target.value);
   };
-    /*CREATE PROJECT*/
+  /*CREATE PROJECT*/
   const [addProject] = useMutation(ADD_PROJECT_MUTATION);
   const [updateProject] = useMutation(UPDATE_PROJECT_MUTATION);
-  const [addProjectPhoto] = useMutation(ADD_PROJECT_PHOTO_MUTATION)
+  const [addProjectPhoto] = useMutation(ADD_PROJECT_PHOTO_MUTATION);
 
   const handleResearchUpload = () => {
-    console.log('not finished')
-  }
+    console.log('not finished');
+  };
 
-    const handleImageUpload = async (file) => {
+  const handleImageUpload = async (files, projectId) => {
+    const imageUrls = [];
     if (files.length > 0) {
       let requestPromises = files.map(async (file) => {
         try {
-          ////NOT SURE ABOUT KEY
-          const key = file.length
-          console.log(file)
-
-          await addProjectPhoto({
-          variables: {
-              projectId: project.id || '',
-              url: '',
-              description: '',
-              title: ''
-            }
-          });
+          console.log('FILE IMAGE UPLOAD', file);
+          await storage.ref(`/images/${file.name}`).put(file);
+          await storage
+            .ref('images')
+            .child(file.name)
+            .getDownloadURL()
+            .then(async (firebaseURL) => {
+              imageUrls.push(firebaseURL);
+              console.log('FILENAME IMAGE UPLOAD', {
+                fileName: file.name,
+                projectId,
+                firebaseURL,
+              });
+              const { error } = await addProjectPhoto({
+                variables: {
+                  data: {
+                    projectId,
+                    url: firebaseURL,
+                    description: 'image',
+                    title: file?.name,
+                  },
+                },
+              });
+              console.log('addProjectData', error);
+            });
 
           // await addHeatmap({
           //   userId: state.project.userId,
@@ -178,28 +188,27 @@ const ProjectFromBody = ({
           //   projectId: projectId,
           //   imageId: data.id,
           // });
-          const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
-          return imageUrl;
-          console.log('IMAGE URL', imageUrl)
+          // const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
+          // console.log('IMAGE URL', imageUrl);
+          // return imageUrl;
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         }
       });
-      return await Promise.all(requestPromises).then((res) => {
-        return res[0];
-      });
+      // return await Promise.all(requestPromises).then((res) => {
+
+      // });
     }
+    console.log('imageurls0', imageUrls);
+    return imageUrls[0];
   };
 
   const createProject = async (project) => {
+    console.log('CREATENEWPROJECT DATA!!!', newProjectData.project);
     try {
-      const {
-        data: { id },
-        data,
-      } = await addProject({        
+      const { data } = await addProject({
         variables: {
           data: {
-            id: project?.id,
             userId: user?.sub,
             private: newProjectData?.project?.privateProjects,
             name: newProjectData?.project?.name,
@@ -210,32 +219,46 @@ const ProjectFromBody = ({
             mainImg: newProjectData?.project?.mainImg,
           },
         },
-        refetchQueries: [{ query: GET_PROJECT_BY_ID_QUERY }],
-        });
+        refetchQueries: [
+          {
+            query: GET_PROJECT_BY_ID_QUERY,
+            variables: {
+              id: project.id,
+            },
+          },
+        ],
+      });
+      console.log('CREATE PROJECT DATA', newProjectData.project);
       const uploadedImage = await handleImageUpload(
         files,
-        id,
-        data.data[0].name
+        data?.addProject?.id,
+        data?.addProject?.name
       );
       if (researchFile.length > 0) {
-        await handleResearchUpload(researchFile, id, data.data[0].name);
+        await handleResearchUpload(
+          researchFile,
+          data?.addProject?.id,
+          data?.addProject?.name
+        );
       }
 
       const newProject = {
         ...project,
         mainImg: uploadedImage,
       };
-      await updateProject(id, newProject);
-      await history.push(`/project/${id}`);
-      return uploadedImage;
+      // await updateProject(data?.addProject?.id, newProject);
+      console.log('DATA', data);
+      //await history.push(`/project/${data?.addProject?.id}`);
+
+     // return uploadedImage;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
   };
   /*EDIT PROJECT*/
-  const editProject = ()=> {
-    console.log('not finished')
-  }
+  const editProject = () => {
+    console.log('not finished');
+  };
 
   return (
     <>
@@ -314,9 +337,9 @@ const ProjectFromBody = ({
                 </option>
               ) : (
               */}
-                <option value="" disabled selected hidden>
-                  Please Select a Category
-                </option>
+              <option value="" disabled selected hidden>
+                Please Select a Category
+              </option>
               {/*)}*/}
 
               <option value="" disabled selected hidden>
@@ -354,15 +377,21 @@ const ProjectFromBody = ({
               onChange={handleChanges}
             />
 
-            <CaseStudy />
+            {/*<CaseStudy />*/}
             <Privacy />
             <Editing />
             <div className="submit-cancel-container">
               <button type="button" className="cancel-btn">
                 Cancel
               </button>
-              <button className="submit-button" type="submit" onClick={handleSubmit} disabled={isLoading}
-              >{isEditing ? 'Save Changes' : 'Publish'}</button>
+              <button
+                className="submit-button"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isLoading}
+              >
+                {isEditing ? 'Save Changes' : 'Publish'}
+              </button>
             </div>
             <div className="error">{error}</div>
 
