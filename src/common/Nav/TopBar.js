@@ -80,7 +80,7 @@ const TopBar = ({ searchData, getSearch }) => {
       <>
         <div className="nav-content">
           <div className="logo-container">
-            <Link to={`/explore`}>
+            <Link to={`/`}>
               <SampleLogo />
             </Link>
           </div>
