@@ -6,56 +6,49 @@ import Loading from '../../common/Loading/index';
 import './styles.scss';
 
 export default function ProjectPdf(props) {
+  console.log('pdf', props);
   const [pdfLoading, setPdfLoading] = useState(false);
+  const [pdfPage, setPdfPage] = useState(1);
+  const [numPages, setNumPages] = useState(null);
+
+  const onDocumentComplete = (totalPage) => {
+    setNumPages({ numPages: totalPage, pdfLoading: false });
+  };
+
+  const handleChangePage = (direction) => {
+    if (direction && pdfPage !== numPages) {
+      setPdfPage({ pdfPage: pdfPage + 1 });
+    } else if (!direction && pdfPage !== 1) {
+      setPdfPage({ pdfPage: pdfPage - 1 });
+    }
+  };
   return (
     <div className="pdf-view">
       <div className="pdf-nav-buttons">
-        <button>
-          {/*onClick={() => setState({ pdfPage: 1 })}*/}
-          First
-        </button>
-        <button
-        // {/*onClick={() => handleChangePage(false)}*/}
-        >
-          Previous
-        </button>
+        <button onClick={() => setPdfPage({ pdfPage: 1 })}>First</button>
+        <button onClick={() => handleChangePage(false)}>Previous</button>
         <p>
           Page
-          {/*  {state.pdfPage} of {state.numPages} */}
+          {pdfPage} of {numPages}
         </p>
-        <button>
-          {/*onClick={() => handleChangePage(true)}*/}
-          Next
-        </button>
-        <button>
-          {/*onClick={() => setState({ pdfPage: state.numPages })}*/}
-          Last
-        </button>
+        <button onClick={() => handleChangePage(true)}>Next</button>
+        <button onClick={() => setPdfPage({ pdfPage: numPages })}>Last</button>
       </div>
-     {/* <PDFReader />
-             url={props.projectResearch[0].url}
+      {/* <PDFReader
+        url={props.projectResearch[0].url}
         onDocumentComplete={onDocumentComplete}
-        page={state.pdfPage}*/}
+        page={pdfPage}
+      /> */}
 
       {pdfLoading ? <Loading /> : null}
       <div className="pdf-nav-buttons">
-        <button>
-          {/*onClick={() => setState({ pdfPage: 1 })}*/}
-          First
-        </button>
-        <button>
-          {/*onClick={() => handleChangePage(false)}*/}
-          Previous
-        </button>
-        <p>Page {/*{state.pdfPage} of {state.numPages}*/}</p>
-        <button>
-          {/*onClick={() => handleChangePage(true)}*/}
-          Next
-        </button>
-        <button>
-          {/*onClick={() => setState({ pdfPage: state.numPages })}*/}
-          Last
-        </button>
+        <button onClick={() => setPdfPage({ pdfPage: 1 })}>First</button>
+        <button onClick={() => handleChangePage(false)}>Previous</button>
+        <p>
+          Page {pdfPage} of {numPages}
+        </p>
+        <button onClick={() => handleChangePage(true)}>Next</button>
+        <button onClick={() => setPdfPage({ pdfPage: numPages })}>Last</button>
       </div>
     </div>
   );

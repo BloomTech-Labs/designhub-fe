@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './styles.scss';
 import { useQuery } from '@apollo/react-hooks';
 
-
 import { GET_ALL_PROJECTS_QUERY } from '../../graphql/index';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
@@ -21,7 +20,7 @@ const ProjectThumbnail = ({ project }) => {
   useEffect(() => {
     if (!project || !project.userId) return;
     setUser(allProjects[0]);
-  }, [setUser, project]);
+  }, [project]);
 
   return !project ? null : (
     <div className="project-content">

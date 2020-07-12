@@ -107,7 +107,6 @@ const ProjectFromBody = () => {
             <option /*key={category.id} value={category.id}*/>
               category.category
             </option>
-            );
           </select>
 
           <label htmlFor="figmaLink" className="label">

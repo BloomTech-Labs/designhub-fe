@@ -4,17 +4,25 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
-import TopBar from '../../common/Nav/TopBar';
 import ProjectDetails from './ProjectDetails';
 import ProjectPdf from './ProjectPdf';
 import ProjectButtonLinks from './ProjectButtonLinks';
 import ImageViewer from './ImageViewer/ImageViewer';
 
+import { useQuery } from '@apollo/react-hooks';
+import { GET_PROJECT_BY_ID_QUERY } from '../../graphql';
+import ProjectThumbnail from './ProjectThumbnail';
+import ProjectFromBody from '../CreateProject/ProjectFormBody';
+
 export default function Projects() {
   const { id } = useParams();
+  const { data: projectData } = useQuery(GET_PROJECT_BY_ID_QUERY, {
+    variables: { id: id },
+  });
+  // console.log('projectdata', projectData);
+
   return (
-    <Layout>
-    <TopBar />
+    <Layout projectData={projectData}>
       <div className="projects-container">
         <div className="project-header">
           <div className="project-header-alignment">
@@ -23,9 +31,9 @@ export default function Projects() {
           </div>
         </div>
       </div>
-      {/*Show:*/}
-      {/*  <ProjectPdf />*/}
-      {/*or show:*/}
+      {/* Show:*/}
+      {<ProjectPdf />}
+      {/*or show: */}
       <div className="project-body">
         <ImageViewer />
       </div>

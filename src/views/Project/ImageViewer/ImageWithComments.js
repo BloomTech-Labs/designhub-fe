@@ -5,6 +5,8 @@ import { TempComment } from './TempComment';
 import ModalXIcon from '../../../ASSETS/Icons/ModalXIcon.js';
 //import postCommentNotification from './postCommentNotification';
 import CommentBubbleIcon from '../../../ASSETS/Icons/CommentBubbleIcon.js';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+
 import '../styles.scss';
 
 const uuidv1 = require('uuid/v1');
@@ -23,16 +25,16 @@ const ImageWithComments = (props) => {
   let activeComments = props.photoComments;
   let activeTemp = tempComments.filter((c) => c.imageId === id);
 
-  // useEffect(() => {
-  //   element.current;
-  //   const projectComments = props.comments;
-  //   props.getPhotoComments(props.activeImg.id);
-  //   setComments({ comments: projectComments });
-  // }, [props.comments]);
+  useEffect(() => {
+    // element.current;
+    const projectComments = props.comments;
+    props.getPhotoComments(props.activeImg.id);
+    setComments({ comments: projectComments });
+  }, [props.comments]);
 
   function makeComment(id, x, y) {
     const newComment = {
-      id: uuidv1(), //?
+      id: uuidv1(),
       imageId: id,
       userId: props.activeUser.id,
       username: props.activeUser.username,
@@ -104,7 +106,7 @@ const ImageWithComments = (props) => {
               key={c.id}
               hidden={hidden}
               onSubmit={handleSubmit}
-              //commentDelete={commentDelete}
+              // commentDelete={commentDelete}
             />
           ))}
         {activeComments[0] &&

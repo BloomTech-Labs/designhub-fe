@@ -27,22 +27,23 @@ import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useAuth0 } from './utilities/auth-spa.js';
 
-
-
 export default function App() {
   /*  USER STATE   */
 
   const { user, loading } = useAuth0();
   const history = useHistory();
-  const { data:userData, loading: gqlLoading } = useQuery(GET_USER_BY_ID_QUERY, {
-    variables: { id: user?.sub },
-  });
-  //console.log('GET_USER_DATA_GQL', userData);
+  const { data: userData, loading: gqlLoading } = useQuery(
+    GET_USER_BY_ID_QUERY,
+    {
+      variables: { id: user?.sub },
+    }
+  );
+  // console.log('GET_USER_DATA_GQL', userData);
 
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
 
   const [addUser] = useMutation(ADD_USER_MUTATION);
-  
+
   /*   PROJECT STATE   */
   const { data: allProjects } = useQuery(GET_ALL_PROJECTS_QUERY);
 
@@ -56,16 +57,22 @@ export default function App() {
           // username: is not included in adding user to DB, the null username is used to send the new user to /onboarding from ./Loginbar
         },
       },
-      refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
+      refetchQueries: [
+        {
+          query: GET_USER_BY_ID_QUERY,
+
+          variables: { id: user?.sub },
+        },
+      ],
     });
 
-    //console.log('AUTHUSER', user);
+    // console.log('AUTHUSER', user);
   }, [loading, gqlLoading, user]);
 
   useEffect(() => {
     if (userData?.user?.username === null) return history.push('/onboarding');
-    // console.log('EFFECT USER', data?.user?.username)
-    //console.log('AUTH0USER', user);
+    // console.log('EFFECT USER', data?.user?.username);
+    // console.log('AUTH0USER', user);
   }, [loading, gqlLoading, user, userData?.user]);
 
   return (
@@ -73,10 +80,21 @@ export default function App() {
       <div className="app-wrapper">
         <Suspense fallback={<Loading />}>
           <main className="workspace">
-            <Route exact path="/" component={Explore} allUsers={allUsers} allProjects={allProjects}/>
+            <Route
+              exact
+              path="/"
+              component={Explore}
+              allUsers={allUsers}
+              allProjects={allProjects}
+            />
             <Route path="/landing" component={LandingPage} />
             <Route path="/profile/:username" component={Profile} />
-            <Route path="/project/:id" component={Project} allUsers={allUsers} allProjects={allProjects}/>
+            <Route
+              path="/project/:id"
+              component={Project}
+              allUsers={allUsers}
+              allProjects={allProjects}
+            />
             <Route path="/search" component={Search} />
             <Route path="/onboarding" component={Onboarding} />
             <Route

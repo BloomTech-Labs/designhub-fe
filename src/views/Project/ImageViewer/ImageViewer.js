@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ImageWithComments from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../../ASSETS/default_thumbnail.svg';
 import Loading from '../../../common/Loading';
 
-const ImageViewer = (props) => {
+const ImageViewer = ({ props, project }) => {
   const [activeImg, setActiveImg] = useState(null);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState();
   const [modal, setModal] = useState(false);
-  // useEffect(
-  //   (prevProps) => {
-  //     if (props.thumbnail !== prevProps.thumbnail) {
-  //       setActiveImg({ activeImg: props.thumbnail[0] });
-  //     } else if (props.thumbnail && activeImg === null) {
-  //       setComments({ comments: props.comments }),
-  //         setActiveImg({ activeImg: props.thumbnail });
-  //     }
-  //   },
-  //   [props.thumbnail]
-  // );
+
   function changeImg(imgObj) {
     if (activeImg === null || activeImg.id !== imgObj.id) {
       setActiveImg({ activeImg: imgObj });
     }
+    console.log('active', imgObj);
   }
   function closeModal() {
     setModal({ modal: false });
   }
-
+  console.log('ImageVue', project);
   if (activeImg === null) {
     return <Loading />;
   } else {
@@ -42,11 +33,11 @@ const ImageViewer = (props) => {
               />
               {modal && (
                 <ImageWithComments
-                  activeUser={props.activeUser}
+                  activeUser={project.activeUser}
                   activeImg={activeImg}
                   closeModal={closeModal}
-                  comments={comments.length > 0 ? comments : props.comments}
-                  thisProject={props.thisProject}
+                  comments={comments.length > 0 ? comments : project.comments}
+                  thisProject={project.thisProject}
                 />
               )}
             </div>
@@ -61,7 +52,7 @@ const ImageViewer = (props) => {
                   />
                 ) : (
                   <img
-                    src={activeImg ? activeImg.url : props.thumbnail[0].url}
+                    src={activeImg ? activeImg.url : props.thumbnails[0].url}
                     alt="main project"
                     onClick={() => setModal({ modal: true })}
                     className="main-image"
@@ -69,7 +60,7 @@ const ImageViewer = (props) => {
                 )}
               </section>
               <section className="ImageViewer__thumbnails">
-                {props.thumbnail.map((t) => (
+                {props.thumbnails.map((t) => (
                   <img
                     src={t.url}
                     key={t.url}
