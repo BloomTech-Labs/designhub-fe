@@ -154,9 +154,9 @@ const ProjectFromBody = ({
   const handleImageUpload = async (files, projectId) => {
     const imageUrls = [];
     if (files.length > 0) {
-      let requestPromises = files.map(async (file) => {
+      let requestPromises = await files.map(async (file) => {
         try {
-          console.log('FILE IMAGE UPLOAD', file);
+          // console.log('FILE IMAGE UPLOAD', file);
           await storage.ref(`/images/${file.name}`).put(file);
           await storage
             .ref('images')
@@ -164,12 +164,12 @@ const ProjectFromBody = ({
             .getDownloadURL()
             .then(async (firebaseURL) => {
               imageUrls.push(firebaseURL);
-              console.log('FILENAME IMAGE UPLOAD', {
-                fileName: file.name,
-                projectId,
-                firebaseURL,
-              });
-              const { error } = await addProjectPhoto({
+              // console.log('FILENAME IMAGE UPLOAD', {
+              //   fileName: file.name,
+              //   projectId,
+              //   firebaseURL,
+              // });
+              const { data } = await addProjectPhoto({
                 variables: {
                   data: {
                     projectId,
@@ -179,32 +179,23 @@ const ProjectFromBody = ({
                   },
                 },
               });
-              console.log('addProjectData', error);
+              console.log('addProjectDataURLS', imageUrls[0]);
             });
-
-          // await addHeatmap({
-          //   userId: state.project.userId,
-          //   contribution: `Posted one photo to ${projectTitle}`,
-          //   projectId: projectId,
-          //   imageId: data.id,
-          // });
-          // const imageUrl = `${process.env.REACT_APP_S3_BUCKET_URL}${key}`;
-          // console.log('IMAGE URL', imageUrl);
-          // return imageUrl;
+          console.log('addProjectDataURLS-2', imageUrls);
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         }
       });
-      // return await Promise.all(requestPromises).then((res) => {
-
-      // });
+      console.log('requestPromises', requestPromises);
+      console.log('addProjectDataURLS-3', imageUrls[0]);
     }
     console.log('imageurls0', imageUrls);
-    return imageUrls[0];
+    
+    return await imageUrls[0];
   };
 
   const createProject = async (project) => {
-    console.log('CREATENEWPROJECT DATA!!!', newProjectData.project);
+   console.log('CREATENEWPROJECT image DATA!!!', [addProjectPhoto?.data?.url]);
     try {
       const { data } = await addProject({
         variables: {
@@ -234,23 +225,15 @@ const ProjectFromBody = ({
         data?.addProject?.id,
         data?.addProject?.name
       );
-      if (researchFile.length > 0) {
-        await handleResearchUpload(
-          researchFile,
-          data?.addProject?.id,
-          data?.addProject?.name
-        );
-      }
-
       const newProject = {
         ...project,
-        mainImg: uploadedImage,
+        mainImg: addProjectPhoto[0]?.data?.url,
       };
-      // await updateProject(data?.addProject?.id, newProject);
+      await updateProject(project?.id, newProject);
       console.log('DATA', data);
-      //await history.push(`/project/${data?.addProject?.id}`);
+      await history.push(`/project/${data?.addProject?.id}`);
 
-     // return uploadedImage;
+      return uploadedImage;
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
@@ -379,7 +362,7 @@ const ProjectFromBody = ({
 
             {/*<CaseStudy />*/}
             <Privacy />
-            <Editing />
+            {/*<Editing />*/}
             <div className="submit-cancel-container">
               <button type="button" className="cancel-btn">
                 Cancel

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
-
+import { storage } from '../../utilities/firebase';
 import Loading from '../../common/Loading/index.js';
 import Explore from '../../views/Explore/index.js';
 import Step1 from './Step1.js';
@@ -111,7 +111,7 @@ const OnboardingForm = ({ history, isLoading }) => {
         variables: {
           data: {
             id: user?.sub,
-            avatar: user?.picture,
+            avatar: formUser?.avatar,
             email: user?.email,
             username: formUser?.username,
             firstName: formUser?.firstName,
@@ -130,27 +130,47 @@ const OnboardingForm = ({ history, isLoading }) => {
     }
   };
 
-  const handleImageUpload = async file => {
-    try {
+const handleImageUpload = async files => {
+    
+    if (files.length > 0) {
+      await files.map(async (file) => {
+        try {
+          console.log('FILE IMAGE UPLOAD', file);
+          await storage.ref(`/images/${file.name}`).put(file);
+          await storage
+            .ref('images')
+            .child(file.name)
+            .getDownloadURL()
+            .then(async (firebaseURL) => {
+              
+              console.log('FILENAME IMAGE UPLOAD', {
+                fileName: file.name,
+                firebaseURL,
+              });
       const {
-        data: { key, url }
+        data: { data }
       } = await updateUser({
       variables: {
         data: {
           id: user?.sub,
-          avatar: user?.avatar,
+          avatar: firebaseURL,
         }
       }
     })
       // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
+     // files.forEach(file => URL.revokeObjectURL(file.preview));
 
-      return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
-    } catch (err) {
-      console.error('OnboardingForm.js handleImageUpload() ERROR', err);
-    }
+            });
+        } catch (err) {
+          console.error('OnboardingForm.js handleImageUpload() ERROR', err);
+        }
+
+      console.log('addProjectDataURLS-3', data);
+    })
+    }  
+    return data?.avatar;
   };
-  
+
   if (loadingPage || isLoading) return <Loading />;
   else
     return (
