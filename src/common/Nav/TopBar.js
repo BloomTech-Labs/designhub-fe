@@ -21,7 +21,7 @@ const TopBar = ({ searchData, getSearch }) => {
   const { data: activeUser } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
-
+//console.log('ACTIVE USER TOP BAR', activeUser)
   const startLight = localStorage.getItem('theme') === 'light';
 
   const [light, setLight] = useState(startLight);
