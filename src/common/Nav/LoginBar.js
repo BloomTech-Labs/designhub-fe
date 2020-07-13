@@ -22,7 +22,7 @@ const LoginBar = () => {
   const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
-
+  
   const startLight = localStorage.getItem('theme') === 'light';
 
   const [light, setLight] = useState(startLight);

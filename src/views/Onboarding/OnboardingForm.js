@@ -17,7 +17,6 @@ import {
 import './styles.scss';
 
 const OnboardingForm = ({ history, isLoading }) => {
-  
   const [loadingPage, setLoadingPage] = useState(false);
 
   // user data from auth0-spa
@@ -59,7 +58,6 @@ const OnboardingForm = ({ history, isLoading }) => {
     firstName: false,
     lastName: false,
   });
-
 
   const handleChange = (e, id) => {
     setAlert({
@@ -106,7 +104,6 @@ const OnboardingForm = ({ history, isLoading }) => {
         newAvatar = await handleImageUpload(files);
       }
 
-      //changes = {...changes, avatar: newAvatar, auth0Id: user?.sub}
       updateUser({
         variables: {
           data: {
@@ -124,50 +121,37 @@ const OnboardingForm = ({ history, isLoading }) => {
         refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
       });
       history.push(`/callback`);
-      console.log('res submit:', data);
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
-const handleImageUpload = async files => {
-    
+  const handleImageUpload = async (files) => {
     if (files.length > 0) {
       await files.map(async (file) => {
         try {
-          console.log('FILE IMAGE UPLOAD', file);
           await storage.ref(`/images/${file.name}`).put(file);
           await storage
             .ref('images')
             .child(file.name)
             .getDownloadURL()
             .then(async (firebaseURL) => {
-              
-              console.log('FILENAME IMAGE UPLOAD', {
-                fileName: file.name,
-                firebaseURL,
+              const {
+                data: { data },
+              } = await updateUser({
+                variables: {
+                  data: {
+                    id: user?.sub,
+                    avatar: firebaseURL,
+                  },
+                },
               });
-      const {
-        data: { data }
-      } = await updateUser({
-      variables: {
-        data: {
-          id: user?.sub,
-          avatar: firebaseURL,
-        }
-      }
-    })
-      // Make sure to revoke the data uris to avoid memory leaks
-     // files.forEach(file => URL.revokeObjectURL(file.preview));
-
             });
         } catch (err) {
           console.error('OnboardingForm.js handleImageUpload() ERROR', err);
         }
-
-      console.log('addProjectDataURLS-3', data);
-    })
-    }  
+      });
+    }
     return data?.avatar;
   };
 
@@ -185,7 +169,7 @@ const handleImageUpload = async files => {
                       key={i}
                       alert={alert}
                       files={files}
-                      picture={data?.user?.picture}
+                      picture={data?.user?.avatar}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
