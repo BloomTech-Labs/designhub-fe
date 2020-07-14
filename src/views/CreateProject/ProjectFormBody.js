@@ -156,111 +156,13 @@ const ProjectFromBody = ({
     newProjectData.project.category = event.target.value;
   };
 
-  /*_____________________HANDLE IMAGE UPLOAD___________________________*/
-
-  const imgUrl = [];
-  const handleImageUpload = async (
-    files,
-    newProject,
-    updateProjectData,
-    projectId
-  ) => {
-    console.log('start of upload');
-    console.log('FILE change', newProject);
-    if (files.length > 0) {
-      files.map(async (file) => {
-        try {
-          console.log('FILE IMAGE UPLOAD', file);
-          console.log('FILE data', project);
-          console.log('FILE newProject', projectId);
-          storage.ref(`/images/${file.name}`).put(file);
-          storage
-            .ref('images')
-            .child(file.name)
-            .getDownloadURL()
-
-            .then(async (firebaseURL) => {
-              await setImageAsUrl([...imageAsUrl, firebaseURL]);
-              //imgUrl.push(firebaseURL);
-              console.log('FIREBASE IMAGE UPLOAD', {
-                fileName: file.name,
-                firebaseURL,
-                imgUrl,
-                imageAsUrl,
-              });
-              const { data: addProjectPhotoData } = await addProjectPhoto({
-                variables: {
-                  data: {
-                    projectId: project?.id,
-                    url: firebaseURL,
-                    description: 'image',
-                    title: file?.name,
-                  },
-                },
-                refetchQueries: [
-                  {
-                    query: GET_PROJECT_BY_ID_QUERY,
-                    variables: {
-                      id: project?.id,
-                    },
-                  },
-                ],
-              });
-              console.log('ADD PROJECT PHOTO DATA', addProjectPhotoData);
-            });
-
-          //  imgUrl.forEach(async (url) => {
-          //    const {data: addProjectPhotoData} = await addProjectPhoto({
-          //      variables: {
-          //        data: {
-          //          projectId: projectId?.id,
-          //          url: url,
-          //          description: 'image',
-          //          title: file?.name,
-          //        },
-          //      },
-          //      refetchQueries: [
-          //        {
-          //          query: GET_PROJECT_BY_ID_QUERY,
-          //          variables: {
-          //            id: projectId?.id,
-          //          },
-          //        },
-          //      ],
-          //    });
-          //    console.log('ADD PROJECT PHOTO DATA', addProjectPhotoData)
-          //  });
-          // console.log('SET-NEW-PROJECT-mainimg',  imgUrl)
-          //  await setNewProjectData({...newProjectData, mainImg: imgUrl[0]})
-        } catch (err) {
-          console.error('ProjectForm.js handleSubmit() ERROR', err);
-        }
-      });
-      // const { data: updateProjectData } = await updateProject({
-      //   variables: {
-      //     data: {
-      //       id: projectId?.id,
-      //       userId: newProject?.userId,
-      //       name: newProject?.name,
-      //       description: newProject?.description,
-      //       category: newProject?.category,
-      //       figma: newProject?.figma,
-      //       invision: newProject?.invision,
-      //       mainImg: imgUrl[0],
-      //     },
-      //   },
-      // });
-      // console.log('UPDATE PROJECT', updateProjectData);
-    }
-  };
+  
 
   /*______________________CREATE PROJECT__________________________*/
 
   const createProject = async (project) => {
     console.log('START CREATE PROJECT');
     try {
-      console.log('CREATE-PROJECT FILES', imgUrl.shift());
-
       const { data: addProjectData } = await addProject({
         variables: {
           data: {
@@ -283,9 +185,6 @@ const ProjectFromBody = ({
           },
         ],
       });
-
-      console.log('PROJECT ADDED', addProjectData);
-
       const newProject = {
         ...addProject?.id,
       };
@@ -293,9 +192,6 @@ const ProjectFromBody = ({
       files.map(async (file) => {
         try {
           const imgUrl = [];
-          console.log('FILE IMAGE UPLOAD', file);
-          console.log('FILE data', project);
-          console.log('FILE newProject', newProject);
           storage.ref(`/images/${file.name}`).put(file);
           storage
             .ref('images')
@@ -305,12 +201,6 @@ const ProjectFromBody = ({
             .then(async (firebaseURL) => {
               await setImageAsUrl([...imageAsUrl, firebaseURL]);
               imgUrl.push(firebaseURL);
-              console.log('FIREBASE IMAGE UPLOAD', {
-                fileName: file.name,
-                firebaseURL,
-                imgUrl,
-                imageAsUrl,
-              });
               const { data: addProjectPhotoData } = await addProjectPhoto({
                 variables: {
                   data: {
@@ -329,7 +219,6 @@ const ProjectFromBody = ({
                   },
                 ],
               });
-              console.log('ADD PROJECT PHOTO DATA', addProjectPhotoData);
               const { data: updateProjectData } = await updateProject({
                 variables: {
                   data: {
@@ -352,68 +241,13 @@ const ProjectFromBody = ({
                   },
                 ],
               });
-              console.log('UPDATE PROJECT', updateProjectData);
-            });
-
-          //  imgUrl.forEach(async (url) => {
-          //    const {data: addProjectPhotoData} = await addProjectPhoto({
-          //      variables: {
-          //        data: {
-          //          projectId: projectId?.id,
-          //          url: url,
-          //          description: 'image',
-          //          title: file?.name,
-          //        },
-          //      },
-          //      refetchQueries: [
-          //        {
-          //          query: GET_PROJECT_BY_ID_QUERY,
-          //          variables: {
-          //            id: projectId?.id,
-          //          },
-          //        },
-          //      ],
-          //    });
-          //    console.log('ADD PROJECT PHOTO DATA', addProjectPhotoData)
-          //  });
-          // console.log('SET-NEW-PROJECT-mainimg',  imgUrl)
-          //  await setNewProjectData({...newProjectData, mainImg: imgUrl[0]})
+            });        
         } catch (err) {
           console.error('ProjectForm.js handleSubmit() ERROR', err);
         }
       });
-
-      // const uploadedImage = await handleImageUpload(files);
-      // const firstImage = imgUrl.shift()
-      console.log('NEW PROJECT', newProject);
-      // const { data: updateProjectData } = await updateProject({
-      //   variables: {
-      //     data: {
-      //       id: addProjectData?.addProject?.id,
-      //       userId: user?.sub,
-      //       name: addProjectData?.addProject?.name,
-      //       description: addProjectData?.addProject?.description,
-      //       category: addProjectData?.addProject?.category,
-      //       figma: addProjectData?.addProject?.figma,
-      //       invision: addProjectData?.addProject?.invision,
-      //       mainImg: addProjectPhotoData[0]?.addProjectPhoto?.url
-      //     },
-      //   },
-      //           refetchQueries: [
-      //     {
-      //       query: GET_PROJECT_BY_ID_QUERY,
-      //       variables: {
-      //         id: project.id,
-      //       },
-      //     },
-      //   ],
-      // });
-      // console.log('UPDATE PROJECT', updateProjectData);
-
       await history.push(`/project/${addProjectData?.addProject?.id}`);
-      // console.log(uploadedImage);
-      // return uploadedImage;
-      //
+
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);
     }
