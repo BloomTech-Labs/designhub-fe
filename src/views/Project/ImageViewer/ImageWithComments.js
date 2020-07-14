@@ -5,14 +5,28 @@ import { TempComment } from './TempComment';
 import ModalXIcon from '../../../ASSETS/Icons/ModalXIcon.js';
 //import postCommentNotification from './postCommentNotification';
 import CommentBubbleIcon from '../../../ASSETS/Icons/CommentBubbleIcon.js';
+
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import {
+  ADD_COMMENT_MUTATION,
+  GET_PROJECT_BY_ID_QUERY,
+  GET_USER_BY_ID_QUERY,
+} from '../../../graphql';
 
 import '../styles.scss';
+import ProjectDetails from '../ProjectDetails';
 
 const uuidv1 = require('uuid/v1');
 
-const ImageWithComments = (props) => {
+const ImageWithComments = (props, projectImg) => {
   const { id, url } = props.activeImg;
+
+  const { data: userData, loading: gqlLoading } = useQuery(
+    GET_USER_BY_ID_QUERY,
+    {
+      variables: { id: userData?.sub },
+    }
+  );
   const [hidden, setHidden] = useState(false);
   //comments are in the side bar
   const [comments, setComments] = useState([]);
@@ -22,15 +36,35 @@ const ImageWithComments = (props) => {
   const topOffset = useRef(null);
   const element = useRef(null);
 
+  const [addComments] = useMutation(ADD_COMMENT_MUTATION);
+
   let activeComments = props.photoComments;
   let activeTemp = tempComments.filter((c) => c.imageId === id);
 
+  // useEffect(() => {
+  //   // element.current;
+  //   const projectComments = props.comments;
+  //   props.getPhotoComments(props.activeImg.id);
+  //   setComments({ comments: projectComments });
+  // }, [comments]);
+
   useEffect(() => {
-    // element.current;
-    const projectComments = props.comments;
-    props.getPhotoComments(props.activeImg.id);
-    setComments({ comments: projectComments });
-  }, [props.comments]);
+    addComments({
+      variables: {
+        data: {
+          id: userData?.sub,
+          projectId: userData?.projectId,
+          text: userData?.text,
+        },
+      },
+      refetchQueries: [
+        {
+          query: GET_PROJECT_BY_ID_QUERY,
+          variables: { id: userData?.sub },
+        },
+      ],
+    });
+  }, [gqlLoading, userData, ProjectDetails]);
 
   function makeComment(id, x, y) {
     const newComment = {
@@ -105,7 +139,7 @@ const ImageWithComments = (props) => {
               c={c}
               key={c.id}
               hidden={hidden}
-              onSubmit={handleSubmit}
+              // onSubmit={handleSubmit}
               // commentDelete={commentDelete}
             />
           ))}

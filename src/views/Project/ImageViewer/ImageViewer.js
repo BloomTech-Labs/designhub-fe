@@ -4,22 +4,24 @@ import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../../ASSETS/default_thumbnail.svg';
 import Loading from '../../../common/Loading';
 
-const ImageViewer = ({ props, project }) => {
+const ImageViewer = ({ props, project, projectImg, userData, projectData }) => {
+  //changed all activeImg to projectImg
+  //changed all activeUser to userData
   const [activeImg, setActiveImg] = useState(null);
-  const [comments, setComments] = useState();
+  // const [comments, setComments] = useState();
   const [modal, setModal] = useState(false);
 
   function changeImg(imgObj) {
-    if (activeImg === null || activeImg.id !== imgObj.id) {
-      setActiveImg({ activeImg: imgObj });
+    if (projectImg === null || projectImg.id !== imgObj.id) {
+      setActiveImg({ projectImg: imgObj });
     }
-    console.log('active', imgObj);
+    console.log('active', activeImg);
   }
   function closeModal() {
     setModal({ modal: false });
   }
-  console.log('ImageVue', project);
-  if (activeImg === null) {
+  console.log('ImageVue', projectImg);
+  if (projectImg === null) {
     return <Loading />;
   } else {
     return (
@@ -31,19 +33,23 @@ const ImageViewer = ({ props, project }) => {
                 className="modal--expand__background-overlay"
                 onClick={closeModal}
               />
-              {modal && (
+              {/* {modal && (
                 <ImageWithComments
-                  activeUser={project.activeUser}
-                  activeImg={activeImg}
+                  userData={projectData}
+                  projectImg={projectImg}
                   closeModal={closeModal}
-                  comments={comments.length > 0 ? comments : project.comments}
-                  thisProject={project.thisProject}
+                  // comments={comments.length > 0 ? comments : project.comments}
+                  comments={
+                    projectImg?.length > 0 ? projectImg : projectData?.comments
+                  }
+                  // thisProject={project.thisProject}
+                  projectData={projectData}
                 />
-              )}
+              )} */}
             </div>
             <div className="main-image-container">
               <section className="ImageViewer__main-image">
-                {!activeImg ? (
+                {!projectImg ? (
                   <img
                     src={defaultImage}
                     alt="main project"
@@ -52,7 +58,7 @@ const ImageViewer = ({ props, project }) => {
                   />
                 ) : (
                   <img
-                    src={activeImg ? activeImg.url : props.thumbnails[0].url}
+                    src={projectImg ? projectImg.url : props.thumbnails[0].url}
                     alt="main project"
                     onClick={() => setModal({ modal: true })}
                     className="main-image"
@@ -60,7 +66,7 @@ const ImageViewer = ({ props, project }) => {
                 )}
               </section>
               <section className="ImageViewer__thumbnails">
-                {props.thumbnails.map((t) => (
+                {projectData?.thumbnails.map((t) => (
                   <img
                     src={t.url}
                     key={t.url}
@@ -74,9 +80,11 @@ const ImageViewer = ({ props, project }) => {
           </main>
         </div>
         <ProjectComments
-          activeUser={props.activeUser}
+          // activeUser={props.activeUser}
+          userData={userData}
           modal={modal}
-          thisProject={props.thisProject}
+          // thisProject={props.thisProject}
+          projectData={projectData}
         />
       </>
     );
