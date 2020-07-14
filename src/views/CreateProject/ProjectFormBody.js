@@ -9,8 +9,8 @@ import DeleteIcon from '../../ASSETS/Icons/DeleteIcon.js';
 import ThumbnailContainer from './ThumbnailContainer';
 import { MultiImageUpload } from './MultiImageUpload';
 import { storage } from '../../utilities/firebase';
-import { useAuth0 } from '../../utilities/auth-spa.js';
 import { useHistory } from 'react-router-dom';
+
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import {
   ADD_PROJECT_MUTATION,
@@ -30,9 +30,17 @@ const ProjectFromBody = ({
   projectPhotos,
   userData,
   user,
-  //history,
 }) => {
-  //console.log('PROJECT USER', userData);
+  /*user is from AUTH0, userData is from graphQL*/
+  // console.log('user props', user)
+  // console.log('userData props', userData)
+  // console.log('project props', project)
+
+  /*____________APOLLO/GRAPHQL______________________________*/
+  const [addProject] = useMutation(ADD_PROJECT_MUTATION);
+  const [updateProject] = useMutation(UPDATE_PROJECT_MUTATION);
+  const [addProjectPhoto] = useMutation(ADD_PROJECT_PHOTO_MUTATION);
+
   const history = useHistory();
   const [files, setFiles] = useState([]);
   const [researchFile, setResearchFile] = useState([]);
