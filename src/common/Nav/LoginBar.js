@@ -15,7 +15,7 @@ import './SASS/LoginBar.scss';
 
 const LoginBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0();
-  const history = useHistory()
+  const history = useHistory();
   //const [pathname, setPathname] =useState(()=> history.locaiton.pathname);
   //console.log('history', history)
 
@@ -51,7 +51,6 @@ const LoginBar = () => {
     }
   };
 
-
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
     toggleLightMode();
@@ -62,7 +61,7 @@ const LoginBar = () => {
     }
     setLight(!light);
   };
- 
+
   // const redirect_uri = `${window.location.origin}/onboarding`
 
   const toggleLightMode = () => {
@@ -84,11 +83,11 @@ const LoginBar = () => {
     : 'mobile-overlay display-block';
 
   // No username is added to DB when user is created.
- // if (data?.user?.username === null) return <Redirect to="/onboarding" />
-const login = () => {
-  loginWithRedirect({})
-  return window.location.reload()
-}
+  // if (data?.user?.username === null) return <Redirect to="/onboarding" />
+  const login = () => {
+    loginWithRedirect({});
+    return window.location.reload();
+  };
   return (
     <div className="top-bar-container">
       <div className="nav-content">
@@ -105,17 +104,13 @@ const login = () => {
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
-          <button className="auth0-btn" onClick={logout}>
-          Logout
-        </button>
-          
 
           <div>
             <Tooltip
               show={show}
               arrowAlign="center"
               backgroundColor={light ? undefined : '#212229'}
-             // hoverColor="#212229"
+              // hoverColor="#212229"
               border="1px solid #ffffff"
               position="bottom right"
               moveRight="-100px"

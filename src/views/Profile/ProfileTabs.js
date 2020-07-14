@@ -18,7 +18,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
 
     
     
-    // const projects = this.projects;
+    // const projects = projects;
      const recentProjects = null;
     // const followers = this.followers;
     // const following = this.following;

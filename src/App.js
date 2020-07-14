@@ -26,23 +26,25 @@ import {
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useAuth0 } from './utilities/auth-spa.js';
-
-
+import Privacy from './views/CreateProject/Privacy';
 
 export default function App() {
   /*  USER STATE   */
 
-  const { user, loading } = useAuth0();
+  const { user, loading, logout } = useAuth0();
   const history = useHistory();
-  const { data:userData, loading: gqlLoading } = useQuery(GET_USER_BY_ID_QUERY, {
-    variables: { id: user?.sub },
-  });
-  console.log('GET_USER_DATA_GQL', userData);
+  const { data: userData, loading: gqlLoading } = useQuery(
+    GET_USER_BY_ID_QUERY,
+    {
+      variables: { id: user?.sub },
+    }
+  );
+  //console.log('GET_USER_DATA_GQL', userData);
 
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
 
   const [addUser] = useMutation(ADD_USER_MUTATION);
-  
+
   /*   PROJECT STATE   */
   const { data: allProjects } = useQuery(GET_ALL_PROJECTS_QUERY);
 
@@ -68,15 +70,28 @@ export default function App() {
     //console.log('AUTH0USER', user);
   }, [loading, gqlLoading, user, userData?.user]);
 
+  console.log('userData', userData);
+
   return (
     <>
       <div className="app-wrapper">
         <Suspense fallback={<Loading />}>
           <main className="workspace">
-            <Route exact path="/" component={Explore} allUsers={allUsers} allProjects={allProjects}/>
+            <Route
+              exact
+              path="/"
+              component={Explore}
+              allUsers={allUsers}
+              allProjects={allProjects}
+            />
             <Route path="/landing" component={LandingPage} />
             <Route path="/profile/:username" component={Profile} />
-            <Route path="/project/:id" component={Project} allUsers={allUsers} allProjects={allProjects}/>
+            <Route
+              path="/project/:id"
+              component={Project}
+              allUsers={allUsers}
+              allProjects={allProjects}
+            />
             <Route path="/search" component={Search} />
             <Route path="/onboarding" component={Onboarding} />
             <Route
@@ -86,7 +101,11 @@ export default function App() {
             />
             <PrivateRoute path="/notifications" component={Notifications} />
             <PrivateRoute path="/create-project" component={CreateProject} />
-            <PrivateRoute path="/settings" component={Settings} />
+            <PrivateRoute
+              path="/settings"
+              component={() => <Settings activeUser={userData?.user} />}
+            />
+            {/* <PrivateRoute exact path="/settings/privacy" component={Privacy} /> */}
           </main>
         </Suspense>
       </div>
