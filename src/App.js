@@ -26,11 +26,12 @@ import {
 import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import { useAuth0 } from './utilities/auth-spa.js';
+import Privacy from './views/CreateProject/Privacy';
 
 export default function App() {
   /*  USER STATE   */
 
-  const { user, loading } = useAuth0();
+  const { user, loading, logout } = useAuth0();
   const history = useHistory();
   const { data: userData, loading: gqlLoading } = useQuery(
     GET_USER_BY_ID_QUERY,
@@ -38,7 +39,7 @@ export default function App() {
       variables: { id: user?.sub },
     }
   );
-  // console.log('GET_USER_DATA_GQL', userData);
+  //console.log('GET_USER_DATA_GQL', userData);
 
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
 
@@ -75,6 +76,8 @@ export default function App() {
     // console.log('AUTH0USER', user);
   }, [loading, gqlLoading, user, userData?.user]);
 
+  console.log('userData', userData);
+
   return (
     <>
       <div className="app-wrapper">
@@ -104,7 +107,11 @@ export default function App() {
             />
             <PrivateRoute path="/notifications" component={Notifications} />
             <PrivateRoute path="/create-project" component={CreateProject} />
-            <PrivateRoute path="/settings" component={Settings} />
+            <PrivateRoute
+              path="/settings"
+              component={() => <Settings activeUser={userData?.user} />}
+            />
+            {/* <PrivateRoute exact path="/settings/privacy" component={Privacy} /> */}
           </main>
         </Suspense>
       </div>
