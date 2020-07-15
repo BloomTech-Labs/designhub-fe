@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import React, { useState, useEffect } from 'react';
->>>>>>> 5ee28e61c497fa4a6f0b0c1805b358b86c4dfaa7
+
 import Editing from './Editing';
 import Privacy from './Privacy';
 import CaseStudy from './CaseStudy';
@@ -28,18 +25,6 @@ import {
 
 import './styles.scss';
 
-<<<<<<< HEAD
-const ProjectFromBody = () => {
-  const [error, setError] = useState('');
-  const [state, setState] = useState();
-
-  const handleChanges = (e) => {
-    setError('');
-    setState({
-      ...state,
-      project: {
-        ...state.project,
-=======
 const ProjectFromBody = ({
   isEditing,
   project,
@@ -125,38 +110,10 @@ const ProjectFromBody = ({
       ...newProjectData,
       project: {
         ...newProjectData.project,
->>>>>>> 5ee28e61c497fa4a6f0b0c1805b358b86c4dfaa7
         [e.target.name]: e.target.value,
       },
     });
   };
-<<<<<<< HEAD
-  return (
-    <section className="ProjectForm__body">
-      <div className="left-container">
-        <header className="ProjectForm__header">
-          <h2 className="page-header" />
-        </header>
-        <MultiImageUpload /*files={files} setFiles={setFiles} */ />
-
-        <div>
-          <div className="thumbnail-container ">
-            <div /*key={index}*/>
-              <img
-                alt=""
-                /*src={remove}*/
-                className="remove"
-              />
-              <div className="thumb" /*key={index}*/>
-                <div /*style={thumbInner}*/>
-                  <img
-                    alt="project thumbnail"
-                    /*src={photo.url}*/
-                    className="thumbnail"
-                  />
-                </div>
-              </div>
-=======
   /*___________________HANDLE PRIVACY_____________________________*/
   const handlePrivacySetting = (e) => {
     setPrivacy(e.target.value);
@@ -224,7 +181,7 @@ const ProjectFromBody = ({
   };
 
   const imageHandler = async (addProjectData) => {
-    setTimeout( async()=>{
+    setTimeout(async () => {
       imgUrl.forEach(async (url) => {
         const { data: addProjectPhotoData } = addProjectPhoto({
           variables: {
@@ -260,9 +217,7 @@ const ProjectFromBody = ({
           },
         },
       });
-    }, 3000)
-      
-    
+    }, 3000);
   };
 
   /*______________________CREATE PROJECT__________________________*/
@@ -329,7 +284,6 @@ const ProjectFromBody = ({
           {isEditing && (
             <div>
               <ThumbnailContainer />
->>>>>>> 5ee28e61c497fa4a6f0b0c1805b358b86c4dfaa7
             </div>
           )}
         </div>
@@ -362,19 +316,10 @@ const ProjectFromBody = ({
               name="description"
               value={description}
               type="text"
-<<<<<<< HEAD
-              /*value={name}*/
-              name="name"
-              id="name"
-              placeholder="Enter project title here"
-              onChange={handleChanges}
-              /*ref={setTitleRef}*/
-=======
               placeholder="Enter description here"
               onChange={handleChanges}
               className="description"
               maxLength="240"
->>>>>>> 5ee28e61c497fa4a6f0b0c1805b358b86c4dfaa7
             />
             <CharacterCount string={description} limit={240} />
 
@@ -391,61 +336,6 @@ const ProjectFromBody = ({
             >
               {/*if editing a project and a category was previously selected for the project
                    display that category as the default selection. if not, dispay the defaut option */}
-<<<<<<< HEAD
-            {/*            <option value="" disabled selected hidden>
-              {projectCategories[0].category}
-            </option>*/}
-            {/*):(*/}
-            <option value="" disabled selected hidden>
-              Please Select a Category
-            </option>
-            <option /*key={category.id} value={category.id}*/>
-              category.category
-            </option>
-          </select>
-
-          <label htmlFor="figmaLink" className="label">
-            Figma
-          </label>
-          <input
-            type="text"
-            name="figma"
-            /*value={figma}*/
-            placeholder="Enter link here (optional)"
-            id="figmaLink"
-            /*onChange={handleChanges}*/
-          />
-          <label htmlFor="invisionLink" className="label">
-            Prototype
-          </label>
-          <input
-            type="text"
-            name="invision"
-            /*value={invision}*/
-            placeholder="Enter link here (optional)"
-            id="invisionLink"
-            /*onChange={handleChanges}*/
-          />
-
-          <CaseStudy />
-          <Privacy />
-          <Editing />
-          <div className="submit-cancel-container">
-            <button type="button" className="cancel-btn">
-              Cancel
-            </button>
-            <button className="submit-button" type="submit" />
-          </div>
-          <div className="error">error</div>
-
-          <div className="delete-project-button">
-            <DeleteIcon />
-            <p>Delete project</p>
-          </div>
-        </form>
-      </div>
-    </section>
-=======
               {/*              {isEditing && projectCategories[0] ? (
                 <option value="" disabled selected hidden>
                   {projectCategories[0].category}
@@ -518,7 +408,6 @@ const ProjectFromBody = ({
         </div>
       </section>
     </>
->>>>>>> 5ee28e61c497fa4a6f0b0c1805b358b86c4dfaa7
   );
 };
 
