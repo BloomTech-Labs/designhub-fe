@@ -52,7 +52,7 @@
     "redux-thunk": "^2.3.0",
     "serve": "^11.3.0",
     "styled-components": "^4.4.0",
-    "uuid": "^3.3.3"
+    "uuid": "^8.2.0"
   },
   "resolutions": {
     "moment": "2.24.0"

@@ -2,8 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import moment from 'moment';
-
+import { v4 } from 'uuid'
 import Heatmap from './Heatmap.js';
+import {useQuery} from '@apollo/react-hooks';
+
+import {GET_USER_BY_ID_QUERY} from '../../graphql';
+
+
 // Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import empty from '../../ASSETS/Icons/empty_project.svg';
@@ -26,7 +31,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
     // const acceptedProjects = this.acceptedCollabProjects;
 
     // if (!this.isProjectsLoading) {
-
+  console.log("USERS", activeUser)
       return (
         <div className="profile-tabs-container">
           <div className="new-tabs-div">
@@ -51,14 +56,15 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                   Starred
                 </Tab>
               </TabList>
-              
 
+              
+            
               <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Recent Projects</h2> 
                 </div>
                 <div className="tab-content">                  
-                  {projects.length === 0 && (
+                  {activeUser?.projects?.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">
@@ -69,21 +75,21 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                   <div className="projects-array">
                     {recentProjects !== null &&
                       recentProjects.map(project => {
-                        return <ProjectThumbnail project={project} key={project.id} />
+                        return <ProjectThumbnail project={activeUser?.projects} key={v4()} />
                       })}
                   </div>
                 </div>
 
 
                  <Heatmap />
-              </TabPanel>
+              </TabPanel> 
 
-              <TabPanel className="tabs-container">
+               <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Projects</h2>
                 </div>
                 <div className="tab-content">
-                  {projects.length === 0 && (
+                  {activeUser?.projects?.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">
@@ -92,7 +98,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     </div>
                   )}
                   <div className="projects-array">
-                    {projects.map(project => {
+                    {activeUser?.projects?.map(project => {
                       return <ProjectThumbnail project={project} key={project.id} />
                     })}
                   </div>
@@ -108,7 +114,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                 </div>
                 <div className="tab-content">
 
-                  {(activeUser.id === userData.id) && (acceptedProjects.length === 0) && (
+                  {(activeUser?.id) && (activeUser?.projects.length === 0) && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">
@@ -116,16 +122,17 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                         </h1>
                     </div>
                   )}
+
                   <div className="projects-array">
-                  {acceptedProjects.map(project => {
-                    return <ProjectThumbnail project={project} key={project.id} />
+                  {acceptedProjects?.map(project => {
+                    return <ProjectThumbnail project={activeUser?.projects} key={v4()} />
                   })}
                   </div>
                 </div>
               </TabPanel>
 
 
-              <TabPanel className="tabs-container">
+              {/* <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Followers</h2> 
                 </div>
@@ -213,8 +220,8 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     );
                   })}
                 </div>
-              </TabPanel>
-              <TabPanel className="tabs-container">
+              </TabPanel> */}
+              {/* <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Following</h2> 
                 </div>
@@ -275,8 +282,8 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     </div>
                   ))}
                 </div>
-              </TabPanel>
-              <TabPanel className="tabs-container">
+              </TabPanel> */}
+              {/* <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Starred</h2>
                 </div>
@@ -317,7 +324,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     ))}
                   </div>
                 </div>
-              </TabPanel>
+              </TabPanel> */}
             </Tabs>
           </div >
         </div >

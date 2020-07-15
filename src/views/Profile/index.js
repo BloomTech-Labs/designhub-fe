@@ -1,11 +1,36 @@
 import React, {useState} from 'react';
 import Layout from '../../common/Layout';
 import ProfileTabs from './ProfileTabs';
-// import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useAuth0 } from '../../utilities/auth-spa';
+
 import './styles.scss';
+
+import { useQuery } from '@apollo/react-hooks';
+import {GET_USER_BY_ID_QUERY, GET_ALL_PROJECTS_QUERY} from '../../graphql';
+
 
 export default function Profile(props, users) {
   // const { username, avatar} = useParams();
+
+  const { id } = useParams();
+  const { user } = useAuth0();
+
+  const { data: projectData } = useQuery(GET_ALL_PROJECTS_QUERY, {
+    variables: {id: id},
+    });
+
+    const { data: activeUserData } = useQuery(GET_USER_BY_ID_QUERY, {
+      variables: {id: user?.sub},
+      });
+
+  // const { data: userProfile } = useQuery(GET_USER_BY_ID_QUERY, {
+  //   variables: {id: userProjects?.project?.userId},
+  //   });
+
+  // console.log(`USER PROFILE ${userProjects}`)
+    // console.log(userProjects);
+
   const [currentTab, setCurrentTab] = useState(1)
   const followUser = null
   const unfollowUser = null
@@ -82,25 +107,26 @@ export default function Profile(props, users) {
           </div>
         </div>
                 <ProfileTabs
+          // userProfile={userProfile}
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
-          projects={props.allProjects}
-          recentProjects={props.recentProjects}
-          followers={props.followersTab}
-          following={props.followingTab}
-          starred={props.starred}
-          isFollowed={props.isFollowed}
-          getIsFollowed={props.getIsFollowed}
+          projects={projectData?.projects}
+          // recentProjects={props.recentProjects}
+          // followers={props.followersTab}
+          // following={props.followingTab}
+          // starred={props.starred}
+          // isFollowed={props.isFollowed}
+          // getIsFollowed={props.getIsFollowed}
           followUser={followUser}
           unfollowUser={unfollowUser}
-          activeUser={props.activeUser}
-          params={props.match.params}
-          isProjectsLoading={props.isProjectsLoading}
+          activeUser={activeUserData?.user}
+          // params={props.match.params}
+          // isProjectsLoading={props.isProjectsLoading}
           acceptedCollabInvites={acceptedCollabInvites} //accepted collab invites  
-          getSingleProject={props.getSingleProject}   //collab
-          singleProject={props.singleProject} //collab     
+          // getSingleProject={props.getSingleProject}   //collab
+          // singleProject={props.singleProject} //collab     
           acceptedCollabProjects={acceptedCollabProjects}
-          userData={props.userData}
+          // userData={props.userData}
           collabUsers={users}
         />
       </div>
