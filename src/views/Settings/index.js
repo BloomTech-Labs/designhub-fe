@@ -10,7 +10,7 @@ import Privacy from '../CreateProject/Privacy';
 export default function Settings({ activeUser }) {
   const { logout } = useAuth0();
   const { pathname } = useLocation();
-  console.log('activeUser:', activeUser);
+  //console.log('activeUser:', activeUser);
   return (
     <Layout>
       <div className="Settings">

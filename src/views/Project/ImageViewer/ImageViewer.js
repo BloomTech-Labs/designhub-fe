@@ -13,10 +13,11 @@ const ImageViewer = ({ props, project, projectImg, userData, projectData }) => {
 
   function changeImg(imgObj) {
     if (projectImg === null || projectImg.id !== imgObj.id) {
-      setActiveImg({ projectImg: imgObj });
+      setActiveImg({ ...projectImg, activeImg: imgObj });
     }
     console.log('active', activeImg);
   }
+
   function closeModal() {
     setModal({ modal: false });
   }
@@ -58,7 +59,7 @@ const ImageViewer = ({ props, project, projectImg, userData, projectData }) => {
                   />
                 ) : (
                   <img
-                    src={projectImg ? projectImg.url : props.thumbnails[0].url}
+                    src={projectImg ? projectImg.url : props.photos[0].url}
                     alt="main project"
                     onClick={() => setModal({ modal: true })}
                     className="main-image"
@@ -66,7 +67,7 @@ const ImageViewer = ({ props, project, projectImg, userData, projectData }) => {
                 )}
               </section>
               <section className="ImageViewer__thumbnails">
-                {projectData?.thumbnails.map((t) => (
+                {projectData?.project?.photos.map((t) => (
                   <img
                     src={t.url}
                     key={t.url}

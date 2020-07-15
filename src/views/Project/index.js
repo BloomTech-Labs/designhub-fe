@@ -26,12 +26,12 @@ export default function Projects() {
   });
 
   const { data: projectImg } = useQuery(GET_PROJECT_BY_ID_QUERY, {
-    variables: { id: id, mainImg: projectData?.project?.mainImg },
+    variables: { id: id },
   });
 
-  // console.log('projectComms', projectImg);
-  // console.log('ProjectDeets', userData);
-  // console.log('projectdata', projectData);
+  console.log('projectComms', projectImg);
+  console.log('ProjectDeets', userData);
+  console.log('projectdata', projectData);
 
   return (
     <Layout>
@@ -47,7 +47,12 @@ export default function Projects() {
       {/* {<ProjectPdf />} */}
       {/*or show: */}
       <div className="project-body">
-        <ImageViewer projectImg={projectData} />
+        <ImageViewer
+          projectData={projectData}
+          userData={userData}
+          projectImg={projectData?.project?.photos}
+        />
+        <ProjectThumbnail />
       </div>
     </Layout>
   );

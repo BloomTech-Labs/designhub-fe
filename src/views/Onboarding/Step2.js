@@ -1,13 +1,11 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
-
 import DottedLine from '../../ASSETS/Icons/DottedLine.js';
 
 import UploadCloud from '../../ASSETS/Icons/UploadCloud.js';
 import remove from '../../ASSETS/remove.svg';
 import welcome from '../../ASSETS/welcome.svg';
-
 
 const Step2 = ({
   formUser,
@@ -18,30 +16,30 @@ const Step2 = ({
   handleNextButton,
   handlePrevButton,
   logout,
-  submitButton
+  submitButton,
 }) => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: 'image/*',
-    onDrop: acceptedFiles => {
+    onDrop: (acceptedFiles) => {
       setFiles(
-        acceptedFiles.map(file =>
+        acceptedFiles.map((file) =>
           Object.assign(file, {
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
           })
         )
       );
-    }
+    },
   });
 
   const thumbInner = {
     display: 'flex',
     minWidth: 0,
-    overflow: 'hidden'
+    overflow: 'hidden',
   };
 
   const thumbs = () => {
-    const removeThumbnail = index => {
-      const newList = files.filter(file => files[index] !== file);
+    const removeThumbnail = (index) => {
+      const newList = files.filter((file) => files[index] !== file);
       setFiles(newList);
     };
     if (files.length === 0)

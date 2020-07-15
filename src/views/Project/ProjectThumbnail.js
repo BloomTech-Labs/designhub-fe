@@ -9,7 +9,7 @@ import { GET_ALL_PROJECTS_QUERY } from '../../graphql/index';
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 
 const ProjectThumbnail = ({ project }) => {
-  // console.log('PROJECTS PROJECT THUMBNAIL', project);
+  //console.log('PROJECTS PROJECT THUMBNAIL', project);
 
   const [user, setUser] = useState({
     avatar: null,
