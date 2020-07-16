@@ -1,25 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ImageWithComments from './ImageWithComments';
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../../ASSETS/default_thumbnail.svg';
 import Loading from '../../../common/Loading';
 
-
 const ImageViewer = (props) => {
-	const [activeImg, setActiveImg] = useState(null);
-const [comments, setComments] = useState([]);
-const [modal, setModal] = useState(false);
-  // useEffect(
-  //   (prevProps) => {
-  //     if (props.thumbnail !== prevProps.thumbnail) {
-  //       setActiveImg({ activeImg: props.thumbnail[0] });
-  //     } else if (props.thumbnail && activeImg === null) {
-  //       setComments({ comments: props.comments }),
-  //         setActiveImg({ activeImg: props.thumbnail });
-  //     }
-  //   },
-  //   [props.thumbnail]
-  // );
+  const [activeImg, setActiveImg] = useState(null);
+  const comments = [];
+  const [modal, setModal] = useState(false);
+
   function changeImg(imgObj) {
     if (activeImg === null || activeImg.id !== imgObj.id) {
       setActiveImg({ activeImg: imgObj });

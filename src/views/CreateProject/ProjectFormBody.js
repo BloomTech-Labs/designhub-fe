@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Editing from './Editing';
+import React, { useState } from 'react';
+
 import Privacy from './Privacy';
-import CaseStudy from './CaseStudy';
+
 import DeleteProjectModal from './DeleteProjectModal';
 import InviteModal from './InviteModal';
 import CharacterCount from '../../common/CharacterCount/CharacterCount';
@@ -11,14 +11,14 @@ import { MultiImageUpload } from './MultiImageUpload';
 import { storage } from '../../utilities/firebase';
 import { useHistory } from 'react-router-dom';
 
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import {
   ADD_PROJECT_MUTATION,
   ADD_PROJECT_PHOTO_MUTATION,
   UPDATE_PROJECT_MUTATION,
-  UPDATE_PROJECT_PHOTO_MUTATION,
-  DELETE_PROJECT_PHOTO_MUTATION,
-  DELETE_PROJECT_MUTATION,
+  // UPDATE_PROJECT_PHOTO_MUTATION,
+  // DELETE_PROJECT_PHOTO_MUTATION,
+  // DELETE_PROJECT_MUTATION,
   GET_PROJECT_BY_ID_QUERY,
   GET_ALL_PROJECTS_QUERY
 } from '../../graphql/index';
@@ -32,10 +32,6 @@ const ProjectFromBody = ({
   userData,
   user,
 }) => {
-  /*user is from AUTH0, userData is from graphQL*/
-  // console.log('user props', user)
-  // console.log('userData props', userData)
-  // console.log('project props', project)
 
   /*____________APOLLO/GRAPHQL______________________________*/
   const [addProject] = useMutation(ADD_PROJECT_MUTATION);
@@ -44,18 +40,18 @@ const ProjectFromBody = ({
 
   const history = useHistory();
   const [files, setFiles] = useState([]);
-  const [researchFile, setResearchFile] = useState([]);
+  // const [researchFile, setResearchFile] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [titleRef, setTitleRef] = useState(null);
   const [error, setError] = useState('');
-  const [privacy, setPrivacy] = useState(
-    isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
-  );
+  // const [privacy, setPrivacy] = useState(
+  //   isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
+  // );
 
   // const allInputs = { imgUrl: '' }
 
-  const [imageAsUrl, setImageAsUrl] = useState([]);
-  const [prjData, setPrjData] = useState({});
+  // const [imageAsUrl, setImageAsUrl] = useState([]);
+  // const [prjData, setPrjData] = useState({});
 
   const [newProjectData, setNewProjectData] = useState({
     project: {
@@ -115,18 +111,18 @@ const ProjectFromBody = ({
     });
   };
   /*___________________HANDLE PRIVACY_____________________________*/
-  const handlePrivacySetting = (e) => {
-    setPrivacy(e.target.value);
-    const isPrivate = e.target.value === 'private' ? true : false;
+  // const handlePrivacySetting = (e) => {
+  //   setPrivacy(e.target.value);
+  //   const isPrivate = e.target.value === 'private' ? true : false;
 
-    setNewProjectData({
-      ...newProjectData,
-      project: {
-        ...newProjectData.project,
-        privateProjects: isPrivate,
-      },
-    });
-  };
+  //   setNewProjectData({
+  //     ...newProjectData,
+  //     project: {
+  //       ...newProjectData.project,
+  //       privateProjects: isPrivate,
+  //     },
+  //   });
+  // };
   /*___________________HANDLE SUBMIT_____________________________*/
   const handleSubmit = async (e) => {
     setIsLoading(true);
@@ -183,7 +179,7 @@ const ProjectFromBody = ({
   const imageHandler = async (addProjectData) => {
     setTimeout(async () => {
       imgUrl.forEach(async (url) => {
-        const { data: addProjectPhotoData } = addProjectPhoto({
+        addProjectPhoto({
           variables: {
             data: {
               projectId: addProjectData?.id,
@@ -203,7 +199,7 @@ const ProjectFromBody = ({
         });
       });
 
-      const { data: updateProjectData } = await updateProject({
+      await updateProject({
         variables: {
           data: {
             id: addProjectData?.id,
@@ -307,7 +303,7 @@ const ProjectFromBody = ({
       <section className="ProjectForm__body">
         <div className="left-container">
           <header className="ProjectForm__header">
-            <h2 className="page-header"></h2>
+            <h2 className="page-header">Create a project</h2>
           </header>
           <MultiImageUpload files={files} setFiles={setFiles} />
           {isEditing && (
