@@ -104,7 +104,9 @@ const LoginBar = () => {
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
-
+          <button className="auth0-btn" onClick={logout}>
+            Log out
+          </button>
           <div>
             <Tooltip
               show={show}
@@ -167,6 +169,9 @@ const LoginBar = () => {
 
         <button className="auth0-btn" onClick={login}>
           Create an account or Sign in
+        </button>
+        <button className="auth0-btn" onClick={logout}>
+          Log out
         </button>
       </div>
       <span className={showHideOverlayClassName} onClick={toggleNav} />

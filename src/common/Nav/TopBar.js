@@ -89,7 +89,7 @@ const TopBar = ({ searchData, getSearch }) => {
             <MagnifyingGlass />
           </div>*/}
 
-            {/*        <Search/>*/}
+            <Search />
           </div>
           <div
             className="top-bar-user-info"
@@ -137,9 +137,7 @@ const TopBar = ({ searchData, getSearch }) => {
                 </span>
 
                 <span
-                  onClick={() =>
-                    history.push(`/notifications`)
-                  }
+                  onClick={() => history.push(`/notifications`)}
                   to={`/notifications`}
                 >
                   Notifications

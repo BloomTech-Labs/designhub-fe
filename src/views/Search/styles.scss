@@ -1,0 +1,37 @@
+.imageBox {
+  width: 150px;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+h1 {
+  font-size: 50px;
+  justify-content: center;
+  color: royalblue;
+  padding: 10px;
+}
+
+h4,
+h2,
+p {
+  color: royalblue;
+  padding: 10px;
+}
+
+input {
+  width: 250px;
+  height: 30px;
+  justify-self: center;
+}
+
+.userSearch {
+  display: block;
+  width: 48%;
+}
+
+.projectSearch {
+  display: block;
+  width: 48%;
+}

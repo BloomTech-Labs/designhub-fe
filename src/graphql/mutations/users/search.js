@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-const SEARCH_QUERY = gql`
-  query($searchText: String!) {
+const SEARCH_MUTATION = gql`
+  mutation($searchText: String!) {
     search(searchText: $searchText) {
       users {
         id
@@ -28,4 +28,4 @@ const SEARCH_QUERY = gql`
     }
   }
 `;
-export default SEARCH_QUERY;
+export default SEARCH_MUTATION;
