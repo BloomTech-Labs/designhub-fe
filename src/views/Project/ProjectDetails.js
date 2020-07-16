@@ -10,15 +10,12 @@ import moment from 'moment';
 import ProjectButtonLinks from './ProjectButtonLinks';
 
 //Images and Icons:
-import avatar1 from '../../ASSETS/avatar.jpg';
-import avatar2 from '../../ASSETS/avatar_2.jpg';
-import avatar3 from '../../ASSETS/avatar_3.jpg';
+// import avatar1 from '../../ASSETS/avatar.jpg';
+// import avatar2 from '../../ASSETS/avatar_2.jpg';
+// import avatar3 from '../../ASSETS/avatar_3.jpg';
 
 export default function ProjectDetails({ projectData, userData }) {
-  // console.log('projectDetails', projectData);
-
-  const publishedOn = new Date(projectData?.project?.created_at * 1000);
-  moment(publishedOn).format('MM/DD/YYYY');
+  const publishedOn = new Date(projectData?.project?.created_at / 1);
 
   return (
     <>
@@ -27,16 +24,17 @@ export default function ProjectDetails({ projectData, userData }) {
         <h3>{projectData?.project?.description}</h3>
         <div className="subtitle">
           <span>
-            Created by{' '}
+            Created by {userData?.user?.username}
             <span className="project-header-username">
               {
                 <Link to={`/profile/${userData?.project?.user}`}>
-                  {projectData?.project?.user}
+                  {projectData?.project?.username}
                 </Link>
               }
             </span>
           </span>
           <span>Created on {moment(publishedOn).format('MM/DD/YYYY')}</span>
+
           <span className="collab-count">
             Collaborators{' '}
             <span className="collab-members">

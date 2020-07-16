@@ -6,7 +6,6 @@ import Loading from '../../common/Loading/index';
 import './styles.scss';
 
 export default function ProjectPdf(props) {
-  console.log('pdf', props);
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfPage, setPdfPage] = useState(1);
   const [numPages, setNumPages] = useState(null);

@@ -29,10 +29,6 @@ export default function Projects() {
     variables: { id: id },
   });
 
-  console.log('projectComms', projectImg);
-  console.log('ProjectDeets', userData);
-  console.log('projectdata', projectData);
-
   return (
     <Layout>
       <div className="projects-container">

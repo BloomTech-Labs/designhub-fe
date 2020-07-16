@@ -8,8 +8,9 @@ import { GET_ALL_PROJECTS_QUERY } from '../../graphql/index';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 
-const ProjectThumbnail = ({ project }) => {
+const ProjectThumbnail = ({ project, projectData }) => {
   //console.log('PROJECTS PROJECT THUMBNAIL', project);
+  const publishedOn = new Date(projectData?.project?.created_at / 1);
 
   const [user, setUser] = useState({
     avatar: null,
@@ -37,7 +38,7 @@ const ProjectThumbnail = ({ project }) => {
               <h1 className="project-username">{user?.username}</h1>
             </div>
             <h1 className="created">
-              {moment(project.created_at).format('MMM DD, YYYY')}
+              {moment(publishedOn).format('MM/DD/YYYY')}
             </h1>
           </div>
         </div>

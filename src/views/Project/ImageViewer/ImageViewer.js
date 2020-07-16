@@ -7,12 +7,12 @@ import Loading from '../../../common/Loading';
 const ImageViewer = ({ props, project, projectImg, userData, projectData }) => {
   //changed all activeImg to projectImg
   //changed all activeUser to userData
-  const [activeImg, setActiveImg] = useState(null);
+  const [activeImg, setActiveImg] = useState();
   // const [comments, setComments] = useState();
   const [modal, setModal] = useState(false);
 
   function changeImg(imgObj) {
-    if (projectImg === null || projectImg.id !== imgObj.id) {
+    if (activeImg === null || projectImg.id !== imgObj.id) {
       setActiveImg({ ...projectImg, activeImg: imgObj });
     }
     console.log('active', activeImg);
@@ -59,7 +59,7 @@ const ImageViewer = ({ props, project, projectImg, userData, projectData }) => {
                   />
                 ) : (
                   <img
-                    src={projectImg ? projectImg.url : props.photos[0].url}
+                    src={activeImg ? activeImg : projectData?.project?.photos}
                     alt="main project"
                     onClick={() => setModal({ modal: true })}
                     className="main-image"
