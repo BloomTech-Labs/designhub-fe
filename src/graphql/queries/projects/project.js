@@ -5,14 +5,33 @@ const GET_PROJECT_BY_ID_QUERY = gql`
     project(id: $id) {
       id
       userId
-      privateProjects
+      private
       name
       description
       figma
       invision
+      mainImg
       created_at
       updated_at
-      mainImg
+      photos {
+        id
+        projectId
+        url
+        description
+        title
+        created_at
+      }
+      comments {
+        id
+        userId
+        projectId
+        text
+        created_at
+        user {
+          id
+          username
+        }
+      }
     }
   }
 `;

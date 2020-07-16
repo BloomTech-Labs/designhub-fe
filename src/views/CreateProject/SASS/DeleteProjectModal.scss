@@ -1,0 +1,45 @@
+@import '../../../common/SASS/palette';
+@import '../../../common/SASS/mixins';
+
+/****************************DELETE PROJECT MODAL************************/
+
+@include modal;
+
+.delete-project-modal {
+  @include themify($themes) {
+    background-color: themed('bg2');
+  }
+  display: flex;
+  max-width: 489px;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: $black;
+  padding: 40px;
+
+  .delete-modal-button-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+
+    .delete-button {
+      background: $alert;
+
+      &:hover {
+        background: $white;
+        color: $alert;
+      }
+    }
+
+    button {
+      @include secondary-btn;
+      margin-top: 20px;
+      transition: 0.1s ease-in-out;
+    }
+  }
+  p {
+    text-align: center;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.11em;
+  }
+}

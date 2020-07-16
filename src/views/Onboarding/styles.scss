@@ -1,0 +1,322 @@
+@import '../../common/SASS/palette';
+@import '../../common/SASS/mixins';
+
+
+.OnboardingForm {
+  width: 100%;
+
+  .stepComponents {
+    width: 100%;
+
+    .FormStep {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      grid-gap: 0;
+      height: 100vh;
+
+      .left-side {
+        background: white;
+        width: 100%;
+        margin: 0;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .steps {
+          text-align: right;
+          padding: 1rem;
+          margin: 0;
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        .left-container {
+          margin-top: 1rem;
+          padding: 0 5rem;
+
+          header {
+            text-align: center;
+            margin-bottom: 1rem;
+            h1 {
+              font-size: 24px;
+              font-weight: 500;
+              line-height: normal;
+            }
+
+            p {
+              font-size: 14px;
+              font-weight: 500;
+              padding: 0;
+            }
+          }
+
+          .input-field {
+            display: flex;
+            flex-direction: column;
+
+            &.taken > input {
+              border: 1.5px solid red;
+              color: red;
+            }
+
+            &.taken::after {
+              margin-top: 0.4rem;
+              content: 'This username is already taken.';
+              color: red;
+            }
+
+            label {
+              margin-top: 1.5rem;
+              margin-bottom: 0.5rem;
+              text-transform: uppercase;
+              font-weight: 500;
+              font-size: 14px;
+            }
+
+            input,
+            textarea {
+              width: 100%;
+              border: 1px solid #e0e0e0;
+              border-radius: 5px;
+              font-size: 14px;
+
+              &::placeholder {
+                font-size: 14px;
+              }
+            }
+
+            input {
+              padding: 0.5rem 0.2rem;
+            }
+          }
+
+          .first_lastname-flex {
+            display: grid;
+            grid-template-columns: 48% 48%;
+            grid-gap: 2%;
+            width: 100%;
+            justify-content: space-between;
+
+            &.required,
+            .alert > input {
+              border: 1.5px solid red;
+              color: red;
+            }
+
+            &.required,
+            .alert::after {
+              margin-top: 0.4rem;
+              content: 'Name cannot be blank.';
+              color: red;
+            }
+          }
+
+          &.required,
+          .alert > input {
+            border: 1.5px solid red;
+            color: red;
+          }
+
+          &.required,
+          .alert::after {
+            margin-top: 0.4rem;
+            content: 'Please enter a valid email.';
+            color: red;
+          }
+
+          .location-website-flex {
+            display: grid;
+            grid-template-columns: 48% 48%;
+            grid-gap: 2%;
+            width: 100%;
+            justify-content: space-between;
+          }
+        }
+      }
+
+      .avatar-upload-container {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4rem;
+        width: 100%;
+      }
+
+      .dropzone-container {
+        width: max-content;
+        z-index: 123456789;
+      }
+
+      .upload-container {
+        align-items: center;
+        border: 7px solid $blue;
+        background: $white;
+        border-radius: 50%;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: flex;
+        flex-wrap: wrap;
+        height: 200px;
+        justify-content: center;
+        outline: none;
+        transition: all 0.1s ease-in-out;
+        width: 200px;
+
+        &:hover {
+          background: #e0e0e0;
+        }
+
+        svg {
+          stroke: $blue;
+          width: 40%;
+        }
+      }
+
+      .drop-text-container {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      span.DottedLine {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin: 0 4px;
+
+        svg {
+          transition: fill 0.5s ease-in;
+          fill: #e0e0e0;
+        }
+
+        &.active {
+          svg {
+            fill: $blue;
+          }
+        }
+      }
+
+      .Step2-thumbnail-container {
+        align-items: center;
+        background: $field-bg;
+        border-radius: 50%;
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 200px;
+        transition: all 0.1s ease-in-out;
+        width: 200px;
+
+        svg {
+          fill: none;
+          stroke: $dark-grey;
+          width: 100px;
+        }
+      }
+
+      .thumb {
+        display: inline-flex;
+      }
+
+      .avatarBlank-container {
+        width: max-content;
+      }
+      .avatarBlank {
+        display: flex;
+        align-items: center;
+        height: 200px;
+        width: 200px;
+      }
+
+      .Step2-thumbnail {
+        border: 7px solid $blue;
+        border-radius: 50%;
+        height: 200px;
+        object-fit: cover;
+        width: 200px;
+        min-width: 200px;
+        z-index: 123456789;
+      }
+
+      .remove {
+        cursor: pointer;
+        margin-top: -5px;
+        margin-left: -5px;
+        opacity: 0.8;
+        position: absolute;
+        transition: all 0.1s ease-in-out;
+        width: 20px;
+
+        &:hover {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      .upload-help {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .right-side {
+        width: 100%;
+        background-image: url('../../ASSETS/loginpage-bg.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 0;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        header {
+          text-align: center;
+          width: 100%;
+
+          h2 {
+            width: 74%;
+            margin: 0 auto;
+            font-size: 22px;
+            line-height: 28px;
+          }
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-top: 2rem;
+      width: 100%;
+
+      .next-btn {
+        background: linear-gradient(106.22deg, #5557fe 0%, #9555fe 100%);
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        padding: 0.8rem 0;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+
+        &:hover {
+          filter: brightness(90%);
+        }
+      }
+
+      .prev-btn {
+        background: white;
+        color: black;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        padding: 0.8rem 0;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    }
+  }
+}

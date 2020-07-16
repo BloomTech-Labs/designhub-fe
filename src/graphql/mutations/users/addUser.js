@@ -3,17 +3,15 @@ import gql from 'graphql-tag';
 const ADD_USER_MUTATION = gql`
   mutation addUser($data: UserInput!) {
     addUser(data: $data) {
-      auth0Id
-      username
-      email
-      phoneNumber
+      id
       firstName
       lastName
+      username
+      email
       location
       bio
       website
       avatar
-      created_at
     }
   }
 `;

@@ -1,0 +1,208 @@
+@import '../../SASS/palette';
+@import '../../SASS/mixins';
+
+.top-bar-container {
+  border-bottom: 1px solid #2a2b31;
+  position: fixed;
+  z-index: 999999;
+  width: 100%;
+  background: $almost-black;
+
+
+  @include themify($themes) {
+    background: themed('bg2');
+    border-bottom: themed('bg');
+    color: themed('text');
+  }
+
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  .logo-container {
+    width: auto;
+    margin-left: 20px;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+    .dark-mode-switch {
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    margin: 5px 0;
+  }
+
+    .auth0-btn {
+      @include auth0-redirect-btn;
+      margin-top: 3.5vh;
+      margin-bottom: 3.5vh;
+      color: $white;
+      background: url('../../../ASSETS/loginpage-bg.jpg');
+      animation: bgAnimation 10s ease-in-out alternate-reverse infinite;
+      @media screen and (max-width: 700px) {
+      flex-flow: column-reverse nowrap;
+      &:hover {
+        background: $btn-gradient;
+        color: white;
+      }
+      @media screen and (max-width: 1024px) {
+        width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      @media screen and (max-width: 700px) {
+        margin-top: 40px;
+        padding: 20px;
+      }
+    }
+  }
+
+
+@keyframes bgAnimation {
+  from {
+    background-position: -40vh 0;
+  }
+  to {
+    background-position: 0vh 0;
+  }
+}
+  .mobile-nav {
+    display: none;
+  }
+
+  .mobile-navlinks {
+    display: none;
+  }
+
+ }
+
+ @media (max-width: 1024px) {
+  .top-bar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .nav-content {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: inline-flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 95%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 99999999;
+
+      .mobile-logo {
+        width: 2rem;
+        margin: 10px 0;
+      }
+
+      .mobile-menu {
+        width: 40px;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+        stroke: white;
+        @include themify($themes) {
+          stroke: themed('link');
+        }
+
+        &:hover {
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    .mobile-navlinks {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      z-index: 99;
+      margin-top: 70px;
+      background: $almost-black;
+      border-bottom: 1px solid #2a2b31;
+      border-top: 1px solid #2a2b31;
+      height: 500px;
+      overflow: hidden;
+      animation: slideDown 0.6s ease-in-out;
+      @include themify($themes) {
+        background: themed('bg');
+        color: themed('text');
+      }
+
+      @keyframes slideDown {
+        from {
+          height: 0px;
+        }
+        to {
+          height: 500px;
+        }
+      }
+
+      .links {
+        color: $dark-grey;
+        text-decoration: none;
+        text-align: center;
+        margin: 2rem 0;
+
+        &:hover {
+          color: white;
+        }
+      }
+
+      .active-links {
+        color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
+      }
+
+      .mobile-search {
+        margin: 2rem auto 0;
+      }
+    }
+
+    .mobile-overlay {
+      display: block;
+      content: '';
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.365);
+      position: absolute;
+      z-index: 1;
+      margin-top: 70px;
+      cursor: pointer;
+    }
+
+    .display-none {
+      display: none;
+    }
+
+    .display-block {
+      display: inline-flex;
+    }
+  }
+}
+
+.rpt-textbox-container {
+  border: 1px solid $white;
+  box-shadow: none;
+}
+.rpt-arrow {
+  border: 1px solid $white;
+  border-bottom: none;
+  border-radius: 3px;
+}
+.tooltip-settings-link:hover {
+  color: $almost-black;
+}

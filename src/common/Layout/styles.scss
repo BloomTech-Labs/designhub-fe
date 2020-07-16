@@ -1,0 +1,23 @@
+.layout-wrapper {
+	width: 100%;
+}
+.nav-wrapper {
+	margin-bottom: 10%;
+}
+
+.page-wrapper {
+	// margin-top: 10%;
+}
+
+@media (max-width: 1024px) {
+	.layout-wrapper {
+		width: 100%;
+	}
+	.nav-wrapper {
+		margin-bottom: 20%;
+	}
+
+	.page-wrapper {
+		// margin-top: 10%;
+	}
+}

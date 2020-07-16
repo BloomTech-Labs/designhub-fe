@@ -1,20 +1,38 @@
 import gql from 'graphql-tag';
 
 const GET_ALL_PROJECTS_QUERY = gql`
-  query Projects {
+  query Project {
     projects {
       id
       userId
-      privateProjects
+      private
       name
       description
       figma
       invision
+      mainImg
       created_at
       updated_at
-      mainImg
+      photos {
+        id
+        projectId
+        url
+        description
+        title
+        created_at
+      }
+      comments {
+        id
+        userId
+        projectId
+        text
+        created_at
+        user {
+          id
+          username
+        }
+      }
     }
   }
 `;
-
 export default GET_ALL_PROJECTS_QUERY;

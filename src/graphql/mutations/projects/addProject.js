@@ -1,19 +1,19 @@
-import gql from 'gaphql-tag';
+import gql from 'graphql-tag';
 
 const ADD_PROJECT_MUTATION = gql`
-  mutation Projects($data: ProjectInput!) {
+  mutation addProject($data: ProjectInput!) {
     addProject(data: $data) {
       id
       userId
-      privateProjects
+      private
       name
       description
       figma
       invision
-      created_at
-      updated_at
       mainImg
     }
   }
 `;
 export default ADD_PROJECT_MUTATION;
+
+

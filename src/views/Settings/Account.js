@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-
-import { axiosWithAuth } from '../../utilities/axiosWithAuth.js';
-
-import { getSingleUser, updateUser } from '../../store/actions';
 
 import CharacterCount from '../../common/CharacterCount/CharacterCount';
 
-const Account = ({ activeUser, getSingleUser, updateUser }) => {
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_USER_MUTATION } from '../../graphql';
+
+import { useForm } from 'react-hook-form';
+
+// import { useAuth0 } from "../../utilities/auth-spa"
+
+const Account = ({ activeUser }) => {
+  const [updateUser] = useMutation(UPDATE_USER_MUTATION);
+  const { handleSubmit, register } = useForm();
+  // const { user } = useAuth0()
   const [formUser, setFormUser] = useState({
-    avatar: activeUser.avatar,
-    bio: '',
-    email: '',
-    firstName: '',
-    id: activeUser.id,
-    lastName: '',
-    location: '',
-    username: '',
-    website: '',
-    auth0Id: activeUser.auth0Id
+    avatar: activeUser?.avatar,
+    bio: activeUser?.boi,
+    email: activeUser?.email,
+    firstName: activeUser?.firstName,
+    id: activeUser?.id,
+    lastName: activeUser?.lastName,
+    location: activeUser?.location,
+    username: activeUser?.username,
+    website: activeUser?.website,
   });
-
-
-  const {
-    bio,
-    email,
-    firstName,
-    lastName,
-    location,
-    username,
-    website
-  } = formUser;
 
   const [formSuccess, setFormSuccess] = useState(false);
 
@@ -39,108 +32,33 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
     username: false,
     firstName: false,
     lastName: false,
-    email: false
+    email: false,
   });
+  // };
+  const [userNameAlertClass, setUsernameAlertClass] = useState('required');
 
-  // DOM refs for required input fields
-  const [firstNameRef, setFirstNameRef] = useState(null);
-  const [lastNameRef, setLastNameRef] = useState(null);
-  const [usernameRef, setUsernameRef] = useState(null);
-  const [emailRef, setEmailRef] = useState(null);
-  const focusRef = thisRef => {
-    thisRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-  const [userNameAlertClass, setuserNameAlertClass] = useState('required');
-
-  // update alert status on render
-  useEffect(() => {
-    if (alert.username) {
-      alert.username === 'taken'
-        ? setuserNameAlertClass('required alert taken')
-        : setuserNameAlertClass('required alert');
-      focusRef(usernameRef);
-    }
-    if (alert.email) focusRef(emailRef);
-    if (alert.lastName) focusRef(lastNameRef);
-    if (alert.firstName) focusRef(firstNameRef);
-  }, [alert, usernameRef, emailRef, firstNameRef, lastNameRef]);
-
-  useEffect(() => {
-    getCurrentUserInfo(activeUser.id);
-  }, [activeUser]);
-
-  const getCurrentUserInfo = id => {
-    return axiosWithAuth()
-      .get(`/api/v1/users/${id}`)
-      .then(res => {
-        const user = res.data[0];
-        setFormUser({
-          avatar: user.avatar ? `${user.avatar}` : '',
-          bio: user.bio ? `${user.bio}` : '',
-          email: user.email ? `${user.email}` : '',
-          firstName: user.firstName ? `${user.firstName}` : '',
-          id: user.id,
-          lastName: user.lastName ? `${user.lastName}` : '',
-          location: user.location ? `${user.location}` : '',
-          username: user.username ? `${user.username}` : '',
-          website: user.website ? `${user.website}` : '',
-          auth0Id: user.auth0Id
-        });
-      })
-      .catch();
-  };
-
-  const handleChange = e => {
-    if (e.target.name === 'username') setuserNameAlertClass('required');
-    setFormSuccess(false);
-    setAlert({
-      ...alert,
-      [e.target.name]: false
+  const onSubmit = (data) => {
+    updateUser({
+      variables: {
+        data: {
+          id: activeUser?.id,
+          avatar: activeUser?.avatar,
+          bio: data.bio,
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          location: data.location,
+          username: data.username,
+          website: data.website,
+        },
+      },
     });
-    setFormUser({ ...formUser, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const validForm = await validateForm();
-    if (validForm) {
-      try {
-        // await axiosWithAuth().put(`/api/v1/users/${activeUser.id}`, formUser);
-        await updateUser(activeUser.id, formUser);
-        await setFormSuccess(true);
-      } catch (err) {
-        console.error('Account.js handleSubmit() ERROR', err);
-      }
-    }
-  };
-
-  const validateForm = async () => {
-    const { username, firstName, lastName, email } = formUser;
-    const newAlert = {};
-    if (username.trim().length === 0) newAlert.username = true;
-    if (firstName.trim().length === 0) newAlert.firstName = true;
-    if (lastName.trim().length === 0) newAlert.lastName = true;
-    if (email.trim().length === 0) newAlert.email = true;
-    if (!newAlert.username && username !== activeUser.username) {
-      try {
-        const res = await axiosWithAuth().get(
-          `api/v1/users/check/${formUser.username}`
-        );
-        if (res.data.length !== 0) newAlert.username = 'taken';
-      } catch (err) {
-        console.error('Account.js validateForm() ERROR', err);
-      }
-    }
-    const v = Object.values(newAlert);
-    if (v.includes(true) || v.includes('taken')) {
-      setAlert({ ...alert, ...newAlert });
-      return false;
-    } else return true;
+    setFormSuccess(true);
   };
 
   return (
     <div className="account-form-container">
-      <form className="account-form" onSubmit={e => e.preventDefault()}>
+      <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
         <div className={alert.firstName ? 'required alert' : 'required'}>
           <label htmlFor="firstName">First Name</label>
           <input
@@ -148,11 +66,10 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             id="firstName"
             name="firstName"
             type="text"
-            value={firstName}
-            onChange={handleChange}
             placeholder="i.e. Erik"
-            ref={setFirstNameRef}
-            maxLength='40'
+            defaultValue={activeUser?.firstName}
+            ref={register}
+            maxLength="40"
           />
         </div>
 
@@ -163,10 +80,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             id="lastName"
             name="lastName"
             type="text"
-            value={lastName}
-            onChange={handleChange}
+            defaultValue={activeUser?.lastName}
             placeholder="i.e. Lambert"
-            ref={setLastNameRef}
+            ref={register}
             maxLength="40"
           />
         </div>
@@ -178,10 +94,9 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             id="username"
             name="username"
             type="text"
-            value={username}
-            onChange={handleChange}
+            defaultValue={activeUser?.username}
             placeholder="i.e. eriklambert"
-            ref={setUsernameRef}
+            ref={register}
             maxLength="80"
           />
         </div>
@@ -193,10 +108,10 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             id="email"
             name="email"
             type="text"
-            value={email}
+            defaultValue={activeUser?.email}
             readOnly
             placeholder="i.e. eriklambert@designhubx.com"
-            ref={setEmailRef}
+            ref={register}
             maxLength="80"
           />
         </div>
@@ -207,19 +122,19 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
           rows="4"
           name="bio"
           id="bio"
-          value={bio}
-          onChange={handleChange}
+          defaultValue={activeUser?.bio}
+          ref={register}
           placeholder="Describe yourself! This will appear on your profile in your bio!"
           maxLength="240"
         />
-        <CharacterCount string={bio} limit={240} />
+        <CharacterCount string={activeUser?.bio} limit={240} />
         <label htmlFor="location">Location</label>
         <input
           id="location"
           name="location"
           type="text"
-          value={location}
-          onChange={handleChange}
+          defaultValue={activeUser?.location}
+          ref={register}
           maxLength="180"
           placeholder="i.e. Austin, TX"
         />
@@ -228,8 +143,8 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
           id="website"
           name="website"
           type="text"
-          value={website}
-          onChange={handleChange}
+          defaultValue={activeUser?.website}
+          ref={register}
           placeholder="i.e. https://eriklambert.ux"
         />
         {formSuccess ? (
@@ -237,14 +152,11 @@ const Account = ({ activeUser, getSingleUser, updateUser }) => {
             Account Updated
           </button>
         ) : (
-            <button onClick={handleSubmit}>Save</button>
-          )}
+          <button type="submit">Save</button>
+        )}
       </form>
     </div>
   );
 };
 
-export default connect(
-  null,
-  { getSingleUser, updateUser }
-)(Account);
+export default Account;

@@ -1,13 +1,16 @@
 import React from 'react';
 
-import './CharacterCount.scss';
+import './styles.scss';
 
 function CharacterCount({ string, limit }) {
-    return (
-        <div>
-            <p className="charLength">{string.length}/{limit}</p>
-        </div>
-    )
+
+  return (
+    <div>
+      <p className="charLength">
+        
+      </p>
+    </div>
+  );
 }
 
 export default CharacterCount;

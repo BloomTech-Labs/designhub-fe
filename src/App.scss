@@ -1,10 +1,16 @@
+// * {
+//   box-sizing: border-box;
+// }
+
+
+
 @import './common/SASS/reset.scss';
 @import './common/SASS/palette';
 @import './common/SASS/mixins';
-@import './common/Nav/SASS/Navbar.scss';
-@import './views/UserProfile/SASS/UserProfile.scss';
-@import './views/Projects/SASS/Error404Projects.scss';
-@import './views/Projects/SASS/Error401Projects.scss';
+//@import './common/Nav/SASS/Navbar.scss';
+//@import './views/UserProfile/SASS/UserProfile.scss';
+// @import './views/Projects/SASS/Error404Projects.scss';
+// @import './views/Projects/SASS/Error401Projects.scss';
 
 // * {
 // 	box-sizing:border-box;
@@ -31,6 +37,30 @@ h6,
 p,
 button {
   font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  letter-spacing: 1.4px;
+}
+
+input {
+  letter-spacing: 1.4px;
+}
+
+input::placeholder {
+  letter-spacing: 1.4px;
 }
 
 main {
@@ -68,3 +98,17 @@ div.isLoading {
 .inverted {
   filter: invert(100%);
 }
+
+.app-wrapper {
+  transition: all 0.2s ease-in-out;
+
+  .workspace {
+      transition: all 0.2s ease-in-out;
+      width: auto;
+      margin-top: 1.4rem;
+      margin-left: 0;
+      min-height: 80vh;
+    }
+    
+}
+

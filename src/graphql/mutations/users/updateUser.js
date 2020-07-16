@@ -1,20 +1,17 @@
 import gql from 'graphql-tag';
 
 const UPDATE_USER_MUTATION = gql`
-  mutation updateUser($data: updateUserInput!) {
+  mutation updateUser($data: UserInput!) {
     updateUser(data: $data) {
       id
-      auth0Id
-      username
-      email
-      phoneNumber
       firstName
       lastName
+      username
+      email
       location
       bio
       website
       avatar
-      created_at
     }
   }
 `;

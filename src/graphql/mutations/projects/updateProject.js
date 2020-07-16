@@ -1,13 +1,16 @@
 import gql from 'graphql-tag';
 
 const UPDATE_PROJECT_MUTATION = gql`
-  mutation Projects($data: updateProjectInput!) {
+  mutation updateProject($data: UpdateProjectInput!) {
     updateProject(data: $data) {
       id
       userId
-      privateProjects
+      private
       name
       description
+      figma
+      invision
+      mainImg
     }
   }
 `;
