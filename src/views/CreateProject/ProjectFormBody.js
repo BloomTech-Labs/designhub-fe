@@ -21,6 +21,7 @@ import {
   DELETE_PROJECT_PHOTO_MUTATION,
   DELETE_PROJECT_MUTATION,
   GET_PROJECT_BY_ID_QUERY,
+  GET_ALL_PROJECTS_QUERY
 } from '../../graphql/index';
 
 import './styles.scss';
@@ -222,7 +223,7 @@ const ProjectFromBody = ({
 
   /*______________________CREATE PROJECT__________________________*/
 
-  const createProject = async (project, res) => {
+  const createProject = async () => {
     try {
       console.log('CREATENEWPROJECT image DATA!!!', imgUrl);
       const { data: addProjectData } = await addProject({
@@ -240,10 +241,7 @@ const ProjectFromBody = ({
         },
         refetchQueries: [
           {
-            query: GET_PROJECT_BY_ID_QUERY,
-            variables: {
-              id: project.id,
-            },
+            query: GET_ALL_PROJECTS_QUERY
           },
         ],
       });
@@ -261,8 +259,40 @@ const ProjectFromBody = ({
   };
 
   /*__________________EDIT PROJECT______________________________*/
-  const editProject = () => {
-    console.log('not finished');
+  const editProject = async () => {
+    // try {
+    //   const { data: editUpdateProjectData } = await updateProject({
+    //     variables: {
+    //       data: {
+    //         id: project?.id,
+    //         userId: user?.sub,
+    //         name: project?.name,
+    //         description: project?.description,
+    //         category: project?.category,
+    //         figma: project?.figma,
+    //         invision: project?.invision,
+    //         mainImg: imgUrl[0],
+    //       },
+    //     },
+    //     refetchQueries: [
+    //       {
+    //         query: GET_PROJECT_BY_ID_QUERY,
+    //         variables: {
+    //           id: project.id,
+    //         },
+    //       },
+    //     ],
+    //   });
+    //   handleImageUpload(
+    //     files,
+    //     editUpdateProjectData?.updateProject
+    //   ).then((editUpdateProjectData) => imageHandler(editUpdateProjectData));
+
+    //   // console.log('ADD PROJECT DATA', editUpdateProjectData);
+    //   await history.push(`/project/${editUpdateProjectData?.updateProject?.id}`);
+    // } catch (err) {
+    //   console.log('ProjectForm.js updateProject ERROR', err);
+    // }
   };
 
   return (
