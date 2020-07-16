@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 //import { Link } from 'react-router-dom';
 import './styles.scss';
 
@@ -33,16 +33,16 @@ export default function ProjectButtonLinks(/*props*/) {
           />
         </div>
         <div className="project-header-button">
-          <a>
-            <img src={figmaIcon} className="link-enabled" alt="figma" />
-          </a>
+          {/*<a>*/}
+          <img src={figmaIcon} className="link-enabled" alt="figma" />
+          {/*</a>*/}
 
           <img src={figmaIcon} className="link-enabled" alt="figma" />
         </div>
         <div className="project-header-button">
-          <a>
-            <img src={invisionIcon} className="link-disabled" alt="invision" />
-          </a>
+          {/*<a>*/}
+          <img src={invisionIcon} className="link-disabled" alt="invision" />
+          {/*</a>*/}
 
           <img src={invisionIcon} className="link-enabled" alt="invision" />
         </div>
