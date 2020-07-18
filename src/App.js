@@ -69,7 +69,6 @@ export default function App() {
     //console.log('AUTH0USER', user);
   }, [loading, gqlLoading, user, userData, history]);
 
-  console.log('userData', userData);
 
   return (
     <>
