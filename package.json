@@ -103,6 +103,7 @@
     "@graphql-codegen/typescript-react-apollo": "1.15.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
     "jest-environment-enzyme": "^7.1.1",
     "jest-enzyme": "^7.1.1",
     "npm-force-resolutions": "0.0.3",
@@ -122,7 +123,8 @@
       "!**/*.spec.{js,jsx}",
       "!**/coverage/**",
       "!**//Icons/**"
-    ]
+    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "description": "A design platform",
   "main": "index.js",
