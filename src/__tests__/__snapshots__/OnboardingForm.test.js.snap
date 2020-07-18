@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/OnboardingForm - logged in Renders with correct userId 1`] = `
-<ContextConsumer>
-  <Component />
-</ContextConsumer>
-`;
-
 exports[`components/OnboardingForm - logged in Renders with required props 1`] = `
 <ContextConsumer>
   <Component />
