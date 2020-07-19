@@ -10,7 +10,7 @@ import { mount, shallow } from 'enzyme';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
-import { GET_USER_BY_ID_QUERY } from '../graphql';
+import { GET_USER_BY_ID_QUERY, UPDATE_USER_MUTATION } from '../graphql';
 
 configure({ adapter: new Adapter() });
 const history = createMemoryHistory();
@@ -20,37 +20,12 @@ const user = {
   sub: 'google-oauth2|2147627834623744883746',
 };
 
-const mocks = [
-  {
-    request: {
-      query: GET_USER_BY_ID_QUERY,
-      variables: {
-        id: 'google-oauth2|2147627834623744883746',
-      },
-    },
-    result: {
-      data: {
-        user: {
-          id: 'google-oauth2|2147627834623744883746',
-          firstName: 'Buck',
-          lastName: 'bulldog',
-          username: 'buckbulldog',
-          email: 'buck@bulldog.com',
-          location: 'Buckville, USA',
-          bio: 'Do not mess with buck',
-          website: 'buckwild.org',
-          avatar: 'https://bulldog.img',
-        },
-      },
-    },
-  },
-];
-
 const client = new ApolloClient({
   uri: process.env.REACT_APP_API_URL,
 });
 
 jest.mock('../utilities/auth-spa');
+
 describe('components/OnboardingForm - logged in', () => {
   beforeEach(() => {
     // Mock the Auth0 hook and make it return a logged in state
@@ -73,3 +48,50 @@ describe('components/OnboardingForm - logged in', () => {
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 });
+
+it('submit works', async () => {
+  const loadingPage = false;
+  const updateUser = {
+    user: {
+      id: 'google-oauth2|2147627834623744883746',
+      firstName: 'Buck',
+      lastName: 'bulldog',
+      username: 'buckbulldog',
+      email: 'buck@bulldog.com',
+      location: 'Buckville, USA',
+      bio: 'Do not mess with buck',
+      website: 'buckwild.org',
+      avatar: 'https://bulldog.img',
+    },
+  };
+  const userMocks = [
+    {
+      request: {
+        query: UPDATE_USER_MUTATION,
+        variables: {
+          id: 'google-oauth2|2147627834623744883746',
+        },
+      },
+      result: {
+        data: { updateUser },
+      },
+    },
+  ];
+  const component = mount(
+    <ApolloProvider client={client}>
+      <MockedProvider mocks={userMocks} addTypename={true}>
+        <Router history={history}>
+          <OnboardingForm id="google-oauth2|2147627834623744883746" loadingPage={loadingPage} />
+        </Router>
+      </MockedProvider>
+    </ApolloProvider>
+  );
+  
+  expect(component.find('form')).toHaveLength(1);
+  
+  component.find('form').simulate('submit');
+
+});
+  
+
+  

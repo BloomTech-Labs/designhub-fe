@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import App from '../App.js';
+import AllTab from '../views/Explore/AllTab.js';
 import { MockedProvider } from '@apollo/client/testing';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
@@ -28,7 +28,7 @@ const mocks = [
     },
     result: {
       data: {
-        user: {
+        dog: {
           id: 'google-oauth2|2147627834623744883746',
           firstName: 'Buck',
           lastName: 'bulldog',
@@ -49,7 +49,7 @@ const client = new ApolloClient({
 });
 
 jest.mock('../utilities/auth-spa');
-describe('components/App - logged in', () => {
+describe('components/AllTab - logged in', () => {
   beforeEach(() => {
     // Mock the Auth0 hook and make it return a logged in state
     useAuth0.mockReturnValue({
@@ -63,7 +63,7 @@ describe('components/App - logged in', () => {
     const wrapper = mount(
       <ApolloProvider client={client}>
         <Router history={history}>
-          <App />
+          <AllTab />
         </Router>
       </ApolloProvider>
     );
@@ -74,7 +74,7 @@ describe('components/App - logged in', () => {
       <ApolloProvider client={client}>
         <MockedProvider mocks={mocks} addTypename={false}>
           <Router history={history}>
-            <App id="google-oauth2|2147627834623744883746" />
+            <AllTab id="google-oauth2|2147627834623744883746" />
           </Router>
         </MockedProvider>
       </ApolloProvider>
@@ -88,14 +88,11 @@ it('Renders with correct components', async () => {
   const wrapper = mount(
     <ApolloProvider client={client}>
       <Router history={history}>
-        <App />
+        <AllTab />
       </Router>
     </ApolloProvider>
   );
   expect(wrapper).toBeTruthy();
   // should contain a button to be defined
-  expect(wrapper.find('main')).toHaveLength(1);
-  expect(wrapper.find('Suspense')).toHaveLength(1);
-  expect(wrapper.find('Route')).toHaveLength(10);
-  expect(wrapper.find('PrivateRoute')).toHaveLength(3);
+  expect(wrapper.find('div')).toHaveLength(1);
 });
