@@ -127,10 +127,7 @@
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
-    ],
-    "coverageReporters": [
-   "text-summary", "html"
-]
+    ]
   },
   "description": "A design platform",
   "main": "index.js",
