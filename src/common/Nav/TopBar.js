@@ -5,7 +5,7 @@ import Tooltip from 'react-power-tooltip';
 import { useHistory } from 'react-router';
 import SampleLogo from '../../ASSETS/Icons/SampleLogo.js';
 import logo from '../../ASSETS/logo.svg';
-import Search from '../../views/Search/index.js';
+// import Search from '../../views/Search/index.js';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
 
@@ -80,7 +80,7 @@ const TopBar = ({ searchData, getSearch }) => {
       <>
         <div className="nav-content">
           <div className="logo-container">
-            <Link to={`/explore`}>
+            <Link to={`/`}>
               <SampleLogo />
             </Link>
           </div>
@@ -215,7 +215,7 @@ const TopBar = ({ searchData, getSearch }) => {
             Profile
           </NavLink>
           <NavLink
-            to="/create"
+            to="/create-project"
             className="links"
             activeClassName="active-links"
             onClick={toggleNav}

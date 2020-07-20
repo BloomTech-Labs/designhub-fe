@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAuth0 } from '../../utilities/auth-spa';
 import { Route } from 'react-router-dom';
 import LandingPage from '../LandingPage';

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa.js';
 import Tooltip from 'react-power-tooltip';
 
@@ -8,20 +8,11 @@ import logo from '../../ASSETS/logo.svg';
 //import SearchBar from '../../views/Search/SearchBar.js';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
-import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
-import { useQuery } from '@apollo/react-hooks';
-// import './styles.scss';
+
 import './SASS/LoginBar.scss';
 
 const LoginBar = () => {
-  const { loginWithRedirect, logout, user } = useAuth0();
-  const history = useHistory();
-  //const [pathname, setPathname] =useState(()=> history.locaiton.pathname);
-  //console.log('history', history)
-
-  const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
-    variables: { id: user?.sub },
-  });
+  const { loginWithRedirect } = useAuth0();
 
   const startLight = localStorage.getItem('theme') === 'light';
 
@@ -41,10 +32,6 @@ const LoginBar = () => {
 
   useEffect(init, []);
 
-  // useEffect(() =>{
-  //   return history.listen(({pathname}) => setPathname(pathname))
-  // }, [history])
-
   const handleClick = (e) => {
     if (!target.current.contains(e.target)) {
       setShow(false);
@@ -61,8 +48,6 @@ const LoginBar = () => {
     }
     setLight(!light);
   };
-
-  // const redirect_uri = `${window.location.origin}/onboarding`
 
   const toggleLightMode = () => {
     document.documentElement.classList.toggle('theme-light');
@@ -82,8 +67,6 @@ const LoginBar = () => {
     ? 'mobile-overlay display-none'
     : 'mobile-overlay display-block';
 
-  // No username is added to DB when user is created.
-  // if (data?.user?.username === null) return <Redirect to="/onboarding" />
   const login = () => {
     loginWithRedirect({});
     return window.location.reload();
@@ -92,7 +75,7 @@ const LoginBar = () => {
     <div className="top-bar-container">
       <div className="nav-content">
         <div className="logo-container">
-          <Link to={`/explore`}>
+          <Link to={`/`}>
             <SampleLogo />
           </Link>
         </div>

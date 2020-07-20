@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useQuery } from 'react-apollo';
-import { PDFReader } from 'reactjs-pdf-reader';
+import React from 'react';
+//import { useQuery } from 'react-apollo';
+//import { PDFReader } from 'reactjs-pdf-reader';
 
 import Loading from '../../common/Loading/index';
 import './styles.scss';
 
-export default function ProjectPdf(props) {
-  const [pdfLoading, setPdfLoading] = useState(false);
+export default function ProjectPdf() {
+  //const [pdfLoading, setPdfLoading] = useState(false);
+  const pdfLoading = false;
   return (
     <div className="pdf-view">
       <div className="pdf-nav-buttons">
@@ -32,7 +33,7 @@ export default function ProjectPdf(props) {
           Last
         </button>
       </div>
-     {/* <PDFReader />
+      {/* <PDFReader />
              url={props.projectResearch[0].url}
         onDocumentComplete={onDocumentComplete}
         page={state.pdfPage}*/}

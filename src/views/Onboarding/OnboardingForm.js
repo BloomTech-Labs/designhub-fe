@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
-
+import { storage } from '../../utilities/firebase';
 import Loading from '../../common/Loading/index.js';
-import Explore from '../../views/Explore/index.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
 
@@ -18,14 +17,13 @@ import './styles.scss';
 
 const OnboardingForm = ({ history, isLoading }) => {
   const [loadingPage, setLoadingPage] = useState(false);
+
   // user data from auth0-spa
   const { logout, user } = useAuth0();
 
-  const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
+  const { data } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
-  const id = user?.sub;
-  console.log('AUTH-USER-OB', data?.user?.id);
 
   // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
@@ -51,20 +49,12 @@ const OnboardingForm = ({ history, isLoading }) => {
     username: data?.user?.username || '',
   });
 
-  console.log('ob-db-DATA', formUser);
   // alert state for required form inputs
   const [alert, setAlert] = useState({
     username: false,
     firstName: false,
     lastName: false,
   });
-
-  //   const [redirect, setRedirect] = useState(data?.user?.username !==null || data?.user?.username !== 0)
-
-  // useEffect(() => {
-  //   if (redirect === true)
-  //     history.push('/profile/:username')
-  // },[redirect])
 
   const handleChange = (e, id) => {
     setAlert({
@@ -104,19 +94,13 @@ const OnboardingForm = ({ history, isLoading }) => {
     e.preventDefault();
     try {
       setLoadingPage(true);
-      let newAvatar;
-      if (files.length === 0) {
-        newAvatar = data?.user?.avatar;
-      } else {
-        newAvatar = await handleImageUpload(files);
-      }
+      await handleImageUpload(files);
 
-      //changes = {...changes, avatar: newAvatar, auth0Id: user?.sub}
       updateUser({
         variables: {
           data: {
             id: user?.sub,
-            avatar: user?.picture,
+            avatar: formUser?.avatar,
             email: user?.email,
             username: formUser?.username,
             firstName: formUser?.firstName,
@@ -129,33 +113,38 @@ const OnboardingForm = ({ history, isLoading }) => {
         refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
       });
       history.push(`/callback`);
-      console.log('res submit:', data);
     } catch (err) {
       console.error('OnboardingForm.js handleSubmit() ERROR', err);
     }
   };
 
-  const handleImageUpload = async file => {
-    try {
-      const {
-        data: { key, url }
-      } = await updateUser({
-      variables: {
-        data: {
-          id: user?.sub,
-          avatar: user?.avatar,
+  const handleImageUpload = async (files) => {
+    if (files.length > 0) {
+      await files.map(async (file) => {
+        try {
+          await storage.ref(`/images/${file.name}`).put(file);
+          await storage
+            .ref('images')
+            .child(file.name)
+            .getDownloadURL()
+            .then(async (firebaseURL) => {
+              updateUser({
+                variables: {
+                  data: {
+                    id: user?.sub,
+                    avatar: firebaseURL,
+                  },
+                },
+              });
+            });
+        } catch (err) {
+          console.error('OnboardingForm.js handleImageUpload() ERROR', err);
         }
-      }
-    })
-      // Make sure to revoke the data uris to avoid memory leaks
-      files.forEach(file => URL.revokeObjectURL(file.preview));
-
-      return `https://my-photo-bucket-123.s3.us-east-2.amazonaws.com/${key}`;
-    } catch (err) {
-      console.error('OnboardingForm.js handleImageUpload() ERROR', err);
+      });
     }
+    return data?.avatar;
   };
-  
+
   if (loadingPage || isLoading) return <Loading />;
   else
     return (
@@ -170,7 +159,7 @@ const OnboardingForm = ({ history, isLoading }) => {
                       key={i}
                       alert={alert}
                       files={files}
-                      picture={data?.user?.picture}
+                      picture={data?.user?.avatar}
                       setFiles={setFiles}
                       formUser={formUser}
                       onChange={handleChange}
