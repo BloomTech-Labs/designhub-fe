@@ -9,6 +9,7 @@ const GET_ALL_PROJECTS_QUERY = gql`
       name
       description
       figma
+      category
       invision
       mainImg
       created_at
