@@ -28,7 +28,7 @@ const mocks = [
     },
     result: {
       data: {
-        dog: {
+        user: {
           id: 'google-oauth2|2147627834623744883746',
           firstName: 'Buck',
           lastName: 'bulldog',
