@@ -1,37 +1,53 @@
-.imageBox {
-  width: 150px;
-  img {
-    width: 100%;
-    height: auto;
+.searchWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  .imageBox {
+    width: 150px;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
-}
 
-h1 {
-  font-size: 50px;
-  justify-content: center;
-  color: royalblue;
-  padding: 10px;
-}
+  h1 {
+    font-size: 50px;
+    justify-content: center;
+    color: royalblue;
+    padding: 10px;
+  }
 
-h4,
-h2,
-p {
-  color: royalblue;
-  padding: 10px;
-}
+  h4,
+  h2,
+  p {
+    color: royalblue;
+    padding: 10px;
+  }
 
-input {
-  width: 250px;
-  height: 30px;
-  justify-self: center;
-}
+  input {
+    width: 350px;
+    height: 30px;
+  }
 
-.userSearch {
-  display: block;
-  width: 48%;
-}
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    button {
+      height: 30px;
+      width: 100%;
+      border-radius: 5px;
+    }
+  }
 
-.projectSearch {
-  display: block;
-  width: 48%;
+  .searchDisplay {
+    width: 100%;
+    .searchResults {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+  }
 }

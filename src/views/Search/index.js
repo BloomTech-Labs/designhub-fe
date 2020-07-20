@@ -26,12 +26,14 @@ export default function Search() {
   };
   return (
     <Layout>
-      <h1>Search!</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input name="search" ref={register} />
-        <button type="submit">Submit</button>
-      </form>
-      <Display users={users} projects={projects} loading={loading} />
+      <div className="searchWrapper">
+        <h1>Search!</h1>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input name="search" ref={register} />
+          <button type="submit">Submit</button>
+        </form>
+        <Display users={users} projects={projects} loading={loading} />
+      </div>
     </Layout>
   );
 }
