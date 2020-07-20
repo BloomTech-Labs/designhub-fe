@@ -367,9 +367,9 @@ const ProjectFromBody = ({
                 </option>
               ) : (
               */}
-              <option value="" disabled selected hidden>
+{/*              <option value="" disabled selected hidden>
                 Please Select a Category
-              </option>
+              </option>*/}
               {/*)}*/}
 
               <option value="" disabled selected hidden>
