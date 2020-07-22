@@ -90,7 +90,6 @@ const LoginBar = () => {
           <button className="auth0-btn" onClick={logout}>
             Logout
           </button>
-
           <div>
             <Tooltip
               show={show}
