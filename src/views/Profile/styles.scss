@@ -1,0 +1,596 @@
+@import '../../common/SASS/palette';
+@import '../../common/SASS/mixins';
+
+.user-profile-container {
+  color: $white;
+  width: 100%;
+  position: relative;
+  position: relative;
+
+  @include themify($themes) {
+    color: themed('text');
+  }
+
+  .user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: auto;
+    background: $black;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    @include themify($themes) {
+      background: themed('bg2');
+    }
+
+    .user-left-content {
+      display: flex;
+      align-items: flex-start;
+      max-width:65%;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      min-width: 120px;
+      box-sizing: content-box;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .user-info {
+      height: 80%;
+      width: 74%;
+      max-width:74%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      font-size: 16px;
+
+      .userFLname {
+        font-size: 16px;
+        font-weight: 400;
+        margin: 0;
+        letter-spacing: 0.11em;
+      }
+
+      .username {
+        margin-top: 0.2em;
+        margin-bottom: 0.8em;
+        font-weight: 500;
+        font-size: 14px;
+        color: $dark-grey;
+        letter-spacing: 0.11em;
+        @include themify($themes) {
+          color: themed('link');
+        }
+      }
+
+      .bio {
+        margin: 0;
+        line-height: 20px;
+        font-size: 14px;
+        letter-spacing: 0.11em;
+        overflow-wrap:break-word;
+      }
+
+      .user-info-location-website {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-gap: 20px;
+        align-items: center;
+        width: max-content;
+        font-size: 14px;
+        margin-top: 15px;
+        letter-spacing: 0.11em;
+
+        svg {
+          margin-right: 8px;
+        }
+
+        .location-website-flex {
+          display: flex;
+          align-items: center;
+        }
+
+        .website {
+          text-decoration: none;
+          color: $white;
+          @include themify($themes) {
+            color: themed('text');
+          }
+        }
+
+        .website:hover {
+          color: $dark-grey;
+          @include themify($themes) {
+            color: themed('link');
+          }
+        }
+      }
+    }
+
+    .user-data-container {
+      width: 35%;
+      min-width:max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      h6 {
+        color: $dark-grey;
+        margin: 0 10px;
+        @include themify($themes) {
+          color: themed('link');
+        }
+      }
+
+      .user-data {
+        display: flex;
+        letter-spacing: 0.11em;
+        justify-content: space-evenly;
+        .count-flex {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          h6,
+          p {
+            font-size: 16px;
+          }
+
+          p {
+            margin: 10px 0;
+          }
+        }
+      }
+      .teams-container {
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .teams {
+          margin-top: 5px;
+
+          .team-avatar {
+            margin-top: 1vh;
+            margin-right: -2vh;
+            border-radius: 100%;
+            object-fit: cover;
+            width: 5vh;
+            height: 5vh;
+            border: 5px solid $black;
+            @include themify($themes) {
+              border: 5px solid themed('bg');
+            }
+          }
+        }
+
+        .edit-profile-btn {
+          @include edit-profile-btn;
+          background: $almost-black;
+        }
+      }
+    }
+  }
+
+  .profile-tabs-container {
+    color: $white;
+    width: 100%;
+    @include themify($themes) {
+      color: themed('text');
+    }
+
+    .nav-links{  /*tab list */
+      display: flex;
+      width: 100%;
+      margin-bottom: 0px;
+      /*border: 1px solid red;*/
+      li {
+        letter-spacing: 0.11em;
+        font-size: 1rem;
+        //border: 1px solid red;
+      }
+      .links {
+        color: $dark-grey;
+        text-decoration: none;
+        list-style-type: none;
+        margin: 0;
+        cursor: pointer;
+        transition: 0.1s ease-in-out;
+        font-weight: 400;
+        position: relative;
+        z-index: 100;
+        padding: 0px 20px 0px 0px;
+        @include themify($themes) {
+          color: themed('link');
+        }
+      }
+
+      .active-link {
+        color: $white;
+      }
+
+      .links:hover {
+        color: $white;
+        @include themify($themes) {
+          color: themed('text');
+        }
+      }
+    }
+  }
+
+  .tabs-container {
+    width: 100%;
+    margin: 4vh 0;
+    margin: 29px 0;
+    //margin-top: 0px;
+    .tabs-header {
+      height: 40px;
+      width: 18rem;
+      background: $black;
+      border-radius: 10px 10px 0 0;
+      clip-path: polygon(0 0, 90% 0, 92% 7%, 100% 100%, 0% 100%);
+      padding: 24px 26px 0 26px;
+      box-sizing: border-box;
+      @include themify($themes) {
+        background: themed('bg2');
+      }
+      h2 {
+        font-weight: 400;
+        margin: 0;
+        letter-spacing: 0.11em;
+      }
+    }
+    .tab-content {
+      background: $black;
+      padding: 16px;
+      border-radius: 0 10px 10px 10px;
+      @include themify($themes) {
+        background: themed('bg2');
+      }
+    }
+
+    .empty-state {
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+
+      .empty-icon {
+        opacity: 0.03;
+      }
+      .no-projects {
+        width: 100%;
+        text-align: center;
+        color: $dark-grey;
+        margin-bottom: 20px;
+        user-select: none;
+        opacity: 0.6;
+      }
+    }
+
+    .projects-array {
+      display: grid;
+      grid-template-columns: 22% 22% 22% 22%;
+      grid-column-gap: 3%;
+      width: 100%;
+
+      .project-content {
+        width: 100%;
+        height: 14vw;
+        // height: 11.5rem;
+        position: relative;
+        transition: all 0.2s ease-in-out;
+        border: 8px solid $field-bg;
+        border-radius: 5px;
+        overflow: hidden;
+        margin: 10px 10px 10px 10px;
+        object-fit: cover;
+
+        @include themify($themes) {
+          border: 8px solid themed('bg');
+        }
+
+        .project-info {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          color: $white;
+          text-decoration: none;
+          background: $blue;
+          overflow: hidden;
+          height: 50px;
+          display: none;
+          pointer-events: none;
+
+          h1 {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .created {
+            margin: 0;
+            margin-top: 5px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.507);
+          }
+        }
+
+        .project-thumbnail {
+          object-fit: cover;
+          width: 103%;
+          height: 100%;
+          transition: 0.1s ease-in-out;
+          cursor: pointer;
+        }
+      }
+      .project-content:hover {
+        border: 8px solid $blue;
+        text-align: left;
+      }
+    }
+
+    .project-content:hover {
+      .project-info {
+        display: inline;
+        animation: slideUp 0.25s ease-in-out;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        height: 0px;
+      }
+      to {
+        height: 50px;
+      }
+    }
+
+    .follow-container {
+      background: $black;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 4vh;
+      width: 97.5%;
+      justify-content: space-between;
+      @include themify($themes) {
+        background: themed('bg2');
+        h1,
+        p {
+          color: $almost-black;
+        }
+      }
+      .follow-btn {
+        @include follow-btn;
+        margin: 0;
+        padding-left: 70px;
+        padding-right: 65px;
+      }
+      .edit-profile-btn {
+        @include edit-profile-btn;
+        background: $almost-black;
+        margin: 0;
+      }
+      .follow-avatar {
+        border-radius: 100%;
+        object-fit: cover;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+      }
+
+      .follow-info-flex {
+        display: flex;
+        align-items: center;
+        width: 30%;
+        a {
+          text-decoration: none;
+          color: white;
+          padding: 0;
+          margin: 0;
+        }
+      }
+
+      .follow-content-flex {
+        display: flex;
+        margin-left: 25px;
+
+        .follow-FLname {
+          font-weight: 400;
+          font-size: 1rem;
+          margin: 0;
+          letter-spacing: 0.11em;
+        }
+
+        .follow-username {
+          margin: 0;
+          margin-left: 10px;
+          font-weight: 400;
+          font-size: 0.8rem;
+          line-height: 0.8rem;
+          color: $dark-grey;
+          letter-spacing: 0.11em;
+          align-self: flex-end;
+        }
+      }
+      .follower-bio {
+        margin: 0;
+        margin-top: 2vh;
+        margin-left: 25px;
+        max-width: 90%;
+        font-size: 0.75rem;
+        line-height: 20px;
+        letter-spacing: 0.11em;
+      }
+    }
+  }
+
+  .follow-btn {
+    @include follow-btn;
+  }
+}
+
+// TABLET RESPONSIVE
+@media (max-width: 1024px) {
+  .user-profile-container {
+    .user-header {
+      flex-direction: column;
+      height: max-content;
+      padding: 0;
+      padding-top: 1.5rem;
+
+      .user-info {
+        width: 100%;
+
+        .username {
+          margin: 1% 0;
+        }
+        .bio {
+          max-width: 95%;
+        }
+      }
+
+      .user-data-container {
+        width: 100%;
+        align-content: center;
+        margin: 1.5rem 0;
+        .user-data {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin: 0 auto;
+          border-top: 1px solid $almost-black;
+          border-bottom: 1px solid $almost-black;
+
+          .count-flex {
+            padding: 10px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+              margin: 5px 0;
+            }
+          }
+        }
+
+        .teams-container {
+          text-align: center;
+          width: 100%;
+          justify-content: center;
+          margin: 0;
+
+          .edit-profile-btn {
+            margin: 30px 0 10px 0;
+          }
+
+          .follow-btn {
+            margin: 6% 0;
+          }
+        }
+      }
+    }
+
+    .profile-tabs-container {
+      .nav-links {
+        width: auto;
+
+        justify-content: space-between;
+
+        .links {
+          padding: 0;
+        }
+      }
+
+      .projects-array {
+        grid-template-columns: 29.5% 29.5% 29.5%;
+        grid-column-gap: 4%;
+        .project-content {
+          height: 25vh;
+        }
+      }
+    }
+  }
+}
+
+// MOBILE RESPONSIVE
+@media (max-width: 800px) {
+  .user-profile-container {
+    .user-header {
+      flex-direction: column;
+      height: max-content;
+
+      .user-info {
+        width: 100%;
+
+        .username {
+          margin: 1% 0;
+        }
+        .bio {
+          max-width: 95%;
+        }
+      }
+
+      .user-data-container {
+        width: 100%;
+        align-content: center;
+        margin-top: 20px;
+        .user-data {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          margin: 0 auto;
+          border-top: 1px solid $almost-black;
+          border-bottom: 1px solid $almost-black;
+
+          .count-flex {
+            padding: 10px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+              margin: 1vh 0;
+            }
+          }
+        }
+
+        .teams-container {
+          text-align: center;
+          width: 100%;
+          justify-content: center;
+          margin: 0;
+
+          .edit-profile-btn {
+            margin: 30px 0 10px 0;
+          }
+        }
+      }
+    }
+    .profile-tabs-container {
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+
+        .links {
+          padding: 0;
+        }
+      }
+      .projects-array {
+        grid-template-columns: 45% 45%;
+        grid-column-gap: 5%;
+        .project-content {
+          height: 25vh;
+        }
+      }
+    }
+  }
+}
+

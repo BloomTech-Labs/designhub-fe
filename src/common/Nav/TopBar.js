@@ -5,7 +5,7 @@ import Tooltip from 'react-power-tooltip';
 import { useHistory } from 'react-router';
 import SampleLogo from '../../ASSETS/Icons/SampleLogo.js';
 import logo from '../../ASSETS/logo.svg';
-import Search from '../../views/Search/index.js';
+// import Search from '../../views/Search';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
 
@@ -89,7 +89,7 @@ const TopBar = ({ searchData, getSearch }) => {
             <MagnifyingGlass />
           </div>*/}
 
-            <Search />
+            {/* <Search /> */}
           </div>
           <div
             className="top-bar-user-info"
@@ -130,6 +130,10 @@ const TopBar = ({ searchData, getSearch }) => {
                   to={`/create-project`}
                 >
                   New Project
+                </span>
+
+                <span onClick={() => history.push('/search')} to="/search">
+                  Search
                 </span>
 
                 <span onClick={() => history.push('/')} to={`/`}>
@@ -221,6 +225,15 @@ const TopBar = ({ searchData, getSearch }) => {
             onClick={toggleNav}
           >
             New Project
+          </NavLink>
+
+          <NavLink
+            to="/search"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            Search
           </NavLink>
 
           <NavLink

@@ -22,7 +22,6 @@
     display: flex;
     flex-flow: column nowrap;
   }
-
   .settings-left-column {
     align-self: flex-start;
     width: 12%;
@@ -38,7 +37,6 @@
         margin-bottom: 10px;
       }
     }
-
     .settings-logout {
       color: $alert;
     }
@@ -84,7 +82,6 @@
     text-align: left;
     padding: 0 60px;
     width: 85%;
-
     @include themify($themes) {
       border-left: 3px solid themed('bg');
     }
@@ -117,7 +114,6 @@
       &.formSuccess-btn {
         background: green;
       }
-
       @media screen and (max-width: 700px) {
         width: 100%;
       }

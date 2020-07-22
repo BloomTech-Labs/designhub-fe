@@ -4,10 +4,10 @@
 .top-bar-container {
   border-bottom: 1px solid #2a2b31;
   position: fixed;
+  top: 0;
   z-index: 999999;
   width: 100%;
   background: $almost-black;
-
 
   @include themify($themes) {
     background: themed('bg2');
@@ -32,21 +32,21 @@
       height: 2rem;
     }
   }
-    .dark-mode-switch {
+  .dark-mode-switch {
     cursor: pointer;
     width: auto;
     height: auto;
     margin: 5px 0;
   }
 
-    .auth0-btn {
-      @include auth0-redirect-btn;
-      margin-top: 3.5vh;
-      margin-bottom: 3.5vh;
-      color: $white;
-      background: url('../../../ASSETS/loginpage-bg.jpg');
-      animation: bgAnimation 10s ease-in-out alternate-reverse infinite;
-      @media screen and (max-width: 700px) {
+  .auth0-btn {
+    @include auth0-redirect-btn;
+    margin-top: 3.5vh;
+    margin-bottom: 3.5vh;
+    color: $white;
+    background: url('../../../ASSETS/loginpage-bg.jpg');
+    animation: bgAnimation 10s ease-in-out alternate-reverse infinite;
+    @media screen and (max-width: 700px) {
       flex-flow: column-reverse nowrap;
       &:hover {
         background: $btn-gradient;
@@ -64,15 +64,14 @@
     }
   }
 
-
-@keyframes bgAnimation {
-  from {
-    background-position: -40vh 0;
+  @keyframes bgAnimation {
+    from {
+      background-position: -40vh 0;
+    }
+    to {
+      background-position: 0vh 0;
+    }
   }
-  to {
-    background-position: 0vh 0;
-  }
-}
   .mobile-nav {
     display: none;
   }
@@ -80,10 +79,9 @@
   .mobile-navlinks {
     display: none;
   }
+}
 
- }
-
- @media (max-width: 1024px) {
+@media (max-width: 1024px) {
   .top-bar-container {
     width: 100%;
     display: flex;

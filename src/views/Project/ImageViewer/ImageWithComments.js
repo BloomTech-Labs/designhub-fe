@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-
+import { v1 as uuidv1 } from 'uuid';
 import { StickyComment } from './StickyComments';
 import { TempComment } from './TempComment';
 import ModalXIcon from '../../../ASSETS/Icons/ModalXIcon.js';
@@ -12,8 +12,6 @@ import { GET_PROJECT_BY_ID_QUERY } from '../../../graphql';
 import '../styles.scss';
 import ProjectDetails from '../ProjectDetails';
 import { useParams } from 'react-router-dom';
-
-const uuidv1 = require('uuid/v1');
 
 const ImageWithComments = ({ projectImg, closeModal }) => {
   const { id } = useParams();
