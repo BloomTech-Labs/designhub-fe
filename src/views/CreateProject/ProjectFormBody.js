@@ -20,7 +20,7 @@ import {
   // DELETE_PROJECT_PHOTO_MUTATION,
   // DELETE_PROJECT_MUTATION,
   GET_PROJECT_BY_ID_QUERY,
-  GET_ALL_PROJECTS_QUERY
+  GET_ALL_PROJECTS_QUERY,
 } from '../../graphql/index';
 
 import './styles.scss';
@@ -32,7 +32,6 @@ const ProjectFromBody = ({
   userData,
   user,
 }) => {
-
   /*____________APOLLO/GRAPHQL______________________________*/
   const [addProject] = useMutation(ADD_PROJECT_MUTATION);
   const [updateProject] = useMutation(UPDATE_PROJECT_MUTATION);
@@ -241,7 +240,7 @@ const ProjectFromBody = ({
         },
         refetchQueries: [
           {
-            query: GET_ALL_PROJECTS_QUERY
+            query: GET_ALL_PROJECTS_QUERY,
           },
         ],
       });
@@ -287,7 +286,6 @@ const ProjectFromBody = ({
     //     files,
     //     editUpdateProjectData?.updateProject
     //   ).then((editUpdateProjectData) => imageHandler(editUpdateProjectData));
-
     //   // console.log('ADD PROJECT DATA', editUpdateProjectData);
     //   await history.push(`/project/${editUpdateProjectData?.updateProject?.id}`);
     // } catch (err) {
@@ -372,7 +370,7 @@ const ProjectFromBody = ({
                 </option>
               ) : (
               */}
-{/*              <option value="" disabled selected hidden>
+              {/*              <option value="" disabled selected hidden>
                 Please Select a Category
               </option>*/}
               {/*)}*/}

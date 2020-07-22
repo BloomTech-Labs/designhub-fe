@@ -13,8 +13,8 @@ import avatar1 from '../../ASSETS/avatar.jpg';
 import avatar2 from '../../ASSETS/avatar_2.jpg';
 import avatar3 from '../../ASSETS/avatar_3.jpg';
 
-export default function ProjectButtonLinks(/*props*/) {
-  //const { id } = useParams();
+export default function ProjectButtonLinks(props) {
+  // const { id } = useParams();
   return (
     <div className="project-header-right">
       <div className="project-header-team">
@@ -24,7 +24,7 @@ export default function ProjectButtonLinks(/*props*/) {
       </div>
       <div className="project-header-links">
         <div className="project-header-button">
-          <img src={caseStudyIcon} alt="case study" className="pdf-button" />
+          {/* <img src={caseStudyIcon} alt="case study" className="pdf-button" /> */}
 
           <img
             src={caseStudyIcon}
@@ -38,13 +38,16 @@ export default function ProjectButtonLinks(/*props*/) {
           {/*</a>*/}
 
           <img src={figmaIcon} className="link-enabled" alt="figma" />
+          {/* </a> */}
+
+          {/* <img src={figmaIcon} className="link-enabled" alt="figma" /> */}
         </div>
         <div className="project-header-button">
           {/*<a>*/}
           <img src={invisionIcon} className="link-disabled" alt="invision" />
           {/*</a>*/}
 
-          <img src={invisionIcon} className="link-enabled" alt="invision" />
+          {/* <img src={invisionIcon} className="link-enabled" alt="invision" /> */}
         </div>
         <div className="download project-header-button">
           <DownloadIcon />

@@ -4,6 +4,7 @@
 .top-bar-container {
   border-bottom: 1px solid #2a2b31;
   position: fixed;
+  top: 0;
   z-index: 999999;
   width: 100%;
   background: $almost-black;
@@ -72,7 +73,6 @@
   }
 
   .tooltip {
-
     @include themify($themes) {
       background: themed('bg2');
       color: themed('text');

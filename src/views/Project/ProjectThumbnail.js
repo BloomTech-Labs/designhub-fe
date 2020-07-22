@@ -13,9 +13,10 @@ const ProjectThumbnail = ({ project, projectData }) => {
   const { data } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: projectData?.userId },
   });
+  const publishedOn = new Date(project?.created_at / 1);
 
-const publishedOn = new Date(projectData?.created_at / 1);
-  
+  // const publishedOn = new Date(projectData?.created_at / 1);
+
   return !projectData ? null : (
     <div className="project-content">
       <Link to={`/project/${projectData.id}`}>
@@ -34,9 +35,7 @@ const publishedOn = new Date(projectData?.created_at / 1);
               )}
               <h1 className="project-username">{data?.user?.username}</h1>
             </div>
-            <h1 className="created">
-              {moment(publishedOn).format('ll')}
-            </h1>
+            <h1 className="created">{moment(publishedOn).format('ll')}</h1>
           </div>
         </div>
         <img

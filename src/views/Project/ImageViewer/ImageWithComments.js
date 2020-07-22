@@ -5,10 +5,25 @@ import { TempComment } from './TempComment';
 import ModalXIcon from '../../../ASSETS/Icons/ModalXIcon.js';
 //import postCommentNotification from './postCommentNotification';
 import CommentBubbleIcon from '../../../ASSETS/Icons/CommentBubbleIcon.js';
-import '../styles.scss';
 
-const ImageWithComments = (props) => {
-  const { id, url } = props.activeImg;
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { GET_PROJECT_BY_ID_QUERY } from '../../../graphql';
+
+import '../styles.scss';
+import ProjectDetails from '../ProjectDetails';
+import { useParams } from 'react-router-dom';
+
+const ImageWithComments = ({ projectImg, closeModal }) => {
+  const { id } = useParams();
+  // const { id, url } = props.activeImg;
+  const { data: projectData, error } = useQuery(GET_PROJECT_BY_ID_QUERY, {
+    variables: { id: id },
+  });
+  console.log('IC', projectData);
+
+  const [activeImg, setActiveImg] = useState([]);
+  // console.log('comments', photoComments);
+
   const [hidden, setHidden] = useState(false);
   //comments are in the side bar
   //const [comments, setComments] = useState([]);
@@ -18,30 +33,58 @@ const ImageWithComments = (props) => {
   const topOffset = useRef(null);
   const element = useRef(null);
 
-  let activeComments = props.photoComments;
-  let activeTemp = tempComments.filter((c) => c.imageId === id);
+  let activeComments = projectData?.project?.comments;
+
+  console.log('photocomms', activeComments);
 
   // useEffect(() => {
-  //   element.current;
-  //   const projectComments = props.comments;
-  //   props.getPhotoComments(props.activeImg.id);
-  //   setComments({ comments: projectComments });
-  // }, [props.comments]);
+  //   // element.current;
+  //   if (activeComments.id === activeImg.id)
+  //     setComments({ comments: activeComments });
+  // }, [activeComments]);
 
-  function makeComment(id, x, y) {
-    const newComment = {
-      id: uuidv1(), //?
-      imageId: id,
-      userId: props.activeUser.id,
-      username: props.activeUser.username,
-      projectId: props.thisProject.id,
-      editing: false,
-      left: `${x}px`,
-      top: `${y}px`,
-      text: '',
-    };
-    setTempComments({ tempComments: newComment });
-  }
+  // const projectComments = this.props.comments;
+  // this.props.getPhotoComments(this.props.activeImg.id);
+  // this.setState({
+  //   ...this.state,
+  //   comments: projectComments
+  // });
+
+  // useEffect(() => {
+  //   addComments({
+  //     variables: {
+  //       data: {
+  //         id: userData?.sub,
+  //         projectId: userData?.id,
+  //         text: userData?.text,
+  //       },
+  //     },
+  //     refetchQueries: [
+  //       {
+  //         query: GET_PROJECT_BY_ID_QUERY,
+  //         variables: { id: userData?.sub },
+  //       },
+  //     ],
+  //   });
+  // }, [gqlLoading, userData, ProjectDetails]);
+
+  // function makeComment(id, x, y) {
+  //   const newComment = {
+  //     id: uuidv1(),
+  //     imageId: id,
+  //     // userId: props.activeUser.id,
+  //     userId: userData.userId,
+  //     // username: props.activeUser.username,
+  //     username: projectImg.username,
+  //     // projectId: props.thisProject.id,
+  //     projectId: userData.projectId,
+  //     editing: false,
+  //     left: `${x}px`,
+  //     top: `${y}px`,
+  //     text: '',
+  //   };
+  //   setTempComments({ tempComments: newComment });
+  // }
 
   function updateElementPosition(x, y) {
     const rect = element.getBoundingClientRect();
@@ -56,7 +99,7 @@ const ImageWithComments = (props) => {
     await updateElementPosition(x, y);
     x = leftOffset.current;
     y = topOffset.current;
-    makeComment(id, x, y);
+    // makeComment(id, x, y);
   }
 
   async function handleSubmit(e, c) {
@@ -81,7 +124,7 @@ const ImageWithComments = (props) => {
           >
             <CommentBubbleIcon />
           </div>
-          <div onClick={props.closeModal}>
+          <div onClick={closeModal}>
             <ModalXIcon className="close" />
           </div>
         </section>
@@ -89,31 +132,32 @@ const ImageWithComments = (props) => {
 
       <div className="ImageWithComments">
         <img
-          alt={url}
+          alt={projectData?.project?.mainImg}
           className="ImageWithComments__full-img"
           onClick={(e) => handleClick(e, id)}
-          src={url}
+          src={projectImg}
         />
 
-        {activeTemp[0] &&
-          activeTemp.map((c) => (
+        {/* {activeTemp &&
+          activeTemp?.text?.map((c) => (
             <TempComment
               c={c}
               key={c.id}
               hidden={hidden}
               onSubmit={handleSubmit}
-              //commentDelete={commentDelete}
+              // commentDelete={commentDelete}
+              projectData={projectData}
             />
           ))}
         {activeComments[0] &&
-          activeComments.map((s) => (
+          activeComments?.text?.map((s) => (
             <StickyComment
               {...s}
               hidden={hidden}
               key={s.id}
               //commentDelete={commentDelete}
             />
-          ))}
+          ))} */}
       </div>
     </>
   );

@@ -2,24 +2,18 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa.js';
 import Tooltip from 'react-power-tooltip';
-
 import SampleLogo from '../../ASSETS/Icons/SampleLogo.js';
 import logo from '../../ASSETS/logo.svg';
 //import SearchBar from '../../views/Search/SearchBar.js';
 import DarkModeSwitch from '../../ASSETS/Icons/DarkModeSwitch.js';
 import sunMode from '../../ASSETS/sun-mode.svg';
-
 import './SASS/LoginBar.scss';
-
 const LoginBar = () => {
-  const { loginWithRedirect, logout } = useAuth0();
-
+  const { loginWithRedirect } = useAuth0();
   const startLight = localStorage.getItem('theme') === 'light';
-
   const [light, setLight] = useState(startLight);
   const [show, setShow] = useState(false);
   const target = useRef();
-
   const init = () => {
     if (startLight) {
       toggleLightMode();
@@ -29,15 +23,12 @@ const LoginBar = () => {
       document.removeEventListener('mousedown', handleClick);
     };
   };
-
   useEffect(init, []);
-
   const handleClick = (e) => {
     if (!target.current.contains(e.target)) {
       setShow(false);
     }
   };
-
   // look at mixins.scss and palette.scss for more info on this theming function
   const setLightMode = () => {
     toggleLightMode();
@@ -48,25 +39,20 @@ const LoginBar = () => {
     }
     setLight(!light);
   };
-
   const toggleLightMode = () => {
     document.documentElement.classList.toggle('theme-light');
   };
-
   const [open, mobileNav] = useState(true);
   const toggleNav = () => {
     document.documentElement.classList.toggle('mobile-navlinks');
     mobileNav(!open);
   };
-
   const showHideClassName = open
     ? 'mobile-navlinks display-none'
     : 'mobile-navlinks display-block';
-
   const showHideOverlayClassName = open
     ? 'mobile-overlay display-none'
     : 'mobile-overlay display-block';
-
   const login = () => {
     loginWithRedirect({});
     return window.location.reload();
@@ -86,9 +72,6 @@ const LoginBar = () => {
         >
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
-          </button>
-          <button className="auth0-btn" onClick={logout}>
-            Logout
           </button>
           <div>
             <Tooltip
@@ -149,17 +132,12 @@ const LoginBar = () => {
         <div className="mobile-search">
           {/*   <SearchBar searchData={searchData} getSearch={getSearch} />*/}
         </div>
-
         <button className="auth0-btn" onClick={login}>
           Create an account or Sign in
-        </button>
-        <button className="auth0-btn" onClick={logout}>
-          Logout
         </button>
       </div>
       <span className={showHideOverlayClassName} onClick={toggleNav} />
     </div>
   );
 };
-
 export default LoginBar;

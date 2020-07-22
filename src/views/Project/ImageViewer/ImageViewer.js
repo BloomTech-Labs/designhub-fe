@@ -1,48 +1,35 @@
 import React, { useState } from 'react';
-import ImageWithComments from './ImageWithComments';
+
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../../ASSETS/default_thumbnail.svg';
 import Loading from '../../../common/Loading';
+import { Modal, useModal } from 'sriracha-ui';
 
-const ImageViewer = (props) => {
+const ImageViewer = ({ projectImg, userData, projectData }) => {
+  const { isModal, toggleModal } = useModal();
   const [activeImg, setActiveImg] = useState(null);
-  const comments = [];
-  const [modal, setModal] = useState(false);
-
-  function changeImg(imgObj) {
+  const changeImg = (imgObj) => {
     if (activeImg === null || activeImg.id !== imgObj.id) {
-      setActiveImg({ activeImg: imgObj });
+      setActiveImg(imgObj);
     }
-  }
-  function closeModal() {
-    setModal({ modal: false });
-  }
+  };
 
-  if (activeImg === null) {
+  if (projectImg === null) {
     return <Loading />;
   } else {
     return (
       <>
         <div className="ImageViewer">
           <main className="ImageViewer_body">
-            <div className={modal ? 'modal--expand' : 'modal--close'}>
-              <span
-                className="modal--expand__background-overlay"
-                onClick={closeModal}
+            <Modal active={isModal} toggle={toggleModal}>
+              <img
+                src={activeImg ? activeImg.url : projectData?.project?.mainImg}
+                alt="big boy"
               />
-              {modal && (
-                <ImageWithComments
-                  activeUser={props.activeUser}
-                  activeImg={activeImg}
-                  closeModal={closeModal}
-                  comments={comments.length > 0 ? comments : props.comments}
-                  thisProject={props.thisProject}
-                />
-              )}
-            </div>
+            </Modal>
             <div className="main-image-container">
               <section className="ImageViewer__main-image">
-                {!activeImg ? (
+                {!projectData?.project?.mainImg ? (
                   <img
                     src={defaultImage}
                     alt="main project"
@@ -51,32 +38,32 @@ const ImageViewer = (props) => {
                   />
                 ) : (
                   <img
-                    src={activeImg ? activeImg.url : props.thumbnail[0].url}
+                    src={
+                      activeImg ? activeImg.url : projectData?.project?.mainImg
+                    }
                     alt="main project"
-                    onClick={() => setModal({ modal: true })}
+                    onClick={toggleModal}
                     className="main-image"
+                    style={{ maxWidth: '900px' }}
                   />
                 )}
               </section>
               <section className="ImageViewer__thumbnails">
-                {props.thumbnail.map((t) => (
+                {projectData?.project?.photos.map((t) => (
                   <img
                     src={t.url}
-                    key={t.url}
+                    key={t.id}
                     alt="project-thumbnail"
                     onClick={() => changeImg(t)}
                     className="thumbnails"
+                    style={{ maxWidth: '200px' }}
                   />
                 ))}
               </section>
             </div>
           </main>
         </div>
-        <ProjectComments
-          activeUser={props.activeUser}
-          modal={modal}
-          thisProject={props.thisProject}
-        />
+        <ProjectComments comments={projectData?.project?.comments} />
       </>
     );
   }
