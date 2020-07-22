@@ -5,7 +5,7 @@ import { PDFReader } from 'reactjs-pdf-reader';
 import Loading from '../../common/Loading/index';
 import './styles.scss';
 
-export default function ProjectPdf(props) {
+export default function ProjectPdf({ props, projectImg, project }) {
   const [pdfLoading, setPdfLoading] = useState(false);
   const [pdfPage, setPdfPage] = useState(1);
   const [numPages, setNumPages] = useState(null);
@@ -30,14 +30,14 @@ export default function ProjectPdf(props) {
           Page
           {pdfPage} of {numPages}
         </p>
-        <button onClick={() => handleChangePage(true)}>Next</button>
-        <button onClick={() => setPdfPage({ pdfPage: numPages })}>Last</button>
+        {/* <button onClick={() => handleChangePage(true)}>Next</button>
+        <button onClick={() => setPdfPage({ pdfPage: numPages })}>Last</button> */}
       </div>
-      {/* <PDFReader
-        url={props.projectResearch[0].url}
+      <PDFReader
+        url={projectImg?.url}
         onDocumentComplete={onDocumentComplete}
         page={pdfPage}
-      /> */}
+      />
 
       {pdfLoading ? <Loading /> : null}
       <div className="pdf-nav-buttons">

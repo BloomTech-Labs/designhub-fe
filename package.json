@@ -52,6 +52,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "serve": "^11.3.0",
+    "snapshot": "^0.0.0",
+    "sriracha-ui": "^0.7.2",
     "styled-components": "^4.4.0",
     "uuid": "^3.3.3"
   },
