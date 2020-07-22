@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import AllTab from './AllTab';
@@ -20,11 +20,11 @@ import {
 export default function ExploreTabs() {
   const { data: allProjects } = useQuery(GET_ALL_PROJECTS_QUERY);
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
-  console.log('allProjects', allProjects);
+
 
   const [categoryId, setCategoryId] = useState(0);
 
-  let currentTab = 0;
+  // let currentTab = 0;
 
   let getIllustrations = allProjects?.projects.filter((project) => {
     if (project?.category === 'Illustration') {
@@ -35,7 +35,7 @@ export default function ExploreTabs() {
   // Create ID
 
   let illustrations = getIllustrations?.reduce((illustrations, project) => {
-    const catId = 0;
+    // const catId = 0;
     illustrations.push(project);
     return illustrations;
   }, []);
@@ -47,7 +47,7 @@ export default function ExploreTabs() {
     }
   });
   let webDesign = getWebDesign?.reduce((webDesign, project) => {
-    const catId = 1;
+    // const catId = 1;
     webDesign.push(project);
     return webDesign;
   }, []);
@@ -59,7 +59,7 @@ export default function ExploreTabs() {
     }
   });
   let graphicDesign = getGraphicDesign?.reduce((graphicDesign, project) => {
-    const catId = 2;
+    // const catId = 2;
     graphicDesign.push(project);
     return graphicDesign;
   }, []);
@@ -71,7 +71,7 @@ export default function ExploreTabs() {
     }
   });
   let uXDesign = getUXDesign?.reduce((uXDesign, project) => {
-    const catId = 3;
+    // const catId = 3;
     uXDesign.push(project);
     return uXDesign;
   }, []);
@@ -83,7 +83,7 @@ export default function ExploreTabs() {
     }
   });
   let uIDesign = getUIDesign?.reduce((uIDesign, project) => {
-    const catId = 4;
+    // const catId = 4;
     uIDesign.push(project);
     return uIDesign;
   }, []);
@@ -95,7 +95,7 @@ export default function ExploreTabs() {
     }
   });
   let motionDesign = getMotionDesign?.reduce((motionDesign, project) => {
-    const catId = 5;
+    // const catId = 5;
     motionDesign.push(project);
     return motionDesign;
   }, []);
@@ -107,7 +107,7 @@ export default function ExploreTabs() {
     }
   });
       let animation = getAnimation?.reduce((animation,  project) => {
-     const catId = 6
+     // const catId = 6
      animation.push(project);
   return animation;
 }, []);
@@ -119,7 +119,7 @@ export default function ExploreTabs() {
     }
   });
         let productDesign = getProductDesign?.reduce((productDesign,  project) => {
-     const catId = 7
+     // const catId = 7
      productDesign.push(project);
   return productDesign;
 }, []);
