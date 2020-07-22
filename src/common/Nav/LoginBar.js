@@ -12,7 +12,7 @@ import sunMode from '../../ASSETS/sun-mode.svg';
 import './SASS/LoginBar.scss';
 
 const LoginBar = () => {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, logout } = useAuth0();
 
   const startLight = localStorage.getItem('theme') === 'light';
 
@@ -87,7 +87,9 @@ const LoginBar = () => {
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
-    
+          <button className="auth0-btn" onClick={logout}>
+            Logout
+          </button>
           <div>
             <Tooltip
               show={show}
@@ -150,6 +152,9 @@ const LoginBar = () => {
 
         <button className="auth0-btn" onClick={login}>
           Create an account or Sign in
+        </button>
+        <button className="auth0-btn" onClick={logout}>
+          Logout
         </button>
       </div>
       <span className={showHideOverlayClassName} onClick={toggleNav} />
