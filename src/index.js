@@ -11,7 +11,7 @@ import ApolloClient from 'apollo-boost';
 import { render } from 'react-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-Sentry.init({ dsn: `${process.env.REACT_APP_SENTRY_DSN}` });
+Sentry.init({ dsn: process.env.REACT_APP_SENTRY_DSN });
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_GQL_API,

@@ -57,18 +57,17 @@ export default function App() {
           // username: is not included in adding user to DB, the null username is used to send the new user to /onboarding from ./Loginbar
         },
       },
-      // refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
-    });
 
-    //console.log('AUTHUSER', user);
+      refetchQueries: [{ query: GET_USER_BY_ID_QUERY, variables: {id: user?.sub} }],
+    });
   }, [loading, gqlLoading, user, addUser]);
+
 
   useEffect(() => {
     if (userData?.user?.username === null) return history.push('/onboarding');
     // console.log('EFFECT USER', data?.user?.username)
     //console.log('AUTH0USER', user);
   }, [loading, gqlLoading, user, userData, history]);
-
 
   return (
     <>

@@ -1,0 +1,59 @@
+@import '../../common/SASS/palette';
+@import '../../common/SASS/mixins';
+
+.heatmap {
+  margin: 4vh 0;
+  background: $black;
+  padding: 1.5%;
+  border-radius: 10px;
+  @include themify($themes) {
+    background: themed('bg2');
+  }
+
+  .header {
+    margin: 0 0 2vh 0;
+    padding-left: 21px; 
+  }
+
+  .react-calendar-heatmap {
+    text {
+      font-size: 6px;
+    }
+    .color-scale-0 {
+      fill: $almost-black;
+    }
+    .color-scale-1 {
+      fill: $heatmap-1;
+    }
+    .color-scale-2 {
+      fill: $heatmap-2;
+    }
+    .color-scale-3 {
+      fill: $heatmap-3;
+    }
+    .color-scale-4 {
+      fill: $heatmap-4;
+    }
+    .color-scale-5 {
+      fill: $heatmap-5;
+    }
+    .color-scale-high {
+      fill: $heatmap-5;
+    }
+
+    .color-empty {
+      fill: #212229;
+      @include themify($themes) {
+        fill: themed('bg');
+      }
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .heatmap {
+    .header {
+      font-size: 1.4rem;
+    }
+  }
+}
