@@ -16,7 +16,7 @@ import {
   GET_ALL_PROJECTS_QUERY,
   GET_ALL_USERS_QUERY,
 } from '../../graphql/index';
-
+//This File needs work.
 export default function ExploreTabs() {
   const { data: allProjects } = useQuery(GET_ALL_PROJECTS_QUERY);
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
