@@ -35,6 +35,7 @@ const ApolloApp = () => {
     setToggle(false);
     window.location.reload();
   };
+  
   return (
     <Router>
       <ApolloProvider client={client}>
