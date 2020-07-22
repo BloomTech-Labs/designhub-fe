@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import AllTab from './AllTab';
@@ -20,6 +20,143 @@ import {
 export default function ExploreTabs() {
   const { data: allProjects } = useQuery(GET_ALL_PROJECTS_QUERY);
   const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
+  console.log('allProjects', allProjects);
+
+  const [categoryId, setCategoryId] = useState(0);
+
+  let currentTab = 0;
+
+  let getIllustrations = allProjects?.projects.filter((project) => {
+    if (project?.category === 'Illustration') {
+      return project;
+    }
+  });
+  console.log('getIllustrations', getIllustrations);
+  // Create ID
+
+  let illustrations = getIllustrations?.reduce((illustrations, project) => {
+    const catId = 0;
+    illustrations.push(project);
+    return illustrations;
+  }, []);
+  console.log('illustrations', illustrations);
+
+  let getWebDesign = allProjects?.projects.filter((project) => {
+    if (project?.category === 'Web Design') {
+      return project;
+    }
+  });
+  let webDesign = getWebDesign?.reduce((webDesign, project) => {
+    const catId = 1;
+    webDesign.push(project);
+    return webDesign;
+  }, []);
+  console.log('webDesign', webDesign);
+
+  let getGraphicDesign = allProjects?.projects.filter((project) => {
+    if (project?.category === 'Graphic Design') {
+      return project;
+    }
+  });
+  let graphicDesign = getGraphicDesign?.reduce((graphicDesign, project) => {
+    const catId = 2;
+    graphicDesign.push(project);
+    return graphicDesign;
+  }, []);
+  console.log('graphicDesign', graphicDesign);
+
+  let getUXDesign = allProjects?.projects.filter((project) => {
+    if (project?.category === 'UX Design') {
+      return project;
+    }
+  });
+  let uXDesign = getUXDesign?.reduce((uXDesign, project) => {
+    const catId = 3;
+    uXDesign.push(project);
+    return uXDesign;
+  }, []);
+  console.log('uXDesign', uXDesign);
+
+  let getUIDesign = allProjects?.projects.filter((project) => {
+    if (project?.category === 'UI Design') {
+      return project;
+    }
+  });
+  let uIDesign = getUIDesign?.reduce((uIDesign, project) => {
+    const catId = 4;
+    uIDesign.push(project);
+    return uIDesign;
+  }, []);
+  console.log('uIDesign', uIDesign);
+
+  let getMotionDesign = allProjects?.projects.filter((project) => {
+    if (project?.category === 'Motion Design') {
+      return project;
+    }
+  });
+  let motionDesign = getMotionDesign?.reduce((motionDesign, project) => {
+    const catId = 5;
+    motionDesign.push(project);
+    return motionDesign;
+  }, []);
+  console.log('motionDesign', motionDesign);
+
+  let getAnimation = allProjects?.projects.filter((project) => {
+    if (project?.category === 'Animation') {
+      return project;
+    }
+  });
+      let animation = getAnimation?.reduce((animation,  project) => {
+     const catId = 6
+     animation.push(project);
+  return animation;
+}, []);
+    console.log('animation', animation)
+
+  let getProductDesign = allProjects?.projects.filter((project) => {
+    if (project?.category === 'ProductDesign') {
+      return project;
+    }
+  });
+        let productDesign = getProductDesign?.reduce((productDesign,  project) => {
+     const catId = 7
+     productDesign.push(project);
+  return productDesign;
+}, []);
+    console.log('productDesign', productDesign)
+  // //get category name
+  // useEffect(
+  //   illustrations,
+  //   webDesign,
+  //   graphicDesign,
+  //   uIDesign,
+  //   uXDesign,
+  //   productDesign,
+  //   motionDesign,
+  //   animation,
+  //   []
+  // );
+
+  //each time a category is selected in the categories drop down list
+  let categoryNames = {
+    illustrations,
+    webDesign,
+    graphicDesign,
+    uIDesign,
+    uXDesign,
+    productDesign,
+    motionDesign,
+    animation
+  };
+
+
+
+  console.log('categoryNames', categoryNames);
+  console.log('categoryId', categoryId);
+  const categoryHandler = (categoryNames) => {
+    setCategoryId(categoryNames);
+    console.log('categoryNames', setCategoryId(categoryNames));
+  };
   return (
     <div className="explore-tabs-container">
       <div>
@@ -31,34 +168,54 @@ export default function ExploreTabs() {
               </Tab>
 
               {/*CHIPS*/}
+              {allProjects?.projects?.map((category, index) => {
+                console.log("category", category)
+                return (
+                  <Tab
+                    key={categoryNames}
+                    className={`tabs-${index}`}
+                    selectedClassName="active-link"
+                    onClick={() => categoryHandler(category.category)}
+                  >
+                    <p className="linkText">
+                      {category.category.toUpperCase()}
+                    </p>
+                  </Tab>
+                );
+              })}
             </div>
           </TabList>
           <TabPanel className="tabs-container">
-            <AllTab projects={allProjects} users={allUsers} />
+            <AllTab allProjects={allProjects} users={allUsers} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <Illustration projects={allProjects} users={allUsers} />
+            <Illustration
+              getIllustrations={getIllustrations}
+              illustrations={illustrations}
+              users={allUsers}
+              key={categoryNames.illustrations}
+            />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <WebDesign projects={allProjects} users={allUsers} />
+            <WebDesign allProjects={allProjects} users={allUsers} key={categoryNames.webDesign} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <GrapicDesign projects={allProjects} users={allUsers} />
+            <GrapicDesign allProjects={allProjects} users={allUsers} key={categoryNames.graphicDesign} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <UXDesign projects={allProjects} users={allUsers} />
+            <UXDesign allProjects={allProjects} users={allUsers} key={categoryNames.uXDesign}/>
           </TabPanel>
           <TabPanel className="tabs-container">
-            <UIDesign projects={allProjects} users={allUsers} />
+            <UIDesign allProjects={allProjects} users={allUsers} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <MotionDesign projects={allProjects} users={allUsers} />
+            <MotionDesign allProjects={allProjects} users={allUsers} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <Animation projects={allProjects} />
+            <Animation allProjects={allProjects} key={categoryNames}/>
           </TabPanel>
           <TabPanel className="tabs-container">
-            <ProductDesign projects={allProjects} users={allUsers} />
+            <ProductDesign allProjects={allProjects} users={allUsers} />
           </TabPanel>
         </Tabs>
       </div>
