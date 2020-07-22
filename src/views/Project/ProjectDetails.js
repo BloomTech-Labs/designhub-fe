@@ -1,17 +1,9 @@
 import React from 'react';
-import Layout from '../../common/Layout';
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 
-import ProjectButtonLinks from './ProjectButtonLinks';
-
-//Images and Icons:
-import avatar1 from '../../ASSETS/avatar.jpg';
-import avatar2 from '../../ASSETS/avatar_2.jpg';
-import avatar3 from '../../ASSETS/avatar_3.jpg';
-
-export default function ProjectDetails(props) {
+export default function ProjectDetails() {
   return (
     <>
       <div className="project-details">

@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../../common/Layout';
-import { Switch, Route, NavLink as Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { Route, NavLink as Link } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa';
 import Account from './Account';
 import './styles.scss';
@@ -9,8 +8,6 @@ import Privacy from '../CreateProject/Privacy';
 
 export default function Settings({ activeUser }) {
   const { logout } = useAuth0();
-  const { pathname } = useLocation();
-  console.log('activeUser:', activeUser);
   return (
     <Layout>
       <div className="Settings">
@@ -23,9 +20,9 @@ export default function Settings({ activeUser }) {
             <h4>Privacy</h4>
           </Link>
 
-          <h4>Notifications</h4>
+{/*          <h4>Notifications</h4>
           <h4>Linked Profiles</h4>
-          <h4>Download Data</h4>
+          <h4>Download Data</h4>*/}
           <h4 className="settings-logout" onClick={() => logout()}>
             Log Out
           </h4>

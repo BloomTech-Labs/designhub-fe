@@ -80,7 +80,7 @@ const TopBar = ({ searchData, getSearch }) => {
       <>
         <div className="nav-content">
           <div className="logo-container">
-            <Link to={`/explore`}>
+            <Link to={`/`}>
               <SampleLogo />
             </Link>
           </div>
@@ -89,7 +89,7 @@ const TopBar = ({ searchData, getSearch }) => {
             <MagnifyingGlass />
           </div>*/}
 
-            {/*        <Search/>*/}
+            <Search />
           </div>
           <div
             className="top-bar-user-info"
@@ -137,9 +137,7 @@ const TopBar = ({ searchData, getSearch }) => {
                 </span>
 
                 <span
-                  onClick={() =>
-                    history.push(`/notifications`)
-                  }
+                  onClick={() => history.push(`/notifications`)}
                   to={`/notifications`}
                 >
                   Notifications
@@ -217,7 +215,7 @@ const TopBar = ({ searchData, getSearch }) => {
             Profile
           </NavLink>
           <NavLink
-            to="/create"
+            to="/create-project"
             className="links"
             activeClassName="active-links"
             onClick={toggleNav}
