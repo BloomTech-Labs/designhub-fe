@@ -3,7 +3,7 @@ import React from 'react';
 import empty from '../../ASSETS/Icons/empty_project.svg';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
-export default function Illustration({ allProjects, project, user, users, illustrations }) {
+export default function Illustration({ allProjects, getIllustrations, user, allUsers, illustrations, ...rest }) {
   // let getIllustrations = allProjects?.projects.filter((project) => {
   //   if (project?.category == 'Illustration') {
   //     return project;
@@ -19,8 +19,8 @@ export default function Illustration({ allProjects, project, user, users, illust
       </div>
 
       <div className="explore-projects-array">
-        {illustrations.map((project) => {
-          const user = users.find((user) => user.id === project.userId);
+        {getIllustrations.map((project) => {
+          const user = allUsers?.users.find((user) => user.id === project.userId);
           return (
             <ProjectThumbnail projectData={project} user={user} key={project.id} />
           );

@@ -148,10 +148,14 @@ export default function ExploreTabs() {
     motionDesign,
     animation
   };
+
+
+
   console.log('categoryNames', categoryNames);
   console.log('categoryId', categoryId);
-  const categoryHandler = (catId) => {
-    setCategoryId(catId);
+  const categoryHandler = (categoryNames) => {
+    setCategoryId(categoryNames);
+    console.log('categoryNames', setCategoryId(categoryNames));
   };
   return (
     <div className="explore-tabs-container">
@@ -165,12 +169,13 @@ export default function ExploreTabs() {
 
               {/*CHIPS*/}
               {allProjects?.projects?.map((category, index) => {
+                console.log("category", category)
                 return (
                   <Tab
-                    key={category.id}
+                    key={categoryNames}
                     className={`tabs-${index}`}
                     selectedClassName="active-link"
-                    onClick={() => categoryHandler(category.id)}
+                    onClick={() => categoryHandler(category.category)}
                   >
                     <p className="linkText">
                       {category.category.toUpperCase()}
@@ -188,16 +193,17 @@ export default function ExploreTabs() {
               getIllustrations={getIllustrations}
               illustrations={illustrations}
               users={allUsers}
+              key={categoryNames.illustrations}
             />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <WebDesign allProjects={allProjects} users={allUsers} />
+            <WebDesign allProjects={allProjects} users={allUsers} key={categoryNames.webDesign} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <GrapicDesign allProjects={allProjects} users={allUsers} />
+            <GrapicDesign allProjects={allProjects} users={allUsers} key={categoryNames.graphicDesign} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <UXDesign allProjects={allProjects} users={allUsers} />
+            <UXDesign allProjects={allProjects} users={allUsers} key={categoryNames.uXDesign}/>
           </TabPanel>
           <TabPanel className="tabs-container">
             <UIDesign allProjects={allProjects} users={allUsers} />
@@ -206,7 +212,7 @@ export default function ExploreTabs() {
             <MotionDesign allProjects={allProjects} users={allUsers} />
           </TabPanel>
           <TabPanel className="tabs-container">
-            <Animation allProjects={allProjects} />
+            <Animation allProjects={allProjects} key={categoryNames}/>
           </TabPanel>
           <TabPanel className="tabs-container">
             <ProductDesign allProjects={allProjects} users={allUsers} />
