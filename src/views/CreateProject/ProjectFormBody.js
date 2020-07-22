@@ -48,11 +48,17 @@ const ProjectFromBody = ({
   //   isEditing ? (project.privateProjects ? 'private' : 'public') : 'public'
   // );
 
-  // const allInputs = { imgUrl: '' }
-
-  // const [imageAsUrl, setImageAsUrl] = useState([]);
-  // const [prjData, setPrjData] = useState({});
-
+  /*________CATEGORY STATE____________________________________________*/
+  const categoryNames = [
+    'Illustration',
+    'Web Design',
+    'Graphic Design',
+    'UX Design',
+    'UI Design',
+    'Motion Design',
+    'Animation',
+    'ProductDesign',
+  ];
   const [newProjectData, setNewProjectData] = useState({
     project: {
       userId: user?.sub,
@@ -62,7 +68,7 @@ const ProjectFromBody = ({
       invision: isEditing ? project?.invision : '',
       privateProjects: isEditing ? project?.privateProjects : false,
       mainImg: isEditing ? project?.mainImg : '',
-      category: isEditing ? project?.category : 'something',
+      category: isEditing ? project?.category : '',
       // projectInvites: projectInvites,
     },
     success: false,
@@ -77,17 +83,7 @@ const ProjectFromBody = ({
     //categoryId: null,
     //foundProjectCategory,
   });
-  /*________CATEGORY STATE____________________________________________*/
-  const categoryNames = [
-    'Illustration',
-    'webDesign',
-    'graphicDesign',
-    'uxDesign',
-    'uiDesign',
-    'motionDesign',
-    'animation',
-    'productDesign',
-  ];
+
 
   const { name, description, figma, invision } = newProjectData?.project;
 
@@ -147,9 +143,18 @@ const ProjectFromBody = ({
   };
   /*_____________________HANDLE CATEGORY___________________________*/
   //each time a category is selected in the categories drop down list
-  const categoryHandler = (event) => {
-    event.preventDefault();
-    newProjectData.project.category = event.target.value;
+  const categoryHandler = (e) => {
+    newProjectData.project.category = e.target.value;
+    console.log('cat change', e.target.value)
+
+        setNewProjectData({
+      ...newProjectData,
+      project: {
+        ...newProjectData.project,
+        [e.target.name]: e.target.value,
+      },
+    });
+        return (newProjectData)
   };
 
   /*_____________________HANDLE IMAGE UPLOAD___________________________*/
@@ -246,7 +251,7 @@ const ProjectFromBody = ({
         addProjectData?.addProject
       ).then((addProjectData) => imageHandler(addProjectData));
 
-      // console.log('ADD PROJECT DATA', addProjectData);
+       console.log('ADD PROJECT Categories', addProjectData?.addProject?.category);
       await history.push(`/project/${addProjectData?.addProject?.id}`);
     } catch (err) {
       console.log('ProjectForm.js addProject ERROR', err);

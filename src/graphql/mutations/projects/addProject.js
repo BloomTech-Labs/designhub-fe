@@ -7,6 +7,7 @@ const ADD_PROJECT_MUTATION = gql`
       userId
       private
       name
+      category
       description
       figma
       invision

@@ -87,7 +87,7 @@ const LoginBar = () => {
           <button className="auth0-btn" onClick={login}>
             Create an account or Sign in
           </button>
-
+    
           <div>
             <Tooltip
               show={show}

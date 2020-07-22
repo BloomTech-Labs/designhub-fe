@@ -8,15 +8,17 @@ import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 
-const ProjectThumbnail = ({ project }) => {
+const ProjectThumbnail = ({ project, projectData }) => {
   // console.log("thumbnail project props data",project)
   const { data } = useQuery(GET_USER_BY_ID_QUERY, {
-    variables: { id: project?.userId },
+    variables: { id: projectData?.userId },
   });
 
-  return !project ? null : (
+const publishedOn = new Date(projectData?.created_at / 1);
+  
+  return !projectData ? null : (
     <div className="project-content">
-      <Link to={`/project/${project.id}`}>
+      <Link to={`/project/${projectData.id}`}>
         <div className="project-info">
           <div className="project-flex">
             <img
@@ -25,23 +27,23 @@ const ProjectThumbnail = ({ project }) => {
               alt={data?.user?.firstName}
             />
             <div className="project-middle">
-              {project.name.length > 35 ? (
-                <h1>{project.name.slice(0, 35)}...</h1>
+              {projectData.name.length > 35 ? (
+                <h1>{projectData.name.slice(0, 35)}...</h1>
               ) : (
-                <h1>{project.name}</h1>
+                <h1>{projectData.name}</h1>
               )}
               <h1 className="project-username">{data?.user?.username}</h1>
             </div>
             <h1 className="created">
-              {moment(project.created_at).format('MMM DD, YYYY')}
+              {moment(publishedOn).format('ll')}
             </h1>
           </div>
         </div>
         <img
-          src={project.mainImg ? project.mainImg : defaultImg}
+          src={projectData.mainImg ? projectData.mainImg : defaultImg}
           className="project-thumbnail"
           alt="test"
-          key={project.id}
+          key={projectData.id}
         />
       </Link>
     </div>
