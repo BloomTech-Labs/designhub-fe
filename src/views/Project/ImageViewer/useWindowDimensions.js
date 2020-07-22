@@ -1,8 +1,4 @@
 import { useState, useEffect } from 'react';
-<<<<<<< HEAD
-=======
-
->>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
   return {

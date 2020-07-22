@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useWindowDimensions } from './useWindowDimensions.js';
 import { Link, useParams } from 'react-router-dom';
 import SendIcon from '../../../ASSETS/Icons/SendIcon';
-//import postCommentNotification from './postCommentNotification';
+
 import '../styles.scss';
 import {
   GET_USER_BY_ID_QUERY,
@@ -15,6 +15,7 @@ import { ADD_COMMENT_MUTATION } from '../../../graphql';
 
 const ProjectComments = ({ comments, modal }) => {
   const { handleSubmit, register } = useForm();
+
   //custom hook to get window height/width
   const { width } = useWindowDimensions();
 
@@ -36,16 +37,11 @@ const ProjectComments = ({ comments, modal }) => {
     variables: { id: projectData?.project?.userId },
   });
 
-  console.log('object', comments);
-  console.log('object2', userData);
-  //local state for form input
-  const [newComment, setNewComment] = useState();
-
+  console.log('object', id);
   const [addComments] = useMutation(ADD_COMMENT_MUTATION);
 
   //click submit
   const onSubmit = (data) => {
-    // if (!addComments) return; //dont submit blank comments
     addComments({
       variables: {
         data: {
@@ -95,7 +91,6 @@ const ProjectComments = ({ comments, modal }) => {
                 />
                 <strong>{c.user.username}</strong>
               </Link>
-              {/* )} */}
               <div className="ProjectComment__body__text">
                 <Link
                   to={`/profile/${c.userId}/${c.username}`}
@@ -123,8 +118,6 @@ const ProjectComments = ({ comments, modal }) => {
               ref={register}
               type="text"
               name="text"
-              // value={newComment}
-              // onChange={addComments}
               placeholder="Leave a comment..."
             />
             <button>

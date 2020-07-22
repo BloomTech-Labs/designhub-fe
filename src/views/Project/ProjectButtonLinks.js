@@ -33,29 +33,19 @@ export default function ProjectButtonLinks(props) {
           />
         </div>
         <div className="project-header-button">
-<<<<<<< HEAD
-          {/* <a> */}
-=======
           {/*<a>*/}
           <img src={figmaIcon} className="link-enabled" alt="figma" />
           {/*</a>*/}
 
->>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
           <img src={figmaIcon} className="link-enabled" alt="figma" />
           {/* </a> */}
 
           {/* <img src={figmaIcon} className="link-enabled" alt="figma" /> */}
         </div>
         <div className="project-header-button">
-<<<<<<< HEAD
-          {/* <a> */}
-          <img src={invisionIcon} className="link-disabled" alt="invision" />
-          {/* </a> */}
-=======
           {/*<a>*/}
           <img src={invisionIcon} className="link-disabled" alt="invision" />
           {/*</a>*/}
->>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
 
           {/* <img src={invisionIcon} className="link-enabled" alt="invision" /> */}
         </div>
