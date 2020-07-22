@@ -89,7 +89,7 @@ const TopBar = ({ searchData, getSearch }) => {
             <MagnifyingGlass />
           </div>*/}
 
-            {/*        <Search/>*/}
+            <Search />
           </div>
           <div
             className="top-bar-user-info"
