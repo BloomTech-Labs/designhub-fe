@@ -10,10 +10,9 @@ import 'react-calendar-heatmap/dist/styles.css';
 
 import './Heatmap.scss';
 
-const Heatmap = props => {
+const Heatmap = (props) => {
   const [today] = useState(new Date());
-  const [params] = useState(props.match.params.id);
-  const [heatmapArr, setHeatmapArr] = useState([]);
+  const heatmapArr = [];
   const [days, setDays] = useState(-365);
   const { width } = useWindowDimensions();
 
@@ -60,22 +59,22 @@ const Heatmap = props => {
   // }, []);
 
   //conditionally renders the tool tip message when hovering over a square
-  const renderToolTip = value => {
+  const renderToolTip = (value) => {
     if (value.date === null || value.count === null) {
       return {
-        'data-tip': `No contributions on this date`
+        'data-tip': `No contributions on this date`,
       };
     } else if (value.count === 1) {
       return {
         'data-tip': `${value.count} contribution on ${moment(value.date).format(
           'MMM Do YYYY'
-        )}`
+        )}`,
       };
     } else {
       return {
         'data-tip': `${value.count} contributions on ${moment(
           value.date
-        ).format('MMM Do YYYY')}`
+        ).format('MMM Do YYYY')}`,
       };
     }
   };
@@ -86,10 +85,10 @@ const Heatmap = props => {
         startDate={shiftDate(moment(today).format('YYYY-MM-DD'), days)}
         endDate={moment(today).format('YYYY-MM-DD')}
         values={heatmapArr}
-        tooltipDataAttrs={value => {
+        tooltipDataAttrs={(value) => {
           return renderToolTip(value);
         }}
-        classForValue={value => {
+        classForValue={(value) => {
           if (!value) {
             return 'color-empty';
           } else if (value.count > 5) {

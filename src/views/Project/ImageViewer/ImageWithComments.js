@@ -1,13 +1,11 @@
 import React, { useState, useRef } from 'react';
-
+import { v1 as uuidv1 } from 'uuid';
 import { StickyComment } from './StickyComments';
 import { TempComment } from './TempComment';
 import ModalXIcon from '../../../ASSETS/Icons/ModalXIcon.js';
 //import postCommentNotification from './postCommentNotification';
 import CommentBubbleIcon from '../../../ASSETS/Icons/CommentBubbleIcon.js';
 import '../styles.scss';
-
-const uuidv1 = require('uuid/v1');
 
 const ImageWithComments = (props) => {
   const { id, url } = props.activeImg;

@@ -4,15 +4,15 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import moment from 'moment';
 import { v4 } from 'uuid'
 import Heatmap from './Heatmap.js';
-import {useQuery} from '@apollo/react-hooks';
+// import {useQuery} from '@apollo/react-hooks';
 
-import {GET_USER_BY_ID_QUERY} from '../../graphql';
+// import {GET_USER_BY_ID_QUERY} from '../../graphql';
 
 
 // Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 import empty from '../../ASSETS/Icons/empty_project.svg';
-import Loading from '../../ASSETS/loading';
+// import Loading from '../../ASSETS/loading';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
 const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, currentTab, setCurrentTab, projects, acceptedProjects, followers, following, starred, ...rest}) => {
@@ -329,10 +329,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
           </div >
         </div >
       );
-{/*    }//end if
-    else {
-      return <Loading />; //diplay spinner while content is being fetched 
-    }*/}
+
 
 
 
