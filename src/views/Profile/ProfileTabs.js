@@ -22,7 +22,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
     //   acceptedCollabProjects: [] //accepted collab projects
 
     
-    
+
     // const projects = projects;
      const recentProjects = null;
     // const followers = this.followers;
@@ -52,9 +52,9 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                 <Tab className="links" selectedClassName="active-link">
                   Following
                 </Tab>
-                <Tab className="links" id="starred" selectedClassName="active-link">
+                {/* <Tab className="links" id="starred" selectedClassName="active-link">
                   Starred
-                </Tab>
+                </Tab> */}
               </TabList>
 
               
@@ -132,13 +132,13 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
               </TabPanel>
 
 
-              {/* <TabPanel className="tabs-container">
+              <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Followers</h2> 
                 </div>
 
                 <div className="tab-content">
-                  {followers.length === 0 && (
+                  {followers?.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">
@@ -146,40 +146,40 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     </h1>
                     </div>
                   )}
-                  {followers.map(follower => {
+                  {followers?.map(follower => {
                     let alsoFollowing = false;
                     following.map(following => {
-                      if (following.userId === follower.userId) {
+                      if (following?.userId === follower?.userId) {
                         alsoFollowing = true;
                       }
                       return following;
                     });
                     return (
-                      <div className="follow-container" key={follower.id}>
+                      <div className="follow-container" key={follower?.id}>
                         <div className="follow-info-flex">
                           <Link
-                            to={`/profile/${follower.userId}/${follower.username}`}
+                            to={`/profile/${follower?.userId}/${follower?.username}`}
                           >
                             <img
-                              src={follower.avatar}
+                              src={follower?.avatar}
                               className="follow-avatar"
                               alt="avatar"
                             />
                           </Link>
                           <Link
-                            to={`/profile/${follower.userId}/${follower.username}`}
+                            to={`/profile/${follower?.userId}/${follower?.username}`}
                           >
                             <div className="follow-content">
                               <div className="follow-content-flex">
-                                <h1 className="follow-FLname">{follower.name}</h1>
+                                <h1 className="follow-FLname">{follower?.name}</h1>
                                 <h1 className="follow-username">
-                                  {follower.username}
+                                  {follower?.username}
                                 </h1>
                               </div>
                               <p className="follower-bio">{`${
-                                follower.bio.length > 100
-                                  ? follower.bio.slice(0, 100) + '...'
-                                  : follower.bio
+                                follower?.bio.length > 100
+                                  ? follower?.bio.slice(0, 100) + '...'
+                                  : follower?.bio
                                 }`}</p>
                             </div>
                           </Link>
@@ -220,14 +220,14 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     );
                   })}
                 </div>
-              </TabPanel> */}
-              {/* <TabPanel className="tabs-container">
+              </TabPanel>
+              <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Following</h2> 
                 </div>
 
                 <div className="tab-content">
-                  {following.length === 0 && (
+                  {followers?.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">
@@ -235,7 +235,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     </h1>
                     </div>
                   )}
-                  {following.map(follower => (
+                  {followers?.map(follower => (
                     <div className="follow-container" key={follower.id}>
                       <div className="follow-info-flex">
                         <Link
@@ -249,14 +249,14 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                         </Link>
                         <div className="follow-content">
                           <div className="follow-content-flex">
-                            <h1 className="follow-FLname">{follower.name}</h1>
+                            <h1 className="follow-FLname">{follower?.user.name}</h1>
                             <h1 className="follow-username">
-                              {follower.username}
+                              {follower?.user.username}
                             </h1>
                           </div>
                           <p className="follower-bio">
                             {`${
-                              follower.bio.length > 100
+                              follower?.bio.length > 100
                                 ? follower.bio.slice(0, 100) + '...'
                                 : follower.bio
                               }`}
@@ -282,20 +282,20 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     </div>
                   ))}
                 </div>
-              </TabPanel> */}
-              {/* <TabPanel className="tabs-container">
+              </TabPanel>
+              <TabPanel className="tabs-container">
                 <div className="tabs-header">
                   <h2>Starred</h2>
                 </div>
                 <div className="tab-content">
-                  {starred.length === 0 && (
+                  {starred?.length === 0 && (
                     <div className="empty-state">
                       <img src={empty} alt="empty" className="empty-icon" />
                       <h1 className="no-projects">No starred projects yet.</h1>
                     </div>
                   )}
                   <div className="projects-array">
-                    {starred.map(project => (
+                    {starred?.map(project => (
                       <div className="project-content" key={project.id}>
                         <Link to={`/project/${project.projectId}`}>
                           <>
@@ -324,7 +324,7 @@ const ProfileTabs = ({activeUser, userData, params, followUser, unfollowUser, cu
                     ))}
                   </div>
                 </div>
-              </TabPanel> */}
+              </TabPanel>
             </Tabs>
           </div >
         </div >

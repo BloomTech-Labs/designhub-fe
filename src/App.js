@@ -58,10 +58,13 @@ export default function App() {
           // username: is not included in adding user to DB, the null username is used to send the new user to /onboarding from ./Loginbar
         },
       },
-      refetchQueries: [{ query: GET_USER_BY_ID_QUERY }],
+      refetchQueries: [{ query: GET_USER_BY_ID_QUERY, variables: {id: user?.sub} }],
     });
 
-    //console.log('AUTHUSER', user);
+    
+
+  
+
   }, [loading, gqlLoading, user]);
 
   useEffect(() => {
@@ -71,7 +74,7 @@ export default function App() {
   }, [loading, gqlLoading, user, userData?.user]);
 
   console.log('userData', userData);
-
+  console.log('USERLOSER', user);
   return (
     <>
       <div className="app-wrapper">

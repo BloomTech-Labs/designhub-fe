@@ -3,6 +3,7 @@ import Layout from '../../common/Layout';
 import ProfileTabs from './ProfileTabs';
 import { useParams } from 'react-router-dom';
 import { useAuth0 } from '../../utilities/auth-spa';
+import { useHistory } from 'react-router';
 
 import './styles.scss';
 
@@ -12,7 +13,7 @@ import {GET_USER_BY_ID_QUERY, GET_ALL_PROJECTS_QUERY} from '../../graphql';
 
 export default function Profile(props, users) {
   // const { username, avatar} = useParams();
-
+  const history = useHistory();
   const { id } = useParams();
   const { user } = useAuth0();
 
@@ -20,9 +21,15 @@ export default function Profile(props, users) {
     variables: {id: id},
     });
 
-    const { data: activeUserData } = useQuery(GET_USER_BY_ID_QUERY, {
-      variables: {id: user?.sub},
-      });
+  const { data: activeUserData } = useQuery(GET_USER_BY_ID_QUERY, {
+    variables: {id: user?.sub},
+    });
+
+    console.log('AUD:', activeUserData)
+
+    // const { data: activeUserFollowers } = useQuery(GET_USER_BY_ID_QUERY, {
+    //   variables: {id: user?.sub},
+    //   });
 
   // const { data: userProfile } = useQuery(GET_USER_BY_ID_QUERY, {
   //   variables: {id: userProjects?.project?.userId},
@@ -42,22 +49,20 @@ export default function Profile(props, users) {
         <div className="user-header">
           <div className="user-left-content">
             <img
-              // src={avatar}
+              src={activeUserData?.user.avatar}
               className="avatar"
               alt="avatar"
             />
 
             <div className="user-info">
-              <h1 className="userFLname">Erik Lambert</h1>
-              <h2 className="username">eriklambert</h2>
+              <h1 className="userFLname">{activeUserData?.user.firstName && activeUserData.user.lastName}</h1>
+              <h2 className="username">{activeUserData?.user.username}</h2>
               <p className="bio">
-                An About section is the part of your website where you tell
-                visitors and potential customers who you are and what you can do
-                for them.
+              {activeUserData?.user.bio}
               </p>
               <div className="user-info-location-website">
                 <div className="location-website-flex">
-                  <p className="location">Austin, TX</p>
+                  <p className="location">{activeUserData?.location}</p>
                 </div>
 
                 <div className="location-website-flex">
@@ -67,7 +72,7 @@ export default function Profile(props, users) {
                     rel="noopener noreferrer"
                     className="website"
                   >
-                    eriklambert.com
+                    {activeUserData?.user.website}
                   </a>
                 </div>
               </div>
@@ -78,30 +83,32 @@ export default function Profile(props, users) {
             <div className="user-data">
               <div className="count-flex">
                 <h6>Projects</h6>
-                <p>12</p>
+                <p>{activeUserData?.user.projects.length}</p>
+
               </div>
 
               <div className="count-flex">
                 <h6>Followers</h6>
-                <p>37</p>
+                <p>{activeUserData?.user.followers.length}</p>
               </div>
               <div className="count-flex">
                 <h6>Following</h6>
-                <p>1</p>
+                <p>{activeUserData?.user.followers.length}</p>
               </div>
               <div className="count-flex">
                 <h6>Starred</h6>
-                <p>143</p>
+                <p>{activeUserData?.user.followers.length}</p>
               </div>
             </div>
             <div className="teams-container">
               <div className="teams">
                 <h6>Teams</h6>
-                <p></p>
+                <p>{activeUserData?.user.followers.length}</p>
               </div>
 
+              <button onClick={() => history.push('/settings')}
+                  to={`/settings`} className="edit-profile-btn">Edit Profile</button>
               <div>
-                <button className="edit-profile-btn">Edit Profile</button>
               </div>
             </div>
           </div>
@@ -112,9 +119,9 @@ export default function Profile(props, users) {
           setCurrentTab={setCurrentTab}
           projects={projectData?.projects}
           // recentProjects={props.recentProjects}
-          // followers={props.followersTab}
-          // following={props.followingTab}
-          // starred={props.starred}
+          followers={activeUserData?.user.followers}
+          following={activeUserData?.followers}
+          starred={activeUserData?.starred}
           // isFollowed={props.isFollowed}
           // getIsFollowed={props.getIsFollowed}
           followUser={followUser}
