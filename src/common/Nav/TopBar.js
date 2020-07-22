@@ -132,6 +132,10 @@ const TopBar = ({ searchData, getSearch }) => {
                   New Project
                 </span>
 
+                <span onClick={() => history.push('/search')} to="/search">
+                  Search
+                </span>
+
                 <span onClick={() => history.push('/')} to={`/`}>
                   Explore
                 </span>
@@ -221,6 +225,15 @@ const TopBar = ({ searchData, getSearch }) => {
             onClick={toggleNav}
           >
             New Project
+          </NavLink>
+
+          <NavLink
+            to="/search"
+            className="links"
+            activeClassName="active-links"
+            onClick={toggleNav}
+          >
+            Search
           </NavLink>
 
           <NavLink
