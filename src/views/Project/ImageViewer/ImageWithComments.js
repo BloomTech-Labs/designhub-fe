@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 import { StickyComment } from './StickyComments';
 import { TempComment } from './TempComment';
@@ -28,7 +28,7 @@ const ImageWithComments = ({ projectImg, closeModal }) => {
 
   const [hidden, setHidden] = useState(false);
   //comments are in the side bar
-  const [comments, setComments] = useState([]);
+  //const [comments, setComments] = useState([]);
   //temp comments are sticky comments
   const [tempComments, setTempComments] = useState([]);
   const leftOffset = useRef(null);
@@ -106,7 +106,7 @@ const ImageWithComments = ({ projectImg, closeModal }) => {
 
   async function handleSubmit(e, c) {
     e.preventDefault();
-    const { comments } = comments;
+    //const { comments } = comments;
     const thisComment = { ...c };
 
     //remove local state flags before submit to DB

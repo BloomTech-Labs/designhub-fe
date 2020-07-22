@@ -2,7 +2,6 @@
   QUERIES
 */
 
-export { default as SEARCH_QUERY } from './queries/users/search';
 export { default as GET_PROJECT_BY_ID_QUERY } from './queries/projects/project';
 export { default as GET_ALL_PROJECTS_QUERY } from './queries/projects/projects';
 export { default as GET_USER_BY_ID_QUERY } from './queries/users/user';
@@ -48,3 +47,4 @@ export { default as DELETE_PROJECT_MUTATION } from './mutations/projects/deleteP
 // export { default as DELETE_INVITE_MUTATION } from './mutations/invites/deleteInvite';
 export { default as DELETE_COMMENTS_MUTATION } from './mutations/comments/deleteComments';
 export { default as DELETE_USER_MUTATION } from './mutations/users/deleteUser';
+export { default as SEARCH_MUTATION } from './mutations/users/search';

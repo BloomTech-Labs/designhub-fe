@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { PropTypes, useState } from 'react';
+=======
+import React from 'react';
+>>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
 import './styles.scss';
 import anonymous from '../../ASSETS/anonymous.jpg';
 

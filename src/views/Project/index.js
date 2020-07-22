@@ -1,11 +1,10 @@
 import React from 'react';
 import Layout from '../../common/Layout';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+
 import './styles.scss';
 
 import ProjectDetails from './ProjectDetails';
-import ProjectPdf from './ProjectPdf';
+// import ProjectPdf from './ProjectPdf';
 import ProjectButtonLinks from './ProjectButtonLinks';
 import ImageViewer from './ImageViewer/ImageViewer';
 
@@ -16,6 +15,7 @@ import ProjectThumbnail from './ProjectThumbnail';
 import ProjectFromBody from '../CreateProject/ProjectFormBody';
 
 export default function Projects() {
+<<<<<<< HEAD
   const { id } = useParams();
   const { data: projectData } = useQuery(GET_PROJECT_BY_ID_QUERY, {
     variables: { id: id },
@@ -25,6 +25,9 @@ export default function Projects() {
     variables: { id: projectData?.project?.userId },
   });
 
+=======
+  
+>>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
   return (
     <Layout>
       <div className="projects-container">

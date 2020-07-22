@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { withRouter, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
 import { storage } from '../../utilities/firebase';
 import Loading from '../../common/Loading/index.js';
-import Explore from '../../views/Explore/index.js';
 import Step1 from './Step1.js';
 import Step2 from './Step2.js';
 
@@ -22,11 +21,9 @@ const OnboardingForm = ({ history, isLoading }) => {
   // user data from auth0-spa
   const { logout, user } = useAuth0();
 
-  const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
+  const { data } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },
   });
-
-  const id = user?.sub;
 
   // individual form steps & state to track which step to display
   const stepComponents = [Step1, Step2];
@@ -97,12 +94,7 @@ const OnboardingForm = ({ history, isLoading }) => {
     e.preventDefault();
     try {
       setLoadingPage(true);
-      let newAvatar;
-      if (files.length === 0) {
-        newAvatar = data?.user?.avatar;
-      } else {
-        newAvatar = await handleImageUpload(files);
-      }
+      await handleImageUpload(files);
 
       updateUser({
         variables: {
@@ -136,9 +128,7 @@ const OnboardingForm = ({ history, isLoading }) => {
             .child(file.name)
             .getDownloadURL()
             .then(async (firebaseURL) => {
-              const {
-                data: { data },
-              } = await updateUser({
+              updateUser({
                 variables: {
                   data: {
                     id: user?.sub,

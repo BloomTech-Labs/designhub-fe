@@ -1,18 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import './styles.scss';
 import { useQuery } from '@apollo/react-hooks';
+<<<<<<< HEAD
 import {
   GET_ALL_PROJECTS_QUERY,
   GET_USER_BY_ID_QUERY,
 } from '../../graphql/index';
+=======
+
+import { GET_USER_BY_ID_QUERY } from '../../graphql/index';
+>>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
 
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
 
 const ProjectThumbnail = ({ project }) => {
+<<<<<<< HEAD
   const publishedOn = new Date(project?.created_at / 1);
   const { data, loading } = useQuery(GET_USER_BY_ID_QUERY, {
+=======
+  // console.log("thumbnail project props data",project)
+  const { data } = useQuery(GET_USER_BY_ID_QUERY, {
+>>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
     variables: { id: project?.userId },
   });
 

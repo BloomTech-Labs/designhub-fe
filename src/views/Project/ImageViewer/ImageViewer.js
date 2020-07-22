@@ -1,16 +1,30 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 // import ImageWithComments from './ImageWithComments';
+=======
+import React, { useState } from 'react';
+import ImageWithComments from './ImageWithComments';
+>>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
 import ProjectComments from './ProjectComments.js';
 import defaultImage from '../../../ASSETS/default_thumbnail.svg';
 import Loading from '../../../common/Loading';
 import { Modal, useModal } from 'sriracha-ui';
 
+<<<<<<< HEAD
 const ImageViewer = ({ projectImg, userData, projectData }) => {
   const { isModal, toggleModal } = useModal();
   const [activeImg, setActiveImg] = useState(null);
   const [comments, setComments] = useState([]);
   const [modal, setModal] = useState(false);
   const changeImg = (imgObj) => {
+=======
+const ImageViewer = (props) => {
+  const [activeImg, setActiveImg] = useState(null);
+  const comments = [];
+  const [modal, setModal] = useState(false);
+
+  function changeImg(imgObj) {
+>>>>>>> cba8fd1f468182ef11996ae0c9d4418870d57b7b
     if (activeImg === null || activeImg.id !== imgObj.id) {
       setActiveImg(imgObj);
     }

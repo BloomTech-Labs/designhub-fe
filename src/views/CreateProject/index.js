@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../../common/Layout';
-import DeleteProjectModal from './DeleteProjectModal';
-import InviteModal from './InviteModal';
+// import DeleteProjectModal from './DeleteProjectModal';
+// import InviteModal from './InviteModal';
 import ProjectFormBody from './ProjectFormBody';
 
 import { useAuth0 } from '../../utilities/auth-spa.js';
@@ -12,7 +12,7 @@ import './styles.scss';
 
 export default function CreateProject() {
 
-    const { logout, user } = useAuth0();
+    const { user } = useAuth0();
 
   const { data: userData } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: { id: user?.sub },

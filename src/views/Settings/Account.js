@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import CharacterCount from '../../common/CharacterCount/CharacterCount';
 
@@ -12,30 +12,8 @@ import { useForm } from 'react-hook-form';
 const Account = ({ activeUser }) => {
   const [updateUser] = useMutation(UPDATE_USER_MUTATION);
   const { handleSubmit, register } = useForm();
-  // const { user } = useAuth0()
-  const [formUser, setFormUser] = useState({
-    avatar: activeUser?.avatar,
-    bio: activeUser?.boi,
-    email: activeUser?.email,
-    firstName: activeUser?.firstName,
-    id: activeUser?.id,
-    lastName: activeUser?.lastName,
-    location: activeUser?.location,
-    username: activeUser?.username,
-    website: activeUser?.website,
-  });
 
   const [formSuccess, setFormSuccess] = useState(false);
-
-  // alert state for required form inputs
-  const [alert, setAlert] = useState({
-    username: false,
-    firstName: false,
-    lastName: false,
-    email: false,
-  });
-  // };
-  const [userNameAlertClass, setUsernameAlertClass] = useState('required');
 
   const onSubmit = (data) => {
     updateUser({
@@ -59,7 +37,7 @@ const Account = ({ activeUser }) => {
   return (
     <div className="account-form-container">
       <form className="account-form" onSubmit={handleSubmit(onSubmit)}>
-        <div className={alert.firstName ? 'required alert' : 'required'}>
+       
           <label htmlFor="firstName">First Name</label>
           <input
             required
@@ -71,9 +49,9 @@ const Account = ({ activeUser }) => {
             ref={register}
             maxLength="40"
           />
-        </div>
+        
 
-        <div className={alert.lastName ? 'required alert' : 'required'}>
+        
           <label htmlFor="lastName">Last Name</label>
           <input
             required
@@ -85,9 +63,9 @@ const Account = ({ activeUser }) => {
             ref={register}
             maxLength="40"
           />
-        </div>
+        
 
-        <div className={userNameAlertClass}>
+       
           <label htmlFor="username">Username</label>
           <input
             required
@@ -99,9 +77,9 @@ const Account = ({ activeUser }) => {
             ref={register}
             maxLength="80"
           />
-        </div>
 
-        <div className={alert.email ? 'required alert' : 'required'}>
+
+        
           <label htmlFor="email">Email</label>
           <input
             required
@@ -114,7 +92,7 @@ const Account = ({ activeUser }) => {
             ref={register}
             maxLength="80"
           />
-        </div>
+        
 
         <label htmlFor="bio">Bio</label>
         <textarea
