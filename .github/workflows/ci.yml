@@ -29,16 +29,32 @@ jobs:
           node-version: '12'
 
       # Run the NPM install command before proceeding
-      - run: npm install
+      - run: yarn install
 
       # A GitHub action for running tests and publishing coverage
       - uses: paambaati/codeclimate-action@v2.4.0
         env:
           # An environment variable, the value is a GitHub repo secret
           CC_TEST_REPORTER_ID: ${{ secrets.CodeClimateReporterId }}
+          REACT_APP_SENTRY_DSN: ${{ secrets.REACT_APP_SENTRY_DSN }}
+          REACT_APP_GQL_API: ${{ secrets.REACT_APP_GQL_API }}
+          REACT_APP_DOMAIN: ${{ secrets.REACT_APP_DOMAIN }}
+          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+          REACT_APP_BASE_URL: ${{ secrets.REACT_APP_BASE_URL }}
+          REACT_APP_S3_BUCKET_URL: ${{ secrets.REACT_APP_S3_BUCKET_URL }}
+          REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
+          REACT_APP_END_OF_LINE: ${{ secrets.REACT_APP_END_OF_LINE }}
+          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
+          REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
+          REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+          REACT_APP_STORAGE_BUCKET: ${{ secrets.REACT_APP_STORAGE_BUCKET }}
+          REACT_APP_MESSAGING_SENDER_ID: ${{ secrets.REACT_APP_MESSAGING_SENDER_ID }}
+          REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
+          CI: true
         with:
           # Run our `coverage` script in our `package.json`
-          coverageCommand: npm run coverage
+          coverageCommand: yarn coverage
           # By default, this looks for a `coverage` folder in the root of your project, but you may need to change this
           coverageLocations: './coverage/clover.xml:clover'
           # Great for troubleshooting
