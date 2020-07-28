@@ -124,20 +124,20 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
             </div>
             <div className="tab-content">
 
-              {(activeUser?.id) && (activeUser?.projects.length === 0) && (
+              {/* {(activeUser?.id) && (activeUser?.projects.length === 0) && ( */}
                 <div className="empty-state">
                   <img src={empty} alt="empty" className="empty-icon" />
                   <h1 className="no-projects">
                     You are not collaborating on any projects.
                         </h1>
                 </div>
-              )}
-
+              
+{/* 
               <div className="projects-array">
                 {acceptedProjects?.map(project => {
                   return <ProjectThumbnail project={activeUser?.projects} key={v4()} />
                 })}
-              </div>
+              </div> */}
             </div>
           </TabPanel>
 
