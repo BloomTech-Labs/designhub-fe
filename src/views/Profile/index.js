@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 import './styles.scss';
 
 import { useQuery } from '@apollo/react-hooks';
-import {GET_USER_BY_ID_QUERY, GET_ALL_PROJECTS_QUERY} from '../../graphql';
+import {GET_USER_BY_ID_QUERY, GET_ALL_PROJECTS_QUERY, GET_ALL_USERS_QUERY} from '../../graphql';
 
 
 export default function Profile(props, users) {
@@ -24,8 +24,10 @@ export default function Profile(props, users) {
   const { data: activeUserData } = useQuery(GET_USER_BY_ID_QUERY, {
     variables: {id: user?.sub},
     });
+    const { data: allUsers } = useQuery(GET_ALL_USERS_QUERY);
 
     console.log('AUD:', activeUserData)
+    console.log('AUPROJ:', projectData)
 
     // const { data: activeUserFollowers } = useQuery(GET_USER_BY_ID_QUERY, {
     //   variables: {id: user?.sub},
@@ -115,6 +117,7 @@ export default function Profile(props, users) {
         </div>
                 <ProfileTabs
           // userProfile={userProfile}
+          users={allUsers}
           currentTab={currentTab}
           setCurrentTab={setCurrentTab}
           projects={projectData?.projects}
