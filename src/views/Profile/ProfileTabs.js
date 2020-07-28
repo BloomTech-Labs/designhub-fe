@@ -2,13 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import moment from 'moment';
-import { v4 } from 'uuid'
+import { v4 } from 'uuid';
 import Heatmap from './Heatmap.js';
 // import {useQuery} from '@apollo/react-hooks';
-import { useParams } from "react-router-dom"
+// import { useParams } from 'react-router-dom';
 
 // import {GET_USER_BY_ID_QUERY} from '../../graphql';
-
 
 // Assets
 import defaultImg from '../../ASSETS/default_thumbnail.svg';
@@ -16,14 +15,26 @@ import empty from '../../ASSETS/Icons/empty_project.svg';
 // import Loading from '../../ASSETS/loading';
 import ProjectThumbnail from '../Project/ProjectThumbnail';
 
-const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, currentTab, setCurrentTab, projects, acceptedProjects, followers, following, starred, users, ...rest }) => {
-
-  const { id } = useParams()
+const ProfileTabs = ({
+  activeUser,
+  userData,
+  params,
+  followUser,
+  unfollowUser,
+  currentTab,
+  setCurrentTab,
+  projects,
+  acceptedProjects,
+  followers,
+  following,
+  starred,
+  users,
+  ...rest
+}) => {
+  // const { id } = useParams()
 
   // state = {
   //   acceptedCollabProjects: [] //accepted collab projects
-
-
 
   // const projects = projects;
   const recentProjects = null;
@@ -33,33 +44,35 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
   // const acceptedProjects = this.acceptedCollabProjects;
 
   // if (!this.isProjectsLoading) {
-  console.log("USERS", activeUser)
+  console.log('USERS', activeUser);
   return (
     <div className="profile-tabs-container">
       <div className="new-tabs-div">
-        <Tabs defaultIndex={0} selectedIndex={currentTab} onSelect={setCurrentTab}>
+        <Tabs
+          defaultIndex={0}
+          selectedIndex={currentTab}
+          onSelect={setCurrentTab}
+        >
           <TabList className="nav-links">
             <Tab className="links" selectedClassName="active-link">
               Overview
-                </Tab>
+            </Tab>
             <Tab className="links" selectedClassName="active-link">
               Projects
-                </Tab>
+            </Tab>
             <Tab className="links" selectedClassName="active-link">
               Collaborations
-                </Tab>
+            </Tab>
             <Tab className="links" selectedClassName="active-link">
               Followers
-                </Tab>
+            </Tab>
             <Tab className="links" selectedClassName="active-link">
               Following
-                </Tab>
+            </Tab>
             {/* <Tab className="links" id="starred" selectedClassName="active-link">
                   Starred
                 </Tab> */}
           </TabList>
-
-
 
           <TabPanel className="tabs-container">
             <div className="tabs-header">
@@ -71,17 +84,21 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                   <img src={empty} alt="empty" className="empty-icon" />
                   <h1 className="no-projects">
                     No projects have been created yet
-                      </h1>
+                  </h1>
                 </div>
               )}
               <div className="projects-array">
                 {recentProjects !== null &&
-                  recentProjects.map(project => {
-                    return <ProjectThumbnail project={activeUser?.projects} key={v4()} />
+                  recentProjects.map((project) => {
+                    return (
+                      <ProjectThumbnail
+                        project={activeUser?.projects}
+                        key={v4()}
+                      />
+                    );
                   })}
               </div>
             </div>
-
 
             <Heatmap />
           </TabPanel>
@@ -96,26 +113,27 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                   <img src={empty} alt="empty" className="empty-icon" />
                   <h1 className="no-projects">
                     No projects have been created yet.
-                      </h1>
+                  </h1>
                 </div>
               )}
               <div className="projects-array">
-                {
-                  activeUser?.projects?.map(projectData => {
-                  const user = activeUser?.projects
-                    // console.log('projects', projects)
-                    // console.log('projectData', projectData)
-                    // console.log('users',users)
-                    console.log('activeUser', activeUser)
-                    return (
-                      <ProjectThumbnail projectData={projectData} user={activeUser} key={projectData.id} />
-                    );
-                  })}
+                {activeUser?.projects?.map((projectData) => {
+                  // const user = activeUser?.projects;
+                  // console.log('projects', projects)
+                  // console.log('projectData', projectData)
+                  // console.log('users',users)
+                  console.log('activeUser', activeUser);
+                  return (
+                    <ProjectThumbnail
+                      projectData={projectData}
+                      user={activeUser}
+                      key={projectData.id}
+                    />
+                  );
+                })}
               </div>
             </div>
-
           </TabPanel>
-
 
           {/*ADDING COLLABORATORS */}
           <TabPanel className="tabs-container">
@@ -123,16 +141,15 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
               <h2>Collaborations</h2>
             </div>
             <div className="tab-content">
-
               {/* {(activeUser?.id) && (activeUser?.projects.length === 0) && ( */}
-                <div className="empty-state">
-                  <img src={empty} alt="empty" className="empty-icon" />
-                  <h1 className="no-projects">
-                    You are not collaborating on any projects.
-                        </h1>
-                </div>
-              
-{/* 
+              <div className="empty-state">
+                <img src={empty} alt="empty" className="empty-icon" />
+                <h1 className="no-projects">
+                  You are not collaborating on any projects.
+                </h1>
+              </div>
+
+              {/* 
               <div className="projects-array">
                 {acceptedProjects?.map(project => {
                   return <ProjectThumbnail project={activeUser?.projects} key={v4()} />
@@ -140,7 +157,6 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
               </div> */}
             </div>
           </TabPanel>
-
 
           <TabPanel className="tabs-container">
             <div className="tabs-header">
@@ -153,12 +169,12 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                   <img src={empty} alt="empty" className="empty-icon" />
                   <h1 className="no-projects">
                     This user does not have any followers.
-                    </h1>
+                  </h1>
                 </div>
               )}
-              {followers?.map(follower => {
+              {followers?.map((follower) => {
                 let alsoFollowing = false;
-                following.map(following => {
+                following.map((following) => {
                   if (following?.userId === follower?.userId) {
                     alsoFollowing = true;
                   }
@@ -190,42 +206,38 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                             follower?.bio.length > 100
                               ? follower?.bio.slice(0, 100) + '...'
                               : follower?.bio
-                            }`}</p>
+                          }`}</p>
                         </div>
                       </Link>
                     </div>
-                    {activeUser.id ===
-                      Number(params.id) ? (
-                        !alsoFollowing ? (
-                          <button
-                            onClick={() =>
-                              followUser(
-                                activeUser.id,
-                                follower.userId,
-                                activeUser,
-                                params
-                              )
-                            }
-                            className="follow-btn"
-                          >
-                            Follow
-                          </button>
-                        ) : (
-                            <button
-                              onClick={() =>
-                                unfollowUser(
-                                  activeUser.id,
-                                  follower.userId
-                                )
-                              }
-                              className="edit-profile-btn"
-                            >
-                              Unfollow
-                            </button>
-                          )
+                    {activeUser.id === Number(params.id) ? (
+                      !alsoFollowing ? (
+                        <button
+                          onClick={() =>
+                            followUser(
+                              activeUser.id,
+                              follower.userId,
+                              activeUser,
+                              params
+                            )
+                          }
+                          className="follow-btn"
+                        >
+                          Follow
+                        </button>
                       ) : (
-                        ''
-                      )}
+                        <button
+                          onClick={() =>
+                            unfollowUser(activeUser.id, follower.userId)
+                          }
+                          className="edit-profile-btn"
+                        >
+                          Unfollow
+                        </button>
+                      )
+                    ) : (
+                      ''
+                    )}
                   </div>
                 );
               })}
@@ -242,10 +254,10 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                   <img src={empty} alt="empty" className="empty-icon" />
                   <h1 className="no-projects">
                     This user does not follow anyone.
-                    </h1>
+                  </h1>
                 </div>
               )}
-              {followers?.map(follower => (
+              {followers?.map((follower) => (
                 <div className="follow-container" key={follower.id}>
                   <div className="follow-info-flex">
                     <Link
@@ -269,26 +281,22 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                           follower?.bio.length > 100
                             ? follower.bio.slice(0, 100) + '...'
                             : follower.bio
-                          }`}
+                        }`}
                       </p>
                     </div>
                   </div>
-                  {activeUser.id ===
-                    Number(params.id) ? (
-                      <button
-                        onClick={() =>
-                          unfollowUser(
-                            activeUser.id,
-                            follower.userId
-                          )
-                        }
-                        className="edit-profile-btn"
-                      >
-                        Unfollow
-                      </button>
-                    ) : (
-                      ''
-                    )}
+                  {activeUser.id === Number(params.id) ? (
+                    <button
+                      onClick={() =>
+                        unfollowUser(activeUser.id, follower.userId)
+                      }
+                      className="edit-profile-btn"
+                    >
+                      Unfollow
+                    </button>
+                  ) : (
+                    ''
+                  )}
                 </div>
               ))}
             </div>
@@ -305,7 +313,7 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                 </div>
               )}
               <div className="projects-array">
-                {starred?.map(project => (
+                {starred?.map((project) => (
                   <div className="project-content" key={project.id}>
                     <Link to={`/project/${project.projectId}`}>
                       <>
@@ -313,12 +321,10 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
                           {project.name.length > 35 ? (
                             <h1>{project.name.slice(0, 35)}...</h1>
                           ) : (
-                              <h1>{project.name}</h1>
-                            )}
+                            <h1>{project.name}</h1>
+                          )}
                           <h1 className="created">
-                            {moment(project.created_at).format(
-                              'MMM DD, YYYY'
-                            )}
+                            {moment(project.created_at).format('MMM DD, YYYY')}
                           </h1>
                         </div>
                         <img
@@ -336,13 +342,9 @@ const ProfileTabs = ({ activeUser, userData, params, followUser, unfollowUser, c
             </div>
           </TabPanel>
         </Tabs>
-      </div >
-    </div >
+      </div>
+    </div>
   );
-
-
-
-
-};//end function
+}; //end function
 
 export default ProfileTabs;
